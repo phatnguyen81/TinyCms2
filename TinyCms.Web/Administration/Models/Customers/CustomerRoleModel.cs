@@ -14,13 +14,6 @@ namespace TinyCms.Admin.Models.Customers
         [AllowHtml]
         public string Name { get; set; }
 
-        [NopResourceDisplayName("Admin.Customers.CustomerRoles.Fields.FreeShipping")]
-        [AllowHtml]
-        public bool FreeShipping { get; set; }
-
-        [NopResourceDisplayName("Admin.Customers.CustomerRoles.Fields.TaxExempt")]
-        public bool TaxExempt { get; set; }
-
         [NopResourceDisplayName("Admin.Customers.CustomerRoles.Fields.Active")]
         public bool Active { get; set; }
 
@@ -30,13 +23,7 @@ namespace TinyCms.Admin.Models.Customers
         [NopResourceDisplayName("Admin.Customers.CustomerRoles.Fields.SystemName")]
         public string SystemName { get; set; }
 
-        [NopResourceDisplayName("Admin.Customers.CustomerRoles.Fields.PurchasedWithProduct")]
-        public int PurchasedWithProductId { get; set; }
-
-        [NopResourceDisplayName("Admin.Customers.CustomerRoles.Fields.PurchasedWithProduct")]
-        public string PurchasedWithProductName { get; set; }
-
-
+      
         #region Nested classes
 
         public partial class AssociateProductToCustomerRoleModel : BaseNopModel

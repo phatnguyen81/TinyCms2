@@ -49,6 +49,10 @@
     <Reference Include="FluentValidation">
       <HintPath>..\..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ImageResizer.4.0.4\lib\net45\ImageResizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -167,8 +171,33 @@
   <ItemGroup>
     <Compile Include="AdminAreaRegistration.cs" />
     <Compile Include="Controllers\BaseAdminController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\CustomerController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\CustomerRoleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguageController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\LogController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\PictureController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\PollController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\QueuedEmailController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\ScheduleTaskController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="Extensions\MappingExtensions.cs" />
     <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
     <Compile Include="Infrastructure\Cache\ModelCacheEventConsumer.cs" />
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
@@ -321,6 +350,35 @@
     <Content Include="Views\Security\AccessDenied.cshtml" />
     <Content Include="Views\Security\Permissions.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Common\LanguageSelector.cshtml" />
+    <Content Include="Views\Language\Create.cshtml" />
+    <Content Include="Views\Language\Edit.cshtml" />
+    <Content Include="Views\Language\List.cshtml" />
+    <Content Include="Views\Language\Resources.cshtml" />
+    <Content Include="Views\Language\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Log\List.cshtml" />
+    <Content Include="Views\Log\View.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\List.cshtml" />
+    <Content Include="Views\Customer\ReportRegisteredCustomers.cshtml" />
+    <Content Include="Views\Customer\Reports.cshtml" />
+    <Content Include="Views\Customer\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Customer\_CreateOrUpdateAddress.cshtml" />
+    <Content Include="Views\Customer\_CustomerAttributes.cshtml" />
+    <Content Include="Views\Customer\_ReportBestCustomersByNumberOfOrders.cshtml" />
+    <Content Include="Views\Customer\_ReportBestCustomersByOrderTotal.cshtml" />
+    <Content Include="Views\CustomerAttribute\Create.cshtml" />
+    <Content Include="Views\CustomerAttribute\Edit.cshtml" />
+    <Content Include="Views\CustomerAttribute\ListBlock.cshtml" />
+    <Content Include="Views\CustomerAttribute\ValueCreatePopup.cshtml" />
+    <Content Include="Views\CustomerAttribute\ValueEditPopup.cshtml" />
+    <Content Include="Views\CustomerAttribute\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\CustomerAttribute\_CreateOrUpdateValue.cshtml" />
+    <Content Include="Views\CustomerRole\Create.cshtml" />
+    <Content Include="Views\CustomerRole\Edit.cshtml" />
+    <Content Include="Views\CustomerRole\List.cshtml" />
+    <Content Include="Views\CustomerRole\_CreateOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -330,6 +388,10 @@
     <ProjectReference Include="..\..\TinyCms.Core\TinyCms.Core.csproj">
       <Project>{601841ed-ac84-406a-9dd3-3817a58ee733}</Project>
       <Name>TinyCms.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TinyCms.Data\TinyCms.Data.csproj">
+      <Project>{9c46738b-5a84-4e05-8527-8f08e52c24fa}</Project>
+      <Name>TinyCms.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\TinyCms.Services\TinyCms.Services.csproj">
       <Project>{61796fad-92c5-47a0-a53f-a783ac814bdb}</Project>

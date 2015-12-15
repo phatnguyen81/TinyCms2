@@ -21,6 +21,7 @@ using TinyCms.Services.Common;
 using TinyCms.Services.Configuration;
 using TinyCms.Services.Customers;
 using TinyCms.Services.Events;
+using TinyCms.Services.ExportImport;
 using TinyCms.Services.Helpers;
 using TinyCms.Services.Infrastructure;
 using TinyCms.Services.Localization;
@@ -217,6 +218,8 @@ namespace TinyCms.Web.Framework
 
             builder.RegisterType<ScheduleTaskService>().As<IScheduleTaskService>().InstancePerLifetimeScope();
 
+            builder.RegisterType<ExportManager>().As<IExportManager>().InstancePerLifetimeScope();
+            builder.RegisterType<ImportManager>().As<IImportManager>().InstancePerLifetimeScope();
             builder.RegisterType<ThemeProvider>().As<IThemeProvider>().InstancePerLifetimeScope();
             builder.RegisterType<ThemeContext>().As<IThemeContext>().InstancePerLifetimeScope();
 

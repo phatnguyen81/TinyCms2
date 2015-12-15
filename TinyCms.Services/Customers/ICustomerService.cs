@@ -35,7 +35,7 @@ namespace TinyCms.Services.Customers
         /// <param name="pageSize">Page size</param>
         /// <returns>Customers</returns>
         IPagedList<Customer> GetAllCustomers(DateTime? createdFromUtc = null,
-            DateTime? createdToUtc = null, int affiliateId = 0,
+            DateTime? createdToUtc = null,
             int[] customerRoleIds = null, string email = null, string username = null,
             string firstName = null, string lastName = null,
             int dayOfBirth = 0, int monthOfBirth = 0,

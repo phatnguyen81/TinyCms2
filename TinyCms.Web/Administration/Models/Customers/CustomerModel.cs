@@ -25,7 +25,6 @@ namespace TinyCms.Admin.Models.Customers
             this.AvailableVendors = new List<SelectListItem>();
             this.CustomerAttributes = new List<CustomerAttributeModel>();
             this.AvailableNewsletterSubscriptionStores = new List<StoreModel>();
-            this.RewardPointsAvailableStores = new List<SelectListItem>();
         }
 
         public bool AllowUsersToChangeUsernames { get; set; }
@@ -43,8 +42,6 @@ namespace TinyCms.Admin.Models.Customers
         [AllowHtml]
         public string Password { get; set; }
 
-        [NopResourceDisplayName("Admin.Customers.Customers.Fields.Vendor")]
-        public int VendorId { get; set; }
         public IList<SelectListItem> AvailableVendors { get; set; }
 
         //form fields & properties
@@ -121,16 +118,9 @@ namespace TinyCms.Admin.Models.Customers
         [AllowHtml]
         public string AdminComment { get; set; }
         
-        [NopResourceDisplayName("Admin.Customers.Customers.Fields.IsTaxExempt")]
-        public bool IsTaxExempt { get; set; }
-
+      
         [NopResourceDisplayName("Admin.Customers.Customers.Fields.Active")]
         public bool Active { get; set; }
-
-        [NopResourceDisplayName("Admin.Customers.Customers.Fields.Affiliate")]
-        public int AffiliateId { get; set; }
-        [NopResourceDisplayName("Admin.Customers.Customers.Fields.Affiliate")]
-        public string AffiliateName { get; set; }
 
 
 
@@ -148,18 +138,7 @@ namespace TinyCms.Admin.Models.Customers
 
 
 
-        //EU VAT
-        [NopResourceDisplayName("Admin.Customers.Customers.Fields.VatNumber")]
-        [AllowHtml]
-        public string VatNumber { get; set; }
-
-        public string VatNumberStatusNote { get; set; }
-
-        public bool DisplayVatNumber { get; set; }
-
-
-
-
+   
 
         //registration date
         [NopResourceDisplayName("Admin.Customers.Customers.Fields.CreatedOn")]
@@ -188,21 +167,6 @@ namespace TinyCms.Admin.Models.Customers
         public List<StoreModel> AvailableNewsletterSubscriptionStores { get; set; }
         [NopResourceDisplayName("Admin.Customers.Customers.Fields.Newsletter")]
         public int[] SelectedNewsletterSubscriptionStoreIds { get; set; }
-
-
-
-        //reward points history
-        public bool DisplayRewardPointsHistory { get; set; }
-        [NopResourceDisplayName("Admin.Customers.Customers.RewardPoints.Fields.AddRewardPointsValue")]
-        public int AddRewardPointsValue { get; set; }
-        [NopResourceDisplayName("Admin.Customers.Customers.RewardPoints.Fields.AddRewardPointsMessage")]
-        [AllowHtml]
-        public string AddRewardPointsMessage { get; set; }
-        [NopResourceDisplayName("Admin.Customers.Customers.RewardPoints.Fields.AddRewardPointsStore")]
-        public int AddRewardPointsStoreId { get; set; }
-        [NopResourceDisplayName("Admin.Customers.Customers.RewardPoints.Fields.AddRewardPointsStore")]
-        public IList<SelectListItem> RewardPointsAvailableStores { get; set; }
-
 
 
         //send email model

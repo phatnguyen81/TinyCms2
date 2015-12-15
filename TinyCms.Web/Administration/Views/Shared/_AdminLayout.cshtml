@@ -78,11 +78,10 @@
                     <div class="header">
                         <div class="logo">
                         </div>
-                        @Html.Widget("admin_header_before", area: "Admin")
+                        
                         <div class="languageselector">
                             @Html.Action("LanguageSelector", "Common", new { area = "Admin" })
                         </div>
-                        @Html.Widget("admin_header_middle", area: "Admin")
                         <div class="links">
                             @Html.ActionLink(T("Admin.Header.PublicStore").Text, "Index", "Home", new { area = "" }, null)
                             @if (canManageMaintenance)
@@ -100,10 +99,9 @@
                                 <text>, </text> <a href="@Url.Action("Logout", "Customer", new { area = "" }, null)">@T("Admin.Header.Logout")</a>
                             }
                         </div>
-                        <div class="version">
+                        @*<div class="version">
                             <span>nopCommerce @currentVersion</span>
-                        </div>
-                        @Html.Widget("admin_header_after", area: "Admin")
+                        </div>*@
                     </div>
                 }
                 @if (IsSectionDefined("headermenu"))
@@ -123,7 +121,7 @@
                 else
                 {
                     <div class="status-bar">
-                        @(EngineContext.Current.Resolve<Nop.Services.Helpers.IDateTimeHelper>().ConvertToUserTime(DateTime.Now).ToString("f"))
+                        @(EngineContext.Current.Resolve<TinyCms.Services.Helpers.IDateTimeHelper>().ConvertToUserTime(DateTime.Now).ToString("f"))
                     </div>
                 }
                 <div class="content">
