@@ -318,8 +318,8 @@
     <Content Include="Views\Shared\_AddressAttributes.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_AdminPopupLayout.cshtml" />
-    <Content Include="Views\Shared\Security\AccessDenied.cshtml" />
-    <Content Include="Views\Shared\Security\Permissions.cshtml" />
+    <Content Include="Views\Security\AccessDenied.cshtml" />
+    <Content Include="Views\Security\Permissions.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
