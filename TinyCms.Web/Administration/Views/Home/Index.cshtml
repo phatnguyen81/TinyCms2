@@ -1,0 +1,32 @@
+﻿@using TinyCms.Services.Security
+@model DashboardModel
+@{
+    //page title
+    ViewBag.Title = T("Admin.Dashboard").Text;
+
+    var permissionService = EngineContext.Current.Resolve<IPermissionService>();
+    var canManageOrders = permissionService.Authorize(StandardPermissionProvider.ManageOrders);
+    var canManageCustomers = permissionService.Authorize(StandardPermissionProvider.ManageCustomers);
+    var canManageProducts = permissionService.Authorize(StandardPermissionProvider.ManageProducts);
+}
+@Html.AntiForgeryToken()
+<div class="section-title">
+    <img src="@Url.Content("~/Administration/Content/images/ico-dashboard.png")" alt="" />
+    @T("Admin.Dashboard")
+</div>
+<table class="dashboard">
+    @Html.Widget("admin_dashboard_top")
+    <tr>
+        <td class="maincol">
+            <div class="section-header">
+                <div class="title">
+                    <img src="@Url.Content("~/Administration/Content/images/ico-stat1.gif")" alt="" />
+                    @T("Admin.Dashboard.StoreStatistics")
+                </div>
+            </div>
+         
+        </td>
+        
+    </tr>
+    @Html.Widget("admin_dashboard_bottom")
+</table>

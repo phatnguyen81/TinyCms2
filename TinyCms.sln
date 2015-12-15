@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms.Web", "TinyCms.Web\TinyCms.Web.csproj", "{3E3A8188-0DEE-4D0B-BE6D-D5FC2CB7DD04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms.Core", "TinyCms.Core\TinyCms.Core.csproj", "{601841ED-AC84-406A-9DD3-3817A58EE733}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms.Data", "TinyCms.Data\TinyCms.Data.csproj", "{9C46738B-5A84-4E05-8527-8F08E52C24FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms.Web.Framework", "TinyCms.Web.Framework\TinyCms.Web.Framework.csproj", "{7E2A36AE-9A27-4AC5-B431-649205E33322}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms.Services", "TinyCms.Services\TinyCms.Services.csproj", "{61796FAD-92C5-47A0-A53F-A783AC814BDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms.Admin", "TinyCms.Web\Administration\TinyCms.Admin.csproj", "{2FD06072-9E03-4207-8E2D-D5852A646505}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E3A8188-0DEE-4D0B-BE6D-D5FC2CB7DD04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3A8188-0DEE-4D0B-BE6D-D5FC2CB7DD04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3A8188-0DEE-4D0B-BE6D-D5FC2CB7DD04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3A8188-0DEE-4D0B-BE6D-D5FC2CB7DD04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{601841ED-AC84-406A-9DD3-3817A58EE733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{601841ED-AC84-406A-9DD3-3817A58EE733}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{601841ED-AC84-406A-9DD3-3817A58EE733}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{601841ED-AC84-406A-9DD3-3817A58EE733}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C46738B-5A84-4E05-8527-8F08E52C24FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C46738B-5A84-4E05-8527-8F08E52C24FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C46738B-5A84-4E05-8527-8F08E52C24FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C46738B-5A84-4E05-8527-8F08E52C24FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E2A36AE-9A27-4AC5-B431-649205E33322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E2A36AE-9A27-4AC5-B431-649205E33322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E2A36AE-9A27-4AC5-B431-649205E33322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E2A36AE-9A27-4AC5-B431-649205E33322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61796FAD-92C5-47A0-A53F-A783AC814BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61796FAD-92C5-47A0-A53F-A783AC814BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61796FAD-92C5-47A0-A53F-A783AC814BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61796FAD-92C5-47A0-A53F-A783AC814BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FD06072-9E03-4207-8E2D-D5852A646505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD06072-9E03-4207-8E2D-D5852A646505}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD06072-9E03-4207-8E2D-D5852A646505}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FD06072-9E03-4207-8E2D-D5852A646505}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

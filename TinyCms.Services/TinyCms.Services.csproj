@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{61796FAD-92C5-47A0-A53F-A783AC814BDB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TinyCms.Services</RootNamespace>
+    <AssemblyName>TinyCms.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\packages\ImageResizer.4.0.4\lib\net45\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UserAgentStringLibrary">
+      <HintPath>..\packages\nopCommerceCustom\UserAgentStringLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Authentication\External\AuthorizationResult.cs" />
+    <Compile Include="Authentication\External\AuthorizeState.cs" />
+    <Compile Include="Authentication\External\ExternalAuthorizer.cs" />
+    <Compile Include="Authentication\External\ExternalAuthorizerHelper.cs" />
+    <Compile Include="Authentication\External\IClaimsTranslator.cs" />
+    <Compile Include="Authentication\External\IExternalAuthenticationMethod.cs" />
+    <Compile Include="Authentication\External\IExternalAuthorizer.cs" />
+    <Compile Include="Authentication\External\IExternalProviderAuthorizer.cs" />
+    <Compile Include="Authentication\External\IOpenAuthenticationService.cs" />
+    <Compile Include="Authentication\External\OpenAuthenticationParameters.cs" />
+    <Compile Include="Authentication\External\OpenAuthenticationService.cs" />
+    <Compile Include="Authentication\External\OpenAuthenticationStatus.cs" />
+    <Compile Include="Authentication\External\OpenAuthentificationExtensions.cs" />
+    <Compile Include="Authentication\External\RegistrationDetails.cs" />
+    <Compile Include="Authentication\External\UserClaims.cs" />
+    <Compile Include="Authentication\FormsAuthenticationService.cs" />
+    <Compile Include="Authentication\IAuthenticationService.cs" />
+    <Compile Include="Caching\ClearCacheTask.cs" />
+    <Compile Include="Common\FulltextService.cs" />
+    <Compile Include="Common\GenericAttributeExtensions.cs" />
+    <Compile Include="Common\GenericAttributeService.cs" />
+    <Compile Include="Common\IFulltextService.cs" />
+    <Compile Include="Common\IGenericAttributeService.cs" />
+    <Compile Include="Common\IMaintenanceService.cs" />
+    <Compile Include="Common\ISearchTermService.cs" />
+    <Compile Include="Common\KeepAliveTask.cs" />
+    <Compile Include="Common\MaintenanceService.cs" />
+    <Compile Include="Common\SearchTermService.cs" />
+    <Compile Include="Configuration\ISettingService.cs" />
+    <Compile Include="Configuration\SettingExtensions.cs" />
+    <Compile Include="Configuration\SettingService.cs" />
+    <Compile Include="Customers\ChangePasswordRequest.cs" />
+    <Compile Include="Customers\ChangePasswordResult.cs" />
+    <Compile Include="Customers\CustomerAttributeExtensions.cs" />
+    <Compile Include="Customers\CustomerAttributeParser.cs" />
+    <Compile Include="Customers\CustomerAttributeService.cs" />
+    <Compile Include="Customers\CustomerExtensions.cs" />
+    <Compile Include="Customers\CustomerRegistrationRequest.cs" />
+    <Compile Include="Customers\CustomerRegistrationResult.cs" />
+    <Compile Include="Customers\CustomerRegistrationService.cs" />
+    <Compile Include="Customers\CustomerService.cs" />
+    <Compile Include="Customers\ICustomerAttributeParser.cs" />
+    <Compile Include="Customers\ICustomerAttributeService.cs" />
+    <Compile Include="Customers\ICustomerRegistrationService.cs" />
+    <Compile Include="Customers\ICustomerService.cs" />
+    <Compile Include="Events\EventPublisher.cs" />
+    <Compile Include="Events\EventPublisherExtensions.cs" />
+    <Compile Include="Events\IConsumer.cs" />
+    <Compile Include="Events\IEventPublisher.cs" />
+    <Compile Include="Events\ISubscriptionService.cs" />
+    <Compile Include="Events\SubscriptionService.cs" />
+    <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\DateTimeSettings.cs" />
+    <Compile Include="Helpers\IDateTimeHelper.cs" />
+    <Compile Include="Helpers\IUserAgentHelper.cs" />
+    <Compile Include="Helpers\UserAgentHelper.cs" />
+    <Compile Include="Infrastructure\AzureWebsitesMachineNameProvider.cs" />
+    <Compile Include="Infrastructure\DefaultMachineNameProvider.cs" />
+    <Compile Include="Infrastructure\IMachineNameProvider.cs" />
+    <Compile Include="Localization\ILanguageService.cs" />
+    <Compile Include="Localization\ILocalizationService.cs" />
+    <Compile Include="Localization\ILocalizedEntityService.cs" />
+    <Compile Include="Localization\LanguageService.cs" />
+    <Compile Include="Localization\LocalizationExtensions.cs" />
+    <Compile Include="Localization\LocalizationService.cs" />
+    <Compile Include="Localization\LocalizedEntityService.cs" />
+    <Compile Include="Logging\ClearLogTask.cs" />
+    <Compile Include="Logging\CustomerActivityService.cs" />
+    <Compile Include="Logging\DefaultLogger.cs" />
+    <Compile Include="Logging\ICustomerActivityService.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\LoggingExtensions.cs" />
+    <Compile Include="Logging\NullLogger.cs" />
+    <Compile Include="Media\Extensions.cs" />
+    <Compile Include="Media\IPictureService.cs" />
+    <Compile Include="Media\PictureService.cs" />
+    <Compile Include="Media\ResizeType.cs" />
+    <Compile Include="Messages\EmailAccountService.cs" />
+    <Compile Include="Messages\EmailSender.cs" />
+    <Compile Include="Messages\EventPublisherExtensions.cs" />
+    <Compile Include="Messages\IEmailAccountService.cs" />
+    <Compile Include="Messages\IEmailSender.cs" />
+    <Compile Include="Messages\IMessageTemplateService.cs" />
+    <Compile Include="Messages\IMessageTokenProvider.cs" />
+    <Compile Include="Messages\INewsLetterSubscriptionService.cs" />
+    <Compile Include="Messages\IQueuedEmailService.cs" />
+    <Compile Include="Messages\ITokenizer.cs" />
+    <Compile Include="Messages\IWorkflowMessageService.cs" />
+    <Compile Include="Messages\MessageTemplateService.cs" />
+    <Compile Include="Messages\MessageTokenProvider.cs" />
+    <Compile Include="Messages\NewsLetterSubscriptionService.cs" />
+    <Compile Include="Messages\QueuedEmailService.cs" />
+    <Compile Include="Messages\QueuedMessagesSendTask.cs" />
+    <Compile Include="Messages\Token.cs" />
+    <Compile Include="Messages\Tokenizer.cs" />
+    <Compile Include="Messages\WorkflowMessageService.cs" />
+    <Compile Include="Polls\IPollService.cs" />
+    <Compile Include="Polls\PollService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AclService.cs" />
+    <Compile Include="Security\EncryptionService.cs" />
+    <Compile Include="Security\IAclService.cs" />
+    <Compile Include="Security\IEncryptionService.cs" />
+    <Compile Include="Security\IPermissionProvider.cs" />
+    <Compile Include="Security\IPermissionService.cs" />
+    <Compile Include="Security\PermissionService.cs" />
+    <Compile Include="Security\StandardPermissionProvider.cs" />
+    <Compile Include="Seo\ISitemapGenerator.cs" />
+    <Compile Include="Seo\IUrlRecordService.cs" />
+    <Compile Include="Seo\SeoExtensions.cs" />
+    <Compile Include="Seo\SitemapGenerator.cs" />
+    <Compile Include="Seo\UpdateFrequency.cs" />
+    <Compile Include="Seo\UrlRecordService.cs" />
+    <Compile Include="Tasks\IScheduleTaskService.cs" />
+    <Compile Include="Tasks\ITask.cs" />
+    <Compile Include="Tasks\ScheduleTaskService.cs" />
+    <Compile Include="Tasks\Task.cs" />
+    <Compile Include="Tasks\TaskManager.cs" />
+    <Compile Include="Tasks\TaskThread.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TinyCms.Core\TinyCms.Core.csproj">
+      <Project>{601841ed-ac84-406a-9dd3-3817a58ee733}</Project>
+      <Name>TinyCms.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TinyCms.Data\TinyCms.Data.csproj">
+      <Project>{9c46738b-5a84-4e05-8527-8f08e52c24fa}</Project>
+      <Name>TinyCms.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
