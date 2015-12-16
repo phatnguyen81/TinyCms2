@@ -203,6 +203,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\MappingExtensions.cs" />
     <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Models\Posts\PostModel.cs" />
     <Compile Include="Models\Security\PermissionMappingModel.cs" />
     <Compile Include="Models\Security\PermissionRecordModel.cs" />
+    <Compile Include="Models\Settings\CatalogSettingsModel.cs" />
     <Compile Include="Models\Settings\CustomerUserSettingsModel.cs" />
     <Compile Include="Models\Settings\GeneralCommonSettingsModel.cs" />
     <Compile Include="Models\Settings\MediaSettingsModel.cs" />
@@ -456,6 +458,7 @@
     <Content Include="Views\Category\ProductAddPopup.cshtml" />
     <Content Include="Views\Category\Tree.cshtml" />
     <Content Include="Views\Category\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Common\AclDisabledWarning.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

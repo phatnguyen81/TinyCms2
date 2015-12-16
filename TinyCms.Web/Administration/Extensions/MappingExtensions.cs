@@ -269,7 +269,16 @@ namespace TinyCms.Admin.Extensions
         {
             return model.MapTo(destination);
         }
-      
+
+        public static CatalogSettingsModel ToModel(this CatalogSettings entity)
+        {
+            return entity.MapTo<CatalogSettings, CatalogSettingsModel>();
+        }
+        public static CatalogSettings ToEntity(this CatalogSettingsModel model, CatalogSettings destination)
+        {
+            return model.MapTo(destination);
+        }
+
         #endregion
 
         #region Plugins

@@ -264,11 +264,8 @@ namespace TinyCms.Admin.Controllers
             //ACL
             PrepareAclModel(model, null, false);
             //default values
-            model.PageSize = _catalogSettings.DefaultCategoryPageSize;
-            model.PageSizeOptions = _catalogSettings.DefaultCategoryPageSizeOptions;
             model.Published = true;
             model.IncludeInTopMenu = true;
-            model.AllowCustomersToSelectPageSize = true;            
 
             return View(model);
         }
@@ -418,7 +415,6 @@ namespace TinyCms.Admin.Controllers
 
         #endregion
 
-    
         #region Posts
 
         [HttpPost]

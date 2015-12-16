@@ -12,6 +12,7 @@ using TinyCms.Admin.Extensions;
 using TinyCms.Admin.Models.Common;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
+using TinyCms.Core.Domain.Posts;
 using TinyCms.Core.Domain.Seo;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Services.Common;
@@ -41,6 +42,7 @@ namespace TinyCms.Admin.Controllers
         private readonly ILocalizationService _localizationService;
         private readonly ISearchTermService _searchTermService;
         private readonly ISettingService _settingService;
+        private readonly CatalogSettings _catalogSettings;
         private readonly HttpContextBase _httpContext;
 
 
@@ -59,7 +61,7 @@ namespace TinyCms.Admin.Controllers
             ILocalizationService localizationService,
             ISearchTermService searchTermService,
             ISettingService settingService,
-            HttpContextBase httpContext)
+            HttpContextBase httpContext, CatalogSettings catalogSettings)
         {
             this._customerService = customerService;
             this._urlRecordService = urlRecordService;
@@ -72,6 +74,7 @@ namespace TinyCms.Admin.Controllers
             this._searchTermService = searchTermService;
             this._settingService = settingService;
             this._httpContext = httpContext;
+            _catalogSettings = catalogSettings;
         }
 
         #endregion
@@ -465,7 +468,7 @@ namespace TinyCms.Admin.Controllers
         [ChildActionOnly]
         public ActionResult PopularSearchTermsReport()
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
                 return Content("");
 
             return PartialView();
@@ -473,7 +476,7 @@ namespace TinyCms.Admin.Controllers
         [HttpPost]
         public ActionResult PopularSearchTermsReport(DataSourceRequest command)
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
                 return AccessDeniedView();
 
             var searchTermRecordLines = _searchTermService.GetStats(command.Page - 1, command.PageSize);
@@ -489,7 +492,19 @@ namespace TinyCms.Admin.Controllers
             return Json(gridModel);
         }
 
+        //action displaying notification (warning) to a store owner that "ACL rules" feature is ignored
+        [ChildActionOnly]
+        public ActionResult AclDisabledWarning()
+        {
+            //default setting
+            bool enabled = _catalogSettings.IgnoreAcl;
 
+            //This setting is disabled. No warnings.
+            if (!enabled)
+                return Content("");
+
+            return PartialView();
+        }
     
         #endregion
     }

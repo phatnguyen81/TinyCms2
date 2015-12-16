@@ -70,375 +70,375 @@ GO
 
 
 SET IDENTITY_INSERT [dbo].[Setting] ON
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (1, N'pdfsettings.logopictureid', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (2, N'pdfsettings.letterpagesizeenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (3, N'pdfsettings.renderordernotes', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (4, N'pdfsettings.disablepdfinvoicesforpendingorders', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (5, N'pdfsettings.fontfilename', N'FreeSerif.ttf', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (6, N'pdfsettings.invoicefootertextcolumn1', N'', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (7, N'pdfsettings.invoicefootertextcolumn2', N'', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (8, N'commonsettings.subjectfieldoncontactusform', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (9, N'commonsettings.usesystememailforcontactusform', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (10, N'commonsettings.usestoredproceduresifsupported', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (11, N'commonsettings.hideadvertisementsonadminarea', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (12, N'commonsettings.sitemapenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (13, N'commonsettings.sitemapincludecategories', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (14, N'commonsettings.sitemapincludemanufacturers', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (15, N'commonsettings.sitemapincludeproducts', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (16, N'commonsettings.displayjavascriptdisabledwarning', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (17, N'commonsettings.usefulltextsearch', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (18, N'commonsettings.fulltextmode', N'ExactMatch', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (19, N'commonsettings.log404errors', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (20, N'commonsettings.breadcrumbdelimiter', N'/', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (21, N'commonsettings.renderxuacompatible', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (22, N'commonsettings.xuacompatiblevalue', N'IE=edge', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (23, N'commonsettings.ignorelogwordlist', N'', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (24, N'seosettings.pagetitleseparator', N'. ', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (25, N'seosettings.pagetitleseoadjustment', N'PagenameAfterStorename', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (26, N'seosettings.defaulttitle', N'Your store', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (27, N'seosettings.defaultmetakeywords', N'', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (28, N'seosettings.defaultmetadescription', N'', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (29, N'seosettings.generateproductmetadescription', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (30, N'seosettings.convertnonwesternchars', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (31, N'seosettings.allowunicodecharsinurls', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (32, N'seosettings.canonicalurlsenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (33, N'seosettings.wwwrequirement', N'NoMatter', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (34, N'seosettings.enablejsbundling', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (35, N'seosettings.enablecssbundling', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (36, N'seosettings.twittermetatags', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (37, N'seosettings.opengraphmetatags', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (38, N'seosettings.reservedurlrecordslugs', N'admin,install,recentlyviewedproducts,newproducts,compareproducts,clearcomparelist,setproductreviewhelpfulness,login,register,logout,cart,wishlist,emailwishlist,checkout,onepagecheckout,contactus,passwordrecovery,subscribenewsletter,blog,boards,inboxupdate,sentupdate,news,sitemap,search,config,eucookielawaccept,page-not-found', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (39, N'adminareasettings.defaultgridpagesize', N'15', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (40, N'adminareasettings.gridpagesizes', N'10, 15, 20, 50, 100', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (41, N'adminareasettings.richeditoradditionalsettings', N'', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (42, N'adminareasettings.richeditorallowjavascript', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (43, N'catalogsettings.allowviewunpublishedproductpage', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (44, N'catalogsettings.displaydiscontinuedmessageforunpublishedproducts', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (45, N'catalogsettings.publishbackproductwhencancellingorders', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (46, N'catalogsettings.showproductsku', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (47, N'catalogsettings.showmanufacturerpartnumber', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (48, N'catalogsettings.showgtin', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (49, N'catalogsettings.showfreeshippingnotification', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (50, N'catalogsettings.allowproductsorting', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (51, N'catalogsettings.allowproductviewmodechanging', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (52, N'catalogsettings.defaultviewmode', N'grid', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (53, N'catalogsettings.showproductsfromsubcategories', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (54, N'catalogsettings.showcategoryproductnumber', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (55, N'catalogsettings.showcategoryproductnumberincludingsubcategories', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (56, N'catalogsettings.categorybreadcrumbenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (57, N'catalogsettings.showsharebutton', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (58, N'catalogsettings.pagesharecode', N'<!-- AddThis Button BEGIN --><div class="addthis_toolbox addthis_default_style "><a class="addthis_button_preferred_1"></a><a class="addthis_button_preferred_2"></a><a class="addthis_button_preferred_3"></a><a class="addthis_button_preferred_4"></a><a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a></div><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=nopsolutions"></script><!-- AddThis Button END -->', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (59, N'catalogsettings.productreviewsmustbeapproved', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (60, N'catalogsettings.defaultproductratingvalue', N'5', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (61, N'catalogsettings.allowanonymoususerstoreviewproduct', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (62, N'catalogsettings.notifystoreowneraboutnewproductreviews', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (63, N'catalogsettings.emailafriendenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (64, N'catalogsettings.allowanonymoususerstoemailafriend', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (65, N'catalogsettings.recentlyviewedproductsnumber', N'3', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (66, N'catalogsettings.recentlyviewedproductsenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (67, N'catalogsettings.newproductsnumber', N'6', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (68, N'catalogsettings.newproductsenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (69, N'catalogsettings.compareproductsenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (70, N'catalogsettings.compareproductsnumber', N'4', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (71, N'catalogsettings.productsearchautocompleteenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (72, N'catalogsettings.productsearchautocompletenumberofproducts', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (73, N'catalogsettings.showproductimagesinsearchautocomplete', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (74, N'catalogsettings.productsearchtermminimumlength', N'3', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (75, N'catalogsettings.showbestsellersonhomepage', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (76, N'catalogsettings.numberofbestsellersonhomepage', N'4', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (77, N'catalogsettings.searchpageproductsperpage', N'6', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (78, N'catalogsettings.searchpageallowcustomerstoselectpagesize', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (79, N'catalogsettings.searchpagepagesizeoptions', N'6, 3, 9, 18', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (80, N'catalogsettings.productsalsopurchasedenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (81, N'catalogsettings.productsalsopurchasednumber', N'3', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (82, N'catalogsettings.ajaxprocessattributechange', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (83, N'catalogsettings.numberofproducttags', N'15', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (84, N'catalogsettings.productsbytagpagesize', N'6', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (85, N'catalogsettings.productsbytagallowcustomerstoselectpagesize', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (86, N'catalogsettings.productsbytagpagesizeoptions', N'6, 3, 9, 18', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (87, N'catalogsettings.includeshortdescriptionincompareproducts', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (88, N'catalogsettings.includefulldescriptionincompareproducts', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (89, N'catalogsettings.includefeaturedproductsinnormallists', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (90, N'catalogsettings.displaytierpriceswithdiscounts', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (91, N'catalogsettings.ignorediscounts', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (92, N'catalogsettings.ignorefeaturedproducts', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (93, N'catalogsettings.ignoreacl', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (94, N'catalogsettings.ignorestorelimitations', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (95, N'catalogsettings.cacheproductprices', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (96, N'catalogsettings.maximumbackinstocksubscriptions', N'200', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (97, N'catalogsettings.manufacturersblockitemstodisplay', N'2', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (98, N'catalogsettings.displaytaxshippinginfofooter', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (99, N'catalogsettings.displaytaxshippinginfoproductdetailspage', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (100, N'catalogsettings.displaytaxshippinginfoproductboxes', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (101, N'catalogsettings.displaytaxshippinginfoshoppingcart', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (102, N'catalogsettings.displaytaxshippinginfowishlist', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (103, N'catalogsettings.displaytaxshippinginfoorderdetailspage', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (104, N'catalogsettings.defaultcategorypagesizeoptions', N'6, 3, 9', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (105, N'catalogsettings.defaultcategorypagesize', N'6', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (106, N'catalogsettings.defaultmanufacturerpagesizeoptions', N'6, 3, 9', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (107, N'catalogsettings.defaultmanufacturerpagesize', N'6', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (108, N'localizationsettings.defaultadminlanguageid', N'1', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (109, N'localizationsettings.useimagesforlanguageselection', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (110, N'localizationsettings.seofriendlyurlsforlanguagesenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (111, N'localizationsettings.automaticallydetectlanguage', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (112, N'localizationsettings.loadalllocalerecordsonstartup', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (113, N'localizationsettings.loadalllocalizedpropertiesonstartup', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (114, N'localizationsettings.loadallurlrecordsonstartup', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (115, N'localizationsettings.ignorertlpropertyforadminarea', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (116, N'customersettings.usernamesenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (117, N'customersettings.checkusernameavailabilityenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (118, N'customersettings.allowuserstochangeusernames', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (119, N'customersettings.defaultpasswordformat', N'Hashed', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (120, N'customersettings.hashedpasswordformat', N'SHA1', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (121, N'customersettings.passwordminlength', N'6', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (122, N'customersettings.passwordrecoverylinkdaysvalid', N'7', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (123, N'customersettings.userregistrationtype', N'Standard', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (124, N'customersettings.allowcustomerstouploadavatars', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (125, N'customersettings.avatarmaximumsizebytes', N'20000', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (126, N'customersettings.defaultavatarenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (127, N'customersettings.showcustomerslocation', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (128, N'customersettings.showcustomersjoindate', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (129, N'customersettings.allowviewingprofiles', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (130, N'customersettings.notifynewcustomerregistration', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (131, N'customersettings.hidedownloadableproductstab', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (132, N'customersettings.hidebackinstocksubscriptionstab', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (133, N'customersettings.downloadableproductsvalidateuser', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (134, N'customersettings.customernameformat', N'ShowFirstName', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (135, N'customersettings.newsletterenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (136, N'customersettings.newslettertickedbydefault', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (137, N'customersettings.hidenewsletterblock', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (138, N'customersettings.newsletterblockallowtounsubscribe', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (139, N'customersettings.onlinecustomerminutes', N'20', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (140, N'customersettings.storelastvisitedpage', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (141, N'customersettings.suffixdeletedcustomers', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (142, N'customersettings.genderenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (143, N'customersettings.dateofbirthenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (144, N'customersettings.dateofbirthrequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (145, N'customersettings.dateofbirthminimumage', N'', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (146, N'customersettings.companyenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (147, N'customersettings.companyrequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (148, N'customersettings.streetaddressenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (149, N'customersettings.streetaddressrequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (150, N'customersettings.streetaddress2enabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (151, N'customersettings.streetaddress2required', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (152, N'customersettings.zippostalcodeenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (153, N'customersettings.zippostalcoderequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (154, N'customersettings.cityenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (155, N'customersettings.cityrequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (156, N'customersettings.countryenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (157, N'customersettings.countryrequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (158, N'customersettings.stateprovinceenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (159, N'customersettings.stateprovincerequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (160, N'customersettings.phoneenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (161, N'customersettings.phonerequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (162, N'customersettings.faxenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (163, N'customersettings.faxrequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (164, N'customersettings.acceptprivacypolicyenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (165, N'addresssettings.companyenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (166, N'addresssettings.companyrequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (167, N'addresssettings.streetaddressenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (168, N'addresssettings.streetaddressrequired', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (169, N'addresssettings.streetaddress2enabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (170, N'addresssettings.streetaddress2required', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (171, N'addresssettings.zippostalcodeenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (172, N'addresssettings.zippostalcoderequired', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (173, N'addresssettings.cityenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (174, N'addresssettings.cityrequired', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (175, N'addresssettings.countryenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (176, N'addresssettings.stateprovinceenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (177, N'addresssettings.phoneenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (178, N'addresssettings.phonerequired', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (179, N'addresssettings.faxenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (180, N'addresssettings.faxrequired', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (181, N'mediasettings.avatarpicturesize', N'120', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (182, N'mediasettings.productthumbpicturesize', N'415', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (183, N'mediasettings.productdetailspicturesize', N'550', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (184, N'mediasettings.productthumbpicturesizeonproductdetailspage', N'100', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (185, N'mediasettings.associatedproductpicturesize', N'220', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (186, N'mediasettings.categorythumbpicturesize', N'450', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (187, N'mediasettings.manufacturerthumbpicturesize', N'420', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (188, N'mediasettings.vendorthumbpicturesize', N'450', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (189, N'mediasettings.cartthumbpicturesize', N'80', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (190, N'mediasettings.minicartthumbpicturesize', N'70', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (191, N'mediasettings.autocompletesearchthumbpicturesize', N'20', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (192, N'mediasettings.defaultpicturezoomenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (193, N'mediasettings.maximumimagesize', N'1980', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (194, N'mediasettings.defaultimagequality', N'80', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (195, N'mediasettings.multiplethumbdirectories', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (196, N'storeinformationsettings.hidepoweredbynopcommerce', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (197, N'storeinformationsettings.storeclosed', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (198, N'storeinformationsettings.defaultstoretheme', N'DefaultClean', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (199, N'storeinformationsettings.allowcustomertoselecttheme', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (200, N'storeinformationsettings.displayminiprofilerinpublicstore', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (201, N'storeinformationsettings.displayeucookielawwarning', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (202, N'storeinformationsettings.facebooklink', N'http://www.facebook.com/nopCommerce', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (203, N'storeinformationsettings.twitterlink', N'https://twitter.com/nopCommerce', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (204, N'storeinformationsettings.youtubelink', N'http://www.youtube.com/user/nopCommerce', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (205, N'storeinformationsettings.googlepluslink', N'https://plus.google.com/+nopcommerce', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (206, N'externalauthenticationsettings.autoregisterenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (207, N'externalauthenticationsettings.requireemailvalidation', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (208, N'externalauthenticationsettings.activeauthenticationmethodsystemnames', N'', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (209, N'rewardpointssettings.enabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (210, N'rewardpointssettings.exchangerate', N'1', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (211, N'rewardpointssettings.minimumrewardpointstouse', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (212, N'rewardpointssettings.pointsforregistration', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (213, N'rewardpointssettings.pointsforpurchases_amount', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (214, N'rewardpointssettings.pointsforpurchases_points', N'1', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (215, N'rewardpointssettings.pointsforpurchases_awarded', N'Complete', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (216, N'rewardpointssettings.pointsforpurchases_canceled', N'Cancelled', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (217, N'rewardpointssettings.displayhowmuchwillbeearned', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (218, N'rewardpointssettings.pointsaccumulatedforallstores', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (219, N'currencysettings.displaycurrencylabel', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (220, N'currencysettings.primarystorecurrencyid', N'1', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (221, N'currencysettings.primaryexchangeratecurrencyid', N'1', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (222, N'currencysettings.activeexchangerateprovidersystemname', N'CurrencyExchange.MoneyConverter', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (223, N'currencysettings.autoupdateenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (224, N'measuresettings.basedimensionid', N'1', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (225, N'measuresettings.baseweightid', N'2', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (226, N'messagetemplatessettings.caseinvariantreplacement', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (227, N'messagetemplatessettings.color1', N'#b9babe', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (228, N'messagetemplatessettings.color2', N'#ebecee', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (229, N'messagetemplatessettings.color3', N'#dde2e6', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (230, N'shoppingcartsettings.displaycartafteraddingproduct', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (231, N'shoppingcartsettings.displaywishlistafteraddingproduct', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (232, N'shoppingcartsettings.maximumshoppingcartitems', N'1000', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (233, N'shoppingcartsettings.maximumwishlistitems', N'1000', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (234, N'shoppingcartsettings.allowoutofstockitemstobeaddedtowishlist', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (235, N'shoppingcartsettings.moveitemsfromwishlisttocart', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (236, N'shoppingcartsettings.showproductimagesonshoppingcart', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (237, N'shoppingcartsettings.showproductimagesonwishlist', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (238, N'shoppingcartsettings.showdiscountbox', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (239, N'shoppingcartsettings.showgiftcardbox', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (240, N'shoppingcartsettings.crosssellsnumber', N'4', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (241, N'shoppingcartsettings.emailwishlistenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (242, N'shoppingcartsettings.allowanonymoususerstoemailwishlist', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (243, N'shoppingcartsettings.minishoppingcartenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (244, N'shoppingcartsettings.showproductimagesinminishoppingcart', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (245, N'shoppingcartsettings.minishoppingcartproductnumber', N'5', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (246, N'shoppingcartsettings.roundpricesduringcalculation', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (247, N'shoppingcartsettings.grouptierpricesfordistinctshoppingcartitems', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (248, N'shoppingcartsettings.allowcartitemediting', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (249, N'shoppingcartsettings.renderassociatedattributevaluequantity', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (250, N'ordersettings.isreorderallowed', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (251, N'ordersettings.minordersubtotalamount', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (252, N'ordersettings.minordersubtotalamountincludingtax', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (253, N'ordersettings.minordertotalamount', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (254, N'ordersettings.anonymouscheckoutallowed', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (255, N'ordersettings.termsofserviceonshoppingcartpage', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (256, N'ordersettings.termsofserviceonorderconfirmpage', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (257, N'ordersettings.onepagecheckoutenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (258, N'ordersettings.onepagecheckoutdisplayordertotalsonpaymentinfotab', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (259, N'ordersettings.disablebillingaddresscheckoutstep', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (260, N'ordersettings.disableordercompletedpage', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (261, N'ordersettings.attachpdfinvoicetoorderplacedemail', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (262, N'ordersettings.attachpdfinvoicetoorderpaidemail', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (263, N'ordersettings.attachpdfinvoicetoordercompletedemail', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (264, N'ordersettings.returnrequestsenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (265, N'ordersettings.numberofdaysreturnrequestavailable', N'365', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (266, N'ordersettings.giftcards_activated_orderstatusid', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (267, N'ordersettings.giftcards_deactivated_orderstatusid', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (268, N'ordersettings.minimumorderplacementinterval', N'30', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (269, N'securitysettings.forcesslforallpages', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (270, N'securitysettings.encryptionkey', N'9900987817056773', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (271, N'securitysettings.adminareaallowedipaddresses', N'', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (272, N'securitysettings.enablexsrfprotectionforadminarea', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (273, N'securitysettings.enablexsrfprotectionforpublicstore', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (274, N'securitysettings.honeypotenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (275, N'securitysettings.honeypotinputname', N'hpinput', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (276, N'shippingsettings.activeshippingratecomputationmethodsystemnames', N'Shipping.FixedRate', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (277, N'shippingsettings.allowpickupinstore', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (278, N'shippingsettings.pickupinstorefee', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (279, N'shippingsettings.usewarehouselocation', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (280, N'shippingsettings.notifycustomeraboutshippingfrommultiplelocations', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (281, N'shippingsettings.freeshippingoverxenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (282, N'shippingsettings.freeshippingoverxvalue', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (283, N'shippingsettings.freeshippingoverxincludingtax', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (284, N'shippingsettings.estimateshippingenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (285, N'shippingsettings.displayshipmenteventstocustomers', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (286, N'shippingsettings.displayshipmenteventstostoreowner', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (287, N'shippingsettings.shippingoriginaddressid', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (288, N'shippingsettings.returnvalidoptionsifthereareany', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (289, N'shippingsettings.bypassshippingmethodselectionifonlyone', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (290, N'shippingsettings.usecuberootmethod', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (291, N'paymentsettings.activepaymentmethodsystemnames', N'Payments.CheckMoneyOrder,Payments.Manual,Payments.PayInStore,Payments.PurchaseOrder', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (292, N'paymentsettings.allowrepostingpayments', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (293, N'paymentsettings.bypasspaymentmethodselectionifonlyone', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (294, N'taxsettings.taxbasedon', N'BillingAddress', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (295, N'taxsettings.taxdisplaytype', N'ExcludingTax', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (296, N'taxsettings.activetaxprovidersystemname', N'Tax.FixedRate', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (297, N'taxsettings.defaulttaxaddressid', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (298, N'taxsettings.displaytaxsuffix', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (299, N'taxsettings.displaytaxrates', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (300, N'taxsettings.pricesincludetax', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (301, N'taxsettings.allowcustomerstoselecttaxdisplaytype', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (302, N'taxsettings.hidezerotax', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (303, N'taxsettings.hidetaxinordersummary', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (304, N'taxsettings.forcetaxexclusionfromordersubtotal', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (305, N'taxsettings.shippingistaxable', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (306, N'taxsettings.shippingpriceincludestax', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (307, N'taxsettings.shippingtaxclassid', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (308, N'taxsettings.paymentmethodadditionalfeeistaxable', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (309, N'taxsettings.paymentmethodadditionalfeeincludestax', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (310, N'taxsettings.paymentmethodadditionalfeetaxclassid', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (311, N'taxsettings.euvatenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (312, N'taxsettings.euvatshopcountryid', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (313, N'taxsettings.euvatallowvatexemption', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (314, N'taxsettings.euvatusewebservice', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (315, N'taxsettings.euvatassumevalid', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (316, N'taxsettings.euvatemailadminwhennewvatsubmitted', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (317, N'datetimesettings.defaultstoretimezoneid', N'', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (318, N'datetimesettings.allowcustomerstosettimezone', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (319, N'blogsettings.enabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (320, N'blogsettings.postspagesize', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (321, N'blogsettings.allownotregistereduserstoleavecomments', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (322, N'blogsettings.notifyaboutnewblogcomments', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (323, N'blogsettings.numberoftags', N'15', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (324, N'blogsettings.showheaderrssurl', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (325, N'newssettings.enabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (326, N'newssettings.allownotregistereduserstoleavecomments', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (327, N'newssettings.notifyaboutnewnewscomments', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (328, N'newssettings.shownewsonmainpage', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (329, N'newssettings.mainpagenewscount', N'3', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (330, N'newssettings.newsarchivepagesize', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (331, N'newssettings.showheaderrssurl', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (332, N'forumsettings.forumsenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (333, N'forumsettings.relativedatetimeformattingenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (334, N'forumsettings.allowcustomerstoeditposts', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (335, N'forumsettings.allowcustomerstomanagesubscriptions', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (336, N'forumsettings.allowgueststocreateposts', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (337, N'forumsettings.allowgueststocreatetopics', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (338, N'forumsettings.allowcustomerstodeleteposts', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (339, N'forumsettings.topicsubjectmaxlength', N'450', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (340, N'forumsettings.strippedtopicmaxlength', N'45', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (341, N'forumsettings.postmaxlength', N'4000', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (342, N'forumsettings.topicspagesize', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (343, N'forumsettings.postspagesize', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (344, N'forumsettings.searchresultspagesize', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (345, N'forumsettings.activediscussionspagesize', N'50', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (346, N'forumsettings.latestcustomerpostspagesize', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (347, N'forumsettings.showcustomerspostcount', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (348, N'forumsettings.forumeditor', N'BBCodeEditor', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (349, N'forumsettings.signaturesenabled', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (350, N'forumsettings.allowprivatemessages', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (351, N'forumsettings.showalertforpm', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (352, N'forumsettings.privatemessagespagesize', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (353, N'forumsettings.forumsubscriptionspagesize', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (354, N'forumsettings.notifyaboutprivatemessages', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (355, N'forumsettings.pmsubjectmaxlength', N'450', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (356, N'forumsettings.pmtextmaxlength', N'4000', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (357, N'forumsettings.homepageactivediscussionstopiccount', N'5', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (358, N'forumsettings.activediscussionsfeedcount', N'25', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (359, N'forumsettings.activediscussionsfeedenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (360, N'forumsettings.forumfeedsenabled', N'False', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (361, N'forumsettings.forumfeedcount', N'10', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (362, N'forumsettings.forumsearchtermminimumlength', N'3', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (363, N'vendorsettings.defaultvendorpagesizeoptions', N'6, 3, 9', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (364, N'vendorsettings.vendorsblockitemstodisplay', N'0', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (365, N'vendorsettings.showvendoronproductdetailspage', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (366, N'vendorsettings.allowcustomerstocontactvendors', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (367, N'vendorsettings.allowcustomerstoapplyforvendoraccount', N'True', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (368, N'emailaccountsettings.defaultemailaccountid', N'1', 0)
-INSERT [dbo].[Setting] ([Id], [Name], [Value], [StoreId]) VALUES (369, N'widgetsettings.activewidgetsystemnames', N'Widgets.NivoSlider', 0)
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (1, N'pdfsettings.logopictureid', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (2, N'pdfsettings.letterpagesizeenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (3, N'pdfsettings.renderordernotes', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (4, N'pdfsettings.disablepdfinvoicesforpendingorders', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (5, N'pdfsettings.fontfilename', N'FreeSerif.ttf')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (6, N'pdfsettings.invoicefootertextcolumn1', N'')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (7, N'pdfsettings.invoicefootertextcolumn2', N'')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (8, N'commonsettings.subjectfieldoncontactusform', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (9, N'commonsettings.usesystememailforcontactusform', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (10, N'commonsettings.usestoredproceduresifsupported', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (11, N'commonsettings.hideadvertisementsonadminarea', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (12, N'commonsettings.sitemapenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (13, N'commonsettings.sitemapincludecategories', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (14, N'commonsettings.sitemapincludemanufacturers', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (15, N'commonsettings.sitemapincludeproducts', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (16, N'commonsettings.displayjavascriptdisabledwarning', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (17, N'commonsettings.usefulltextsearch', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (18, N'commonsettings.fulltextmode', N'ExactMatch')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (19, N'commonsettings.log404errors', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (20, N'commonsettings.breadcrumbdelimiter', N'/')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (21, N'commonsettings.renderxuacompatible', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (22, N'commonsettings.xuacompatiblevalue', N'IE=edge')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (23, N'commonsettings.ignorelogwordlist', N'')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (24, N'seosettings.pagetitleseparator', N'. ')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (25, N'seosettings.pagetitleseoadjustment', N'PagenameAfterStorename')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (26, N'seosettings.defaulttitle', N'Your store')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (27, N'seosettings.defaultmetakeywords', N'')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (28, N'seosettings.defaultmetadescription', N'')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (29, N'seosettings.generateproductmetadescription', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (30, N'seosettings.convertnonwesternchars', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (31, N'seosettings.allowunicodecharsinurls', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (32, N'seosettings.canonicalurlsenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (33, N'seosettings.wwwrequirement', N'NoMatter')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (34, N'seosettings.enablejsbundling', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (35, N'seosettings.enablecssbundling', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (36, N'seosettings.twittermetatags', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (37, N'seosettings.opengraphmetatags', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (38, N'seosettings.reservedurlrecordslugs', N'admin,install,recentlyviewedproducts,newproducts,compareproducts,clearcomparelist,setproductreviewhelpfulness,login,register,logout,cart,wishlist,emailwishlist,checkout,onepagecheckout,contactus,passwordrecovery,subscribenewsletter,blog,boards,inboxupdate,sentupdate,news,sitemap,search,config,eucookielawaccept,page-not-found')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (39, N'adminareasettings.defaultgridpagesize', N'15')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (40, N'adminareasettings.gridpagesizes', N'10, 15, 20, 50, 100')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (41, N'adminareasettings.richeditoradditionalsettings', N'')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (42, N'adminareasettings.richeditorallowjavascript', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (43, N'catalogsettings.allowviewunpublishedproductpage', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (44, N'catalogsettings.displaydiscontinuedmessageforunpublishedproducts', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (45, N'catalogsettings.publishbackproductwhencancellingorders', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (46, N'catalogsettings.showproductsku', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (47, N'catalogsettings.showmanufacturerpartnumber', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (48, N'catalogsettings.showgtin', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (49, N'catalogsettings.showfreeshippingnotification', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (50, N'catalogsettings.allowproductsorting', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (51, N'catalogsettings.allowproductviewmodechanging', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (52, N'catalogsettings.defaultviewmode', N'grid')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (53, N'catalogsettings.showproductsfromsubcategories', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (54, N'catalogsettings.showcategoryproductnumber', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (55, N'catalogsettings.showcategoryproductnumberincludingsubcategories', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (56, N'catalogsettings.categorybreadcrumbenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (57, N'catalogsettings.showsharebutton', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (58, N'catalogsettings.pagesharecode', N'<!-- AddThis Button BEGIN --><div class="addthis_toolbox addthis_default_style "><a class="addthis_button_preferred_1"></a><a class="addthis_button_preferred_2"></a><a class="addthis_button_preferred_3"></a><a class="addthis_button_preferred_4"></a><a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a></div><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=nopsolutions"></script><!-- AddThis Button END -->')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (59, N'catalogsettings.productreviewsmustbeapproved', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (60, N'catalogsettings.defaultproductratingvalue', N'5')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (61, N'catalogsettings.allowanonymoususerstoreviewproduct', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (62, N'catalogsettings.notifystoreowneraboutnewproductreviews', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (63, N'catalogsettings.emailafriendenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (64, N'catalogsettings.allowanonymoususerstoemailafriend', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (65, N'catalogsettings.recentlyviewedproductsnumber', N'3')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (66, N'catalogsettings.recentlyviewedproductsenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (67, N'catalogsettings.newproductsnumber', N'6')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (68, N'catalogsettings.newproductsenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (69, N'catalogsettings.compareproductsenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (70, N'catalogsettings.compareproductsnumber', N'4')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (71, N'catalogsettings.productsearchautocompleteenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (72, N'catalogsettings.productsearchautocompletenumberofproducts', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (73, N'catalogsettings.showproductimagesinsearchautocomplete', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (74, N'catalogsettings.productsearchtermminimumlength', N'3')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (75, N'catalogsettings.showbestsellersonhomepage', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (76, N'catalogsettings.numberofbestsellersonhomepage', N'4')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (77, N'catalogsettings.searchpageproductsperpage', N'6')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (78, N'catalogsettings.searchpageallowcustomerstoselectpagesize', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (79, N'catalogsettings.searchpagepagesizeoptions', N'6, 3, 9, 18')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (80, N'catalogsettings.productsalsopurchasedenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (81, N'catalogsettings.productsalsopurchasednumber', N'3')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (82, N'catalogsettings.ajaxprocessattributechange', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (83, N'catalogsettings.numberofproducttags', N'15')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (84, N'catalogsettings.productsbytagpagesize', N'6')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (85, N'catalogsettings.productsbytagallowcustomerstoselectpagesize', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (86, N'catalogsettings.productsbytagpagesizeoptions', N'6, 3, 9, 18')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (87, N'catalogsettings.includeshortdescriptionincompareproducts', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (88, N'catalogsettings.includefulldescriptionincompareproducts', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (89, N'catalogsettings.includefeaturedproductsinnormallists', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (90, N'catalogsettings.displaytierpriceswithdiscounts', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (91, N'catalogsettings.ignorediscounts', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (92, N'catalogsettings.ignorefeaturedproducts', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (93, N'catalogsettings.ignoreacl', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (94, N'catalogsettings.ignorestorelimitations', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (95, N'catalogsettings.cacheproductprices', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (96, N'catalogsettings.maximumbackinstocksubscriptions', N'200')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (97, N'catalogsettings.manufacturersblockitemstodisplay', N'2')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (98, N'catalogsettings.displaytaxshippinginfofooter', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (99, N'catalogsettings.displaytaxshippinginfoproductdetailspage', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (100, N'catalogsettings.displaytaxshippinginfoproductboxes', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (101, N'catalogsettings.displaytaxshippinginfoshoppingcart', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (102, N'catalogsettings.displaytaxshippinginfowishlist', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (103, N'catalogsettings.displaytaxshippinginfoorderdetailspage', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (104, N'catalogsettings.defaultcategorypagesizeoptions', N'6, 3, 9')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (105, N'catalogsettings.defaultcategorypagesize', N'6')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (106, N'catalogsettings.defaultmanufacturerpagesizeoptions', N'6, 3, 9')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (107, N'catalogsettings.defaultmanufacturerpagesize', N'6')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (108, N'localizationsettings.defaultadminlanguageid', N'1')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (109, N'localizationsettings.useimagesforlanguageselection', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (110, N'localizationsettings.seofriendlyurlsforlanguagesenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (111, N'localizationsettings.automaticallydetectlanguage', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (112, N'localizationsettings.loadalllocalerecordsonstartup', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (113, N'localizationsettings.loadalllocalizedpropertiesonstartup', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (114, N'localizationsettings.loadallurlrecordsonstartup', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (115, N'localizationsettings.ignorertlpropertyforadminarea', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (116, N'customersettings.usernamesenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (117, N'customersettings.checkusernameavailabilityenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (118, N'customersettings.allowuserstochangeusernames', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (119, N'customersettings.defaultpasswordformat', N'Hashed')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (120, N'customersettings.hashedpasswordformat', N'SHA1')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (121, N'customersettings.passwordminlength', N'6')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (122, N'customersettings.passwordrecoverylinkdaysvalid', N'7')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (123, N'customersettings.userregistrationtype', N'Standard')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (124, N'customersettings.allowcustomerstouploadavatars', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (125, N'customersettings.avatarmaximumsizebytes', N'20000')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (126, N'customersettings.defaultavatarenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (127, N'customersettings.showcustomerslocation', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (128, N'customersettings.showcustomersjoindate', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (129, N'customersettings.allowviewingprofiles', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (130, N'customersettings.notifynewcustomerregistration', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (131, N'customersettings.hidedownloadableproductstab', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (132, N'customersettings.hidebackinstocksubscriptionstab', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (133, N'customersettings.downloadableproductsvalidateuser', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (134, N'customersettings.customernameformat', N'ShowFirstName')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (135, N'customersettings.newsletterenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (136, N'customersettings.newslettertickedbydefault', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (137, N'customersettings.hidenewsletterblock', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (138, N'customersettings.newsletterblockallowtounsubscribe', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (139, N'customersettings.onlinecustomerminutes', N'20')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (140, N'customersettings.storelastvisitedpage', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (141, N'customersettings.suffixdeletedcustomers', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (142, N'customersettings.genderenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (143, N'customersettings.dateofbirthenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (144, N'customersettings.dateofbirthrequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (145, N'customersettings.dateofbirthminimumage', N'')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (146, N'customersettings.companyenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (147, N'customersettings.companyrequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (148, N'customersettings.streetaddressenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (149, N'customersettings.streetaddressrequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (150, N'customersettings.streetaddress2enabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (151, N'customersettings.streetaddress2required', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (152, N'customersettings.zippostalcodeenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (153, N'customersettings.zippostalcoderequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (154, N'customersettings.cityenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (155, N'customersettings.cityrequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (156, N'customersettings.countryenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (157, N'customersettings.countryrequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (158, N'customersettings.stateprovinceenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (159, N'customersettings.stateprovincerequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (160, N'customersettings.phoneenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (161, N'customersettings.phonerequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (162, N'customersettings.faxenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (163, N'customersettings.faxrequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (164, N'customersettings.acceptprivacypolicyenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (165, N'addresssettings.companyenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (166, N'addresssettings.companyrequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (167, N'addresssettings.streetaddressenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (168, N'addresssettings.streetaddressrequired', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (169, N'addresssettings.streetaddress2enabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (170, N'addresssettings.streetaddress2required', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (171, N'addresssettings.zippostalcodeenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (172, N'addresssettings.zippostalcoderequired', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (173, N'addresssettings.cityenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (174, N'addresssettings.cityrequired', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (175, N'addresssettings.countryenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (176, N'addresssettings.stateprovinceenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (177, N'addresssettings.phoneenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (178, N'addresssettings.phonerequired', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (179, N'addresssettings.faxenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (180, N'addresssettings.faxrequired', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (181, N'mediasettings.avatarpicturesize', N'120')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (182, N'mediasettings.productthumbpicturesize', N'415')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (183, N'mediasettings.productdetailspicturesize', N'550')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (184, N'mediasettings.productthumbpicturesizeonproductdetailspage', N'100')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (185, N'mediasettings.associatedproductpicturesize', N'220')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (186, N'mediasettings.categorythumbpicturesize', N'450')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (187, N'mediasettings.manufacturerthumbpicturesize', N'420')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (188, N'mediasettings.vendorthumbpicturesize', N'450')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (189, N'mediasettings.cartthumbpicturesize', N'80')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (190, N'mediasettings.minicartthumbpicturesize', N'70')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (191, N'mediasettings.autocompletesearchthumbpicturesize', N'20')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (192, N'mediasettings.defaultpicturezoomenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (193, N'mediasettings.maximumimagesize', N'1980')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (194, N'mediasettings.defaultimagequality', N'80')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (195, N'mediasettings.multiplethumbdirectories', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (196, N'storeinformationsettings.hidepoweredbynopcommerce', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (197, N'storeinformationsettings.storeclosed', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (198, N'storeinformationsettings.defaultstoretheme', N'DefaultClean')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (199, N'storeinformationsettings.allowcustomertoselecttheme', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (200, N'storeinformationsettings.displayminiprofilerinpublicstore', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (201, N'storeinformationsettings.displayeucookielawwarning', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (202, N'storeinformationsettings.facebooklink', N'http://www.facebook.com/nopCommerce')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (203, N'storeinformationsettings.twitterlink', N'https://twitter.com/nopCommerce')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (204, N'storeinformationsettings.youtubelink', N'http://www.youtube.com/user/nopCommerce')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (205, N'storeinformationsettings.googlepluslink', N'https://plus.google.com/+nopcommerce')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (206, N'externalauthenticationsettings.autoregisterenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (207, N'externalauthenticationsettings.requireemailvalidation', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (208, N'externalauthenticationsettings.activeauthenticationmethodsystemnames', N'')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (209, N'rewardpointssettings.enabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (210, N'rewardpointssettings.exchangerate', N'1')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (211, N'rewardpointssettings.minimumrewardpointstouse', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (212, N'rewardpointssettings.pointsforregistration', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (213, N'rewardpointssettings.pointsforpurchases_amount', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (214, N'rewardpointssettings.pointsforpurchases_points', N'1')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (215, N'rewardpointssettings.pointsforpurchases_awarded', N'Complete')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (216, N'rewardpointssettings.pointsforpurchases_canceled', N'Cancelled')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (217, N'rewardpointssettings.displayhowmuchwillbeearned', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (218, N'rewardpointssettings.pointsaccumulatedforallstores', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (219, N'currencysettings.displaycurrencylabel', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (220, N'currencysettings.primarystorecurrencyid', N'1')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (221, N'currencysettings.primaryexchangeratecurrencyid', N'1')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (222, N'currencysettings.activeexchangerateprovidersystemname', N'CurrencyExchange.MoneyConverter')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (223, N'currencysettings.autoupdateenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (224, N'measuresettings.basedimensionid', N'1')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (225, N'measuresettings.baseweightid', N'2')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (226, N'messagetemplatessettings.caseinvariantreplacement', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (227, N'messagetemplatessettings.color1', N'#b9babe')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (228, N'messagetemplatessettings.color2', N'#ebecee')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (229, N'messagetemplatessettings.color3', N'#dde2e6')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (230, N'shoppingcartsettings.displaycartafteraddingproduct', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (231, N'shoppingcartsettings.displaywishlistafteraddingproduct', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (232, N'shoppingcartsettings.maximumshoppingcartitems', N'1000')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (233, N'shoppingcartsettings.maximumwishlistitems', N'1000')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (234, N'shoppingcartsettings.allowoutofstockitemstobeaddedtowishlist', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (235, N'shoppingcartsettings.moveitemsfromwishlisttocart', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (236, N'shoppingcartsettings.showproductimagesonshoppingcart', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (237, N'shoppingcartsettings.showproductimagesonwishlist', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (238, N'shoppingcartsettings.showdiscountbox', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (239, N'shoppingcartsettings.showgiftcardbox', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (240, N'shoppingcartsettings.crosssellsnumber', N'4')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (241, N'shoppingcartsettings.emailwishlistenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (242, N'shoppingcartsettings.allowanonymoususerstoemailwishlist', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (243, N'shoppingcartsettings.minishoppingcartenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (244, N'shoppingcartsettings.showproductimagesinminishoppingcart', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (245, N'shoppingcartsettings.minishoppingcartproductnumber', N'5')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (246, N'shoppingcartsettings.roundpricesduringcalculation', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (247, N'shoppingcartsettings.grouptierpricesfordistinctshoppingcartitems', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (248, N'shoppingcartsettings.allowcartitemediting', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (249, N'shoppingcartsettings.renderassociatedattributevaluequantity', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (250, N'ordersettings.isreorderallowed', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (251, N'ordersettings.minordersubtotalamount', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (252, N'ordersettings.minordersubtotalamountincludingtax', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (253, N'ordersettings.minordertotalamount', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (254, N'ordersettings.anonymouscheckoutallowed', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (255, N'ordersettings.termsofserviceonshoppingcartpage', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (256, N'ordersettings.termsofserviceonorderconfirmpage', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (257, N'ordersettings.onepagecheckoutenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (258, N'ordersettings.onepagecheckoutdisplayordertotalsonpaymentinfotab', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (259, N'ordersettings.disablebillingaddresscheckoutstep', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (260, N'ordersettings.disableordercompletedpage', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (261, N'ordersettings.attachpdfinvoicetoorderplacedemail', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (262, N'ordersettings.attachpdfinvoicetoorderpaidemail', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (263, N'ordersettings.attachpdfinvoicetoordercompletedemail', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (264, N'ordersettings.returnrequestsenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (265, N'ordersettings.numberofdaysreturnrequestavailable', N'365')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (266, N'ordersettings.giftcards_activated_orderstatusid', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (267, N'ordersettings.giftcards_deactivated_orderstatusid', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (268, N'ordersettings.minimumorderplacementinterval', N'30')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (269, N'securitysettings.forcesslforallpages', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (270, N'securitysettings.encryptionkey', N'9900987817056773')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (271, N'securitysettings.adminareaallowedipaddresses', N'')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (272, N'securitysettings.enablexsrfprotectionforadminarea', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (273, N'securitysettings.enablexsrfprotectionforpublicstore', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (274, N'securitysettings.honeypotenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (275, N'securitysettings.honeypotinputname', N'hpinput')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (276, N'shippingsettings.activeshippingratecomputationmethodsystemnames', N'Shipping.FixedRate')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (277, N'shippingsettings.allowpickupinstore', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (278, N'shippingsettings.pickupinstorefee', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (279, N'shippingsettings.usewarehouselocation', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (280, N'shippingsettings.notifycustomeraboutshippingfrommultiplelocations', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (281, N'shippingsettings.freeshippingoverxenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (282, N'shippingsettings.freeshippingoverxvalue', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (283, N'shippingsettings.freeshippingoverxincludingtax', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (284, N'shippingsettings.estimateshippingenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (285, N'shippingsettings.displayshipmenteventstocustomers', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (286, N'shippingsettings.displayshipmenteventstostoreowner', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (287, N'shippingsettings.shippingoriginaddressid', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (288, N'shippingsettings.returnvalidoptionsifthereareany', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (289, N'shippingsettings.bypassshippingmethodselectionifonlyone', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (290, N'shippingsettings.usecuberootmethod', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (291, N'paymentsettings.activepaymentmethodsystemnames', N'Payments.CheckMoneyOrder,Payments.Manual,Payments.PayInStore,Payments.PurchaseOrder')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (292, N'paymentsettings.allowrepostingpayments', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (293, N'paymentsettings.bypasspaymentmethodselectionifonlyone', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (294, N'taxsettings.taxbasedon', N'BillingAddress')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (295, N'taxsettings.taxdisplaytype', N'ExcludingTax')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (296, N'taxsettings.activetaxprovidersystemname', N'Tax.FixedRate')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (297, N'taxsettings.defaulttaxaddressid', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (298, N'taxsettings.displaytaxsuffix', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (299, N'taxsettings.displaytaxrates', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (300, N'taxsettings.pricesincludetax', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (301, N'taxsettings.allowcustomerstoselecttaxdisplaytype', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (302, N'taxsettings.hidezerotax', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (303, N'taxsettings.hidetaxinordersummary', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (304, N'taxsettings.forcetaxexclusionfromordersubtotal', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (305, N'taxsettings.shippingistaxable', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (306, N'taxsettings.shippingpriceincludestax', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (307, N'taxsettings.shippingtaxclassid', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (308, N'taxsettings.paymentmethodadditionalfeeistaxable', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (309, N'taxsettings.paymentmethodadditionalfeeincludestax', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (310, N'taxsettings.paymentmethodadditionalfeetaxclassid', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (311, N'taxsettings.euvatenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (312, N'taxsettings.euvatshopcountryid', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (313, N'taxsettings.euvatallowvatexemption', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (314, N'taxsettings.euvatusewebservice', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (315, N'taxsettings.euvatassumevalid', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (316, N'taxsettings.euvatemailadminwhennewvatsubmitted', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (317, N'datetimesettings.defaultstoretimezoneid', N'')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (318, N'datetimesettings.allowcustomerstosettimezone', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (319, N'blogsettings.enabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (320, N'blogsettings.postspagesize', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (321, N'blogsettings.allownotregistereduserstoleavecomments', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (322, N'blogsettings.notifyaboutnewblogcomments', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (323, N'blogsettings.numberoftags', N'15')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (324, N'blogsettings.showheaderrssurl', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (325, N'newssettings.enabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (326, N'newssettings.allownotregistereduserstoleavecomments', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (327, N'newssettings.notifyaboutnewnewscomments', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (328, N'newssettings.shownewsonmainpage', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (329, N'newssettings.mainpagenewscount', N'3')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (330, N'newssettings.newsarchivepagesize', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (331, N'newssettings.showheaderrssurl', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (332, N'forumsettings.forumsenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (333, N'forumsettings.relativedatetimeformattingenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (334, N'forumsettings.allowcustomerstoeditposts', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (335, N'forumsettings.allowcustomerstomanagesubscriptions', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (336, N'forumsettings.allowgueststocreateposts', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (337, N'forumsettings.allowgueststocreatetopics', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (338, N'forumsettings.allowcustomerstodeleteposts', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (339, N'forumsettings.topicsubjectmaxlength', N'450')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (340, N'forumsettings.strippedtopicmaxlength', N'45')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (341, N'forumsettings.postmaxlength', N'4000')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (342, N'forumsettings.topicspagesize', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (343, N'forumsettings.postspagesize', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (344, N'forumsettings.searchresultspagesize', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (345, N'forumsettings.activediscussionspagesize', N'50')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (346, N'forumsettings.latestcustomerpostspagesize', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (347, N'forumsettings.showcustomerspostcount', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (348, N'forumsettings.forumeditor', N'BBCodeEditor')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (349, N'forumsettings.signaturesenabled', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (350, N'forumsettings.allowprivatemessages', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (351, N'forumsettings.showalertforpm', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (352, N'forumsettings.privatemessagespagesize', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (353, N'forumsettings.forumsubscriptionspagesize', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (354, N'forumsettings.notifyaboutprivatemessages', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (355, N'forumsettings.pmsubjectmaxlength', N'450')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (356, N'forumsettings.pmtextmaxlength', N'4000')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (357, N'forumsettings.homepageactivediscussionstopiccount', N'5')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (358, N'forumsettings.activediscussionsfeedcount', N'25')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (359, N'forumsettings.activediscussionsfeedenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (360, N'forumsettings.forumfeedsenabled', N'False')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (361, N'forumsettings.forumfeedcount', N'10')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (362, N'forumsettings.forumsearchtermminimumlength', N'3')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (363, N'vendorsettings.defaultvendorpagesizeoptions', N'6, 3, 9')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (364, N'vendorsettings.vendorsblockitemstodisplay', N'0')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (365, N'vendorsettings.showvendoronproductdetailspage', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (366, N'vendorsettings.allowcustomerstocontactvendors', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (367, N'vendorsettings.allowcustomerstoapplyforvendoraccount', N'True')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (368, N'emailaccountsettings.defaultemailaccountid', N'1')
+INSERT [dbo].[Setting] ([Id], [Name], [Value]) VALUES (369, N'widgetsettings.activewidgetsystemnames', N'Widgets.NivoSlider')
 SET IDENTITY_INSERT [dbo].[Setting] OFF
 GO
 
@@ -457,18 +457,19 @@ GO
 
 
 
+
 SET IDENTITY_INSERT [dbo].[Customer] ON
-INSERT [dbo].[Customer] ([Id], [CustomerGuid], [Username], [Email], [Password], [PasswordFormatId], [PasswordSalt], [AdminComment], [IsTaxExempt], [AffiliateId], [Active], [Deleted], [IsSystemAccount], [SystemName], [LastIpAddress], [CreatedOnUtc], [LastLoginDateUtc], [LastActivityDateUtc]) VALUES (1, N'814f3da6-567a-49bc-b508-f7c3a97d8a61', N'admin@yourStore.com', N'admin@yourStore.com', N'7EEFED25B9C97805E24332E3E77A2B91C7EB5473', 1, N'Oni2/wU=', NULL, 0, 0, 1, 0, 0, NULL, N'127.0.0.1', CAST(0x0000A56700C91580 AS DateTime), NULL, CAST(0x0000A56700C91580 AS DateTime))
-INSERT [dbo].[Customer] ([Id], [CustomerGuid], [Username], [Email], [Password], [PasswordFormatId], [PasswordSalt], [AdminComment], [IsTaxExempt], [AffiliateId], [Active], [Deleted], [IsSystemAccount], [SystemName], [LastIpAddress], [CreatedOnUtc], [LastLoginDateUtc], [LastActivityDateUtc]) VALUES (2, N'defc2ca7-65a1-4878-8a15-4ac75779a62e', NULL, N'builtin@search_engine_record.com', NULL, 0, NULL, N'Built-in system guest record used for requests from search engines.', 0, 0, 1, 0, 1, N'SearchEngine', NULL, CAST(0x0000A56700C915A9 AS DateTime), NULL, CAST(0x0000A56700C915A9 AS DateTime))
-INSERT [dbo].[Customer] ([Id], [CustomerGuid], [Username], [Email], [Password], [PasswordFormatId], [PasswordSalt], [AdminComment], [IsTaxExempt], [AffiliateId], [Active], [Deleted], [IsSystemAccount], [SystemName], [LastIpAddress], [CreatedOnUtc], [LastLoginDateUtc], [LastActivityDateUtc]) VALUES (3, N'bb3f07f7-86c5-4e30-899f-334aaea95cde', NULL, N'builtin@background-task-record.com', NULL, 0, NULL, N'Built-in system record used for background tasks.', 0, 0, 1, 0, 1, N'BackgroundTask', NULL, CAST(0x0000A56700C915AB AS DateTime), NULL, CAST(0x0000A56700C915AB AS DateTime))
+INSERT [dbo].[Customer] ([Id], [CustomerGuid], [Username], [Email], [Password], [PasswordFormatId], [PasswordSalt], [AdminComment], [Active], [Deleted], [IsSystemAccount], [SystemName], [LastIpAddress], [CreatedOnUtc], [LastLoginDateUtc], [LastActivityDateUtc]) VALUES (1, N'814f3da6-567a-49bc-b508-f7c3a97d8a61', N'admin@admin.com', N'admin@admin.com', N'DD60F7949C2B6AFAE466624634B44F0786FCE3FE', 1, N'DlY7S+A=', NULL, 1, 0, 0, NULL, N'127.0.0.1', CAST(0x0000A56700C91580 AS DateTime), NULL, CAST(0x0000A56700C91580 AS DateTime))
+INSERT [dbo].[Customer] ([Id], [CustomerGuid], [Username], [Email], [Password], [PasswordFormatId], [PasswordSalt], [AdminComment], [Active], [Deleted], [IsSystemAccount], [SystemName], [LastIpAddress], [CreatedOnUtc], [LastLoginDateUtc], [LastActivityDateUtc]) VALUES (2, N'defc2ca7-65a1-4878-8a15-4ac75779a62e', NULL, N'builtin@search_engine_record.com', NULL, 0, NULL, N'Built-in system guest record used for requests from search engines.', 1, 0, 1, N'SearchEngine', NULL, CAST(0x0000A56700C915A9 AS DateTime), NULL, CAST(0x0000A56700C915A9 AS DateTime))
+INSERT [dbo].[Customer] ([Id], [CustomerGuid], [Username], [Email], [Password], [PasswordFormatId], [PasswordSalt], [AdminComment], [Active], [Deleted], [IsSystemAccount], [SystemName], [LastIpAddress], [CreatedOnUtc], [LastLoginDateUtc], [LastActivityDateUtc]) VALUES (3, N'bb3f07f7-86c5-4e30-899f-334aaea95cde', NULL, N'builtin@background-task-record.com', NULL, 0, NULL, N'Built-in system record used for background tasks.',  1, 0, 1, N'BackgroundTask', NULL, CAST(0x0000A56700C915AB AS DateTime), NULL, CAST(0x0000A56700C915AB AS DateTime))
 SET IDENTITY_INSERT [dbo].[Customer] OFF
 GO
 
 
 SET IDENTITY_INSERT [dbo].[CustomerRole] ON
-INSERT [dbo].[CustomerRole] ([Id], [Name], [FreeShipping], [TaxExempt], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (1, N'Administrators', 0, 0, 1, 1, N'Administrators', 0)
-INSERT [dbo].[CustomerRole] ([Id], [Name], [FreeShipping], [TaxExempt], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (3, N'Registered', 0, 0, 1, 1, N'Registered', 0)
-INSERT [dbo].[CustomerRole] ([Id], [Name], [FreeShipping], [TaxExempt], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (4, N'Guests', 0, 0, 1, 1, N'Guests', 0)
+INSERT [dbo].[CustomerRole] ([Id], [Name], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (1, N'Administrators', 1, 1, N'Administrators', 0)
+INSERT [dbo].[CustomerRole] ([Id], [Name], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (2, N'Registered', 1, 1, N'Registered', 0)
+INSERT [dbo].[CustomerRole] ([Id], [Name], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (3, N'Guests', 1, 1, N'Guests', 0)
 SET IDENTITY_INSERT [dbo].[CustomerRole] OFF
 GO
 
@@ -476,9 +477,8 @@ GO
 
 INSERT [dbo].[Customer_CustomerRole_Mapping] ([Customer_Id], [CustomerRole_Id]) VALUES (1, 1)
 INSERT [dbo].[Customer_CustomerRole_Mapping] ([Customer_Id], [CustomerRole_Id]) VALUES (1, 2)
-INSERT [dbo].[Customer_CustomerRole_Mapping] ([Customer_Id], [CustomerRole_Id]) VALUES (1, 3)
-INSERT [dbo].[Customer_CustomerRole_Mapping] ([Customer_Id], [CustomerRole_Id]) VALUES (2, 4)
-INSERT [dbo].[Customer_CustomerRole_Mapping] ([Customer_Id], [CustomerRole_Id]) VALUES (3, 4)
+INSERT [dbo].[Customer_CustomerRole_Mapping] ([Customer_Id], [CustomerRole_Id]) VALUES (2, 3)
+INSERT [dbo].[Customer_CustomerRole_Mapping] ([Customer_Id], [CustomerRole_Id]) VALUES (3, 3)
 GO
 
 
@@ -525,11 +525,11 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (17, 1, N'Account.BackInStockSubscriptions.DeleteSelected', N'Delete selected')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (18, 1, N'Account.BackInStockSubscriptions.Description', N'You will receive an e-mail when a particular product is back in stock.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (18, 1, N'Account.BackInStockSubscriptions.Description', N'You will receive an e-mail when a particular Post is back in stock.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (19, 1, N'Account.BackInStockSubscriptions.NoSubscriptions', N'You are not currently subscribed to any Back In Stock notification lists')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (20, 1, N'Account.BackInStockSubscriptions.ProductColumn', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (20, 1, N'Account.BackInStockSubscriptions.PostColumn', N'Post')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (21, 1, N'Account.ChangePassword', N'Change password')
 GO
@@ -631,7 +631,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (70, 1, N'Account.CustomerReturnRequests.Title', N'Return #{0} - {1}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (71, 1, N'Account.DownloadableProducts', N'Downloadable products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (71, 1, N'Account.DownloadablePosts', N'Downloadable Posts')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (72, 1, N'Account.EmailUsernameErrors.EmailAlreadyExists', N'The e-mail address is already in use')
 GO
@@ -895,9 +895,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (202, 1, N'ActivityLog.AddNewManufacturer', N'Added a new manufacturer (''{0}'')')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (203, 1, N'ActivityLog.AddNewProduct', N'Added a new product (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (203, 1, N'ActivityLog.AddNewPost', N'Added a new Post (''{0}'')')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (204, 1, N'ActivityLog.AddNewProductAttribute', N'Added a new product attribute (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (204, 1, N'ActivityLog.AddNewPostAttribute', N'Added a new Post attribute (''{0}'')')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (205, 1, N'ActivityLog.AddNewSetting', N'Added a new setting (''{0}'')')
 GO
@@ -919,9 +919,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (214, 1, N'ActivityLog.DeleteManufacturer', N'Deleted a manufacturer (''{0}'')')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (215, 1, N'ActivityLog.DeleteProduct', N'Deleted a product (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (215, 1, N'ActivityLog.DeletePost', N'Deleted a Post (''{0}'')')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (216, 1, N'ActivityLog.DeleteProductAttribute', N'Deleted a product attribute (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (216, 1, N'ActivityLog.DeletePostAttribute', N'Deleted a Post attribute (''{0}'')')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (217, 1, N'ActivityLog.DeleteReturnRequest', N'Deleted a return request (ID = {0})')
 GO
@@ -945,9 +945,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (227, 1, N'ActivityLog.EditManufacturer', N'Edited a manufacturer (''{0}'')')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (228, 1, N'ActivityLog.EditProduct', N'Edited a product (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (228, 1, N'ActivityLog.EditPost', N'Edited a Post (''{0}'')')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (229, 1, N'ActivityLog.EditProductAttribute', N'Edited a product attribute (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (229, 1, N'ActivityLog.EditPostAttribute', N'Edited a Post attribute (''{0}'')')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (230, 1, N'ActivityLog.EditReturnRequest', N'Edited a return request (ID = {0})')
 GO
@@ -961,13 +961,13 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (235, 1, N'ActivityLog.PublicStore.AddNewsComment', N'Added a news comment')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (236, 1, N'ActivityLog.PublicStore.AddProductReview', N'Added a product review (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (236, 1, N'ActivityLog.PublicStore.AddPostReview', N'Added a Post review (''{0}'')')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (237, 1, N'ActivityLog.PublicStore.AddToCompareList', N'Added a product to compare list (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (237, 1, N'ActivityLog.PublicStore.AddToCompareList', N'Added a Post to compare list (''{0}'')')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (238, 1, N'ActivityLog.PublicStore.AddToShoppingCart', N'Added a product to shopping cart (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (238, 1, N'ActivityLog.PublicStore.AddToShoppingCart', N'Added a Post to shopping cart (''{0}'')')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (239, 1, N'ActivityLog.PublicStore.AddToWishlist', N'Added a product to wishlist (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (239, 1, N'ActivityLog.PublicStore.AddToWishlist', N'Added a Post to wishlist (''{0}'')')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (240, 1, N'ActivityLog.PublicStore.ContactUs', N'Used contact us form')
 GO
@@ -983,7 +983,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (246, 1, N'ActivityLog.PublicStore.ViewManufacturer', N'Public store. Viewed a manufacturer details page (''{0}'')')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (247, 1, N'ActivityLog.PublicStore.ViewProduct', N'Public store. Viewed a product details page (''{0}'')')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (247, 1, N'ActivityLog.PublicStore.ViewPost', N'Public store. Viewed a Post details page (''{0}'')')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (248, 1, N'Address', N'Address')
 GO
@@ -1343,9 +1343,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (426, 1, N'Admin.Catalog.Attributes.CheckoutAttributes.Fields.Name.Required', N'Please provide a name.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (427, 1, N'Admin.Catalog.Attributes.CheckoutAttributes.Fields.ShippableProductRequired', N'Shippable product required')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (427, 1, N'Admin.Catalog.Attributes.CheckoutAttributes.Fields.ShippablePostRequired', N'Shippable Post required')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (428, 1, N'Admin.Catalog.Attributes.CheckoutAttributes.Fields.ShippableProductRequired.Hint', N'An option indicating whether shippable products are required in order to display this attribute.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (428, 1, N'Admin.Catalog.Attributes.CheckoutAttributes.Fields.ShippablePostRequired.Hint', N'An option indicating whether shippable Posts are required in order to display this attribute.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (429, 1, N'Admin.Catalog.Attributes.CheckoutAttributes.Fields.TaxCategory', N'Tax category')
 GO
@@ -1395,75 +1395,75 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (452, 1, N'Admin.Catalog.Attributes.CheckoutAttributes.Values.SaveBeforeEdit', N'You need to save the checkout attribute before you can add values for this checkout attribute page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (453, 1, N'Admin.Catalog.Attributes.ProductAttributes', N'Product Attributes')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (453, 1, N'Admin.Catalog.Attributes.PostAttributes', N'Post Attributes')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (454, 1, N'Admin.Catalog.Attributes.ProductAttributes.Added', N'The new attribute has been added successfully.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (454, 1, N'Admin.Catalog.Attributes.PostAttributes.Added', N'The new attribute has been added successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (455, 1, N'Admin.Catalog.Attributes.ProductAttributes.AddNew', N'Add a new product attribute')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (455, 1, N'Admin.Catalog.Attributes.PostAttributes.AddNew', N'Add a new Post attribute')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (456, 1, N'Admin.Catalog.Attributes.ProductAttributes.BackToList', N'back to product attribute list')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (456, 1, N'Admin.Catalog.Attributes.PostAttributes.BackToList', N'back to Post attribute list')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (457, 1, N'Admin.Catalog.Attributes.ProductAttributes.Deleted', N'The attribute has been deleted successfully.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (457, 1, N'Admin.Catalog.Attributes.PostAttributes.Deleted', N'The attribute has been deleted successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (458, 1, N'Admin.Catalog.Attributes.ProductAttributes.EditAttributeDetails', N'Edit product attribute details')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (458, 1, N'Admin.Catalog.Attributes.PostAttributes.EditAttributeDetails', N'Edit Post attribute details')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (459, 1, N'Admin.Catalog.Attributes.ProductAttributes.Fields.Description', N'Description')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (459, 1, N'Admin.Catalog.Attributes.PostAttributes.Fields.Description', N'Description')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (460, 1, N'Admin.Catalog.Attributes.ProductAttributes.Fields.Description.Hint', N'The description of the product attribute.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (460, 1, N'Admin.Catalog.Attributes.PostAttributes.Fields.Description.Hint', N'The description of the Post attribute.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (461, 1, N'Admin.Catalog.Attributes.ProductAttributes.Fields.Name', N'Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (461, 1, N'Admin.Catalog.Attributes.PostAttributes.Fields.Name', N'Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (462, 1, N'Admin.Catalog.Attributes.ProductAttributes.Fields.Name.Hint', N'The name of the product attribute.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (462, 1, N'Admin.Catalog.Attributes.PostAttributes.Fields.Name.Hint', N'The name of the Post attribute.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (463, 1, N'Admin.Catalog.Attributes.ProductAttributes.Fields.Name.Required', N'Please provide a name.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (463, 1, N'Admin.Catalog.Attributes.PostAttributes.Fields.Name.Required', N'Please provide a name.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (464, 1, N'Admin.Catalog.Attributes.ProductAttributes.Info', N'Info')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (464, 1, N'Admin.Catalog.Attributes.PostAttributes.Info', N'Info')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (465, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues', N'Predefined values')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (465, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues', N'Predefined values')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (466, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.AddNew', N'Add a new value')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (466, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.AddNew', N'Add a new value')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (467, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.EditValueDetails', N'Edit value')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (467, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.EditValueDetails', N'Edit value')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (468, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.Cost', N'Cost')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (468, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.Cost', N'Cost')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (469, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.Cost.Hint', N'The attribute value cost is the cost of all the different components which make up this value. This may be either the purchase price if the components are bought from outside suppliers, or the combined cost of materials and manufacturing processes if the component is made in-house.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (469, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.Cost.Hint', N'The attribute value cost is the cost of all the different components which make up this value. This may be either the purchase price if the components are bought from outside suppliers, or the combined cost of materials and manufacturing processes if the component is made in-house.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (470, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (470, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (471, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.DisplayOrder.Hint', N'The display order of the attribute value. 1 represents the first item in attribute value list.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (471, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.DisplayOrder.Hint', N'The display order of the attribute value. 1 represents the first item in attribute value list.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (472, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.IsPreSelected', N'Is pre-selected')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (472, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.IsPreSelected', N'Is pre-selected')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (473, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.IsPreSelected.Hint', N'Determines whether this attribute value is pre selected for the customer')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (473, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.IsPreSelected.Hint', N'Determines whether this attribute value is pre selected for the customer')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (474, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.Name', N'Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (474, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.Name', N'Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (475, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.Name.Hint', N'The attribute value name e.g. ''Blue'' for Color attributes.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (475, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.Name.Hint', N'The attribute value name e.g. ''Blue'' for Color attributes.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (476, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.Name.Required', N'Please provide a name.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (476, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.Name.Required', N'Please provide a name.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (477, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.PriceAdjustment', N'Price adjustment')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (477, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.PriceAdjustment', N'Price adjustment')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (478, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.PriceAdjustment.Hint', N'The price adjustment applied when choosing this attribute value e.g. ''10'' to add 10 dollars.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (478, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.PriceAdjustment.Hint', N'The price adjustment applied when choosing this attribute value e.g. ''10'' to add 10 dollars.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (479, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.WeightAdjustment', N'Weight adjustment')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (479, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.WeightAdjustment', N'Weight adjustment')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (480, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Fields.WeightAdjustment.Hint', N'The weight adjustment applied when choosing this attribute value')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (480, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Fields.WeightAdjustment.Hint', N'The weight adjustment applied when choosing this attribute value')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (481, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Hint', N'Predefined (default) values are helpful for a store owner when creating new products. Then when you add the attribute to a product, you don''t have to create the values again.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (481, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.Hint', N'Predefined (default) values are helpful for a store owner when creating new Posts. Then when you add the attribute to a Post, you don''t have to create the values again.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (482, 1, N'Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.SaveBeforeEdit', N'You need to save the product attribute before you can add values for this page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (482, 1, N'Admin.Catalog.Attributes.PostAttributes.PredefinedValues.SaveBeforeEdit', N'You need to save the Post attribute before you can add values for this page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (483, 1, N'Admin.Catalog.Attributes.ProductAttributes.Updated', N'The attribute has been updated successfully.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (483, 1, N'Admin.Catalog.Attributes.PostAttributes.Updated', N'The attribute has been updated successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (484, 1, N'Admin.Catalog.Attributes.ProductAttributes.UsedByProducts', N'Used by products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (484, 1, N'Admin.Catalog.Attributes.PostAttributes.UsedByPosts', N'Used by Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (485, 1, N'Admin.Catalog.Attributes.ProductAttributes.UsedByProducts.Hint', N'Here you can see a list of products which use this attribute.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (485, 1, N'Admin.Catalog.Attributes.PostAttributes.UsedByPosts.Hint', N'Here you can see a list of Posts which use this attribute.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (486, 1, N'Admin.Catalog.Attributes.ProductAttributes.UsedByProducts.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (486, 1, N'Admin.Catalog.Attributes.PostAttributes.UsedByPosts.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (487, 1, N'Admin.Catalog.Attributes.ProductAttributes.UsedByProducts.Published', N'Published')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (487, 1, N'Admin.Catalog.Attributes.PostAttributes.UsedByPosts.Published', N'Published')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (488, 1, N'Admin.Catalog.Attributes.SpecificationAttributes', N'Specification Attributes')
 GO
@@ -1505,13 +1505,13 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (507, 1, N'Admin.Catalog.Attributes.SpecificationAttributes.Options.Fields.Name.Required', N'Please provide a name.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (508, 1, N'Admin.Catalog.Attributes.SpecificationAttributes.Options.Fields.NumberOfAssociatedProducts', N'Number of associated products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (508, 1, N'Admin.Catalog.Attributes.SpecificationAttributes.Options.Fields.NumberOfAssociatedPosts', N'Number of associated Posts')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (509, 1, N'Admin.Catalog.Attributes.SpecificationAttributes.Options.SaveBeforeEdit', N'You need to save the specification attribute before you can add options for this specification attribute page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (510, 1, N'Admin.Catalog.Attributes.SpecificationAttributes.Updated', N'The attribute has been updated successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (511, 1, N'Admin.Catalog.BulkEdit', N'Bulk edit products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (511, 1, N'Admin.Catalog.BulkEdit', N'Bulk edit Posts')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (512, 1, N'Admin.Catalog.BulkEdit.Fields.ManageInventoryMethod', N'Manage inventory')
 GO
@@ -1535,9 +1535,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (522, 1, N'Admin.Catalog.BulkEdit.List.SearchManufacturer.Hint', N'Search by a specific manufacturer.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (523, 1, N'Admin.Catalog.BulkEdit.List.SearchProductName', N'Product name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (523, 1, N'Admin.Catalog.BulkEdit.List.SearchPostName', N'Post name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (524, 1, N'Admin.Catalog.BulkEdit.List.SearchProductName.Hint', N'A product name.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (524, 1, N'Admin.Catalog.BulkEdit.List.SearchPostName.Hint', N'A Post name.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (525, 1, N'Admin.Catalog.Categories', N'Categories')
 GO
@@ -1573,7 +1573,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (541, 1, N'Admin.Catalog.Categories.Fields.CategoryTemplate', N'Category template')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (542, 1, N'Admin.Catalog.Categories.Fields.CategoryTemplate.Hint', N'Choose a category template. This template defines how this category (and its products) will be displayed.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (542, 1, N'Admin.Catalog.Categories.Fields.CategoryTemplate.Hint', N'Choose a category template. This template defines how this category (and its Posts) will be displayed.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (543, 1, N'Admin.Catalog.Categories.Fields.CreatedOn', N'Created on')
 GO
@@ -1615,7 +1615,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (562, 1, N'Admin.Catalog.Categories.Fields.PageSize', N'Page size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (563, 1, N'Admin.Catalog.Categories.Fields.PageSize.Hint', N'Set the page size for products in this category e.g. ''4'' products per page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (563, 1, N'Admin.Catalog.Categories.Fields.PageSize.Hint', N'Set the page size for Posts in this category e.g. ''4'' Posts per page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (564, 1, N'Admin.Catalog.Categories.Fields.PageSizeOptions', N'Page Size options (comma separated)')
 GO
@@ -1657,17 +1657,17 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (583, 1, N'Admin.Catalog.Categories.Manage', N'Manage Categories')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (584, 1, N'Admin.Catalog.Categories.Products', N'Products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (584, 1, N'Admin.Catalog.Categories.Posts', N'Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (585, 1, N'Admin.Catalog.Categories.Products.AddNew', N'Add a new product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (585, 1, N'Admin.Catalog.Categories.Posts.AddNew', N'Add a new Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (586, 1, N'Admin.Catalog.Categories.Products.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (586, 1, N'Admin.Catalog.Categories.Posts.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (587, 1, N'Admin.Catalog.Categories.Products.Fields.IsFeaturedProduct', N'Is featured product?')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (587, 1, N'Admin.Catalog.Categories.Posts.Fields.IsFeaturedPost', N'Is featured Post?')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (588, 1, N'Admin.Catalog.Categories.Products.Fields.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (588, 1, N'Admin.Catalog.Categories.Posts.Fields.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (589, 1, N'Admin.Catalog.Categories.Products.SaveBeforeEdit', N'You need to save the category before you can add products for this category page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (589, 1, N'Admin.Catalog.Categories.Posts.SaveBeforeEdit', N'You need to save the category before you can add Posts for this category page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (590, 1, N'Admin.Catalog.Categories.Stores', N'Stores')
 GO
@@ -1727,7 +1727,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (618, 1, N'Admin.Catalog.Manufacturers.Fields.ManufacturerTemplate', N'Manufacturer template')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (619, 1, N'Admin.Catalog.Manufacturers.Fields.ManufacturerTemplate.Hint', N'Choose a manufacturer template. This template defines how this manufacturer (and its products) will be displayed.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (619, 1, N'Admin.Catalog.Manufacturers.Fields.ManufacturerTemplate.Hint', N'Choose a manufacturer template. This template defines how this manufacturer (and its Posts) will be displayed.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (620, 1, N'Admin.Catalog.Manufacturers.Fields.MetaDescription', N'Meta description')
 GO
@@ -1749,7 +1749,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (629, 1, N'Admin.Catalog.Manufacturers.Fields.PageSize', N'Page size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (630, 1, N'Admin.Catalog.Manufacturers.Fields.PageSize.Hint', N'Set the page size for products in this manufacturer e.g. ''4'' products per page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (630, 1, N'Admin.Catalog.Manufacturers.Fields.PageSize.Hint', N'Set the page size for Posts in this manufacturer e.g. ''4'' Posts per page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (631, 1, N'Admin.Catalog.Manufacturers.Fields.PageSizeOptions', N'Page Size options (comma separated)')
 GO
@@ -1781,933 +1781,933 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (645, 1, N'Admin.Catalog.Manufacturers.List.SearchManufacturerName.Hint', N'A manufacturer name.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (646, 1, N'Admin.Catalog.Manufacturers.Products', N'Products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (646, 1, N'Admin.Catalog.Manufacturers.Posts', N'Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (647, 1, N'Admin.Catalog.Manufacturers.Products.AddNew', N'Add a new product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (647, 1, N'Admin.Catalog.Manufacturers.Posts.AddNew', N'Add a new Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (648, 1, N'Admin.Catalog.Manufacturers.Products.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (648, 1, N'Admin.Catalog.Manufacturers.Posts.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (649, 1, N'Admin.Catalog.Manufacturers.Products.Fields.IsFeaturedProduct', N'Is featured product?')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (649, 1, N'Admin.Catalog.Manufacturers.Posts.Fields.IsFeaturedPost', N'Is featured Post?')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (650, 1, N'Admin.Catalog.Manufacturers.Products.Fields.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (650, 1, N'Admin.Catalog.Manufacturers.Posts.Fields.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (651, 1, N'Admin.Catalog.Manufacturers.Products.SaveBeforeEdit', N'You need to save the manufacturer before you can add products for this manufacturer page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (651, 1, N'Admin.Catalog.Manufacturers.Posts.SaveBeforeEdit', N'You need to save the manufacturer before you can add Posts for this manufacturer page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (652, 1, N'Admin.Catalog.Manufacturers.Stores', N'Stores')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (653, 1, N'Admin.Catalog.Manufacturers.Updated', N'The manufacturer has been updated successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (654, 1, N'Admin.Catalog.ProductReviews', N'Product reviews')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (654, 1, N'Admin.Catalog.PostReviews', N'Post reviews')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (655, 1, N'Admin.Catalog.ProductReviews.ApproveSelected', N'Approve selected')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (655, 1, N'Admin.Catalog.PostReviews.ApproveSelected', N'Approve selected')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (656, 1, N'Admin.Catalog.ProductReviews.BackToList', N'back to product review list')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (656, 1, N'Admin.Catalog.PostReviews.BackToList', N'back to Post review list')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (657, 1, N'Admin.Catalog.ProductReviews.Deleted', N'The product review has been deleted successfully.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (657, 1, N'Admin.Catalog.PostReviews.Deleted', N'The Post review has been deleted successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (658, 1, N'Admin.Catalog.ProductReviews.DeleteSelected', N'Delete selected')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (658, 1, N'Admin.Catalog.PostReviews.DeleteSelected', N'Delete selected')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (659, 1, N'Admin.Catalog.ProductReviews.DisapproveSelected', N'Disapprove selected')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (659, 1, N'Admin.Catalog.PostReviews.DisapproveSelected', N'Disapprove selected')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (660, 1, N'Admin.Catalog.ProductReviews.EditProductReviewDetails', N'Edit product review details')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (660, 1, N'Admin.Catalog.PostReviews.EditPostReviewDetails', N'Edit Post review details')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (661, 1, N'Admin.Catalog.ProductReviews.Fields.CreatedOn', N'Created on')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (661, 1, N'Admin.Catalog.PostReviews.Fields.CreatedOn', N'Created on')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (662, 1, N'Admin.Catalog.ProductReviews.Fields.CreatedOn.Hint', N'The date/time that the review was created.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (662, 1, N'Admin.Catalog.PostReviews.Fields.CreatedOn.Hint', N'The date/time that the review was created.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (663, 1, N'Admin.Catalog.ProductReviews.Fields.Customer', N'Customer')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (663, 1, N'Admin.Catalog.PostReviews.Fields.Customer', N'Customer')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (664, 1, N'Admin.Catalog.ProductReviews.Fields.Customer.Hint', N'The customer who created the review.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (664, 1, N'Admin.Catalog.PostReviews.Fields.Customer.Hint', N'The customer who created the review.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (665, 1, N'Admin.Catalog.ProductReviews.Fields.IsApproved', N'Is approved')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (665, 1, N'Admin.Catalog.PostReviews.Fields.IsApproved', N'Is approved')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (666, 1, N'Admin.Catalog.ProductReviews.Fields.IsApproved.Hint', N'Is the review approved? Marking it as approved means that it is visible to all your site''s visitors.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (666, 1, N'Admin.Catalog.PostReviews.Fields.IsApproved.Hint', N'Is the review approved? Marking it as approved means that it is visible to all your site''s visitors.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (667, 1, N'Admin.Catalog.ProductReviews.Fields.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (667, 1, N'Admin.Catalog.PostReviews.Fields.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (668, 1, N'Admin.Catalog.ProductReviews.Fields.Product.Hint', N'The name of the product that the review is for.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (668, 1, N'Admin.Catalog.PostReviews.Fields.Post.Hint', N'The name of the Post that the review is for.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (669, 1, N'Admin.Catalog.ProductReviews.Fields.Rating', N'Rating')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (669, 1, N'Admin.Catalog.PostReviews.Fields.Rating', N'Rating')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (670, 1, N'Admin.Catalog.ProductReviews.Fields.Rating.Hint', N'The customer''s product rating.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (670, 1, N'Admin.Catalog.PostReviews.Fields.Rating.Hint', N'The customer''s Post rating.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (671, 1, N'Admin.Catalog.ProductReviews.Fields.ReviewText', N'Review text')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (671, 1, N'Admin.Catalog.PostReviews.Fields.ReviewText', N'Review text')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (672, 1, N'Admin.Catalog.ProductReviews.Fields.ReviewText.Hint', N'The review text.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (672, 1, N'Admin.Catalog.PostReviews.Fields.ReviewText.Hint', N'The review text.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (673, 1, N'Admin.Catalog.ProductReviews.Fields.ReviewText.Required', N'Review text is required.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (673, 1, N'Admin.Catalog.PostReviews.Fields.ReviewText.Required', N'Review text is required.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (674, 1, N'Admin.Catalog.ProductReviews.Fields.Title', N'Title')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (674, 1, N'Admin.Catalog.PostReviews.Fields.Title', N'Title')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (675, 1, N'Admin.Catalog.ProductReviews.Fields.Title.Hint', N'The title of the product review.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (675, 1, N'Admin.Catalog.PostReviews.Fields.Title.Hint', N'The title of the Post review.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (676, 1, N'Admin.Catalog.ProductReviews.Fields.Title.Required', N'Title is required.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (676, 1, N'Admin.Catalog.PostReviews.Fields.Title.Required', N'Title is required.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (677, 1, N'Admin.Catalog.ProductReviews.List.CreatedOnFrom', N'Created from')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (677, 1, N'Admin.Catalog.PostReviews.List.CreatedOnFrom', N'Created from')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (678, 1, N'Admin.Catalog.ProductReviews.List.CreatedOnFrom.Hint', N'The creation from date for the search.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (678, 1, N'Admin.Catalog.PostReviews.List.CreatedOnFrom.Hint', N'The creation from date for the search.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (679, 1, N'Admin.Catalog.ProductReviews.List.CreatedOnTo', N'Created to')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (679, 1, N'Admin.Catalog.PostReviews.List.CreatedOnTo', N'Created to')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (680, 1, N'Admin.Catalog.ProductReviews.List.CreatedOnTo.Hint', N'The creation to date for the search.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (680, 1, N'Admin.Catalog.PostReviews.List.CreatedOnTo.Hint', N'The creation to date for the search.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (681, 1, N'Admin.Catalog.ProductReviews.List.SearchText', N'Message')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (681, 1, N'Admin.Catalog.PostReviews.List.SearchText', N'Message')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (682, 1, N'Admin.Catalog.ProductReviews.List.SearchText.Hint', N'Search in title and review text.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (682, 1, N'Admin.Catalog.PostReviews.List.SearchText.Hint', N'Search in title and review text.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (683, 1, N'Admin.Catalog.ProductReviews.Updated', N'The product review has been updated successfully.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (683, 1, N'Admin.Catalog.PostReviews.Updated', N'The Post review has been updated successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (684, 1, N'Admin.Catalog.Products', N'Products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (684, 1, N'Admin.Catalog.Posts', N'Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (685, 1, N'Admin.Catalog.Products.Acl', N'Access control list')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (685, 1, N'Admin.Catalog.Posts.Acl', N'Access control list')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (686, 1, N'Admin.Catalog.Products.Added', N'The new product has been added successfully.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (686, 1, N'Admin.Catalog.Posts.Added', N'The new Post has been added successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (687, 1, N'Admin.Catalog.Products.AddNew', N'Add a new product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (687, 1, N'Admin.Catalog.Posts.AddNew', N'Add a new Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (688, 1, N'Admin.Catalog.Products.AssociatedProducts', N'Associated products (variants)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (688, 1, N'Admin.Catalog.Posts.AssociatedPosts', N'Associated Posts (variants)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (689, 1, N'Admin.Catalog.Products.AssociatedProducts.AddNew', N'Add new associated product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (689, 1, N'Admin.Catalog.Posts.AssociatedPosts.AddNew', N'Add new associated Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (690, 1, N'Admin.Catalog.Products.AssociatedProducts.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (690, 1, N'Admin.Catalog.Posts.AssociatedPosts.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (691, 1, N'Admin.Catalog.Products.AssociatedProducts.Fields.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (691, 1, N'Admin.Catalog.Posts.AssociatedPosts.Fields.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (692, 1, N'Admin.Catalog.Products.AssociatedProducts.Note1', N'Associated products are used only with "grouped" products.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (692, 1, N'Admin.Catalog.Posts.AssociatedPosts.Note1', N'Associated Posts are used only with "grouped" Posts.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (693, 1, N'Admin.Catalog.Products.AssociatedProducts.Note2', N'A product could be associated to only one "grouped" product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (693, 1, N'Admin.Catalog.Posts.AssociatedPosts.Note2', N'A Post could be associated to only one "grouped" Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (694, 1, N'Admin.Catalog.Products.AssociatedProducts.SaveBeforeEdit', N'You need to save the product before you can add associated products for this product page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (694, 1, N'Admin.Catalog.Posts.AssociatedPosts.SaveBeforeEdit', N'You need to save the Post before you can add associated Posts for this Post page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (695, 1, N'Admin.Catalog.Products.BackToList', N'back to product list')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (695, 1, N'Admin.Catalog.Posts.BackToList', N'back to Post list')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (696, 1, N'Admin.Catalog.Products.Categories', N'Category mappings')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (696, 1, N'Admin.Catalog.Posts.Categories', N'Category mappings')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (697, 1, N'Admin.Catalog.Products.Categories.Fields.Category', N'Category')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (697, 1, N'Admin.Catalog.Posts.Categories.Fields.Category', N'Category')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (698, 1, N'Admin.Catalog.Products.Categories.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (698, 1, N'Admin.Catalog.Posts.Categories.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (699, 1, N'Admin.Catalog.Products.Categories.Fields.IsFeaturedProduct', N'Is featured product?')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (699, 1, N'Admin.Catalog.Posts.Categories.Fields.IsFeaturedPost', N'Is featured Post?')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (700, 1, N'Admin.Catalog.Products.Categories.NoCategoriesAvailable', N'No categories available. Create at least one category before mapping.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (700, 1, N'Admin.Catalog.Posts.Categories.NoCategoriesAvailable', N'No categories available. Create at least one category before mapping.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (701, 1, N'Admin.Catalog.Products.Categories.SaveBeforeEdit', N'You need to save the product before you can map categories for this product page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (701, 1, N'Admin.Catalog.Posts.Categories.SaveBeforeEdit', N'You need to save the Post before you can map categories for this Post page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (702, 1, N'Admin.Catalog.Products.Copy', N'Copy product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (702, 1, N'Admin.Catalog.Posts.Copy', N'Copy Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (703, 1, N'Admin.Catalog.Products.Copy.CopyImages', N'Copy images')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (703, 1, N'Admin.Catalog.Posts.Copy.CopyImages', N'Copy images')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (704, 1, N'Admin.Catalog.Products.Copy.CopyImages.Hint', N'Check to copy the images.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (704, 1, N'Admin.Catalog.Posts.Copy.CopyImages.Hint', N'Check to copy the images.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (705, 1, N'Admin.Catalog.Products.Copy.Name', N'New product name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (705, 1, N'Admin.Catalog.Posts.Copy.Name', N'New Post name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (706, 1, N'Admin.Catalog.Products.Copy.Name.Hint', N'The name of the new product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (706, 1, N'Admin.Catalog.Posts.Copy.Name.Hint', N'The name of the new Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (707, 1, N'Admin.Catalog.Products.Copy.Published', N'Published')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (707, 1, N'Admin.Catalog.Posts.Copy.Published', N'Published')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (708, 1, N'Admin.Catalog.Products.Copy.Published.Hint', N'Check to mark a product as published.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (708, 1, N'Admin.Catalog.Posts.Copy.Published.Hint', N'Check to mark a Post as published.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (709, 1, N'Admin.Catalog.Products.CrossSells', N'Cross-sells')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (709, 1, N'Admin.Catalog.Posts.CrossSells', N'Cross-sells')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (710, 1, N'Admin.Catalog.Products.CrossSells.AddNew', N'Add new cross-sell product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (710, 1, N'Admin.Catalog.Posts.CrossSells.AddNew', N'Add new cross-sell Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (711, 1, N'Admin.Catalog.Products.CrossSells.Fields.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (711, 1, N'Admin.Catalog.Posts.CrossSells.Fields.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (712, 1, N'Admin.Catalog.Products.CrossSells.SaveBeforeEdit', N'You need to save the product before you can add cross-sell products for this product page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (712, 1, N'Admin.Catalog.Posts.CrossSells.SaveBeforeEdit', N'You need to save the Post before you can add cross-sell Posts for this Post page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (713, 1, N'Admin.Catalog.Products.Deleted', N'The product has been deleted successfully.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (713, 1, N'Admin.Catalog.Posts.Deleted', N'The Post has been deleted successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (714, 1, N'Admin.Catalog.Products.Discounts', N'Discounts')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (714, 1, N'Admin.Catalog.Posts.Discounts', N'Discounts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (715, 1, N'Admin.Catalog.Products.Discounts.NoDiscounts', N'No discounts available. Create at least one discount before mapping.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (715, 1, N'Admin.Catalog.Posts.Discounts.NoDiscounts', N'No discounts available. Create at least one discount before mapping.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (716, 1, N'Admin.Catalog.Products.EditProductDetails', N'Edit product details')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (716, 1, N'Admin.Catalog.Posts.EditPostDetails', N'Edit Post details')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (717, 1, N'Admin.Catalog.Products.Fields.AclCustomerRoles', N'Customer roles')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (717, 1, N'Admin.Catalog.Posts.Fields.AclCustomerRoles', N'Customer roles')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (718, 1, N'Admin.Catalog.Products.Fields.AclCustomerRoles.Hint', N'Select customer roles for which the product will be shown.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (718, 1, N'Admin.Catalog.Posts.Fields.AclCustomerRoles.Hint', N'Select customer roles for which the Post will be shown.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (719, 1, N'Admin.Catalog.Products.Fields.AdditionalShippingCharge', N'Additional shipping charge')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (719, 1, N'Admin.Catalog.Posts.Fields.AdditionalShippingCharge', N'Additional shipping charge')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (720, 1, N'Admin.Catalog.Products.Fields.AdditionalShippingCharge.Hint', N'The additional shipping charge.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (720, 1, N'Admin.Catalog.Posts.Fields.AdditionalShippingCharge.Hint', N'The additional shipping charge.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (721, 1, N'Admin.Catalog.Products.Fields.AdminComment', N'Admin comment')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (721, 1, N'Admin.Catalog.Posts.Fields.AdminComment', N'Admin comment')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (722, 1, N'Admin.Catalog.Products.Fields.AdminComment.Hint', N'Admin comment. For internal use.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (722, 1, N'Admin.Catalog.Posts.Fields.AdminComment.Hint', N'Admin comment. For internal use.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (723, 1, N'Admin.Catalog.Products.Fields.AllowAddingOnlyExistingAttributeCombinations', N'Allow only existing attribute combinations')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (723, 1, N'Admin.Catalog.Posts.Fields.AllowAddingOnlyExistingAttributeCombinations', N'Allow only existing attribute combinations')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (724, 1, N'Admin.Catalog.Products.Fields.AllowAddingOnlyExistingAttributeCombinations.Hint', N'Check to allow adding to the cart/wishlist only attribute combinations that exist and have stock greater than zero. In this case you have to create all existing product attribute combinations that you have in stock.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (724, 1, N'Admin.Catalog.Posts.Fields.AllowAddingOnlyExistingAttributeCombinations.Hint', N'Check to allow adding to the cart/wishlist only attribute combinations that exist and have stock greater than zero. In this case you have to create all existing Post attribute combinations that you have in stock.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (725, 1, N'Admin.Catalog.Products.Fields.AllowBackInStockSubscriptions', N'Allow back in stock subscriptions')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (725, 1, N'Admin.Catalog.Posts.Fields.AllowBackInStockSubscriptions', N'Allow back in stock subscriptions')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (726, 1, N'Admin.Catalog.Products.Fields.AllowBackInStockSubscriptions.Hint', N'Allow customers to subscribe to a notification list for a product that has gone out of stock.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (726, 1, N'Admin.Catalog.Posts.Fields.AllowBackInStockSubscriptions.Hint', N'Allow customers to subscribe to a notification list for a Post that has gone out of stock.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (727, 1, N'Admin.Catalog.Products.Fields.AllowCustomerReviews', N'Allow customer reviews')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (727, 1, N'Admin.Catalog.Posts.Fields.AllowCustomerReviews', N'Allow customer reviews')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (728, 1, N'Admin.Catalog.Products.Fields.AllowCustomerReviews.Hint', N'Check to allow customers to review this product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (728, 1, N'Admin.Catalog.Posts.Fields.AllowCustomerReviews.Hint', N'Check to allow customers to review this Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (729, 1, N'Admin.Catalog.Products.Fields.AllowedQuantities', N'Allowed quantities')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (729, 1, N'Admin.Catalog.Posts.Fields.AllowedQuantities', N'Allowed quantities')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (730, 1, N'Admin.Catalog.Products.Fields.AllowedQuantities.Hint', N'Enter a comma separated list of quantities you want this product to be restricted to. Instead of a quantity textbox that allows them to enter any quantity, they will receive a dropdown list of the values you enter here.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (730, 1, N'Admin.Catalog.Posts.Fields.AllowedQuantities.Hint', N'Enter a comma separated list of quantities you want this Post to be restricted to. Instead of a quantity textbox that allows them to enter any quantity, they will receive a dropdown list of the values you enter here.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (731, 1, N'Admin.Catalog.Products.Fields.AssociatedToProductName', N'Associated to product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (731, 1, N'Admin.Catalog.Posts.Fields.AssociatedToPostName', N'Associated to Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (732, 1, N'Admin.Catalog.Products.Fields.AssociatedToProductName.Hint', N'A "grouped" parent product which this one is associated to.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (732, 1, N'Admin.Catalog.Posts.Fields.AssociatedToPostName.Hint', N'A "grouped" parent Post which this one is associated to.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (733, 1, N'Admin.Catalog.Products.Fields.AutomaticallyAddRequiredProducts', N'Automatically add these products to the cart')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (733, 1, N'Admin.Catalog.Posts.Fields.AutomaticallyAddRequiredPosts', N'Automatically add these Posts to the cart')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (734, 1, N'Admin.Catalog.Products.Fields.AutomaticallyAddRequiredProducts.Hint', N'Check to automatically add these products to the cart.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (734, 1, N'Admin.Catalog.Posts.Fields.AutomaticallyAddRequiredPosts.Hint', N'Check to automatically add these Posts to the cart.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (735, 1, N'Admin.Catalog.Products.Fields.AvailableEndDateTime', N'Available end date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (735, 1, N'Admin.Catalog.Posts.Fields.AvailableEndDateTime', N'Available end date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (736, 1, N'Admin.Catalog.Products.Fields.AvailableEndDateTime.Hint', N'The end of the product''s availability in Coordinated Universal Time (UTC).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (736, 1, N'Admin.Catalog.Posts.Fields.AvailableEndDateTime.Hint', N'The end of the Post''s availability in Coordinated Universal Time (UTC).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (737, 1, N'Admin.Catalog.Products.Fields.AvailableForPreOrder', N'Available for pre-order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (737, 1, N'Admin.Catalog.Posts.Fields.AvailableForPreOrder', N'Available for pre-order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (738, 1, N'Admin.Catalog.Products.Fields.AvailableForPreOrder.Hint', N'Check if this item is available for Pre-Order. It also displays "Pre-order" button instead of "Add to cart".')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (738, 1, N'Admin.Catalog.Posts.Fields.AvailableForPreOrder.Hint', N'Check if this item is available for Pre-Order. It also displays "Pre-order" button instead of "Add to cart".')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (739, 1, N'Admin.Catalog.Products.Fields.AvailableStartDateTime', N'Available start date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (739, 1, N'Admin.Catalog.Posts.Fields.AvailableStartDateTime', N'Available start date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (740, 1, N'Admin.Catalog.Products.Fields.AvailableStartDateTime.Hint', N'The start of the product''s availability in Coordinated Universal Time (UTC).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (740, 1, N'Admin.Catalog.Posts.Fields.AvailableStartDateTime.Hint', N'The start of the Post''s availability in Coordinated Universal Time (UTC).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (741, 1, N'Admin.Catalog.Products.Fields.AvailableStores', N'Stores')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (741, 1, N'Admin.Catalog.Posts.Fields.AvailableStores', N'Stores')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (742, 1, N'Admin.Catalog.Products.Fields.AvailableStores.Hint', N'Select stores for which the product will be shown.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (742, 1, N'Admin.Catalog.Posts.Fields.AvailableStores.Hint', N'Select stores for which the Post will be shown.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (743, 1, N'Admin.Catalog.Products.Fields.BackorderMode', N'Backorders')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (743, 1, N'Admin.Catalog.Posts.Fields.BackorderMode', N'Backorders')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (744, 1, N'Admin.Catalog.Products.Fields.BackorderMode.Hint', N'Select backorder mode.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (744, 1, N'Admin.Catalog.Posts.Fields.BackorderMode.Hint', N'Select backorder mode.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (745, 1, N'Admin.Catalog.Products.Fields.BasepriceEnabled', N'PAngV (base price) enabled')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (745, 1, N'Admin.Catalog.Posts.Fields.BasepriceEnabled', N'PAngV (base price) enabled')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (746, 1, N'Admin.Catalog.Products.Fields.BasepriceEnabled.Hint', N'Check to display baseprice of a product. This is required according to the German law (PAngV). If you sell 500ml of beer for 1,50 euro, then you have to display baseprice: 3.00 euro per 1L.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (746, 1, N'Admin.Catalog.Posts.Fields.BasepriceEnabled.Hint', N'Check to display baseprice of a Post. This is required according to the German law (PAngV). If you sell 500ml of beer for 1,50 euro, then you have to display baseprice: 3.00 euro per 1L.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (747, 1, N'Admin.Catalog.Products.Fields.BasepriceAmount', N'Amount in product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (747, 1, N'Admin.Catalog.Posts.Fields.BasepriceAmount', N'Amount in Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (748, 1, N'Admin.Catalog.Products.Fields.BasepriceAmount.Hint', N'Enter an amount in product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (748, 1, N'Admin.Catalog.Posts.Fields.BasepriceAmount.Hint', N'Enter an amount in Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (749, 1, N'Admin.Catalog.Products.Fields.BasepriceUnit', N'Unit of product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (749, 1, N'Admin.Catalog.Posts.Fields.BasepriceUnit', N'Unit of Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (750, 1, N'Admin.Catalog.Products.Fields.BasepriceUnit.Hint', N'Enter a unit of product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (750, 1, N'Admin.Catalog.Posts.Fields.BasepriceUnit.Hint', N'Enter a unit of Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (751, 1, N'Admin.Catalog.Products.Fields.BasepriceBaseAmount', N'Reference amount')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (751, 1, N'Admin.Catalog.Posts.Fields.BasepriceBaseAmount', N'Reference amount')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (752, 1, N'Admin.Catalog.Products.Fields.BasepriceBaseAmount.Hint', N'Enter a reference amount')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (752, 1, N'Admin.Catalog.Posts.Fields.BasepriceBaseAmount.Hint', N'Enter a reference amount')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (753, 1, N'Admin.Catalog.Products.Fields.BasepriceBaseUnit', N'Reference unit')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (753, 1, N'Admin.Catalog.Posts.Fields.BasepriceBaseUnit', N'Reference unit')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (754, 1, N'Admin.Catalog.Products.Fields.BasepriceBaseUnit.Hint', N'Enter a reference unit.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (754, 1, N'Admin.Catalog.Posts.Fields.BasepriceBaseUnit.Hint', N'Enter a reference unit.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (755, 1, N'Admin.Catalog.Products.Fields.CallForPrice', N'Call for price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (755, 1, N'Admin.Catalog.Posts.Fields.CallForPrice', N'Call for price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (756, 1, N'Admin.Catalog.Products.Fields.CallForPrice.Hint', N'Check to show "Call for Pricing" or "Call for quote" instead of price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (756, 1, N'Admin.Catalog.Posts.Fields.CallForPrice.Hint', N'Check to show "Call for Pricing" or "Call for quote" instead of price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (757, 1, N'Admin.Catalog.Products.Fields.CreatedOn', N'Created on')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (757, 1, N'Admin.Catalog.Posts.Fields.CreatedOn', N'Created on')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (758, 1, N'Admin.Catalog.Products.Fields.CreatedOn.Hint', N'Date and time when this product was created.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (758, 1, N'Admin.Catalog.Posts.Fields.CreatedOn.Hint', N'Date and time when this Post was created.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (759, 1, N'Admin.Catalog.Products.Fields.CustomerEntersPrice', N'Customer enters price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (759, 1, N'Admin.Catalog.Posts.Fields.CustomerEntersPrice', N'Customer enters price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (760, 1, N'Admin.Catalog.Products.Fields.CustomerEntersPrice.Hint', N'An option indicating whether customer should enter price.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (760, 1, N'Admin.Catalog.Posts.Fields.CustomerEntersPrice.Hint', N'An option indicating whether customer should enter price.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (761, 1, N'Admin.Catalog.Products.Fields.DeliveryDate', N'Delivery date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (761, 1, N'Admin.Catalog.Posts.Fields.DeliveryDate', N'Delivery date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (762, 1, N'Admin.Catalog.Products.Fields.DeliveryDate.Hint', N'Choose a delivery date which will be displayed in the public store.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (762, 1, N'Admin.Catalog.Posts.Fields.DeliveryDate.Hint', N'Choose a delivery date which will be displayed in the public store.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (763, 1, N'Admin.Catalog.Products.Fields.DeliveryDate.None', N'None')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (763, 1, N'Admin.Catalog.Posts.Fields.DeliveryDate.None', N'None')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (764, 1, N'Admin.Catalog.Products.Fields.DisableBuyButton', N'Disable buy button')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (764, 1, N'Admin.Catalog.Posts.Fields.DisableBuyButton', N'Disable buy button')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (765, 1, N'Admin.Catalog.Products.Fields.DisableBuyButton.Hint', N'Check to disable the buy button for this product. This may be necessary for products that are ''available upon request''.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (765, 1, N'Admin.Catalog.Posts.Fields.DisableBuyButton.Hint', N'Check to disable the buy button for this Post. This may be necessary for Posts that are ''available upon request''.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (766, 1, N'Admin.Catalog.Products.Fields.DisableWishlistButton', N'Disable wishlist button')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (766, 1, N'Admin.Catalog.Posts.Fields.DisableWishlistButton', N'Disable wishlist button')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (767, 1, N'Admin.Catalog.Products.Fields.DisableWishlistButton.Hint', N'Check to disable the wishlist button for this product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (767, 1, N'Admin.Catalog.Posts.Fields.DisableWishlistButton.Hint', N'Check to disable the wishlist button for this Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (768, 1, N'Admin.Catalog.Products.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (768, 1, N'Admin.Catalog.Posts.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (769, 1, N'Admin.Catalog.Products.Fields.DisplayOrder.Hint', N'Display order of the product. 1 represents the top of the list.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (769, 1, N'Admin.Catalog.Posts.Fields.DisplayOrder.Hint', N'Display order of the Post. 1 represents the top of the list.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (770, 1, N'Admin.Catalog.Products.Fields.DisplayStockAvailability', N'Display stock availability')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (770, 1, N'Admin.Catalog.Posts.Fields.DisplayStockAvailability', N'Display stock availability')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (771, 1, N'Admin.Catalog.Products.Fields.DisplayStockAvailability.Hint', N'Check to display stock availability. When enabled, customers will see stock availability.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (771, 1, N'Admin.Catalog.Posts.Fields.DisplayStockAvailability.Hint', N'Check to display stock availability. When enabled, customers will see stock availability.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (772, 1, N'Admin.Catalog.Products.Fields.DisplayStockQuantity', N'Display stock quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (772, 1, N'Admin.Catalog.Posts.Fields.DisplayStockQuantity', N'Display stock quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (773, 1, N'Admin.Catalog.Products.Fields.DisplayStockQuantity.Hint', N'Check to display stock quantity. When enabled, customers will see stock quantity.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (773, 1, N'Admin.Catalog.Posts.Fields.DisplayStockQuantity.Hint', N'Check to display stock quantity. When enabled, customers will see stock quantity.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (774, 1, N'Admin.Catalog.Products.Fields.Download', N'Download file')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (774, 1, N'Admin.Catalog.Posts.Fields.Download', N'Download file')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (775, 1, N'Admin.Catalog.Products.Fields.Download.Hint', N'The download file.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (775, 1, N'Admin.Catalog.Posts.Fields.Download.Hint', N'The download file.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (776, 1, N'Admin.Catalog.Products.Fields.DownloadActivationType', N'Download activation type')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (776, 1, N'Admin.Catalog.Posts.Fields.DownloadActivationType', N'Download activation type')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (777, 1, N'Admin.Catalog.Products.Fields.DownloadActivationType.Hint', N'A value indicating when download links will be enabled.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (777, 1, N'Admin.Catalog.Posts.Fields.DownloadActivationType.Hint', N'A value indicating when download links will be enabled.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (778, 1, N'Admin.Catalog.Products.Fields.DownloadExpirationDays', N'Number of days')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (778, 1, N'Admin.Catalog.Posts.Fields.DownloadExpirationDays', N'Number of days')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (779, 1, N'Admin.Catalog.Products.Fields.DownloadExpirationDays.Hint', N'The number of days during customers keeps access to the file (e.g. 14). Leave this field blank to allow continuous downloads.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (779, 1, N'Admin.Catalog.Posts.Fields.DownloadExpirationDays.Hint', N'The number of days during customers keeps access to the file (e.g. 14). Leave this field blank to allow continuous downloads.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (780, 1, N'Admin.Catalog.Products.Fields.FullDescription', N'Full description')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (780, 1, N'Admin.Catalog.Posts.Fields.FullDescription', N'Full description')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (781, 1, N'Admin.Catalog.Products.Fields.FullDescription.Hint', N'The full description of the product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (781, 1, N'Admin.Catalog.Posts.Fields.FullDescription.Hint', N'The full description of the Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (782, 1, N'Admin.Catalog.Products.Fields.GiftCardType', N'Gift card type')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (782, 1, N'Admin.Catalog.Posts.Fields.GiftCardType', N'Gift card type')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (783, 1, N'Admin.Catalog.Products.Fields.GiftCardType.Hint', N'Select gift card type. WARNING: not recommended to change in production environment.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (783, 1, N'Admin.Catalog.Posts.Fields.GiftCardType.Hint', N'Select gift card type. WARNING: not recommended to change in Postion environment.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (784, 1, N'Admin.Catalog.Products.Fields.GTIN', N'GTIN (global trade item number)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (784, 1, N'Admin.Catalog.Posts.Fields.GTIN', N'GTIN (global trade item number)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (785, 1, N'Admin.Catalog.Products.Fields.GTIN.Hint', N'Enter global trade item number (GTIN). These identifiers include UPC (in North America), EAN (in Europe), JAN (in Japan), and ISBN (for books).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (785, 1, N'Admin.Catalog.Posts.Fields.GTIN.Hint', N'Enter global trade item number (GTIN). These identifiers include UPC (in North America), EAN (in Europe), JAN (in Japan), and ISBN (for books).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (786, 1, N'Admin.Catalog.Products.Fields.HasSampleDownload', N'Has sample download file')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (786, 1, N'Admin.Catalog.Posts.Fields.HasSampleDownload', N'Has sample download file')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (787, 1, N'Admin.Catalog.Products.Fields.HasSampleDownload.Hint', N'Check if this product has a sample download file that can be downloaded before checkout.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (787, 1, N'Admin.Catalog.Posts.Fields.HasSampleDownload.Hint', N'Check if this Post has a sample download file that can be downloaded before checkout.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (788, 1, N'Admin.Catalog.Products.Fields.HasUserAgreement', N'Has user agreement')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (788, 1, N'Admin.Catalog.Posts.Fields.HasUserAgreement', N'Has user agreement')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (789, 1, N'Admin.Catalog.Products.Fields.HasUserAgreement.Hint', N'Check if the product has a user agreement.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (789, 1, N'Admin.Catalog.Posts.Fields.HasUserAgreement.Hint', N'Check if the Post has a user agreement.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (790, 1, N'Admin.Catalog.Products.Fields.Height', N'Height')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (790, 1, N'Admin.Catalog.Posts.Fields.Height', N'Height')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (791, 1, N'Admin.Catalog.Products.Fields.Height.Hint', N'The height of the product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (791, 1, N'Admin.Catalog.Posts.Fields.Height.Hint', N'The height of the Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (792, 1, N'Admin.Catalog.Products.Fields.ID', N'ID')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (792, 1, N'Admin.Catalog.Posts.Fields.ID', N'ID')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (793, 1, N'Admin.Catalog.Products.Fields.ID.Hint', N'The product identifier.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (793, 1, N'Admin.Catalog.Posts.Fields.ID.Hint', N'The Post identifier.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (794, 1, N'Admin.Catalog.Products.Fields.IsDownload', N'Downloadable product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (794, 1, N'Admin.Catalog.Posts.Fields.IsDownload', N'Downloadable Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (795, 1, N'Admin.Catalog.Products.Fields.IsDownload.Hint', N'Check if this product is a downloadable product. When a customer purchases a download product, they can download the item direct from your store by viewing their completed order.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (795, 1, N'Admin.Catalog.Posts.Fields.IsDownload.Hint', N'Check if this Post is a downloadable Post. When a customer purchases a download Post, they can download the item direct from your store by viewing their completed order.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (796, 1, N'Admin.Catalog.Products.Fields.IsFreeShipping', N'Free shipping')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (796, 1, N'Admin.Catalog.Posts.Fields.IsFreeShipping', N'Free shipping')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (797, 1, N'Admin.Catalog.Products.Fields.IsFreeShipping.Hint', N'Check if this product comes with FREE shipping.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (797, 1, N'Admin.Catalog.Posts.Fields.IsFreeShipping.Hint', N'Check if this Post comes with FREE shipping.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (798, 1, N'Admin.Catalog.Products.Fields.IsGiftCard', N'Is gift card')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (798, 1, N'Admin.Catalog.Posts.Fields.IsGiftCard', N'Is gift card')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (799, 1, N'Admin.Catalog.Products.Fields.IsGiftCard.Hint', N'Check if it is a gift card')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (799, 1, N'Admin.Catalog.Posts.Fields.IsGiftCard.Hint', N'Check if it is a gift card')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (800, 1, N'Admin.Catalog.Products.Fields.IsRecurring', N'Recurring product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (800, 1, N'Admin.Catalog.Posts.Fields.IsRecurring', N'Recurring Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (801, 1, N'Admin.Catalog.Products.Fields.IsRecurring.Hint', N'Check if this product is a recurring product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (801, 1, N'Admin.Catalog.Posts.Fields.IsRecurring.Hint', N'Check if this Post is a recurring Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (802, 1, N'Admin.Catalog.Products.Fields.IsRental', N'Is rental')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (802, 1, N'Admin.Catalog.Posts.Fields.IsRental', N'Is rental')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (803, 1, N'Admin.Catalog.Products.Fields.IsRental.Hint', N'Check if this is a rental product (price is set for some period). Please note that inventory management is not fully supported for rental products yet. It''s recommended to set ''Manage inventory method'' to ''Don''t track inventory'' now.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (803, 1, N'Admin.Catalog.Posts.Fields.IsRental.Hint', N'Check if this is a rental Post (price is set for some period). Please note that inventory management is not fully supported for rental Posts yet. It''s recommended to set ''Manage inventory method'' to ''Don''t track inventory'' now.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (804, 1, N'Admin.Catalog.Products.Fields.IsShipEnabled', N'Shipping enabled')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (804, 1, N'Admin.Catalog.Posts.Fields.IsShipEnabled', N'Shipping enabled')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (805, 1, N'Admin.Catalog.Products.Fields.IsShipEnabled.Hint', N'Determines whether the product can be shipped.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (805, 1, N'Admin.Catalog.Posts.Fields.IsShipEnabled.Hint', N'Determines whether the Post can be shipped.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (806, 1, N'Admin.Catalog.Products.Fields.IsTaxExempt', N'Tax exempt')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (806, 1, N'Admin.Catalog.Posts.Fields.IsTaxExempt', N'Tax exempt')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (807, 1, N'Admin.Catalog.Products.Fields.IsTaxExempt.Hint', N'Determines whether this product is tax exempt (tax will not be applied to this product at checkout).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (807, 1, N'Admin.Catalog.Posts.Fields.IsTaxExempt.Hint', N'Determines whether this Post is tax exempt (tax will not be applied to this Post at checkout).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (808, 1, N'Admin.Catalog.Products.Fields.IsTelecommunicationsOrBroadcastingOrElectronicServices', N'Telecommunications, broadcasting and electronic services')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (808, 1, N'Admin.Catalog.Posts.Fields.IsTelecommunicationsOrBroadcastingOrElectronicServices', N'Telecommunications, broadcasting and electronic services')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (809, 1, N'Admin.Catalog.Products.Fields.IsTelecommunicationsOrBroadcastingOrElectronicServices.Hint', N'Check if it''s telecommunications, broadcasting and electronic services. It''s used for tax calculation in Europe Union.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (809, 1, N'Admin.Catalog.Posts.Fields.IsTelecommunicationsOrBroadcastingOrElectronicServices.Hint', N'Check if it''s telecommunications, broadcasting and electronic services. It''s used for tax calculation in Europe Union.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (810, 1, N'Admin.Catalog.Products.Fields.Length', N'Length')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (810, 1, N'Admin.Catalog.Posts.Fields.Length', N'Length')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (811, 1, N'Admin.Catalog.Products.Fields.Length.Hint', N'The length of the product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (811, 1, N'Admin.Catalog.Posts.Fields.Length.Hint', N'The length of the Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (812, 1, N'Admin.Catalog.Products.Fields.LimitedToStores', N'Limited to stores')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (812, 1, N'Admin.Catalog.Posts.Fields.LimitedToStores', N'Limited to stores')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (813, 1, N'Admin.Catalog.Products.Fields.LimitedToStores.Hint', N'Determines whether the product is available only at certain stores.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (813, 1, N'Admin.Catalog.Posts.Fields.LimitedToStores.Hint', N'Determines whether the Post is available only at certain stores.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (814, 1, N'Admin.Catalog.Products.Fields.LowStockActivity', N'Low stock activity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (814, 1, N'Admin.Catalog.Posts.Fields.LowStockActivity', N'Low stock activity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (815, 1, N'Admin.Catalog.Products.Fields.LowStockActivity.Hint', N'Action to be taken when your current stock quantity falls below (reaches) the ''Minimum stock quantity''.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (815, 1, N'Admin.Catalog.Posts.Fields.LowStockActivity.Hint', N'Action to be taken when your current stock quantity falls below (reaches) the ''Minimum stock quantity''.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (816, 1, N'Admin.Catalog.Products.Fields.ManageInventoryMethod', N'Manage inventory method')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (816, 1, N'Admin.Catalog.Posts.Fields.ManageInventoryMethod', N'Manage inventory method')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (817, 1, N'Admin.Catalog.Products.Fields.ManageInventoryMethod.Hint', N'Select manage inventory method. When enabled, stock quantities are automatically adjusted when a customer makes a purchase. You can also set low stock activity actions and receive notifications.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (817, 1, N'Admin.Catalog.Posts.Fields.ManageInventoryMethod.Hint', N'Select manage inventory method. When enabled, stock quantities are automatically adjusted when a customer makes a purchase. You can also set low stock activity actions and receive notifications.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (818, 1, N'Admin.Catalog.Products.Fields.ManufacturerPartNumber', N'Manufacturer part number')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (818, 1, N'Admin.Catalog.Posts.Fields.ManufacturerPartNumber', N'Manufacturer part number')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (819, 1, N'Admin.Catalog.Products.Fields.ManufacturerPartNumber.Hint', N'The manufacturer''s part number for this product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (819, 1, N'Admin.Catalog.Posts.Fields.ManufacturerPartNumber.Hint', N'The manufacturer''s part number for this Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (820, 1, N'Admin.Catalog.Products.Fields.MarkAsNew', N'Mark as new')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (820, 1, N'Admin.Catalog.Posts.Fields.MarkAsNew', N'Mark as new')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (821, 1, N'Admin.Catalog.Products.Fields.MarkAsNew.Hint', N'Check to mark this product as New')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (821, 1, N'Admin.Catalog.Posts.Fields.MarkAsNew.Hint', N'Check to mark this Post as New')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (822, 1, N'Admin.Catalog.Products.Fields.MarkAsNewStartDateTimeUtc', N'Mark as new. Start date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (822, 1, N'Admin.Catalog.Posts.Fields.MarkAsNewStartDateTimeUtc', N'Mark as new. Start date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (823, 1, N'Admin.Catalog.Products.Fields.MarkAsNewStartDateTimeUtc.Hint', N'Set Product as New from Date in Coordinated Universal Time (UTC).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (823, 1, N'Admin.Catalog.Posts.Fields.MarkAsNewStartDateTimeUtc.Hint', N'Set Post as New from Date in Coordinated Universal Time (UTC).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (824, 1, N'Admin.Catalog.Products.Fields.MarkAsNewEndDateTimeUtc', N'Mark as new. End date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (824, 1, N'Admin.Catalog.Posts.Fields.MarkAsNewEndDateTimeUtc', N'Mark as new. End date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (825, 1, N'Admin.Catalog.Products.Fields.MarkAsNewEndDateTimeUtc.Hint', N'Set Product as New to Date in Coordinated Universal Time (UTC).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (825, 1, N'Admin.Catalog.Posts.Fields.MarkAsNewEndDateTimeUtc.Hint', N'Set Post as New to Date in Coordinated Universal Time (UTC).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (826, 1, N'Admin.Catalog.Products.Fields.MaximumCustomerEnteredPrice', N'Maximum amount')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (826, 1, N'Admin.Catalog.Posts.Fields.MaximumCustomerEnteredPrice', N'Maximum amount')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (827, 1, N'Admin.Catalog.Products.Fields.MaximumCustomerEnteredPrice.Hint', N'Enter a maximum amount.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (827, 1, N'Admin.Catalog.Posts.Fields.MaximumCustomerEnteredPrice.Hint', N'Enter a maximum amount.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (828, 1, N'Admin.Catalog.Products.Fields.MaxNumberOfDownloads', N'Max. downloads')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (828, 1, N'Admin.Catalog.Posts.Fields.MaxNumberOfDownloads', N'Max. downloads')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (829, 1, N'Admin.Catalog.Products.Fields.MaxNumberOfDownloads.Hint', N'The maximum number of downloads.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (829, 1, N'Admin.Catalog.Posts.Fields.MaxNumberOfDownloads.Hint', N'The maximum number of downloads.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (830, 1, N'Admin.Catalog.Products.Fields.MetaDescription', N'Meta description')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (830, 1, N'Admin.Catalog.Posts.Fields.MetaDescription', N'Meta description')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (831, 1, N'Admin.Catalog.Products.Fields.MetaDescription.Hint', N'Meta description to be added to product page header')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (831, 1, N'Admin.Catalog.Posts.Fields.MetaDescription.Hint', N'Meta description to be added to Post page header')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (832, 1, N'Admin.Catalog.Products.Fields.MetaKeywords', N'Meta keywords')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (832, 1, N'Admin.Catalog.Posts.Fields.MetaKeywords', N'Meta keywords')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (833, 1, N'Admin.Catalog.Products.Fields.MetaKeywords.Hint', N'Meta keywords to be added to product page header')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (833, 1, N'Admin.Catalog.Posts.Fields.MetaKeywords.Hint', N'Meta keywords to be added to Post page header')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (834, 1, N'Admin.Catalog.Products.Fields.MetaTitle', N'Meta title')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (834, 1, N'Admin.Catalog.Posts.Fields.MetaTitle', N'Meta title')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (835, 1, N'Admin.Catalog.Products.Fields.MetaTitle.Hint', N'Override the page title. The default is the name of the product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (835, 1, N'Admin.Catalog.Posts.Fields.MetaTitle.Hint', N'Override the page title. The default is the name of the Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (836, 1, N'Admin.Catalog.Products.Fields.MinimumCustomerEnteredPrice', N'Minimum amount')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (836, 1, N'Admin.Catalog.Posts.Fields.MinimumCustomerEnteredPrice', N'Minimum amount')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (837, 1, N'Admin.Catalog.Products.Fields.MinimumCustomerEnteredPrice.Hint', N'Enter a minimum amount.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (837, 1, N'Admin.Catalog.Posts.Fields.MinimumCustomerEnteredPrice.Hint', N'Enter a minimum amount.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (838, 1, N'Admin.Catalog.Products.Fields.MinStockQuantity', N'Minimum stock quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (838, 1, N'Admin.Catalog.Posts.Fields.MinStockQuantity', N'Minimum stock quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (839, 1, N'Admin.Catalog.Products.Fields.MinStockQuantity.Hint', N'If you have enabled ''Manage Stock'' you can perform a number of different actions when the current stock quantity falls below (reaches) your minimum stock quantity.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (839, 1, N'Admin.Catalog.Posts.Fields.MinStockQuantity.Hint', N'If you have enabled ''Manage Stock'' you can perform a number of different actions when the current stock quantity falls below (reaches) your minimum stock quantity.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (840, 1, N'Admin.Catalog.Products.Fields.UseMultipleWarehouses', N'Use multiple warehouses')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (840, 1, N'Admin.Catalog.Posts.Fields.UseMultipleWarehouses', N'Use multiple warehouses')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (841, 1, N'Admin.Catalog.Products.Fields.UseMultipleWarehouses.Hint', N'Check if you want to support shipping and inventory management from multiple warehouses.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (841, 1, N'Admin.Catalog.Posts.Fields.UseMultipleWarehouses.Hint', N'Check if you want to support shipping and inventory management from multiple warehouses.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (842, 1, N'Admin.Catalog.Products.Fields.Name', N'Product name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (842, 1, N'Admin.Catalog.Posts.Fields.Name', N'Post name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (843, 1, N'Admin.Catalog.Products.Fields.Name.Hint', N'The name of the product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (843, 1, N'Admin.Catalog.Posts.Fields.Name.Hint', N'The name of the Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (844, 1, N'Admin.Catalog.Products.Fields.Name.Required', N'Please provide a name.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (844, 1, N'Admin.Catalog.Posts.Fields.Name.Required', N'Please provide a name.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (845, 1, N'Admin.Catalog.Products.Fields.NotifyAdminForQuantityBelow', N'Notify admin for quantity below')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (845, 1, N'Admin.Catalog.Posts.Fields.NotifyAdminForQuantityBelow', N'Notify admin for quantity below')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (846, 1, N'Admin.Catalog.Products.Fields.NotifyAdminForQuantityBelow.Hint', N'When the current stock quantity falls below (reaches) this quantity, a store owner will receive a notification.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (846, 1, N'Admin.Catalog.Posts.Fields.NotifyAdminForQuantityBelow.Hint', N'When the current stock quantity falls below (reaches) this quantity, a store owner will receive a notification.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (847, 1, N'Admin.Catalog.Products.Fields.OldPrice', N'Old price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (847, 1, N'Admin.Catalog.Posts.Fields.OldPrice', N'Old price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (848, 1, N'Admin.Catalog.Products.Fields.OldPrice.Hint', N'The old price of the product. If you set an old price, this will display alongside the current price on the product page to show the difference in price.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (848, 1, N'Admin.Catalog.Posts.Fields.OldPrice.Hint', N'The old price of the Post. If you set an old price, this will display alongside the current price on the Post page to show the difference in price.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (849, 1, N'Admin.Catalog.Products.Fields.OrderMaximumQuantity', N'Maximum cart quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (849, 1, N'Admin.Catalog.Posts.Fields.OrderMaximumQuantity', N'Maximum cart quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (850, 1, N'Admin.Catalog.Products.Fields.OrderMaximumQuantity.Hint', N'Set the maximum quantity allowed in a customer''s shopping cart e.g. set to 5 to only allow customers to purchase 5 of this product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (850, 1, N'Admin.Catalog.Posts.Fields.OrderMaximumQuantity.Hint', N'Set the maximum quantity allowed in a customer''s shopping cart e.g. set to 5 to only allow customers to purchase 5 of this Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (851, 1, N'Admin.Catalog.Products.Fields.OrderMinimumQuantity', N'Minimum cart quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (851, 1, N'Admin.Catalog.Posts.Fields.OrderMinimumQuantity', N'Minimum cart quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (852, 1, N'Admin.Catalog.Products.Fields.OrderMinimumQuantity.Hint', N'Set the minimum quantity allowed in a customer''s shopping cart e.g. set to 3 to only allow customers to purchase 3 or more of this product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (852, 1, N'Admin.Catalog.Posts.Fields.OrderMinimumQuantity.Hint', N'Set the minimum quantity allowed in a customer''s shopping cart e.g. set to 3 to only allow customers to purchase 3 or more of this Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (853, 1, N'Admin.Catalog.Products.Fields.OverriddenGiftCardAmount', N'Overridden gift card amount')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (853, 1, N'Admin.Catalog.Posts.Fields.OverriddenGiftCardAmount', N'Overridden gift card amount')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (854, 1, N'Admin.Catalog.Products.Fields.OverriddenGiftCardAmount.Hint', N'Enter gift card amount that can be used after purchase. If not specified, then product price will be used.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (854, 1, N'Admin.Catalog.Posts.Fields.OverriddenGiftCardAmount.Hint', N'Enter gift card amount that can be used after purchase. If not specified, then Post price will be used.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (855, 1, N'Admin.Catalog.Products.Fields.PictureThumbnailUrl', N'Picture')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (855, 1, N'Admin.Catalog.Posts.Fields.PictureThumbnailUrl', N'Picture')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (856, 1, N'Admin.Catalog.Products.Fields.PreOrderAvailabilityStartDateTimeUtc', N'Pre-order availability start date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (856, 1, N'Admin.Catalog.Posts.Fields.PreOrderAvailabilityStartDateTimeUtc', N'Pre-order availability start date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (857, 1, N'Admin.Catalog.Products.Fields.PreOrderAvailabilityStartDateTimeUtc.Hint', N'The availability start date of the product configured for pre-order in Coordinated Universal Time (UTC). ''Pre-order'' button will automatically be changed to ''Add to cart'' at this moment.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (857, 1, N'Admin.Catalog.Posts.Fields.PreOrderAvailabilityStartDateTimeUtc.Hint', N'The availability start date of the Post configured for pre-order in Coordinated Universal Time (UTC). ''Pre-order'' button will automatically be changed to ''Add to cart'' at this moment.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (858, 1, N'Admin.Catalog.Products.Fields.Price', N'Price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (858, 1, N'Admin.Catalog.Posts.Fields.Price', N'Price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (859, 1, N'Admin.Catalog.Products.Fields.Price.Hint', N'The price of the product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (859, 1, N'Admin.Catalog.Posts.Fields.Price.Hint', N'The price of the Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (860, 1, N'Admin.Catalog.Products.Fields.ProductCost', N'Product cost')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (860, 1, N'Admin.Catalog.Posts.Fields.PostCost', N'Post cost')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (861, 1, N'Admin.Catalog.Products.Fields.ProductCost.Hint', N'The product cost is the cost of all the different components which make up the product. This may either be the purchase price if the components are bought from outside suppliers, or the combined cost of materials and manufacturing processes if the component is made in-house.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (861, 1, N'Admin.Catalog.Posts.Fields.PostCost.Hint', N'The Post cost is the cost of all the different components which make up the Post. This may either be the purchase price if the components are bought from outside suppliers, or the combined cost of materials and manufacturing processes if the component is made in-house.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (862, 1, N'Admin.Catalog.Products.Fields.ProductTags', N'Product tags')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (862, 1, N'Admin.Catalog.Posts.Fields.PostTags', N'Post tags')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (863, 1, N'Admin.Catalog.Products.Fields.ProductTags.Hint', N'Product tags are keywords that this product can also be identified by. Enter a comma separated list of the tags to be associated with this product. The more products associated with a particular tag, the larger it will show on the tag cloud.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (863, 1, N'Admin.Catalog.Posts.Fields.PostTags.Hint', N'Post tags are keywords that this Post can also be identified by. Enter a comma separated list of the tags to be associated with this Post. The more Posts associated with a particular tag, the larger it will show on the tag cloud.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (864, 1, N'Admin.Catalog.Products.Fields.ProductTemplate', N'Product template')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (864, 1, N'Admin.Catalog.Posts.Fields.PostTemplate', N'Post template')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (865, 1, N'Admin.Catalog.Products.Fields.ProductTemplate.Hint', N'Choose a product template. This template defines how this product will be displayed in public store.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (865, 1, N'Admin.Catalog.Posts.Fields.PostTemplate.Hint', N'Choose a Post template. This template defines how this Post will be displayed in public store.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (866, 1, N'Admin.Catalog.Products.Fields.ProductType', N'Product type')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (866, 1, N'Admin.Catalog.Posts.Fields.PostType', N'Post type')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (867, 1, N'Admin.Catalog.Products.Fields.ProductType.Hint', N'Choose your product type.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (867, 1, N'Admin.Catalog.Posts.Fields.PostType.Hint', N'Choose your Post type.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (868, 1, N'Admin.Catalog.Products.Fields.Published', N'Published')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (868, 1, N'Admin.Catalog.Posts.Fields.Published', N'Published')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (869, 1, N'Admin.Catalog.Products.Fields.Published.Hint', N'Check to publish this product (visible in store). Uncheck to unpublish (product not available in store).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (869, 1, N'Admin.Catalog.Posts.Fields.Published.Hint', N'Check to publish this Post (visible in store). Uncheck to unpublish (Post not available in store).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (870, 1, N'Admin.Catalog.Products.Fields.RecurringCycleLength', N'Cycle length')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (870, 1, N'Admin.Catalog.Posts.Fields.RecurringCycleLength', N'Cycle length')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (871, 1, N'Admin.Catalog.Products.Fields.RecurringCycleLength.Hint', N'Enter cycle length.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (871, 1, N'Admin.Catalog.Posts.Fields.RecurringCycleLength.Hint', N'Enter cycle length.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (872, 1, N'Admin.Catalog.Products.Fields.RecurringCyclePeriod', N'Cycle period')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (872, 1, N'Admin.Catalog.Posts.Fields.RecurringCyclePeriod', N'Cycle period')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (873, 1, N'Admin.Catalog.Products.Fields.RecurringCyclePeriod.Hint', N'Select cycle period.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (873, 1, N'Admin.Catalog.Posts.Fields.RecurringCyclePeriod.Hint', N'Select cycle period.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (874, 1, N'Admin.Catalog.Products.Fields.RecurringTotalCycles', N'Total cycles')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (874, 1, N'Admin.Catalog.Posts.Fields.RecurringTotalCycles', N'Total cycles')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (875, 1, N'Admin.Catalog.Products.Fields.RecurringTotalCycles.Hint', N'Enter total cycles.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (875, 1, N'Admin.Catalog.Posts.Fields.RecurringTotalCycles.Hint', N'Enter total cycles.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (876, 1, N'Admin.Catalog.Products.Fields.RentalPriceLength', N'Rental period length')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (876, 1, N'Admin.Catalog.Posts.Fields.RentalPriceLength', N'Rental period length')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (877, 1, N'Admin.Catalog.Products.Fields.RentalPriceLength.Hint', N'Specify period length for rental product. Price is specified for this period.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (877, 1, N'Admin.Catalog.Posts.Fields.RentalPriceLength.Hint', N'Specify period length for rental Post. Price is specified for this period.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (878, 1, N'Admin.Catalog.Products.Fields.RentalPricePeriod', N'Rental period')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (878, 1, N'Admin.Catalog.Posts.Fields.RentalPricePeriod', N'Rental period')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (879, 1, N'Admin.Catalog.Products.Fields.RentalPricePeriod.Hint', N'Specify period for rental product. Price is specified for this period.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (879, 1, N'Admin.Catalog.Posts.Fields.RentalPricePeriod.Hint', N'Specify period for rental Post. Price is specified for this period.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (880, 1, N'Admin.Catalog.Products.Fields.RequiredProductIds', N'Required product IDs')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (880, 1, N'Admin.Catalog.Posts.Fields.RequiredPostIds', N'Required Post IDs')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (881, 1, N'Admin.Catalog.Products.Fields.RequiredProductIds.AddNew', N'Add required product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (881, 1, N'Admin.Catalog.Posts.Fields.RequiredPostIds.AddNew', N'Add required Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (882, 1, N'Admin.Catalog.Products.Fields.RequiredProductIds.Choose', N'Choose')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (882, 1, N'Admin.Catalog.Posts.Fields.RequiredPostIds.Choose', N'Choose')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (883, 1, N'Admin.Catalog.Products.Fields.RequiredProductIds.Hint', N'Specify comma separated list of required product IDs. NOTE: Ensure that there are no circular references (for example, A requires B, and B requires A).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (883, 1, N'Admin.Catalog.Posts.Fields.RequiredPostIds.Hint', N'Specify comma separated list of required Post IDs. NOTE: Ensure that there are no circular references (for example, A requires B, and B requires A).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (884, 1, N'Admin.Catalog.Products.Fields.RequireOtherProducts', N'Require other products added to the cart')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (884, 1, N'Admin.Catalog.Posts.Fields.RequireOtherPosts', N'Require other Posts added to the cart')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (885, 1, N'Admin.Catalog.Products.Fields.RequireOtherProducts.Hint', N'Check if this product requires that other products are added to the cart.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (885, 1, N'Admin.Catalog.Posts.Fields.RequireOtherPosts.Hint', N'Check if this Post requires that other Posts are added to the cart.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (886, 1, N'Admin.Catalog.Products.Fields.SampleDownload', N'Sample download file')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (886, 1, N'Admin.Catalog.Posts.Fields.SampleDownload', N'Sample download file')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (887, 1, N'Admin.Catalog.Products.Fields.SampleDownload.Hint', N'The sample download file.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (887, 1, N'Admin.Catalog.Posts.Fields.SampleDownload.Hint', N'The sample download file.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (888, 1, N'Admin.Catalog.Products.Fields.SeName', N'Search engine friendly page name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (888, 1, N'Admin.Catalog.Posts.Fields.SeName', N'Search engine friendly page name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (889, 1, N'Admin.Catalog.Products.Fields.SeName.Hint', N'Set a search engine friendly page name e.g. ''the-best-product'' to make your page URL ''http://www.yourStore.com/the-best-product''. Leave empty to generate it automatically based on the name of the product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (889, 1, N'Admin.Catalog.Posts.Fields.SeName.Hint', N'Set a search engine friendly page name e.g. ''the-best-Post'' to make your page URL ''http://www.yourStore.com/the-best-Post''. Leave empty to generate it automatically based on the name of the Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (890, 1, N'Admin.Catalog.Products.Fields.ShipSeparately', N'Ship separately')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (890, 1, N'Admin.Catalog.Posts.Fields.ShipSeparately', N'Ship separately')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (891, 1, N'Admin.Catalog.Products.Fields.ShipSeparately.Hint', N'Check to mark a product as being able to be shipped by itself in a single box (separate shipment). This way shipping rates are calculated separately for this product regardless of what other products are also in the cart. Please note that if you have several quantities of this product in the cart, then all of them will be packed and shipped in a single box.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (891, 1, N'Admin.Catalog.Posts.Fields.ShipSeparately.Hint', N'Check to mark a Post as being able to be shipped by itself in a single box (separate shipment). This way shipping rates are calculated separately for this Post regardless of what other Posts are also in the cart. Please note that if you have several quantities of this Post in the cart, then all of them will be packed and shipped in a single box.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (892, 1, N'Admin.Catalog.Products.Fields.ShortDescription', N'Short description')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (892, 1, N'Admin.Catalog.Posts.Fields.ShortDescription', N'Short description')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (893, 1, N'Admin.Catalog.Products.Fields.ShortDescription.Hint', N'The short description of the product. This is the text that displays in product lists i.e. category / manufacturer pages')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (893, 1, N'Admin.Catalog.Posts.Fields.ShortDescription.Hint', N'The short description of the Post. This is the text that displays in Post lists i.e. category / manufacturer pages')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (894, 1, N'Admin.Catalog.Products.Fields.ShowOnHomePage', N'Show on home page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (894, 1, N'Admin.Catalog.Posts.Fields.ShowOnHomePage', N'Show on home page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (895, 1, N'Admin.Catalog.Products.Fields.ShowOnHomePage.Hint', N'Check to display this product on your store''s home page. Recommended for your most popular products.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (895, 1, N'Admin.Catalog.Posts.Fields.ShowOnHomePage.Hint', N'Check to display this Post on your store''s home page. Recommended for your most popular Posts.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (896, 1, N'Admin.Catalog.Products.Fields.Sku', N'SKU')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (896, 1, N'Admin.Catalog.Posts.Fields.Sku', N'SKU')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (897, 1, N'Admin.Catalog.Products.Fields.Sku.Hint', N'Product stock keeping unit (SKU). Your internal unique identifier that can be used to track this product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (897, 1, N'Admin.Catalog.Posts.Fields.Sku.Hint', N'Post stock keeping unit (SKU). Your internal unique identifier that can be used to track this Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (898, 1, N'Admin.Catalog.Products.Fields.SpecialPrice', N'Special price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (898, 1, N'Admin.Catalog.Posts.Fields.SpecialPrice', N'Special price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (899, 1, N'Admin.Catalog.Products.Fields.SpecialPrice.Hint', N'Set a special price for the product. New price will be valid between start and end dates. Leave empty to ignore field.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (899, 1, N'Admin.Catalog.Posts.Fields.SpecialPrice.Hint', N'Set a special price for the Post. New price will be valid between start and end dates. Leave empty to ignore field.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (900, 1, N'Admin.Catalog.Products.Fields.SpecialPriceEndDateTimeUtc', N'Special price end date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (900, 1, N'Admin.Catalog.Posts.Fields.SpecialPriceEndDateTimeUtc', N'Special price end date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (901, 1, N'Admin.Catalog.Products.Fields.SpecialPriceEndDateTimeUtc.Hint', N'The end date of the special price in Coordinated Universal Time (UTC).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (901, 1, N'Admin.Catalog.Posts.Fields.SpecialPriceEndDateTimeUtc.Hint', N'The end date of the special price in Coordinated Universal Time (UTC).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (902, 1, N'Admin.Catalog.Products.Fields.SpecialPriceStartDateTimeUtc', N'Special price start date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (902, 1, N'Admin.Catalog.Posts.Fields.SpecialPriceStartDateTimeUtc', N'Special price start date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (903, 1, N'Admin.Catalog.Products.Fields.SpecialPriceStartDateTimeUtc.Hint', N'The start date of the special price in Coordinated Universal Time (UTC).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (903, 1, N'Admin.Catalog.Posts.Fields.SpecialPriceStartDateTimeUtc.Hint', N'The start date of the special price in Coordinated Universal Time (UTC).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (904, 1, N'Admin.Catalog.Products.Fields.StockQuantity', N'Stock quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (904, 1, N'Admin.Catalog.Posts.Fields.StockQuantity', N'Stock quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (905, 1, N'Admin.Catalog.Products.Fields.StockQuantity.Hint', N'The current stock quantity of this product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (905, 1, N'Admin.Catalog.Posts.Fields.StockQuantity.Hint', N'The current stock quantity of this Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (906, 1, N'Admin.Catalog.Products.Fields.SubjectToAcl', N'Subject to ACL')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (906, 1, N'Admin.Catalog.Posts.Fields.SubjectToAcl', N'Subject to ACL')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (907, 1, N'Admin.Catalog.Products.Fields.SubjectToAcl.Hint', N'Determines whether the product is subject to ACL (access control list).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (907, 1, N'Admin.Catalog.Posts.Fields.SubjectToAcl.Hint', N'Determines whether the Post is subject to ACL (access control list).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (908, 1, N'Admin.Catalog.Products.Fields.TaxCategory', N'Tax category')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (908, 1, N'Admin.Catalog.Posts.Fields.TaxCategory', N'Tax category')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (909, 1, N'Admin.Catalog.Products.Fields.TaxCategory.Hint', N'The tax classification for this product. You can manage product tax classifications from Configuration : Tax : Tax Classes')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (909, 1, N'Admin.Catalog.Posts.Fields.TaxCategory.Hint', N'The tax classification for this Post. You can manage Post tax classifications from Configuration : Tax : Tax Classes')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (910, 1, N'Admin.Catalog.Products.Fields.UnlimitedDownloads', N'Unlimited downloads')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (910, 1, N'Admin.Catalog.Posts.Fields.UnlimitedDownloads', N'Unlimited downloads')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (911, 1, N'Admin.Catalog.Products.Fields.UnlimitedDownloads.Hint', N'When a customer purchases a download product, they can download the item unlimited number of times.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (911, 1, N'Admin.Catalog.Posts.Fields.UnlimitedDownloads.Hint', N'When a customer purchases a download Post, they can download the item unlimited number of times.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (912, 1, N'Admin.Catalog.Products.Fields.UpdatedOn', N'Updated on')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (912, 1, N'Admin.Catalog.Posts.Fields.UpdatedOn', N'Updated on')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (913, 1, N'Admin.Catalog.Products.Fields.UpdatedOn.Hint', N'Date and time when this product was updated.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (913, 1, N'Admin.Catalog.Posts.Fields.UpdatedOn.Hint', N'Date and time when this Post was updated.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (914, 1, N'Admin.Catalog.Products.Fields.UserAgreementText', N'User agreement text')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (914, 1, N'Admin.Catalog.Posts.Fields.UserAgreementText', N'User agreement text')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (915, 1, N'Admin.Catalog.Products.Fields.UserAgreementText.Hint', N'The text of the user agreement')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (915, 1, N'Admin.Catalog.Posts.Fields.UserAgreementText.Hint', N'The text of the user agreement')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (916, 1, N'Admin.Catalog.Products.Fields.Vendor', N'Vendor')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (916, 1, N'Admin.Catalog.Posts.Fields.Vendor', N'Vendor')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (917, 1, N'Admin.Catalog.Products.Fields.Vendor.Hint', N'Choose a vendor of this product. This can be useful if you''re using multi-vendor functionality.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (917, 1, N'Admin.Catalog.Posts.Fields.Vendor.Hint', N'Choose a vendor of this Post. This can be useful if you''re using multi-vendor functionality.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (918, 1, N'Admin.Catalog.Products.Fields.Vendor.None', N'No vendor')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (918, 1, N'Admin.Catalog.Posts.Fields.Vendor.None', N'No vendor')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (919, 1, N'Admin.Catalog.Products.Fields.VisibleIndividually', N'Visible individually')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (919, 1, N'Admin.Catalog.Posts.Fields.VisibleIndividually', N'Visible individually')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (920, 1, N'Admin.Catalog.Products.Fields.VisibleIndividually.Hint', N'Check it if you want this product to be visible in catalog or search results. You can use this field (just uncheck) to hide associated products from catalog and make them accessible only from a parent "grouped" product details page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (920, 1, N'Admin.Catalog.Posts.Fields.VisibleIndividually.Hint', N'Check it if you want this Post to be visible in catalog or search results. You can use this field (just uncheck) to hide associated Posts from catalog and make them accessible only from a parent "grouped" Post details page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (921, 1, N'Admin.Catalog.Products.Fields.Warehouse', N'Warehouse')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (921, 1, N'Admin.Catalog.Posts.Fields.Warehouse', N'Warehouse')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (922, 1, N'Admin.Catalog.Products.Fields.Warehouse.Hint', N'Choose a warehouse which will be used when calculating shipping rates.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (922, 1, N'Admin.Catalog.Posts.Fields.Warehouse.Hint', N'Choose a warehouse which will be used when calculating shipping rates.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (923, 1, N'Admin.Catalog.Products.Fields.Warehouse.None', N'None')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (923, 1, N'Admin.Catalog.Posts.Fields.Warehouse.None', N'None')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (924, 1, N'Admin.Catalog.Products.Fields.Weight', N'Weight')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (924, 1, N'Admin.Catalog.Posts.Fields.Weight', N'Weight')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (925, 1, N'Admin.Catalog.Products.Fields.Weight.Hint', N'The weight of the product. Can be used in shipping calculations.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (925, 1, N'Admin.Catalog.Posts.Fields.Weight.Hint', N'The weight of the Post. Can be used in shipping calculations.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (926, 1, N'Admin.Catalog.Products.Fields.Width', N'Width')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (926, 1, N'Admin.Catalog.Posts.Fields.Width', N'Width')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (927, 1, N'Admin.Catalog.Products.Fields.Width.Hint', N'The width of the product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (927, 1, N'Admin.Catalog.Posts.Fields.Width.Hint', N'The width of the Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (928, 1, N'Admin.Catalog.Products.Imported', N'Product(s) have been imported successfully.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (928, 1, N'Admin.Catalog.Posts.Imported', N'Post(s) have been imported successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (929, 1, N'Admin.Catalog.Products.Info', N'Product Info')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (929, 1, N'Admin.Catalog.Posts.Info', N'Post Info')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (930, 1, N'Admin.Catalog.Products.List.DownloadPDF', N'Download catalog as PDF')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (930, 1, N'Admin.Catalog.Posts.List.DownloadPDF', N'Download catalog as PDF')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (931, 1, N'Admin.Catalog.Products.List.GoDirectlyToSku', N'Go directly to product SKU')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (931, 1, N'Admin.Catalog.Posts.List.GoDirectlyToSku', N'Go directly to Post SKU')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (932, 1, N'Admin.Catalog.Products.List.GoDirectlyToSku.Hint', N'Enter product SKU and click Go.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (932, 1, N'Admin.Catalog.Posts.List.GoDirectlyToSku.Hint', N'Enter Post SKU and click Go.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (933, 1, N'Admin.Catalog.Products.List.ImportFromExcelTip', N'Imported products are distinguished by SKU. If the SKU already exists, then its corresponding product will be updated.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (933, 1, N'Admin.Catalog.Posts.List.ImportFromExcelTip', N'Imported Posts are distinguished by SKU. If the SKU already exists, then its corresponding Post will be updated.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (934, 1, N'Admin.Catalog.Products.List.SearchCategory', N'Category')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (934, 1, N'Admin.Catalog.Posts.List.SearchCategory', N'Category')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (935, 1, N'Admin.Catalog.Products.List.SearchCategory.Hint', N'Search by a specific category.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (935, 1, N'Admin.Catalog.Posts.List.SearchCategory.Hint', N'Search by a specific category.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (936, 1, N'Admin.Catalog.Products.List.SearchIncludeSubCategories', N'Automatically search sub categories')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (936, 1, N'Admin.Catalog.Posts.List.SearchIncludeSubCategories', N'Automatically search sub categories')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (937, 1, N'Admin.Catalog.Products.List.SearchIncludeSubCategories.Hint', N'Check to search in sub categories.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (937, 1, N'Admin.Catalog.Posts.List.SearchIncludeSubCategories.Hint', N'Check to search in sub categories.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (938, 1, N'Admin.Catalog.Products.List.SearchManufacturer', N'Manufacturer')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (938, 1, N'Admin.Catalog.Posts.List.SearchManufacturer', N'Manufacturer')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (939, 1, N'Admin.Catalog.Products.List.SearchManufacturer.Hint', N'Search by a specific manufacturer.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (939, 1, N'Admin.Catalog.Posts.List.SearchManufacturer.Hint', N'Search by a specific manufacturer.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (940, 1, N'Admin.Catalog.Products.List.SearchProductName', N'Product name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (940, 1, N'Admin.Catalog.Posts.List.SearchPostName', N'Post name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (941, 1, N'Admin.Catalog.Products.List.SearchProductName.Hint', N'A product name.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (941, 1, N'Admin.Catalog.Posts.List.SearchPostName.Hint', N'A Post name.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (942, 1, N'Admin.Catalog.Products.List.SearchProductType', N'Product type')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (942, 1, N'Admin.Catalog.Posts.List.SearchPostType', N'Post type')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (943, 1, N'Admin.Catalog.Products.List.SearchProductType.Hint', N'Search by a product type.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (943, 1, N'Admin.Catalog.Posts.List.SearchPostType.Hint', N'Search by a Post type.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (944, 1, N'Admin.Catalog.Products.List.SearchPublished', N'Published')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (944, 1, N'Admin.Catalog.Posts.List.SearchPublished', N'Published')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (945, 1, N'Admin.Catalog.Products.List.SearchPublished.Hint', N'Search by a "Published" property.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (945, 1, N'Admin.Catalog.Posts.List.SearchPublished.Hint', N'Search by a "Published" property.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (946, 1, N'Admin.Catalog.Products.List.SearchPublished.All', N'All')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (946, 1, N'Admin.Catalog.Posts.List.SearchPublished.All', N'All')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (947, 1, N'Admin.Catalog.Products.List.SearchPublished.PublishedOnly', N'Published only')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (947, 1, N'Admin.Catalog.Posts.List.SearchPublished.PublishedOnly', N'Published only')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (948, 1, N'Admin.Catalog.Products.List.SearchPublished.UnpublishedOnly', N'Unpublished only')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (948, 1, N'Admin.Catalog.Posts.List.SearchPublished.UnpublishedOnly', N'Unpublished only')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (949, 1, N'Admin.Catalog.Products.List.SearchStore', N'Store')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (949, 1, N'Admin.Catalog.Posts.List.SearchStore', N'Store')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (950, 1, N'Admin.Catalog.Products.List.SearchStore.Hint', N'Search by a specific store.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (950, 1, N'Admin.Catalog.Posts.List.SearchStore.Hint', N'Search by a specific store.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (951, 1, N'Admin.Catalog.Products.List.SearchVendor', N'Vendor')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (951, 1, N'Admin.Catalog.Posts.List.SearchVendor', N'Vendor')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (952, 1, N'Admin.Catalog.Products.List.SearchVendor.Hint', N'Search by a specific vendor.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (952, 1, N'Admin.Catalog.Posts.List.SearchVendor.Hint', N'Search by a specific vendor.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (953, 1, N'Admin.Catalog.Products.List.SearchWarehouse', N'Warehouse')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (953, 1, N'Admin.Catalog.Posts.List.SearchWarehouse', N'Warehouse')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (954, 1, N'Admin.Catalog.Products.List.SearchWarehouse.Hint', N'Search by a specific warehouse.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (954, 1, N'Admin.Catalog.Posts.List.SearchWarehouse.Hint', N'Search by a specific warehouse.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (955, 1, N'Admin.Catalog.Products.Manage', N'Manage products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (955, 1, N'Admin.Catalog.Posts.Manage', N'Manage Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (956, 1, N'Admin.Catalog.Products.Manufacturers', N'Manufacturer mappings')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (956, 1, N'Admin.Catalog.Posts.Manufacturers', N'Manufacturer mappings')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (957, 1, N'Admin.Catalog.Products.Manufacturers.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (957, 1, N'Admin.Catalog.Posts.Manufacturers.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (958, 1, N'Admin.Catalog.Products.Manufacturers.Fields.IsFeaturedProduct', N'Is featured product?')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (958, 1, N'Admin.Catalog.Posts.Manufacturers.Fields.IsFeaturedPost', N'Is featured Post?')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (959, 1, N'Admin.Catalog.Products.Manufacturers.Fields.Manufacturer', N'Manufacturer')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (959, 1, N'Admin.Catalog.Posts.Manufacturers.Fields.Manufacturer', N'Manufacturer')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (960, 1, N'Admin.Catalog.Products.Manufacturers.NoManufacturersAvailable', N'No manufacturers available. Create at least one manufacturer before mapping.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (960, 1, N'Admin.Catalog.Posts.Manufacturers.NoManufacturersAvailable', N'No manufacturers available. Create at least one manufacturer before mapping.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (961, 1, N'Admin.Catalog.Products.Manufacturers.SaveBeforeEdit', N'You need to save the product before you can map manufacturers for this product page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (961, 1, N'Admin.Catalog.Posts.Manufacturers.SaveBeforeEdit', N'You need to save the Post before you can map manufacturers for this Post page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (962, 1, N'Admin.Catalog.Products.Pictures', N'Pictures')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (962, 1, N'Admin.Catalog.Posts.Pictures', N'Pictures')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (963, 1, N'Admin.Catalog.Products.Pictures.AddButton', N'Add product picture')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (963, 1, N'Admin.Catalog.Posts.Pictures.AddButton', N'Add Post picture')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (964, 1, N'Admin.Catalog.Products.Pictures.AddNew', N'Add a new picture')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (964, 1, N'Admin.Catalog.Posts.Pictures.AddNew', N'Add a new picture')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (965, 1, N'Admin.Catalog.Products.Pictures.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (965, 1, N'Admin.Catalog.Posts.Pictures.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (966, 1, N'Admin.Catalog.Products.Pictures.Fields.DisplayOrder.Hint', N'Display order of the picture. 1 represents the top of the list.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (966, 1, N'Admin.Catalog.Posts.Pictures.Fields.DisplayOrder.Hint', N'Display order of the picture. 1 represents the top of the list.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (967, 1, N'Admin.Catalog.Products.Pictures.Fields.OverrideAltAttribute', N'Alt')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (967, 1, N'Admin.Catalog.Posts.Pictures.Fields.OverrideAltAttribute', N'Alt')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (968, 1, N'Admin.Catalog.Products.Pictures.Fields.OverrideAltAttribute.Hint', N'Override "alt" attribute for "img" HTML element. If empty, then a default rule will be used (e.g. product name).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (968, 1, N'Admin.Catalog.Posts.Pictures.Fields.OverrideAltAttribute.Hint', N'Override "alt" attribute for "img" HTML element. If empty, then a default rule will be used (e.g. Post name).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (969, 1, N'Admin.Catalog.Products.Pictures.Fields.OverrideTitleAttribute', N'Title')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (969, 1, N'Admin.Catalog.Posts.Pictures.Fields.OverrideTitleAttribute', N'Title')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (970, 1, N'Admin.Catalog.Products.Pictures.Fields.OverrideTitleAttribute.Hint', N'Override "title" attribute for "img" HTML element. If empty, then a default rule will be used (e.g. product name).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (970, 1, N'Admin.Catalog.Posts.Pictures.Fields.OverrideTitleAttribute.Hint', N'Override "title" attribute for "img" HTML element. If empty, then a default rule will be used (e.g. Post name).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (971, 1, N'Admin.Catalog.Products.Pictures.Fields.Picture', N'Picture')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (971, 1, N'Admin.Catalog.Posts.Pictures.Fields.Picture', N'Picture')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (972, 1, N'Admin.Catalog.Products.Pictures.Fields.Picture.Hint', N'Choose a picture to upload. If the picture size exceeds your stores max image size setting, it will be automatically resized.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (972, 1, N'Admin.Catalog.Posts.Pictures.Fields.Picture.Hint', N'Choose a picture to upload. If the picture size exceeds your stores max image size setting, it will be automatically resized.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (973, 1, N'Admin.Catalog.Products.Pictures.SaveBeforeEdit', N'You need to save the product before you can upload pictures for this product page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (973, 1, N'Admin.Catalog.Posts.Pictures.SaveBeforeEdit', N'You need to save the Post before you can upload pictures for this Post page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (974, 1, N'Admin.Catalog.Products.ProductAttributes', N'Product attributes')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (974, 1, N'Admin.Catalog.Posts.PostAttributes', N'Post attributes')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (975, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations', N'Attribute combinations')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (975, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations', N'Attribute combinations')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (976, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.AddNew', N'Add combination')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (976, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.AddNew', N'Add combination')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (977, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.AddTitle', N'Select new combination and enter details below')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (977, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.AddTitle', N'Select new combination and enter details below')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (978, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Description', N'Attribute combinations are useful when your ''Manage inventory method'' is set to ''Track inventory by product attributes''')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (978, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Description', N'Attribute combinations are useful when your ''Manage inventory method'' is set to ''Track inventory by Post attributes''')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (979, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Description2', N'Also note that some attribute control types that support custom user input (e.g. file upload, textboxes, date picker) are useless with attribute combinations')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (979, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Description2', N'Also note that some attribute control types that support custom user input (e.g. file upload, textboxes, date picker) are useless with attribute combinations')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (980, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.AllowOutOfStockOrders', N'Allow out of stock')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (980, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.AllowOutOfStockOrders', N'Allow out of stock')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (981, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.AllowOutOfStockOrders.Hint', N'A value indicating whether to allow orders when out of stock.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (981, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.AllowOutOfStockOrders.Hint', N'A value indicating whether to allow orders when out of stock.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (982, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.Attributes', N'Attributes')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (982, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.Attributes', N'Attributes')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (983, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.GTIN', N'GTIN')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (983, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.GTIN', N'GTIN')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (984, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.GTIN.Hint', N'Enter global trade item number (GTIN). These identifiers include UPC (in North America), EAN (in Europe), JAN (in Japan), and ISBN (for books).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (984, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.GTIN.Hint', N'Enter global trade item number (GTIN). These identifiers include UPC (in North America), EAN (in Europe), JAN (in Japan), and ISBN (for books).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (985, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.ManufacturerPartNumber', N'Manufacturer part number')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (985, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.ManufacturerPartNumber', N'Manufacturer part number')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (986, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.ManufacturerPartNumber.Hint', N'The manufacturer''s part number for this attribute combination.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (986, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.ManufacturerPartNumber.Hint', N'The manufacturer''s part number for this attribute combination.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (987, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.NotifyAdminForQuantityBelow', N'Notify admin for quantity below')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (987, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.NotifyAdminForQuantityBelow', N'Notify admin for quantity below')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (988, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.NotifyAdminForQuantityBelow.Hint', N'When the current stock quantity falls below (reaches) this quantity, a store owner will receive a notification.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (988, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.NotifyAdminForQuantityBelow.Hint', N'When the current stock quantity falls below (reaches) this quantity, a store owner will receive a notification.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (989, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.OverriddenPrice', N'Overridden price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (989, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.OverriddenPrice', N'Overridden price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (990, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.OverriddenPrice.Hint', N'Override price for this attribute combination. This way a store owner can override the default product price when this attribute combination is added to the cart. For example, you can give a discount this way. Leave empty to ignore field. All other applied discounts will be ignored when this field is specified.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (990, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.OverriddenPrice.Hint', N'Override price for this attribute combination. This way a store owner can override the default Post price when this attribute combination is added to the cart. For example, you can give a discount this way. Leave empty to ignore field. All other applied discounts will be ignored when this field is specified.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (991, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.Sku', N'Sku')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (991, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.Sku', N'Sku')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (992, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.Sku.Hint', N'Product stock keeping unit (SKU). Your internal unique identifier that can be used to track this attribute combination.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (992, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.Sku.Hint', N'Post stock keeping unit (SKU). Your internal unique identifier that can be used to track this attribute combination.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (993, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.StockQuantity', N'Stock quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (993, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.StockQuantity', N'Stock quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (994, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.StockQuantity.Hint', N'The current stock quantity of this combination.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (994, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.Fields.StockQuantity.Hint', N'The current stock quantity of this combination.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (995, 1, N'Admin.Catalog.Products.ProductAttributes.AttributeCombinations.GenerateAll', N'Generate all possible combinations')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (995, 1, N'Admin.Catalog.Posts.PostAttributes.AttributeCombinations.GenerateAll', N'Generate all possible combinations')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (996, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes', N'Attributes')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (996, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes', N'Attributes')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (997, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Condition', N'Condition')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (997, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Condition', N'Condition')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (998, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Condition.Attributes', N'Attribute')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (998, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Condition.Attributes', N'Attribute')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (999, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Condition.Attributes.Hint', N'Choose an attribute.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (999, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Condition.Attributes.Hint', N'Choose an attribute.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1000, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Condition.Description', N'Conditional attributes appear if a previous attribute is selected, such as having an option for personalizing clothing with a name and only providing the text input box if the "Personalize" radio button is checked')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1000, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Condition.Description', N'Conditional attributes appear if a previous attribute is selected, such as having an option for personalizing clothing with a name and only providing the text input box if the "Personalize" radio button is checked')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1001, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Condition.EnableCondition', N'Enable condition')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1001, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Condition.EnableCondition', N'Enable condition')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1002, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Condition.EnableCondition.Hint', N'Check to specify a condition (depending on other attribute) when this attribute should be enabled (visible).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1002, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Condition.EnableCondition.Hint', N'Check to specify a condition (depending on other attribute) when this attribute should be enabled (visible).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1003, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Condition.ViewLink', N'View/Edit condition')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1003, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Condition.ViewLink', N'View/Edit condition')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1004, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Fields.Attribute', N'Attribute')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1004, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Fields.Attribute', N'Attribute')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1005, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Fields.AttributeControlType', N'Control type')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1005, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Fields.AttributeControlType', N'Control type')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1006, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1006, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1007, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Fields.IsRequired', N'Is Required')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1007, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Fields.IsRequired', N'Is Required')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1008, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Fields.TextPrompt', N'Text prompt')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1008, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Fields.TextPrompt', N'Text prompt')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1009, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules', N'Validation rules')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1009, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules', N'Validation rules')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1010, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.DefaultValue', N'Default value')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1010, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.DefaultValue', N'Default value')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1011, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.DefaultValue.Hint', N'Enter default value for attribute.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1011, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.DefaultValue.Hint', N'Enter default value for attribute.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1012, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.FileAllowedExtensions', N'Allowed file extensions')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1012, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.FileAllowedExtensions', N'Allowed file extensions')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1013, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.FileAllowedExtensions.Hint', N'Specify a comma-separated list of allowed file extensions. Leave empty to allow any file extension.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1013, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.FileAllowedExtensions.Hint', N'Specify a comma-separated list of allowed file extensions. Leave empty to allow any file extension.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1014, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.FileMaximumSize', N'Maximum file size (KB)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1014, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.FileMaximumSize', N'Maximum file size (KB)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1015, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.FileMaximumSize.Hint', N'Specify maximum file size in kilobytes. Leave empty to skip this validation.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1015, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.FileMaximumSize.Hint', N'Specify maximum file size in kilobytes. Leave empty to skip this validation.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1016, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.MaxLength', N'Maximum length')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1016, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.MaxLength', N'Maximum length')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1017, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.MaxLength.Hint', N'Specify maximum length. Leave empty to skip this validation.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1017, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.MaxLength.Hint', N'Specify maximum length. Leave empty to skip this validation.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1018, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.MinLength', N'Minimum length')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1018, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.MinLength', N'Minimum length')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1019, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.MinLength.Hint', N'Specify minimum length. Leave empty to skip this validation.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1019, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.MinLength.Hint', N'Specify minimum length. Leave empty to skip this validation.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1020, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.ViewLink', N'View/Edit rules')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1020, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.ValidationRules.ViewLink', N'View/Edit rules')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1021, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values', N'Values')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1021, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values', N'Values')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1022, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.AddNew', N'Add a new value')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1022, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.AddNew', N'Add a new value')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1023, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.BackToProduct', N'back to product details')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1023, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.BackToPost', N'back to Post details')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1024, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.EditAttributeDetails', N'Add/Edit values for [{0}] attribute. Product: {1}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1024, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.EditAttributeDetails', N'Add/Edit values for [{0}] attribute. Post: {1}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1025, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.EditValueDetails', N'Edit value')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1025, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.EditValueDetails', N'Edit value')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1026, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AssociatedProduct', N'Associated product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1026, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.AssociatedPost', N'Associated Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1027, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AssociatedProduct.AddNew', N'Associate a product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1027, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.AssociatedPost.AddNew', N'Associate a Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1028, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AssociatedProduct.Hint', N'Associated product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1028, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.AssociatedPost.Hint', N'Associated Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1029, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AttributeValueType', N'Attribute value type')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1029, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.AttributeValueType', N'Attribute value type')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1030, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AttributeValueType.Hint', N'Choose your attribute value type.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1030, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.AttributeValueType.Hint', N'Choose your attribute value type.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1031, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.ColorSquaresRgb', N'RGB color')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1031, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.ColorSquaresRgb', N'RGB color')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1032, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.ColorSquaresRgb.Hint', N'Choose color to be used with the color squares attribute control.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1032, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.ColorSquaresRgb.Hint', N'Choose color to be used with the color squares attribute control.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1033, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Cost', N'Cost')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1033, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Cost', N'Cost')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1034, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Cost.Hint', N'The attribute value cost is the cost of all the different components which make up this value. This may be either the purchase price if the components are bought from outside suppliers, or the combined cost of materials and manufacturing processes if the component is made in-house.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1034, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Cost.Hint', N'The attribute value cost is the cost of all the different components which make up this value. This may be either the purchase price if the components are bought from outside suppliers, or the combined cost of materials and manufacturing processes if the component is made in-house.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1035, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1035, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1036, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.DisplayOrder.Hint', N'The display order of the attribute value. 1 represents the first item in attribute value list.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1036, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.DisplayOrder.Hint', N'The display order of the attribute value. 1 represents the first item in attribute value list.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1037, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.IsPreSelected', N'Is pre-selected')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1037, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.IsPreSelected', N'Is pre-selected')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1038, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.IsPreSelected.Hint', N'Determines whether this attribute value is pre selected for the customer')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1038, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.IsPreSelected.Hint', N'Determines whether this attribute value is pre selected for the customer')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1039, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Name', N'Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1039, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Name', N'Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1040, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Name.Hint', N'The attribute value name e.g. ''Blue'' for Color attributes.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1040, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Name.Hint', N'The attribute value name e.g. ''Blue'' for Color attributes.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1041, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Name.Required', N'Please provide a name.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1041, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Name.Required', N'Please provide a name.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1042, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Picture', N'Picture')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1042, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Picture', N'Picture')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1043, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Picture.Hint', N'Choose a picture associated to this attribute value.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1043, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Picture.Hint', N'Choose a picture associated to this attribute value.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1044, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Picture.NoPicture', N'No picture')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1044, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Picture.NoPicture', N'No picture')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1045, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.PriceAdjustment', N'Price adjustment')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1045, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.PriceAdjustment', N'Price adjustment')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1046, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.PriceAdjustment.Hint', N'The price adjustment applied when choosing this attribute value e.g. ''10'' to add 10 dollars.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1046, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.PriceAdjustment.Hint', N'The price adjustment applied when choosing this attribute value e.g. ''10'' to add 10 dollars.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1047, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Quantity', N'Product quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1047, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Quantity', N'Post quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1048, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Quantity.GreaterThanOrEqualTo1', N'Quantity should be greater than or equal to 1')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1048, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Quantity.GreaterThanOrEqualTo1', N'Quantity should be greater than or equal to 1')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1049, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Quantity.Hint', N'Specify quantity of the associated product which will be added. Minimum allowed value is 1.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1049, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.Quantity.Hint', N'Specify quantity of the associated Post which will be added. Minimum allowed value is 1.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1050, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.WeightAdjustment', N'Weight adjustment')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1050, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.WeightAdjustment', N'Weight adjustment')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1051, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.WeightAdjustment.Hint', N'The weight adjustment applied when choosing this attribute value')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1051, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.Fields.WeightAdjustment.Hint', N'The weight adjustment applied when choosing this attribute value')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1052, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.TotalValues', N'Total: ')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1052, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.TotalValues', N'Total: ')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1053, 1, N'Admin.Catalog.Products.ProductAttributes.Attributes.Values.ViewLink', N'View/Edit values')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1053, 1, N'Admin.Catalog.Posts.PostAttributes.Attributes.Values.ViewLink', N'View/Edit values')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1054, 1, N'Admin.Catalog.Products.ProductAttributes.NoAttributesAvailable', N'No product attributes available. Create at least one product attribute before mapping.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1054, 1, N'Admin.Catalog.Posts.PostAttributes.NoAttributesAvailable', N'No Post attributes available. Create at least one Post attribute before mapping.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1055, 1, N'Admin.Catalog.Products.ProductAttributes.SaveBeforeEdit', N'You need to save the product before you can add attributes for this page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1055, 1, N'Admin.Catalog.Posts.PostAttributes.SaveBeforeEdit', N'You need to save the Post before you can add attributes for this page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1056, 1, N'Admin.Catalog.Products.ProductWarehouseInventory', N'Warehouses')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1056, 1, N'Admin.Catalog.Posts.PostWarehouseInventory', N'Warehouses')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1057, 1, N'Admin.Catalog.Products.ProductWarehouseInventory.Description1', N'"Stock quantity" is total quantity. It''s reduced from when a shipment is shipped.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1057, 1, N'Admin.Catalog.Posts.PostWarehouseInventory.Description1', N'"Stock quantity" is total quantity. It''s reduced from when a shipment is shipped.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1058, 1, N'Admin.Catalog.Products.ProductWarehouseInventory.Description2', N'"Reserved qty" is product quantity that is ordered but not shipped yet.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1058, 1, N'Admin.Catalog.Posts.PostWarehouseInventory.Description2', N'"Reserved qty" is Post quantity that is ordered but not shipped yet.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1059, 1, N'Admin.Catalog.Products.ProductWarehouseInventory.Description3', N'"Planned qty" is product quantity that is ordered and already added to a shipment but not shipped yet.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1059, 1, N'Admin.Catalog.Posts.PostWarehouseInventory.Description3', N'"Planned qty" is Post quantity that is ordered and already added to a shipment but not shipped yet.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1060, 1, N'Admin.Catalog.Products.ProductWarehouseInventory.Fields.PlannedQuantity', N'Planned qty')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1060, 1, N'Admin.Catalog.Posts.PostWarehouseInventory.Fields.PlannedQuantity', N'Planned qty')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1061, 1, N'Admin.Catalog.Products.ProductWarehouseInventory.Fields.ReservedQuantity', N'Reserved qty')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1061, 1, N'Admin.Catalog.Posts.PostWarehouseInventory.Fields.ReservedQuantity', N'Reserved qty')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1062, 1, N'Admin.Catalog.Products.ProductWarehouseInventory.Fields.StockQuantity', N'Stock quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1062, 1, N'Admin.Catalog.Posts.PostWarehouseInventory.Fields.StockQuantity', N'Stock quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1063, 1, N'Admin.Catalog.Products.ProductWarehouseInventory.Fields.Warehouse', N'Warehouse')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1063, 1, N'Admin.Catalog.Posts.PostWarehouseInventory.Fields.Warehouse', N'Warehouse')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1064, 1, N'Admin.Catalog.Products.ProductWarehouseInventory.Fields.Warehouse.NotDefined', N'No warehouses defined')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1064, 1, N'Admin.Catalog.Posts.PostWarehouseInventory.Fields.Warehouse.NotDefined', N'No warehouses defined')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1065, 1, N'Admin.Catalog.Products.ProductWarehouseInventory.Fields.WarehouseUsed', N'Use')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1065, 1, N'Admin.Catalog.Posts.PostWarehouseInventory.Fields.WarehouseUsed', N'Use')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1066, 1, N'Admin.Catalog.Products.ProductWarehouseInventory.Hint', N'Manage inventory per warehouse.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1066, 1, N'Admin.Catalog.Posts.PostWarehouseInventory.Hint', N'Manage inventory per warehouse.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1067, 1, N'Admin.Catalog.Products.PurchasedWithOrders', N'Purchased with orders')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1067, 1, N'Admin.Catalog.Posts.PurchasedWithOrders', N'Purchased with orders')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1068, 1, N'Admin.Catalog.Products.PurchasedWithOrders.Hint', N'Here you can see a list of orders in which this product was purchased.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1068, 1, N'Admin.Catalog.Posts.PurchasedWithOrders.Hint', N'Here you can see a list of orders in which this Post was purchased.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1069, 1, N'Admin.Catalog.Products.RelatedProducts', N'Related products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1069, 1, N'Admin.Catalog.Posts.RelatedPosts', N'Related Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1070, 1, N'Admin.Catalog.Products.RelatedProducts.AddNew', N'Add new related product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1070, 1, N'Admin.Catalog.Posts.RelatedPosts.AddNew', N'Add new related Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1071, 1, N'Admin.Catalog.Products.RelatedProducts.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1071, 1, N'Admin.Catalog.Posts.RelatedPosts.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1072, 1, N'Admin.Catalog.Products.RelatedProducts.Fields.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1072, 1, N'Admin.Catalog.Posts.RelatedPosts.Fields.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1073, 1, N'Admin.Catalog.Products.RelatedProducts.SaveBeforeEdit', N'You need to save the product before you can add related products for this product page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1073, 1, N'Admin.Catalog.Posts.RelatedPosts.SaveBeforeEdit', N'You need to save the Post before you can add related Posts for this Post page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1074, 1, N'Admin.Catalog.Products.SpecificationAttributes', N'Specification attributes')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1074, 1, N'Admin.Catalog.Posts.SpecificationAttributes', N'Specification attributes')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1075, 1, N'Admin.Catalog.Products.SpecificationAttributes.AddButton', N'Add attribute')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1075, 1, N'Admin.Catalog.Posts.SpecificationAttributes.AddButton', N'Add attribute')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1076, 1, N'Admin.Catalog.Products.SpecificationAttributes.AddNew', N'Add a new product specification attribute')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1076, 1, N'Admin.Catalog.Posts.SpecificationAttributes.AddNew', N'Add a new Post specification attribute')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1077, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.AllowFiltering', N'Allow filtering')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1077, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.AllowFiltering', N'Allow filtering')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1078, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.AllowFiltering.Hint', N'Allow product filtering by this attribute.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1078, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.AllowFiltering.Hint', N'Allow Post filtering by this attribute.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1079, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.AttributeType', N'Attribute type')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1079, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.AttributeType', N'Attribute type')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1080, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.AttributeType.Hint', N'Choose attribute type')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1080, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.AttributeType.Hint', N'Choose attribute type')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1081, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.CustomValue', N'Value')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1081, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.CustomValue', N'Value')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1082, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.CustomValue.Hint', N'Custom value (text, hyperlink, etc).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1082, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.CustomValue.Hint', N'Custom value (text, hyperlink, etc).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1083, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1083, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1084, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.DisplayOrder.Hint', N'Display order of the specification attribute. 1 represents the top of the list.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1084, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.DisplayOrder.Hint', N'Display order of the specification attribute. 1 represents the top of the list.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1085, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.ShowOnProductPage', N'Show on product page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1085, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.ShowOnPostPage', N'Show on Post page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1086, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.ShowOnProductPage.Hint', N'The value of the specification attribute. Be visible on the product page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1086, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.ShowOnPostPage.Hint', N'The value of the specification attribute. Be visible on the Post page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1087, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.SpecificationAttribute', N'Attribute')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1087, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.SpecificationAttribute', N'Attribute')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1088, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.SpecificationAttribute.Hint', N'Choose a product specification attribute. You can manage specification attributes from Catalog : Attributes : Product Specifications.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1088, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.SpecificationAttribute.Hint', N'Choose a Post specification attribute. You can manage specification attributes from Catalog : Attributes : Post Specifications.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1089, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.SpecificationAttributeOption', N'Attribute option')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1089, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.SpecificationAttributeOption', N'Attribute option')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1090, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.SpecificationAttributeOption.Hint', N'The value of the specification attribute.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1090, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.SpecificationAttributeOption.Hint', N'The value of the specification attribute.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1091, 1, N'Admin.Catalog.Products.SpecificationAttributes.Fields.Value', N'Value')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1091, 1, N'Admin.Catalog.Posts.SpecificationAttributes.Fields.Value', N'Value')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1092, 1, N'Admin.Catalog.Products.SpecificationAttributes.NoAttributes', N'No specification attributes defined.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1092, 1, N'Admin.Catalog.Posts.SpecificationAttributes.NoAttributes', N'No specification attributes defined.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1093, 1, N'Admin.Catalog.Products.SpecificationAttributes.SaveBeforeEdit', N'You need to save the product before you can add product specification attributes for this product page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1093, 1, N'Admin.Catalog.Posts.SpecificationAttributes.SaveBeforeEdit', N'You need to save the Post before you can add Post specification attributes for this Post page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1094, 1, N'Admin.Catalog.Products.Stores', N'Stores')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1094, 1, N'Admin.Catalog.Posts.Stores', N'Stores')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1095, 1, N'Admin.Catalog.Products.TierPrices', N'Tier prices')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1095, 1, N'Admin.Catalog.Posts.TierPrices', N'Tier prices')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1096, 1, N'Admin.Catalog.Products.TierPrices.Fields.CustomerRole', N'Customer role')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1096, 1, N'Admin.Catalog.Posts.TierPrices.Fields.CustomerRole', N'Customer role')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1097, 1, N'Admin.Catalog.Products.TierPrices.Fields.CustomerRole.All', N'All customer roles')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1097, 1, N'Admin.Catalog.Posts.TierPrices.Fields.CustomerRole.All', N'All customer roles')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1098, 1, N'Admin.Catalog.Products.TierPrices.Fields.Price', N'Price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1098, 1, N'Admin.Catalog.Posts.TierPrices.Fields.Price', N'Price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1099, 1, N'Admin.Catalog.Products.TierPrices.Fields.Quantity', N'Quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1099, 1, N'Admin.Catalog.Posts.TierPrices.Fields.Quantity', N'Quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1100, 1, N'Admin.Catalog.Products.TierPrices.Fields.Store', N'Store')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1100, 1, N'Admin.Catalog.Posts.TierPrices.Fields.Store', N'Store')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1101, 1, N'Admin.Catalog.Products.TierPrices.Fields.Store.All', N'All stores')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1101, 1, N'Admin.Catalog.Posts.TierPrices.Fields.Store.All', N'All stores')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1102, 1, N'Admin.Catalog.Products.TierPrices.SaveBeforeEdit', N'You need to save the product before you can add tier prices for this product page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1102, 1, N'Admin.Catalog.Posts.TierPrices.SaveBeforeEdit', N'You need to save the Post before you can add tier prices for this Post page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1103, 1, N'Admin.Catalog.Products.Updated', N'The product has been updated successfully.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1103, 1, N'Admin.Catalog.Posts.Updated', N'The Post has been updated successfully.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1104, 1, N'Admin.Catalog.ProductTags', N'Product tags')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1104, 1, N'Admin.Catalog.PostTags', N'Post tags')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1105, 1, N'Admin.Catalog.ProductTags.EditTagDetails', N'Edit product tag details')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1105, 1, N'Admin.Catalog.PostTags.EditTagDetails', N'Edit Post tag details')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1106, 1, N'Admin.Catalog.ProductTags.Fields.Name', N'Tag name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1106, 1, N'Admin.Catalog.PostTags.Fields.Name', N'Tag name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1107, 1, N'Admin.Catalog.ProductTags.Fields.Name.Hint', N'The name of the product tag.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1107, 1, N'Admin.Catalog.PostTags.Fields.Name.Hint', N'The name of the Post tag.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1108, 1, N'Admin.Catalog.ProductTags.Fields.Name.Required', N'Please provide a name.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1108, 1, N'Admin.Catalog.PostTags.Fields.Name.Required', N'Please provide a name.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1109, 1, N'Admin.Catalog.ProductTags.Fields.ProductCount', N'Tagged products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1109, 1, N'Admin.Catalog.PostTags.Fields.PostCount', N'Tagged Posts')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1110, 1, N'Admin.Common.AddNew', N'Add new')
 GO
@@ -3353,25 +3353,25 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1431, 1, N'Customer.Guest', N'Guest')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1432, 1, N'DownloadableProducts.Fields.Date', N'Date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1432, 1, N'DownloadablePosts.Fields.Date', N'Date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1433, 1, N'DownloadableProducts.Fields.Download', N'Download')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1433, 1, N'DownloadablePosts.Fields.Download', N'Download')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1434, 1, N'DownloadableProducts.Fields.Download.NA', N'n/a')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1434, 1, N'DownloadablePosts.Fields.Download.NA', N'n/a')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1435, 1, N'DownloadableProducts.Fields.DownloadLicense', N'Download license')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1435, 1, N'DownloadablePosts.Fields.DownloadLicense', N'Download license')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1436, 1, N'DownloadableProducts.Fields.Order', N'Order #')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1436, 1, N'DownloadablePosts.Fields.Order', N'Order #')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1437, 1, N'DownloadableProducts.Fields.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1437, 1, N'DownloadablePosts.Fields.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1438, 1, N'DownloadableProducts.IAgree', N'I agree')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1438, 1, N'DownloadablePosts.IAgree', N'I agree')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1439, 1, N'DownloadableProducts.NoItems', N'There are no downloadable products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1439, 1, N'DownloadablePosts.NoItems', N'There are no downloadable Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1440, 1, N'DownloadableProducts.ReachedMaximumNumber', N'You have reached maximum number of downloads {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1440, 1, N'DownloadablePosts.ReachedMaximumNumber', N'You have reached maximum number of downloads {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1441, 1, N'DownloadableProducts.UserAgreement', N'User agreement')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1441, 1, N'DownloadablePosts.UserAgreement', N'User agreement')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1442, 1, N'Enums.Nop.Core.Domain.Catalog.AttributeControlType.Checkboxes', N'Checkboxes')
 GO
@@ -3391,7 +3391,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1450, 1, N'Enums.Nop.Core.Domain.Catalog.AttributeControlType.TextBox', N'Textbox')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1451, 1, N'Enums.Nop.Core.Domain.Catalog.AttributeValueType.AssociatedToProduct', N'Associated to product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1451, 1, N'Enums.Nop.Core.Domain.Catalog.AttributeValueType.AssociatedToPost', N'Associated to Post')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1452, 1, N'Enums.Nop.Core.Domain.Catalog.AttributeValueType.Simple', N'Simple')
 GO
@@ -3419,31 +3419,31 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1464, 1, N'Enums.Nop.Core.Domain.Catalog.ManageInventoryMethod.ManageStock', N'Track inventory')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1465, 1, N'Enums.Nop.Core.Domain.Catalog.ManageInventoryMethod.ManageStockByAttributes', N'Track inventory by product attributes')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1465, 1, N'Enums.Nop.Core.Domain.Catalog.ManageInventoryMethod.ManageStockByAttributes', N'Track inventory by Post attributes')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1466, 1, N'Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.CreatedOn', N'Created on')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1466, 1, N'Enums.Nop.Core.Domain.Catalog.PostSortingEnum.CreatedOn', N'Created on')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1467, 1, N'Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.NameAsc', N'Name: A to Z')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1467, 1, N'Enums.Nop.Core.Domain.Catalog.PostSortingEnum.NameAsc', N'Name: A to Z')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1468, 1, N'Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.NameDesc', N'Name: Z to A')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1468, 1, N'Enums.Nop.Core.Domain.Catalog.PostSortingEnum.NameDesc', N'Name: Z to A')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1469, 1, N'Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.Position', N'Position')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1469, 1, N'Enums.Nop.Core.Domain.Catalog.PostSortingEnum.Position', N'Position')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1470, 1, N'Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.PriceAsc', N'Price: Low to High')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1470, 1, N'Enums.Nop.Core.Domain.Catalog.PostSortingEnum.PriceAsc', N'Price: Low to High')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1471, 1, N'Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.PriceDesc', N'Price: High to Low')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1471, 1, N'Enums.Nop.Core.Domain.Catalog.PostSortingEnum.PriceDesc', N'Price: High to Low')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1472, 1, N'Enums.Nop.Core.Domain.Catalog.ProductType.GroupedProduct', N'Grouped (product with variants)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1472, 1, N'Enums.Nop.Core.Domain.Catalog.PostType.GroupedPost', N'Grouped (Post with variants)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1473, 1, N'Enums.Nop.Core.Domain.Catalog.ProductType.SimpleProduct', N'Simple')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1473, 1, N'Enums.Nop.Core.Domain.Catalog.PostType.SimplePost', N'Simple')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1474, 1, N'Enums.Nop.Core.Domain.Catalog.RecurringProductCyclePeriod.Days', N'Days')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1474, 1, N'Enums.Nop.Core.Domain.Catalog.RecurringPostCyclePeriod.Days', N'Days')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1475, 1, N'Enums.Nop.Core.Domain.Catalog.RecurringProductCyclePeriod.Months', N'Months')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1475, 1, N'Enums.Nop.Core.Domain.Catalog.RecurringPostCyclePeriod.Months', N'Months')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1476, 1, N'Enums.Nop.Core.Domain.Catalog.RecurringProductCyclePeriod.Weeks', N'Weeks')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1476, 1, N'Enums.Nop.Core.Domain.Catalog.RecurringPostCyclePeriod.Weeks', N'Weeks')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1477, 1, N'Enums.Nop.Core.Domain.Catalog.RecurringProductCyclePeriod.Years', N'Years')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1477, 1, N'Enums.Nop.Core.Domain.Catalog.RecurringPostCyclePeriod.Years', N'Years')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1478, 1, N'Enums.Nop.Core.Domain.Catalog.RentalPricePeriod.Days', N'Days')
 GO
@@ -3497,7 +3497,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1503, 1, N'Enums.Nop.Core.Domain.Discounts.DiscountType.AssignedToShipping', N'Assigned to shipping')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1504, 1, N'Enums.Nop.Core.Domain.Discounts.DiscountType.AssignedToSkus', N'Assigned to products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1504, 1, N'Enums.Nop.Core.Domain.Discounts.DiscountType.AssignedToSkus', N'Assigned to Posts')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1505, 1, N'Enums.Nop.Core.Domain.Forums.EditorType.BBCodeEditor', N'BBCode editor')
 GO
@@ -3873,7 +3873,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1691, 1, N'HomePage', N'Home page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1692, 1, N'HomePage.Products', N'Featured products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1692, 1, N'HomePage.Posts', N'Featured Posts')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1693, 1, N'Languages', N'Languages')
 GO
@@ -3885,7 +3885,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1697, 1, N'Media.Category.ImageAlternateTextFormat', N'Picture for category {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1698, 1, N'Media.Category.ImageLinkTitleFormat', N'Show products in category {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1698, 1, N'Media.Category.ImageLinkTitleFormat', N'Show Posts in category {0}')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1699, 1, N'Media.MagnificPopup.Loading', N'Loading...')
 GO
@@ -3899,19 +3899,19 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1704, 1, N'Media.Manufacturer.ImageAlternateTextFormat', N'Picture for manufacturer {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1705, 1, N'Media.Manufacturer.ImageLinkTitleFormat', N'Show products manufactured by {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1705, 1, N'Media.Manufacturer.ImageLinkTitleFormat', N'Show Posts manufactured by {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1706, 1, N'Media.Product.ImageAlternateTextFormat', N'Picture of {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1706, 1, N'Media.Post.ImageAlternateTextFormat', N'Picture of {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1707, 1, N'Media.Product.ImageAlternateTextFormat.Details', N'Picture of {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1707, 1, N'Media.Post.ImageAlternateTextFormat.Details', N'Picture of {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1708, 1, N'Media.Product.ImageLinkTitleFormat', N'Show details for {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1708, 1, N'Media.Post.ImageLinkTitleFormat', N'Show details for {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1709, 1, N'Media.Product.ImageLinkTitleFormat.Details', N'Picture of {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1709, 1, N'Media.Post.ImageLinkTitleFormat.Details', N'Picture of {0}')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1710, 1, N'Media.Vendor.ImageAlternateTextFormat', N'Picture for vendor {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1711, 1, N'Media.Vendor.ImageLinkTitleFormat', N'Show products of vendor {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1711, 1, N'Media.Vendor.ImageLinkTitleFormat', N'Show Posts of vendor {0}')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1712, 1, N'Menu', N'Menu')
 GO
@@ -3921,21 +3921,21 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1715, 1, N'Messages.Order.PaymentMethodAdditionalFee', N'Payment method additional fee:')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1716, 1, N'Messages.Order.Product(s)', N'Product(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1716, 1, N'Messages.Order.Post(s)', N'Post(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1717, 1, N'Messages.Order.Product(s).Download', N'Download')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1717, 1, N'Messages.Order.Post(s).Download', N'Download')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1718, 1, N'Messages.Order.Product(s).License', N'Download license')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1718, 1, N'Messages.Order.Post(s).License', N'Download license')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1719, 1, N'Messages.Order.Product(s).Name', N'Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1719, 1, N'Messages.Order.Post(s).Name', N'Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1720, 1, N'Messages.Order.Product(s).Price', N'Price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1720, 1, N'Messages.Order.Post(s).Price', N'Price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1721, 1, N'Messages.Order.Product(s).Quantity', N'Quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1721, 1, N'Messages.Order.Post(s).Quantity', N'Quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1722, 1, N'Messages.Order.Product(s).SKU', N'SKU: {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1722, 1, N'Messages.Order.Post(s).SKU', N'SKU: {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1723, 1, N'Messages.Order.Product(s).Total', N'Total')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1723, 1, N'Messages.Order.Post(s).Total', N'Total')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1724, 1, N'Messages.Order.RewardPoints', N'{0} reward points:')
 GO
@@ -4047,17 +4047,17 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1778, 1, N'Order.Print', N'Print')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1779, 1, N'Order.Product(s)', N'Product(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1779, 1, N'Order.Post(s)', N'Post(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1780, 1, N'Order.Product(s).Name', N'Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1780, 1, N'Order.Post(s).Name', N'Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1781, 1, N'Order.Product(s).Price', N'Price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1781, 1, N'Order.Post(s).Price', N'Price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1782, 1, N'Order.Product(s).Quantity', N'Quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1782, 1, N'Order.Post(s).Quantity', N'Quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1783, 1, N'Order.Product(s).SKU', N'SKU')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1783, 1, N'Order.Post(s).SKU', N'SKU')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1784, 1, N'Order.Product(s).Total', N'Total')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1784, 1, N'Order.Post(s).Total', N'Total')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1785, 1, N'Order.Rental.FormattedDate', N'Start date: {0}. End date: {1}.')
 GO
@@ -4089,13 +4089,13 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1799, 1, N'Order.Shipments.Phone', N'Phone')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1800, 1, N'Order.Shipments.Product(s)', N'Shipped product(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1800, 1, N'Order.Shipments.Post(s)', N'Shipped Post(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1801, 1, N'Order.Shipments.Product(s).Name', N'Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1801, 1, N'Order.Shipments.Post(s).Name', N'Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1802, 1, N'Order.Shipments.Product(s).Quantity', N'Qty shipped')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1802, 1, N'Order.Shipments.Post(s).Quantity', N'Qty shipped')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1803, 1, N'Order.Shipments.Product(s).SKU', N'SKU')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1803, 1, N'Order.Shipments.Post(s).SKU', N'SKU')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1804, 1, N'Order.Shipments.ShippedDate', N'Date shipped')
 GO
@@ -4167,7 +4167,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1838, 1, N'PageTitle.AccountActivation', N'Account Activation')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1839, 1, N'PageTitle.AllProductTags', N'All product tags')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1839, 1, N'PageTitle.AllPostTags', N'All Post tags')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1840, 1, N'PageTitle.BackInStockSubscriptions', N'Back in stock subscriptions')
 GO
@@ -4175,7 +4175,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1842, 1, N'PageTitle.Checkout', N'Checkout')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1843, 1, N'PageTitle.CompareProducts', N'Compare Products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1843, 1, N'PageTitle.ComparePosts', N'Compare Posts')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1844, 1, N'PageTitle.ContactUs', N'Contact Us')
 GO
@@ -4187,7 +4187,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1848, 1, N'PageTitle.Manufacturers', N'Manufacturers')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1849, 1, N'PageTitle.NewProducts', N'New Products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1849, 1, N'PageTitle.NewPosts', N'New Posts')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1850, 1, N'PageTitle.NewsArchive', N'News Archive')
 GO
@@ -4199,15 +4199,15 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1854, 1, N'PageTitle.PrivateMessages', N'Private Messages')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1855, 1, N'PageTitle.ProductEmailAFriend', N'Email A Friend')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1855, 1, N'PageTitle.PostEmailAFriend', N'Email A Friend')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1856, 1, N'PageTitle.ProductReviews', N'Product Reviews')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1856, 1, N'PageTitle.PostReviews', N'Post Reviews')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1857, 1, N'PageTitle.ProductsByTag', N'Products tagged with ''{0}''')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1857, 1, N'PageTitle.PostsByTag', N'Posts tagged with ''{0}''')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1858, 1, N'PageTitle.Profile', N'Profile')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1859, 1, N'PageTitle.RecentlyViewedProducts', N'Recently Viewed Products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1859, 1, N'PageTitle.RecentlyViewedPosts', N'Recently Viewed Posts')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1860, 1, N'PageTitle.Register', N'Register')
 GO
@@ -4297,15 +4297,15 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1903, 1, N'PDFInvoice.Phone', N'Phone: {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1904, 1, N'PDFInvoice.Product(s)', N'Product(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1904, 1, N'PDFInvoice.Post(s)', N'Post(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1905, 1, N'PDFInvoice.ProductName', N'Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1905, 1, N'PDFInvoice.PostName', N'Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1906, 1, N'PDFInvoice.ProductPrice', N'Price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1906, 1, N'PDFInvoice.PostPrice', N'Price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1907, 1, N'PDFInvoice.ProductQuantity', N'Qty')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1907, 1, N'PDFInvoice.PostQuantity', N'Qty')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1908, 1, N'PDFInvoice.ProductTotal', N'Total')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1908, 1, N'PDFInvoice.PostTotal', N'Total')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1909, 1, N'PDFInvoice.RewardPoints', N'{0} reward points:')
 GO
@@ -4337,7 +4337,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1923, 1, N'PDFPackagingSlip.Phone', N'Phone: {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1924, 1, N'PDFPackagingSlip.ProductName', N'Product Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1924, 1, N'PDFPackagingSlip.PostName', N'Post Name')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1925, 1, N'PDFPackagingSlip.QTY', N'Quantity')
 GO
@@ -4347,13 +4347,13 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1928, 1, N'PDFPackagingSlip.SKU', N'SKU')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1929, 1, N'PDFProductCatalog.Price', N'Price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1929, 1, N'PDFPostCatalog.Price', N'Price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1930, 1, N'PDFProductCatalog.SKU', N'SKU')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1930, 1, N'PDFPostCatalog.SKU', N'SKU')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1931, 1, N'PDFProductCatalog.StockQuantity', N'Stock quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1931, 1, N'PDFPostCatalog.StockQuantity', N'Stock quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1932, 1, N'PDFProductCatalog.Weight', N'Weight')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1932, 1, N'PDFPostCatalog.Weight', N'Weight')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1933, 1, N'Permission.AccessAdminPanel', N'Access admin area')
 GO
@@ -4425,11 +4425,11 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1967, 1, N'Permission.ManagePolls', N'Admin area. Manage Polls')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1968, 1, N'Permission.ManageProductReviews', N'Admin area. Manage Product Reviews')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1968, 1, N'Permission.ManagePostReviews', N'Admin area. Manage Post Reviews')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1969, 1, N'Permission.ManageProducts', N'Admin area. Manage Products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1969, 1, N'Permission.ManagePosts', N'Admin area. Manage Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1970, 1, N'Permission.ManageProductTags', N'Admin area. Manage Product Tags')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1970, 1, N'Permission.ManagePostTags', N'Admin area. Manage Post Tags')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (1971, 1, N'Permission.ManageRecurringPayments', N'Admin area. Manage Recurring Payments')
 GO
@@ -4533,187 +4533,187 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2021, 1, N'PrivateMessages.YouHaveUnreadPM', N'You have {0} unread message(s) in your Inbox')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2022, 1, N'Products.AlsoPurchased', N'Customers who bought this item also bought')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2022, 1, N'Posts.AlsoPurchased', N'Customers who bought this item also bought')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2023, 1, N'Products.Availability', N'Availability')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2023, 1, N'Posts.Availability', N'Availability')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2024, 1, N'Products.Availability.Backordering', N'Out of Stock - on backorder and will be dispatched once in stock.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2024, 1, N'Posts.Availability.Backordering', N'Out of Stock - on backorder and will be dispatched once in stock.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2025, 1, N'Products.Availability.InStock', N'In stock')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2025, 1, N'Posts.Availability.InStock', N'In stock')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2026, 1, N'Products.Availability.InStockWithQuantity', N'{0} in stock')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2026, 1, N'Posts.Availability.InStockWithQuantity', N'{0} in stock')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2027, 1, N'Products.Availability.OutOfStock', N'Out of stock')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2027, 1, N'Posts.Availability.OutOfStock', N'Out of stock')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2028, 1, N'Products.BasePrice', N'equates to {0} per {1} {2}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2028, 1, N'Posts.BasePrice', N'equates to {0} per {1} {2}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2029, 1, N'Products.Breadcrumb.Top', N'Home')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2029, 1, N'Posts.Breadcrumb.Top', N'Home')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2030, 1, N'Products.CallForPrice', N'Call for pricing')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2030, 1, N'Posts.CallForPrice', N'Call for pricing')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2031, 1, N'Products.Compare', N'Compare products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2031, 1, N'Posts.Compare', N'Compare Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2032, 1, N'Products.Compare.AddToCompareList', N'Add to compare list')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2032, 1, N'Posts.Compare.AddToCompareList', N'Add to compare list')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2033, 1, N'Products.Compare.Clear', N'Clear list')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2033, 1, N'Posts.Compare.Clear', N'Clear list')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2034, 1, N'Products.Compare.FullDescription', N'Full description')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2034, 1, N'Posts.Compare.FullDescription', N'Full description')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2035, 1, N'Products.Compare.List', N'Compare products list')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2035, 1, N'Posts.Compare.List', N'Compare Posts list')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2036, 1, N'Products.Compare.Name', N'Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2036, 1, N'Posts.Compare.Name', N'Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2037, 1, N'Products.Compare.NoItems', N'You have no items to compare.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2037, 1, N'Posts.Compare.NoItems', N'You have no items to compare.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2038, 1, N'Products.Compare.Price', N'Price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2038, 1, N'Posts.Compare.Price', N'Price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2039, 1, N'Products.Compare.ShortDescription', N'Short description')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2039, 1, N'Posts.Compare.ShortDescription', N'Short description')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2040, 1, N'Products.Compare.Title', N'Compare products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2040, 1, N'Posts.Compare.Title', N'Compare Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2041, 1, N'Products.DeliveryDate', N'Delivery date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2041, 1, N'Posts.DeliveryDate', N'Delivery date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2042, 1, N'Products.Details', N'Details')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2042, 1, N'Posts.Details', N'Details')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2043, 1, N'Products.Discontinued', N'Sorry - this product is no longer available')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2043, 1, N'Posts.Discontinued', N'Sorry - this Post is no longer available')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2044, 1, N'Products.DownloadSample', N'Download sample')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2044, 1, N'Posts.DownloadSample', N'Download sample')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2045, 1, N'Products.EmailAFriend', N'Email a friend')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2045, 1, N'Posts.EmailAFriend', N'Email a friend')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2046, 1, N'Products.EmailAFriend.Button', N'Send email')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2046, 1, N'Posts.EmailAFriend.Button', N'Send email')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2047, 1, N'Products.EmailAFriend.FriendEmail', N'Friend''s email')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2047, 1, N'Posts.EmailAFriend.FriendEmail', N'Friend''s email')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2048, 1, N'Products.EmailAFriend.FriendEmail.Hint', N'Enter friend''s email')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2048, 1, N'Posts.EmailAFriend.FriendEmail.Hint', N'Enter friend''s email')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2049, 1, N'Products.EmailAFriend.FriendEmail.Required', N'Enter friend''s email')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2049, 1, N'Posts.EmailAFriend.FriendEmail.Required', N'Enter friend''s email')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2050, 1, N'Products.EmailAFriend.OnlyRegisteredUsers', N'Only registered customers can use email a friend feature')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2050, 1, N'Posts.EmailAFriend.OnlyRegisteredUsers', N'Only registered customers can use email a friend feature')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2051, 1, N'Products.EmailAFriend.PersonalMessage', N'Personal message')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2051, 1, N'Posts.EmailAFriend.PersonalMessage', N'Personal message')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2052, 1, N'Products.EmailAFriend.PersonalMessage.Hint', N'Enter personal message (optional)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2052, 1, N'Posts.EmailAFriend.PersonalMessage.Hint', N'Enter personal message (optional)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2053, 1, N'Products.EmailAFriend.SuccessfullySent', N'Your message has been sent.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2053, 1, N'Posts.EmailAFriend.SuccessfullySent', N'Your message has been sent.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2054, 1, N'Products.EmailAFriend.Title', N'Email a friend')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2054, 1, N'Posts.EmailAFriend.Title', N'Email a friend')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2055, 1, N'Products.EmailAFriend.YourEmailAddress', N'Your email address')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2055, 1, N'Posts.EmailAFriend.YourEmailAddress', N'Your email address')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2056, 1, N'Products.EmailAFriend.YourEmailAddress.Hint', N'Enter your email address')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2056, 1, N'Posts.EmailAFriend.YourEmailAddress.Hint', N'Enter your email address')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2057, 1, N'Products.EmailAFriend.YourEmailAddress.Required', N'Enter your email')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2057, 1, N'Posts.EmailAFriend.YourEmailAddress.Required', N'Enter your email')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2058, 1, N'Products.EnterProductPrice', N'Please enter your price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2058, 1, N'Posts.EnterPostPrice', N'Please enter your price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2059, 1, N'Products.EnterProductPrice.Range', N'The price must be from {0} to {1}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2059, 1, N'Posts.EnterPostPrice.Range', N'The price must be from {0} to {1}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2060, 1, N'Products.ExclTaxSuffix', N'{0} excl tax')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2060, 1, N'Posts.ExclTaxSuffix', N'{0} excl tax')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2061, 1, N'Products.FeaturedProducts', N'Featured products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2061, 1, N'Posts.FeaturedPosts', N'Featured Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2062, 1, N'Products.FreeShipping', N'Free shipping')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2062, 1, N'Posts.FreeShipping', N'Free shipping')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2063, 1, N'Products.GiftCard.Message', N'Message')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2063, 1, N'Posts.GiftCard.Message', N'Message')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2064, 1, N'Products.GiftCard.RecipientEmail', N'Recipient''s Email')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2064, 1, N'Posts.GiftCard.RecipientEmail', N'Recipient''s Email')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2065, 1, N'Products.GiftCard.RecipientName', N'Recipient''s Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2065, 1, N'Posts.GiftCard.RecipientName', N'Recipient''s Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2066, 1, N'Products.GiftCard.SenderEmail', N'Your Email')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2066, 1, N'Posts.GiftCard.SenderEmail', N'Your Email')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2067, 1, N'Products.GiftCard.SenderName', N'Your Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2067, 1, N'Posts.GiftCard.SenderName', N'Your Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2068, 1, N'Products.GTIN', N'GTIN')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2068, 1, N'Posts.GTIN', N'GTIN')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2069, 1, N'Products.InclTaxSuffix', N'{0} incl tax')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2069, 1, N'Posts.InclTaxSuffix', N'{0} incl tax')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2070, 1, N'Products.Manufacturer', N'Manufacturer')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2070, 1, N'Posts.Manufacturer', N'Manufacturer')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2071, 1, N'Products.ManufacturerPartNumber', N'Manufacturer part number')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2071, 1, N'Posts.ManufacturerPartNumber', N'Manufacturer part number')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2072, 1, N'Products.Manufacturers', N'Manufacturers')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2072, 1, N'Posts.Manufacturers', N'Manufacturers')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2073, 1, N'Products.MinimumQuantityNotification', N'This product has a minimum quantity of {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2073, 1, N'Posts.MinimumQuantityNotification', N'This Post has a minimum quantity of {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2074, 1, N'Products.NewProducts', N'New products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2074, 1, N'Posts.NewPosts', N'New Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2075, 1, N'Products.NewProducts.RSS', N'RSS')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2075, 1, N'Posts.NewPosts.RSS', N'RSS')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2076, 1, N'Products.NewProducts.RSS.Hint', N'Click here to be informed automatically when we add new items to our site')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2076, 1, N'Posts.NewPosts.RSS.Hint', N'Click here to be informed automatically when we add new items to our site')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2077, 1, N'Products.NoAssociatedProducts', N'This product is sold out')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2077, 1, N'Posts.NoAssociatedPosts', N'This Post is sold out')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2078, 1, N'Products.Price', N'Price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2078, 1, N'Posts.Price', N'Price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2079, 1, N'Products.Price.OldPrice', N'Old price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2079, 1, N'Posts.Price.OldPrice', N'Old price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2080, 1, N'Products.Price.Rental.Days', N'{0} per {1} day(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2080, 1, N'Posts.Price.Rental.Days', N'{0} per {1} day(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2081, 1, N'Products.Price.Rental.Weeks', N'{0} per {1} week(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2081, 1, N'Posts.Price.Rental.Weeks', N'{0} per {1} week(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2082, 1, N'Products.Price.Rental.Months', N'{0} per {1} month(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2082, 1, N'Posts.Price.Rental.Months', N'{0} per {1} month(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2083, 1, N'Products.Price.Rental.Years', N'{0} per {1} year(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2083, 1, N'Posts.Price.Rental.Years', N'{0} per {1} year(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2084, 1, N'Products.Price.RentalPrice', N'Rental price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2084, 1, N'Posts.Price.RentalPrice', N'Rental price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2085, 1, N'Products.Price.TaxShipping.ExclTax', N'excluding <a href="{0}">shipping</a>')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2085, 1, N'Posts.Price.TaxShipping.ExclTax', N'excluding <a href="{0}">shipping</a>')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2086, 1, N'Products.Price.TaxShipping.InclTax', N'excluding <a href="{0}">shipping</a>')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2086, 1, N'Posts.Price.TaxShipping.InclTax', N'excluding <a href="{0}">shipping</a>')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2087, 1, N'Products.Price.WithDiscount', N'Your price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2087, 1, N'Posts.Price.WithDiscount', N'Your price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2088, 1, N'Products.PriceRangeFrom', N'From {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2088, 1, N'Posts.PriceRangeFrom', N'From {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2089, 1, N'Products.ProductAttributes.PriceAdjustment', N'{0} [{1}]')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2089, 1, N'Posts.PostAttributes.PriceAdjustment', N'{0} [{1}]')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2090, 1, N'Products.ProductHasBeenAddedToCompareList', N'The product has been added to your product comparison')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2090, 1, N'Posts.PostHasBeenAddedToCompareList', N'The Post has been added to your Post comparison')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2091, 1, N'Products.ProductHasBeenAddedToCompareList.Link', N'The product has been added to your <a href="{0}">product comparison</a>')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2091, 1, N'Posts.PostHasBeenAddedToCompareList.Link', N'The Post has been added to your <a href="{0}">Post comparison</a>')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2092, 1, N'Products.ProductHasBeenAddedToTheCart', N'The product has been added to your shopping cart')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2092, 1, N'Posts.PostHasBeenAddedToTheCart', N'The Post has been added to your shopping cart')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2093, 1, N'Products.ProductHasBeenAddedToTheCart.Link', N'The product has been added to your <a href="{0}">shopping cart</a>')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2093, 1, N'Posts.PostHasBeenAddedToTheCart.Link', N'The Post has been added to your <a href="{0}">shopping cart</a>')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2094, 1, N'Products.ProductHasBeenAddedToTheWishlist', N'The product has been added to your wishlist')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2094, 1, N'Posts.PostHasBeenAddedToTheWishlist', N'The Post has been added to your wishlist')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2095, 1, N'Products.ProductHasBeenAddedToTheWishlist.Link', N'The product has been added to your <a href="{0}">wishlist</a>')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2095, 1, N'Posts.PostHasBeenAddedToTheWishlist.Link', N'The Post has been added to your <a href="{0}">wishlist</a>')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2096, 1, N'Products.Qty', N'Qty')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2096, 1, N'Posts.Qty', N'Qty')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2097, 1, N'Products.RecentlyViewedProducts', N'Recently viewed products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2097, 1, N'Posts.RecentlyViewedPosts', N'Recently viewed Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2098, 1, N'Products.RelatedProducts', N'Related products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2098, 1, N'Posts.RelatedPosts', N'Related Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2099, 1, N'Products.RentalStartDate', N'Start date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2099, 1, N'Posts.RentalStartDate', N'Start date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2100, 1, N'Products.RentalEndDate', N'End date')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2100, 1, N'Posts.RentalEndDate', N'End date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2101, 1, N'Products.Sku', N'SKU')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2101, 1, N'Posts.Sku', N'SKU')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2102, 1, N'Products.Specs', N'Products specifications')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2102, 1, N'Posts.Specs', N'Posts specifications')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2103, 1, N'Products.Tags', N'Product tags')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2103, 1, N'Posts.Tags', N'Post tags')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2104, 1, N'Products.Tags.All', N'All product tags')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2104, 1, N'Posts.Tags.All', N'All Post tags')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2105, 1, N'Products.Tags.Count', N'({0})')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2105, 1, N'Posts.Tags.Count', N'({0})')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2106, 1, N'Products.Tags.Popular', N'Popular tags')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2106, 1, N'Posts.Tags.Popular', N'Popular tags')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2107, 1, N'Products.Tags.Popular.ViewAll', N'View all')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2107, 1, N'Posts.Tags.Popular.ViewAll', N'View all')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2108, 1, N'Products.Tags.ProductsTaggedWith', N'Products tagged with ''{0}''')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2108, 1, N'Posts.Tags.PostsTaggedWith', N'Posts tagged with ''{0}''')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2109, 1, N'Products.TierPrices', N'PRICE BREAKS - The more you buy, the more you save')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2109, 1, N'Posts.TierPrices', N'PRICE BREAKS - The more you buy, the more you save')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2110, 1, N'Products.TierPrices.Price', N'Price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2110, 1, N'Posts.TierPrices.Price', N'Price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2111, 1, N'Products.TierPrices.Quantity', N'Quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2111, 1, N'Posts.TierPrices.Quantity', N'Quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2112, 1, N'Products.Vendor', N'Vendor')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2112, 1, N'Posts.Vendor', N'Vendor')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2113, 1, N'Profile.Country', N'Country')
 GO
@@ -4743,17 +4743,17 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2126, 1, N'ReturnRequests.NoItemsSubmitted', N'Your return request has not been submitted because you haven''t chosen any items.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2127, 1, N'ReturnRequests.Products.Name', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2127, 1, N'ReturnRequests.Posts.Name', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2128, 1, N'ReturnRequests.Products.Price', N'Unit price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2128, 1, N'ReturnRequests.Posts.Price', N'Unit price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2129, 1, N'ReturnRequests.Products.Quantity', N'Qty. to return')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2129, 1, N'ReturnRequests.Posts.Quantity', N'Qty. to return')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2130, 1, N'ReturnRequests.ReturnAction', N'Return action')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2131, 1, N'ReturnRequests.ReturnReason', N'Return reason')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2132, 1, N'ReturnRequests.SelectProduct(s)', N'Which items do you want to return?')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2132, 1, N'ReturnRequests.SelectPost(s)', N'Which items do you want to return?')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2133, 1, N'ReturnRequests.Submit', N'Submit return request')
 GO
@@ -4781,7 +4781,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2145, 1, N'Reviews.Fields.Title', N'Review title')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2146, 1, N'Reviews.Fields.Title.MaxLengthValidation', N'Max length of product review title is {0} chars')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2146, 1, N'Reviews.Fields.Title.MaxLengthValidation', N'Max length of Post review title is {0} chars')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2147, 1, N'Reviews.Fields.Title.Required', N'Review title is required.')
 GO
@@ -4799,17 +4799,17 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2154, 1, N'Reviews.Overview.AddNew', N'Add your review')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2155, 1, N'Reviews.Overview.First', N'Be the first to review this product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2155, 1, N'Reviews.Overview.First', N'Be the first to review this Post')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2156, 1, N'Reviews.Overview.Reviews', N'review(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2157, 1, N'Reviews.ProductReviewsFor', N'Product reviews for')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2157, 1, N'Reviews.PostReviewsFor', N'Post reviews for')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2158, 1, N'Reviews.SeeAfterApproving', N'You will see the product review after approving by a store administrator.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2158, 1, N'Reviews.SeeAfterApproving', N'You will see the Post review after approving by a store administrator.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2159, 1, N'Reviews.SubmitButton', N'Submit review')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2160, 1, N'Reviews.SuccessfullyAdded', N'Product review is successfully added.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2160, 1, N'Reviews.SuccessfullyAdded', N'Post review is successfully added.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2161, 1, N'Reviews.TotalReviews', N'{0} review(s)')
 GO
@@ -4855,7 +4855,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2182, 1, N'Search.Manufacturer', N'Manufacturer')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2183, 1, N'Search.NoResultsText', N'No products were found that matched your criteria.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2183, 1, N'Search.NoResultsText', N'No Posts were found that matched your criteria.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2184, 1, N'Search.PriceRange', N'Price range')
 GO
@@ -4865,7 +4865,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2187, 1, N'Search.SearchBox.Tooltip', N'Search store')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2188, 1, N'Search.SearchInDescriptions', N'Search In product descriptions')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2188, 1, N'Search.SearchInDescriptions', N'Search In Post descriptions')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2189, 1, N'Search.SearchTerm', N'Search keyword')
 GO
@@ -4881,15 +4881,15 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2195, 1, N'ShoppingCart.AddToWishlist', N'Add to wishlist')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2196, 1, N'ShoppingCart.AllowedQuantities', N'Allowed quantities for this product: {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2196, 1, N'ShoppingCart.AllowedQuantities', N'Allowed quantities for this Post: {0}')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2197, 1, N'ShoppingCart.AssociatedAttributeWarning', N'{0}. {1}. {2}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2198, 1, N'ShoppingCart.BuyingDisabled', N'Buying is disabled for this product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2198, 1, N'ShoppingCart.BuyingDisabled', N'Buying is disabled for this Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2199, 1, N'ShoppingCart.CannotLoadProduct', N'Product (Id={0}) cannot be loaded')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2199, 1, N'ShoppingCart.CannotLoadPost', N'Post (Id={0}) cannot be loaded')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2200, 1, N'ShoppingCart.CannotMixStandardAndAutoshipProducts', N'Your cart has standard and auto-ship (recurring) items. Only one product type is allowed per order.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2200, 1, N'ShoppingCart.CannotMixStandardAndAutoshipPosts', N'Your cart has standard and auto-ship (recurring) items. Only one Post type is allowed per order.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2201, 1, N'ShoppingCart.CartIsEmpty', N'Your Shopping Cart is empty!')
 GO
@@ -4945,7 +4945,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2227, 1, N'ShoppingCart.GiftCardCouponCode.Button', N'Add gift card')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2228, 1, N'ShoppingCart.GiftCardCouponCode.DontWorkWithAutoshipProducts', N'You cannot use gift cards with auto-ship (recurring) items.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2228, 1, N'ShoppingCart.GiftCardCouponCode.DontWorkWithAutoshipPosts', N'You cannot use gift cards with auto-ship (recurring) items.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2229, 1, N'ShoppingCart.GiftCardCouponCode.Tooltip', N'Enter gift card code')
 GO
@@ -4961,11 +4961,11 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2235, 1, N'ShoppingCart.MaximumQuantity', N'The maximum quantity allowed for purchase is {0}.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2236, 1, N'ShoppingCart.MaximumShoppingCartItems', N'The maximum number of distinct products allowed in the cart is {0}.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2236, 1, N'ShoppingCart.MaximumShoppingCartItems', N'The maximum number of distinct Posts allowed in the cart is {0}.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2237, 1, N'ShoppingCart.MaximumUploadedFileSize', N'Maximum file size is {0} KB')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2238, 1, N'ShoppingCart.MaximumWishlistItems', N'The maximum number of distinct products allowed in the wishlist is {0}.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2238, 1, N'ShoppingCart.MaximumWishlistItems', N'The maximum number of distinct Posts allowed in the wishlist is {0}.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2239, 1, N'ShoppingCart.Mini.Items', N'{0} item(s)')
 GO
@@ -4981,17 +4981,17 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2245, 1, N'ShoppingCart.MinimumQuantity', N'The minimum quantity allowed for purchase is {0}.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2246, 1, N'ShoppingCart.NotAvailable', N'Product is not available')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2246, 1, N'ShoppingCart.NotAvailable', N'Post is not available')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2247, 1, N'ShoppingCart.OutOfStock', N'Out of stock')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2248, 1, N'ShoppingCart.PreOrder', N'Pre-order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2249, 1, N'ShoppingCart.Product(s)', N'Product(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2249, 1, N'ShoppingCart.Post(s)', N'Post(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2250, 1, N'ShoppingCart.ProductDeleted', N'Product is deleted')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2250, 1, N'ShoppingCart.PostDeleted', N'Post is deleted')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2251, 1, N'ShoppingCart.ProductUnpublished', N'Product is not published')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2251, 1, N'ShoppingCart.PostUnpublished', N'Post is not published')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2252, 1, N'ShoppingCart.Quantity', N'Qty.')
 GO
@@ -5019,7 +5019,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2264, 1, N'ShoppingCart.Rental.StartDateShouldBeFuture', N'Rental start date should be the future date')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2265, 1, N'ShoppingCart.RequiredProductWarning', N'This product requires the following product is added to the cart: {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2265, 1, N'ShoppingCart.RequiredPostWarning', N'This Post requires the following Post is added to the cart: {0}')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2266, 1, N'ShoppingCart.SelectAttribute', N'Please select {0}')
 GO
@@ -5077,7 +5077,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2293, 1, N'ShoppingCart.UpdateCartItem', N'Update qty')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2294, 1, N'ShoppingCart.WishlistDisabled', N'Wishlist is disabled for this product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2294, 1, N'ShoppingCart.WishlistDisabled', N'Wishlist is disabled for this Post')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2295, 1, N'Sitemap', N'Sitemap')
 GO
@@ -5089,7 +5089,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2299, 1, N'Sitemap.Manufacturers', N'Manufacturers')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2300, 1, N'Sitemap.Products', N'Products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2300, 1, N'Sitemap.Posts', N'Posts')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2301, 1, N'StoreClosed', N'This store is currently closed')
 GO
@@ -5137,7 +5137,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2323, 1, N'Wishlist', N'Wishlist')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2324, 1, N'Wishlist.AddToCart.Error', N'Some product(s) from wishlist could not be moved to the cart for some reasons.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2324, 1, N'Wishlist.AddToCart.Error', N'Some Post(s) from wishlist could not be moved to the cart for some reasons.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2325, 1, N'Wishlist.CartIsEmpty', N'The wishlist is empty!')
 GO
@@ -5319,39 +5319,39 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2414, 1, N'Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToEmailAFriend.Hint', N'Check if you want to allow anonymous users to email a friend.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2415, 1, N'Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToReviewProduct', N'Allow anonymous users to write product reviews')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2415, 1, N'Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToReviewPost', N'Allow anonymous users to write Post reviews')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2416, 1, N'Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToReviewProduct.Hint', N'Check to allow anonymous users to write product reviews.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2416, 1, N'Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToReviewPost.Hint', N'Check to allow anonymous users to write Post reviews.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2417, 1, N'Admin.Configuration.Settings.Catalog.AllowProductSorting', N'Allow product sorting')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2417, 1, N'Admin.Configuration.Settings.Catalog.AllowPostSorting', N'Allow Post sorting')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2418, 1, N'Admin.Configuration.Settings.Catalog.AllowProductSorting.Hint', N'Check to enable product sorting option on category/manufacturer details page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2418, 1, N'Admin.Configuration.Settings.Catalog.AllowPostSorting.Hint', N'Check to enable Post sorting option on category/manufacturer details page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2419, 1, N'Admin.Configuration.Settings.Catalog.AllowProductViewModeChanging', N'Allow view mode changing')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2419, 1, N'Admin.Configuration.Settings.Catalog.AllowPostViewModeChanging', N'Allow view mode changing')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2420, 1, N'Admin.Configuration.Settings.Catalog.AllowProductViewModeChanging.Hint', N'Check to enable the option to change view mode on category/manufacturer details page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2420, 1, N'Admin.Configuration.Settings.Catalog.AllowPostViewModeChanging.Hint', N'Check to enable the option to change view mode on category/manufacturer details page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2421, 1, N'Admin.Configuration.Settings.Catalog.AllowViewUnpublishedProductPage', N'Allow viewing of unpublished product details page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2421, 1, N'Admin.Configuration.Settings.Catalog.AllowViewUnpublishedPostPage', N'Allow viewing of unpublished Post details page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2422, 1, N'Admin.Configuration.Settings.Catalog.AllowViewUnpublishedProductPage.Hint', N'Check to allow viewing of unpublished product details page. This way SEO won''t be affected by search crawlers when a product is temporary unpublished. Please note that a store owner always has access to unpublished products.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2422, 1, N'Admin.Configuration.Settings.Catalog.AllowViewUnpublishedPostPage.Hint', N'Check to allow viewing of unpublished Post details page. This way SEO won''t be affected by search crawlers when a Post is temporary unpublished. Please note that a store owner always has access to unpublished Posts.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2423, 1, N'Admin.Configuration.Settings.Catalog.CacheProductPrices', N'Cache product prices')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2423, 1, N'Admin.Configuration.Settings.Catalog.CachePostPrices', N'Cache Post prices')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2424, 1, N'Admin.Configuration.Settings.Catalog.CacheProductPrices.Hint', N'Check to cache product prices. It can significantly improve performance. But you not should enable it if you use some complex discounts, discount requirement rules, or coupon codes.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2424, 1, N'Admin.Configuration.Settings.Catalog.CachePostPrices.Hint', N'Check to cache Post prices. It can significantly improve performance. But you not should enable it if you use some complex discounts, discount requirement rules, or coupon codes.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2425, 1, N'Admin.Configuration.Settings.Catalog.CategoryBreadcrumbEnabled', N'Category breadcrumb enabled')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2426, 1, N'Admin.Configuration.Settings.Catalog.CategoryBreadcrumbEnabled.Hint', N'Check to show category breadcrumb.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2427, 1, N'Admin.Configuration.Settings.Catalog.CompareProducts', N'Compare products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2427, 1, N'Admin.Configuration.Settings.Catalog.ComparePosts', N'Compare Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2428, 1, N'Admin.Configuration.Settings.Catalog.CompareProductsEnabled', N'''Compare Products'' enabled')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2428, 1, N'Admin.Configuration.Settings.Catalog.ComparePostsEnabled', N'''Compare Posts'' enabled')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2429, 1, N'Admin.Configuration.Settings.Catalog.CompareProductsEnabled.Hint', N'Check to allow customers to use the ''Compare Products'' option in your store')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2429, 1, N'Admin.Configuration.Settings.Catalog.ComparePostsEnabled.Hint', N'Check to allow customers to use the ''Compare Posts'' option in your store')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2430, 1, N'Admin.Configuration.Settings.Catalog.DisplayDiscontinuedMessageForUnpublishedProducts', N'Discontinued message for unpublished products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2430, 1, N'Admin.Configuration.Settings.Catalog.DisplayDiscontinuedMessageForUnpublishedPosts', N'Discontinued message for unpublished Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2431, 1, N'Admin.Configuration.Settings.Catalog.DisplayDiscontinuedMessageForUnpublishedProducts.Hint', N'Check to display "a product has been discontinued" message when viewing details pages of unpublished products.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2431, 1, N'Admin.Configuration.Settings.Catalog.DisplayDiscontinuedMessageForUnpublishedPosts.Hint', N'Check to display "a Post has been discontinued" message when viewing details pages of unpublished Posts.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2432, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoFooter', N'Display tax/shipping info (footer)')
 GO
@@ -5361,13 +5361,13 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2435, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoOrderDetailsPage.Hint', N'Check to display tax and shipping info on the order details page. This option is used in Germany.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2436, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoProductBoxes', N'Display tax/shipping info (product boxes)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2436, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoPostBoxes', N'Display tax/shipping info (Post boxes)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2437, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoProductBoxes.Hint', N'Check to display tax and shipping info in product boxes (catalog pages). This option is used in Germany.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2437, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoPostBoxes.Hint', N'Check to display tax and shipping info in Post boxes (catalog pages). This option is used in Germany.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2438, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoProductDetailsPage', N'Display tax/shipping info (product details page)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2438, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoPostDetailsPage', N'Display tax/shipping info (Post details page)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2439, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoProductDetailsPage.Hint', N'Check to display tax and shipping info on product details pages. This option is used in Germany.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2439, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoPostDetailsPage.Hint', N'Check to display tax and shipping info on Post details pages. This option is used in Germany.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2440, 1, N'Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoShoppingCart', N'Display tax/shipping info (shopping cart)')
 GO
@@ -5387,9 +5387,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2448, 1, N'Admin.Configuration.Settings.Catalog.IgnoreDiscounts.Hint', N'Check to ignore discounts (sitewide). It can significantly improve performance.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2449, 1, N'Admin.Configuration.Settings.Catalog.IgnoreFeaturedProducts', N'Ignore featured products (sitewide)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2449, 1, N'Admin.Configuration.Settings.Catalog.IgnoreFeaturedPosts', N'Ignore featured Posts (sitewide)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2450, 1, N'Admin.Configuration.Settings.Catalog.IgnoreFeaturedProducts.Hint', N'Check to ignore featured products (sitewide). It can significantly improve performance.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2450, 1, N'Admin.Configuration.Settings.Catalog.IgnoreFeaturedPosts.Hint', N'Check to ignore featured Posts (sitewide). It can significantly improve performance.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2451, 1, N'Admin.Configuration.Settings.Catalog.IgnoreAcl', N'Ignore ACL rules (sitewide)')
 GO
@@ -5399,37 +5399,37 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2454, 1, N'Admin.Configuration.Settings.Catalog.IgnoreStoreLimitations.Hint', N'Check to ignore "limit per store" rules configured for entities (sitewide). Recommended to enable this setting if you have only one store or don''t use it. It can significantly improve performance.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2455, 1, N'Admin.Configuration.Settings.Catalog.IncludeFullDescriptionInCompareProducts', N'Include full description in compare products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2455, 1, N'Admin.Configuration.Settings.Catalog.IncludeFullDescriptionInComparePosts', N'Include full description in compare Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2456, 1, N'Admin.Configuration.Settings.Catalog.IncludeFullDescriptionInCompareProducts.Hint', N'Check to display product full description on the compare products page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2456, 1, N'Admin.Configuration.Settings.Catalog.IncludeFullDescriptionInComparePosts.Hint', N'Check to display Post full description on the compare Posts page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2457, 1, N'Admin.Configuration.Settings.Catalog.IncludeShortDescriptionInCompareProducts', N'Include short description in compare products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2457, 1, N'Admin.Configuration.Settings.Catalog.IncludeShortDescriptionInComparePosts', N'Include short description in compare Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2458, 1, N'Admin.Configuration.Settings.Catalog.IncludeShortDescriptionInCompareProducts.Hint', N'Check to display product short description on the compare products page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2458, 1, N'Admin.Configuration.Settings.Catalog.IncludeShortDescriptionInComparePosts.Hint', N'Check to display Post short description on the compare Posts page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2459, 1, N'Admin.Configuration.Settings.Catalog.ManufacturersBlockItemsToDisplay', N'Number of manufacturers to display')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2460, 1, N'Admin.Configuration.Settings.Catalog.ManufacturersBlockItemsToDisplay.Hint', N'Enter the number of manufacturers to display in manufacturer navigation block.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2461, 1, N'Admin.Configuration.Settings.Catalog.NotifyStoreOwnerAboutNewProductReviews', N'Notify about new product reviews')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2461, 1, N'Admin.Configuration.Settings.Catalog.NotifyStoreOwnerAboutNewPostReviews', N'Notify about new Post reviews')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2462, 1, N'Admin.Configuration.Settings.Catalog.NotifyStoreOwnerAboutNewProductReviews.Hint', N'Check to notify store owner about new product reviews.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2462, 1, N'Admin.Configuration.Settings.Catalog.NotifyStoreOwnerAboutNewPostReviews.Hint', N'Check to notify store owner about new Post reviews.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2463, 1, N'Admin.Configuration.Settings.Catalog.NewProductsEnabled', N'''New products'' page enabled')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2463, 1, N'Admin.Configuration.Settings.Catalog.NewPostsEnabled', N'''New Posts'' page enabled')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2464, 1, N'Admin.Configuration.Settings.Catalog.NewProductsEnabled.Hint', N'Check to enable the ''New products'' page in your store')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2464, 1, N'Admin.Configuration.Settings.Catalog.NewPostsEnabled.Hint', N'Check to enable the ''New Posts'' page in your store')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2465, 1, N'Admin.Configuration.Settings.Catalog.NewProductsNumber', N'Number of products on ''New products'' page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2465, 1, N'Admin.Configuration.Settings.Catalog.NewPostsNumber', N'Number of Posts on ''New Posts'' page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2466, 1, N'Admin.Configuration.Settings.Catalog.NewProductsNumber.Hint', N'The number of products to display when ''New products'' page is enabled.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2466, 1, N'Admin.Configuration.Settings.Catalog.NewPostsNumber.Hint', N'The number of Posts to display when ''New Posts'' page is enabled.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2467, 1, N'Admin.Configuration.Settings.Catalog.NumberOfBestsellersOnHomepage', N'Number of best sellers on home page')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2468, 1, N'Admin.Configuration.Settings.Catalog.NumberOfBestsellersOnHomepage.Hint', N'The number of best sellers on home page to display when ''Show best sellers on home page'' option is enabled.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2469, 1, N'Admin.Configuration.Settings.Catalog.NumberOfProductTags', N'Number of product tags (cloud)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2469, 1, N'Admin.Configuration.Settings.Catalog.NumberOfPostTags', N'Number of Post tags (cloud)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2470, 1, N'Admin.Configuration.Settings.Catalog.NumberOfProductTags.Hint', N'The number of product tags that appear in the tag cloud')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2470, 1, N'Admin.Configuration.Settings.Catalog.NumberOfPostTags.Hint', N'The number of Post tags that appear in the tag cloud')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2471, 1, N'Admin.Configuration.Settings.Catalog.PageShareCode', N'Share button code')
 GO
@@ -5437,51 +5437,51 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2473, 1, N'Admin.Configuration.Settings.Catalog.Performance', N'Performance')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2474, 1, N'Admin.Configuration.Settings.Catalog.ProductReviews', N'Product reviews')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2474, 1, N'Admin.Configuration.Settings.Catalog.PostReviews', N'Post reviews')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2475, 1, N'Admin.Configuration.Settings.Catalog.ProductReviewsMustBeApproved', N'Product reviews must be approved')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2475, 1, N'Admin.Configuration.Settings.Catalog.PostReviewsMustBeApproved', N'Post reviews must be approved')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2476, 1, N'Admin.Configuration.Settings.Catalog.ProductReviewsMustBeApproved.Hint', N'Check if product reviews must be approved by administrator.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2476, 1, N'Admin.Configuration.Settings.Catalog.PostReviewsMustBeApproved.Hint', N'Check if Post reviews must be approved by administrator.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2477, 1, N'Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedEnabled', N'''Products also purchased'' enabled')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2477, 1, N'Admin.Configuration.Settings.Catalog.PostsAlsoPurchasedEnabled', N'''Posts also purchased'' enabled')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2478, 1, N'Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedEnabled.Hint', N'Check to allow customers to view a list of products purchased by other customers who purchased the above')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2478, 1, N'Admin.Configuration.Settings.Catalog.PostsAlsoPurchasedEnabled.Hint', N'Check to allow customers to view a list of Posts purchased by other customers who purchased the above')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2479, 1, N'Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedNumber', N'Number of also purchased products to display')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2479, 1, N'Admin.Configuration.Settings.Catalog.PostsAlsoPurchasedNumber', N'Number of also purchased Posts to display')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2480, 1, N'Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedNumber.Hint', N'The number of products also purchased by other customers to display when ''Products also purchased'' option is enabled.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2480, 1, N'Admin.Configuration.Settings.Catalog.PostsAlsoPurchasedNumber.Hint', N'The number of Posts also purchased by other customers to display when ''Posts also purchased'' option is enabled.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2481, 1, N'Admin.Configuration.Settings.Catalog.ProductsByTagAllowCustomersToSelectPageSize', N'Allow customers to select ''Products by tag'' page size')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2481, 1, N'Admin.Configuration.Settings.Catalog.PostsByTagAllowCustomersToSelectPageSize', N'Allow customers to select ''Posts by tag'' page size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2482, 1, N'Admin.Configuration.Settings.Catalog.ProductsByTagAllowCustomersToSelectPageSize.Hint', N'Whether customers are allowed to select the ''Products by tag'' page size from a predefined list of options.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2482, 1, N'Admin.Configuration.Settings.Catalog.PostsByTagAllowCustomersToSelectPageSize.Hint', N'Whether customers are allowed to select the ''Posts by tag'' page size from a predefined list of options.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2483, 1, N'Admin.Configuration.Settings.Catalog.ProductsByTagPageSize', N'''Products by tag'' page. Products per page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2483, 1, N'Admin.Configuration.Settings.Catalog.PostsByTagPageSize', N'''Posts by tag'' page. Posts per page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2484, 1, N'Admin.Configuration.Settings.Catalog.ProductsByTagPageSize.Hint', N'Set the page size for products on ''Products by tag'' page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2484, 1, N'Admin.Configuration.Settings.Catalog.PostsByTagPageSize.Hint', N'Set the page size for Posts on ''Posts by tag'' page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2485, 1, N'Admin.Configuration.Settings.Catalog.ProductsByTagPageSizeOptions', N'''Products by tag'' Page Size options (comma separated)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2485, 1, N'Admin.Configuration.Settings.Catalog.PostsByTagPageSizeOptions', N'''Posts by tag'' Page Size options (comma separated)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2486, 1, N'Admin.Configuration.Settings.Catalog.ProductsByTagPageSizeOptions.Hint', N'Comma separated list of page size options (e.g. 10, 5, 15, 20). First option is the default page size if none are selected.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2486, 1, N'Admin.Configuration.Settings.Catalog.PostsByTagPageSizeOptions.Hint', N'Comma separated list of page size options (e.g. 10, 5, 15, 20). First option is the default page size if none are selected.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2487, 1, N'Admin.Configuration.Settings.Catalog.ProductSearchAutoCompleteEnabled', N'Search autocomplete enabled')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2487, 1, N'Admin.Configuration.Settings.Catalog.PostSearchAutoCompleteEnabled', N'Search autocomplete enabled')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2488, 1, N'Admin.Configuration.Settings.Catalog.ProductSearchAutoCompleteEnabled.Hint', N'Check to enabled autocomplete in the search box.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2488, 1, N'Admin.Configuration.Settings.Catalog.PostSearchAutoCompleteEnabled.Hint', N'Check to enabled autocomplete in the search box.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2489, 1, N'Admin.Configuration.Settings.Catalog.ProductSearchAutoCompleteNumberOfProducts', N'Number of ''autocomplete'' products to display')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2489, 1, N'Admin.Configuration.Settings.Catalog.PostSearchAutoCompleteNumberOfPosts', N'Number of ''autocomplete'' Posts to display')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2490, 1, N'Admin.Configuration.Settings.Catalog.ProductSearchAutoCompleteNumberOfProducts.Hint', N'Change number of visible results shown in autocomplete dropdown when searching.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2490, 1, N'Admin.Configuration.Settings.Catalog.PostSearchAutoCompleteNumberOfPosts.Hint', N'Change number of visible results shown in autocomplete dropdown when searching.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2491, 1, N'Admin.Configuration.Settings.Catalog.ProductSearchTermMinimumLength', N'Search term minimum length')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2491, 1, N'Admin.Configuration.Settings.Catalog.PostSearchTermMinimumLength', N'Search term minimum length')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2492, 1, N'Admin.Configuration.Settings.Catalog.ProductSearchTermMinimumLength.Hint', N'Specify minimum length of search term.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2492, 1, N'Admin.Configuration.Settings.Catalog.PostSearchTermMinimumLength.Hint', N'Specify minimum length of search term.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2493, 1, N'Admin.Configuration.Settings.Catalog.RecentlyViewedProductsEnabled', N'''Recently viewed products'' enabled')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2493, 1, N'Admin.Configuration.Settings.Catalog.RecentlyViewedPostsEnabled', N'''Recently viewed Posts'' enabled')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2494, 1, N'Admin.Configuration.Settings.Catalog.RecentlyViewedProductsEnabled.Hint', N'Check to allow customers to use the ''Recently viewed products'' feature in your store')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2494, 1, N'Admin.Configuration.Settings.Catalog.RecentlyViewedPostsEnabled.Hint', N'Check to allow customers to use the ''Recently viewed Posts'' feature in your store')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2495, 1, N'Admin.Configuration.Settings.Catalog.RecentlyViewedProductsNumber', N'Number of ''Recently viewed products''')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2495, 1, N'Admin.Configuration.Settings.Catalog.RecentlyViewedPostsNumber', N'Number of ''Recently viewed Posts''')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2496, 1, N'Admin.Configuration.Settings.Catalog.RecentlyViewedProductsNumber.Hint', N'The number of ''Recently viewed products'' to display when ''Recently viewed products'' option is enabled.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2496, 1, N'Admin.Configuration.Settings.Catalog.RecentlyViewedPostsNumber.Hint', N'The number of ''Recently viewed Posts'' to display when ''Recently viewed Posts'' option is enabled.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2497, 1, N'Admin.Configuration.Settings.Catalog.Search', N'Search')
 GO
@@ -5493,9 +5493,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2501, 1, N'Admin.Configuration.Settings.Catalog.SearchPagePageSizeOptions.Hint', N'Search page. Comma separated list of page size options (e.g. 10, 5, 15, 20). First option is the default page size if none are selected.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2502, 1, N'Admin.Configuration.Settings.Catalog.SearchPageProductsPerPage', N'Search page. Products per page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2502, 1, N'Admin.Configuration.Settings.Catalog.SearchPagePostsPerPage', N'Search page. Posts per page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2503, 1, N'Admin.Configuration.Settings.Catalog.SearchPageProductsPerPage.Hint', N'Set the page size for products on ''Search'' page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2503, 1, N'Admin.Configuration.Settings.Catalog.SearchPagePostsPerPage.Hint', N'Set the page size for Posts on ''Search'' page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2504, 1, N'Admin.Configuration.Settings.Catalog.Sharing', N'Sharing')
 GO
@@ -5503,17 +5503,17 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2506, 1, N'Admin.Configuration.Settings.Catalog.ShowBestsellersOnHomepage.Hint', N'Check to show best sellers on home page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2507, 1, N'Admin.Configuration.Settings.Catalog.ShowCategoryProductNumber', N'Show the number of distinct products besides each category')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2507, 1, N'Admin.Configuration.Settings.Catalog.ShowCategoryPostNumber', N'Show the number of distinct Posts besides each category')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2508, 1, N'Admin.Configuration.Settings.Catalog.ShowCategoryProductNumber.Hint', N'Check to show the number of products besides each category (category navigation block).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2508, 1, N'Admin.Configuration.Settings.Catalog.ShowCategoryPostNumber.Hint', N'Check to show the number of Posts besides each category (category navigation block).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2509, 1, N'Admin.Configuration.Settings.Catalog.ShowCategoryProductNumberIncludingSubcategories', N'Include subcategories (number of distinct products)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2509, 1, N'Admin.Configuration.Settings.Catalog.ShowCategoryPostNumberIncludingSubcategories', N'Include subcategories (number of distinct Posts)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2510, 1, N'Admin.Configuration.Settings.Catalog.ShowCategoryProductNumberIncludingSubcategories.Hint', N'Check to including when showing the number of products besides each category.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2510, 1, N'Admin.Configuration.Settings.Catalog.ShowCategoryPostNumberIncludingSubcategories.Hint', N'Check to including when showing the number of Posts besides each category.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2511, 1, N'Admin.Configuration.Settings.Catalog.ShowFreeShippingNotification', N'Show "free shipping" icon')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2512, 1, N'Admin.Configuration.Settings.Catalog.ShowFreeShippingNotification.Hint', N'Check to show "free shipping" notification for products with this option enabled.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2512, 1, N'Admin.Configuration.Settings.Catalog.ShowFreeShippingNotification.Hint', N'Check to show "free shipping" notification for Posts with this option enabled.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2513, 1, N'Admin.Configuration.Settings.Catalog.ShowGtin', N'Show GTIN')
 GO
@@ -5523,21 +5523,21 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2516, 1, N'Admin.Configuration.Settings.Catalog.ShowManufacturerPartNumber.Hint', N'Check to show manufacturer part numbers in public store.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2517, 1, N'Admin.Configuration.Settings.Catalog.ShowProductImagesInSearchAutoComplete', N'Show product images in autocomplete box')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2517, 1, N'Admin.Configuration.Settings.Catalog.ShowPostImagesInSearchAutoComplete', N'Show Post images in autocomplete box')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2518, 1, N'Admin.Configuration.Settings.Catalog.ShowProductImagesInSearchAutoComplete.Hint', N'Determines whether product images should be displayed in the autocomplete search box.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2518, 1, N'Admin.Configuration.Settings.Catalog.ShowPostImagesInSearchAutoComplete.Hint', N'Determines whether Post images should be displayed in the autocomplete search box.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2519, 1, N'Admin.Configuration.Settings.Catalog.ShowProductsFromSubcategories', N'Include products from subcategories')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2519, 1, N'Admin.Configuration.Settings.Catalog.ShowPostsFromSubcategories', N'Include Posts from subcategories')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2520, 1, N'Admin.Configuration.Settings.Catalog.ShowProductsFromSubcategories.Hint', N'Check if you want a category details page to include products from subcategories.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2520, 1, N'Admin.Configuration.Settings.Catalog.ShowPostsFromSubcategories.Hint', N'Check if you want a category details page to include Posts from subcategories.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2521, 1, N'Admin.Configuration.Settings.Catalog.ShowProductSku', N'Show SKU')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2521, 1, N'Admin.Configuration.Settings.Catalog.ShowPostSku', N'Show SKU')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2522, 1, N'Admin.Configuration.Settings.Catalog.ShowProductSku.Hint', N'Check to show product SKU in public store.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2522, 1, N'Admin.Configuration.Settings.Catalog.ShowPostSku.Hint', N'Check to show Post SKU in public store.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2523, 1, N'Admin.Configuration.Settings.Catalog.ShowShareButton', N'Show a share button')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2524, 1, N'Admin.Configuration.Settings.Catalog.ShowShareButton.Hint', N'Check to show share button on product details page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2524, 1, N'Admin.Configuration.Settings.Catalog.ShowShareButton.Hint', N'Check to show share button on Post details page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2525, 1, N'Admin.Configuration.Settings.CustomerUser', N'Customer settings')
 GO
@@ -5715,9 +5715,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2612, 1, N'Admin.Configuration.Settings.CustomerUser.HideBackInStockSubscriptionsTab.Hint', N'Check to hide ''Back in stock subscriptions'' tab on ''My account'' page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2613, 1, N'Admin.Configuration.Settings.CustomerUser.HideDownloadableProductsTab', N'Hide ''Downloadable products'' tab')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2613, 1, N'Admin.Configuration.Settings.CustomerUser.HideDownloadablePostsTab', N'Hide ''Downloadable Posts'' tab')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2614, 1, N'Admin.Configuration.Settings.CustomerUser.HideDownloadableProductsTab.Hint', N'Check to hide ''Downloadable products'' tab on ''My account'' page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2614, 1, N'Admin.Configuration.Settings.CustomerUser.HideDownloadablePostsTab.Hint', N'Check to hide ''Downloadable Posts'' tab on ''My account'' page')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2615, 1, N'Admin.Configuration.Settings.CustomerUser.HideNewsletterBlock', N'Hide newsletter box')
 GO
@@ -5793,7 +5793,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2651, 1, N'Admin.Configuration.Settings.CustomerUser.UsernamesEnabled', N'''Usernames'' enabled')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2652, 1, N'Admin.Configuration.Settings.CustomerUser.UsernamesEnabled.Hint', N'Check to use usernames for login/registration instead of emails. WARNING: not recommended to change in production environment.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2652, 1, N'Admin.Configuration.Settings.CustomerUser.UsernamesEnabled.Hint', N'Check to use usernames for login/registration instead of emails. WARNING: not recommended to change in Postion environment.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2653, 1, N'Admin.Configuration.Settings.CustomerUser.UserRegistrationType', N'Registration method')
 GO
@@ -5847,7 +5847,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2678, 1, N'Admin.Configuration.Settings.Forums.ForumEditor', N'Forum editor')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2679, 1, N'Admin.Configuration.Settings.Forums.ForumEditor.Hint', N'Forum editor type. WARNING: not recommended to change in production environment')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2679, 1, N'Admin.Configuration.Settings.Forums.ForumEditor.Hint', N'Forum editor type. WARNING: not recommended to change in Postion environment')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2680, 1, N'Admin.Configuration.Settings.Forums.ForumFeedCount', N'Forum feed count')
 GO
@@ -5927,9 +5927,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2718, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnContactUsPage.Hint', N'Check to show CAPTCHA on contact us page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2719, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailProductToFriendPage', N'Show on ''email product to a friend'' page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2719, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailPostToFriendPage', N'Show on ''email Post to a friend'' page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2720, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailProductToFriendPage.Hint', N'Check to show CAPTCHA on ''email product to a friend'' page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2720, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailPostToFriendPage.Hint', N'Check to show CAPTCHA on ''email Post to a friend'' page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2721, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailWishlistToFriendPage', N'Show on ''email wishlist to a friend'' page')
 GO
@@ -5943,9 +5943,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2726, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnNewsCommentPage.Hint', N'Check to show CAPTCHA on news page when writing a comment.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2727, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnProductReviewPage', N'Show on product reviews page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2727, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnPostReviewPage', N'Show on Post reviews page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2728, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnProductReviewPage.Hint', N'Check to show CAPTCHA on product reviews page when writing a review.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2728, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnPostReviewPage.Hint', N'Check to show CAPTCHA on Post reviews page when writing a review.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2729, 1, N'Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnRegistrationPage', N'Show on registration page')
 GO
@@ -5957,11 +5957,11 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2733, 1, N'Admin.Configuration.Settings.GeneralCommon.DefaultMetaDescription', N'Default meta description')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2734, 1, N'Admin.Configuration.Settings.GeneralCommon.DefaultMetaDescription.Hint', N'The default meta description for pages in your store. You can override this for individual categories / products / manufacturer pages.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2734, 1, N'Admin.Configuration.Settings.GeneralCommon.DefaultMetaDescription.Hint', N'The default meta description for pages in your store. You can override this for individual categories / Posts / manufacturer pages.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2735, 1, N'Admin.Configuration.Settings.GeneralCommon.DefaultMetaKeywords', N'Default meta keywords')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2736, 1, N'Admin.Configuration.Settings.GeneralCommon.DefaultMetaKeywords.Hint', N'The default meta keywords for pages in your store. You can override these for individual categories / products / manufacturer pages.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2736, 1, N'Admin.Configuration.Settings.GeneralCommon.DefaultMetaKeywords.Hint', N'The default meta keywords for pages in your store. You can override these for individual categories / Posts / manufacturer pages.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2737, 1, N'Admin.Configuration.Settings.GeneralCommon.DefaultStoreTheme', N'Default store theme')
 GO
@@ -6039,9 +6039,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2774, 1, N'Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Supported', N'Full-Text is supported by your database')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2775, 1, N'Admin.Configuration.Settings.GeneralCommon.GenerateProductMetaDescription', N'Generate product META description')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2775, 1, N'Admin.Configuration.Settings.GeneralCommon.GeneratePostMetaDescription', N'Generate Post META description')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2776, 1, N'Admin.Configuration.Settings.GeneralCommon.GenerateProductMetaDescription.Hint', N'When enabled, product META descriptions will be automatically generated (if not specified on the product details page) based on product short description.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2776, 1, N'Admin.Configuration.Settings.GeneralCommon.GeneratePostMetaDescription.Hint', N'When enabled, Post META descriptions will be automatically generated (if not specified on the Post details page) based on Post short description.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2777, 1, N'Admin.Configuration.Settings.GeneralCommon.GooglePlusLink', N'Google+ page URL')
 GO
@@ -6065,7 +6065,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2787, 1, N'Admin.Configuration.Settings.GeneralCommon.LoadAllLocalizedPropertiesOnStartup', N'Load all localized properties on startup')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2788, 1, N'Admin.Configuration.Settings.GeneralCommon.LoadAllLocalizedPropertiesOnStartup.Hint', N'When enabled, all localized properties (such as localized product properties) will be loaded on application startup. The application start will be slower, but then all pages could be opened much faster. It''s used only when you have two or more languages enabled. Not recommended to enable when you have a large catalog (several thousand localized entities).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2788, 1, N'Admin.Configuration.Settings.GeneralCommon.LoadAllLocalizedPropertiesOnStartup.Hint', N'When enabled, all localized properties (such as localized Post properties) will be loaded on application startup. The application start will be slower, but then all pages could be opened much faster. It''s used only when you have two or more languages enabled. Not recommended to enable when you have a large catalog (several thousand localized entities).')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2789, 1, N'Admin.Configuration.Settings.GeneralCommon.LoadAllUrlRecordsOnStartup', N'Load all search engine friendly names on startup')
 GO
@@ -6075,7 +6075,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2792, 1, N'Admin.Configuration.Settings.GeneralCommon.OpenGraphMetaTags', N'Open Graph META tags')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2793, 1, N'Admin.Configuration.Settings.GeneralCommon.OpenGraphMetaTags.Hint', N'Check to generate Open Graph META tags on the product details page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2793, 1, N'Admin.Configuration.Settings.GeneralCommon.OpenGraphMetaTags.Hint', N'Check to generate Open Graph META tags on the Post details page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2794, 1, N'Admin.Configuration.Settings.GeneralCommon.PageTitleSeoAdjustment', N'Page title SEO adjustment')
 GO
@@ -6127,7 +6127,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2818, 1, N'Admin.Configuration.Settings.GeneralCommon.TwitterMetaTags', N'Twitter META tags')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2819, 1, N'Admin.Configuration.Settings.GeneralCommon.TwitterMetaTags.Hint', N'Check to generate Twitter META tags on the product details page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2819, 1, N'Admin.Configuration.Settings.GeneralCommon.TwitterMetaTags.Hint', N'Check to generate Twitter META tags on the Post details page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2820, 1, N'Admin.Configuration.Settings.GeneralCommon.UseImagesForLanguageSelection', N'Use images for language selection')
 GO
@@ -6147,9 +6147,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2828, 1, N'Admin.Configuration.Settings.Media', N'Media settings')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2829, 1, N'Admin.Configuration.Settings.Media.AssociatedProductPictureSize', N'Associated product image size')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2829, 1, N'Admin.Configuration.Settings.Media.AssociatedPostPictureSize', N'Associated Post image size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2830, 1, N'Admin.Configuration.Settings.Media.AssociatedProductPictureSize.Hint', N'The default size (pixels) for associated product images (part of ''grouped'' products).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2830, 1, N'Admin.Configuration.Settings.Media.AssociatedPostPictureSize.Hint', N'The default size (pixels) for associated Post images (part of ''grouped'' Posts).')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2831, 1, N'Admin.Configuration.Settings.Media.AvatarPictureSize', N'Avatar image size')
 GO
@@ -6157,11 +6157,11 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2833, 1, N'Admin.Configuration.Settings.Media.CartThumbPictureSize', N'Cart/Wishlist thumbnail image size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2834, 1, N'Admin.Configuration.Settings.Media.CartThumbPictureSize.Hint', N'The default size (pixels) for product thumbnail images on the shopping cart and wishlist.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2834, 1, N'Admin.Configuration.Settings.Media.CartThumbPictureSize.Hint', N'The default size (pixels) for Post thumbnail images on the shopping cart and wishlist.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2835, 1, N'Admin.Configuration.Settings.Media.CategoryThumbPictureSize', N'Category thumbnail image size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2836, 1, N'Admin.Configuration.Settings.Media.CategoryThumbPictureSize.Hint', N'The default size (pixels) for product thumbnail images on category pages.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2836, 1, N'Admin.Configuration.Settings.Media.CategoryThumbPictureSize.Hint', N'The default size (pixels) for Post thumbnail images on category pages.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2837, 1, N'Admin.Configuration.Settings.Media.DefaultImageQuality', N'Default image quality (0 - 100)')
 GO
@@ -6169,7 +6169,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2839, 1, N'Admin.Configuration.Settings.Media.ManufacturerThumbPictureSize', N'Manufacturer thumbnail image size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2840, 1, N'Admin.Configuration.Settings.Media.ManufacturerThumbPictureSize.Hint', N'The default size (pixels) for product thumbnail images on manufacturer pages.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2840, 1, N'Admin.Configuration.Settings.Media.ManufacturerThumbPictureSize.Hint', N'The default size (pixels) for Post thumbnail images on manufacturer pages.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2841, 1, N'Admin.Configuration.Settings.Media.MaximumImageSize', N'Maximum image size')
 GO
@@ -6177,7 +6177,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2843, 1, N'Admin.Configuration.Settings.Media.MiniCartThumbPictureSize', N'Mini-shopping cart thumbnail image size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2844, 1, N'Admin.Configuration.Settings.Media.MiniCartThumbPictureSize.Hint', N'The default size (pixels) for product thumbnail images in the mini-shopping cart block.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2844, 1, N'Admin.Configuration.Settings.Media.MiniCartThumbPictureSize.Hint', N'The default size (pixels) for Post thumbnail images in the mini-shopping cart block.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2845, 1, N'Admin.Configuration.Settings.Media.MultipleThumbDirectories', N'Multiple thumb directories')
 GO
@@ -6195,17 +6195,17 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2852, 1, N'Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Note', N'NOTE: Do not forget to backup your database before changing this option')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2853, 1, N'Admin.Configuration.Settings.Media.ProductDetailsPictureSize', N'Product detail image size')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2853, 1, N'Admin.Configuration.Settings.Media.PostDetailsPictureSize', N'Post detail image size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2854, 1, N'Admin.Configuration.Settings.Media.ProductDetailsPictureSize.Hint', N'The default size (pixels) for product detail images.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2854, 1, N'Admin.Configuration.Settings.Media.PostDetailsPictureSize.Hint', N'The default size (pixels) for Post detail images.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2855, 1, N'Admin.Configuration.Settings.Media.ProductThumbPictureSize', N'Product thumbnail image size (catalog)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2855, 1, N'Admin.Configuration.Settings.Media.PostThumbPictureSize', N'Post thumbnail image size (catalog)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2856, 1, N'Admin.Configuration.Settings.Media.ProductThumbPictureSize.Hint', N'The default size (pixels) for product thumbnail images displayed on category or manufacturer pages.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2856, 1, N'Admin.Configuration.Settings.Media.PostThumbPictureSize.Hint', N'The default size (pixels) for Post thumbnail images displayed on category or manufacturer pages.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2857, 1, N'Admin.Configuration.Settings.Media.ProductThumbPictureSizeOnProductDetailsPage', N'Product thumbnail image size (product page)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2857, 1, N'Admin.Configuration.Settings.Media.PostThumbPictureSizeOnPostDetailsPage', N'Post thumbnail image size (Post page)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2858, 1, N'Admin.Configuration.Settings.Media.ProductThumbPictureSizeOnProductDetailsPage.Hint', N'The default size (pixels) for product thumbnail images displayed on product details page when you have more than one product image.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2858, 1, N'Admin.Configuration.Settings.Media.PostThumbPictureSizeOnPostDetailsPage.Hint', N'The default size (pixels) for Post thumbnail images displayed on Post details page when you have more than one Post image.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2859, 1, N'Admin.Configuration.Settings.Media.VendorThumbPictureSize', N'Vendor thumbnail image size')
 GO
@@ -6245,7 +6245,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2877, 1, N'Admin.Configuration.Settings.Order.AnonymousCheckoutAllowed', N'Anonymous checkout allowed')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2878, 1, N'Admin.Configuration.Settings.Order.AnonymousCheckoutAllowed.Hint', N'Check to enable anonymous checkout (customers are not required to login/register when purchasing products)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2878, 1, N'Admin.Configuration.Settings.Order.AnonymousCheckoutAllowed.Hint', N'Check to enable anonymous checkout (customers are not required to login/register when purchasing Posts)')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2879, 1, N'Admin.Configuration.Settings.Order.AttachPdfInvoiceToOrderCompletedEmail', N'Attach PDF invoice ("order completed" email)')
 GO
@@ -6301,11 +6301,11 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2905, 1, N'Admin.Configuration.Settings.Order.OnePageCheckoutDisplayOrderTotalsOnPaymentInfoTab', N'Order totals on payment info tab')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2906, 1, N'Admin.Configuration.Settings.Order.OnePageCheckoutDisplayOrderTotalsOnPaymentInfoTab.Hint', N'Check to display a product list and order totals on the payment info tab (one-page checkout).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2906, 1, N'Admin.Configuration.Settings.Order.OnePageCheckoutDisplayOrderTotalsOnPaymentInfoTab.Hint', N'Check to display a Post list and order totals on the payment info tab (one-page checkout).')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2907, 1, N'Admin.Configuration.Settings.Order.OnePageCheckoutEnabled', N'Use one page checkout')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2908, 1, N'Admin.Configuration.Settings.Order.OnePageCheckoutEnabled.Hint', N'One page checkout is a single web page your customers can use to buy a products/service from you.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2908, 1, N'Admin.Configuration.Settings.Order.OnePageCheckoutEnabled.Hint', N'One page checkout is a single web page your customers can use to buy a Posts/service from you.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2909, 1, N'Admin.Configuration.Settings.Order.OrderIdent', N'Order ID')
 GO
@@ -6415,7 +6415,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2962, 1, N'Admin.Configuration.Settings.RewardPoints.PointsAccumulatedForAllStores', N'Points accumulated for all stores')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2963, 1, N'Admin.Configuration.Settings.RewardPoints.PointsAccumulatedForAllStores.Hint', N'Check to accumulate all reward points in one balance for all stores so they can be used in any store. Otherwise, each store has its own rewards points and they can only be used in that store. WARNING: not recommended to change in production environment with several stores already created.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2963, 1, N'Admin.Configuration.Settings.RewardPoints.PointsAccumulatedForAllStores.Hint', N'Check to accumulate all reward points in one balance for all stores so they can be used in any store. Otherwise, each store has its own rewards points and they can only be used in that store. WARNING: not recommended to change in Postion environment with several stores already created.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (2964, 1, N'Admin.Configuration.Settings.RewardPoints.PointsForPurchases_Amount', N'Points for purchases')
 GO
@@ -6495,23 +6495,23 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3002, 1, N'Admin.Configuration.Settings.ShoppingCart.AllowCartItemEditing', N'Allow cart item editing')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3003, 1, N'Admin.Configuration.Settings.ShoppingCart.AllowCartItemEditing.Hint', N'Check to allow customers to edit items already placed in the cart. It could be useful when your products have attributes or any other fields entered by a customer.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3003, 1, N'Admin.Configuration.Settings.ShoppingCart.AllowCartItemEditing.Hint', N'Check to allow customers to edit items already placed in the cart. It could be useful when your Posts have attributes or any other fields entered by a customer.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3004, 1, N'Admin.Configuration.Settings.ShoppingCart.AllowOutOfStockItemsToBeAddedToWishlist', N'Allow ''out of stock'' items to be added to wishlist')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3005, 1, N'Admin.Configuration.Settings.ShoppingCart.AllowOutOfStockItemsToBeAddedToWishlist.Hint', N'Check to allow ''out of stock'' products to be added to wishlist.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3005, 1, N'Admin.Configuration.Settings.ShoppingCart.AllowOutOfStockItemsToBeAddedToWishlist.Hint', N'Check to allow ''out of stock'' Posts to be added to wishlist.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3006, 1, N'Admin.Configuration.Settings.ShoppingCart.CrossSellsNumber', N'Number of ''Cross-Sells''')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3007, 1, N'Admin.Configuration.Settings.ShoppingCart.CrossSellsNumber.Hint', N'The number of ''Cross-Sells'' to display on shopping cart page; 0 if you don''t want to load cross-sells')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3008, 1, N'Admin.Configuration.Settings.ShoppingCart.DisplayCartAfterAddingProduct', N'Display cart after adding product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3008, 1, N'Admin.Configuration.Settings.ShoppingCart.DisplayCartAfterAddingPost', N'Display cart after adding Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3009, 1, N'Admin.Configuration.Settings.ShoppingCart.DisplayCartAfterAddingProduct.Hint', N'If checked, a customer will be taken to the Shopping Cart page immediately after adding a product to their cart. If unchecked, a customer will stay on the same page that they are adding the product to the cart from.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3009, 1, N'Admin.Configuration.Settings.ShoppingCart.DisplayCartAfterAddingPost.Hint', N'If checked, a customer will be taken to the Shopping Cart page immediately after adding a Post to their cart. If unchecked, a customer will stay on the same page that they are adding the Post to the cart from.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3010, 1, N'Admin.Configuration.Settings.ShoppingCart.DisplayWishlistAfterAddingProduct', N'Display wishlist after adding product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3010, 1, N'Admin.Configuration.Settings.ShoppingCart.DisplayWishlistAfterAddingPost', N'Display wishlist after adding Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3011, 1, N'Admin.Configuration.Settings.ShoppingCart.DisplayWishlistAfterAddingProduct.Hint', N'If checked, a customer will be taken to the Wishlist page immediately after adding a product to their wishlist. If unchecked, a customer will stay on the same page that they are adding the product to the wishlist from.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3011, 1, N'Admin.Configuration.Settings.ShoppingCart.DisplayWishlistAfterAddingPost.Hint', N'If checked, a customer will be taken to the Wishlist page immediately after adding a Post to their wishlist. If unchecked, a customer will stay on the same page that they are adding the Post to the wishlist from.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3012, 1, N'Admin.Configuration.Settings.ShoppingCart.EmailWishlistEnabled', N'Allow customers to email their wishlists')
 GO
@@ -6519,23 +6519,23 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3014, 1, N'Admin.Configuration.Settings.ShoppingCart.MaximumShoppingCartItems', N'Maximum shopping cart items')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3015, 1, N'Admin.Configuration.Settings.ShoppingCart.MaximumShoppingCartItems.Hint', N'Maximum number of distinct products allowed in a shopping cart.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3015, 1, N'Admin.Configuration.Settings.ShoppingCart.MaximumShoppingCartItems.Hint', N'Maximum number of distinct Posts allowed in a shopping cart.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3016, 1, N'Admin.Configuration.Settings.ShoppingCart.MaximumWishlistItems', N'Maximum wishlist items')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3017, 1, N'Admin.Configuration.Settings.ShoppingCart.MaximumWishlistItems.Hint', N'Maximum number of distinct products allowed in a wishlist.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3017, 1, N'Admin.Configuration.Settings.ShoppingCart.MaximumWishlistItems.Hint', N'Maximum number of distinct Posts allowed in a wishlist.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3018, 1, N'Admin.Configuration.Settings.ShoppingCart.MiniShoppingCartEnabled', N'Show mini-shopping cart')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3019, 1, N'Admin.Configuration.Settings.ShoppingCart.MiniShoppingCartEnabled.Hint', N'Check to enable mini-shopping cart.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3020, 1, N'Admin.Configuration.Settings.ShoppingCart.MiniShoppingCartProductNumber', N'Mini-shopping cart product number')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3020, 1, N'Admin.Configuration.Settings.ShoppingCart.MiniShoppingCartPostNumber', N'Mini-shopping cart Post number')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3021, 1, N'Admin.Configuration.Settings.ShoppingCart.MiniShoppingCartProductNumber.Hint', N'Specify the maximum number of products which can be displayed in the mini-shopping cart block.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3021, 1, N'Admin.Configuration.Settings.ShoppingCart.MiniShoppingCartPostNumber.Hint', N'Specify the maximum number of Posts which can be displayed in the mini-shopping cart block.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3022, 1, N'Admin.Configuration.Settings.ShoppingCart.MoveItemsFromWishlistToCart', N'Move items from wishlist to cart')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3023, 1, N'Admin.Configuration.Settings.ShoppingCart.MoveItemsFromWishlistToCart.Hint', N'Check to move products from wishlist to the cart when clicking "Add to cart" button. Otherwise, they are copied.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3023, 1, N'Admin.Configuration.Settings.ShoppingCart.MoveItemsFromWishlistToCart.Hint', N'Check to move Posts from wishlist to the cart when clicking "Add to cart" button. Otherwise, they are copied.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3024, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowDiscountBox', N'Show discount box')
 GO
@@ -6545,17 +6545,17 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3027, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowGiftCardBox.Hint', N'Check if you want the gift card coupon box to be displayed on shopping cart page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3028, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowProductImagesInMiniShoppingCart', N'Show product images in mini-shopping cart')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3028, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowPostImagesInMiniShoppingCart', N'Show Post images in mini-shopping cart')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3029, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowProductImagesInMiniShoppingCart.Hint', N'Determines whether product images should be displayed in the mini-shopping cart block.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3029, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowPostImagesInMiniShoppingCart.Hint', N'Determines whether Post images should be displayed in the mini-shopping cart block.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3030, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowProductImagesOnShoppingCart', N'Show product images on cart')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3030, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowPostImagesOnShoppingCart', N'Show Post images on cart')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3031, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowProductImagesOnShoppingCart.Hint', N'Determines whether product images should be displayed in your store shopping cart.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3031, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowPostImagesOnShoppingCart.Hint', N'Determines whether Post images should be displayed in your store shopping cart.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3032, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowProductImagesOnWishList', N'Show product images on wishlist')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3032, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowPostImagesOnWishList', N'Show Post images on wishlist')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3033, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowProductImagesOnWishList.Hint', N'Determines whether product images should be displayed on customer wishlists.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3033, 1, N'Admin.Configuration.Settings.ShoppingCart.ShowPostImagesOnWishList.Hint', N'Determines whether Post images should be displayed on customer wishlists.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3034, 1, N'Admin.Configuration.Settings.StoreScope', N'Multi-store configuration for')
 GO
@@ -6665,9 +6665,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3087, 1, N'Admin.Configuration.Settings.Vendor.AllowCustomersToContactVendors.Hint', N'Check to allow customers to contact vendors.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3088, 1, N'Admin.Configuration.Settings.Vendor.ShowVendorOnProductDetailsPage', N'Show vendor on product details page')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3088, 1, N'Admin.Configuration.Settings.Vendor.ShowVendorOnPostDetailsPage', N'Show vendor on Post details page')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3089, 1, N'Admin.Configuration.Settings.Vendor.ShowVendorOnProductDetailsPage.Hint', N'Check to display a vendor name on the product details page (if associated)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3089, 1, N'Admin.Configuration.Settings.Vendor.ShowVendorOnPostDetailsPage.Hint', N'Check to display a vendor name on the Post details page (if associated)')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3090, 1, N'Admin.Configuration.Settings.Vendor.VendorsBlockItemsToDisplay', N'Number of vendors to display')
 GO
@@ -7443,7 +7443,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3476, 1, N'Admin.CurrentCarts.Customer', N'Customer')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3477, 1, N'Admin.CurrentCarts.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3477, 1, N'Admin.CurrentCarts.Post', N'Post')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3478, 1, N'Admin.CurrentCarts.Quantity', N'Quantity')
 GO
@@ -7551,15 +7551,15 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3530, 1, N'Admin.Customers.CustomerRoles.Fields.Name.Required', N'Please provide a name.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3531, 1, N'Admin.Customers.CustomerRoles.Fields.PurchasedWithProduct', N'Purchased with product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3531, 1, N'Admin.Customers.CustomerRoles.Fields.PurchasedWithPost', N'Purchased with Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3532, 1, N'Admin.Customers.CustomerRoles.Fields.PurchasedWithProduct.Choose', N'Choose product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3532, 1, N'Admin.Customers.CustomerRoles.Fields.PurchasedWithPost.Choose', N'Choose Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3533, 1, N'Admin.Customers.CustomerRoles.Fields.PurchasedWithProduct.Hint', N'A customer is added to this customer role once a specified product is purchased (paid). Please note that in case of refund or order cancellation you have to manually remove a customer from this role.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3533, 1, N'Admin.Customers.CustomerRoles.Fields.PurchasedWithPost.Hint', N'A customer is added to this customer role once a specified Post is purchased (paid). Please note that in case of refund or order cancellation you have to manually remove a customer from this role.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3534, 1, N'Admin.Customers.CustomerRoles.Fields.PurchasedWithProduct.Registered', N'You cannot specify "Purchased with product" value for "Registered" customer role')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3534, 1, N'Admin.Customers.CustomerRoles.Fields.PurchasedWithPost.Registered', N'You cannot specify "Purchased with Post" value for "Registered" customer role')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3535, 1, N'Admin.Customers.CustomerRoles.Fields.PurchasedWithProduct.Remove', N'Remove')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3535, 1, N'Admin.Customers.CustomerRoles.Fields.PurchasedWithPost.Remove', N'Remove')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3536, 1, N'Admin.Customers.CustomerRoles.Fields.SystemName', N'System name')
 GO
@@ -7617,7 +7617,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3563, 1, N'Admin.Customers.Customers.BackInStockSubscriptions.Store', N'Store')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3564, 1, N'Admin.Customers.Customers.BackInStockSubscriptions.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3564, 1, N'Admin.Customers.Customers.BackInStockSubscriptions.Post', N'Post')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3565, 1, N'Admin.Customers.Customers.BackInStockSubscriptions.CreatedOn', N'Subscribed on')
 GO
@@ -7785,7 +7785,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3647, 1, N'Admin.Customers.Customers.Fields.Vendor', N'Manager of vendor')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3648, 1, N'Admin.Customers.Customers.Fields.Vendor.Hint', N'Choose a vendor associated to this customer account. When associated this customer will be able to login to the chosen vendor portal and manage his products and orders.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3648, 1, N'Admin.Customers.Customers.Fields.Vendor.Hint', N'Choose a vendor associated to this customer account. When associated this customer will be able to login to the chosen vendor portal and manage his Posts and orders.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3649, 1, N'Admin.Customers.Customers.Fields.Vendor.None', N'Not a vendor')
 GO
@@ -7799,7 +7799,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3654, 1, N'Admin.Customers.Customers.Impersonate.Button', N'Place order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3655, 1, N'Admin.Customers.Customers.Impersonate.Description1', N'During the order placement process, you will see almost exactly what the customer would see while browsing this site, with the exception of the header menu (you will see the following text ''Impersonated as customer@email.here - finish session''). Navigate to the products the customer wants and add them to the cart exactly as the customer would, then use the ''Checkout'' button to proceed through the usual checkout process.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3655, 1, N'Admin.Customers.Customers.Impersonate.Description1', N'During the order placement process, you will see almost exactly what the customer would see while browsing this site, with the exception of the header menu (you will see the following text ''Impersonated as customer@email.here - finish session''). Navigate to the Posts the customer wants and add them to the cart exactly as the customer would, then use the ''Checkout'' button to proceed through the usual checkout process.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3656, 1, N'Admin.Customers.Customers.Impersonate.Description2', N'Note: Click ''finish session'' link in order to finish this session')
 GO
@@ -8465,9 +8465,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3987, 1, N'Admin.Orders.List.PaymentStatus.Hint', N'Search by a specific payment status e.g. Paid.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3988, 1, N'Admin.Orders.List.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3988, 1, N'Admin.Orders.List.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3989, 1, N'Admin.Orders.List.Product.Hint', N'Search by a specific product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3989, 1, N'Admin.Orders.List.Post.Hint', N'Search by a specific Post.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3990, 1, N'Admin.Orders.List.ShippingStatus', N'Shipping status')
 GO
@@ -8483,11 +8483,11 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3996, 1, N'Admin.Orders.List.Vendor', N'Vendor')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3997, 1, N'Admin.Orders.List.Vendor.Hint', N'Search by a specific vendor. You''ll see orders with products from a specified vendor.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3997, 1, N'Admin.Orders.List.Vendor.Hint', N'Search by a specific vendor. You''ll see orders with Posts from a specified vendor.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3998, 1, N'Admin.Orders.List.Warehouse', N'Warehouse')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3999, 1, N'Admin.Orders.List.Warehouse.Hint', N'Load orders with products from a specified warehouse.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (3999, 1, N'Admin.Orders.List.Warehouse.Hint', N'Load orders with Posts from a specified warehouse.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4000, 1, N'Admin.Orders.OrderNotes', N'Order notes')
 GO
@@ -8523,89 +8523,89 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4016, 1, N'Admin.Orders.PdfInvoice.Selected', N'Print PDF invoices (selected)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4017, 1, N'Admin.Orders.Products', N'Products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4017, 1, N'Admin.Orders.Posts', N'Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4018, 1, N'Admin.Orders.Products.AddNew', N'Add product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4018, 1, N'Admin.Orders.Posts.AddNew', N'Add Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4019, 1, N'Admin.Orders.Products.AddNew.BackToList', N'back to product list')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4019, 1, N'Admin.Orders.Posts.AddNew.BackToList', N'back to Post list')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4020, 1, N'Admin.Orders.Products.AddNew.BackToOrder', N'back to order details')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4020, 1, N'Admin.Orders.Posts.AddNew.BackToOrder', N'back to order details')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4021, 1, N'Admin.Orders.Products.AddNew.Name', N'Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4021, 1, N'Admin.Orders.Posts.AddNew.Name', N'Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4022, 1, N'Admin.Orders.Products.AddNew.Note1', N'Click on interested product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4022, 1, N'Admin.Orders.Posts.AddNew.Note1', N'Click on interested Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4023, 1, N'Admin.Orders.Products.AddNew.Note2', N'Do not to forget to update order totals after adding this product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4023, 1, N'Admin.Orders.Posts.AddNew.Note2', N'Do not to forget to update order totals after adding this Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4024, 1, N'Admin.Orders.Products.AddNew.Quantity', N'Quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4024, 1, N'Admin.Orders.Posts.AddNew.Quantity', N'Quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4025, 1, N'Admin.Orders.Products.AddNew.Quantity.Hint', N'Enter quantity.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4025, 1, N'Admin.Orders.Posts.AddNew.Quantity.Hint', N'Enter quantity.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4026, 1, N'Admin.Orders.Products.AddNew.SKU', N'SKU')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4026, 1, N'Admin.Orders.Posts.AddNew.SKU', N'SKU')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4027, 1, N'Admin.Orders.Products.AddNew.SubTotalExclTax', N'Total (excl tax)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4027, 1, N'Admin.Orders.Posts.AddNew.SubTotalExclTax', N'Total (excl tax)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4028, 1, N'Admin.Orders.Products.AddNew.SubTotalExclTax.Hint', N'Enter total (excl tax).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4028, 1, N'Admin.Orders.Posts.AddNew.SubTotalExclTax.Hint', N'Enter total (excl tax).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4029, 1, N'Admin.Orders.Products.AddNew.SubTotalInclTax', N'Total (incl tax)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4029, 1, N'Admin.Orders.Posts.AddNew.SubTotalInclTax', N'Total (incl tax)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4030, 1, N'Admin.Orders.Products.AddNew.SubTotalInclTax.Hint', N'Enter total (incl tax).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4030, 1, N'Admin.Orders.Posts.AddNew.SubTotalInclTax.Hint', N'Enter total (incl tax).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4031, 1, N'Admin.Orders.Products.AddNew.Title1', N'Add a new product to order #{0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4031, 1, N'Admin.Orders.Posts.AddNew.Title1', N'Add a new Post to order #{0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4032, 1, N'Admin.Orders.Products.AddNew.Title2', N'Add product ''{0}'' to order #{1}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4032, 1, N'Admin.Orders.Posts.AddNew.Title2', N'Add Post ''{0}'' to order #{1}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4033, 1, N'Admin.Orders.Products.AddNew.UnitPriceExclTax', N'Price (excl tax)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4033, 1, N'Admin.Orders.Posts.AddNew.UnitPriceExclTax', N'Price (excl tax)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4034, 1, N'Admin.Orders.Products.AddNew.UnitPriceExclTax.Hint', N'Enter product price (excl tax).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4034, 1, N'Admin.Orders.Posts.AddNew.UnitPriceExclTax.Hint', N'Enter Post price (excl tax).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4035, 1, N'Admin.Orders.Products.AddNew.UnitPriceInclTax', N'Price (incl tax)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4035, 1, N'Admin.Orders.Posts.AddNew.UnitPriceInclTax', N'Price (incl tax)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4036, 1, N'Admin.Orders.Products.AddNew.UnitPriceInclTax.Hint', N'Enter product price (incl tax).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4036, 1, N'Admin.Orders.Posts.AddNew.UnitPriceInclTax.Hint', N'Enter Post price (incl tax).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4037, 1, N'Admin.Orders.Products.Discount', N'Discount')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4037, 1, N'Admin.Orders.Posts.Discount', N'Discount')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4038, 1, N'Admin.Orders.Products.Download', N'Downloadable product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4038, 1, N'Admin.Orders.Posts.Download', N'Downloadable Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4039, 1, N'Admin.Orders.Products.Download.Activate', N'Activate')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4039, 1, N'Admin.Orders.Posts.Download.Activate', N'Activate')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4040, 1, N'Admin.Orders.Products.Download.Deactivate', N'Deactivate')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4040, 1, N'Admin.Orders.Posts.Download.Deactivate', N'Deactivate')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4041, 1, N'Admin.Orders.Products.Download.DownloadCount', N'Number of downloads: {0}')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4041, 1, N'Admin.Orders.Posts.Download.DownloadCount', N'Number of downloads: {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4042, 1, N'Admin.Orders.Products.Download.ResetDownloadCount', N'Reset')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4042, 1, N'Admin.Orders.Posts.Download.ResetDownloadCount', N'Reset')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4043, 1, N'Admin.Orders.Products.Download.ResetDownloadCount.Title', N'Click to reset download count')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4043, 1, N'Admin.Orders.Posts.Download.ResetDownloadCount.Title', N'Click to reset download count')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4044, 1, N'Admin.Orders.Products.Edit.ExclTax', N'Excl tax:')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4044, 1, N'Admin.Orders.Posts.Edit.ExclTax', N'Excl tax:')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4045, 1, N'Admin.Orders.Products.Edit.InclTax', N'Incl tax:')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4045, 1, N'Admin.Orders.Posts.Edit.InclTax', N'Incl tax:')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4046, 1, N'Admin.Orders.Products.GiftCards', N'Gift card(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4046, 1, N'Admin.Orders.Posts.GiftCards', N'Gift card(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4047, 1, N'Admin.Orders.Products.License', N'License file (optional):')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4047, 1, N'Admin.Orders.Posts.License', N'License file (optional):')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4048, 1, N'Admin.Orders.Products.License.DownloadLicense', N'Download license file')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4048, 1, N'Admin.Orders.Posts.License.DownloadLicense', N'Download license file')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4049, 1, N'Admin.Orders.Products.License.UploadFile', N'Upload license file')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4049, 1, N'Admin.Orders.Posts.License.UploadFile', N'Upload license file')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4050, 1, N'Admin.Orders.Products.Picture', N'Picture')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4050, 1, N'Admin.Orders.Posts.Picture', N'Picture')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4051, 1, N'Admin.Orders.Products.Price', N'Price')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4051, 1, N'Admin.Orders.Posts.Price', N'Price')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4052, 1, N'Admin.Orders.Products.ProductName', N'Product name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4052, 1, N'Admin.Orders.Posts.PostName', N'Post name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4053, 1, N'Admin.Orders.Products.Quantity', N'Quantity')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4053, 1, N'Admin.Orders.Posts.Quantity', N'Quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4054, 1, N'Admin.Orders.Products.RecurringPeriod', N'[Auto-ship, Every {0} {1}]')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4054, 1, N'Admin.Orders.Posts.RecurringPeriod', N'[Auto-ship, Every {0} {1}]')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4055, 1, N'Admin.Orders.Products.ReturnRequests', N'Return request(s)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4055, 1, N'Admin.Orders.Posts.ReturnRequests', N'Return request(s)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4056, 1, N'Admin.Orders.Products.SKU', N'SKU')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4056, 1, N'Admin.Orders.Posts.SKU', N'SKU')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4057, 1, N'Admin.Orders.Products.Total', N'Total')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4057, 1, N'Admin.Orders.Posts.Total', N'Total')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4058, 1, N'Admin.Orders.Products.Vendor', N'Vendor')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4058, 1, N'Admin.Orders.Posts.Vendor', N'Vendor')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4059, 1, N'Admin.Orders.Report.Profit', N'Profit')
 GO
@@ -8681,9 +8681,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4095, 1, N'Admin.Orders.Shipments.List.Warehouse', N'Warehouse')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4096, 1, N'Admin.Orders.Shipments.List.Warehouse.Hint', N'Load shipments with products from a specified warehouse.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4096, 1, N'Admin.Orders.Shipments.List.Warehouse.Hint', N'Load shipments with Posts from a specified warehouse.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4097, 1, N'Admin.Orders.Shipments.NoProductsSelected', N'No products selected')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4097, 1, N'Admin.Orders.Shipments.NoPostsSelected', N'No Posts selected')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4098, 1, N'Admin.Orders.Shipments.NoShipmentsSelected', N'No shipments selected')
 GO
@@ -8697,33 +8697,33 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4103, 1, N'Admin.Orders.Shipments.PrintPackagingSlip.Selected', N'Print packaging slips (selected)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4104, 1, N'Admin.Orders.Shipments.Products', N'Products shipped')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4104, 1, N'Admin.Orders.Shipments.Posts', N'Posts shipped')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4105, 1, N'Admin.Orders.Shipments.Products.ItemDimensions', N'Item dimensions')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4105, 1, N'Admin.Orders.Shipments.Posts.ItemDimensions', N'Item dimensions')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4106, 1, N'Admin.Orders.Shipments.Products.ItemWeight', N'Item weight')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4106, 1, N'Admin.Orders.Shipments.Posts.ItemWeight', N'Item weight')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4107, 1, N'Admin.Orders.Shipments.Products.ProductName', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4107, 1, N'Admin.Orders.Shipments.Posts.PostName', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4108, 1, N'Admin.Orders.Shipments.Products.QtyOrdered', N'Qty ordered')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4108, 1, N'Admin.Orders.Shipments.Posts.QtyOrdered', N'Qty ordered')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4109, 1, N'Admin.Orders.Shipments.Products.QtyShipped', N'Qty shipped')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4109, 1, N'Admin.Orders.Shipments.Posts.QtyShipped', N'Qty shipped')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4110, 1, N'Admin.Orders.Shipments.Products.QtyToShip', N'Qty to ship')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4110, 1, N'Admin.Orders.Shipments.Posts.QtyToShip', N'Qty to ship')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4111, 1, N'Admin.Orders.Shipments.Products.ShipSeparately', N'this product should be shipped separately!')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4111, 1, N'Admin.Orders.Shipments.Posts.ShipSeparately', N'this Post should be shipped separately!')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4112, 1, N'Admin.Orders.Shipments.Products.ShipSeparately.Warning', N'Warning: ')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4112, 1, N'Admin.Orders.Shipments.Posts.ShipSeparately.Warning', N'Warning: ')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4113, 1, N'Admin.Orders.Shipments.Products.SKU', N'SKU')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4113, 1, N'Admin.Orders.Shipments.Posts.SKU', N'SKU')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4114, 1, N'Admin.Orders.Shipments.Products.Warehouse', N'Warehouse')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4114, 1, N'Admin.Orders.Shipments.Posts.Warehouse', N'Warehouse')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4115, 1, N'Admin.Orders.Shipments.Products.Warehouse.ChooseQty', N'{0} ({1} qty in stock, {2} qty reserved, {3} qty planned)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4115, 1, N'Admin.Orders.Shipments.Posts.Warehouse.ChooseQty', N'{0} ({1} qty in stock, {2} qty reserved, {3} qty planned)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4116, 1, N'Admin.Orders.Shipments.Products.Warehouse.NotAvailabe', N'No warehouses available. You cannot ship this product.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4116, 1, N'Admin.Orders.Shipments.Posts.Warehouse.NotAvailabe', N'No warehouses available. You cannot ship this Post.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4117, 1, N'Admin.Orders.Shipments.Products.Warehouse.QuantityNotEnough', N'[Reserved - Planned] quantity value of some products are less than specified quantity to be shipped. Are you sure?')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4117, 1, N'Admin.Orders.Shipments.Posts.Warehouse.QuantityNotEnough', N'[Reserved - Planned] quantity value of some Posts are less than specified quantity to be shipped. Are you sure?')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4118, 1, N'Admin.Orders.Shipments.ShipmentStatusEvents', N'Shipment status events')
 GO
@@ -8853,13 +8853,13 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4181, 1, N'Admin.Promotions.Discounts.AppliedToManufacturers.AddNew', N'Add a new manufacturer')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4182, 1, N'Admin.Promotions.Discounts.AppliedToProducts', N'Applied to products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4182, 1, N'Admin.Promotions.Discounts.AppliedToPosts', N'Applied to Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4183, 1, N'Admin.Promotions.Discounts.AppliedToProducts.SaveBeforeEdit', N'You need to save the discount before you can add products for this discount page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4183, 1, N'Admin.Promotions.Discounts.AppliedToPosts.SaveBeforeEdit', N'You need to save the discount before you can add Posts for this discount page.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4184, 1, N'Admin.Promotions.Discounts.AppliedToProducts.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4184, 1, N'Admin.Promotions.Discounts.AppliedToPosts.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4185, 1, N'Admin.Promotions.Discounts.AppliedToProducts.AddNew', N'Add a new product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4185, 1, N'Admin.Promotions.Discounts.AppliedToPosts.AddNew', N'Add a new Post')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4186, 1, N'Admin.Promotions.Discounts.BackToList', N'back to discount list')
 GO
@@ -8911,11 +8911,11 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4210, 1, N'Admin.Promotions.Discounts.Fields.MaximumDiscountAmount', N'Maximum discount amount')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4211, 1, N'Admin.Promotions.Discounts.Fields.MaximumDiscountAmount.Hint', N'Maximum allowed discount amount. Leave empty to allow any discount amount. If you''re using "Assigned to products" discount type, then it''s applied to each product separately.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4211, 1, N'Admin.Promotions.Discounts.Fields.MaximumDiscountAmount.Hint', N'Maximum allowed discount amount. Leave empty to allow any discount amount. If you''re using "Assigned to Posts" discount type, then it''s applied to each Post separately.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4212, 1, N'Admin.Promotions.Discounts.Fields.MaximumDiscountedQuantity', N'Maximum discounted quantity')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4213, 1, N'Admin.Promotions.Discounts.Fields.MaximumDiscountedQuantity.Hint', N'Maximum product quantity which could be discounted. For example, you can have two products (the same) in the cart but only one of them will be discounted. It can be used for scenarios like "buy 2 get 1 free". Leave empty if any quantity could be discounted.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4213, 1, N'Admin.Promotions.Discounts.Fields.MaximumDiscountedQuantity.Hint', N'Maximum Post quantity which could be discounted. For example, you can have two Posts (the same) in the cart but only one of them will be discounted. It can be used for scenarios like "buy 2 get 1 free". Leave empty if any quantity could be discounted.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4214, 1, N'Admin.Promotions.Discounts.Fields.Name', N'Name')
 GO
@@ -9117,9 +9117,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4313, 1, N'Admin.ReturnRequests.Fields.Order.Hint', N'Order information.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4314, 1, N'Admin.ReturnRequests.Fields.Product', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4314, 1, N'Admin.ReturnRequests.Fields.Post', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4315, 1, N'Admin.ReturnRequests.Fields.Product.Hint', N'Product information.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4315, 1, N'Admin.ReturnRequests.Fields.Post.Hint', N'Post information.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4316, 1, N'Admin.ReturnRequests.Fields.Quantity', N'Quantity')
 GO
@@ -9259,7 +9259,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4384, 1, N'Admin.SalesReport.Incomplete.View', N'view all')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4385, 1, N'Admin.SalesReport.NeverSold', N'Products never purchased')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4385, 1, N'Admin.SalesReport.NeverSold', N'Posts never purchased')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4386, 1, N'Admin.SalesReport.NeverSold.EndDate', N'End date')
 GO
@@ -9623,17 +9623,17 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4566, 1, N'Admin.System.Templates.Manufacturer.ViewPath.Required', N'View path is required')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4567, 1, N'Admin.System.Templates.Product', N'Product templates')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4567, 1, N'Admin.System.Templates.Post', N'Post templates')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4568, 1, N'Admin.System.Templates.Product.DisplayOrder', N'Display order')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4568, 1, N'Admin.System.Templates.Post.DisplayOrder', N'Display order')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4569, 1, N'Admin.System.Templates.Product.Name', N'Name')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4569, 1, N'Admin.System.Templates.Post.Name', N'Name')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4570, 1, N'Admin.System.Templates.Product.Name.Required', N'Name is required')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4570, 1, N'Admin.System.Templates.Post.Name.Required', N'Name is required')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4571, 1, N'Admin.System.Templates.Product.ViewPath', N'View path')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4571, 1, N'Admin.System.Templates.Post.ViewPath', N'View path')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4572, 1, N'Admin.System.Templates.Product.ViewPath.Required', N'View path is required')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4572, 1, N'Admin.System.Templates.Post.ViewPath.Required', N'View path is required')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4573, 1, N'Admin.System.Templates.Topic', N'Topic templates')
 GO
@@ -9731,7 +9731,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4620, 1, N'Admin.Vendors.Fields.AssociatedCustomerEmails', N'Customers')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4621, 1, N'Admin.Vendors.Fields.AssociatedCustomerEmails.Hint', N'A list of customer accounts which could be used to manage products and orders of this vendor (have access to the vendor portal). You can associate customers to a vendor on a customer details page. If you don''t want the vendor to have access to the vendor portal, then do not associate any customer account with it.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4621, 1, N'Admin.Vendors.Fields.AssociatedCustomerEmails.Hint', N'A list of customer accounts which could be used to manage Posts and orders of this vendor (have access to the vendor portal). You can associate customers to a vendor on a customer details page. If you don''t want the vendor to have access to the vendor portal, then do not associate any customer account with it.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4622, 1, N'Admin.Vendors.Fields.AssociatedCustomerEmails.None', N'No customer account associated to this vendor.')
 GO
@@ -9769,7 +9769,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4639, 1, N'Admin.Vendors.Fields.PageSize', N'Page size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4640, 1, N'Admin.Vendors.Fields.PageSize.Hint', N'Set the page size for products in this vendor e.g. ''4'' products per page.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4640, 1, N'Admin.Vendors.Fields.PageSize.Hint', N'Set the page size for Posts in this vendor e.g. ''4'' Posts per page.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4641, 1, N'Admin.Vendors.Fields.PageSizeOptions', N'Page Size options (comma separated)')
 GO
@@ -9803,11 +9803,11 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4656, 1, N'Admin.Vendors.VendorNotes.Fields.Note.Hint', N'Enter this vendor note message.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4657, 1, N'BackInStockSubscriptions.AlreadySubscribed', N'You''re already subscribed for this product back in stock notification')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4657, 1, N'BackInStockSubscriptions.AlreadySubscribed', N'You''re already subscribed for this Post back in stock notification')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4658, 1, N'BackInStockSubscriptions.MaxSubscriptions', N'You cannot subscribe. Maximum number of allowed subscriptions is {0}')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4659, 1, N'BackInStockSubscriptions.NotAllowed', N'Subscriptions are not allowed for this product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4659, 1, N'BackInStockSubscriptions.NotAllowed', N'Subscriptions are not allowed for this Post')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4660, 1, N'BackInStockSubscriptions.NotifyMe', N'Notify me')
 GO
@@ -9817,7 +9817,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4663, 1, N'BackInStockSubscriptions.PopupTitle', N'Receive an email when this arrives in stock')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4664, 1, N'BackInStockSubscriptions.Tooltip', N'You''ll receive a onetime e-mail when this product is available for ordering again. We will not send you any other e-mails or add you to our newsletter; you will only be e-mailed about this product!')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4664, 1, N'BackInStockSubscriptions.Tooltip', N'You''ll receive a onetime e-mail when this Post is available for ordering again. We will not send you any other e-mails or add you to our newsletter; you will only be e-mailed about this Post!')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4665, 1, N'BackInStockSubscriptions.Unsubscribe', N'Unsubscribe')
 GO
@@ -9875,7 +9875,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4692, 1, N'Categories.Breadcrumb.Top', N'Home')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4693, 1, N'Categories.TotalProducts', N'({0})')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4693, 1, N'Categories.TotalPosts', N'({0})')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4694, 1, N'Checkout', N'Checkout')
 GO
@@ -10135,21 +10135,21 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4822, 1, N'Plugins.DiscountRules.HadSpentAmount.NotEnough', N'Sorry, this offer requires more money spent (previously placed orders)')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4823, 1, N'Plugins.DiscountRules.HasAllProducts.Fields.Products', N'Restricted products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4823, 1, N'Plugins.DiscountRules.HasAllPosts.Fields.Posts', N'Restricted Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4824, 1, N'Plugins.DiscountRules.HasAllProducts.Fields.Products.Hint', N'The comma-separated list of product identifiers (e.g. 77, 123, 156). You can find a product ID on its details page. You can also specify the comma-separated list of product identifiers with quantities ({Product ID}:{Quantity}. for example, 77:1, 123:2, 156:3). And you can also specify the comma-separated list of product identifiers with quantity range ({Product ID}:{Min quantity}-{Max quantity}. for example, 77:1-3, 123:2-5, 156:3-8).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4824, 1, N'Plugins.DiscountRules.HasAllPosts.Fields.Posts.Hint', N'The comma-separated list of Post identifiers (e.g. 77, 123, 156). You can find a Post ID on its details page. You can also specify the comma-separated list of Post identifiers with quantities ({Post ID}:{Quantity}. for example, 77:1, 123:2, 156:3). And you can also specify the comma-separated list of Post identifiers with quantity range ({Post ID}:{Min quantity}-{Max quantity}. for example, 77:1-3, 123:2-5, 156:3-8).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4825, 1, N'Plugins.DiscountRules.HasAllProducts.Fields.Products.AddNew', N'Add product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4825, 1, N'Plugins.DiscountRules.HasAllPosts.Fields.Posts.AddNew', N'Add Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4826, 1, N'Plugins.DiscountRules.HasAllProducts.Fields.Products.Choose', N'Choose')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4826, 1, N'Plugins.DiscountRules.HasAllPosts.Fields.Posts.Choose', N'Choose')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4827, 1, N'Plugins.DiscountRules.HasOneProduct.Fields.Products', N'Restricted products')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4827, 1, N'Plugins.DiscountRules.HasOnePost.Fields.Posts', N'Restricted Posts')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4828, 1, N'Plugins.DiscountRules.HasOneProduct.Fields.Products.Hint', N'The comma-separated list of product identifiers (e.g. 77, 123, 156). You can find a product ID on its details page. You can also specify the comma-separated list of product identifiers with quantities ({Product ID}:{Quantity}. for example, 77:1, 123:2, 156:3). And you can also specify the comma-separated list of product identifiers with quantity range ({Product ID}:{Min quantity}-{Max quantity}. for example, 77:1-3, 123:2-5, 156:3-8).')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4828, 1, N'Plugins.DiscountRules.HasOnePost.Fields.Posts.Hint', N'The comma-separated list of Post identifiers (e.g. 77, 123, 156). You can find a Post ID on its details page. You can also specify the comma-separated list of Post identifiers with quantities ({Post ID}:{Quantity}. for example, 77:1, 123:2, 156:3). And you can also specify the comma-separated list of Post identifiers with quantity range ({Post ID}:{Min quantity}-{Max quantity}. for example, 77:1-3, 123:2-5, 156:3-8).')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4829, 1, N'Plugins.DiscountRules.HasOneProduct.Fields.Products.AddNew', N'Add product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4829, 1, N'Plugins.DiscountRules.HasOnePost.Fields.Posts.AddNew', N'Add Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4830, 1, N'Plugins.DiscountRules.HasOneProduct.Fields.Products.Choose', N'Choose')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4830, 1, N'Plugins.DiscountRules.HasOnePost.Fields.Posts.Choose', N'Choose')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4831, 1, N'Plugins.DiscountRules.CustomerRoles.Fields.CustomerRole', N'Required customer role')
 GO
@@ -10179,9 +10179,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4844, 1, N'Plugins.Payment.CheckMoneyOrder.AdditionalFeePercentage.Hint', N'Determines whether to apply a percentage additional fee to the order total. If not enabled, a fixed value is used.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4845, 1, N'Plugins.Payment.CheckMoneyOrder.ShippableProductRequired', N'Shippable product required')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4845, 1, N'Plugins.Payment.CheckMoneyOrder.ShippablePostRequired', N'Shippable Post required')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4846, 1, N'Plugins.Payment.CheckMoneyOrder.ShippableProductRequired.Hint', N'An option indicating whether shippable products are required in order to display this payment method during checkout.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4846, 1, N'Plugins.Payment.CheckMoneyOrder.ShippablePostRequired.Hint', N'An option indicating whether shippable Posts are required in order to display this payment method during checkout.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4847, 1, N'Plugins.Payments.Manual.Fields.AdditionalFee', N'Additional fee')
 GO
@@ -10275,9 +10275,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4892, 1, N'Plugins.Payments.PayPalStandard.Fields.AdditionalFeePercentage.Hint', N'Determines whether to apply a percentage additional fee to the order total. If not enabled, a fixed value is used.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4893, 1, N'Plugins.Payments.PayPalStandard.Fields.PassProductNamesAndTotals', N'Pass product names and order totals to PayPal')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4893, 1, N'Plugins.Payments.PayPalStandard.Fields.PassPostNamesAndTotals', N'Pass Post names and order totals to PayPal')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4894, 1, N'Plugins.Payments.PayPalStandard.Fields.PassProductNamesAndTotals.Hint', N'Check if product names and order totals should be passed to PayPal.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4894, 1, N'Plugins.Payments.PayPalStandard.Fields.PassPostNamesAndTotals.Hint', N'Check if Post names and order totals should be passed to PayPal.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4895, 1, N'Plugins.Payments.PayPalStandard.Fields.EnableIpn', N'Enable IPN (Instant Payment Notification)')
 GO
@@ -10307,9 +10307,9 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4908, 1, N'Plugins.Payment.PurchaseOrder.AdditionalFeePercentage.Hint', N'Determines whether to apply a percentage additional fee to the order total. If not enabled, a fixed value is used.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4909, 1, N'Plugins.Payment.PurchaseOrder.ShippableProductRequired', N'Shippable product required')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4909, 1, N'Plugins.Payment.PurchaseOrder.ShippablePostRequired', N'Shippable Post required')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4910, 1, N'Plugins.Payment.PurchaseOrder.ShippableProductRequired.Hint', N'An option indicating whether shippable products are required in order to display this payment method during checkout.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4910, 1, N'Plugins.Payment.PurchaseOrder.ShippablePostRequired.Hint', N'An option indicating whether shippable Posts are required in order to display this payment method during checkout.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4911, 1, N'Plugins.Feed.Froogle.Store', N'Store')
 GO
@@ -10327,7 +10327,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4918, 1, N'Plugins.Feed.Froogle.Generate', N'Generate feed')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4919, 1, N'Plugins.Feed.Froogle.Override', N'Override product settings')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4919, 1, N'Plugins.Feed.Froogle.Override', N'Override Post settings')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4920, 1, N'Plugins.Feed.Froogle.PassShippingInfoWeight', N'Pass shipping info (weight)')
 GO
@@ -10341,23 +10341,23 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4925, 1, N'Plugins.Feed.Froogle.PricesConsiderPromotions.Hint', N'Check if you want prices to be calculated with promotions (tier prices, discounts, special prices, tax, etc). But please note that it can significantly reduce time required to generate the feed file.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4926, 1, N'Plugins.Feed.Froogle.ProductPictureSize', N'Product thumbnail image size')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4926, 1, N'Plugins.Feed.Froogle.PostPictureSize', N'Post thumbnail image size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4927, 1, N'Plugins.Feed.Froogle.ProductPictureSize.Hint', N'The default size (pixels) for product thumbnail images.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4927, 1, N'Plugins.Feed.Froogle.PostPictureSize.Hint', N'The default size (pixels) for Post thumbnail images.')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4928, 1, N'Plugins.Feed.Froogle.Products.ProductName', N'Product')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4928, 1, N'Plugins.Feed.Froogle.Posts.PostName', N'Post')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4929, 1, N'Plugins.Feed.Froogle.Products.GoogleCategory', N'Google Category')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4929, 1, N'Plugins.Feed.Froogle.Posts.GoogleCategory', N'Google Category')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4930, 1, N'Plugins.Feed.Froogle.Products.Gender', N'Gender')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4930, 1, N'Plugins.Feed.Froogle.Posts.Gender', N'Gender')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4931, 1, N'Plugins.Feed.Froogle.Products.AgeGroup', N'Age group')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4931, 1, N'Plugins.Feed.Froogle.Posts.AgeGroup', N'Age group')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4932, 1, N'Plugins.Feed.Froogle.Products.Color', N'Color')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4932, 1, N'Plugins.Feed.Froogle.Posts.Color', N'Color')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4933, 1, N'Plugins.Feed.Froogle.Products.Size', N'Size')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4933, 1, N'Plugins.Feed.Froogle.Posts.Size', N'Size')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4934, 1, N'Plugins.Feed.Froogle.Products.CustomGoods', N'Custom goods (no identifier exists)')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4934, 1, N'Plugins.Feed.Froogle.Posts.CustomGoods', N'Custom goods (no identifier exists)')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (4935, 1, N'Plugins.Feed.Froogle.SuccessResult', N'Froogle feed has been successfully generated.')
 GO
@@ -10595,7 +10595,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (5052, 1, N'Plugins.Shipping.UPS.Fields.Tracing', N'Tracing')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (5053, 1, N'Plugins.Shipping.UPS.Fields.Tracing.Hint', N'Check if you want to record plugin tracing in System Log. Warning: The entire request and response XML will be logged (including AccessKey/UserName,Password). Do not leave this enabled in a production environment.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (5053, 1, N'Plugins.Shipping.UPS.Fields.Tracing.Hint', N'Check if you want to record plugin tracing in System Log. Warning: The entire request and response XML will be logged (including AccessKey/UserName,Password). Do not leave this enabled in a Postion environment.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (5054, 1, N'Plugins.Shipping.USPS.Fields.Url', N'URL')
 GO
@@ -10687,7 +10687,7 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (5098, 1, N'Plugins.Widgets.GoogleAnalytics.EcommerceDetailScript', N'Tracking code for {DETAILS} part')
 GO
-INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (5099, 1, N'Plugins.Widgets.GoogleAnalytics.EcommerceDetailScript.Hint', N'Paste the tracking code generated by Google analytics here. {ORDERID}, {PRODUCTSKU}, {PRODUCTNAME}, {CATEGORYNAME}, {UNITPRICE}, {QUANTITY} will be dynamically replaced.')
+INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (5099, 1, N'Plugins.Widgets.GoogleAnalytics.EcommerceDetailScript.Hint', N'Paste the tracking code generated by Google analytics here. {ORDERID}, {PostSKU}, {PostNAME}, {CATEGORYNAME}, {UNITPRICE}, {QUANTITY} will be dynamically replaced.')
 GO
 INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [ResourceValue]) VALUES (5100, 1, N'Plugins.Widgets.GoogleAnalytics.IncludingTax', N'Include tax')
 GO
@@ -10724,6 +10724,9 @@ GO
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Access admin area',N'AccessAdminPanel',N'Standard');
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Allow Customer Impersonation',N'AllowCustomerImpersonation',N'Customers');
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Customers',N'ManageCustomers',N'Customers');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Posts',N'ManagePosts',N'Posts');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Categories',N'ManageCategories',N'Posts');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Post Tags',N'ManagePostTags',N'Posts');
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Newsletter Subscribers',N'ManageNewsletterSubscribers',N'Promo');
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Polls',N'ManagePolls',N'Content Management');
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Message Templates',N'ManageMessageTemplates',N'Content Management');

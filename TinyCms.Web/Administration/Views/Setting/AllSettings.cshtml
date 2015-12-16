@@ -1,7 +1,6 @@
-﻿@using Nop.Services.Stores
-@{
-    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
-    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+﻿@{
+    var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
 
     //page title
     ViewBag.Title = T("Admin.Configuration.Settings.AllSettings").Text;
@@ -73,8 +72,6 @@
                                     fields: {
                                         Name: { editable: true, type: "string" },
                                         Value: { editable: true, type: "string" },
-                                        Store: { editable: true, type: "string" },
-                                        StoreId: { editable: true, type: "number" },
                                         Id: { editable: false, type: "number" }
                                     }
                                 }
@@ -128,14 +125,6 @@
                             filterable: true,
                             sortable: true
                         }, {
-                            field: "StoreId",
-                            title: "@T("Admin.Configuration.Settings.AllSettings.Fields.StoreName")",
-                            width: 150,
-                            editor: storeDropDownEditor,
-                            template: "#:Store#",
-                            filterable: false,
-                            sortable: false
-                        }, {
                             command: [{
                                 name: "edit",
                                 text: {
@@ -153,27 +142,7 @@
                     });
                 });
 
-                //local datasource
-                var allStores = [
-                    {
-                        Id : 0,
-                        Name : "@T("Admin.Configuration.Settings.AllSettings.Fields.StoreName.AllStores")"
-                    }
-                    @{
-                        var storeService = EngineContext.Current.Resolve<IStoreService>();
-                        var allStores = storeService.GetAllStores();
-                    }
-                    @foreach (var store in allStores)
-                    {
-                        <text>
-                        , {
-                            Id: @(store.Id),
-                            Name: "@(Html.Raw(HttpUtility.JavaScriptStringEncode(store.Name)))"
-                        }
-                        </text>
-                    }
-                ];
-
+              
                 function storeDropDownEditor(container, options) {
                     $('<input required data-text-field="Name" data-value-field="Id" data-bind="value:StoreId"/>')
                         .appendTo(container)

@@ -1,5 +1,3 @@
-using System.Data.Entity.Infrastructure;
-
 namespace TinyCms.Data.Migrations
 {
     using System;
@@ -9,7 +7,6 @@ namespace TinyCms.Data.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<TinyCms.Data.NopObjectContext>
     {
-
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
@@ -19,7 +16,6 @@ namespace TinyCms.Data.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
-            
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //

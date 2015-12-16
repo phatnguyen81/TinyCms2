@@ -17,8 +17,5 @@ namespace TinyCms.Admin.Models.Settings
         [AllowHtml]
         public string Value { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.AllSettings.Fields.StoreName")]
-        public string Store { get; set; }
-        public int StoreId { get; set; }
     }
 }

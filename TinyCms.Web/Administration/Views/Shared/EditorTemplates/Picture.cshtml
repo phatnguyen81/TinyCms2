@@ -9,7 +9,7 @@
     //other variables
     var random = CommonHelper.GenerateRandomInteger();
     var clientId = "picture" + random;
-    var pictureService = EngineContext.Current.Resolve<Nop.Services.Media.IPictureService>();
+    var pictureService = EngineContext.Current.Resolve<TinyCms.Services.Media.IPictureService>();
     var picture = pictureService.GetPictureById(Model);
 }
 <div id="@(clientId + "value")">

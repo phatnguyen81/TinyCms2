@@ -15,12 +15,8 @@ namespace TinyCms.Admin.Models.Posts
     {
         public CategoryModel()
         {
-            if (PageSize < 1)
-            {
-                PageSize = 5;
-            }
+
             Locales = new List<CategoryLocalizedModel>();
-            AvailableCategoryTemplates = new List<SelectListItem>();
             AvailableCategories = new List<SelectListItem>();
         }
 
@@ -58,19 +54,6 @@ namespace TinyCms.Admin.Models.Posts
         [UIHint("Picture")]
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.Picture")]
         public int PictureId { get; set; }
-
-        [NopResourceDisplayName("Admin.Catalog.Categories.Fields.PageSize")]
-        public int PageSize { get; set; }
-
-        [NopResourceDisplayName("Admin.Catalog.Categories.Fields.AllowCustomersToSelectPageSize")]
-        public bool AllowCustomersToSelectPageSize { get; set; }
-
-        [NopResourceDisplayName("Admin.Catalog.Categories.Fields.PageSizeOptions")]
-        public string PageSizeOptions { get; set; }
-
-        [NopResourceDisplayName("Admin.Catalog.Categories.Fields.PriceRanges")]
-        [AllowHtml]
-        public string PriceRanges { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.ShowOnHomePage")]
         public bool ShowOnHomePage { get; set; }

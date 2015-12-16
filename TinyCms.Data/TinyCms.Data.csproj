@@ -91,18 +91,11 @@
     <Compile Include="Mapping\Polls\PollMap.cs" />
     <Compile Include="Mapping\Polls\PollVotingRecordMap.cs" />
     <Compile Include="Mapping\Posts\CategoryMap.cs" />
+    <Compile Include="Mapping\Posts\PostCategoryMap.cs" />
     <Compile Include="Mapping\Posts\ProductMap.cs" />
     <Compile Include="Mapping\Posts\ProductPictureMap.cs" />
     <Compile Include="Mapping\Posts\ProductTagMap.cs" />
     <Compile Include="Mapping\Tasks\ScheduleTaskMap.cs" />
-    <Compile Include="Migrations\201512160914352_Initial.cs" />
-    <Compile Include="Migrations\201512160914352_Initial.Designer.cs">
-      <DependentUpon>201512160914352_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512160923417_Initial1.cs" />
-    <Compile Include="Migrations\201512160923417_Initial1.Designer.cs">
-      <DependentUpon>201512160923417_Initial1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NopEntityTypeConfiguration.cs" />
     <Compile Include="NopObjectContext.cs" />
@@ -123,14 +116,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512160914352_Initial.resx">
-      <DependentUpon>201512160914352_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512160923417_Initial1.resx">
-      <DependentUpon>201512160923417_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

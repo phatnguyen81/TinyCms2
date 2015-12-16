@@ -12,11 +12,11 @@ namespace TinyCms.Services.Security
         //admin area permissions
         public static readonly PermissionRecord AccessAdminPanel = new PermissionRecord { Name = "Access admin area", SystemName = "AccessAdminPanel", Category = "Standard" };
         public static readonly PermissionRecord AllowCustomerImpersonation = new PermissionRecord { Name = "Admin area. Allow Customer Impersonation", SystemName = "AllowCustomerImpersonation", Category = "Customers" };
-        public static readonly PermissionRecord ManageProducts = new PermissionRecord { Name = "Admin area. Manage Products", SystemName = "ManageProducts", Category = "Catalog" };
+        public static readonly PermissionRecord ManagePosts = new PermissionRecord { Name = "Admin area. Manage Posts", SystemName = "ManagePosts", Category = "Catalog" };
         public static readonly PermissionRecord ManageCategories = new PermissionRecord { Name = "Admin area. Manage Categories", SystemName = "ManageCategories", Category = "Catalog" };
         public static readonly PermissionRecord ManageManufacturers = new PermissionRecord { Name = "Admin area. Manage Manufacturers", SystemName = "ManageManufacturers", Category = "Catalog" };
-        public static readonly PermissionRecord ManageProductReviews = new PermissionRecord { Name = "Admin area. Manage Product Reviews", SystemName = "ManageProductReviews", Category = "Catalog" };
-        public static readonly PermissionRecord ManageProductTags = new PermissionRecord { Name = "Admin area. Manage Product Tags", SystemName = "ManageProductTags", Category = "Catalog" };
+        public static readonly PermissionRecord ManagePostReviews = new PermissionRecord { Name = "Admin area. Manage Post Reviews", SystemName = "ManagePostReviews", Category = "Catalog" };
+        public static readonly PermissionRecord ManagePostTags = new PermissionRecord { Name = "Admin area. Manage Post Tags", SystemName = "ManagePostTags", Category = "Catalog" };
         public static readonly PermissionRecord ManageAttributes = new PermissionRecord { Name = "Admin area. Manage Attributes", SystemName = "ManageAttributes", Category = "Catalog" };
         public static readonly PermissionRecord ManageCustomers = new PermissionRecord { Name = "Admin area. Manage Customers", SystemName = "ManageCustomers", Category = "Customers" };
         public static readonly PermissionRecord ManageVendors = new PermissionRecord { Name = "Admin area. Manage Vendors", SystemName = "ManageVendors", Category = "Customers" };
@@ -72,11 +72,11 @@ namespace TinyCms.Services.Security
             {
                 AccessAdminPanel,
                 AllowCustomerImpersonation,
-                ManageProducts,
+                ManagePosts,
                 ManageCategories,
                 ManageManufacturers,
-                ManageProductReviews,
-                ManageProductTags,
+                ManagePostReviews,
+                ManagePostTags,
                 ManageAttributes,
                 ManageCustomers,
                 ManageVendors,
@@ -135,11 +135,11 @@ namespace TinyCms.Services.Security
                     {
                         AccessAdminPanel,
                         AllowCustomerImpersonation,
-                        ManageProducts,
+                        ManagePosts,
                         ManageCategories,
                         ManageManufacturers,
-                        ManageProductReviews,
-                        ManageProductTags,
+                        ManagePostReviews,
+                        ManagePostTags,
                         ManageAttributes,
                         ManageCustomers,
                         ManageVendors,
@@ -225,7 +225,7 @@ namespace TinyCms.Services.Security
                     PermissionRecords = new[] 
                     {
                         AccessAdminPanel,
-                        ManageProducts,
+                        ManagePosts,
                         ManageOrders
                     }
                 }
