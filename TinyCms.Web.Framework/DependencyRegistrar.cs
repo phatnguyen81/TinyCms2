@@ -14,12 +14,14 @@ using TinyCms.Core.Data;
 using TinyCms.Core.Fakes;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Core.Infrastructure.DependencyManagement;
+using TinyCms.Core.Plugins;
 using TinyCms.Data;
 using TinyCms.Services.Authentication;
 using TinyCms.Services.Authentication.External;
 using TinyCms.Services.Common;
 using TinyCms.Services.Configuration;
 using TinyCms.Services.Customers;
+using TinyCms.Services.Directory;
 using TinyCms.Services.Events;
 using TinyCms.Services.ExportImport;
 using TinyCms.Services.Helpers;
@@ -28,6 +30,8 @@ using TinyCms.Services.Localization;
 using TinyCms.Services.Logging;
 using TinyCms.Services.Media;
 using TinyCms.Services.Messages;
+using TinyCms.Services.Polls;
+using TinyCms.Services.Posts;
 using TinyCms.Services.Security;
 using TinyCms.Services.Seo;
 using TinyCms.Services.Tasks;
@@ -104,6 +108,10 @@ namespace TinyCms.Web.Framework
 
 
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
+
+            //plugins
+            builder.RegisterType<PluginFinder>().As<IPluginFinder>().InstancePerLifetimeScope();
+            builder.RegisterType<OfficialFeedManager>().As<IOfficialFeedManager>().InstancePerLifetimeScope();
             
             //cache managers
             if (config.RedisCachingEnabled)
@@ -129,6 +137,8 @@ namespace TinyCms.Web.Framework
             builder.RegisterType<WebWorkContext>().As<IWorkContext>().InstancePerLifetimeScope();
 
             //services
+            builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
+            builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();
             
             //use static cache (between HTTP requests)
             builder.RegisterType<SearchTermService>().As<ISearchTermService>().InstancePerLifetimeScope();
@@ -150,7 +160,8 @@ namespace TinyCms.Web.Framework
             builder.RegisterType<AclService>().As<IAclService>()
                 .WithParameter(ResolvedParameter.ForNamed<ICacheManager>("nop_cache_static"))
                 .InstancePerLifetimeScope();
-            
+
+            builder.RegisterType<GeoLookupService>().As<IGeoLookupService>().InstancePerLifetimeScope();
 
             //use static cache (between HTTP requests)
             builder.RegisterType<SettingService>().As<ISettingService>()
@@ -212,6 +223,8 @@ namespace TinyCms.Web.Framework
             //    }
             //}
 
+            builder.RegisterType<PollService>().As<IPollService>().InstancePerLifetimeScope();
+
             builder.RegisterType<DateTimeHelper>().As<IDateTimeHelper>().InstancePerLifetimeScope();
             builder.RegisterType<SitemapGenerator>().As<ISitemapGenerator>().InstancePerLifetimeScope();
             builder.RegisterType<PageHeadBuilder>().As<IPageHeadBuilder>().InstancePerLifetimeScope();
@@ -223,6 +236,9 @@ namespace TinyCms.Web.Framework
             builder.RegisterType<ThemeProvider>().As<IThemeProvider>().InstancePerLifetimeScope();
             builder.RegisterType<ThemeContext>().As<IThemeContext>().InstancePerLifetimeScope();
 
+
+            builder.RegisterType<ExternalAuthorizer>().As<IExternalAuthorizer>().InstancePerLifetimeScope();
+            builder.RegisterType<OpenAuthenticationService>().As<IOpenAuthenticationService>().InstancePerLifetimeScope();
 
             builder.RegisterType<ExternalAuthorizer>().As<IExternalAuthorizer>().InstancePerLifetimeScope();
             builder.RegisterType<OpenAuthenticationService>().As<IOpenAuthenticationService>().InstancePerLifetimeScope();

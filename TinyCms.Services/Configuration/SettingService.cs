@@ -64,7 +64,7 @@ namespace TinyCms.Services.Configuration
             public int Id { get; set; }
             public string Name { get; set; }
             public string Value { get; set; }
-            public int StoreId { get; set; }
+            
         }
 
         #endregion
@@ -84,7 +84,7 @@ namespace TinyCms.Services.Configuration
                 //we use no tracking here for performance optimization
                 //anyway records are loaded only for read-only operations
                 var query = from s in _settingRepository.TableNoTracking
-                            orderby s.Name, s.StoreId
+                            orderby s.Name
                             select s;
                 var settings = query.ToList();
                 var dictionary = new Dictionary<string, IList<SettingForCaching>>();
@@ -95,8 +95,7 @@ namespace TinyCms.Services.Configuration
                             {
                                 Id = s.Id,
                                 Name = s.Name,
-                                Value = s.Value,
-                                StoreId = s.StoreId
+                                Value = s.Value
                             };
                     if (!dictionary.ContainsKey(resourceName))
                     {
@@ -199,7 +198,7 @@ namespace TinyCms.Services.Configuration
         /// <param name="storeId">Store identifier</param>
         /// <param name="loadSharedValueIfNotFound">A value indicating whether a shared (for all stores) value should be loaded if a value specific for a certain is not found</param>
         /// <returns>Setting</returns>
-        public virtual Setting GetSetting(string key, int storeId = 0, bool loadSharedValueIfNotFound = false)
+        public virtual Setting GetSetting(string key)
         {
             if (String.IsNullOrEmpty(key))
                 return null;
@@ -209,11 +208,7 @@ namespace TinyCms.Services.Configuration
             if (settings.ContainsKey(key))
             {
                 var settingsByKey = settings[key];
-                var setting = settingsByKey.FirstOrDefault(x => x.StoreId == storeId);
-
-                //load shared value?
-                if (setting == null && storeId > 0 && loadSharedValueIfNotFound)
-                    setting = settingsByKey.FirstOrDefault(x => x.StoreId == 0);
+                var setting = settingsByKey.FirstOrDefault();
 
                 if (setting != null)
                     return GetSettingById(setting.Id);
@@ -231,8 +226,7 @@ namespace TinyCms.Services.Configuration
         /// <param name="storeId">Store identifier</param>
         /// <param name="loadSharedValueIfNotFound">A value indicating whether a shared (for all stores) value should be loaded if a value specific for a certain is not found</param>
         /// <returns>Setting value</returns>
-        public virtual T GetSettingByKey<T>(string key, T defaultValue = default(T), 
-            int storeId = 0, bool loadSharedValueIfNotFound = false)
+        public virtual T GetSettingByKey<T>(string key, T defaultValue = default(T))
         {
             if (String.IsNullOrEmpty(key))
                 return defaultValue;
@@ -242,11 +236,7 @@ namespace TinyCms.Services.Configuration
             if (settings.ContainsKey(key))
             {
                 var settingsByKey = settings[key];
-                var setting = settingsByKey.FirstOrDefault(x => x.StoreId == storeId);
-
-                //load shared value?
-                if (setting == null && storeId > 0 && loadSharedValueIfNotFound)
-                    setting = settingsByKey.FirstOrDefault(x => x.StoreId == 0);
+                var setting = settingsByKey.FirstOrDefault();
 
                 if (setting != null)
                     return CommonHelper.To<T>(setting.Value);
@@ -263,7 +253,7 @@ namespace TinyCms.Services.Configuration
         /// <param name="value">Value</param>
         /// <param name="storeId">Store identifier</param>
         /// <param name="clearCache">A value indicating whether to clear cache after setting update</param>
-        public virtual void SetSetting<T>(string key, T value, int storeId = 0, bool clearCache = true)
+        public virtual void SetSetting<T>(string key, T value,bool clearCache = true)
         {
             if (key == null)
                 throw new ArgumentNullException("key");
@@ -272,7 +262,7 @@ namespace TinyCms.Services.Configuration
 
             var allSettings = GetAllSettingsCached();
             var settingForCaching = allSettings.ContainsKey(key) ? 
-                allSettings[key].FirstOrDefault(x => x.StoreId == storeId) : null;
+                allSettings[key].FirstOrDefault() : null;
             if (settingForCaching != null)
             {
                 //update
@@ -286,8 +276,7 @@ namespace TinyCms.Services.Configuration
                 var setting = new Setting
                 {
                     Name = key,
-                    Value = valueStr,
-                    StoreId = storeId
+                    Value = valueStr
                 };
                 InsertSetting(setting, clearCache);
             }
@@ -300,7 +289,7 @@ namespace TinyCms.Services.Configuration
         public virtual IList<Setting> GetAllSettings()
         {
             var query = from s in _settingRepository.Table
-                        orderby s.Name, s.StoreId
+                        orderby s.Name
                         select s;
             var settings = query.ToList();
             return settings;
@@ -316,12 +305,12 @@ namespace TinyCms.Services.Configuration
         /// <param name="storeId">Store identifier</param>
         /// <returns>true -setting exists; false - does not exist</returns>
         public virtual bool SettingExists<T, TPropType>(T settings, 
-            Expression<Func<T, TPropType>> keySelector, int storeId = 0) 
+            Expression<Func<T, TPropType>> keySelector) 
             where T : ISettings, new()
         {
             string key = settings.GetSettingKey(keySelector);
 
-            var setting = GetSettingByKey<string>(key, storeId: storeId);
+            var setting = GetSettingByKey<string>(key);
             return setting != null;
         }
 
@@ -330,7 +319,7 @@ namespace TinyCms.Services.Configuration
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="storeId">Store identifier for which settigns should be loaded</param>
-        public virtual T LoadSetting<T>(int storeId = 0) where T : ISettings, new()
+        public virtual T LoadSetting<T>() where T : ISettings, new()
         {
             var settings = Activator.CreateInstance<T>();
 
@@ -342,7 +331,7 @@ namespace TinyCms.Services.Configuration
 
                 var key = typeof(T).Name + "." + prop.Name;
                 //load by store
-                var setting = GetSettingByKey<string>(key, storeId: storeId, loadSharedValueIfNotFound: true);
+                var setting = GetSettingByKey<string>(key);
                 if (setting == null)
                     continue;
 
@@ -367,7 +356,7 @@ namespace TinyCms.Services.Configuration
         /// <typeparam name="T">Type</typeparam>
         /// <param name="storeId">Store identifier</param>
         /// <param name="settings">Setting instance</param>
-        public virtual void SaveSetting<T>(T settings, int storeId = 0) where T : ISettings, new()
+        public virtual void SaveSetting<T>(T settings) where T : ISettings, new()
         {
             /* We do not clear cache after each setting update.
              * This behavior can increase performance because cached settings will not be cleared 
@@ -385,9 +374,9 @@ namespace TinyCms.Services.Configuration
                 //Duck typing is not supported in C#. That's why we're using dynamic type
                 dynamic value = prop.GetValue(settings, null);
                 if (value != null)
-                    SetSetting(key, value, storeId, false);
+                    SetSetting(key, value);
                 else
-                    SetSetting(key, "", storeId, false);
+                    SetSetting(key, "");
             }
 
             //and now clear cache
@@ -405,7 +394,7 @@ namespace TinyCms.Services.Configuration
         /// <param name="clearCache">A value indicating whether to clear cache after setting update</param>
         public virtual void SaveSetting<T, TPropType>(T settings,
             Expression<Func<T, TPropType>> keySelector,
-            int storeId = 0, bool clearCache = true) where T : ISettings, new()
+            bool clearCache = true) where T : ISettings, new()
         {
             var member = keySelector.Body as MemberExpression;
             if (member == null)
@@ -427,9 +416,9 @@ namespace TinyCms.Services.Configuration
             //Duck typing is not supported in C#. That's why we're using dynamic type
             dynamic value = propInfo.GetValue(settings, null);
             if (value != null)
-                SetSetting(key, value, storeId, clearCache);
+                SetSetting(key, value);
             else
-                SetSetting(key, "", storeId, clearCache);
+                SetSetting(key, "");
         }
 
         /// <summary>
@@ -459,14 +448,14 @@ namespace TinyCms.Services.Configuration
         /// <param name="keySelector">Key selector</param>
         /// <param name="storeId">Store ID</param>
         public virtual void DeleteSetting<T, TPropType>(T settings,
-            Expression<Func<T, TPropType>> keySelector, int storeId = 0) where T : ISettings, new()
+            Expression<Func<T, TPropType>> keySelector) where T : ISettings, new()
         {
             string key = settings.GetSettingKey(keySelector);
             key = key.Trim().ToLowerInvariant();
 
             var allSettings = GetAllSettingsCached();
             var settingForCaching = allSettings.ContainsKey(key) ?
-                allSettings[key].FirstOrDefault(x => x.StoreId == storeId) : null;
+                allSettings[key].FirstOrDefault() : null;
             if (settingForCaching != null)
             {
                 //update

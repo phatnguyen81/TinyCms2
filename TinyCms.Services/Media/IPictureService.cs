@@ -94,6 +94,14 @@ namespace TinyCms.Services.Media
         /// <returns>Paged list of pictures</returns>
         IPagedList<Picture> GetPictures(int pageIndex = 0, int pageSize = int.MaxValue);
 
+        /// <summary>
+        /// Gets pictures by product identifier
+        /// </summary>
+        /// <param name="postId">Post identifier</param>
+        /// <param name="recordsToReturn">Number of records to return. 0 if you want to get all items</param>
+        /// <returns>Pictures</returns>
+        IList<Picture> GetPicturesByPostId(int postId, int recordsToReturn = 0);
+
       /// <summary>
         /// Inserts a picture
         /// </summary>

@@ -30,9 +30,6 @@ namespace TinyCms.Admin.Models.Common
             [UIHint("DateNullable")]
             public DateTime? EndDate { get; set; }
 
-            [NopResourceDisplayName("Admin.System.Maintenance.DeleteGuests.OnlyWithoutShoppingCart")]
-            public bool OnlyWithoutShoppingCart { get; set; }
-
             public int? NumberOfDeletedCustomers { get; set; }
         }
 

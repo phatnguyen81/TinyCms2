@@ -9,6 +9,7 @@ using TinyCms.Core.Caching;
 using TinyCms.Core.Data;
 using TinyCms.Core.Domain.Common;
 using TinyCms.Core.Domain.Customers;
+using TinyCms.Core.Domain.Polls;
 using TinyCms.Data;
 using TinyCms.Services.Common;
 using TinyCms.Services.Events;
@@ -48,6 +49,7 @@ namespace TinyCms.Services.Customers
         private readonly IRepository<Customer> _customerRepository;
         private readonly IRepository<CustomerRole> _customerRoleRepository;
         private readonly IRepository<GenericAttribute> _gaRepository;
+        private readonly IRepository<PollVotingRecord> _pollVotingRecordRepository;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IDataProvider _dataProvider;
         private readonly IDbContext _dbContext;
@@ -69,7 +71,7 @@ namespace TinyCms.Services.Customers
             IDbContext dbContext,
             IEventPublisher eventPublisher, 
             CustomerSettings customerSettings,
-            CommonSettings commonSettings)
+            CommonSettings commonSettings, IRepository<PollVotingRecord> pollVotingRecordRepository)
         {
             this._cacheManager = cacheManager;
             this._customerRepository = customerRepository;
@@ -81,6 +83,7 @@ namespace TinyCms.Services.Customers
             this._eventPublisher = eventPublisher;
             this._customerSettings = customerSettings;
             this._commonSettings = commonSettings;
+            _pollVotingRecordRepository = pollVotingRecordRepository;
         }
 
         #endregion
@@ -464,7 +467,113 @@ namespace TinyCms.Services.Customers
             _eventPublisher.EntityUpdated(customer);
         }
 
-     
+        /// <summary>
+        /// Delete guest customer records
+        /// </summary>
+        /// <param name="createdFromUtc">Created date from (UTC); null to load all records</param>
+        /// <param name="createdToUtc">Created date to (UTC); null to load all records</param>
+        /// <returns>Number of deleted customers</returns>
+        public virtual int DeleteGuestCustomers(DateTime? createdFromUtc, DateTime? createdToUtc)
+        {
+            if (_commonSettings.UseStoredProceduresIfSupported && _dataProvider.StoredProceduredSupported)
+            {
+                //stored procedures are enabled and supported by the database. 
+                //It's much faster than the LINQ implementation below 
+
+                #region Stored procedure
+
+                //prepare parameters
+              
+                var pCreatedFromUtc = _dataProvider.GetParameter();
+                pCreatedFromUtc.ParameterName = "CreatedFromUtc";
+                pCreatedFromUtc.Value = createdFromUtc.HasValue ? (object)createdFromUtc.Value : DBNull.Value;
+                pCreatedFromUtc.DbType = DbType.DateTime;
+
+                var pCreatedToUtc = _dataProvider.GetParameter();
+                pCreatedToUtc.ParameterName = "CreatedToUtc";
+                pCreatedToUtc.Value = createdToUtc.HasValue ? (object)createdToUtc.Value : DBNull.Value;
+                pCreatedToUtc.DbType = DbType.DateTime;
+
+                var pTotalRecordsDeleted = _dataProvider.GetParameter();
+                pTotalRecordsDeleted.ParameterName = "TotalRecordsDeleted";
+                pTotalRecordsDeleted.Direction = ParameterDirection.Output;
+                pTotalRecordsDeleted.DbType = DbType.Int32;
+
+                //invoke stored procedure
+                _dbContext.ExecuteSqlCommand(
+                    "EXEC [DeleteGuests] @CreatedFromUtc, @CreatedToUtc, @TotalRecordsDeleted OUTPUT",
+                    false, null,
+                    pCreatedFromUtc,
+                    pCreatedToUtc,
+                    pTotalRecordsDeleted);
+
+                int totalRecordsDeleted = (pTotalRecordsDeleted.Value != DBNull.Value) ? Convert.ToInt32(pTotalRecordsDeleted.Value) : 0;
+                return totalRecordsDeleted;
+
+                #endregion
+            }
+            else
+            {
+                //stored procedures aren't supported. Use LINQ
+
+                #region No stored procedure
+
+                var guestRole = GetCustomerRoleBySystemName(SystemCustomerRoleNames.Guests);
+                if (guestRole == null)
+                    throw new NopException("'Guests' role could not be loaded");
+
+                var query = _customerRepository.Table;
+                if (createdFromUtc.HasValue)
+                    query = query.Where(c => createdFromUtc.Value <= c.CreatedOnUtc);
+                if (createdToUtc.HasValue)
+                    query = query.Where(c => createdToUtc.Value >= c.CreatedOnUtc);
+                query = query.Where(c => c.CustomerRoles.Select(cr => cr.Id).Contains(guestRole.Id));
+             
+                //no poll voting
+                query = from c in query
+                        join pvr in _pollVotingRecordRepository.Table on c.Id equals pvr.CustomerId into c_pvr
+                        from pvr in c_pvr.DefaultIfEmpty()
+                        where !c_pvr.Any()
+                        select c;
+            
+                //don't delete system accounts
+                query = query.Where(c => !c.IsSystemAccount);
+
+                //only distinct customers (group by ID)
+                query = from c in query
+                        group c by c.Id
+                            into cGroup
+                            orderby cGroup.Key
+                            select cGroup.FirstOrDefault();
+                query = query.OrderBy(c => c.Id);
+                var customers = query.ToList();
+
+
+                int totalRecordsDeleted = 0;
+                foreach (var c in customers)
+                {
+                    try
+                    {
+                        //delete attributes
+                        var attributes = _genericAttributeService.GetAttributesForEntity(c.Id, "Customer");
+                        foreach (var attribute in attributes)
+                            _genericAttributeService.DeleteAttribute(attribute);
+
+
+                        //delete from database
+                        _customerRepository.Delete(c);
+                        totalRecordsDeleted++;
+                    }
+                    catch (Exception exc)
+                    {
+                        Debug.WriteLine(exc);
+                    }
+                }
+                return totalRecordsDeleted;
+
+                #endregion
+            }
+        }
       
         #endregion
         

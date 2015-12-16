@@ -28,10 +28,8 @@ namespace TinyCms.Services.Configuration
         /// Get setting by key
         /// </summary>
         /// <param name="key">Key</param>
-        /// <param name="storeId">Store identifier</param>
-        /// <param name="loadSharedValueIfNotFound">A value indicating whether a shared (for all stores) value should be loaded if a value specific for a certain is not found</param>
         /// <returns>Setting</returns>
-        Setting GetSetting(string key, int storeId = 0, bool loadSharedValueIfNotFound = false);
+        Setting GetSetting(string key);
 
         /// <summary>
         /// Get setting value by key
@@ -42,8 +40,7 @@ namespace TinyCms.Services.Configuration
         /// <param name="defaultValue">Default value</param>
         /// <param name="loadSharedValueIfNotFound">A value indicating whether a shared (for all stores) value should be loaded if a value specific for a certain is not found</param>
         /// <returns>Setting value</returns>
-        T GetSettingByKey<T>(string key, T defaultValue = default(T), 
-            int storeId = 0, bool loadSharedValueIfNotFound = false);
+        T GetSettingByKey<T>(string key, T defaultValue = default(T));
         
         /// <summary>
         /// Set setting value
@@ -53,7 +50,7 @@ namespace TinyCms.Services.Configuration
         /// <param name="value">Value</param>
         /// <param name="storeId">Store identifier</param>
         /// <param name="clearCache">A value indicating whether to clear cache after setting update</param>
-        void SetSetting<T>(string key, T value, int storeId = 0, bool clearCache = true);
+        void SetSetting<T>(string key, T value, bool clearCache = true);
 
         /// <summary>
         /// Gets all settings
@@ -71,7 +68,7 @@ namespace TinyCms.Services.Configuration
         /// <param name="storeId">Store identifier</param>
         /// <returns>true -setting exists; false - does not exist</returns>
         bool SettingExists<T, TPropType>(T settings, 
-            Expression<Func<T, TPropType>> keySelector, int storeId = 0)
+            Expression<Func<T, TPropType>> keySelector)
             where T : ISettings, new();
 
         /// <summary>
@@ -79,7 +76,7 @@ namespace TinyCms.Services.Configuration
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="storeId">Store identifier for which settigns should be loaded</param>
-        T LoadSetting<T>(int storeId = 0) where T : ISettings, new();
+        T LoadSetting<T>() where T : ISettings, new();
         
         /// <summary>
         /// Save settings object
@@ -87,7 +84,7 @@ namespace TinyCms.Services.Configuration
         /// <typeparam name="T">Type</typeparam>
         /// <param name="storeId">Store identifier</param>
         /// <param name="settings">Setting instance</param>
-        void SaveSetting<T>(T settings, int storeId = 0) where T : ISettings, new();
+        void SaveSetting<T>(T settings) where T : ISettings, new();
         
         /// <summary>
         /// Save settings object
@@ -100,7 +97,7 @@ namespace TinyCms.Services.Configuration
         /// <param name="clearCache">A value indicating whether to clear cache after setting update</param>
         void SaveSetting<T, TPropType>(T settings,
             Expression<Func<T, TPropType>> keySelector,
-            int storeId = 0, bool clearCache = true) where T : ISettings, new();
+            bool clearCache = true) where T : ISettings, new();
 
         /// <summary>
         /// Delete all settings
@@ -117,7 +114,7 @@ namespace TinyCms.Services.Configuration
         /// <param name="keySelector">Key selector</param>
         /// <param name="storeId">Store ID</param>
         void DeleteSetting<T, TPropType>(T settings,
-            Expression<Func<T, TPropType>> keySelector, int storeId = 0) where T : ISettings, new();
+            Expression<Func<T, TPropType>> keySelector) where T : ISettings, new();
 
         /// <summary>
         /// Clear cache

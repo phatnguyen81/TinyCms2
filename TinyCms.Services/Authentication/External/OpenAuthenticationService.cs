@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TinyCms.Core.Data;
 using TinyCms.Core.Domain.Customers;
+using TinyCms.Core.Plugins;
 using TinyCms.Services.Customers;
 
 namespace TinyCms.Services.Authentication.External
@@ -17,14 +18,16 @@ namespace TinyCms.Services.Authentication.External
         private readonly ICustomerService _customerService;
         private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
         private readonly IRepository<ExternalAuthenticationRecord> _externalAuthenticationRecordRepository;
+        private readonly IPluginFinder _pluginFinder;
 
         public OpenAuthenticationService(IRepository<ExternalAuthenticationRecord> externalAuthenticationRecordRepository,
             ExternalAuthenticationSettings externalAuthenticationSettings,
-            ICustomerService customerService)
+            ICustomerService customerService, IPluginFinder pluginFinder)
         {
             this._externalAuthenticationRecordRepository = externalAuthenticationRecordRepository;
             this._externalAuthenticationSettings = externalAuthenticationSettings;
             this._customerService = customerService;
+            _pluginFinder = pluginFinder;
         }
 
         /// <summary>
@@ -34,10 +37,9 @@ namespace TinyCms.Services.Authentication.External
         /// <returns>Payment methods</returns>
         public virtual IList<IExternalAuthenticationMethod> LoadActiveExternalAuthenticationMethods()
         {
-            //return LoadAllExternalAuthenticationMethods()
-            //       .Where(provider => _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Contains(provider.PluginDescriptor.SystemName, StringComparer.InvariantCultureIgnoreCase))
-            //       .ToList();
-            return null;
+            return LoadAllExternalAuthenticationMethods()
+                   .Where(provider => _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Contains(provider.PluginDescriptor.SystemName, StringComparer.InvariantCultureIgnoreCase))
+                   .ToList();
         }
 
         /// <summary>
@@ -47,10 +49,9 @@ namespace TinyCms.Services.Authentication.External
         /// <returns>Found external authentication method</returns>
         public virtual IExternalAuthenticationMethod LoadExternalAuthenticationMethodBySystemName(string systemName)
         {
-            //var descriptor = _pluginFinder.GetPluginDescriptorBySystemName<IExternalAuthenticationMethod>(systemName);
-            //if (descriptor != null)
-            //    return descriptor.Instance<IExternalAuthenticationMethod>();
-
+            var descriptor = _pluginFinder.GetPluginDescriptorBySystemName<IExternalAuthenticationMethod>(systemName);
+            if (descriptor != null)
+                return descriptor.Instance<IExternalAuthenticationMethod>();
             return null;
         }
 
@@ -61,10 +62,9 @@ namespace TinyCms.Services.Authentication.External
         /// <returns>External authentication methods</returns>
         public virtual IList<IExternalAuthenticationMethod> LoadAllExternalAuthenticationMethods()
         {
-            //return _pluginFinder
-            //    .GetPlugins<IExternalAuthenticationMethod>(storeId: storeId)
-            //    .ToList();
-            return null;
+            return _pluginFinder
+                .GetPlugins<IExternalAuthenticationMethod>()
+                .ToList();
         }
 
 

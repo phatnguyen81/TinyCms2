@@ -40,5 +40,20 @@ namespace TinyCms.Services.Messages
         int SendCustomerPasswordRecoveryMessage(Customer customer, int languageId);
         
         #endregion
+
+        #region Misc
+
+        /// <summary>
+        /// Sends a test email
+        /// </summary>
+        /// <param name="messageTemplateId">Message template identifier</param>
+        /// <param name="sendToEmail">Send to email</param>
+        /// <param name="tokens">Tokens</param>
+        /// <param name="languageId">Message language identifier</param>
+        /// <returns>Queued email identifier</returns>
+        int SendTestEmail(int messageTemplateId, string sendToEmail,
+            List<Token> tokens, int languageId);
+
+        #endregion
     }
 }

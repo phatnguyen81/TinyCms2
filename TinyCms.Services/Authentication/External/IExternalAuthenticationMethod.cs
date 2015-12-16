@@ -1,7 +1,7 @@
 //Contributor:  Nicholas Mayne
 
 using System.Web.Routing;
-using ImageResizer.Plugins;
+using TinyCms.Core.Plugins;
 
 namespace TinyCms.Services.Authentication.External
 {

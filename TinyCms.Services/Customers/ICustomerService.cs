@@ -126,6 +126,14 @@ namespace TinyCms.Services.Customers
         /// </summary>
         /// <param name="customer">Customer</param>
         void UpdateCustomer(Customer customer);
+
+        /// <summary>
+        /// Delete guest customer records
+        /// </summary>
+        /// <param name="createdFromUtc">Created date from (UTC); null to load all records</param>
+        /// <param name="createdToUtc">Created date to (UTC); null to load all records</param>
+        /// <returns>Number of deleted customers</returns>
+        int DeleteGuestCustomers(DateTime? createdFromUtc, DateTime? createdToUtc);
      
         #endregion
 

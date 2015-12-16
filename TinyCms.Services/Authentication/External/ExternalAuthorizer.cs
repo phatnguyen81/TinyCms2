@@ -10,8 +10,6 @@ using TinyCms.Services.Events;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Logging;
 using TinyCms.Services.Messages;
-using TinyCms.Services.Authentication;
-using TinyCms.Services.Authentication.External;
 
 namespace TinyCms.Services.Authentication.External
 {
@@ -33,7 +31,7 @@ namespace TinyCms.Services.Authentication.External
         private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
         private readonly IEventPublisher _eventPublisher;
         private readonly LocalizationSettings _localizationSettings;
-        private readonly WorkflowMessageService _workflowMessageService;
+        private readonly IWorkflowMessageService _workflowMessageService;
         #endregion
 
         #region Ctor
@@ -48,7 +46,7 @@ namespace TinyCms.Services.Authentication.External
             CustomerSettings customerSettings,
             ExternalAuthenticationSettings externalAuthenticationSettings,
             IEventPublisher eventPublisher,
-            LocalizationSettings localizationSettings, WorkflowMessageService workflowMessageService)
+            LocalizationSettings localizationSettings, IWorkflowMessageService workflowMessageService)
         {
             this._authenticationService = authenticationService;
             this._openAuthenticationService = openAuthenticationService;

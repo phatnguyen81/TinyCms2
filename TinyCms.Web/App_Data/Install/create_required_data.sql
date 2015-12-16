@@ -1,3 +1,4 @@
+
 SET IDENTITY_INSERT [dbo].[EmailAccount] ON
 INSERT [dbo].[EmailAccount] ([Id], [Email], [DisplayName], [Host], [Port], [Username], [Password], [EnableSsl], [UseDefaultCredentials]) VALUES (1, N'test@mail.com', N'Store name', N'smtp.mail.com', 25, N'123', N'123', 0, 0)
 SET IDENTITY_INSERT [dbo].[EmailAccount] OFF
@@ -466,10 +467,8 @@ GO
 
 SET IDENTITY_INSERT [dbo].[CustomerRole] ON
 INSERT [dbo].[CustomerRole] ([Id], [Name], [FreeShipping], [TaxExempt], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (1, N'Administrators', 0, 0, 1, 1, N'Administrators', 0)
-INSERT [dbo].[CustomerRole] ([Id], [Name], [FreeShipping], [TaxExempt], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (2, N'Forum Moderators', 0, 0, 1, 1, N'ForumModerators', 0)
 INSERT [dbo].[CustomerRole] ([Id], [Name], [FreeShipping], [TaxExempt], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (3, N'Registered', 0, 0, 1, 1, N'Registered', 0)
 INSERT [dbo].[CustomerRole] ([Id], [Name], [FreeShipping], [TaxExempt], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (4, N'Guests', 0, 0, 1, 1, N'Guests', 0)
-INSERT [dbo].[CustomerRole] ([Id], [Name], [FreeShipping], [TaxExempt], [Active], [IsSystemRole], [SystemName], [PurchasedWithProductId]) VALUES (5, N'Vendors', 0, 0, 1, 1, N'Vendors', 0)
 SET IDENTITY_INSERT [dbo].[CustomerRole] OFF
 GO
 
@@ -10720,3 +10719,25 @@ INSERT [dbo].[LocaleStringResource] ([Id], [LanguageId], [ResourceName], [Resour
 GO
 SET IDENTITY_INSERT [dbo].[LocaleStringResource] OFF
 GO
+
+
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Access admin area',N'AccessAdminPanel',N'Standard');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Allow Customer Impersonation',N'AllowCustomerImpersonation',N'Customers');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Customers',N'ManageCustomers',N'Customers');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Newsletter Subscribers',N'ManageNewsletterSubscribers',N'Promo');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Polls',N'ManagePolls',N'Content Management');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Message Templates',N'ManageMessageTemplates',N'Content Management');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Languages',N'ManageLanguages',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Settings',N'ManageSettings',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage External Authentication Methods',N'ManageExternalAuthenticationMethods',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Activity Log',N'ManageActivityLog',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage ACL',N'ManageACL',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Email Accounts',N'ManageEmailAccounts',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Plugins',N'ManagePlugins',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage System Log',N'ManageSystemLog',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Message Queue',N'ManageMessageQueue',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Maintenance',N'ManageMaintenance',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. HTML Editor. Manage pictures',N'HtmlEditor.ManagePictures',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Schedule Tasks',N'ManageScheduleTasks',N'Configuration');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Public store. Allow navigation',N'PublicStoreAllowNavigation',N'PublicStore');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Public store. Access a closed store',N'AccessClosedStore',N'PublicStore');

@@ -9,11 +9,8 @@ namespace TinyCms.Admin.Models.Messages
     {
         public MessageTemplateListModel()
         {
-            AvailableStores = new List<SelectListItem>();
         }
 
-        [NopResourceDisplayName("Admin.ContentManagement.MessageTemplates.List.SearchStore")]
-        public int SearchStoreId { get; set; }
-        public IList<SelectListItem> AvailableStores { get; set; }
+        
     }
 }

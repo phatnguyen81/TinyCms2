@@ -17,6 +17,9 @@ namespace TinyCms.Data
     public class NopObjectContext : DbContext, IDbContext
     {
         #region Ctor
+
+        public NopObjectContext():this("Data Source=.\\SQLEXPRESS2K8;Initial Catalog=test;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Admin@123")
+        { }
         public NopObjectContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {

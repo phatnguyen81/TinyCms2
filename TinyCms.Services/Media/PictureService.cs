@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using ImageResizer;
+using TinyCms.Core.Domain.Posts;
 using TinyCms.Services.Media;
 using TinyCms.Core;
 using TinyCms.Core.Data;
@@ -32,6 +33,7 @@ namespace TinyCms.Services.Media
         private static readonly object s_lock = new object();
 
         private readonly IRepository<Picture> _pictureRepository;
+        private readonly IRepository<PostPicture> _postPictureRepository;
         private readonly ISettingService _settingService;
         private readonly IWebHelper _webHelper;
         private readonly ILogger _logger;
@@ -47,7 +49,7 @@ namespace TinyCms.Services.Media
         /// Ctor
         /// </summary>
         /// <param name="pictureRepository">Picture repository</param>
-        /// <param name="productPictureRepository">Product picture repository</param>
+        /// <param name="productPictureRepository">Post picture repository</param>
         /// <param name="settingService">Setting service</param>
         /// <param name="webHelper">Web helper</param>
         /// <param name="logger">Logger</param>
@@ -60,7 +62,7 @@ namespace TinyCms.Services.Media
             ILogger logger,
             IDbContext dbContext,
             IEventPublisher eventPublisher,
-            MediaSettings mediaSettings)
+            MediaSettings mediaSettings, IRepository<PostPicture> postPictureRepository)
         {
             this._pictureRepository = pictureRepository;
             this._settingService = settingService;
@@ -69,6 +71,7 @@ namespace TinyCms.Services.Media
             this._dbContext = dbContext;
             this._eventPublisher = eventPublisher;
             this._mediaSettings = mediaSettings;
+            _postPictureRepository = postPictureRepository;
         }
 
         #endregion
@@ -611,9 +614,32 @@ namespace TinyCms.Services.Media
             var pics = new PagedList<Picture>(query, pageIndex, pageSize);
             return pics;
         }
-        
 
-    
+
+        /// <summary>
+        /// Gets pictures by product identifier
+        /// </summary>
+        /// <param name="productId">Post identifier</param>
+        /// <param name="recordsToReturn">Number of records to return. 0 if you want to get all items</param>
+        /// <returns>Pictures</returns>
+        public virtual IList<Picture> GetPicturesByPostId(int postId, int recordsToReturn = 0)
+        {
+            if (postId == 0)
+                return new List<Picture>();
+
+
+            var query = from p in _pictureRepository.Table
+                        join pp in _postPictureRepository.Table on p.Id equals pp.PictureId
+                        orderby pp.DisplayOrder
+                        where pp.PostId == postId
+                        select p;
+
+            if (recordsToReturn > 0)
+                query = query.Take(recordsToReturn);
+
+            var pics = query.ToList();
+            return pics;
+        }
 
         /// <summary>
         /// Inserts a picture

@@ -9,6 +9,7 @@ namespace TinyCms.Data.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<TinyCms.Data.NopObjectContext>
     {
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
@@ -18,6 +19,7 @@ namespace TinyCms.Data.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
+            
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
@@ -28,13 +30,6 @@ namespace TinyCms.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-        }
-    }
-    public class MyContextFactory : IDbContextFactory<NopObjectContext>
-    {
-        public NopObjectContext Create()
-        {
-            return new NopObjectContext("Data Source=.\\SQLEXPRESS2K8;Initial Catalog=TinyCms;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Admin@123");
         }
     }
 }

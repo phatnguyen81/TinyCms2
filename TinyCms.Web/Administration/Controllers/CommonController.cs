@@ -234,11 +234,27 @@ namespace TinyCms.Admin.Controllers
 
             var model = new MaintenanceModel();
             model.DeleteGuests.EndDate = DateTime.UtcNow.AddDays(-7);
-            model.DeleteGuests.OnlyWithoutShoppingCart = true;
             model.DeleteAbandonedCarts.OlderThan = DateTime.UtcNow.AddDays(-182);
             return View(model);
         }
-     
+
+        [HttpPost, ActionName("Maintenance")]
+        [FormValueRequired("delete-guests")]
+        public ActionResult MaintenanceDeleteGuests(MaintenanceModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
+                return AccessDeniedView();
+
+            DateTime? startDateValue = (model.DeleteGuests.StartDate == null) ? null
+                            : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.DeleteGuests.StartDate.Value, _dateTimeHelper.CurrentTimeZone);
+
+            DateTime? endDateValue = (model.DeleteGuests.EndDate == null) ? null
+                            : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.DeleteGuests.EndDate.Value, _dateTimeHelper.CurrentTimeZone).AddDays(1);
+
+            model.DeleteGuests.NumberOfDeletedCustomers = _customerService.DeleteGuestCustomers(startDateValue, endDateValue);
+
+            return View(model);
+        }
       
         [HttpPost, ActionName("Maintenance")]
         [FormValueRequired("delete-exported-files")]

@@ -1,16 +1,22 @@
 ﻿using System;
 using AutoMapper;
 using TinyCms.Admin.Models.Customers;
+using TinyCms.Admin.Models.ExternalAuthentication;
 using TinyCms.Admin.Models.Localization;
 using TinyCms.Admin.Models.Logging;
 using TinyCms.Admin.Models.Messages;
+using TinyCms.Admin.Models.Plugins;
 using TinyCms.Admin.Models.Polls;
+using TinyCms.Admin.Models.Posts;
 using TinyCms.Admin.Models.Settings;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Core.Domain.Localization;
 using TinyCms.Core.Domain.Logging;
 using TinyCms.Core.Domain.Messages;
 using TinyCms.Core.Domain.Polls;
+using TinyCms.Core.Domain.Posts;
+using TinyCms.Core.Plugins;
+using TinyCms.Services.Authentication.External;
 
 namespace TinyCms.Admin.Extensions
 {
@@ -25,7 +31,44 @@ namespace TinyCms.Admin.Extensions
         {
             return Mapper.Map(source, destination);
         }
-       
+
+        #region Category
+
+        public static CategoryModel ToModel(this Category entity)
+        {
+            return entity.MapTo<Category, CategoryModel>();
+        }
+
+        public static Category ToEntity(this CategoryModel model)
+        {
+            return model.MapTo<CategoryModel, Category>();
+        }
+
+        public static Category ToEntity(this CategoryModel model, Category destination)
+        {
+            return model.MapTo(destination);
+        }
+
+        #endregion
+
+        #region Posts
+
+        public static PostModel ToModel(this Post entity)
+        {
+            return entity.MapTo<Post, PostModel>();
+        }
+
+        public static Post ToEntity(this PostModel model)
+        {
+            return model.MapTo<PostModel, Post>();
+        }
+
+        public static Post ToEntity(this PostModel model, Post destination)
+        {
+            return model.MapTo(destination);
+        }
+
+        #endregion
 
         #region Customer attributes
 
@@ -151,6 +194,15 @@ namespace TinyCms.Admin.Extensions
         }
 
         #endregion
+
+        #region External authentication methods
+
+        public static AuthenticationMethodModel ToModel(this IExternalAuthenticationMethod entity)
+        {
+            return entity.MapTo<IExternalAuthenticationMethod, AuthenticationMethodModel>();
+        }
+
+        #endregion
      
         #region NewsLetter subscriptions
 
@@ -220,6 +272,14 @@ namespace TinyCms.Admin.Extensions
       
         #endregion
 
+        #region Plugins
+
+        public static PluginModel ToModel(this PluginDescriptor entity)
+        {
+            return entity.MapTo<PluginDescriptor, PluginModel>();
+        }
+
+        #endregion
      
 
     }

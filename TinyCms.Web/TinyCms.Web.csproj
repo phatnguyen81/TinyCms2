@@ -211,6 +211,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Install\create_required_data.sql" />
+    <Content Include="App_Data\Install\SqlServer.Indexes.sql" />
+    <Content Include="App_Data\Install\SqlServer.StoredProcedures.sql" />
     <Content Include="App_Data\Localization\defaultResources.nopres.xml" />
     <Content Include="App_Data\Localization\Installation\installation.ar.xml" />
     <Content Include="App_Data\Localization\Installation\installation.bg.xml" />

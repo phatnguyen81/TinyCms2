@@ -170,12 +170,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminAreaRegistration.cs" />
+    <Compile Include="Controllers\ActivityLogController.cs" />
     <Compile Include="Controllers\BaseAdminController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CustomerController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\CustomerRoleController.cs" />
+    <Compile Include="Controllers\EmailAccountController.cs" />
+    <Compile Include="Controllers\ExternalAuthenticationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageController.cs">
       <SubType>Code</SubType>
@@ -183,9 +187,12 @@
     <Compile Include="Controllers\LogController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\MessageTemplateController.cs" />
+    <Compile Include="Controllers\OnlineCustomerController.cs" />
     <Compile Include="Controllers\PictureController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\PluginController.cs" />
     <Compile Include="Controllers\PollController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -201,6 +208,8 @@
     <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
     <Compile Include="Infrastructure\Cache\ModelCacheEventConsumer.cs" />
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Models\Cms\RenderWidgetModel.cs" />
+    <Compile Include="Models\Cms\WidgetModel.cs" />
     <Compile Include="Models\Common\LanguageSelectorModel.cs" />
     <Compile Include="Models\Common\MaintenanceModel.cs" />
     <Compile Include="Models\Common\SearchTermReportLineModel.cs" />
@@ -235,14 +244,23 @@
     <Compile Include="Models\Messages\QueuedEmailListModel.cs" />
     <Compile Include="Models\Messages\QueuedEmailModel.cs" />
     <Compile Include="Models\Messages\TestMessageTemplateModel.cs" />
+    <Compile Include="Models\Plugins\MiscPluginModel.cs" />
+    <Compile Include="Models\Plugins\OfficialFeedListModel.cs" />
+    <Compile Include="Models\Plugins\PluginListModel.cs" />
+    <Compile Include="Models\Plugins\PluginModel.cs" />
     <Compile Include="Models\Polls\PollAnswerModel.cs" />
     <Compile Include="Models\Polls\PollModel.cs" />
+    <Compile Include="Models\Posts\CategoryListModel.cs" />
+    <Compile Include="Models\Posts\CategoryModel.cs" />
+    <Compile Include="Models\Posts\CopyPostModel.cs" />
+    <Compile Include="Models\Posts\PostModel.cs" />
     <Compile Include="Models\Security\PermissionMappingModel.cs" />
     <Compile Include="Models\Security\PermissionRecordModel.cs" />
     <Compile Include="Models\Settings\CustomerUserSettingsModel.cs" />
     <Compile Include="Models\Settings\GeneralCommonSettingsModel.cs" />
     <Compile Include="Models\Settings\MediaSettingsModel.cs" />
     <Compile Include="Models\Settings\SettingModel.cs" />
+    <Compile Include="Models\Settings\StoreScopeConfigurationModel.cs" />
     <Compile Include="Models\Tasks\ScheduleTaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\Customers\CustomerAttributeValidator.cs" />
@@ -256,8 +274,11 @@
     <Compile Include="Validators\Messages\NewsLetterSubscriptionValidator.cs" />
     <Compile Include="Validators\Messages\QueuedEmailValidator.cs" />
     <Compile Include="Validators\Messages\TestMessageTemplateValidator.cs" />
+    <Compile Include="Validators\Plugins\PluginValidator.cs" />
     <Compile Include="Validators\Polls\PollAnswerValidator.cs" />
     <Compile Include="Validators\Polls\PollValidator.cs" />
+    <Compile Include="Validators\Posts\CategoryValidator.cs" />
+    <Compile Include="Validators\Posts\PostValidator.cs" />
     <Compile Include="Validators\Settings\SettingValidator.cs" />
     <Compile Include="Validators\Tasks\ScheduleTaskValidator.cs" />
   </ItemGroup>
@@ -364,10 +385,7 @@
     <Content Include="Views\Customer\ReportRegisteredCustomers.cshtml" />
     <Content Include="Views\Customer\Reports.cshtml" />
     <Content Include="Views\Customer\_CreateOrUpdate.cshtml" />
-    <Content Include="Views\Customer\_CreateOrUpdateAddress.cshtml" />
     <Content Include="Views\Customer\_CustomerAttributes.cshtml" />
-    <Content Include="Views\Customer\_ReportBestCustomersByNumberOfOrders.cshtml" />
-    <Content Include="Views\Customer\_ReportBestCustomersByOrderTotal.cshtml" />
     <Content Include="Views\CustomerAttribute\Create.cshtml" />
     <Content Include="Views\CustomerAttribute\Edit.cshtml" />
     <Content Include="Views\CustomerAttribute\ListBlock.cshtml" />
@@ -379,6 +397,65 @@
     <Content Include="Views\CustomerRole\Edit.cshtml" />
     <Content Include="Views\CustomerRole\List.cshtml" />
     <Content Include="Views\CustomerRole\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\OnlineCustomer\List.cshtml" />
+    <Content Include="Views\Poll\Create.cshtml" />
+    <Content Include="Views\Poll\Edit.cshtml" />
+    <Content Include="Views\Poll\List.cshtml" />
+    <Content Include="Views\Poll\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\EmailAccount\Create.cshtml" />
+    <Content Include="Views\EmailAccount\Edit.cshtml" />
+    <Content Include="Views\EmailAccount\List.cshtml" />
+    <Content Include="Views\EmailAccount\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\ActivityLog\ListLogs.cshtml" />
+    <Content Include="Views\ActivityLog\ListTypes.cshtml" />
+    <Content Include="Views\QueuedEmail\Edit.cshtml" />
+    <Content Include="Views\QueuedEmail\List.cshtml" />
+    <Content Include="Views\QueuedEmail\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Common\Maintenance.cshtml" />
+    <Content Include="Views\ScheduleTask\List.cshtml" />
+    <Content Include="Views\Common\SeNames.cshtml" />
+    <Content Include="Views\Common\SystemInfo.cshtml" />
+    <Content Include="Views\Common\Warnings.cshtml" />
+    <Content Include="Views\MessageTemplate\Edit.cshtml" />
+    <Content Include="Views\MessageTemplate\List.cshtml" />
+    <Content Include="Views\MessageTemplate\TestTemplate.cshtml" />
+    <Content Include="Views\MessageTemplate\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Plugin\ConfigureMiscPlugin.cshtml" />
+    <Content Include="Views\Plugin\EditPopup.cshtml" />
+    <Content Include="Views\Plugin\List.cshtml" />
+    <Content Include="Views\Plugin\OfficialFeed.cshtml" />
+    <Content Include="Views\Plugin\_CreateOrUpdatePlugin.cshtml" />
+    <Content Include="Views\ExternalAuthentication\ConfigureMethod.cshtml" />
+    <Content Include="Views\ExternalAuthentication\Methods.cshtml" />
+    <Content Include="Views\Setting\AllSettings.cshtml" />
+    <Content Include="Views\Setting\Blog.cshtml" />
+    <Content Include="Views\Setting\Catalog.cshtml" />
+    <Content Include="Views\Setting\CustomerUser.cshtml" />
+    <Content Include="Views\Setting\Forum.cshtml" />
+    <Content Include="Views\Setting\GeneralCommon.cshtml" />
+    <Content Include="Views\Setting\Media.cshtml" />
+    <Content Include="Views\Setting\News.cshtml" />
+    <Content Include="Views\Setting\Order.cshtml" />
+    <Content Include="Views\Setting\ReturnRequestActionCreate.cshtml" />
+    <Content Include="Views\Setting\ReturnRequestActionEdit.cshtml" />
+    <Content Include="Views\Setting\ReturnRequestReasonCreate.cshtml" />
+    <Content Include="Views\Setting\ReturnRequestReasonEdit.cshtml" />
+    <Content Include="Views\Setting\RewardPoints.cshtml" />
+    <Content Include="Views\Setting\Shipping.cshtml" />
+    <Content Include="Views\Setting\ShoppingCart.cshtml" />
+    <Content Include="Views\Setting\StoreScopeConfiguration.cshtml" />
+    <Content Include="Views\Setting\Tax.cshtml" />
+    <Content Include="Views\Setting\Vendor.cshtml" />
+    <Content Include="Views\Setting\_CreateOrUpdate.ReturnRequestAction.cshtml" />
+    <Content Include="Views\Setting\_CreateOrUpdate.ReturnRequestReason.cshtml" />
+    <Content Include="Views\Setting\_ReturnRequestActions.cshtml" />
+    <Content Include="Views\Setting\_ReturnRequestReasons.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\List.cshtml" />
+    <Content Include="Views\Category\ProductAddPopup.cshtml" />
+    <Content Include="Views\Category\Tree.cshtml" />
+    <Content Include="Views\Category\_CreateOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
