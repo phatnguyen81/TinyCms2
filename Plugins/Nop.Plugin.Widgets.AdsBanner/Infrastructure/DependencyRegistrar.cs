@@ -30,22 +30,18 @@ namespace Nop.Plugin.Widgets.AdsBanner.Infrastructure
         /// <param name="config">Config</param>
         public virtual void Register(ContainerBuilder builder, ITypeFinder typeFinder, NopConfig config)
         {
-            //we cache presentation models between requests
-            builder.RegisterType<WidgetsAdsBannerController>()
-                .WithParameter(ResolvedParameter.ForNamed<ICacheManager>("nop_cache_static"));
-
-            
+            builder.RegisterType<AdsBannerService>().As<IAdsBannerService>().InstancePerLifetimeScope();
 
             //datacontext
             this.RegisterPluginDataContext<AdsBannerObjectContext>(builder, CONTEXT_NAME);
 
+            //override required repository with our custom context
             builder.RegisterType<EfRepository<AdsBannerRecord>>()
                 .As<IRepository<AdsBannerRecord>>()
                 .WithParameter(ResolvedParameter.ForNamed<IDbContext>(CONTEXT_NAME))
                 .InstancePerLifetimeScope();
 
-
-            builder.RegisterType<AdsBannerService>().As<IAdsBannerService>().InstancePerLifetimeScope();
+          
         }
 
         /// <summary>

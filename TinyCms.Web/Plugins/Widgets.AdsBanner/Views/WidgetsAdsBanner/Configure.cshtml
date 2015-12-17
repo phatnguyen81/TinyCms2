@@ -31,49 +31,67 @@
             <div id="adsbanners-grid"></div>
 
             <script>
-                $(document).ready(function () {
-                    $("#adsbanners-grid").kendoGrid({
-                        dataSource: {
-                            type: "json",
-                            transport: {
-                                read: {
-                                    url: "@Html.Raw(Url.Action("List", "WidgetsAdsBanner"))",
-                                    type: "POST",
-                                    dataType: "json",
-                                    data: additionalData
-                                }
-                            },
-                            schema: {
-                                data: "Data",
-                                total: "Total",
-                                errors: "Errors"
-                            },
-                            error: function(e) {
-                                display_kendoui_grid_error(e);
-                                // Cancel the changes
-                                this.cancelChanges();
-                            },
-                            pageSize: @(defaultGridPageSize),
-                            serverPaging: true,
-                            serverFiltering: true,
-                            serverSorting: true
-                        },
-                        pageable: {
-                            refresh: true,
-                            pageSizes: [@(gridPageSizes)]
-                        },
-                        editable: {
-                            confirmation: false,
-                            mode: "inline"
-                        },
-                        scrollable: false,
-                        columns: [{
-                            field: "Name",
-                            title: "@T("Plugins.Widgets.AdsBanner.Name")"
-                        }]
-                    });
-                });
-            </script>
+    $(document).ready(function () {
+        $("#adsbanners-grid").kendoGrid({
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: {
+                        url: "@Html.Raw(Url.Action("List", "WidgetsAdsBanner"))",
+                        type: "POST",
+                        dataType: "json",
+                        data: additionalData
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    errors: "Errors"
+                },
+                error: function(e) {
+                    display_kendoui_grid_error(e);
+                    // Cancel the changes
+                    this.cancelChanges();
+                },
+                pageSize: @(defaultGridPageSize),
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true
+            },
+            pageable: {
+                refresh: true,
+                pageSizes: [@(gridPageSizes)]
+            },
+            editable: {
+                confirmation: false,
+                mode: "inline"
+            },
+            scrollable: false,
+            columns: [{
+                field: "Name",
+                title: "@T("Plugins.Widgets.AdsBanner.Name")"
+            }, {
+                field: "Url",
+                title: "@T("Plugins.Widgets.AdsBanner.Url")"
+            }, {
+                field: "FromDate",
+                title: "@T("Plugins.Widgets.AdsBanner.FromDate")",
+                width: 150,
+                template: "#= kendo.toString(kendo.parseDate(FromDate),'MM-dd-yyyy hh:ss')#"
+            }, {
+                field: "ToDate",
+                title: "@T("Plugins.Widgets.AdsBanner.ToDate")",
+                width: 150,
+                template: "#= kendo.toString(kendo.parseDate(ToDate),'MM-dd-yyyy hh:ss')#"
+            }, {
+                field: "Id",
+                title: "@T("Admin.Common.Edit")",
+                width: 100,
+                template: '<a href="@Url.Action("Edit", "WidgetsAdsBanner")/#=Id#">@T("Admin.Common.Edit")</a>'
+            }]
+    });
+    });
+</script>
             <script type="text/javascript">
                 $(document).ready(function () {
                     //search button

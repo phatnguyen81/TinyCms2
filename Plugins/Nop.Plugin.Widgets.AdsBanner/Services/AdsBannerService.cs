@@ -50,12 +50,19 @@ namespace Nop.Plugin.Widgets.AdsBanner.Services
 
         public void UpdateAdsBanner(AdsBannerRecord adsBannerRecord)
         {
+            if (adsBannerRecord == null)
+                throw new ArgumentNullException("adsBannerRecord");
+
             _adsBannerRecordRepository.Update(adsBannerRecord);
         }
 
         public void DeleteAdsBanner(AdsBannerRecord adsBannerRecord)
         {
+            if (adsBannerRecord == null)
+                throw new ArgumentNullException("adsBannerRecord");
+
             _adsBannerRecordRepository.Delete(adsBannerRecord);
+
         }
     }
 }

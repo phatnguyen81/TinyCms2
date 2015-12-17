@@ -1,23 +1,24 @@
-﻿@model CategoryModel
+﻿@using TinyCms.Web.Framework
+@model AdsBannerModel
 @{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
     //page title
-    ViewBag.Title = T("Admin.Catalog.Categories.EditCategoryDetails").Text;
+    ViewBag.Title = T("Plugins.Widgets.AdsBanner.EditAdsBannerDetail").Text;
 }
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "category-form" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "adsbanner-form" }))
 {
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
             <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
-            @T("Admin.Catalog.Categories.EditCategoryDetails") - @Model.Name @Html.ActionLink("(" + T("Admin.Catalog.Categories.BackToList") + ")", "List")
+            @T("Plugins.Widgets.AdsBanner.EditAdsBannerDetail") - @Html.ActionLink("(" + T("Plugins.Widgets.AdsBanner.BackToList") + ")", "ConfigureWidget", "Widget", new { area = "Admin", systemName = "Widgets.AdsBanner" }, null)
         </div>
         <div class="options">
-            <input type="submit" value="@T("Admin.Common.Preview")" onclick="javascript:OpenWindow('@Url.RouteUrl("Category", new { SeName = Model.SeName })', 800, 600, true); return false;" class="k-button" />
             <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
             <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")" />
-            <span id="category-delete" class="k-button">@T("Admin.Common.Delete")</span>
+            <span id="adsbanner-delete" class="k-button">@T("Admin.Common.Delete")</span>
         </div>
     </div>
-    @Html.Partial("_CreateOrUpdate", Model)
+    @Html.Partial("~/Plugins/Widgets.AdsBanner/Views/WidgetsAdsBanner/_CreateOrUpdate.cshtml", Model)
 }
-@Html.DeleteConfirmation("category-delete")
+@Html.DeleteConfirmation("adsbanner-delete")

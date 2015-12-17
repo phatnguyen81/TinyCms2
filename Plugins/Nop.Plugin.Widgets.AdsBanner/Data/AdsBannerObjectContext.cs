@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nop.Plugin.Widgets.AdsBanner.Domain;
 using TinyCms.Core;
 using TinyCms.Data;
+using TinyCms.Data.Mapping.Media;
 
 namespace Nop.Plugin.Widgets.AdsBanner.Data
 {
     public class AdsBannerObjectContext : DbContext, IDbContext
     {
 
-        public AdsBannerObjectContext(string nameOrConnectionString) : base(nameOrConnectionString) { }
+        public AdsBannerObjectContext(string nameOrConnectionString) : base(nameOrConnectionString)
+        {
+            Database.SetInitializer<AdsBannerObjectContext>(null);
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new AdsBannerRecordMap());
+            modelBuilder.Configurations.Add(new PictureMap());
             base.OnModelCreating(modelBuilder);
         }
 

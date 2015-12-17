@@ -90,6 +90,12 @@ namespace Nop.Plugin.Widgets.AdsBanner
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.DisplayOrder", "Display order");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.List.SearchAdsBannerName", "Search banner name");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Manage", "Banner management");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.AddNew", "Add new Ads banner");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.EditAdsBannerDetail", "Edit Ads banner");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Added", "Add new Ads Banner successful");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Updated", "Update Ads Banner successful");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Deleted", "Delete Ads Banner successful");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.BackToList", "Back to ads banner list");
             base.Install();
         }
 
@@ -110,6 +116,12 @@ namespace Nop.Plugin.Widgets.AdsBanner
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.DisplayOrder");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.List.SearchAdsBannerName");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Manage");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.AddNew");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.EditAdsBannerDetail");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Added");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Updated");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Deleted");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.BackToList");
 
             base.Uninstall();
         }

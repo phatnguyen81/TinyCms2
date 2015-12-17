@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Nop.Plugin.Widgets.AdsBanner.Extensions;
 using Nop.Plugin.Widgets.AdsBanner.Infrastructure.Cache;
@@ -72,7 +73,15 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
                 command.Page - 1, command.PageSize, true);
             var gridModel = new DataSourceResult
             {
-                Data = adsbanners.Select(q=>q.ToModel()),
+                Data = adsbanners.Select(q =>
+                {
+                    var ads = q.ToModel();
+                    if (q.FromDateUtc != null)
+                        ads.FromDate = _dateTimeHelper.ConvertToUserTime(q.FromDateUtc.Value, DateTimeKind.Utc);
+                    if (q.ToDateUtc != null)
+                        ads.ToDate = _dateTimeHelper.ConvertToUserTime(q.ToDateUtc.Value, DateTimeKind.Utc);
+                    return ads;
+                }),
                 Total = adsbanners.TotalCount
             };
             return Json(gridModel);
@@ -87,7 +96,13 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
                 Value = q.Id.ToString()
             }).ToList();
         }
-
+        [NonAction]
+        protected virtual void UpdatePictureSeoNames(AdsBannerModel adsBanner)
+        {
+            var picture = _pictureService.GetPictureById(adsBanner.PictureId);
+            if (picture != null)
+                _pictureService.SetSeoFilename(picture.Id, _pictureService.GetPictureSeName(adsBanner.Name));
+        }
         public ActionResult Create()
         {
             var model = new AdsBannerModel();
@@ -106,7 +121,10 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
                 if (model.ToDate != null)
                     adsbanner.ToDateUtc = _dateTimeHelper.ConvertToUtcTime(model.ToDate.Value);
 
-                _adsBannerService.UpdateAdsBanner(adsbanner);
+                _adsBannerService.InsertAdsBanner(adsbanner);
+
+                UpdatePictureSeoNames(model);
+
                 SuccessNotification(_localizationService.GetResource("Plugins.Widgets.AdsBanner.Added"));
                 return continueEditing ? RedirectToAction("Edit", new { id = adsbanner.Id }) : RedirectToAction("ConfigureWidget", "Widget", new { area = "Admin", systemName = "Widgets.AdsBanner" });
             }
@@ -114,6 +132,67 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
 
             PrepareAdsBannerModel(model);
             return View("~/Plugins/Widgets.AdsBanner/Views/WidgetsAdsBanner/Create.cshtml", model);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var ads = _adsBannerService.GetById(id);
+            if (ads == null)
+                return RedirectToAction("ConfigureWidget", "Widget",
+                    new {area = "Admin", systemName = "Widgets.AdsBanner"});
+
+            var model = ads.ToModel();
+            if (ads.FromDateUtc != null) model.FromDate = _dateTimeHelper.ConvertToUserTime(ads.FromDateUtc.Value, DateTimeKind.Utc);
+            if (ads.ToDateUtc != null) model.ToDate = _dateTimeHelper.ConvertToUserTime(ads.ToDateUtc.Value, DateTimeKind.Utc);
+            PrepareAdsBannerModel(model);
+
+            return View("~/Plugins/Widgets.AdsBanner/Views/WidgetsAdsBanner/Edit.cshtml", model);
+        }
+
+        [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+        public ActionResult Edit(AdsBannerModel model, bool continueEditing)
+        {
+            var adsbanner = _adsBannerService.GetById(model.Id);
+            if (adsbanner == null)
+                return RedirectToAction("ConfigureWidget", "Widget",
+                    new { area = "Admin", systemName = "Widgets.AdsBanner" });
+            if (ModelState.IsValid)
+            {
+                int prevPictureId = adsbanner.PictureId;
+
+                _adsBannerService.UpdateAdsBanner(adsbanner);
+                //delete an old picture (if deleted or updated)
+                if (prevPictureId > 0 && prevPictureId != adsbanner.PictureId)
+                {
+                    var prevPicture = _pictureService.GetPictureById(prevPictureId);
+                    if (prevPicture != null)
+                        _pictureService.DeletePicture(prevPicture);
+                }
+                SuccessNotification(_localizationService.GetResource("Plugins.Widgets.AdsBanner.Updated"));
+                return continueEditing ? RedirectToAction("Edit", new { id = adsbanner.Id }) : RedirectToAction("ConfigureWidget", "Widget", new { area = "Admin", systemName = "Widgets.AdsBanner" });
+            }
+
+            PrepareAdsBannerModel(model);
+
+            return View("~/Plugins/Widgets.AdsBanner/Views/WidgetsAdsBanner/Edit.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var adsbanner = _adsBannerService.GetById(id);
+            if (adsbanner == null)
+                return RedirectToAction("ConfigureWidget", "Widget",
+                    new { area = "Admin", systemName = "Widgets.AdsBanner" });
+
+            int pictureId = adsbanner.PictureId;
+
+            _adsBannerService.DeleteAdsBanner(adsbanner);
+
+            _pictureService.DeletePicture(_pictureService.GetPictureById(pictureId));
+
+            SuccessNotification(_localizationService.GetResource("Plugins.Widgets.AdsBanner.Deleted"));
+            return RedirectToAction("ConfigureWidget", "Widget", new { area = "Admin", systemName = "Widgets.AdsBanner" });
         }
    
         [ChildActionOnly]
