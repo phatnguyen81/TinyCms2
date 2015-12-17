@@ -1,0 +1,272 @@
+﻿@model PostModel
+@{
+    //resources for post tags input
+    Html.AppendCssFileParts("~/Content/tagit/jquery.tagit.css");
+    Html.AppendScriptParts("~/Scripts/tag-it.min.js");
+}
+@using TinyCms.Services.Posts;
+@using System.Text;
+<script type="text/javascript">
+    $(document).ready(function() {
+
+      
+        $("#@Html.FieldIdFor(model => model.MarkAsNew)").click(toggleMarkAsNew);
+
+        toggleMarkAsNew();
+    });
+
+    function toggleShowOnHomePage() {
+        if ($('#@Html.FieldIdFor(model => model.ShowOnHomePage)').is(':checked')) {
+            $('#pnlDisplayOrder').show();
+        } else {
+            $('#pnlDisplayOrder').hide();
+        }
+    }
+
+
+    @{
+        //TODO move to Model
+        var postTags = EngineContext.Current.Resolve<IPostTagService>().GetAllPostTags();
+        var postTagsSb = new StringBuilder();
+        postTagsSb.Append("var sampleTags = [");
+        for (int i = 0; i < postTags.Count; i++)
+        {
+            var tag = postTags[i];
+            postTagsSb.Append("'");
+            postTagsSb.Append(HttpUtility.JavaScriptStringEncode(tag.Name));
+            postTagsSb.Append("'");
+            if (i != postTags.Count - 1)
+            {
+                postTagsSb.Append(",");
+            }
+        }
+        postTagsSb.Append("]");
+    }
+    //post tags
+    $(document).ready(function () {
+        @Html.Raw(postTagsSb.ToString())
+        $("#@Html.FieldIdFor(model => model.PostTags)").tagit({
+            availableTags: sampleTags,
+            allowSpaces: true
+        });
+    });
+
+
+</script>
+<table class="adminContent">
+    @if (Model.Id > 0)
+    {
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.Id):
+            </td>
+            <td class="adminData">
+                @Model.Id.ToString()
+                @Html.ValidationMessageFor(model => model.Id)
+            </td>
+        </tr>
+    }
+    
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.VisibleIndividually):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.VisibleIndividually)
+            @Html.ValidationMessageFor(model => model.VisibleIndividually)
+        </td>
+    </tr>
+   
+</table>
+@(Html.LocalizedEditor<PostModel, PostLocalizedModel>("post-info-localized",
+                @<table class="adminContent">
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.NopLabelFor(model => model.Locales[item].Name):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.Locales[item].Name)
+                            @Html.ValidationMessageFor(model => model.Locales[item].Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.NopLabelFor(model => model.Locales[item].ShortDescription):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextAreaFor(model => model.Locales[item].ShortDescription, new { style = "Width: 250px; Height: 150px;" })
+                            @Html.ValidationMessageFor(model => model.Locales[item].ShortDescription)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.NopLabelFor(model => model.Locales[item].FullDescription):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.Locales[item].FullDescription, "RichEditor")
+                            @Html.ValidationMessageFor(model => model.Locales[item].FullDescription)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            @Html.HiddenFor(model => model.Locales[item].LanguageId)
+                        </td>
+                    </tr>
+                </table>
+                ,
+                @<table class="adminContent">
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.NopLabelFor(model => model.Name):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.NopLabelFor(model => model.ShortDescription):
+                        </td>
+                        <td class="adminData">
+                            @Html.TextAreaFor(x => x.ShortDescription, new { style = "Width: 250px; Height: 150px;" })
+                            @Html.ValidationMessageFor(model => model.ShortDescription)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.NopLabelFor(model => model.FullDescription):
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(x => x.FullDescription, "RichEditor")
+                            @Html.ValidationMessageFor(model => model.FullDescription)
+                        </td>
+                    </tr>
+                </table>
+            ))
+<table class="adminContent">
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.AdminComment):
+        </td>
+        <td class="adminData">
+            @Html.TextAreaFor(model => model.AdminComment)
+            @Html.ValidationMessageFor(model => model.AdminComment)
+        </td>
+    </tr>
+   
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.ShowOnHomePage):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.ShowOnHomePage)
+            @Html.ValidationMessageFor(model => model.ShowOnHomePage)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.DisplayOrder):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.DisplayOrder)
+            @Html.ValidationMessageFor(model => model.DisplayOrder)
+        </td>
+    </tr>
+  
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.PostTags):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.PostTags)
+            @Html.ValidationMessageFor(model => model.PostTags)
+        </td>
+    </tr>
+  
+   
+</table>
+
+<table class="adminContent">
+    <tr class="adminSeparator">
+        <td colspan="2">
+            <hr />
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.AvailableStartDateTimeUtc):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.AvailableStartDateTimeUtc)
+            @Html.ValidationMessageFor(model => model.AvailableStartDateTimeUtc)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.AvailableEndDateTimeUtc):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.AvailableEndDateTimeUtc)
+            @Html.ValidationMessageFor(model => model.AvailableEndDateTimeUtc)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.MarkAsNew):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.MarkAsNew)
+            @Html.ValidationMessageFor(model => model.MarkAsNew)
+        </td>
+    </tr>
+    <tr id="pnlMarkAsNewStartDateTimeUtc">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.MarkAsNewStartDateTimeUtc):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.MarkAsNewStartDateTimeUtc)
+            @Html.ValidationMessageFor(model => model.MarkAsNewStartDateTimeUtc)
+        </td>
+    </tr>
+    <tr id="pnlMarkAsNewEndDateTimeUtc">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.MarkAsNewEndDateTimeUtc):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.MarkAsNewEndDateTimeUtc)
+            @Html.ValidationMessageFor(model => model.MarkAsNewEndDateTimeUtc)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.Published):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.Published)
+            @Html.ValidationMessageFor(model => model.Published)
+        </td>
+    </tr>
+    @if (Model.CreatedOn.HasValue)
+    {
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.CreatedOn):
+            </td>
+            <td class="adminData">
+                @Model.CreatedOn.Value.ToString("F")
+            </td>
+        </tr>
+    }
+    @if (Model.UpdatedOn.HasValue)
+    {
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.UpdatedOn):
+            </td>
+            <td class="adminData">
+                @Model.UpdatedOn.Value.ToString("F")
+            </td>
+        </tr>
+    }
+</table>

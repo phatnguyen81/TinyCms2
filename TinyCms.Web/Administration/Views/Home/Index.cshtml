@@ -7,7 +7,7 @@
     var permissionService = EngineContext.Current.Resolve<IPermissionService>();
     var canManageOrders = permissionService.Authorize(StandardPermissionProvider.ManageOrders);
     var canManageCustomers = permissionService.Authorize(StandardPermissionProvider.ManageCustomers);
-    var canManageProducts = permissionService.Authorize(StandardPermissionProvider.ManageProducts);
+    var canManagePosts = permissionService.Authorize(StandardPermissionProvider.ManagePosts);
 }
 @Html.AntiForgeryToken()
 <div class="section-title">

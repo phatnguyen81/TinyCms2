@@ -1,0 +1,202 @@
+﻿@model PostModel
+
+@if (Model.Id > 0)
+{
+    <div>
+        <div id="postpictures-grid"></div>
+
+        <script>
+            $(document).ready(function () {
+                $("#postpictures-grid").kendoGrid({
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: {
+                                url: "@Html.Raw(Url.Action("PostPictureList", "Post", new { postId = Model.Id }))",
+                                type: "POST",
+                                dataType: "json",
+                                data: addAntiForgeryToken
+                            },
+                            update: {
+                                url:"@Html.Raw(Url.Action("PostPictureUpdate", "Post"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: addAntiForgeryToken
+                            },
+                            destroy: {
+                                url: "@Html.Raw(Url.Action("PostPictureDelete", "Post"))",
+                                type: "POST",
+                                dataType: "json",
+                                data: addAntiForgeryToken
+                            }
+                        },
+                        schema: {
+                            data: "Data",
+                            total: "Total",
+                            errors: "Errors",
+                            model: {
+                                id: "Id",
+                                fields: {
+                                    PictureUrl: {editable: false, type: "string" },
+                                    DisplayOrder: {editable: true, type: "number" },
+                                    OverrideAltAttribute: {editable: true, type: "string" },
+                                    OverrideTitleAttribute: {editable: true, type: "string" }
+                                }
+                            }
+                        },
+                        requestEnd: function(e) {
+                            if(e.type=="update") {
+                                this.read();
+                            }
+                        },
+                        error: function(e) {
+                            display_kendoui_grid_error(e);
+                            // Cancel the changes
+                            this.cancelChanges();
+                        },
+                        serverPaging: true,
+                        serverFiltering: true,
+                        serverSorting: true
+                    },
+                    pageable: {
+                        refresh: true,
+                        numeric: false,
+                        previousNext: false,
+                        info: false
+                    },
+                    editable: {
+                        confirmation: false,
+                        mode: "inline"
+                    },
+                    scrollable: false,
+                    columns: [{
+                        field: "PictureUrl",
+                        title: "@T("Admin.Catalog.Posts.Pictures.Fields.Picture")",
+                        template: '<a href="#=PictureUrl#" target="_blank"><img alt="#=PictureId#" src="#=PictureUrl#" width="150" /></a>',
+                        width: 200
+                    }, {
+                        field: "DisplayOrder",
+                        title: "@T("Admin.Catalog.Posts.Pictures.Fields.DisplayOrder")",
+                        //integer format
+                        format: "{0:0}",
+                        width: 150
+                    }, {
+                        field: "OverrideAltAttribute",
+                        title: "@T("Admin.Catalog.Posts.Pictures.Fields.OverrideAltAttribute")",
+                        width: 200
+                    }, {
+                        field: "OverrideTitleAttribute",
+                        title: "@T("Admin.Catalog.Posts.Pictures.Fields.OverrideTitleAttribute")",
+                        width: 200
+                    }, {
+                        command: [{
+                            name: "edit",
+                            text: {
+                                edit: "@T("Admin.Common.Edit")",
+                                update: "@T("Admin.Common.Update")",
+                                cancel: "@T("Admin.Common.Cancel")"
+                            }
+                        }, {
+                            name: "destroy",
+                            text: "@T("Admin.Common.Delete")"
+                        }],
+                        width: 200
+                    }]
+                });
+            });
+        </script>
+    </div>
+    <p>
+        <strong>@T("Admin.Catalog.Posts.Pictures.AddNew")</strong>
+    </p>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#addPostPicture').click(function () {
+                var pictureId = $("#@Html.FieldIdFor(model => model.AddPictureModel.PictureId)").val();
+                var overrideAltAttribute = $("#@Html.FieldIdFor(model => model.AddPictureModel.OverrideAltAttribute)").val();
+                var overrideTitleAttribute = $("#@Html.FieldIdFor(model => model.AddPictureModel.OverrideTitleAttribute)").val();
+                var displayOrder = $("#@Html.FieldIdFor(model => model.AddPictureModel.DisplayOrder)").val();
+
+                if (pictureId == 0) {
+                    alert('Upload picture first');
+                    return;
+                }
+
+                $('#addPostPicture').attr('disabled', true);
+
+                var postData = {
+                    pictureId: pictureId,
+                    displayOrder: displayOrder,
+                    overrideAltAttribute: overrideAltAttribute,
+                    overrideTitleAttribute: overrideTitleAttribute,
+                    postId: @Model.Id
+                };
+                addAntiForgeryToken(postData);
+
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "@(Url.Action("PostPictureAdd", "Post"))",
+                    data: postData,
+                    success: function(data) {
+                        var grid = $("#postpictures-grid");
+                        grid.data('kendoGrid').dataSource.read();
+                        $('#addPostPicture').attr('disabled', false);
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert('Failed to add post picture.');
+                        $('#addPostPicture').attr('disabled', false);
+                    }
+                });
+            });
+        });
+    </script>     
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.AddPictureModel.PictureId):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddPictureModel.PictureId)
+                @Html.ValidationMessageFor(model => model.AddPictureModel.PictureId)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.AddPictureModel.OverrideAltAttribute):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddPictureModel.OverrideAltAttribute)
+                @Html.ValidationMessageFor(model => model.AddPictureModel.OverrideAltAttribute)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.AddPictureModel.OverrideTitleAttribute):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddPictureModel.OverrideTitleAttribute)
+                @Html.ValidationMessageFor(model => model.AddPictureModel.OverrideTitleAttribute)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.AddPictureModel.DisplayOrder):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddPictureModel.DisplayOrder)
+                @Html.ValidationMessageFor(model => model.AddPictureModel.DisplayOrder)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="left">
+                <input type="button" id="addPostPicture" class="k-button" value="@T("Admin.Catalog.Posts.Pictures.AddButton")" />
+            </td>
+        </tr>
+    </table>
+}
+else
+{
+    @T("Admin.Catalog.Posts.Pictures.SaveBeforeEdit")
+}

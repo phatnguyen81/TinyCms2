@@ -1,0 +1,8 @@
+﻿Group: Widgets
+FriendlyName: Banner Management
+SystemName: Widgets.AdsBanner
+Version: 1.09
+SupportedVersions: 1.0
+Author: phatnh team
+DisplayOrder: 1
+FileName: Nop.Plugin.Widgets.AdsBanner.dll

@@ -4,11 +4,11 @@ using TinyCms.Core.Domain.Localization;
 namespace TinyCms.Core.Domain.Posts
 {
     /// <summary>
-    /// Represents a product tag
+    /// Represents a post tag
     /// </summary>
     public partial class PostTag : BaseEntity, ILocalizedEntity
     {
-        private ICollection<Post> _products;
+        private ICollection<Post> _posts;
 
         /// <summary>
         /// Gets or sets the name
@@ -16,12 +16,12 @@ namespace TinyCms.Core.Domain.Posts
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the products
+        /// Gets or sets the posts
         /// </summary>
-        public virtual ICollection<Post> Products
+        public virtual ICollection<Post> Posts
         {
-            get { return _products ?? (_products = new List<Post>()); }
-            protected set { _products = value; }
+            get { return _posts ?? (_posts = new List<Post>()); }
+            protected set { _posts = value; }
         }
     }
 }

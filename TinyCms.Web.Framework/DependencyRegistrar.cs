@@ -18,6 +18,7 @@ using TinyCms.Core.Plugins;
 using TinyCms.Data;
 using TinyCms.Services.Authentication;
 using TinyCms.Services.Authentication.External;
+using TinyCms.Services.Cms;
 using TinyCms.Services.Common;
 using TinyCms.Services.Configuration;
 using TinyCms.Services.Customers;
@@ -139,6 +140,7 @@ namespace TinyCms.Web.Framework
             //services
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
             builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();
+            builder.RegisterType<PostTagService>().As<IPostTagService>().InstancePerLifetimeScope();
             
             //use static cache (between HTTP requests)
             builder.RegisterType<SearchTermService>().As<ISearchTermService>().InstancePerLifetimeScope();
@@ -224,6 +226,7 @@ namespace TinyCms.Web.Framework
             //}
 
             builder.RegisterType<PollService>().As<IPollService>().InstancePerLifetimeScope();
+            builder.RegisterType<WidgetService>().As<IWidgetService>().InstancePerLifetimeScope();
 
             builder.RegisterType<DateTimeHelper>().As<IDateTimeHelper>().InstancePerLifetimeScope();
             builder.RegisterType<SitemapGenerator>().As<ISitemapGenerator>().InstancePerLifetimeScope();

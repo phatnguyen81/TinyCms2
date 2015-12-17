@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TinyCms.Core.Domain.Cms;
 
 namespace TinyCms.Services.Cms
 {
@@ -35,5 +36,7 @@ namespace TinyCms.Services.Cms
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <returns>Widgets</returns>
         IList<IWidgetPlugin> LoadAllWidgets(int storeId = 0);
+
+        IList<WidgetZone> LoaddAllWidgetZones();
     }
 }

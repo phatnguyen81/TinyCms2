@@ -1,4 +1,4 @@
-
+use tinycms;
 SET IDENTITY_INSERT [dbo].[EmailAccount] ON
 INSERT [dbo].[EmailAccount] ([Id], [Email], [DisplayName], [Host], [Port], [Username], [Password], [EnableSsl], [UseDefaultCredentials]) VALUES (1, N'test@mail.com', N'Store name', N'smtp.mail.com', 25, N'123', N'123', 0, 0)
 SET IDENTITY_INSERT [dbo].[EmailAccount] OFF
@@ -10730,6 +10730,7 @@ INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Newsletter Subscribers',N'ManageNewsletterSubscribers',N'Promo');
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Polls',N'ManagePolls',N'Content Management');
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Message Templates',N'ManageMessageTemplates',N'Content Management');
+INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Widgets',N'ManageWidgets',N'Content Management');
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Languages',N'ManageLanguages',N'Configuration');
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage Settings',N'ManageSettings',N'Configuration');
 INSERT INTO PermissionRecord([Name],[SystemName],[Category]) VALUES(N'Admin area. Manage External Authentication Methods',N'ManageExternalAuthenticationMethods',N'Configuration');

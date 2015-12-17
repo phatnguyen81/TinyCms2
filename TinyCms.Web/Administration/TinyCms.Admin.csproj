@@ -57,6 +57,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -196,14 +197,17 @@
     <Compile Include="Controllers\PollController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\QueuedEmailController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\RoxyFilemanController.cs" />
     <Compile Include="Controllers\ScheduleTaskController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\MappingExtensions.cs" />
     <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
@@ -255,6 +259,8 @@
     <Compile Include="Models\Posts\CategoryModel.cs" />
     <Compile Include="Models\Posts\CopyPostModel.cs" />
     <Compile Include="Models\Posts\PostModel.cs" />
+    <Compile Include="Models\Posts\PostTagModel.cs" />
+    <Compile Include="Models\Posts\PostListModel.cs" />
     <Compile Include="Models\Security\PermissionMappingModel.cs" />
     <Compile Include="Models\Security\PermissionRecordModel.cs" />
     <Compile Include="Models\Settings\CatalogSettingsModel.cs" />
@@ -281,6 +287,7 @@
     <Compile Include="Validators\Polls\PollValidator.cs" />
     <Compile Include="Validators\Posts\CategoryValidator.cs" />
     <Compile Include="Validators\Posts\PostValidator.cs" />
+    <Compile Include="Validators\Posts\PostTagValidator.cs" />
     <Compile Include="Validators\Settings\SettingValidator.cs" />
     <Compile Include="Validators\Tasks\ScheduleTaskValidator.cs" />
   </ItemGroup>
@@ -459,6 +466,46 @@
     <Content Include="Views\Category\Tree.cshtml" />
     <Content Include="Views\Category\_CreateOrUpdate.cshtml" />
     <Content Include="Views\Common\AclDisabledWarning.cshtml" />
+    <Content Include="Views\Post\AddAttributeCombinationPopup.cshtml" />
+    <Content Include="Views\Post\AssociatedProductAddPopup.cshtml" />
+    <Content Include="Views\Post\AssociateProductToAttributeValuePopup.cshtml" />
+    <Content Include="Views\Post\BulkEdit.cshtml" />
+    <Content Include="Views\Post\Create.cshtml" />
+    <Content Include="Views\Post\CrossSellProductAddPopup.cshtml" />
+    <Content Include="Views\Post\Edit.cshtml" />
+    <Content Include="Views\Post\EditAttributeValues.cshtml" />
+    <Content Include="Views\Post\EditProductTag.cshtml" />
+    <Content Include="Views\Post\List.cshtml" />
+    <Content Include="Views\Post\LowStockReport.cshtml" />
+    <Content Include="Views\Post\ProductAttributeConditionPopup.cshtml" />
+    <Content Include="Views\Post\ProductAttributeValidationRulesPopup.cshtml" />
+    <Content Include="Views\Post\ProductAttributeValueCreatePopup.cshtml" />
+    <Content Include="Views\Post\ProductAttributeValueEditPopup.cshtml" />
+    <Content Include="Views\Post\ProductTags.cshtml" />
+    <Content Include="Views\Post\RelatedProductAddPopup.cshtml" />
+    <Content Include="Views\Post\RequiredProductAddPopup.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.Acl.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.AssociatedProducts.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.Categories.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.CrossSells.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.Discounts.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.Info.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.Manufacturers.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.Pictures.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.ProductAttributes.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.PurchasedWithOrders.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.RelatedProducts.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.SEO.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.SpecificationAttributes.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.Stores.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.TierPrices.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdateProductAttributeValue.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdatePostTag.cshtml" />
+    <Content Include="Views\Post\_ProductAttributes.cshtml" />
+    <Content Include="Views\Widget\ConfigureWidget.cshtml" />
+    <Content Include="Views\Widget\List.cshtml" />
+    <Content Include="Views\Widget\WidgetsByZone.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

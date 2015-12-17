@@ -12,7 +12,7 @@ namespace TinyCms.Data.Mapping.Posts
             this.Property(p => p.MetaKeywords).HasMaxLength(400);
             this.Property(p => p.MetaTitle).HasMaxLength(400);
             this.HasMany(p => p.PostTags)
-                .WithMany(pt => pt.Products)
+                .WithMany(pt => pt.Posts)
                 .Map(m => m.ToTable("Post_PostTag_Mapping"));
         }
     }

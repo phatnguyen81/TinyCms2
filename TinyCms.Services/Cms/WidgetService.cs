@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TinyCms.Core.Data;
 using TinyCms.Core.Domain.Cms;
 using TinyCms.Core.Plugins;
 
@@ -11,10 +12,14 @@ namespace TinyCms.Services.Cms
     /// </summary>
     public partial class WidgetService : IWidgetService
     {
+        #region Constants
+        #endregion
+
         #region Fields
 
         private readonly IPluginFinder _pluginFinder;
         private readonly WidgetSettings _widgetSettings;
+        private readonly IRepository<WidgetZone> _widgetZoneRepository;
 
         #endregion
         
@@ -25,11 +30,13 @@ namespace TinyCms.Services.Cms
         /// </summary>
         /// <param name="pluginFinder">Plugin finder</param>
         /// <param name="widgetSettings">Widget settings</param>
+        /// <param name="widgetZoneRepository"></param>
         public WidgetService(IPluginFinder pluginFinder,
-            WidgetSettings widgetSettings)
+            WidgetSettings widgetSettings, IRepository<WidgetZone> widgetZoneRepository)
         {
             this._pluginFinder = pluginFinder;
             this._widgetSettings = widgetSettings;
+            _widgetZoneRepository = widgetZoneRepository;
         }
 
         #endregion
@@ -87,7 +94,12 @@ namespace TinyCms.Services.Cms
         {
             return _pluginFinder.GetPlugins<IWidgetPlugin>(storeId: storeId).ToList();
         }
-        
+
+        public IList<WidgetZone> LoaddAllWidgetZones()
+        {
+            return _widgetZoneRepository.Table.ToList();
+        }
+
         #endregion
     }
 }

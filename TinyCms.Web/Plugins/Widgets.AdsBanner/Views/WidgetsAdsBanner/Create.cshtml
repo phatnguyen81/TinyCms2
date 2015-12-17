@@ -1,0 +1,21 @@
+﻿@model AdsBannerModel
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    //page title
+    ViewBag.Title = T("Plugins.Widgets.AdsBanner.AddNew").Text;
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "adsbanner-form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Administration/Content/images/ico-content.png")" alt="" />
+            @T("Plugins.Widgets.AdsBanner.AddNew") @Html.ActionLink("(" + T("Plugins.Widgets.AdsBanner.BackToList") + ")", "ConfigureWidget", "Widget", new { area = "Admin", systemName = "Widgets.AdsBanner" },null)
+        </div>
+        <div class="options">
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")" />
+        </div>
+    </div>
+    @Html.Partial("~/Plugins/Widgets.AdsBanner/Views/WidgetsAdsBanner/_CreateOrUpdate.cshtml", Model)
+}

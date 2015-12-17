@@ -1,0 +1,109 @@
+﻿@using TinyCms.Core.Infrastructure
+@using TinyCms.Web.Framework
+@model Nop.Plugin.Widgets.AdsBanner.Models.AdsBannerListModel
+@{
+    Layout = "";
+    var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    //page title
+    ViewBag.Title = T("Plugins.Widgets.AdsBanner.Manage").Text;
+}
+<table width="100%">
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.SearchAdsBannerName):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.SearchAdsBannerName)
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="button" id="search-adsbanners" class="k-button" value="@T("Admin.Common.Search")" />
+            <a href="@Url.Action("Create", "WidgetsAdsBanner")" class="k-button">@T("Admin.Common.AddNew")</a>
+        </td>
+    </tr>
+</table>
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="adsbanners-grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#adsbanners-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("List", "WidgetsAdsBanner"))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: additionalData
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors"
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            pageSize: @(defaultGridPageSize),
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            pageSizes: [@(gridPageSizes)]
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                        columns: [{
+                            field: "Name",
+                            title: "@T("Plugins.Widgets.AdsBanner.Name")"
+                        }]
+                    });
+                });
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    //search button
+                    $('#search-adsbanners').click(function () {
+                        //search
+                        var grid = $('#adsbanners-grid').data('kendoGrid');
+                        grid.dataSource.page(1); //new search. Set page size to 1
+                        //grid.dataSource.read(); we already loaded the grid above using "page" function
+                        return false;
+                    });
+
+                    $("#@Html.FieldIdFor(model => model.SearchAdsBannerName)").keydown(function (event) {
+                        if (event.keyCode == 13) {
+                            $("#search-adsbanners").click();
+                            return false;
+                        }
+                    });
+                });
+
+                function additionalData() {
+                    var data = {
+                        SearchAdsBannerName: $('#@Html.FieldIdFor(model => model.SearchAdsBannerName)').val()
+                    };
+                    addAntiForgeryToken(data);
+                    return data;
+                }
+            </script>
+
+
+    
+        </td>
+    </tr>
+</table>

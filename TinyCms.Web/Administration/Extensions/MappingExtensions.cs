@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using TinyCms.Admin.Models.Cms;
 using TinyCms.Admin.Models.Customers;
 using TinyCms.Admin.Models.ExternalAuthentication;
 using TinyCms.Admin.Models.Localization;
@@ -17,6 +18,7 @@ using TinyCms.Core.Domain.Polls;
 using TinyCms.Core.Domain.Posts;
 using TinyCms.Core.Plugins;
 using TinyCms.Services.Authentication.External;
+using TinyCms.Services.Cms;
 
 namespace TinyCms.Admin.Extensions
 {
@@ -200,6 +202,15 @@ namespace TinyCms.Admin.Extensions
         public static AuthenticationMethodModel ToModel(this IExternalAuthenticationMethod entity)
         {
             return entity.MapTo<IExternalAuthenticationMethod, AuthenticationMethodModel>();
+        }
+
+        #endregion
+
+        #region Widgets
+
+        public static WidgetModel ToModel(this IWidgetPlugin entity)
+        {
+            return entity.MapTo<IWidgetPlugin, WidgetModel>();
         }
 
         #endregion
