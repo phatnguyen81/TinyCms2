@@ -48,6 +48,7 @@ namespace TinyCms.Admin.Controllers
         private readonly IAclService _aclService;
         private readonly ICacheManager _cacheManager;
         private readonly IDateTimeHelper _dateTimeHelper;
+        private readonly IPostTemplateService _postTemplateService;
 
         #endregion
 
@@ -69,7 +70,7 @@ namespace TinyCms.Admin.Controllers
             IAclService aclService,
             ICacheManager cacheManager,
             IDateTimeHelper dateTimeHelper, 
-            IPostTagService postTagService)
+            IPostTagService postTagService, IPostTemplateService postTemplateService)
         {
             this._postService = postService;
             this._categoryService = categoryService;
@@ -88,6 +89,7 @@ namespace TinyCms.Admin.Controllers
             this._cacheManager = cacheManager;
             this._dateTimeHelper = dateTimeHelper;
             this._postTagService = postTagService;
+            _postTemplateService = postTemplateService;
         }
 
         #endregion 
@@ -305,6 +307,16 @@ namespace TinyCms.Admin.Controllers
                 model.CopyPostModel.CopyImages = true;
             }
 
+            //templates
+            var templates = _postTemplateService.GetAllPostTemplates();
+            foreach (var template in templates)
+            {
+                model.AvailablePostTemplates.Add(new SelectListItem
+                {
+                    Text = template.Name,
+                    Value = template.Id.ToString()
+                });
+            }
        
             //post tags
             if (post != null)
@@ -326,7 +338,6 @@ namespace TinyCms.Admin.Controllers
             if (setPredefinedValues)
             {
                 model.Published = true;
-                model.VisibleIndividually = true;
             }
         }
 

@@ -22,6 +22,10 @@ namespace TinyCms.Core.Domain.Posts
         /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value of used category template identifier
+        /// </summary>
+        public int CategoryTemplateId { get; set; }
 
         /// <summary>
         /// Gets or sets the meta keywords

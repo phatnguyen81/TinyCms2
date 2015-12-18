@@ -254,8 +254,6 @@ GO
 CREATE PROCEDURE [dbo].[PostLoadAllPaged]
 (
 	@CategoryIds		nvarchar(MAX) = null,	--a list of category IDs (comma-separated list). e.g. 1,2,3
-	@VisibleIndividuallyOnly bit = 0, 	--0 - load all Posts , 1 - "visible indivially" only
-	@MarkedAsNewOnly	bit = 0, 	--0 - load all Posts , 1 - "marked as new" only
 	@PostTagId		int = 0,
 	@FeaturedPosts	bit = null,	--0 featured only , 1 not featured only, null - load all Posts
 	@Keywords			nvarchar(4000) = null,
@@ -569,21 +567,6 @@ BEGIN
 	END
 	
 
-	
-	--filter by "visible individually"
-	IF @VisibleIndividuallyOnly = 1
-	BEGIN
-		SET @sql = @sql + '
-		AND p.VisibleIndividually = 1'
-	END
-	
-	--filter by "marked as new"
-	IF @MarkedAsNewOnly = 1
-	BEGIN
-		SET @sql = @sql + '
-		AND p.MarkAsNew = 1
-		AND (getutcdate() BETWEEN ISNULL(p.MarkAsNewStartDateTimeUtc, ''1/1/1900'') and ISNULL(p.MarkAsNewEndDateTimeUtc, ''1/1/2999''))'
-	END
 	
 	--filter by Post tag
 	IF ISNULL(@PostTagId, 0) != 0

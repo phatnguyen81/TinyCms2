@@ -141,6 +141,9 @@ namespace TinyCms.Web.Framework
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
             builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();
             builder.RegisterType<PostTagService>().As<IPostTagService>().InstancePerLifetimeScope();
+            builder.RegisterType<CategoryTemplateService>().As<ICategoryTemplateService>().InstancePerLifetimeScope();
+            builder.RegisterType<PostTemplateService>().As<IPostTemplateService>().InstancePerLifetimeScope();
+            builder.RegisterType<CategoryTypeService>().As<ICategoryTypeService>().InstancePerLifetimeScope();
             
             //use static cache (between HTTP requests)
             builder.RegisterType<SearchTermService>().As<ISearchTermService>().InstancePerLifetimeScope();

@@ -35,6 +35,8 @@ namespace TinyCms.Admin.Controllers
         private readonly IAclService _aclService;
         private readonly IExportManager _exportManager;
         private readonly ICustomerActivityService _customerActivityService;
+        private readonly ICategoryTemplateService _categoryTemplateService;
+        private readonly ICategoryTypeService _categoryTypeService;
         private readonly CatalogSettings _catalogSettings;
 
         #endregion
@@ -53,7 +55,7 @@ namespace TinyCms.Admin.Controllers
             IAclService aclService, 
             IExportManager exportManager, 
             ICustomerActivityService customerActivityService,
-            CatalogSettings catalogSettings)
+            CatalogSettings catalogSettings, ICategoryTemplateService categoryTemplateService, ICategoryTypeService categoryTypeService)
         {
             this._categoryService = categoryService;
             this._postService = postService;
@@ -68,6 +70,8 @@ namespace TinyCms.Admin.Controllers
             this._exportManager = exportManager;
             this._customerActivityService = customerActivityService;
             this._catalogSettings = catalogSettings;
+            _categoryTemplateService = categoryTemplateService;
+            _categoryTypeService = categoryTypeService;
         }
 
         #endregion
@@ -184,7 +188,39 @@ namespace TinyCms.Admin.Controllers
             }
         }
 
+        [NonAction]
+        protected virtual void PrepareTemplatesModel(CategoryModel model)
+        {
+            if (model == null)
+                throw new ArgumentNullException("model");
 
+            var templates = _categoryTemplateService.GetAllCategoryTemplates();
+            foreach (var template in templates)
+            {
+                model.AvailableCategoryTemplates.Add(new SelectListItem
+                {
+                    Text = template.Name,
+                    Value = template.Id.ToString()
+                });
+            }
+        }
+
+        [NonAction]
+        protected virtual void PrepareCategoryTypeModel(CategoryModel model)
+        {
+            if (model == null)
+                throw new ArgumentNullException("model");
+
+            var types = _categoryTypeService.GetAllCategoryTypes();
+            foreach (var type in types)
+            {
+                model.AvailableCategoryTypes.Add(new SelectListItem
+                {
+                    Text = type.Name,
+                    Value = type.Id.ToString()
+                });
+            }
+        }
         #endregion
         
         #region List / tree
@@ -202,7 +238,7 @@ namespace TinyCms.Admin.Controllers
             var model = new CategoryListModel();
             return View(model);
         }
-
+    
         [HttpPost]
         public ActionResult List(DataSourceRequest command, CategoryListModel model)
         {
@@ -259,6 +295,10 @@ namespace TinyCms.Admin.Controllers
             var model = new CategoryModel();
             //locales
             AddLocales(_languageService, model.Locales);
+            //templates
+            PrepareTemplatesModel(model);
+            //category types
+            PrepareCategoryTypeModel(model);
             //categories
             PrepareAllCategoriesModel(model);
             //ACL
@@ -301,7 +341,10 @@ namespace TinyCms.Admin.Controllers
             }
 
             //If we got this far, something failed, redisplay form
-         
+            //templates
+            PrepareTemplatesModel(model);
+            //category types
+            PrepareCategoryTypeModel(model);
             //categories
             PrepareAllCategoriesModel(model);
             //ACL
@@ -330,6 +373,10 @@ namespace TinyCms.Admin.Controllers
                 locale.MetaTitle = category.GetLocalized(x => x.MetaTitle, languageId, false, false);
                 locale.SeName = category.GetSeName(languageId, false, false);
             });
+            //templates
+            PrepareTemplatesModel(model);
+            //category types
+            PrepareCategoryTypeModel(model);
             //ACL
             PrepareAclModel(model, category, false);
 
@@ -383,7 +430,10 @@ namespace TinyCms.Admin.Controllers
                 }
                 return RedirectToAction("List");
             }
-
+            //templates
+            PrepareTemplatesModel(model);
+            //category types
+            PrepareCategoryTypeModel(model);
             //categories
             PrepareAllCategoriesModel(model);
             //ACL

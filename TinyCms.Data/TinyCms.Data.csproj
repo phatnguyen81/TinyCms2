@@ -91,11 +91,14 @@
     <Compile Include="Mapping\Polls\PollAnswerMap.cs" />
     <Compile Include="Mapping\Polls\PollMap.cs" />
     <Compile Include="Mapping\Polls\PollVotingRecordMap.cs" />
+    <Compile Include="Mapping\Posts\CategoryTypeMap.cs" />
     <Compile Include="Mapping\Posts\CategoryMap.cs" />
+    <Compile Include="Mapping\Posts\CategoryTemplateMap.cs" />
     <Compile Include="Mapping\Posts\PostCategoryMap.cs" />
-    <Compile Include="Mapping\Posts\ProductMap.cs" />
-    <Compile Include="Mapping\Posts\ProductPictureMap.cs" />
-    <Compile Include="Mapping\Posts\ProductTagMap.cs" />
+    <Compile Include="Mapping\Posts\PostMap.cs" />
+    <Compile Include="Mapping\Posts\PostPictureMap.cs" />
+    <Compile Include="Mapping\Posts\PostTagMap.cs" />
+    <Compile Include="Mapping\Posts\PostTemplateMap.cs" />
     <Compile Include="Mapping\Tasks\ScheduleTaskMap.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NopEntityTypeConfiguration.cs" />

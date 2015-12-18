@@ -18,6 +18,8 @@ namespace TinyCms.Admin.Models.Posts
 
             Locales = new List<CategoryLocalizedModel>();
             AvailableCategories = new List<SelectListItem>();
+            AvailableCategoryTemplates = new List<SelectListItem>();
+            AvailableCategoryTypes = new List<SelectListItem>();
         }
 
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.Name")]
@@ -31,6 +33,10 @@ namespace TinyCms.Admin.Models.Posts
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.CategoryTemplate")]
         public int CategoryTemplateId { get; set; }
         public IList<SelectListItem> AvailableCategoryTemplates { get; set; }
+
+        [NopResourceDisplayName("Admin.Catalog.Categories.Fields.CategoryType")]
+        public int CategoryTypeId { get; set; }
+        public IList<SelectListItem> AvailableCategoryTypes { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.MetaKeywords")]
         [AllowHtml]

@@ -21,6 +21,7 @@ namespace TinyCms.Admin.Models.Posts
             CopyPostModel = new CopyPostModel();
             AvailableCategories = new List<SelectListItem>();
             AddPictureModel = new PostPictureModel();
+            AvailablePostTemplates = new List<SelectListItem>();
         }
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.ID")]
@@ -29,10 +30,11 @@ namespace TinyCms.Admin.Models.Posts
         //picture thumbnail
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.PictureThumbnailUrl")]
         public string PictureThumbnailUrl { get; set; }
-        
-        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.VisibleIndividually")]
-        public bool VisibleIndividually { get; set; }
 
+        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.PostTemplate")]
+        public int PostTemplateId { get; set; }
+        public IList<SelectListItem> AvailablePostTemplates { get; set; }
+        
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.Name")]
         [AllowHtml]
         public string Name { get; set; }
@@ -71,33 +73,18 @@ namespace TinyCms.Admin.Models.Posts
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.PostTags")]
         public string PostTags { get; set; }
 
-        
-        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.MarkAsNew")]
-        public bool MarkAsNew { get; set; }
-
-        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.MarkAsNewStartDateTimeUtc")]
-        [UIHint("DateTimeNullable")]
-        public DateTime? MarkAsNewStartDateTimeUtc { get; set; }
-
-        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.MarkAsNewEndDateTimeUtc")]
-        [UIHint("DateTimeNullable")]
-        public DateTime? MarkAsNewEndDateTimeUtc { get; set; }
-
-
-
-        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.AvailableStartDateTime")]
-        [UIHint("DateTimeNullable")]
-        public DateTime? AvailableStartDateTimeUtc { get; set; }
-
-        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.AvailableEndDateTime")]
-        [UIHint("DateTimeNullable")]
-        public DateTime? AvailableEndDateTimeUtc { get; set; }
-
+     
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.DisplayOrder")]
         public int DisplayOrder { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.Published")]
         public bool Published { get; set; }
+
+        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.CreatedBy")]
+        public int CreatedBy { get; set; }
+
+        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.ApprovedBy")]
+        public int ApprovedBy { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.CreatedOn")]
         public DateTime? CreatedOn { get; set; }
@@ -105,13 +92,14 @@ namespace TinyCms.Admin.Models.Posts
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.UpdatedOn")]
         public DateTime? UpdatedOn { get; set; }
 
-
-        public string PrimaryStoreCurrencyCode { get; set; }
-        public string BaseDimensionIn { get; set; }
-        public string BaseWeightIn { get; set; }
+        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.ApprovedOn")]
+        public DateTime? ApprovedOn { get; set; }
 
         public IList<PostLocalizedModel> Locales { get; set; }
 
+        [UIHint("Picture")]
+        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.Picture")]
+        public int PictureId { get; set; }
 
         //ACL (customer roles)
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.SubjectToAcl")]

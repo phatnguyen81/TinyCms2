@@ -61,6 +61,10 @@
     <Reference Include="MiniProfiler.Mvc">
       <HintPath>..\packages\MiniProfiler.Mvc4.3.0.11\lib\net40\MiniProfiler.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -124,9 +128,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -177,6 +178,7 @@
     <Compile Include="Controllers\BasePublicController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,6 +189,7 @@
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
     <Compile Include="Infrastructure\GenericUrlRouteProvider.cs" />
     <Compile Include="Infrastructure\RouteProvider.cs" />
+    <Compile Include="Models\Common\FaviconModel.cs" />
     <Compile Include="Models\Common\PagerModel.cs" />
     <Compile Include="Models\Customer\AccountActivationModel.cs" />
     <Compile Include="Models\Customer\ChangePasswordModel.cs" />
@@ -213,7 +216,9 @@
     <Content Include="App_Data\Install\create_required_data.sql" />
     <Content Include="App_Data\Install\SqlServer.Indexes.sql" />
     <Content Include="App_Data\Install\SqlServer.StoredProcedures.sql" />
-    <Content Include="App_Data\Localization\defaultResources.nopres.xml" />
+    <Content Include="App_Data\Localization\defaultResources.nopres.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Localization\Installation\installation.ar.xml" />
     <Content Include="App_Data\Localization\Installation\installation.bg.xml" />
     <Content Include="App_Data\Localization\Installation\installation.bn-bd.xml" />
@@ -257,6 +262,9 @@
     <Content Include="Content\BBEditor\images\underline.gif" />
     <Content Include="Content\BBEditor\images\unlink.gif" />
     <Content Include="Content\BBEditor\images\unordered.gif" />
+    <Content Include="Content\css\popup.css" />
+    <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\fancybox\blank.gif" />
     <Content Include="Content\fancybox\fancybox-x.png" />
     <Content Include="Content\fancybox\fancybox-y.png" />
@@ -534,6 +542,11 @@
     <Content Include="Content\Images\flags\za.png" />
     <Content Include="Content\Images\flags\zm.png" />
     <Content Include="Content\Images\flags\zw.png" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\logo_sprt.png" />
+    <Content Include="Content\Images\logo_sprt2x.png" />
+    <Content Include="Content\Images\sprt.png" />
+    <Content Include="Content\Images\sprt2x.png" />
     <Content Include="Content\Images\Thumbs\0000005_electronics.jpeg" />
     <Content Include="Content\Images\Thumbs\0000005_electronics_450.jpeg" />
     <Content Include="Content\Images\Thumbs\0000009_apparel.jpeg" />
@@ -1231,6 +1244,8 @@
     <Content Include="Scripts\fineuploader\processing.gif" />
     <Content Include="Scripts\fineuploader\templates\default.html" />
     <Content Include="Scripts\fineuploader\templates\simple-thumbnails.html" />
+    <Content Include="Content\Images\logo_sprt.psd" />
+    <Content Include="Content\Images\sprt.psd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1247,6 +1262,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jscript.js" />
     <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.af-ZA.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.af.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.am-ET.min.js" />
@@ -1735,34 +1751,12 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Themes\DefaultClean\theme.config" />
-    <Content Include="Themes\DefaultClean\Views\Shared\Head.cshtml" />
     <Content Include="Themes\DefaultClean\Views\Web.config" />
-    <Content Include="Views\Customer\Login.cshtml" />
     <Content Include="Scripts\kendo\2014.1.318\jquery.min.map" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.autocomplete.min.js.map" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.binder.min.js.map" />
@@ -1829,9 +1823,31 @@
     <Content Include="Scripts\kendo\2014.1.318\kendo.view.min.js.map" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.window.min.js.map" />
+    <Content Include="Views\Shared\_Root.cshtml" />
+    <Content Include="Views\Shared\_Root.Head.cshtml" />
+    <Content Include="Views\Shared\_ColumnsOne.cshtml" />
+    <Content Include="Views\Shared\Head.cshtml" />
+    <Content Include="Views\Common\Favicon.cshtml" />
+    <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\Common\AdminHeaderLinks.cshtml" />
+    <Content Include="Views\Common\ContactUs.cshtml" />
+    <Content Include="Views\Common\ContactVendor.cshtml" />
+    <Content Include="Views\Common\CurrencySelector.cshtml" />
+    <Content Include="Views\Common\EuCookieLaw.cshtml" />
+    <Content Include="Views\Common\Footer.cshtml" />
+    <Content Include="Views\Common\HeaderLinks.cshtml" />
+    <Content Include="Views\Common\JavaScriptDisabledWarning.cshtml" />
+    <Content Include="Views\Common\LanguageSelector.cshtml" />
+    <Content Include="Views\Common\PageNotFound.cshtml" />
+    <Content Include="Views\Common\Sitemap.cshtml" />
+    <Content Include="Views\Common\StoreClosed.cshtml" />
+    <Content Include="Views\Common\StoreThemeSelector.cshtml" />
+    <Content Include="Views\Common\TaxTypeSelector.cshtml" />
+    <Content Include="Views\Shared\OldInternetExplorerWarning.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />
+    <Folder Include="Themes\DefaultClean\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -55,7 +55,8 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -194,12 +195,18 @@
     <Compile Include="Polls\PollService.cs" />
     <Compile Include="Posts\CategoryExtensions.cs" />
     <Compile Include="Posts\CategoryService.cs" />
+    <Compile Include="Posts\CategoryTemplateService.cs" />
+    <Compile Include="Posts\CategoryTypeService.cs" />
+    <Compile Include="Posts\ICategoryTypeService.cs" />
     <Compile Include="Posts\ICategoryService.cs" />
+    <Compile Include="Posts\ICategoryTemplateService.cs" />
     <Compile Include="Posts\IPostService.cs" />
     <Compile Include="Posts\IPostTagService.cs" />
+    <Compile Include="Posts\IProductTemplateService.cs" />
     <Compile Include="Posts\PostExtensions.cs" />
     <Compile Include="Posts\PostService.cs" />
     <Compile Include="Posts\PostTagService.cs" />
+    <Compile Include="Posts\ProductTemplateService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AclService.cs" />
     <Compile Include="Security\EncryptionService.cs" />

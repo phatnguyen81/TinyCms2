@@ -247,7 +247,7 @@ namespace TinyCms.Services.Posts
                 categoryIds.Remove(0);
 
             var query = _postRepository.Table;
-            query = query.Where(p => !p.Deleted && p.Published && p.VisibleIndividually);
+            query = query.Where(p => !p.Deleted && p.Published);
 
             //category filtering
             if (categoryIds != null && categoryIds.Count > 0)
@@ -314,8 +314,6 @@ namespace TinyCms.Services.Posts
             int pageIndex = 0,
             int pageSize = int.MaxValue,
             IList<int> categoryIds = null,
-            bool visibleIndividuallyOnly = false,
-            bool markedAsNewOnly = false,
             bool? featuredPosts = null,
             int postTagId = 0,
             string keywords = null,
@@ -376,17 +374,6 @@ namespace TinyCms.Services.Posts
                 pCategoryIds.Value = commaSeparatedCategoryIds != null ? (object)commaSeparatedCategoryIds : DBNull.Value;
                 pCategoryIds.DbType = DbType.String;
                 
-              
-                var pVisibleIndividuallyOnly = _dataProvider.GetParameter();
-                pVisibleIndividuallyOnly.ParameterName = "VisibleIndividuallyOnly";
-                pVisibleIndividuallyOnly.Value = visibleIndividuallyOnly;
-                pVisibleIndividuallyOnly.DbType = DbType.Int32;
-
-                var pMarkedAsNewOnly = _dataProvider.GetParameter();
-                pMarkedAsNewOnly.ParameterName = "MarkedAsNewOnly";
-                pMarkedAsNewOnly.Value = markedAsNewOnly;
-                pMarkedAsNewOnly.DbType = DbType.Int32;
-
                 var pPostTagId = _dataProvider.GetParameter();
                 pPostTagId.ParameterName = "PostTagId";
                 pPostTagId.Value = postTagId;
@@ -472,8 +459,6 @@ namespace TinyCms.Services.Posts
                 var posts = _dbContext.ExecuteStoredProcedureList<Post>(
                     "PostLoadAllPaged",
                     pCategoryIds,
-                    pVisibleIndividuallyOnly,
-                    pMarkedAsNewOnly,
                     pPostTagId,
                     pFeaturedPosts,
                     pKeywords,
@@ -523,20 +508,11 @@ namespace TinyCms.Services.Posts
                     //unpublished only
                     query = query.Where(p => !p.Published);
                 }
-                if (visibleIndividuallyOnly)
-                {
-                    query = query.Where(p => p.VisibleIndividually);
-                }
+          
                 //The function 'CurrentUtcDateTime' is not supported by SQL Server Compact. 
                 //That's why we pass the date value
                 var nowUtc = DateTime.UtcNow;
-                if (markedAsNewOnly)
-                {
-                    query = query.Where(p => p.MarkAsNew);
-                    query = query.Where(p =>
-                        (!p.MarkAsNewStartDateTimeUtc.HasValue || p.MarkAsNewStartDateTimeUtc.Value < nowUtc) &&
-                        (!p.MarkAsNewEndDateTimeUtc.HasValue || p.MarkAsNewEndDateTimeUtc.Value > nowUtc));
-                }
+       
             
                 if (!showHidden)
                 {

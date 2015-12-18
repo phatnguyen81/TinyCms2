@@ -210,8 +210,8 @@
   <LocaleResource Name="Account.CustomerReturnRequests.Title">
     <Value>Return #{0} - {1}</Value>
   </LocaleResource>
-  <LocaleResource Name="Account.DownloadableProducts">
-    <Value>Downloadable products</Value>
+  <LocaleResource Name="Account.DownloadablePosts">
+    <Value>Downloadable Posts</Value>
   </LocaleResource>
   <LocaleResource Name="Account.EmailUsernameErrors.EmailAlreadyExists">
     <Value>The e-mail address is already in use</Value>
@@ -1282,7 +1282,7 @@
     <Value>Shippable product required</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.ShippableProductRequired.Hint">
-    <Value>An option indicating whether shippable products are required in order to display this attribute.</Value>
+    <Value>An option indicating whether shippable Posts are required in order to display this attribute.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Attributes.CheckoutAttributes.Fields.TaxCategory">
     <Value>Tax category</Value>
@@ -1441,7 +1441,7 @@
     <Value>The weight adjustment applied when choosing this attribute value</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.Hint">
-    <Value>Predefined (default) values are helpful for a store owner when creating new products. Then when you add the attribute to a product, you don't have to create the values again.</Value>
+    <Value>Predefined (default) values are helpful for a store owner when creating new Posts. Then when you add the attribute to a product, you don't have to create the values again.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.PredefinedValues.SaveBeforeEdit">
     <Value>You need to save the product attribute before you can add values for this page.</Value>
@@ -1449,16 +1449,16 @@
   <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.Updated">
     <Value>The attribute has been updated successfully.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.UsedByProducts">
-    <Value>Used by products</Value>
+  <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.UsedByPosts">
+    <Value>Used by Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.UsedByProducts.Hint">
-    <Value>Here you can see a list of products which use this attribute.</Value>
+  <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.UsedByPosts.Hint">
+    <Value>Here you can see a list of Posts which use this attribute.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.UsedByProducts.Product">
+  <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.UsedByPosts.Product">
     <Value>Product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.UsedByProducts.Published">
+  <LocaleResource Name="Admin.Catalog.Attributes.ProductAttributes.UsedByPosts.Published">
     <Value>Published</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes">
@@ -1521,8 +1521,8 @@
   <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Options.Fields.Name.Required">
     <Value>Please provide a name.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Options.Fields.NumberOfAssociatedProducts">
-    <Value>Number of associated products</Value>
+  <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Options.Fields.NumberOfAssociatedPosts">
+    <Value>Number of associated Posts</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Attributes.SpecificationAttributes.Options.SaveBeforeEdit">
     <Value>You need to save the specification attribute before you can add options for this specification attribute page.</Value>
@@ -1531,7 +1531,7 @@
     <Value>The attribute has been updated successfully.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.BulkEdit">
-    <Value>Bulk edit products</Value>
+    <Value>Bulk edit Posts</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.BulkEdit.Fields.ManageInventoryMethod">
     <Value>Manage inventory</Value>
@@ -1624,7 +1624,7 @@
     <Value>Category template</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Categories.Fields.CategoryTemplate.Hint">
-    <Value>Choose a category template. This template defines how this category (and its products) will be displayed.</Value>
+    <Value>Choose a category template. This template defines how this category (and its Posts) will be displayed.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Categories.Fields.CreatedOn">
     <Value>Created on</Value>
@@ -1687,7 +1687,7 @@
     <Value>Page size</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Categories.Fields.PageSize.Hint">
-    <Value>Set the page size for products in this category e.g. '4' products per page.</Value>
+    <Value>Set the page size for Posts in this category e.g. '4' Posts per page.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Categories.Fields.PageSizeOptions">
     <Value>Page Size options (comma separated)</Value>
@@ -1749,23 +1749,23 @@
   <LocaleResource Name="Admin.Catalog.Categories.Manage">
     <Value>Manage Categories</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Categories.Products">
-    <Value>Products</Value>
+  <LocaleResource Name="Admin.Catalog.Categories.Posts">
+    <Value>Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Categories.Products.AddNew">
+  <LocaleResource Name="Admin.Catalog.Categories.Posts.AddNew">
     <Value>Add a new product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Categories.Products.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Categories.Posts.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Categories.Products.Fields.IsFeaturedProduct">
+  <LocaleResource Name="Admin.Catalog.Categories.Posts.Fields.IsFeaturedProduct">
     <Value>Is featured product?</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Categories.Products.Fields.Product">
+  <LocaleResource Name="Admin.Catalog.Categories.Posts.Fields.Product">
     <Value>Product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Categories.Products.SaveBeforeEdit">
-    <Value>You need to save the category before you can add products for this category page.</Value>
+  <LocaleResource Name="Admin.Catalog.Categories.Posts.SaveBeforeEdit">
+    <Value>You need to save the category before you can add Posts for this category page.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Categories.Stores">
     <Value>Stores</Value>
@@ -1855,7 +1855,7 @@
     <Value>Manufacturer template</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Manufacturers.Fields.ManufacturerTemplate.Hint">
-    <Value>Choose a manufacturer template. This template defines how this manufacturer (and its products) will be displayed.</Value>
+    <Value>Choose a manufacturer template. This template defines how this manufacturer (and its Posts) will be displayed.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Manufacturers.Fields.MetaDescription">
     <Value>Meta description</Value>
@@ -1888,7 +1888,7 @@
     <Value>Page size</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Manufacturers.Fields.PageSize.Hint">
-    <Value>Set the page size for products in this manufacturer e.g. '4' products per page.</Value>
+    <Value>Set the page size for Posts in this manufacturer e.g. '4' Posts per page.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Manufacturers.Fields.PageSizeOptions">
     <Value>Page Size options (comma separated)</Value>
@@ -1935,23 +1935,23 @@
   <LocaleResource Name="Admin.Catalog.Manufacturers.List.SearchManufacturerName.Hint">
     <Value>A manufacturer name.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Manufacturers.Products">
-    <Value>Products</Value>
+  <LocaleResource Name="Admin.Catalog.Manufacturers.Posts">
+    <Value>Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Manufacturers.Products.AddNew">
+  <LocaleResource Name="Admin.Catalog.Manufacturers.Posts.AddNew">
     <Value>Add a new product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Manufacturers.Products.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Manufacturers.Posts.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Manufacturers.Products.Fields.IsFeaturedProduct">
+  <LocaleResource Name="Admin.Catalog.Manufacturers.Posts.Fields.IsFeaturedProduct">
     <Value>Is featured product?</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Manufacturers.Products.Fields.Product">
+  <LocaleResource Name="Admin.Catalog.Manufacturers.Posts.Fields.Product">
     <Value>Product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Manufacturers.Products.SaveBeforeEdit">
-    <Value>You need to save the manufacturer before you can add products for this manufacturer page.</Value>
+  <LocaleResource Name="Admin.Catalog.Manufacturers.Posts.SaveBeforeEdit">
+    <Value>You need to save the manufacturer before you can add Posts for this manufacturer page.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.Manufacturers.Stores">
     <Value>Stores</Value>
@@ -2049,1264 +2049,1264 @@
   <LocaleResource Name="Admin.Catalog.ProductReviews.Updated">
     <Value>The product review has been updated successfully.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products">
-    <Value>Products</Value>
+  <LocaleResource Name="Admin.Catalog.Posts">
+    <Value>Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Acl">
+  <LocaleResource Name="Admin.Catalog.Posts.Acl">
     <Value>Access control list</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Added">
+  <LocaleResource Name="Admin.Catalog.Posts.Added">
     <Value>The new product has been added successfully.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.AddNew">
+  <LocaleResource Name="Admin.Catalog.Posts.AddNew">
     <Value>Add a new product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.AssociatedProducts">
-    <Value>Associated products (variants)</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.AssociatedPosts">
+    <Value>Associated Posts (variants)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.AssociatedProducts.AddNew">
+  <LocaleResource Name="Admin.Catalog.Posts.AssociatedPosts.AddNew">
     <Value>Add new associated product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.AssociatedProducts.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Posts.AssociatedPosts.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.AssociatedProducts.Fields.Product">
+  <LocaleResource Name="Admin.Catalog.Posts.AssociatedPosts.Fields.Product">
     <Value>Product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.AssociatedProducts.Note1">
-    <Value>Associated products are used only with "grouped" products.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.AssociatedPosts.Note1">
+    <Value>Associated Posts are used only with "grouped" Posts.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.AssociatedProducts.Note2">
+  <LocaleResource Name="Admin.Catalog.Posts.AssociatedPosts.Note2">
     <Value>A product could be associated to only one "grouped" product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.AssociatedProducts.SaveBeforeEdit">
-    <Value>You need to save the product before you can add associated products for this product page.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.AssociatedPosts.SaveBeforeEdit">
+    <Value>You need to save the product before you can add associated Posts for this product page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.BackToList">
+  <LocaleResource Name="Admin.Catalog.Posts.BackToList">
     <Value>back to product list</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Categories">
+  <LocaleResource Name="Admin.Catalog.Posts.Categories">
     <Value>Category mappings</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Categories.Fields.Category">
+  <LocaleResource Name="Admin.Catalog.Posts.Categories.Fields.Category">
     <Value>Category</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Categories.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Posts.Categories.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Categories.Fields.IsFeaturedProduct">
+  <LocaleResource Name="Admin.Catalog.Posts.Categories.Fields.IsFeaturedProduct">
     <Value>Is featured product?</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Categories.NoCategoriesAvailable">
+  <LocaleResource Name="Admin.Catalog.Posts.Categories.NoCategoriesAvailable">
     <Value>No categories available. Create at least one category before mapping.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Categories.SaveBeforeEdit">
+  <LocaleResource Name="Admin.Catalog.Posts.Categories.SaveBeforeEdit">
     <Value>You need to save the product before you can map categories for this product page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Copy">
+  <LocaleResource Name="Admin.Catalog.Posts.Copy">
     <Value>Copy product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Copy.CopyImages">
+  <LocaleResource Name="Admin.Catalog.Posts.Copy.CopyImages">
     <Value>Copy images</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Copy.CopyImages.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Copy.CopyImages.Hint">
     <Value>Check to copy the images.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Copy.Name">
+  <LocaleResource Name="Admin.Catalog.Posts.Copy.Name">
     <Value>New product name</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Copy.Name.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Copy.Name.Hint">
     <Value>The name of the new product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Copy.Published">
+  <LocaleResource Name="Admin.Catalog.Posts.Copy.Published">
     <Value>Published</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Copy.Published.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Copy.Published.Hint">
     <Value>Check to mark a product as published.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.CrossSells">
+  <LocaleResource Name="Admin.Catalog.Posts.CrossSells">
     <Value>Cross-sells</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.CrossSells.AddNew">
+  <LocaleResource Name="Admin.Catalog.Posts.CrossSells.AddNew">
     <Value>Add new cross-sell product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.CrossSells.Fields.Product">
+  <LocaleResource Name="Admin.Catalog.Posts.CrossSells.Fields.Product">
     <Value>Product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.CrossSells.SaveBeforeEdit">
-    <Value>You need to save the product before you can add cross-sell products for this product page.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.CrossSells.SaveBeforeEdit">
+    <Value>You need to save the product before you can add cross-sell Posts for this product page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Deleted">
+  <LocaleResource Name="Admin.Catalog.Posts.Deleted">
     <Value>The product has been deleted successfully.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Discounts">
+  <LocaleResource Name="Admin.Catalog.Posts.Discounts">
     <Value>Discounts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Discounts.NoDiscounts">
+  <LocaleResource Name="Admin.Catalog.Posts.Discounts.NoDiscounts">
     <Value>No discounts available. Create at least one discount before mapping.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.EditProductDetails">
+  <LocaleResource Name="Admin.Catalog.Posts.EditProductDetails">
     <Value>Edit product details</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AclCustomerRoles">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AclCustomerRoles">
     <Value>Customer roles</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AclCustomerRoles.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AclCustomerRoles.Hint">
     <Value>Select customer roles for which the product will be shown.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AdditionalShippingCharge">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AdditionalShippingCharge">
     <Value>Additional shipping charge</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AdditionalShippingCharge.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AdditionalShippingCharge.Hint">
     <Value>The additional shipping charge.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AdminComment">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AdminComment">
     <Value>Admin comment</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AdminComment.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AdminComment.Hint">
     <Value>Admin comment. For internal use.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AllowAddingOnlyExistingAttributeCombinations">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AllowAddingOnlyExistingAttributeCombinations">
     <Value>Allow only existing attribute combinations</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AllowAddingOnlyExistingAttributeCombinations.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AllowAddingOnlyExistingAttributeCombinations.Hint">
     <Value>Check to allow adding to the cart/wishlist only attribute combinations that exist and have stock greater than zero. In this case you have to create all existing product attribute combinations that you have in stock.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AllowBackInStockSubscriptions">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AllowBackInStockSubscriptions">
     <Value>Allow back in stock subscriptions</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AllowBackInStockSubscriptions.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AllowBackInStockSubscriptions.Hint">
     <Value>Allow customers to subscribe to a notification list for a product that has gone out of stock.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AllowCustomerReviews">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AllowCustomerReviews">
     <Value>Allow customer reviews</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AllowCustomerReviews.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AllowCustomerReviews.Hint">
     <Value>Check to allow customers to review this product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AllowedQuantities">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AllowedQuantities">
     <Value>Allowed quantities</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AllowedQuantities.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AllowedQuantities.Hint">
     <Value>Enter a comma separated list of quantities you want this product to be restricted to. Instead of a quantity textbox that allows them to enter any quantity, they will receive a dropdown list of the values you enter here.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AssociatedToProductName">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AssociatedToProductName">
     <Value>Associated to product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AssociatedToProductName.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AssociatedToProductName.Hint">
     <Value>A "grouped" parent product which this one is associated to.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AutomaticallyAddRequiredProducts">
-    <Value>Automatically add these products to the cart</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AutomaticallyAddRequiredPosts">
+    <Value>Automatically add these Posts to the cart</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AutomaticallyAddRequiredProducts.Hint">
-    <Value>Check to automatically add these products to the cart.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AutomaticallyAddRequiredPosts.Hint">
+    <Value>Check to automatically add these Posts to the cart.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AvailableEndDateTime">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AvailableEndDateTime">
     <Value>Available end date</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AvailableEndDateTime.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AvailableEndDateTime.Hint">
     <Value>The end of the product's availability in Coordinated Universal Time (UTC).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AvailableForPreOrder">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AvailableForPreOrder">
     <Value>Available for pre-order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AvailableForPreOrder.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AvailableForPreOrder.Hint">
     <Value>Check if this item is available for Pre-Order. It also displays "Pre-order" button instead of "Add to cart".</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AvailableStartDateTime">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AvailableStartDateTime">
     <Value>Available start date</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AvailableStartDateTime.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AvailableStartDateTime.Hint">
     <Value>The start of the product's availability in Coordinated Universal Time (UTC).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AvailableStores">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AvailableStores">
     <Value>Stores</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.AvailableStores.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.AvailableStores.Hint">
     <Value>Select stores for which the product will be shown.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BackorderMode">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BackorderMode">
     <Value>Backorders</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BackorderMode.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BackorderMode.Hint">
     <Value>Select backorder mode.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BasepriceEnabled">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BasepriceEnabled">
     <Value>PAngV (base price) enabled</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BasepriceEnabled.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BasepriceEnabled.Hint">
     <Value>Check to display baseprice of a product. This is required according to the German law (PAngV). If you sell 500ml of beer for 1,50 euro, then you have to display baseprice: 3.00 euro per 1L.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BasepriceAmount">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BasepriceAmount">
     <Value>Amount in product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BasepriceAmount.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BasepriceAmount.Hint">
     <Value>Enter an amount in product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BasepriceUnit">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BasepriceUnit">
     <Value>Unit of product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BasepriceUnit.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BasepriceUnit.Hint">
     <Value>Enter a unit of product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BasepriceBaseAmount">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BasepriceBaseAmount">
     <Value>Reference amount</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BasepriceBaseAmount.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BasepriceBaseAmount.Hint">
     <Value>Enter a reference amount</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BasepriceBaseUnit">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BasepriceBaseUnit">
     <Value>Reference unit</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.BasepriceBaseUnit.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.BasepriceBaseUnit.Hint">
     <Value>Enter a reference unit.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.CallForPrice">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.CallForPrice">
     <Value>Call for price</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.CallForPrice.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.CallForPrice.Hint">
     <Value>Check to show "Call for Pricing" or "Call for quote" instead of price</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.CreatedOn">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.CreatedOn">
     <Value>Created on</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.CreatedOn.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.CreatedOn.Hint">
     <Value>Date and time when this product was created.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.CustomerEntersPrice">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.CustomerEntersPrice">
     <Value>Customer enters price</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.CustomerEntersPrice.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.CustomerEntersPrice.Hint">
     <Value>An option indicating whether customer should enter price.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DeliveryDate">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DeliveryDate">
     <Value>Delivery date</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DeliveryDate.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DeliveryDate.Hint">
     <Value>Choose a delivery date which will be displayed in the public store.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DeliveryDate.None">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DeliveryDate.None">
     <Value>None</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DisableBuyButton">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DisableBuyButton">
     <Value>Disable buy button</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DisableBuyButton.Hint">
-    <Value>Check to disable the buy button for this product. This may be necessary for products that are 'available upon request'.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DisableBuyButton.Hint">
+    <Value>Check to disable the buy button for this product. This may be necessary for Posts that are 'available upon request'.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DisableWishlistButton">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DisableWishlistButton">
     <Value>Disable wishlist button</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DisableWishlistButton.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DisableWishlistButton.Hint">
     <Value>Check to disable the wishlist button for this product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DisplayOrder.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DisplayOrder.Hint">
     <Value>Display order of the product. 1 represents the top of the list.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DisplayStockAvailability">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DisplayStockAvailability">
     <Value>Display stock availability</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DisplayStockAvailability.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DisplayStockAvailability.Hint">
     <Value>Check to display stock availability. When enabled, customers will see stock availability.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DisplayStockQuantity">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DisplayStockQuantity">
     <Value>Display stock quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DisplayStockQuantity.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DisplayStockQuantity.Hint">
     <Value>Check to display stock quantity. When enabled, customers will see stock quantity.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Download">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Download">
     <Value>Download file</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Download.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Download.Hint">
     <Value>The download file.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DownloadActivationType">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DownloadActivationType">
     <Value>Download activation type</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DownloadActivationType.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DownloadActivationType.Hint">
     <Value>A value indicating when download links will be enabled.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DownloadExpirationDays">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DownloadExpirationDays">
     <Value>Number of days</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.DownloadExpirationDays.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.DownloadExpirationDays.Hint">
     <Value>The number of days during customers keeps access to the file (e.g. 14). Leave this field blank to allow continuous downloads.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.FullDescription">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.FullDescription">
     <Value>Full description</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.FullDescription.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.FullDescription.Hint">
     <Value>The full description of the product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.GiftCardType">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.GiftCardType">
     <Value>Gift card type</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.GiftCardType.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.GiftCardType.Hint">
     <Value>Select gift card type. WARNING: not recommended to change in production environment.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.GTIN">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.GTIN">
     <Value>GTIN (global trade item number)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.GTIN.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.GTIN.Hint">
     <Value>Enter global trade item number (GTIN). These identifiers include UPC (in North America), EAN (in Europe), JAN (in Japan), and ISBN (for books).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.HasSampleDownload">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.HasSampleDownload">
     <Value>Has sample download file</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.HasSampleDownload.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.HasSampleDownload.Hint">
     <Value>Check if this product has a sample download file that can be downloaded before checkout.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.HasUserAgreement">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.HasUserAgreement">
     <Value>Has user agreement</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.HasUserAgreement.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.HasUserAgreement.Hint">
     <Value>Check if the product has a user agreement.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Height">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Height">
     <Value>Height</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Height.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Height.Hint">
     <Value>The height of the product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ID">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ID">
     <Value>ID</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ID.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ID.Hint">
     <Value>The product identifier.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsDownload">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsDownload">
     <Value>Downloadable product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsDownload.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsDownload.Hint">
     <Value>Check if this product is a downloadable product. When a customer purchases a download product, they can download the item direct from your store by viewing their completed order.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsFreeShipping">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsFreeShipping">
     <Value>Free shipping</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsFreeShipping.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsFreeShipping.Hint">
     <Value>Check if this product comes with FREE shipping.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsGiftCard">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsGiftCard">
     <Value>Is gift card</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsGiftCard.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsGiftCard.Hint">
     <Value>Check if it is a gift card</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsRecurring">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsRecurring">
     <Value>Recurring product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsRecurring.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsRecurring.Hint">
     <Value>Check if this product is a recurring product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsRental">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsRental">
     <Value>Is rental</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsRental.Hint">
-    <Value>Check if this is a rental product (price is set for some period). Please note that inventory management is not fully supported for rental products yet. It's recommended to set 'Manage inventory method' to 'Don't track inventory' now.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsRental.Hint">
+    <Value>Check if this is a rental product (price is set for some period). Please note that inventory management is not fully supported for rental Posts yet. It's recommended to set 'Manage inventory method' to 'Don't track inventory' now.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsShipEnabled">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsShipEnabled">
     <Value>Shipping enabled</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsShipEnabled.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsShipEnabled.Hint">
     <Value>Determines whether the product can be shipped.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsTaxExempt">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsTaxExempt">
     <Value>Tax exempt</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsTaxExempt.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsTaxExempt.Hint">
     <Value>Determines whether this product is tax exempt (tax will not be applied to this product at checkout).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsTelecommunicationsOrBroadcastingOrElectronicServices">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsTelecommunicationsOrBroadcastingOrElectronicServices">
     <Value>Telecommunications, broadcasting and electronic services</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.IsTelecommunicationsOrBroadcastingOrElectronicServices.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.IsTelecommunicationsOrBroadcastingOrElectronicServices.Hint">
     <Value>Check if it's telecommunications, broadcasting and electronic services. It's used for tax calculation in Europe Union.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Length">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Length">
     <Value>Length</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Length.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Length.Hint">
     <Value>The length of the product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.LimitedToStores">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.LimitedToStores">
     <Value>Limited to stores</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.LimitedToStores.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.LimitedToStores.Hint">
     <Value>Determines whether the product is available only at certain stores.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.LowStockActivity">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.LowStockActivity">
     <Value>Low stock activity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.LowStockActivity.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.LowStockActivity.Hint">
     <Value>Action to be taken when your current stock quantity falls below (reaches) the 'Minimum stock quantity'.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ManageInventoryMethod">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ManageInventoryMethod">
     <Value>Manage inventory method</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ManageInventoryMethod.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ManageInventoryMethod.Hint">
     <Value>Select manage inventory method. When enabled, stock quantities are automatically adjusted when a customer makes a purchase. You can also set low stock activity actions and receive notifications.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ManufacturerPartNumber">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ManufacturerPartNumber">
     <Value>Manufacturer part number</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ManufacturerPartNumber.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ManufacturerPartNumber.Hint">
     <Value>The manufacturer's part number for this product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MarkAsNew">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MarkAsNew">
     <Value>Mark as new</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MarkAsNew.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MarkAsNew.Hint">
     <Value>Check to mark this product as New</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MarkAsNewStartDateTimeUtc">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MarkAsNewStartDateTimeUtc">
     <Value>Mark as new. Start date</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MarkAsNewStartDateTimeUtc.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MarkAsNewStartDateTimeUtc.Hint">
     <Value>Set Product as New from Date in Coordinated Universal Time (UTC).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MarkAsNewEndDateTimeUtc">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MarkAsNewEndDateTimeUtc">
     <Value>Mark as new. End date</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MarkAsNewEndDateTimeUtc.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MarkAsNewEndDateTimeUtc.Hint">
     <Value>Set Product as New to Date in Coordinated Universal Time (UTC).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MaximumCustomerEnteredPrice">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MaximumCustomerEnteredPrice">
     <Value>Maximum amount</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MaximumCustomerEnteredPrice.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MaximumCustomerEnteredPrice.Hint">
     <Value>Enter a maximum amount.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MaxNumberOfDownloads">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MaxNumberOfDownloads">
     <Value>Max. downloads</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MaxNumberOfDownloads.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MaxNumberOfDownloads.Hint">
     <Value>The maximum number of downloads.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MetaDescription">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MetaDescription">
     <Value>Meta description</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MetaDescription.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MetaDescription.Hint">
     <Value>Meta description to be added to product page header</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MetaKeywords">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MetaKeywords">
     <Value>Meta keywords</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MetaKeywords.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MetaKeywords.Hint">
     <Value>Meta keywords to be added to product page header</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MetaTitle">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MetaTitle">
     <Value>Meta title</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MetaTitle.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MetaTitle.Hint">
     <Value>Override the page title. The default is the name of the product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MinimumCustomerEnteredPrice">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MinimumCustomerEnteredPrice">
     <Value>Minimum amount</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MinimumCustomerEnteredPrice.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MinimumCustomerEnteredPrice.Hint">
     <Value>Enter a minimum amount.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MinStockQuantity">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MinStockQuantity">
     <Value>Minimum stock quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.MinStockQuantity.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.MinStockQuantity.Hint">
     <Value>If you have enabled 'Manage Stock' you can perform a number of different actions when the current stock quantity falls below (reaches) your minimum stock quantity.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.UseMultipleWarehouses">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.UseMultipleWarehouses">
     <Value>Use multiple warehouses</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.UseMultipleWarehouses.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.UseMultipleWarehouses.Hint">
     <Value>Check if you want to support shipping and inventory management from multiple warehouses.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Name">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Name">
     <Value>Product name</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Name.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Name.Hint">
     <Value>The name of the product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Name.Required">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Name.Required">
     <Value>Please provide a name.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.NotifyAdminForQuantityBelow">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.NotifyAdminForQuantityBelow">
     <Value>Notify admin for quantity below</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.NotifyAdminForQuantityBelow.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.NotifyAdminForQuantityBelow.Hint">
     <Value>When the current stock quantity falls below (reaches) this quantity, a store owner will receive a notification.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.OldPrice">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.OldPrice">
     <Value>Old price</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.OldPrice.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.OldPrice.Hint">
     <Value>The old price of the product. If you set an old price, this will display alongside the current price on the product page to show the difference in price.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.OrderMaximumQuantity">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.OrderMaximumQuantity">
     <Value>Maximum cart quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.OrderMaximumQuantity.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.OrderMaximumQuantity.Hint">
     <Value>Set the maximum quantity allowed in a customer's shopping cart e.g. set to 5 to only allow customers to purchase 5 of this product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.OrderMinimumQuantity">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.OrderMinimumQuantity">
     <Value>Minimum cart quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.OrderMinimumQuantity.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.OrderMinimumQuantity.Hint">
     <Value>Set the minimum quantity allowed in a customer's shopping cart e.g. set to 3 to only allow customers to purchase 3 or more of this product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.OverriddenGiftCardAmount">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.OverriddenGiftCardAmount">
     <Value>Overridden gift card amount</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.OverriddenGiftCardAmount.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.OverriddenGiftCardAmount.Hint">
     <Value>Enter gift card amount that can be used after purchase. If not specified, then product price will be used.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.PictureThumbnailUrl">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.PictureThumbnailUrl">
     <Value>Picture</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.PreOrderAvailabilityStartDateTimeUtc">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.PreOrderAvailabilityStartDateTimeUtc">
     <Value>Pre-order availability start date</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.PreOrderAvailabilityStartDateTimeUtc.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.PreOrderAvailabilityStartDateTimeUtc.Hint">
     <Value>The availability start date of the product configured for pre-order in Coordinated Universal Time (UTC). 'Pre-order' button will automatically be changed to 'Add to cart' at this moment.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Price">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Price">
     <Value>Price</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Price.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Price.Hint">
     <Value>The price of the product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ProductCost">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ProductCost">
     <Value>Product cost</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ProductCost.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ProductCost.Hint">
     <Value>The product cost is the cost of all the different components which make up the product. This may either be the purchase price if the components are bought from outside suppliers, or the combined cost of materials and manufacturing processes if the component is made in-house.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ProductTags">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ProductTags">
     <Value>Product tags</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ProductTags.Hint">
-    <Value>Product tags are keywords that this product can also be identified by. Enter a comma separated list of the tags to be associated with this product. The more products associated with a particular tag, the larger it will show on the tag cloud.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ProductTags.Hint">
+    <Value>Product tags are keywords that this product can also be identified by. Enter a comma separated list of the tags to be associated with this product. The more Posts associated with a particular tag, the larger it will show on the tag cloud.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ProductTemplate">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ProductTemplate">
     <Value>Product template</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ProductTemplate.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ProductTemplate.Hint">
     <Value>Choose a product template. This template defines how this product will be displayed in public store.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ProductType">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ProductType">
     <Value>Product type</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ProductType.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ProductType.Hint">
     <Value>Choose your product type.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Published">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Published">
     <Value>Published</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Published.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Published.Hint">
     <Value>Check to publish this product (visible in store). Uncheck to unpublish (product not available in store).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RecurringCycleLength">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RecurringCycleLength">
     <Value>Cycle length</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RecurringCycleLength.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RecurringCycleLength.Hint">
     <Value>Enter cycle length.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RecurringCyclePeriod">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RecurringCyclePeriod">
     <Value>Cycle period</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RecurringCyclePeriod.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RecurringCyclePeriod.Hint">
     <Value>Select cycle period.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RecurringTotalCycles">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RecurringTotalCycles">
     <Value>Total cycles</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RecurringTotalCycles.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RecurringTotalCycles.Hint">
     <Value>Enter total cycles.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RentalPriceLength">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RentalPriceLength">
     <Value>Rental period length</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RentalPriceLength.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RentalPriceLength.Hint">
     <Value>Specify period length for rental product. Price is specified for this period.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RentalPricePeriod">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RentalPricePeriod">
     <Value>Rental period</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RentalPricePeriod.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RentalPricePeriod.Hint">
     <Value>Specify period for rental product. Price is specified for this period.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RequiredProductIds">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RequiredProductIds">
     <Value>Required product IDs</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RequiredProductIds.AddNew">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RequiredProductIds.AddNew">
     <Value>Add required product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RequiredProductIds.Choose">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RequiredProductIds.Choose">
     <Value>Choose</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RequiredProductIds.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RequiredProductIds.Hint">
     <Value>Specify comma separated list of required product IDs. NOTE: Ensure that there are no circular references (for example, A requires B, and B requires A).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RequireOtherProducts">
-    <Value>Require other products added to the cart</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RequireOtherPosts">
+    <Value>Require other Posts added to the cart</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.RequireOtherProducts.Hint">
-    <Value>Check if this product requires that other products are added to the cart.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.RequireOtherPosts.Hint">
+    <Value>Check if this product requires that other Posts are added to the cart.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SampleDownload">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SampleDownload">
     <Value>Sample download file</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SampleDownload.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SampleDownload.Hint">
     <Value>The sample download file.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SeName">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SeName">
     <Value>Search engine friendly page name</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SeName.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SeName.Hint">
     <Value>Set a search engine friendly page name e.g. 'the-best-product' to make your page URL 'http://www.yourStore.com/the-best-product'. Leave empty to generate it automatically based on the name of the product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ShipSeparately">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ShipSeparately">
     <Value>Ship separately</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ShipSeparately.Hint">
-    <Value>Check to mark a product as being able to be shipped by itself in a single box (separate shipment). This way shipping rates are calculated separately for this product regardless of what other products are also in the cart. Please note that if you have several quantities of this product in the cart, then all of them will be packed and shipped in a single box.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ShipSeparately.Hint">
+    <Value>Check to mark a product as being able to be shipped by itself in a single box (separate shipment). This way shipping rates are calculated separately for this product regardless of what other Posts are also in the cart. Please note that if you have several quantities of this product in the cart, then all of them will be packed and shipped in a single box.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ShortDescription">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ShortDescription">
     <Value>Short description</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ShortDescription.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ShortDescription.Hint">
     <Value>The short description of the product. This is the text that displays in product lists i.e. category / manufacturer pages</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ShowOnHomePage">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ShowOnHomePage">
     <Value>Show on home page</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.ShowOnHomePage.Hint">
-    <Value>Check to display this product on your store's home page. Recommended for your most popular products.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.ShowOnHomePage.Hint">
+    <Value>Check to display this product on your store's home page. Recommended for your most popular Posts.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Sku">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Sku">
     <Value>SKU</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Sku.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Sku.Hint">
     <Value>Product stock keeping unit (SKU). Your internal unique identifier that can be used to track this product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SpecialPrice">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SpecialPrice">
     <Value>Special price</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SpecialPrice.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SpecialPrice.Hint">
     <Value>Set a special price for the product. New price will be valid between start and end dates. Leave empty to ignore field.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SpecialPriceEndDateTimeUtc">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SpecialPriceEndDateTimeUtc">
     <Value>Special price end date</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SpecialPriceEndDateTimeUtc.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SpecialPriceEndDateTimeUtc.Hint">
     <Value>The end date of the special price in Coordinated Universal Time (UTC).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SpecialPriceStartDateTimeUtc">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SpecialPriceStartDateTimeUtc">
     <Value>Special price start date</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SpecialPriceStartDateTimeUtc.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SpecialPriceStartDateTimeUtc.Hint">
     <Value>The start date of the special price in Coordinated Universal Time (UTC).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.StockQuantity">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.StockQuantity">
     <Value>Stock quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.StockQuantity.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.StockQuantity.Hint">
     <Value>The current stock quantity of this product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SubjectToAcl">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SubjectToAcl">
     <Value>Subject to ACL</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.SubjectToAcl.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.SubjectToAcl.Hint">
     <Value>Determines whether the product is subject to ACL (access control list).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.TaxCategory">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.TaxCategory">
     <Value>Tax category</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.TaxCategory.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.TaxCategory.Hint">
     <Value>The tax classification for this product. You can manage product tax classifications from Configuration : Tax : Tax Classes</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.UnlimitedDownloads">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.UnlimitedDownloads">
     <Value>Unlimited downloads</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.UnlimitedDownloads.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.UnlimitedDownloads.Hint">
     <Value>When a customer purchases a download product, they can download the item unlimited number of times.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.UpdatedOn">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.UpdatedOn">
     <Value>Updated on</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.UpdatedOn.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.UpdatedOn.Hint">
     <Value>Date and time when this product was updated.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.UserAgreementText">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.UserAgreementText">
     <Value>User agreement text</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.UserAgreementText.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.UserAgreementText.Hint">
     <Value>The text of the user agreement</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Vendor">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Vendor">
     <Value>Vendor</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Vendor.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Vendor.Hint">
     <Value>Choose a vendor of this product. This can be useful if you're using multi-vendor functionality.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Vendor.None">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Vendor.None">
     <Value>No vendor</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.VisibleIndividually">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.VisibleIndividually">
     <Value>Visible individually</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.VisibleIndividually.Hint">
-    <Value>Check it if you want this product to be visible in catalog or search results. You can use this field (just uncheck) to hide associated products from catalog and make them accessible only from a parent "grouped" product details page.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.VisibleIndividually.Hint">
+    <Value>Check it if you want this product to be visible in catalog or search results. You can use this field (just uncheck) to hide associated Posts from catalog and make them accessible only from a parent "grouped" product details page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Warehouse">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Warehouse">
     <Value>Warehouse</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Warehouse.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Warehouse.Hint">
     <Value>Choose a warehouse which will be used when calculating shipping rates.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Warehouse.None">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Warehouse.None">
     <Value>None</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Weight">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Weight">
     <Value>Weight</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Weight.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Weight.Hint">
     <Value>The weight of the product. Can be used in shipping calculations.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Width">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Width">
     <Value>Width</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Fields.Width.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Fields.Width.Hint">
     <Value>The width of the product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Imported">
+  <LocaleResource Name="Admin.Catalog.Posts.Imported">
     <Value>Product(s) have been imported successfully.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Info">
+  <LocaleResource Name="Admin.Catalog.Posts.Info">
     <Value>Product Info</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.DownloadPDF">
+  <LocaleResource Name="Admin.Catalog.Posts.List.DownloadPDF">
     <Value>Download catalog as PDF</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.GoDirectlyToSku">
+  <LocaleResource Name="Admin.Catalog.Posts.List.GoDirectlyToSku">
     <Value>Go directly to product SKU</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.GoDirectlyToSku.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.List.GoDirectlyToSku.Hint">
     <Value>Enter product SKU and click Go.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.ImportFromExcelTip">
-    <Value>Imported products are distinguished by SKU. If the SKU already exists, then its corresponding product will be updated.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.List.ImportFromExcelTip">
+    <Value>Imported Posts are distinguished by SKU. If the SKU already exists, then its corresponding product will be updated.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchCategory">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchCategory">
     <Value>Category</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchCategory.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchCategory.Hint">
     <Value>Search by a specific category.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchIncludeSubCategories">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchIncludeSubCategories">
     <Value>Automatically search sub categories</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchIncludeSubCategories.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchIncludeSubCategories.Hint">
     <Value>Check to search in sub categories.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchManufacturer">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchManufacturer">
     <Value>Manufacturer</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchManufacturer.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchManufacturer.Hint">
     <Value>Search by a specific manufacturer.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchProductName">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchProductName">
     <Value>Product name</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchProductName.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchProductName.Hint">
     <Value>A product name.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchProductType">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchProductType">
     <Value>Product type</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchProductType.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchProductType.Hint">
     <Value>Search by a product type.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchPublished">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchPublished">
     <Value>Published</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchPublished.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchPublished.Hint">
     <Value>Search by a "Published" property.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchPublished.All">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchPublished.All">
     <Value>All</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchPublished.PublishedOnly">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchPublished.PublishedOnly">
     <Value>Published only</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchPublished.UnpublishedOnly">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchPublished.UnpublishedOnly">
     <Value>Unpublished only</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchStore">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchStore">
     <Value>Store</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchStore.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchStore.Hint">
     <Value>Search by a specific store.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchVendor">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchVendor">
     <Value>Vendor</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchVendor.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchVendor.Hint">
     <Value>Search by a specific vendor.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchWarehouse">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchWarehouse">
     <Value>Warehouse</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.List.SearchWarehouse.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.List.SearchWarehouse.Hint">
     <Value>Search by a specific warehouse.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Manage">
-    <Value>Manage products</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.Manage">
+    <Value>Manage Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Manufacturers">
+  <LocaleResource Name="Admin.Catalog.Posts.Manufacturers">
     <Value>Manufacturer mappings</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Manufacturers.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Posts.Manufacturers.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Manufacturers.Fields.IsFeaturedProduct">
+  <LocaleResource Name="Admin.Catalog.Posts.Manufacturers.Fields.IsFeaturedProduct">
     <Value>Is featured product?</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Manufacturers.Fields.Manufacturer">
+  <LocaleResource Name="Admin.Catalog.Posts.Manufacturers.Fields.Manufacturer">
     <Value>Manufacturer</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Manufacturers.NoManufacturersAvailable">
+  <LocaleResource Name="Admin.Catalog.Posts.Manufacturers.NoManufacturersAvailable">
     <Value>No manufacturers available. Create at least one manufacturer before mapping.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Manufacturers.SaveBeforeEdit">
+  <LocaleResource Name="Admin.Catalog.Posts.Manufacturers.SaveBeforeEdit">
     <Value>You need to save the product before you can map manufacturers for this product page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures">
     <Value>Pictures</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.AddButton">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.AddButton">
     <Value>Add product picture</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.AddNew">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.AddNew">
     <Value>Add a new picture</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.Fields.DisplayOrder.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.Fields.DisplayOrder.Hint">
     <Value>Display order of the picture. 1 represents the top of the list.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.Fields.OverrideAltAttribute">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.Fields.OverrideAltAttribute">
     <Value>Alt</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.Fields.OverrideAltAttribute.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.Fields.OverrideAltAttribute.Hint">
     <Value>Override "alt" attribute for "img" HTML element. If empty, then a default rule will be used (e.g. product name).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.Fields.OverrideTitleAttribute">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.Fields.OverrideTitleAttribute">
     <Value>Title</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.Fields.OverrideTitleAttribute.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.Fields.OverrideTitleAttribute.Hint">
     <Value>Override "title" attribute for "img" HTML element. If empty, then a default rule will be used (e.g. product name).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.Fields.Picture">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.Fields.Picture">
     <Value>Picture</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.Fields.Picture.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.Fields.Picture.Hint">
     <Value>Choose a picture to upload. If the picture size exceeds your stores max image size setting, it will be automatically resized.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Pictures.SaveBeforeEdit">
+  <LocaleResource Name="Admin.Catalog.Posts.Pictures.SaveBeforeEdit">
     <Value>You need to save the product before you can upload pictures for this product page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes">
     <Value>Product attributes</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations">
     <Value>Attribute combinations</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.AddNew">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.AddNew">
     <Value>Add combination</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.AddTitle">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.AddTitle">
     <Value>Select new combination and enter details below</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Description">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Description">
     <Value>Attribute combinations are useful when your 'Manage inventory method' is set to 'Track inventory by product attributes'</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Description2">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Description2">
     <Value>Also note that some attribute control types that support custom user input (e.g. file upload, textboxes, date picker) are useless with attribute combinations</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.AllowOutOfStockOrders">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.AllowOutOfStockOrders">
     <Value>Allow out of stock</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.AllowOutOfStockOrders.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.AllowOutOfStockOrders.Hint">
     <Value>A value indicating whether to allow orders when out of stock.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.Attributes">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.Attributes">
     <Value>Attributes</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.GTIN">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.GTIN">
     <Value>GTIN</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.GTIN.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.GTIN.Hint">
     <Value>Enter global trade item number (GTIN). These identifiers include UPC (in North America), EAN (in Europe), JAN (in Japan), and ISBN (for books).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.ManufacturerPartNumber">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.ManufacturerPartNumber">
     <Value>Manufacturer part number</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.ManufacturerPartNumber.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.ManufacturerPartNumber.Hint">
     <Value>The manufacturer's part number for this attribute combination.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.NotifyAdminForQuantityBelow">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.NotifyAdminForQuantityBelow">
     <Value>Notify admin for quantity below</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.NotifyAdminForQuantityBelow.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.NotifyAdminForQuantityBelow.Hint">
     <Value>When the current stock quantity falls below (reaches) this quantity, a store owner will receive a notification.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.OverriddenPrice">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.OverriddenPrice">
     <Value>Overridden price</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.OverriddenPrice.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.OverriddenPrice.Hint">
     <Value>Override price for this attribute combination. This way a store owner can override the default product price when this attribute combination is added to the cart. For example, you can give a discount this way. Leave empty to ignore field. All other applied discounts will be ignored when this field is specified.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.Sku">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.Sku">
     <Value>Sku</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.Sku.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.Sku.Hint">
     <Value>Product stock keeping unit (SKU). Your internal unique identifier that can be used to track this attribute combination.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.StockQuantity">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.StockQuantity">
     <Value>Stock quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.StockQuantity.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.Fields.StockQuantity.Hint">
     <Value>The current stock quantity of this combination.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.AttributeCombinations.GenerateAll">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.AttributeCombinations.GenerateAll">
     <Value>Generate all possible combinations</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes">
     <Value>Attributes</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Condition">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Condition">
     <Value>Condition</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Condition.Attributes">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Condition.Attributes">
     <Value>Attribute</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Condition.Attributes.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Condition.Attributes.Hint">
     <Value>Choose an attribute.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Condition.Description">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Condition.Description">
     <Value>Conditional attributes appear if a previous attribute is selected, such as having an option for personalizing clothing with a name and only providing the text input box if the "Personalize" radio button is checked</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Condition.EnableCondition">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Condition.EnableCondition">
     <Value>Enable condition</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Condition.EnableCondition.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Condition.EnableCondition.Hint">
     <Value>Check to specify a condition (depending on other attribute) when this attribute should be enabled (visible).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Condition.ViewLink">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Condition.ViewLink">
     <Value>View/Edit condition</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Fields.Attribute">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Fields.Attribute">
     <Value>Attribute</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Fields.AttributeControlType">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Fields.AttributeControlType">
     <Value>Control type</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Fields.IsRequired">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Fields.IsRequired">
     <Value>Is Required</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Fields.TextPrompt">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Fields.TextPrompt">
     <Value>Text prompt</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules">
     <Value>Validation rules</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.DefaultValue">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.DefaultValue">
     <Value>Default value</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.DefaultValue.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.DefaultValue.Hint">
     <Value>Enter default value for attribute.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.FileAllowedExtensions">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.FileAllowedExtensions">
     <Value>Allowed file extensions</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.FileAllowedExtensions.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.FileAllowedExtensions.Hint">
     <Value>Specify a comma-separated list of allowed file extensions. Leave empty to allow any file extension.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.FileMaximumSize">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.FileMaximumSize">
     <Value>Maximum file size (KB)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.FileMaximumSize.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.FileMaximumSize.Hint">
     <Value>Specify maximum file size in kilobytes. Leave empty to skip this validation.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.MaxLength">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.MaxLength">
     <Value>Maximum length</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.MaxLength.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.MaxLength.Hint">
     <Value>Specify maximum length. Leave empty to skip this validation.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.MinLength">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.MinLength">
     <Value>Minimum length</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.MinLength.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.MinLength.Hint">
     <Value>Specify minimum length. Leave empty to skip this validation.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.ValidationRules.ViewLink">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.ValidationRules.ViewLink">
     <Value>View/Edit rules</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values">
     <Value>Values</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.AddNew">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.AddNew">
     <Value>Add a new value</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.BackToProduct">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.BackToProduct">
     <Value>back to product details</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.EditAttributeDetails">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.EditAttributeDetails">
     <Value>Add/Edit values for [{0}] attribute. Product: {1}</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.EditValueDetails">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.EditValueDetails">
     <Value>Edit value</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AssociatedProduct">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.AssociatedProduct">
     <Value>Associated product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AssociatedProduct.AddNew">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.AssociatedProduct.AddNew">
     <Value>Associate a product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AssociatedProduct.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.AssociatedProduct.Hint">
     <Value>Associated product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AttributeValueType">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.AttributeValueType">
     <Value>Attribute value type</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AttributeValueType.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.AttributeValueType.Hint">
     <Value>Choose your attribute value type.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.ColorSquaresRgb">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.ColorSquaresRgb">
     <Value>RGB color</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.ColorSquaresRgb.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.ColorSquaresRgb.Hint">
     <Value>Choose color to be used with the color squares attribute control.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Cost">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Cost">
     <Value>Cost</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Cost.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Cost.Hint">
     <Value>The attribute value cost is the cost of all the different components which make up this value. This may be either the purchase price if the components are bought from outside suppliers, or the combined cost of materials and manufacturing processes if the component is made in-house.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.DisplayOrder.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.DisplayOrder.Hint">
     <Value>The display order of the attribute value. 1 represents the first item in attribute value list.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.IsPreSelected">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.IsPreSelected">
     <Value>Is pre-selected</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.IsPreSelected.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.IsPreSelected.Hint">
     <Value>Determines whether this attribute value is pre selected for the customer</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Name">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Name">
     <Value>Name</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Name.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Name.Hint">
     <Value>The attribute value name e.g. 'Blue' for Color attributes.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Name.Required">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Name.Required">
     <Value>Please provide a name.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Picture">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Picture">
     <Value>Picture</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Picture.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Picture.Hint">
     <Value>Choose a picture associated to this attribute value.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Picture.NoPicture">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Picture.NoPicture">
     <Value>No picture</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.PriceAdjustment">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.PriceAdjustment">
     <Value>Price adjustment</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.PriceAdjustment.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.PriceAdjustment.Hint">
     <Value>The price adjustment applied when choosing this attribute value e.g. '10' to add 10 dollars.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Quantity">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Quantity">
     <Value>Product quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Quantity.GreaterThanOrEqualTo1">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Quantity.GreaterThanOrEqualTo1">
     <Value>Quantity should be greater than or equal to 1</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.Quantity.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.Quantity.Hint">
     <Value>Specify quantity of the associated product which will be added. Minimum allowed value is 1.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.WeightAdjustment">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.WeightAdjustment">
     <Value>Weight adjustment</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.WeightAdjustment.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.Fields.WeightAdjustment.Hint">
     <Value>The weight adjustment applied when choosing this attribute value</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.TotalValues">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.TotalValues">
     <Value>Total: </Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.Attributes.Values.ViewLink">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.Attributes.Values.ViewLink">
     <Value>View/Edit values</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.NoAttributesAvailable">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.NoAttributesAvailable">
     <Value>No product attributes available. Create at least one product attribute before mapping.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductAttributes.SaveBeforeEdit">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductAttributes.SaveBeforeEdit">
     <Value>You need to save the product before you can add attributes for this page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory">
     <Value>Warehouses</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory.Description1">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory.Description1">
     <Value>"Stock quantity" is total quantity. It's reduced from when a shipment is shipped.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory.Description2">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory.Description2">
     <Value>"Reserved qty" is product quantity that is ordered but not shipped yet.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory.Description3">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory.Description3">
     <Value>"Planned qty" is product quantity that is ordered and already added to a shipment but not shipped yet.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory.Fields.PlannedQuantity">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory.Fields.PlannedQuantity">
     <Value>Planned qty</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory.Fields.ReservedQuantity">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory.Fields.ReservedQuantity">
     <Value>Reserved qty</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory.Fields.StockQuantity">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory.Fields.StockQuantity">
     <Value>Stock quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory.Fields.Warehouse">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory.Fields.Warehouse">
     <Value>Warehouse</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory.Fields.Warehouse.NotDefined">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory.Fields.Warehouse.NotDefined">
     <Value>No warehouses defined</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory.Fields.WarehouseUsed">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory.Fields.WarehouseUsed">
     <Value>Use</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.ProductWarehouseInventory.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.ProductWarehouseInventory.Hint">
     <Value>Manage inventory per warehouse.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.PurchasedWithOrders">
+  <LocaleResource Name="Admin.Catalog.Posts.PurchasedWithOrders">
     <Value>Purchased with orders</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.PurchasedWithOrders.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.PurchasedWithOrders.Hint">
     <Value>Here you can see a list of orders in which this product was purchased.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.RelatedProducts">
-    <Value>Related products</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.RelatedPosts">
+    <Value>Related Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.RelatedProducts.AddNew">
+  <LocaleResource Name="Admin.Catalog.Posts.RelatedPosts.AddNew">
     <Value>Add new related product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.RelatedProducts.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Posts.RelatedPosts.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.RelatedProducts.Fields.Product">
+  <LocaleResource Name="Admin.Catalog.Posts.RelatedPosts.Fields.Product">
     <Value>Product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.RelatedProducts.SaveBeforeEdit">
-    <Value>You need to save the product before you can add related products for this product page.</Value>
+  <LocaleResource Name="Admin.Catalog.Posts.RelatedPosts.SaveBeforeEdit">
+    <Value>You need to save the product before you can add related Posts for this product page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes">
     <Value>Specification attributes</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.AddButton">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.AddButton">
     <Value>Add attribute</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.AddNew">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.AddNew">
     <Value>Add a new product specification attribute</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.AllowFiltering">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.AllowFiltering">
     <Value>Allow filtering</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.AllowFiltering.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.AllowFiltering.Hint">
     <Value>Allow product filtering by this attribute.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.AttributeType">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.AttributeType">
     <Value>Attribute type</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.AttributeType.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.AttributeType.Hint">
     <Value>Choose attribute type</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.CustomValue">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.CustomValue">
     <Value>Value</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.CustomValue.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.CustomValue.Hint">
     <Value>Custom value (text, hyperlink, etc).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.DisplayOrder">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.DisplayOrder">
     <Value>Display order</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.DisplayOrder.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.DisplayOrder.Hint">
     <Value>Display order of the specification attribute. 1 represents the top of the list.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.ShowOnProductPage">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.ShowOnProductPage">
     <Value>Show on product page</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.ShowOnProductPage.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.ShowOnProductPage.Hint">
     <Value>The value of the specification attribute. Be visible on the product page</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.SpecificationAttribute">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.SpecificationAttribute">
     <Value>Attribute</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.SpecificationAttribute.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.SpecificationAttribute.Hint">
     <Value>Choose a product specification attribute. You can manage specification attributes from Catalog : Attributes : Product Specifications.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.SpecificationAttributeOption">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.SpecificationAttributeOption">
     <Value>Attribute option</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.SpecificationAttributeOption.Hint">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.SpecificationAttributeOption.Hint">
     <Value>The value of the specification attribute.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.Fields.Value">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.Fields.Value">
     <Value>Value</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.NoAttributes">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.NoAttributes">
     <Value>No specification attributes defined.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.SpecificationAttributes.SaveBeforeEdit">
+  <LocaleResource Name="Admin.Catalog.Posts.SpecificationAttributes.SaveBeforeEdit">
     <Value>You need to save the product before you can add product specification attributes for this product page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Stores">
+  <LocaleResource Name="Admin.Catalog.Posts.Stores">
     <Value>Stores</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.TierPrices">
+  <LocaleResource Name="Admin.Catalog.Posts.TierPrices">
     <Value>Tier prices</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.TierPrices.Fields.CustomerRole">
+  <LocaleResource Name="Admin.Catalog.Posts.TierPrices.Fields.CustomerRole">
     <Value>Customer role</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.TierPrices.Fields.CustomerRole.All">
+  <LocaleResource Name="Admin.Catalog.Posts.TierPrices.Fields.CustomerRole.All">
     <Value>All customer roles</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.TierPrices.Fields.Price">
+  <LocaleResource Name="Admin.Catalog.Posts.TierPrices.Fields.Price">
     <Value>Price</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.TierPrices.Fields.Quantity">
+  <LocaleResource Name="Admin.Catalog.Posts.TierPrices.Fields.Quantity">
     <Value>Quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.TierPrices.Fields.Store">
+  <LocaleResource Name="Admin.Catalog.Posts.TierPrices.Fields.Store">
     <Value>Store</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.TierPrices.Fields.Store.All">
+  <LocaleResource Name="Admin.Catalog.Posts.TierPrices.Fields.Store.All">
     <Value>All stores</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.TierPrices.SaveBeforeEdit">
+  <LocaleResource Name="Admin.Catalog.Posts.TierPrices.SaveBeforeEdit">
     <Value>You need to save the product before you can add tier prices for this product page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Catalog.Products.Updated">
+  <LocaleResource Name="Admin.Catalog.Posts.Updated">
     <Value>The product has been updated successfully.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.ProductTags">
@@ -3325,7 +3325,7 @@
     <Value>Please provide a name.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Catalog.ProductTags.Fields.ProductCount">
-    <Value>Tagged products</Value>
+    <Value>Tagged Posts</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Common.AddNew">
     <Value>Add new</Value>
@@ -4488,10 +4488,10 @@
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToReviewProduct.Hint">
     <Value>Check to allow anonymous users to write product reviews.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowProductSorting">
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowPostsorting">
     <Value>Allow product sorting</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowProductSorting.Hint">
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowPostsorting.Hint">
     <Value>Check to enable product sorting option on category/manufacturer details page.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowProductViewModeChanging">
@@ -4504,7 +4504,7 @@
     <Value>Allow viewing of unpublished product details page</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.AllowViewUnpublishedProductPage.Hint">
-    <Value>Check to allow viewing of unpublished product details page. This way SEO won't be affected by search crawlers when a product is temporary unpublished. Please note that a store owner always has access to unpublished products.</Value>
+    <Value>Check to allow viewing of unpublished product details page. This way SEO won't be affected by search crawlers when a product is temporary unpublished. Please note that a store owner always has access to unpublished Posts.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.CacheProductPrices">
     <Value>Cache product prices</Value>
@@ -4518,20 +4518,20 @@
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.CategoryBreadcrumbEnabled.Hint">
     <Value>Check to show category breadcrumb.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.CompareProducts">
-    <Value>Compare products</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ComparePosts">
+    <Value>Compare Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.CompareProductsEnabled">
-    <Value>'Compare Products' enabled</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ComparePostsEnabled">
+    <Value>'Compare Posts' enabled</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.CompareProductsEnabled.Hint">
-    <Value>Check to allow customers to use the 'Compare Products' option in your store</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ComparePostsEnabled.Hint">
+    <Value>Check to allow customers to use the 'Compare Posts' option in your store</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.DisplayDiscontinuedMessageForUnpublishedProducts">
-    <Value>Discontinued message for unpublished products</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.DisplayDiscontinuedMessageForUnpublishedPosts">
+    <Value>Discontinued message for unpublished Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.DisplayDiscontinuedMessageForUnpublishedProducts.Hint">
-    <Value>Check to display "a product has been discontinued" message when viewing details pages of unpublished products.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.DisplayDiscontinuedMessageForUnpublishedPosts.Hint">
+    <Value>Check to display "a product has been discontinued" message when viewing details pages of unpublished Posts.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoFooter">
     <Value>Display tax/shipping info (footer)</Value>
@@ -4584,11 +4584,11 @@
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.IgnoreDiscounts.Hint">
     <Value>Check to ignore discounts (sitewide). It can significantly improve performance.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IgnoreFeaturedProducts">
-    <Value>Ignore featured products (sitewide)</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IgnoreFeaturedPosts">
+    <Value>Ignore featured Posts (sitewide)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IgnoreFeaturedProducts.Hint">
-    <Value>Check to ignore featured products (sitewide). It can significantly improve performance.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IgnoreFeaturedPosts.Hint">
+    <Value>Check to ignore featured Posts (sitewide). It can significantly improve performance.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.IgnoreAcl">
     <Value>Ignore ACL rules (sitewide)</Value>
@@ -4602,17 +4602,17 @@
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.IgnoreStoreLimitations.Hint">
     <Value>Check to ignore "limit per store" rules configured for entities (sitewide). Recommended to enable this setting if you have only one store or don't use it. It can significantly improve performance.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IncludeFullDescriptionInCompareProducts">
-    <Value>Include full description in compare products</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IncludeFullDescriptionInComparePosts">
+    <Value>Include full description in compare Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IncludeFullDescriptionInCompareProducts.Hint">
-    <Value>Check to display product full description on the compare products page.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IncludeFullDescriptionInComparePosts.Hint">
+    <Value>Check to display product full description on the compare Posts page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IncludeShortDescriptionInCompareProducts">
-    <Value>Include short description in compare products</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IncludeShortDescriptionInComparePosts">
+    <Value>Include short description in compare Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IncludeShortDescriptionInCompareProducts.Hint">
-    <Value>Check to display product short description on the compare products page.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.IncludeShortDescriptionInComparePosts.Hint">
+    <Value>Check to display product short description on the compare Posts page.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ManufacturersBlockItemsToDisplay">
     <Value>Number of manufacturers to display</Value>
@@ -4626,17 +4626,17 @@
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.NotifyStoreOwnerAboutNewProductReviews.Hint">
     <Value>Check to notify store owner about new product reviews.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.NewProductsEnabled">
-    <Value>'New products' page enabled</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.NewPostsEnabled">
+    <Value>'New Posts' page enabled</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.NewProductsEnabled.Hint">
-    <Value>Check to enable the 'New products' page in your store</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.NewPostsEnabled.Hint">
+    <Value>Check to enable the 'New Posts' page in your store</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.NewProductsNumber">
-    <Value>Number of products on 'New products' page</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.NewPostsNumber">
+    <Value>Number of Posts on 'New Posts' page</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.NewProductsNumber.Hint">
-    <Value>The number of products to display when 'New products' page is enabled.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.NewPostsNumber.Hint">
+    <Value>The number of Posts to display when 'New Posts' page is enabled.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.NumberOfBestsellersOnHomepage">
     <Value>Number of best sellers on home page</Value>
@@ -4668,65 +4668,65 @@
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductReviewsMustBeApproved.Hint">
     <Value>Check if product reviews must be approved by administrator.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedEnabled">
-    <Value>'Products also purchased' enabled</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsAlsoPurchasedEnabled">
+    <Value>'Posts also purchased' enabled</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedEnabled.Hint">
-    <Value>Check to allow customers to view a list of products purchased by other customers who purchased the above</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsAlsoPurchasedEnabled.Hint">
+    <Value>Check to allow customers to view a list of Posts purchased by other customers who purchased the above</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedNumber">
-    <Value>Number of also purchased products to display</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsAlsoPurchasedNumber">
+    <Value>Number of also purchased Posts to display</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedNumber.Hint">
-    <Value>The number of products also purchased by other customers to display when 'Products also purchased' option is enabled.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsAlsoPurchasedNumber.Hint">
+    <Value>The number of Posts also purchased by other customers to display when 'Posts also purchased' option is enabled.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsByTagAllowCustomersToSelectPageSize">
-    <Value>Allow customers to select 'Products by tag' page size</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsByTagAllowCustomersToSelectPageSize">
+    <Value>Allow customers to select 'Posts by tag' page size</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsByTagAllowCustomersToSelectPageSize.Hint">
-    <Value>Whether customers are allowed to select the 'Products by tag' page size from a predefined list of options.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsByTagAllowCustomersToSelectPageSize.Hint">
+    <Value>Whether customers are allowed to select the 'Posts by tag' page size from a predefined list of options.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsByTagPageSize">
-    <Value>'Products by tag' page. Products per page</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsByTagPageSize">
+    <Value>'Posts by tag' page. Posts per page</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsByTagPageSize.Hint">
-    <Value>Set the page size for products on 'Products by tag' page.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsByTagPageSize.Hint">
+    <Value>Set the page size for Posts on 'Posts by tag' page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsByTagPageSizeOptions">
-    <Value>'Products by tag' Page Size options (comma separated)</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsByTagPageSizeOptions">
+    <Value>'Posts by tag' Page Size options (comma separated)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductsByTagPageSizeOptions.Hint">
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsByTagPageSizeOptions.Hint">
     <Value>Comma separated list of page size options (e.g. 10, 5, 15, 20). First option is the default page size if none are selected.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductSearchAutoCompleteEnabled">
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsearchAutoCompleteEnabled">
     <Value>Search autocomplete enabled</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductSearchAutoCompleteEnabled.Hint">
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsearchAutoCompleteEnabled.Hint">
     <Value>Check to enabled autocomplete in the search box.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductSearchAutoCompleteNumberOfProducts">
-    <Value>Number of 'autocomplete' products to display</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsearchAutoCompleteNumberOfPosts">
+    <Value>Number of 'autocomplete' Posts to display</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductSearchAutoCompleteNumberOfProducts.Hint">
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsearchAutoCompleteNumberOfPosts.Hint">
     <Value>Change number of visible results shown in autocomplete dropdown when searching.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductSearchTermMinimumLength">
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsearchTermMinimumLength">
     <Value>Search term minimum length</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ProductSearchTermMinimumLength.Hint">
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.PostsearchTermMinimumLength.Hint">
     <Value>Specify minimum length of search term.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.RecentlyViewedProductsEnabled">
-    <Value>'Recently viewed products' enabled</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.RecentlyViewedPostsEnabled">
+    <Value>'Recently viewed Posts' enabled</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.RecentlyViewedProductsEnabled.Hint">
-    <Value>Check to allow customers to use the 'Recently viewed products' feature in your store</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.RecentlyViewedPostsEnabled.Hint">
+    <Value>Check to allow customers to use the 'Recently viewed Posts' feature in your store</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.RecentlyViewedProductsNumber">
-    <Value>Number of 'Recently viewed products'</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.RecentlyViewedPostsNumber">
+    <Value>Number of 'Recently viewed Posts'</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.RecentlyViewedProductsNumber.Hint">
-    <Value>The number of 'Recently viewed products' to display when 'Recently viewed products' option is enabled.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.RecentlyViewedPostsNumber.Hint">
+    <Value>The number of 'Recently viewed Posts' to display when 'Recently viewed Posts' option is enabled.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.Search">
     <Value>Search</Value>
@@ -4743,11 +4743,11 @@
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.SearchPagePageSizeOptions.Hint">
     <Value>Search page. Comma separated list of page size options (e.g. 10, 5, 15, 20). First option is the default page size if none are selected.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.SearchPageProductsPerPage">
-    <Value>Search page. Products per page</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.SearchPagePostsPerPage">
+    <Value>Search page. Posts per page</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.SearchPageProductsPerPage.Hint">
-    <Value>Set the page size for products on 'Search' page.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.SearchPagePostsPerPage.Hint">
+    <Value>Set the page size for Posts on 'Search' page.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.Sharing">
     <Value>Sharing</Value>
@@ -4759,22 +4759,22 @@
     <Value>Check to show best sellers on home page.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowCategoryProductNumber">
-    <Value>Show the number of distinct products besides each category</Value>
+    <Value>Show the number of distinct Posts besides each category</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowCategoryProductNumber.Hint">
-    <Value>Check to show the number of products besides each category (category navigation block).</Value>
+    <Value>Check to show the number of Posts besides each category (category navigation block).</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowCategoryProductNumberIncludingSubcategories">
-    <Value>Include subcategories (number of distinct products)</Value>
+    <Value>Include subcategories (number of distinct Posts)</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowCategoryProductNumberIncludingSubcategories.Hint">
-    <Value>Check to including when showing the number of products besides each category.</Value>
+    <Value>Check to including when showing the number of Posts besides each category.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowFreeShippingNotification">
     <Value>Show "free shipping" icon</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowFreeShippingNotification.Hint">
-    <Value>Check to show "free shipping" notification for products with this option enabled.</Value>
+    <Value>Check to show "free shipping" notification for Posts with this option enabled.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowGtin">
     <Value>Show GTIN</Value>
@@ -4794,16 +4794,16 @@
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductImagesInSearchAutoComplete.Hint">
     <Value>Determines whether product images should be displayed in the autocomplete search box.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductsFromSubcategories">
-    <Value>Include products from subcategories</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowPostsFromSubcategories">
+    <Value>Include Posts from subcategories</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductsFromSubcategories.Hint">
-    <Value>Check if you want a category details page to include products from subcategories.</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowPostsFromSubcategories.Hint">
+    <Value>Check if you want a category details page to include Posts from subcategories.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductSku">
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowPostsku">
     <Value>Show SKU</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowProductSku.Hint">
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowPostsku.Hint">
     <Value>Check to show product SKU in public store.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Catalog.ShowShareButton">
@@ -5076,11 +5076,11 @@
   <LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideBackInStockSubscriptionsTab.Hint">
     <Value>Check to hide 'Back in stock subscriptions' tab on 'My account' page</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideDownloadableProductsTab">
-    <Value>Hide 'Downloadable products' tab</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideDownloadablePostsTab">
+    <Value>Hide 'Downloadable Posts' tab</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideDownloadableProductsTab.Hint">
-    <Value>Check to hide 'Downloadable products' tab on 'My account' page</Value>
+  <LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideDownloadablePostsTab.Hint">
+    <Value>Check to hide 'Downloadable Posts' tab on 'My account' page</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.CustomerUser.HideNewsletterBlock">
     <Value>Hide newsletter box</Value>
@@ -5440,13 +5440,13 @@
     <Value>Default meta description</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultMetaDescription.Hint">
-    <Value>The default meta description for pages in your store. You can override this for individual categories / products / manufacturer pages.</Value>
+    <Value>The default meta description for pages in your store. You can override this for individual categories / Posts / manufacturer pages.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultMetaKeywords">
     <Value>Default meta keywords</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultMetaKeywords.Hint">
-    <Value>The default meta keywords for pages in your store. You can override these for individual categories / products / manufacturer pages.</Value>
+    <Value>The default meta keywords for pages in your store. You can override these for individual categories / Posts / manufacturer pages.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.DefaultStoreTheme">
     <Value>Default store theme</Value>
@@ -5728,7 +5728,7 @@
     <Value>Associated product image size</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Media.AssociatedProductPictureSize.Hint">
-    <Value>The default size (pixels) for associated product images (part of 'grouped' products).</Value>
+    <Value>The default size (pixels) for associated product images (part of 'grouped' Posts).</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Media.AvatarPictureSize">
     <Value>Avatar image size</Value>
@@ -5872,7 +5872,7 @@
     <Value>Anonymous checkout allowed</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Order.AnonymousCheckoutAllowed.Hint">
-    <Value>Check to enable anonymous checkout (customers are not required to login/register when purchasing products)</Value>
+    <Value>Check to enable anonymous checkout (customers are not required to login/register when purchasing Posts)</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Order.AttachPdfInvoiceToOrderCompletedEmail">
     <Value>Attach PDF invoice ("order completed" email)</Value>
@@ -5962,7 +5962,7 @@
     <Value>Use one page checkout</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Order.OnePageCheckoutEnabled.Hint">
-    <Value>One page checkout is a single web page your customers can use to buy a products/service from you.</Value>
+    <Value>One page checkout is a single web page your customers can use to buy a Posts/service from you.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.Order.OrderIdent">
     <Value>Order ID</Value>
@@ -6247,13 +6247,13 @@
     <Value>Allow cart item editing</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AllowCartItemEditing.Hint">
-    <Value>Check to allow customers to edit items already placed in the cart. It could be useful when your products have attributes or any other fields entered by a customer.</Value>
+    <Value>Check to allow customers to edit items already placed in the cart. It could be useful when your Posts have attributes or any other fields entered by a customer.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AllowOutOfStockItemsToBeAddedToWishlist">
     <Value>Allow 'out of stock' items to be added to wishlist</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.AllowOutOfStockItemsToBeAddedToWishlist.Hint">
-    <Value>Check to allow 'out of stock' products to be added to wishlist.</Value>
+    <Value>Check to allow 'out of stock' Posts to be added to wishlist.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.CrossSellsNumber">
     <Value>Number of 'Cross-Sells'</Value>
@@ -6283,13 +6283,13 @@
     <Value>Maximum shopping cart items</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MaximumShoppingCartItems.Hint">
-    <Value>Maximum number of distinct products allowed in a shopping cart.</Value>
+    <Value>Maximum number of distinct Posts allowed in a shopping cart.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MaximumWishlistItems">
     <Value>Maximum wishlist items</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MaximumWishlistItems.Hint">
-    <Value>Maximum number of distinct products allowed in a wishlist.</Value>
+    <Value>Maximum number of distinct Posts allowed in a wishlist.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MiniShoppingCartEnabled">
     <Value>Show mini-shopping cart</Value>
@@ -6301,13 +6301,13 @@
     <Value>Mini-shopping cart product number</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MiniShoppingCartProductNumber.Hint">
-    <Value>Specify the maximum number of products which can be displayed in the mini-shopping cart block.</Value>
+    <Value>Specify the maximum number of Posts which can be displayed in the mini-shopping cart block.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MoveItemsFromWishlistToCart">
     <Value>Move items from wishlist to cart</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.MoveItemsFromWishlistToCart.Hint">
-    <Value>Check to move products from wishlist to the cart when clicking "Add to cart" button. Otherwise, they are copied.</Value>
+    <Value>Check to move Posts from wishlist to the cart when clicking "Add to cart" button. Otherwise, they are copied.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Configuration.Settings.ShoppingCart.ShowDiscountBox">
     <Value>Show discount box</Value>
@@ -8182,7 +8182,7 @@
     <Value>Manager of vendor</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Customers.Customers.Fields.Vendor.Hint">
-    <Value>Choose a vendor associated to this customer account. When associated this customer will be able to login to the chosen vendor portal and manage his products and orders.</Value>
+    <Value>Choose a vendor associated to this customer account. When associated this customer will be able to login to the chosen vendor portal and manage his Posts and orders.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Customers.Customers.Fields.Vendor.None">
     <Value>Not a vendor</Value>
@@ -8203,7 +8203,7 @@
     <Value>Place order</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Customers.Customers.Impersonate.Description1">
-    <Value>During the order placement process, you will see almost exactly what the customer would see while browsing this site, with the exception of the header menu (you will see the following text 'Impersonated as customer@email.here - finish session'). Navigate to the products the customer wants and add them to the cart exactly as the customer would, then use the 'Checkout' button to proceed through the usual checkout process.</Value>
+    <Value>During the order placement process, you will see almost exactly what the customer would see while browsing this site, with the exception of the header menu (you will see the following text 'Impersonated as customer@email.here - finish session'). Navigate to the Posts the customer wants and add them to the cart exactly as the customer would, then use the 'Checkout' button to proceed through the usual checkout process.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Customers.Customers.Impersonate.Description2">
     <Value>Note: Click 'finish session' link in order to finish this session</Value>
@@ -9229,13 +9229,13 @@
     <Value>Vendor</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.List.Vendor.Hint">
-    <Value>Search by a specific vendor. You'll see orders with products from a specified vendor.</Value>
+    <Value>Search by a specific vendor. You'll see orders with Posts from a specified vendor.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.List.Warehouse">
     <Value>Warehouse</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.List.Warehouse.Hint">
-    <Value>Load orders with products from a specified warehouse.</Value>
+    <Value>Load orders with Posts from a specified warehouse.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.OrderNotes">
     <Value>Order notes</Value>
@@ -9288,130 +9288,130 @@
   <LocaleResource Name="Admin.Orders.PdfInvoice.Selected">
     <Value>Print PDF invoices (selected)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products">
-    <Value>Products</Value>
+  <LocaleResource Name="Admin.Orders.Posts">
+    <Value>Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew">
     <Value>Add product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.BackToList">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.BackToList">
     <Value>back to product list</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.BackToOrder">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.BackToOrder">
     <Value>back to order details</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.Name">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.Name">
     <Value>Name</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.Note1">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.Note1">
     <Value>Click on interested product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.Note2">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.Note2">
     <Value>Do not to forget to update order totals after adding this product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.Quantity">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.Quantity">
     <Value>Quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.Quantity.Hint">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.Quantity.Hint">
     <Value>Enter quantity.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.SKU">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.SKU">
     <Value>SKU</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.SubTotalExclTax">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.SubTotalExclTax">
     <Value>Total (excl tax)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.SubTotalExclTax.Hint">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.SubTotalExclTax.Hint">
     <Value>Enter total (excl tax).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.SubTotalInclTax">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.SubTotalInclTax">
     <Value>Total (incl tax)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.SubTotalInclTax.Hint">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.SubTotalInclTax.Hint">
     <Value>Enter total (incl tax).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.Title1">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.Title1">
     <Value>Add a new product to order #{0}</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.Title2">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.Title2">
     <Value>Add product '{0}' to order #{1}</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.UnitPriceExclTax">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.UnitPriceExclTax">
     <Value>Price (excl tax)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.UnitPriceExclTax.Hint">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.UnitPriceExclTax.Hint">
     <Value>Enter product price (excl tax).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.UnitPriceInclTax">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.UnitPriceInclTax">
     <Value>Price (incl tax)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.AddNew.UnitPriceInclTax.Hint">
+  <LocaleResource Name="Admin.Orders.Posts.AddNew.UnitPriceInclTax.Hint">
     <Value>Enter product price (incl tax).</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Discount">
+  <LocaleResource Name="Admin.Orders.Posts.Discount">
     <Value>Discount</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Download">
+  <LocaleResource Name="Admin.Orders.Posts.Download">
     <Value>Downloadable product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Download.Activate">
+  <LocaleResource Name="Admin.Orders.Posts.Download.Activate">
     <Value>Activate</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Download.Deactivate">
+  <LocaleResource Name="Admin.Orders.Posts.Download.Deactivate">
     <Value>Deactivate</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Download.DownloadCount">
+  <LocaleResource Name="Admin.Orders.Posts.Download.DownloadCount">
     <Value>Number of downloads: {0}</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Download.ResetDownloadCount">
+  <LocaleResource Name="Admin.Orders.Posts.Download.ResetDownloadCount">
     <Value>Reset</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Download.ResetDownloadCount.Title">
+  <LocaleResource Name="Admin.Orders.Posts.Download.ResetDownloadCount.Title">
     <Value>Click to reset download count</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Edit.ExclTax">
+  <LocaleResource Name="Admin.Orders.Posts.Edit.ExclTax">
     <Value>Excl tax:</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Edit.InclTax">
+  <LocaleResource Name="Admin.Orders.Posts.Edit.InclTax">
     <Value>Incl tax:</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.GiftCards">
+  <LocaleResource Name="Admin.Orders.Posts.GiftCards">
     <Value>Gift card(s)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.License">
+  <LocaleResource Name="Admin.Orders.Posts.License">
     <Value>License file (optional):</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.License.DownloadLicense">
+  <LocaleResource Name="Admin.Orders.Posts.License.DownloadLicense">
     <Value>Download license file</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.License.UploadFile">
+  <LocaleResource Name="Admin.Orders.Posts.License.UploadFile">
     <Value>Upload license file</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Picture">
+  <LocaleResource Name="Admin.Orders.Posts.Picture">
     <Value>Picture</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Price">
+  <LocaleResource Name="Admin.Orders.Posts.Price">
     <Value>Price</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.ProductName">
+  <LocaleResource Name="Admin.Orders.Posts.ProductName">
     <Value>Product name</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Quantity">
+  <LocaleResource Name="Admin.Orders.Posts.Quantity">
     <Value>Quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.RecurringPeriod">
+  <LocaleResource Name="Admin.Orders.Posts.RecurringPeriod">
     <Value>[Auto-ship, Every {0} {1}]</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.ReturnRequests">
+  <LocaleResource Name="Admin.Orders.Posts.ReturnRequests">
     <Value>Return request(s)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.SKU">
+  <LocaleResource Name="Admin.Orders.Posts.SKU">
     <Value>SKU</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Total">
+  <LocaleResource Name="Admin.Orders.Posts.Total">
     <Value>Total</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Products.Vendor">
+  <LocaleResource Name="Admin.Orders.Posts.Vendor">
     <Value>Vendor</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Report.Profit">
@@ -9526,10 +9526,10 @@
     <Value>Warehouse</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Shipments.List.Warehouse.Hint">
-    <Value>Load shipments with products from a specified warehouse.</Value>
+    <Value>Load shipments with Posts from a specified warehouse.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.NoProductsSelected">
-    <Value>No products selected</Value>
+  <LocaleResource Name="Admin.Orders.Shipments.NoPostsSelected">
+    <Value>No Posts selected</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Shipments.NoShipmentsSelected">
     <Value>No shipments selected</Value>
@@ -9549,47 +9549,47 @@
   <LocaleResource Name="Admin.Orders.Shipments.PrintPackagingSlip.Selected">
     <Value>Print packaging slips (selected)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products">
-    <Value>Products shipped</Value>
+  <LocaleResource Name="Admin.Orders.Shipments.Posts">
+    <Value>Posts shipped</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.ItemDimensions">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.ItemDimensions">
     <Value>Item dimensions</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.ItemWeight">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.ItemWeight">
     <Value>Item weight</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.ProductName">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.ProductName">
     <Value>Product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.QtyOrdered">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.QtyOrdered">
     <Value>Qty ordered</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.QtyShipped">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.QtyShipped">
     <Value>Qty shipped</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.QtyToShip">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.QtyToShip">
     <Value>Qty to ship</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.ShipSeparately">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.ShipSeparately">
     <Value>this product should be shipped separately!</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.ShipSeparately.Warning">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.ShipSeparately.Warning">
     <Value>Warning: </Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.SKU">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.SKU">
     <Value>SKU</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.Warehouse">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.Warehouse">
     <Value>Warehouse</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.Warehouse.ChooseQty">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.Warehouse.ChooseQty">
     <Value>{0} ({1} qty in stock, {2} qty reserved, {3} qty planned)</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.Warehouse.NotAvailabe">
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.Warehouse.NotAvailabe">
     <Value>No warehouses available. You cannot ship this product.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Orders.Shipments.Products.Warehouse.QuantityNotEnough">
-    <Value>[Reserved - Planned] quantity value of some products are less than specified quantity to be shipped. Are you sure?</Value>
+  <LocaleResource Name="Admin.Orders.Shipments.Posts.Warehouse.QuantityNotEnough">
+    <Value>[Reserved - Planned] quantity value of some Posts are less than specified quantity to be shipped. Are you sure?</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Shipments.ShipmentStatusEvents">
     <Value>Shipment status events</Value>
@@ -9783,16 +9783,16 @@
   <LocaleResource Name="Admin.Promotions.Discounts.AppliedToManufacturers.AddNew">
     <Value>Add a new manufacturer</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Promotions.Discounts.AppliedToProducts">
-    <Value>Applied to products</Value>
+  <LocaleResource Name="Admin.Promotions.Discounts.AppliedToPosts">
+    <Value>Applied to Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Promotions.Discounts.AppliedToProducts.SaveBeforeEdit">
-    <Value>You need to save the discount before you can add products for this discount page.</Value>
+  <LocaleResource Name="Admin.Promotions.Discounts.AppliedToPosts.SaveBeforeEdit">
+    <Value>You need to save the discount before you can add Posts for this discount page.</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Promotions.Discounts.AppliedToProducts.Product">
+  <LocaleResource Name="Admin.Promotions.Discounts.AppliedToPosts.Product">
     <Value>Product</Value>
   </LocaleResource>
-  <LocaleResource Name="Admin.Promotions.Discounts.AppliedToProducts.AddNew">
+  <LocaleResource Name="Admin.Promotions.Discounts.AppliedToPosts.AddNew">
     <Value>Add a new product</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Promotions.Discounts.BackToList">
@@ -9871,13 +9871,13 @@
     <Value>Maximum discount amount</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Promotions.Discounts.Fields.MaximumDiscountAmount.Hint">
-    <Value>Maximum allowed discount amount. Leave empty to allow any discount amount. If you're using "Assigned to products" discount type, then it's applied to each product separately.</Value>
+    <Value>Maximum allowed discount amount. Leave empty to allow any discount amount. If you're using "Assigned to Posts" discount type, then it's applied to each product separately.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Promotions.Discounts.Fields.MaximumDiscountedQuantity">
     <Value>Maximum discounted quantity</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Promotions.Discounts.Fields.MaximumDiscountedQuantity.Hint">
-    <Value>Maximum product quantity which could be discounted. For example, you can have two products (the same) in the cart but only one of them will be discounted. It can be used for scenarios like "buy 2 get 1 free". Leave empty if any quantity could be discounted.</Value>
+    <Value>Maximum product quantity which could be discounted. For example, you can have two Posts (the same) in the cart but only one of them will be discounted. It can be used for scenarios like "buy 2 get 1 free". Leave empty if any quantity could be discounted.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Promotions.Discounts.Fields.Name">
     <Value>Name</Value>
@@ -10393,7 +10393,7 @@
     <Value>view all</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.SalesReport.NeverSold">
-    <Value>Products never purchased</Value>
+    <Value>Posts never purchased</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.SalesReport.NeverSold.EndDate">
     <Value>End date</Value>
@@ -11101,7 +11101,7 @@
     <Value>Customers</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Vendors.Fields.AssociatedCustomerEmails.Hint">
-    <Value>A list of customer accounts which could be used to manage products and orders of this vendor (have access to the vendor portal). You can associate customers to a vendor on a customer details page. If you don't want the vendor to have access to the vendor portal, then do not associate any customer account with it.</Value>
+    <Value>A list of customer accounts which could be used to manage Posts and orders of this vendor (have access to the vendor portal). You can associate customers to a vendor on a customer details page. If you don't want the vendor to have access to the vendor portal, then do not associate any customer account with it.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Vendors.Fields.AssociatedCustomerEmails.None">
     <Value>No customer account associated to this vendor.</Value>
@@ -11158,7 +11158,7 @@
     <Value>Page size</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Vendors.Fields.PageSize.Hint">
-    <Value>Set the page size for products in this vendor e.g. '4' products per page.</Value>
+    <Value>Set the page size for Posts in this vendor e.g. '4' Posts per page.</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Vendors.Fields.PageSizeOptions">
     <Value>Page Size options (comma separated)</Value>
@@ -11316,7 +11316,7 @@
   <LocaleResource Name="Categories.Breadcrumb.Top">
     <Value>Home</Value>
   </LocaleResource>
-  <LocaleResource Name="Categories.TotalProducts">
+  <LocaleResource Name="Categories.TotalPosts">
     <Value>({0})</Value>
   </LocaleResource>
   <LocaleResource Name="Checkout">
@@ -11718,34 +11718,34 @@
   <LocaleResource Name="Customer.Guest">
     <Value>Guest</Value>
   </LocaleResource>
-  <LocaleResource Name="DownloadableProducts.Fields.Date">
+  <LocaleResource Name="DownloadablePosts.Fields.Date">
     <Value>Date</Value>
   </LocaleResource>
-  <LocaleResource Name="DownloadableProducts.Fields.Download">
+  <LocaleResource Name="DownloadablePosts.Fields.Download">
     <Value>Download</Value>
   </LocaleResource>
-  <LocaleResource Name="DownloadableProducts.Fields.Download.NA">
+  <LocaleResource Name="DownloadablePosts.Fields.Download.NA">
     <Value>n/a</Value>
   </LocaleResource>
-  <LocaleResource Name="DownloadableProducts.Fields.DownloadLicense">
+  <LocaleResource Name="DownloadablePosts.Fields.DownloadLicense">
     <Value>Download license</Value>
   </LocaleResource>
-  <LocaleResource Name="DownloadableProducts.Fields.Order">
+  <LocaleResource Name="DownloadablePosts.Fields.Order">
     <Value>Order #</Value>
   </LocaleResource>
-  <LocaleResource Name="DownloadableProducts.Fields.Product">
+  <LocaleResource Name="DownloadablePosts.Fields.Product">
     <Value>Product</Value>
   </LocaleResource>
-  <LocaleResource Name="DownloadableProducts.IAgree">
+  <LocaleResource Name="DownloadablePosts.IAgree">
     <Value>I agree</Value>
   </LocaleResource>
-  <LocaleResource Name="DownloadableProducts.NoItems">
-    <Value>There are no downloadable products</Value>
+  <LocaleResource Name="DownloadablePosts.NoItems">
+    <Value>There are no downloadable Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="DownloadableProducts.ReachedMaximumNumber">
+  <LocaleResource Name="DownloadablePosts.ReachedMaximumNumber">
     <Value>You have reached maximum number of downloads {0}</Value>
   </LocaleResource>
-  <LocaleResource Name="DownloadableProducts.UserAgreement">
+  <LocaleResource Name="DownloadablePosts.UserAgreement">
     <Value>User agreement</Value>
   </LocaleResource>
   <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.AttributeControlType.Checkboxes">
@@ -11820,22 +11820,22 @@
   <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.ManageInventoryMethod.ManageStockByAttributes">
     <Value>Track inventory by product attributes</Value>
   </LocaleResource>
-  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.CreatedOn">
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.PostsortingEnum.CreatedOn">
     <Value>Created on</Value>
   </LocaleResource>
-  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.NameAsc">
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.PostsortingEnum.NameAsc">
     <Value>Name: A to Z</Value>
   </LocaleResource>
-  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.NameDesc">
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.PostsortingEnum.NameDesc">
     <Value>Name: Z to A</Value>
   </LocaleResource>
-  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.Position">
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.PostsortingEnum.Position">
     <Value>Position</Value>
   </LocaleResource>
-  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.PriceAsc">
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.PostsortingEnum.PriceAsc">
     <Value>Price: Low to High</Value>
   </LocaleResource>
-  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.ProductSortingEnum.PriceDesc">
+  <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.PostsortingEnum.PriceDesc">
     <Value>Price: High to Low</Value>
   </LocaleResource>
   <LocaleResource Name="Enums.Nop.Core.Domain.Catalog.ProductType.GroupedProduct">
@@ -11935,7 +11935,7 @@
     <Value>Assigned to shipping</Value>
   </LocaleResource>
   <LocaleResource Name="Enums.Nop.Core.Domain.Discounts.DiscountType.AssignedToSkus">
-    <Value>Assigned to products</Value>
+    <Value>Assigned to Posts</Value>
   </LocaleResource>
   <LocaleResource Name="Enums.Nop.Core.Domain.Forums.EditorType.BBCodeEditor">
     <Value>BBCode editor</Value>
@@ -12498,8 +12498,8 @@
   <LocaleResource Name="HomePage">
     <Value>Home page</Value>
   </LocaleResource>
-  <LocaleResource Name="HomePage.Products">
-    <Value>Featured products</Value>
+  <LocaleResource Name="HomePage.Posts">
+    <Value>Featured Posts</Value>
   </LocaleResource>
   <LocaleResource Name="Languages">
     <Value>Languages</Value>
@@ -12517,7 +12517,7 @@
     <Value>Picture for category {0}</Value>
   </LocaleResource>
   <LocaleResource Name="Media.Category.ImageLinkTitleFormat">
-    <Value>Show products in category {0}</Value>
+    <Value>Show Posts in category {0}</Value>
   </LocaleResource>
   <LocaleResource Name="Media.MagnificPopup.Loading">
     <Value>Loading...</Value>
@@ -12538,7 +12538,7 @@
     <Value>Picture for manufacturer {0}</Value>
   </LocaleResource>
   <LocaleResource Name="Media.Manufacturer.ImageLinkTitleFormat">
-    <Value>Show products manufactured by {0}</Value>
+    <Value>Show Posts manufactured by {0}</Value>
   </LocaleResource>
   <LocaleResource Name="Media.Product.ImageAlternateTextFormat">
     <Value>Picture of {0}</Value>
@@ -12556,7 +12556,7 @@
     <Value>Picture for vendor {0}</Value>
   </LocaleResource>
   <LocaleResource Name="Media.Vendor.ImageLinkTitleFormat">
-    <Value>Show products of vendor {0}</Value>
+    <Value>Show Posts of vendor {0}</Value>
   </LocaleResource>
   <LocaleResource Name="Menu">
     <Value>Menu</Value>
@@ -12954,8 +12954,8 @@
   <LocaleResource Name="PageTitle.Checkout">
     <Value>Checkout</Value>
   </LocaleResource>
-  <LocaleResource Name="PageTitle.CompareProducts">
-    <Value>Compare Products</Value>
+  <LocaleResource Name="PageTitle.ComparePosts">
+    <Value>Compare Posts</Value>
   </LocaleResource>
   <LocaleResource Name="PageTitle.ContactUs">
     <Value>Contact Us</Value>
@@ -12972,8 +12972,8 @@
   <LocaleResource Name="PageTitle.Manufacturers">
     <Value>Manufacturers</Value>
   </LocaleResource>
-  <LocaleResource Name="PageTitle.NewProducts">
-    <Value>New Products</Value>
+  <LocaleResource Name="PageTitle.NewPosts">
+    <Value>New Posts</Value>
   </LocaleResource>
   <LocaleResource Name="PageTitle.NewsArchive">
     <Value>News Archive</Value>
@@ -12996,14 +12996,14 @@
   <LocaleResource Name="PageTitle.ProductReviews">
     <Value>Product Reviews</Value>
   </LocaleResource>
-  <LocaleResource Name="PageTitle.ProductsByTag">
-    <Value>Products tagged with '{0}'</Value>
+  <LocaleResource Name="PageTitle.PostsByTag">
+    <Value>Posts tagged with '{0}'</Value>
   </LocaleResource>
   <LocaleResource Name="PageTitle.Profile">
     <Value>Profile</Value>
   </LocaleResource>
-  <LocaleResource Name="PageTitle.RecentlyViewedProducts">
-    <Value>Recently Viewed Products</Value>
+  <LocaleResource Name="PageTitle.RecentlyViewedPosts">
+    <Value>Recently Viewed Posts</Value>
   </LocaleResource>
   <LocaleResource Name="PageTitle.Register">
     <Value>Register</Value>
@@ -13332,8 +13332,8 @@
   <LocaleResource Name="Permission.ManageProductReviews">
     <Value>Admin area. Manage Product Reviews</Value>
   </LocaleResource>
-  <LocaleResource Name="Permission.ManageProducts">
-    <Value>Admin area. Manage Products</Value>
+  <LocaleResource Name="Permission.ManagePosts">
+    <Value>Admin area. Manage Posts</Value>
   </LocaleResource>
   <LocaleResource Name="Permission.ManageProductTags">
     <Value>Admin area. Manage Product Tags</Value>
@@ -13491,277 +13491,277 @@
   <LocaleResource Name="PrivateMessages.YouHaveUnreadPM">
     <Value>You have {0} unread message(s) in your Inbox</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.AlsoPurchased">
+  <LocaleResource Name="Posts.AlsoPurchased">
     <Value>Customers who bought this item also bought</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Availability">
+  <LocaleResource Name="Posts.Availability">
     <Value>Availability</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Availability.Backordering">
+  <LocaleResource Name="Posts.Availability.Backordering">
     <Value>Out of Stock - on backorder and will be dispatched once in stock.</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Availability.InStock">
+  <LocaleResource Name="Posts.Availability.InStock">
     <Value>In stock</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Availability.InStockWithQuantity">
+  <LocaleResource Name="Posts.Availability.InStockWithQuantity">
     <Value>{0} in stock</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Availability.OutOfStock">
+  <LocaleResource Name="Posts.Availability.OutOfStock">
     <Value>Out of stock</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.BasePrice">
+  <LocaleResource Name="Posts.BasePrice">
     <Value>equates to {0} per {1} {2}</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Breadcrumb.Top">
+  <LocaleResource Name="Posts.Breadcrumb.Top">
     <Value>Home</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.CallForPrice">
+  <LocaleResource Name="Posts.CallForPrice">
     <Value>Call for pricing</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Compare">
-    <Value>Compare products</Value>
+  <LocaleResource Name="Posts.Compare">
+    <Value>Compare Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Compare.AddToCompareList">
+  <LocaleResource Name="Posts.Compare.AddToCompareList">
     <Value>Add to compare list</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Compare.Clear">
+  <LocaleResource Name="Posts.Compare.Clear">
     <Value>Clear list</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Compare.FullDescription">
+  <LocaleResource Name="Posts.Compare.FullDescription">
     <Value>Full description</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Compare.List">
-    <Value>Compare products list</Value>
+  <LocaleResource Name="Posts.Compare.List">
+    <Value>Compare Posts list</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Compare.Name">
+  <LocaleResource Name="Posts.Compare.Name">
     <Value>Name</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Compare.NoItems">
+  <LocaleResource Name="Posts.Compare.NoItems">
     <Value>You have no items to compare.</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Compare.Price">
+  <LocaleResource Name="Posts.Compare.Price">
     <Value>Price</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Compare.ShortDescription">
+  <LocaleResource Name="Posts.Compare.ShortDescription">
     <Value>Short description</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Compare.Title">
-    <Value>Compare products</Value>
+  <LocaleResource Name="Posts.Compare.Title">
+    <Value>Compare Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.DeliveryDate">
+  <LocaleResource Name="Posts.DeliveryDate">
     <Value>Delivery date</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Details">
+  <LocaleResource Name="Posts.Details">
     <Value>Details</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Discontinued">
+  <LocaleResource Name="Posts.Discontinued">
     <Value>Sorry - this product is no longer available</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.DownloadSample">
+  <LocaleResource Name="Posts.DownloadSample">
     <Value>Download sample</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend">
+  <LocaleResource Name="Posts.EmailAFriend">
     <Value>Email a friend</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.Button">
+  <LocaleResource Name="Posts.EmailAFriend.Button">
     <Value>Send email</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.FriendEmail">
+  <LocaleResource Name="Posts.EmailAFriend.FriendEmail">
     <Value>Friend's email</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.FriendEmail.Hint">
+  <LocaleResource Name="Posts.EmailAFriend.FriendEmail.Hint">
     <Value>Enter friend's email</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.FriendEmail.Required">
+  <LocaleResource Name="Posts.EmailAFriend.FriendEmail.Required">
     <Value>Enter friend's email</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.OnlyRegisteredUsers">
+  <LocaleResource Name="Posts.EmailAFriend.OnlyRegisteredUsers">
     <Value>Only registered customers can use email a friend feature</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.PersonalMessage">
+  <LocaleResource Name="Posts.EmailAFriend.PersonalMessage">
     <Value>Personal message</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.PersonalMessage.Hint">
+  <LocaleResource Name="Posts.EmailAFriend.PersonalMessage.Hint">
     <Value>Enter personal message (optional)</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.SuccessfullySent">
+  <LocaleResource Name="Posts.EmailAFriend.SuccessfullySent">
     <Value>Your message has been sent.</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.Title">
+  <LocaleResource Name="Posts.EmailAFriend.Title">
     <Value>Email a friend</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.YourEmailAddress">
+  <LocaleResource Name="Posts.EmailAFriend.YourEmailAddress">
     <Value>Your email address</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.YourEmailAddress.Hint">
+  <LocaleResource Name="Posts.EmailAFriend.YourEmailAddress.Hint">
     <Value>Enter your email address</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EmailAFriend.YourEmailAddress.Required">
+  <LocaleResource Name="Posts.EmailAFriend.YourEmailAddress.Required">
     <Value>Enter your email</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EnterProductPrice">
+  <LocaleResource Name="Posts.EnterProductPrice">
     <Value>Please enter your price</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.EnterProductPrice.Range">
+  <LocaleResource Name="Posts.EnterProductPrice.Range">
     <Value>The price must be from {0} to {1}</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.ExclTaxSuffix">
+  <LocaleResource Name="Posts.ExclTaxSuffix">
     <Value>{0} excl tax</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.FeaturedProducts">
-    <Value>Featured products</Value>
+  <LocaleResource Name="Posts.FeaturedPosts">
+    <Value>Featured Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.FreeShipping">
+  <LocaleResource Name="Posts.FreeShipping">
     <Value>Free shipping</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.GiftCard.Message">
+  <LocaleResource Name="Posts.GiftCard.Message">
     <Value>Message</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.GiftCard.RecipientEmail">
+  <LocaleResource Name="Posts.GiftCard.RecipientEmail">
     <Value>Recipient's Email</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.GiftCard.RecipientName">
+  <LocaleResource Name="Posts.GiftCard.RecipientName">
     <Value>Recipient's Name</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.GiftCard.SenderEmail">
+  <LocaleResource Name="Posts.GiftCard.SenderEmail">
     <Value>Your Email</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.GiftCard.SenderName">
+  <LocaleResource Name="Posts.GiftCard.SenderName">
     <Value>Your Name</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.GTIN">
+  <LocaleResource Name="Posts.GTIN">
     <Value>GTIN</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.InclTaxSuffix">
+  <LocaleResource Name="Posts.InclTaxSuffix">
     <Value>{0} incl tax</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Manufacturer">
+  <LocaleResource Name="Posts.Manufacturer">
     <Value>Manufacturer</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.ManufacturerPartNumber">
+  <LocaleResource Name="Posts.ManufacturerPartNumber">
     <Value>Manufacturer part number</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Manufacturers">
+  <LocaleResource Name="Posts.Manufacturers">
     <Value>Manufacturers</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.MinimumQuantityNotification">
+  <LocaleResource Name="Posts.MinimumQuantityNotification">
     <Value>This product has a minimum quantity of {0}</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.NewProducts">
-    <Value>New products</Value>
+  <LocaleResource Name="Posts.NewPosts">
+    <Value>New Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.NewProducts.RSS">
+  <LocaleResource Name="Posts.NewPosts.RSS">
     <Value>RSS</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.NewProducts.RSS.Hint">
+  <LocaleResource Name="Posts.NewPosts.RSS.Hint">
     <Value>Click here to be informed automatically when we add new items to our site</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.NoAssociatedProducts">
+  <LocaleResource Name="Posts.NoAssociatedPosts">
     <Value>This product is sold out</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Price">
+  <LocaleResource Name="Posts.Price">
     <Value>Price</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Price.OldPrice">
+  <LocaleResource Name="Posts.Price.OldPrice">
     <Value>Old price</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Price.Rental.Days">
+  <LocaleResource Name="Posts.Price.Rental.Days">
     <Value>{0} per {1} day(s)</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Price.Rental.Weeks">
+  <LocaleResource Name="Posts.Price.Rental.Weeks">
     <Value>{0} per {1} week(s)</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Price.Rental.Months">
+  <LocaleResource Name="Posts.Price.Rental.Months">
     <Value>{0} per {1} month(s)</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Price.Rental.Years">
+  <LocaleResource Name="Posts.Price.Rental.Years">
     <Value>{0} per {1} year(s)</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Price.RentalPrice">
+  <LocaleResource Name="Posts.Price.RentalPrice">
     <Value>Rental price</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Price.TaxShipping.ExclTax">
+  <LocaleResource Name="Posts.Price.TaxShipping.ExclTax">
     <Value><![CDATA[excluding <a href="{0}">shipping</a>]]></Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Price.TaxShipping.InclTax">
+  <LocaleResource Name="Posts.Price.TaxShipping.InclTax">
     <Value><![CDATA[excluding <a href="{0}">shipping</a>]]></Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Price.WithDiscount">
+  <LocaleResource Name="Posts.Price.WithDiscount">
     <Value>Your price</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.PriceRangeFrom">
+  <LocaleResource Name="Posts.PriceRangeFrom">
     <Value>From {0}</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.ProductAttributes.PriceAdjustment">
+  <LocaleResource Name="Posts.ProductAttributes.PriceAdjustment">
     <Value>{0} [{1}]</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.ProductHasBeenAddedToCompareList">
+  <LocaleResource Name="Posts.ProductHasBeenAddedToCompareList">
     <Value>The product has been added to your product comparison</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.ProductHasBeenAddedToCompareList.Link">
+  <LocaleResource Name="Posts.ProductHasBeenAddedToCompareList.Link">
     <Value><![CDATA[The product has been added to your <a href="{0}">product comparison</a>]]></Value>
   </LocaleResource>
-  <LocaleResource Name="Products.ProductHasBeenAddedToTheCart">
+  <LocaleResource Name="Posts.ProductHasBeenAddedToTheCart">
     <Value>The product has been added to your shopping cart</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.ProductHasBeenAddedToTheCart.Link">
+  <LocaleResource Name="Posts.ProductHasBeenAddedToTheCart.Link">
     <Value><![CDATA[The product has been added to your <a href="{0}">shopping cart</a>]]></Value>
   </LocaleResource>
-  <LocaleResource Name="Products.ProductHasBeenAddedToTheWishlist">
+  <LocaleResource Name="Posts.ProductHasBeenAddedToTheWishlist">
     <Value>The product has been added to your wishlist</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.ProductHasBeenAddedToTheWishlist.Link">
+  <LocaleResource Name="Posts.ProductHasBeenAddedToTheWishlist.Link">
     <Value><![CDATA[The product has been added to your <a href="{0}">wishlist</a>]]></Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Qty">
+  <LocaleResource Name="Posts.Qty">
     <Value>Qty</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.RecentlyViewedProducts">
-    <Value>Recently viewed products</Value>
+  <LocaleResource Name="Posts.RecentlyViewedPosts">
+    <Value>Recently viewed Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.RelatedProducts">
-    <Value>Related products</Value>
+  <LocaleResource Name="Posts.RelatedPosts">
+    <Value>Related Posts</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.RentalStartDate">
+  <LocaleResource Name="Posts.RentalStartDate">
     <Value>Start date</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.RentalEndDate">
+  <LocaleResource Name="Posts.RentalEndDate">
     <Value>End date</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Sku">
+  <LocaleResource Name="Posts.Sku">
     <Value>SKU</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Specs">
-    <Value>Products specifications</Value>
+  <LocaleResource Name="Posts.Specs">
+    <Value>Posts specifications</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Tags">
+  <LocaleResource Name="Posts.Tags">
     <Value>Product tags</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Tags.All">
+  <LocaleResource Name="Posts.Tags.All">
     <Value>All product tags</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Tags.Count">
+  <LocaleResource Name="Posts.Tags.Count">
     <Value>({0})</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Tags.Popular">
+  <LocaleResource Name="Posts.Tags.Popular">
     <Value>Popular tags</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Tags.Popular.ViewAll">
+  <LocaleResource Name="Posts.Tags.Popular.ViewAll">
     <Value>View all</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Tags.ProductsTaggedWith">
-    <Value>Products tagged with '{0}'</Value>
+  <LocaleResource Name="Posts.Tags.PostsTaggedWith">
+    <Value>Posts tagged with '{0}'</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.TierPrices">
+  <LocaleResource Name="Posts.TierPrices">
     <Value>PRICE BREAKS - The more you buy, the more you save</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.TierPrices.Price">
+  <LocaleResource Name="Posts.TierPrices.Price">
     <Value>Price</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.TierPrices.Quantity">
+  <LocaleResource Name="Posts.TierPrices.Quantity">
     <Value>Quantity</Value>
   </LocaleResource>
-  <LocaleResource Name="Products.Vendor">
+  <LocaleResource Name="Posts.Vendor">
     <Value>Vendor</Value>
   </LocaleResource>
   <LocaleResource Name="Profile.Country">
@@ -13806,13 +13806,13 @@
   <LocaleResource Name="ReturnRequests.NoItemsSubmitted">
     <Value>Your return request has not been submitted because you haven't chosen any items.</Value>
   </LocaleResource>
-  <LocaleResource Name="ReturnRequests.Products.Name">
+  <LocaleResource Name="ReturnRequests.Posts.Name">
     <Value>Product</Value>
   </LocaleResource>
-  <LocaleResource Name="ReturnRequests.Products.Price">
+  <LocaleResource Name="ReturnRequests.Posts.Price">
     <Value>Unit price</Value>
   </LocaleResource>
-  <LocaleResource Name="ReturnRequests.Products.Quantity">
+  <LocaleResource Name="ReturnRequests.Posts.Quantity">
     <Value>Qty. to return</Value>
   </LocaleResource>
   <LocaleResource Name="ReturnRequests.ReturnAction">
@@ -13975,7 +13975,7 @@
     <Value>Manufacturer</Value>
   </LocaleResource>
   <LocaleResource Name="Search.NoResultsText">
-    <Value>No products were found that matched your criteria.</Value>
+    <Value>No Posts were found that matched your criteria.</Value>
   </LocaleResource>
   <LocaleResource Name="Search.PriceRange">
     <Value>Price range</Value>
@@ -14025,7 +14025,7 @@
   <LocaleResource Name="ShoppingCart.CannotLoadProduct">
     <Value>Product (Id={0}) cannot be loaded</Value>
   </LocaleResource>
-  <LocaleResource Name="ShoppingCart.CannotMixStandardAndAutoshipProducts">
+  <LocaleResource Name="ShoppingCart.CannotMixStandardAndAutoshipPosts">
     <Value>Your cart has standard and auto-ship (recurring) items. Only one product type is allowed per order.</Value>
   </LocaleResource>
   <LocaleResource Name="ShoppingCart.CartIsEmpty">
@@ -14109,7 +14109,7 @@
   <LocaleResource Name="ShoppingCart.GiftCardCouponCode.Button">
     <Value>Add gift card</Value>
   </LocaleResource>
-  <LocaleResource Name="ShoppingCart.GiftCardCouponCode.DontWorkWithAutoshipProducts">
+  <LocaleResource Name="ShoppingCart.GiftCardCouponCode.DontWorkWithAutoshipPosts">
     <Value>You cannot use gift cards with auto-ship (recurring) items.</Value>
   </LocaleResource>
   <LocaleResource Name="ShoppingCart.GiftCardCouponCode.Tooltip">
@@ -14134,13 +14134,13 @@
     <Value>The maximum quantity allowed for purchase is {0}.</Value>
   </LocaleResource>
   <LocaleResource Name="ShoppingCart.MaximumShoppingCartItems">
-    <Value>The maximum number of distinct products allowed in the cart is {0}.</Value>
+    <Value>The maximum number of distinct Posts allowed in the cart is {0}.</Value>
   </LocaleResource>
   <LocaleResource Name="ShoppingCart.MaximumUploadedFileSize">
     <Value>Maximum file size is {0} KB</Value>
   </LocaleResource>
   <LocaleResource Name="ShoppingCart.MaximumWishlistItems">
-    <Value>The maximum number of distinct products allowed in the wishlist is {0}.</Value>
+    <Value>The maximum number of distinct Posts allowed in the wishlist is {0}.</Value>
   </LocaleResource>
   <LocaleResource Name="ShoppingCart.Mini.Items">
     <Value>{0} item(s)</Value>
@@ -14325,8 +14325,8 @@
   <LocaleResource Name="Sitemap.Manufacturers">
     <Value>Manufacturers</Value>
   </LocaleResource>
-  <LocaleResource Name="Sitemap.Products">
-    <Value>Products</Value>
+  <LocaleResource Name="Sitemap.Posts">
+    <Value>Posts</Value>
   </LocaleResource>
   <LocaleResource Name="StoreClosed">
     <Value>This store is currently closed</Value>

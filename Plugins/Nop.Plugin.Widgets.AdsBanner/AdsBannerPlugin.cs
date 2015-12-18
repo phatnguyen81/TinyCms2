@@ -81,14 +81,23 @@ namespace Nop.Plugin.Widgets.AdsBanner
             _context.Install();
 
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Name", "Name");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Name.Hint", "Name of banner");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Picture", "Picture");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.WidgetZone", "WidgetZone");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Picture.Hint", "Picture of banner");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.WidgetZone", "Widget Zone");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.WidgetZone.Hint", "Zone to show banner");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Url", "Url");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Url.Hint", "Redirect to link when click to banner");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.FromDate", "From date");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.FromDate.Hint", "Show banner after from date");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.ToDate", "To date");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.ToDate.Hint", "Show banner before from date");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Published", "Published");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Published.Hint", "Published");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.DisplayOrder", "Display order");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.DisplayOrder.Hint", "Display order");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.List.SearchAdsBannerName", "Search banner name");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.List.SearchAdsBannerName.Hint", "Search banner name");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Manage", "Banner management");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.AddNew", "Add new Ads banner");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.EditAdsBannerDetail", "Edit Ads banner");
@@ -107,14 +116,23 @@ namespace Nop.Plugin.Widgets.AdsBanner
             _context.Uninstall();
 
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Name");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Name.Hint");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Picture");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Picture.Hint");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.WidgetZone");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.WidgetZone.Hint");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Url");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Url.Hint");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.FromDate");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.FromDate.Hint");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.ToDate");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.ToDate.Hint");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Published");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Published.Hint");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.DisplayOrder");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.DisplayOrder.Hint");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.List.SearchAdsBannerName");
+            this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.List.SearchAdsBannerName.Hint");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.Manage");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.AddNew");
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.EditAdsBannerDetail");

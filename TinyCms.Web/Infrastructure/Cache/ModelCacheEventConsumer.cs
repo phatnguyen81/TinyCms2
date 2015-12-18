@@ -61,15 +61,15 @@ namespace TinyCms.Web.Infrastructure.Cache
         public const string VENDOR_NAVIGATION_PATTERN_KEY = "Nop.pres.vendor.navigation";
 
         /// <summary>
-        /// Key for caching of a value indicating whether a manufacturer has featured products
+        /// Key for caching of a value indicating whether a manufacturer has featured Posts
         /// </summary>
         /// <remarks>
         /// {0} : manufacturer id
         /// {1} : roles of the current user
         /// {2} : current store ID
         /// </remarks>
-        public const string MANUFACTURER_HAS_FEATURED_PRODUCTS_KEY = "Nop.pres.manufacturer.hasfeaturedproducts-{0}-{1}-{2}";
-        public const string MANUFACTURER_HAS_FEATURED_PRODUCTS_PATTERN_KEY = "Nop.pres.manufacturer.hasfeaturedproducts";
+        public const string MANUFACTURER_HAS_FEATURED_Posts_KEY = "Nop.pres.manufacturer.hasfeaturedPosts-{0}-{1}-{2}";
+        public const string MANUFACTURER_HAS_FEATURED_Posts_PATTERN_KEY = "Nop.pres.manufacturer.hasfeaturedPosts";
         
         /// <summary>
         /// Key for CategoryNavigationModel caching
@@ -101,19 +101,19 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {1} : current store ID
         /// {2} : category ID
         /// </remarks>
-        public const string CATEGORY_NUMBER_OF_PRODUCTS_MODEL_KEY = "Nop.pres.category.numberofproducts-{0}-{1}-{2}";
-        public const string CATEGORY_NUMBER_OF_PRODUCTS_PATTERN_KEY = "Nop.pres.category.numberofproducts";
+        public const string CATEGORY_NUMBER_OF_Posts_MODEL_KEY = "Nop.pres.category.numberofPosts-{0}-{1}-{2}";
+        public const string CATEGORY_NUMBER_OF_Posts_PATTERN_KEY = "Nop.pres.category.numberofPosts";
 
         /// <summary>
-        /// Key for caching of a value indicating whether a category has featured products
+        /// Key for caching of a value indicating whether a category has featured Posts
         /// </summary>
         /// <remarks>
         /// {0} : category id
         /// {1} : roles of the current user
         /// {2} : current store ID
         /// </remarks>
-        public const string CATEGORY_HAS_FEATURED_PRODUCTS_KEY = "Nop.pres.category.hasfeaturedproducts-{0}-{1}-{2}";
-        public const string CATEGORY_HAS_FEATURED_PRODUCTS_PATTERN_KEY = "Nop.pres.category.hasfeaturedproducts";
+        public const string CATEGORY_HAS_FEATURED_Posts_KEY = "Nop.pres.category.hasfeaturedPosts-{0}-{1}-{2}";
+        public const string CATEGORY_HAS_FEATURED_Posts_PATTERN_KEY = "Nop.pres.category.hasfeaturedPosts";
 
         /// <summary>
         /// Key for caching of category breadcrumb
@@ -219,7 +219,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         public const string PRODUCT_MANUFACTURERS_PATTERN_KEY = "Nop.pres.product.manufacturers";
 
         /// <summary>
-        /// Key for ProductSpecificationModel caching
+        /// Key for PostspecificationModel caching
         /// </summary>
         /// <remarks>
         /// {0} : product id
@@ -338,8 +338,8 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {0} : current product id
         /// {1} : current store ID
         /// </remarks>
-        public const string PRODUCTS_ALSO_PURCHASED_IDS_KEY = "Nop.pres.alsopuchased-{0}-{1}";
-        public const string PRODUCTS_ALSO_PURCHASED_IDS_PATTERN_KEY = "Nop.pres.alsopuchased";
+        public const string Posts_ALSO_PURCHASED_IDS_KEY = "Nop.pres.alsopuchased-{0}-{1}";
+        public const string Posts_ALSO_PURCHASED_IDS_PATTERN_KEY = "Nop.pres.alsopuchased";
 
         /// <summary>
         /// Key for "related" product identifiers displayed on the product details page
@@ -348,8 +348,8 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {0} : current product id
         /// {1} : current store ID
         /// </remarks>
-        public const string PRODUCTS_RELATED_IDS_KEY = "Nop.pres.related-{0}-{1}";
-        public const string PRODUCTS_RELATED_IDS_PATTERN_KEY = "Nop.pres.related";
+        public const string Posts_RELATED_IDS_KEY = "Nop.pres.related-{0}-{1}";
+        public const string Posts_RELATED_IDS_PATTERN_KEY = "Nop.pres.related";
 
         /// <summary>
         /// Key for default product picture caching (all pictures)
@@ -601,7 +601,7 @@ namespace TinyCms.Web.Infrastructure.Cache
             _cacheManager.RemoveByPattern(TOPIC_PATTERN_KEY);
             _cacheManager.RemoveByPattern(PRODUCT_BREADCRUMB_PATTERN_KEY);
             _cacheManager.RemoveByPattern(CATEGORY_NAVIGATION_PATTERN_KEY);
-            _cacheManager.RemoveByPattern(CATEGORY_NUMBER_OF_PRODUCTS_PATTERN_KEY);
+            _cacheManager.RemoveByPattern(CATEGORY_NUMBER_OF_Posts_PATTERN_KEY);
             _cacheManager.RemoveByPattern(PRODUCT_MANUFACTURERS_PATTERN_KEY);
             _cacheManager.RemoveByPattern(STATEPROVINCES_PATTERN_KEY);
             _cacheManager.RemoveByPattern(AVAILABLE_LANGUAGES_PATTERN_KEY);
@@ -617,7 +617,7 @@ namespace TinyCms.Web.Infrastructure.Cache
             _cacheManager.RemoveByPattern(TOPIC_PATTERN_KEY);
             _cacheManager.RemoveByPattern(PRODUCT_BREADCRUMB_PATTERN_KEY);
             _cacheManager.RemoveByPattern(CATEGORY_NAVIGATION_PATTERN_KEY);
-            _cacheManager.RemoveByPattern(CATEGORY_NUMBER_OF_PRODUCTS_PATTERN_KEY);
+            _cacheManager.RemoveByPattern(CATEGORY_NUMBER_OF_Posts_PATTERN_KEY);
             _cacheManager.RemoveByPattern(PRODUCT_MANUFACTURERS_PATTERN_KEY);
             _cacheManager.RemoveByPattern(STATEPROVINCES_PATTERN_KEY);
             _cacheManager.RemoveByPattern(AVAILABLE_LANGUAGES_PATTERN_KEY);
@@ -633,7 +633,7 @@ namespace TinyCms.Web.Infrastructure.Cache
             _cacheManager.RemoveByPattern(TOPIC_PATTERN_KEY);
             _cacheManager.RemoveByPattern(PRODUCT_BREADCRUMB_PATTERN_KEY);
             _cacheManager.RemoveByPattern(CATEGORY_NAVIGATION_PATTERN_KEY);
-            _cacheManager.RemoveByPattern(CATEGORY_NUMBER_OF_PRODUCTS_PATTERN_KEY);
+            _cacheManager.RemoveByPattern(CATEGORY_NUMBER_OF_Posts_PATTERN_KEY);
             _cacheManager.RemoveByPattern(PRODUCT_MANUFACTURERS_PATTERN_KEY);
             _cacheManager.RemoveByPattern(STATEPROVINCES_PATTERN_KEY);
             _cacheManager.RemoveByPattern(AVAILABLE_LANGUAGES_PATTERN_KEY);
@@ -649,10 +649,10 @@ namespace TinyCms.Web.Infrastructure.Cache
             _cacheManager.RemoveByPattern(VENDOR_NAVIGATION_PATTERN_KEY); //depends on VendorSettings.VendorBlockItemsToDisplay
             _cacheManager.RemoveByPattern(CATEGORY_NAVIGATION_PATTERN_KEY); //depends on CatalogSettings.ShowCategoryProductNumber and CatalogSettings.ShowCategoryProductNumberIncludingSubcategories
             _cacheManager.RemoveByPattern(CATEGORY_MENU_PATTERN_KEY); //depends on CatalogSettings.ShowCategoryProductNumber and CatalogSettings.ShowCategoryProductNumberIncludingSubcategories
-            _cacheManager.RemoveByPattern(CATEGORY_NUMBER_OF_PRODUCTS_PATTERN_KEY); //depends on CatalogSettings.ShowCategoryProductNumberIncludingSubcategories
+            _cacheManager.RemoveByPattern(CATEGORY_NUMBER_OF_Posts_PATTERN_KEY); //depends on CatalogSettings.ShowCategoryProductNumberIncludingSubcategories
             _cacheManager.RemoveByPattern(HOMEPAGE_BESTSELLERS_IDS_PATTERN_KEY); //depends on CatalogSettings.NumberOfBestsellersOnHomepage
-            _cacheManager.RemoveByPattern(PRODUCTS_ALSO_PURCHASED_IDS_PATTERN_KEY); //depends on CatalogSettings.ProductsAlsoPurchasedNumber
-            _cacheManager.RemoveByPattern(PRODUCTS_RELATED_IDS_PATTERN_KEY);
+            _cacheManager.RemoveByPattern(Posts_ALSO_PURCHASED_IDS_PATTERN_KEY); //depends on CatalogSettings.PostsAlsoPurchasedNumber
+            _cacheManager.RemoveByPattern(Posts_RELATED_IDS_PATTERN_KEY);
             _cacheManager.RemoveByPattern(BLOG_PATTERN_KEY); //depends on BlogSettings.NumberOfTags
             _cacheManager.RemoveByPattern(NEWS_PATTERN_KEY); //depends on NewsSettings.MainPageNewsCount
             _cacheManager.RemoveByPattern(SITEMAP_PATTERN_KEY); //depends on distinct sitemap settings

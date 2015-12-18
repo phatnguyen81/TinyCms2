@@ -4,17 +4,17 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Web.Models.Customer
 {
-    public partial class CustomerDownloadableProductsModel : BaseNopModel
+    public partial class CustomerDownloadablePostsModel : BaseNopModel
     {
-        public CustomerDownloadableProductsModel()
+        public CustomerDownloadablePostsModel()
         {
-            Items = new List<DownloadableProductsModel>();
+            Items = new List<DownloadablePostsModel>();
         }
 
-        public IList<DownloadableProductsModel> Items { get; set; }
+        public IList<DownloadablePostsModel> Items { get; set; }
 
         #region Nested classes
-        public partial class DownloadableProductsModel : BaseNopModel
+        public partial class DownloadablePostsModel : BaseNopModel
         {
             public Guid OrderItemGuid { get; set; }
 
@@ -22,7 +22,7 @@ namespace TinyCms.Web.Models.Customer
 
             public int ProductId { get; set; }
             public string ProductName { get; set; }
-            public string ProductSeName { get; set; }
+            public string PostseName { get; set; }
             public string ProductAttributes { get; set; }
 
             public int DownloadId { get; set; }

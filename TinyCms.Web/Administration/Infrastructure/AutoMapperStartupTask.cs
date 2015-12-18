@@ -84,7 +84,7 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.CreatedOnUtc, mo => mo.Ignore())
                 .ForMember(dest => dest.UpdatedOnUtc, mo => mo.Ignore())
                 .ForMember(dest => dest.Deleted, mo => mo.Ignore());
-            //products
+            //posts
             Mapper.CreateMap<Post, PostModel>()
                 .ForMember(dest => dest.CreatedOn, mo => mo.Ignore())
                 .ForMember(dest => dest.UpdatedOn, mo => mo.Ignore())
@@ -98,9 +98,6 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.SeName, mo => mo.MapFrom(src => src.GetSeName(0, true, false)))
                 .ForMember(dest => dest.AvailableCustomerRoles, mo => mo.Ignore())
                 .ForMember(dest => dest.SelectedCustomerRoleIds, mo => mo.Ignore())
-                .ForMember(dest => dest.PrimaryStoreCurrencyCode, mo => mo.Ignore())
-                .ForMember(dest => dest.BaseDimensionIn, mo => mo.Ignore())
-                .ForMember(dest => dest.BaseWeightIn, mo => mo.Ignore())
                 .ForMember(dest => dest.Locales, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<PostModel, Post>()
@@ -108,10 +105,6 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.CreatedOnUtc, mo => mo.Ignore())
                 .ForMember(dest => dest.UpdatedOnUtc, mo => mo.Ignore())
                 .ForMember(dest => dest.Deleted, mo => mo.Ignore())
-                .ForMember(dest => dest.ApprovedRatingSum, mo => mo.Ignore())
-                .ForMember(dest => dest.NotApprovedRatingSum, mo => mo.Ignore())
-                .ForMember(dest => dest.ApprovedTotalReviews, mo => mo.Ignore())
-                .ForMember(dest => dest.NotApprovedTotalReviews, mo => mo.Ignore())
                 .ForMember(dest => dest.PostCategories, mo => mo.Ignore())
                 .ForMember(dest => dest.PostPictures, mo => mo.Ignore());
             //logs

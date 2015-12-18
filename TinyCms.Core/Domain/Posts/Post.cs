@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TinyCms.Core.Domain.Localization;
+using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Security;
 using TinyCms.Core.Domain.Seo;
 
@@ -14,13 +15,6 @@ namespace TinyCms.Core.Domain.Posts
         private ICollection<PostCategory> _postCategories;
         private ICollection<PostPicture> _postPictures;
         private ICollection<PostTag> _postTags;
-
-        /// <summary>
-        /// Gets or sets the values indicating whether this product is visible in catalog or search results.
-        /// It's used when this product is associated to some "grouped" one
-        /// This way associated products could be accessed/added/etc only from a grouped product details page
-        /// </summary>
-        public bool VisibleIndividually { get; set; }
 
         /// <summary>
         /// Gets or sets the name
@@ -40,7 +34,11 @@ namespace TinyCms.Core.Domain.Posts
         /// </summary>
         public string AdminComment { get; set; }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public int PictureId { get; set; }
+        
         /// <summary>
         /// Gets or sets a value indicating whether to show the product on home page
         /// </summary>
@@ -63,43 +61,11 @@ namespace TinyCms.Core.Domain.Posts
         /// Gets or sets a value indicating whether the product allows customer reviews
         /// </summary>
         public bool AllowCustomerReviews { get; set; }
-        /// <summary>
-        /// Gets or sets the rating sum (approved reviews)
-        /// </summary>
-        public int ApprovedRatingSum { get; set; }
-        /// <summary>
-        /// Gets or sets the rating sum (not approved reviews)
-        /// </summary>
-        public int NotApprovedRatingSum { get; set; }
-        /// <summary>
-        /// Gets or sets the total rating votes (approved reviews)
-        /// </summary>
-        public int ApprovedTotalReviews { get; set; }
-        /// <summary>
-        /// Gets or sets the total rating votes (not approved reviews)
-        /// </summary>
-        public int NotApprovedTotalReviews { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the entity is subject to ACL
         /// </summary>
         public bool SubjectToAcl { get; set; }
-
-
-
-        /// <summary
-        /// <summary>
-        /// Gets or sets a value indicating whether this product is marked as new
-        /// </summary>
-        public bool MarkAsNew { get; set; }
-        /// <summary>
-        /// Gets or sets the start date and time of the new product (set product as "New" from date). Leave empty to ignore this property
-        /// </summary>
-        public DateTime? MarkAsNewStartDateTimeUtc { get; set; }
-        /// <summary>
-        /// Gets or sets the end date and time of the new product (set product as "New" to date). Leave empty to ignore this property
-        /// </summary>
-        public DateTime? MarkAsNewEndDateTimeUtc { get; set; }
 
 
         /// <summary>
@@ -127,6 +93,17 @@ namespace TinyCms.Core.Domain.Posts
         public bool Deleted { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public int CreatedBy { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int ApprovedBy { get; set; }
+
+
+        /// <summary>
         /// Gets or sets the date and time of product creation
         /// </summary>
         public DateTime CreatedOnUtc { get; set; }
@@ -135,12 +112,11 @@ namespace TinyCms.Core.Domain.Posts
         /// </summary>
         public DateTime UpdatedOnUtc { get; set; }
 
-
-
-
-
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime ApprovedOnUtc { get; set; }
+        
 
         /// <summary>
         /// Gets or sets the collection of PostCategory

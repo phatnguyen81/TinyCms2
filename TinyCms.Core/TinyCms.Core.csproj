@@ -147,11 +147,14 @@
     <Compile Include="Domain\Polls\PollAnswer.cs" />
     <Compile Include="Domain\Polls\PollVotingRecord.cs" />
     <Compile Include="Domain\Posts\CatalogSettings.cs" />
+    <Compile Include="Domain\Posts\CategoryType.cs" />
     <Compile Include="Domain\Posts\Category.cs" />
+    <Compile Include="Domain\Posts\CategoryTemplate.cs" />
     <Compile Include="Domain\Posts\Post.cs" />
     <Compile Include="Domain\Posts\PostTag.cs" />
     <Compile Include="Domain\Posts\PostCategory.cs" />
     <Compile Include="Domain\Posts\PostPicture.cs" />
+    <Compile Include="Domain\Posts\ProductTemplate.cs" />
     <Compile Include="Domain\Security\AclRecord.cs" />
     <Compile Include="Domain\Security\DefaultPermissionRecord.cs" />
     <Compile Include="Domain\Security\IAclSupported.cs" />

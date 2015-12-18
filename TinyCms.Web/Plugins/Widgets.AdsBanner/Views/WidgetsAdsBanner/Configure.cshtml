@@ -84,6 +84,13 @@
                 width: 150,
                 template: "#= kendo.toString(kendo.parseDate(ToDate),'MM-dd-yyyy hh:ss')#"
             }, {
+                field: "Published",
+                title: "@T("Admin.ContentManagement.Polls.Fields.Published")",
+                width: 100,
+                headerAttributes: { style: "text-align:center" },
+                attributes: { style: "text-align:center" },
+                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Published#.gif" />'
+            }, {
                 field: "Id",
                 title: "@T("Admin.Common.Edit")",
                 width: 100,

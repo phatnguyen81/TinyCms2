@@ -16,7 +16,7 @@ namespace TinyCms.Web.Infrastructure
             if (!config.SupportPreviousNopcommerceVersions)
                 return;
 
-            //products
+            //Posts
             routes.MapLocalizedRoute("", "p/{productId}/{SeName}",
                 new { controller = "BackwardCompatibility2X", action = "RedirectProductById", SeName = UrlParameter.Optional },
                 new { productId = @"\d+" },

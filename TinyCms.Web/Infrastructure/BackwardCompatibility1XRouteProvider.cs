@@ -20,8 +20,8 @@ namespace TinyCms.Web.Infrastructure
                             new { controller = "BackwardCompatibility1X", action = "GeneralRedirect" },
                             new[] { "Nop.Web.Controllers" });
             
-            //products
-            routes.MapRoute("", "products/{id}.aspx",
+            //Posts
+            routes.MapRoute("", "Posts/{id}.aspx",
                             new { controller = "BackwardCompatibility1X", action = "RedirectProduct"},
                             new[] { "Nop.Web.Controllers" });
             

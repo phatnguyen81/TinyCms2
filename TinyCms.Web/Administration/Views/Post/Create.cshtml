@@ -1,15 +1,15 @@
 ﻿@model PostModel
 @{
     //page title
-    ViewBag.Title = T("Admin.Catalog.Products.AddNew").Text;
+    ViewBag.Title = T("Admin.Catalog.Posts.AddNew").Text;
 }
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "product-form" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "post-form" }))
 {
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
             <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
-            @T("Admin.Catalog.Products.AddNew") @Html.ActionLink("(" + T("Admin.Catalog.Products.BackToList") + ")", "List")
+            @T("Admin.Catalog.Posts.AddNew") @Html.ActionLink("(" + T("Admin.Catalog.Posts.BackToList") + ")", "List")
         </div>
         <div class="options">
             <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />

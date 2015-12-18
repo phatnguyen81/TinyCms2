@@ -1,23 +1,23 @@
 ﻿@model PostModel
 @{
     //page title
-    ViewBag.Title = T("Admin.Catalog.Products.EditProductDetails").Text;
+    ViewBag.Title = T("Admin.Catalog.Posts.EditPostDetails").Text;
 }
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "product-form" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "post-form" }))
 {
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
             <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
-            @T("Admin.Catalog.Products.EditProductDetails") - @Model.Name @Html.ActionLink("(" + T("Admin.Catalog.Products.BackToList") + ")", "List")
+            @T("Admin.Catalog.Posts.EditPostDetails") - @Model.Name @Html.ActionLink("(" + T("Admin.Catalog.Posts.BackToList") + ")", "List")
         </div>
         <div class="options">
-            <input type="submit" value="@T("Admin.Common.Preview")" onclick="javascript:OpenWindow('@Url.RouteUrl("Product", new { SeName = Model.SeName })', 800, 600, true); return false;" class="k-button" />
+            <input type="submit" value="@T("Admin.Common.Preview")" onclick="javascript:OpenWindow('@Url.RouteUrl("Post", new { SeName = Model.SeName })', 800, 600, true); return false;" class="k-button" />
             <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
             <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")" />
-            <span id="product-delete" class="k-button">@T("Admin.Common.Delete")</span>
+            <span id="post-delete" class="k-button">@T("Admin.Common.Delete")</span>
         </div>
     </div>
     @Html.Partial("_CreateOrUpdate", Model)
 }
-@Html.DeleteConfirmation("product-delete")
+@Html.DeleteConfirmation("post-delete")

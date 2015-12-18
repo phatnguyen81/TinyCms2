@@ -1,4 +1,4 @@
-﻿Group: Widgets
+Group: Widgets
 FriendlyName: Banner Management
 SystemName: Widgets.AdsBanner
 Version: 1.09

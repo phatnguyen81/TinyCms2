@@ -7,14 +7,7 @@
 @using TinyCms.Services.Posts;
 @using System.Text;
 <script type="text/javascript">
-    $(document).ready(function() {
-
-      
-        $("#@Html.FieldIdFor(model => model.MarkAsNew)").click(toggleMarkAsNew);
-
-        toggleMarkAsNew();
-    });
-
+  
     function toggleShowOnHomePage() {
         if ($('#@Html.FieldIdFor(model => model.ShowOnHomePage)').is(':checked')) {
             $('#pnlDisplayOrder').show();
@@ -66,17 +59,15 @@
             </td>
         </tr>
     }
-    
     <tr>
         <td class="adminTitle">
-            @Html.NopLabelFor(model => model.VisibleIndividually):
+            @Html.NopLabelFor(model => model.PostTemplateId):
         </td>
         <td class="adminData">
-            @Html.EditorFor(model => model.VisibleIndividually)
-            @Html.ValidationMessageFor(model => model.VisibleIndividually)
+            @Html.DropDownListFor(model => model.PostTemplateId, Model.AvailablePostTemplates)
+            @Html.ValidationMessageFor(model => model.PostTemplateId)
         </td>
     </tr>
-   
 </table>
 @(Html.LocalizedEditor<PostModel, PostLocalizedModel>("post-info-localized",
                 @<table class="adminContent">
@@ -147,6 +138,15 @@
 <table class="adminContent">
     <tr>
         <td class="adminTitle">
+            @Html.NopLabelFor(model => model.PictureId):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.PictureId)
+            @Html.ValidationMessageFor(model => model.PictureId)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
             @Html.NopLabelFor(model => model.AdminComment):
         </td>
         <td class="adminData">
@@ -192,52 +192,6 @@
         <td colspan="2">
             <hr />
         </td>
-    </tr>
-    <tr>
-        <td class="adminTitle">
-            @Html.NopLabelFor(model => model.AvailableStartDateTimeUtc):
-        </td>
-        <td class="adminData">
-            @Html.EditorFor(model => model.AvailableStartDateTimeUtc)
-            @Html.ValidationMessageFor(model => model.AvailableStartDateTimeUtc)
-        </td>
-    </tr>
-    <tr>
-        <td class="adminTitle">
-            @Html.NopLabelFor(model => model.AvailableEndDateTimeUtc):
-        </td>
-        <td class="adminData">
-            @Html.EditorFor(model => model.AvailableEndDateTimeUtc)
-            @Html.ValidationMessageFor(model => model.AvailableEndDateTimeUtc)
-        </td>
-    </tr>
-    <tr>
-        <td class="adminTitle">
-            @Html.NopLabelFor(model => model.MarkAsNew):
-        </td>
-        <td class="adminData">
-            @Html.EditorFor(model => model.MarkAsNew)
-            @Html.ValidationMessageFor(model => model.MarkAsNew)
-        </td>
-    </tr>
-    <tr id="pnlMarkAsNewStartDateTimeUtc">
-        <td class="adminTitle">
-            @Html.NopLabelFor(model => model.MarkAsNewStartDateTimeUtc):
-        </td>
-        <td class="adminData">
-            @Html.EditorFor(model => model.MarkAsNewStartDateTimeUtc)
-            @Html.ValidationMessageFor(model => model.MarkAsNewStartDateTimeUtc)
-        </td>
-    </tr>
-    <tr id="pnlMarkAsNewEndDateTimeUtc">
-        <td class="adminTitle">
-            @Html.NopLabelFor(model => model.MarkAsNewEndDateTimeUtc):
-        </td>
-        <td class="adminData">
-            @Html.EditorFor(model => model.MarkAsNewEndDateTimeUtc)
-            @Html.ValidationMessageFor(model => model.MarkAsNewEndDateTimeUtc)
-        </td>
-    </tr>
     <tr>
         <td class="adminTitle">
             @Html.NopLabelFor(model => model.Published):
