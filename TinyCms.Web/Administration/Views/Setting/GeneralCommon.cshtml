@@ -15,7 +15,6 @@
             <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
         </div>
     </div>
-    @Html.Action("StoreScopeConfiguration", "Setting")
     @Html.ValidationSummary(false)
 
     <script>
@@ -42,12 +41,9 @@
                 @T("Admin.Configuration.Settings.GeneralCommon.SecuritySettings")
             </li>
             <li @Html.RenderSelectedTabIndex(3, GetSelectedTabIndex())>
-                @T("Admin.Configuration.Settings.GeneralCommon.PdfSettings")
-            </li>
-            <li @Html.RenderSelectedTabIndex(4, GetSelectedTabIndex())>
                 @T("Admin.Configuration.Settings.GeneralCommon.LocalizationSettings")
             </li>
-            <li @Html.RenderSelectedTabIndex(5, GetSelectedTabIndex())>
+            <li @Html.RenderSelectedTabIndex(4, GetSelectedTabIndex())>
                 @T("Admin.Configuration.Settings.GeneralCommon.FullTextSettings")
             </li>
         </ul>
@@ -59,9 +55,6 @@
         </div>
         <div>
             @TabSecuritySettings()
-        </div>
-        <div>
-            @TabPdfSettings()
         </div>
         <div>
             @TabLocalizationSettings()
@@ -93,7 +86,6 @@
     <table class="adminContent">
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.StoreInformationSettings.StoreClosed_OverrideForStore, model => model.StoreInformationSettings.StoreClosed, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.StoreInformationSettings.StoreClosed):
             </td>
             <td class="adminData">
@@ -103,7 +95,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.StoreInformationSettings.DefaultStoreTheme_OverrideForStore, "theme-selection-block", Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.StoreInformationSettings.DefaultStoreTheme):
             </td>
             <td class="adminData">
@@ -131,7 +122,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.StoreInformationSettings.AllowCustomerToSelectTheme_OverrideForStore, model => model.StoreInformationSettings.AllowCustomerToSelectTheme, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.StoreInformationSettings.AllowCustomerToSelectTheme):
             </td>
             <td class="adminData">
@@ -141,7 +131,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.StoreInformationSettings.DisplayEuCookieLawWarning_OverrideForStore, model => model.StoreInformationSettings.DisplayEuCookieLawWarning, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.StoreInformationSettings.DisplayEuCookieLawWarning):
             </td>
             <td class="adminData">
@@ -151,7 +140,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.StoreInformationSettings.FacebookLink_OverrideForStore, model => model.StoreInformationSettings.FacebookLink, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.StoreInformationSettings.FacebookLink):
             </td>
             <td class="adminData">
@@ -161,7 +149,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.StoreInformationSettings.TwitterLink_OverrideForStore, model => model.StoreInformationSettings.TwitterLink, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.StoreInformationSettings.TwitterLink):
             </td>
             <td class="adminData">
@@ -171,7 +158,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.StoreInformationSettings.YoutubeLink_OverrideForStore, model => model.StoreInformationSettings.YoutubeLink, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.StoreInformationSettings.YoutubeLink):
             </td>
             <td class="adminData">
@@ -181,7 +167,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.StoreInformationSettings.GooglePlusLink_OverrideForStore, model => model.StoreInformationSettings.GooglePlusLink, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.StoreInformationSettings.GooglePlusLink):
             </td>
             <td class="adminData">
@@ -191,7 +176,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.StoreInformationSettings.SubjectFieldOnContactUsForm_OverrideForStore, model => model.StoreInformationSettings.SubjectFieldOnContactUsForm, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.StoreInformationSettings.SubjectFieldOnContactUsForm):
             </td>
             <td class="adminData">
@@ -201,7 +185,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.StoreInformationSettings.UseSystemEmailForContactUsForm_OverrideForStore, model => model.StoreInformationSettings.UseSystemEmailForContactUsForm, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.StoreInformationSettings.UseSystemEmailForContactUsForm):
             </td>
             <td class="adminData">
@@ -216,7 +199,6 @@
     <table class="adminContent">
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.PageTitleSeparator_OverrideForStore, model => model.SeoSettings.PageTitleSeparator, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.PageTitleSeparator):
             </td>
             <td class="adminData">
@@ -226,7 +208,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.PageTitleSeoAdjustment_OverrideForStore, model => model.SeoSettings.PageTitleSeoAdjustment, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.PageTitleSeoAdjustment):
             </td>
             <td class="adminData">
@@ -236,7 +217,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.DefaultTitle_OverrideForStore, model => model.SeoSettings.DefaultTitle, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.DefaultTitle):
             </td>
             <td class="adminData">
@@ -246,7 +226,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.DefaultMetaKeywords_OverrideForStore, model => model.SeoSettings.DefaultMetaKeywords, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.DefaultMetaKeywords):
             </td>
             <td class="adminData">
@@ -256,7 +235,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.DefaultMetaDescription_OverrideForStore, model => model.SeoSettings.DefaultMetaDescription, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.DefaultMetaDescription):
             </td>
             <td class="adminData">
@@ -266,7 +244,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.GenerateProductMetaDescription_OverrideForStore, model => model.SeoSettings.GenerateProductMetaDescription, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.GenerateProductMetaDescription):
             </td>
             <td class="adminData">
@@ -276,7 +253,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.ConvertNonWesternChars_OverrideForStore, model => model.SeoSettings.ConvertNonWesternChars, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.ConvertNonWesternChars):
             </td>
             <td class="adminData">
@@ -286,7 +262,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.CanonicalUrlsEnabled_OverrideForStore, model => model.SeoSettings.CanonicalUrlsEnabled, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.CanonicalUrlsEnabled):
             </td>
             <td class="adminData">
@@ -296,7 +271,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.WwwRequirement_OverrideForStore, model => model.SeoSettings.WwwRequirement, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.WwwRequirement):
             </td>
             <td class="adminData">
@@ -306,7 +280,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.EnableJsBundling_OverrideForStore, model => model.SeoSettings.EnableJsBundling, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.EnableJsBundling):
             </td>
             <td class="adminData">
@@ -316,7 +289,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.EnableCssBundling_OverrideForStore, model => model.SeoSettings.EnableCssBundling, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.EnableCssBundling):
             </td>
             <td class="adminData">
@@ -326,7 +298,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.TwitterMetaTags_OverrideForStore, model => model.SeoSettings.TwitterMetaTags, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.TwitterMetaTags):
             </td>
             <td class="adminData">
@@ -336,7 +307,6 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.SeoSettings.OpenGraphMetaTags_OverrideForStore, model => model.SeoSettings.OpenGraphMetaTags, Model.ActiveStoreScopeConfiguration)
                 @Html.NopLabelFor(model => model.SeoSettings.OpenGraphMetaTags):
             </td>
             <td class="adminData">
@@ -564,61 +534,7 @@
         </tr>
     </table>
 }
-@helper TabPdfSettings()
-{
-    <table class="adminContent">
-        <tr>
-            <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.PdfSettings.LetterPageSizeEnabled_OverrideForStore, model => model.PdfSettings.LetterPageSizeEnabled, Model.ActiveStoreScopeConfiguration)
-                @Html.NopLabelFor(model => model.PdfSettings.LetterPageSizeEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.PdfSettings.LetterPageSizeEnabled)
-                @Html.ValidationMessageFor(model => model.PdfSettings.LetterPageSizeEnabled)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.PdfSettings.LogoPictureId_OverrideForStore, "pdf-logo-picture", Model.ActiveStoreScopeConfiguration)
-                @Html.NopLabelFor(model => model.PdfSettings.LogoPictureId):
-            </td>
-            <td class="adminData" id="pdf-logo-picture">
-                @Html.EditorFor(model => model.PdfSettings.LogoPictureId)
-                @Html.ValidationMessageFor(model => model.PdfSettings.LogoPictureId)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.PdfSettings.DisablePdfInvoicesForPendingOrders_OverrideForStore, model => model.PdfSettings.DisablePdfInvoicesForPendingOrders, Model.ActiveStoreScopeConfiguration)
-                @Html.NopLabelFor(model => model.PdfSettings.DisablePdfInvoicesForPendingOrders):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.PdfSettings.DisablePdfInvoicesForPendingOrders)
-                @Html.ValidationMessageFor(model => model.PdfSettings.DisablePdfInvoicesForPendingOrders)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.PdfSettings.InvoiceFooterTextColumn1_OverrideForStore, model => model.PdfSettings.InvoiceFooterTextColumn1, Model.ActiveStoreScopeConfiguration)
-                @Html.NopLabelFor(model => model.PdfSettings.InvoiceFooterTextColumn1):
-            </td>
-            <td class="adminData">
-                @Html.TextAreaFor(model => model.PdfSettings.InvoiceFooterTextColumn1, new { style = "Width: 250px; Height: 150px;" })
-                @Html.ValidationMessageFor(model => model.PdfSettings.InvoiceFooterTextColumn1)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.OverrideStoreCheckboxFor(model => model.PdfSettings.InvoiceFooterTextColumn2_OverrideForStore, model => model.PdfSettings.InvoiceFooterTextColumn2, Model.ActiveStoreScopeConfiguration)
-                @Html.NopLabelFor(model => model.PdfSettings.InvoiceFooterTextColumn2):
-            </td>
-            <td class="adminData">
-                @Html.TextAreaFor(model => model.PdfSettings.InvoiceFooterTextColumn2, new { style = "Width: 250px; Height: 150px;" })
-                @Html.ValidationMessageFor(model => model.PdfSettings.InvoiceFooterTextColumn2)
-            </td>
-        </tr>
-    </table>
-}
+
 @helper TabLocalizationSettings()
 {
     <table class="adminContent">

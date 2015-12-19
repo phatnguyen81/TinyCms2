@@ -377,6 +377,8 @@ namespace TinyCms.Admin.Controllers
             PrepareTemplatesModel(model);
             //category types
             PrepareCategoryTypeModel(model);
+            //categories
+            PrepareAllCategoriesModel(model);
             //ACL
             PrepareAclModel(model, category, false);
 

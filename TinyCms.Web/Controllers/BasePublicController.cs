@@ -9,7 +9,7 @@ using TinyCms.Web.Framework.Seo;
 namespace TinyCms.Web.Controllers
 {
     [StoreClosed]
-    [PublicStoreAllowNavigation]
+    //[PublicStoreAllowNavigation]
     [LanguageSeoCode]
     [NopHttpsRequirement(SslRequirement.NoMatter)]
     [WwwRequirement]

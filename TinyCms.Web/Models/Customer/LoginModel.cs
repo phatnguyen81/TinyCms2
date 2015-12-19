@@ -30,5 +30,7 @@ namespace TinyCms.Web.Models.Customer
         public bool RememberMe { get; set; }
 
         public bool DisplayCaptcha { get; set; }
+
+        public string ReturnUrl;
     }
 }

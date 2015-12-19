@@ -7,7 +7,10 @@
     
     Html.AppendCssFileParts("~/Content/css/style.css");
     Html.AppendCssFileParts("~/Content/css/responsive.css");
+    Html.AppendCssFileParts("~/Content/css/popup.css");
 
-    Html.AddScriptParts("~/Scripts/jscript.js");
-    
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Scripts/jscript.js");
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Scripts/webvina.js");
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Scripts/boxy.js");
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Scripts/scrollbar/jquery.slimscroll.js");
 }

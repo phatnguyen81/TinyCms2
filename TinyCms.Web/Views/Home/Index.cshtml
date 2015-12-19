@@ -1,7 +1,35 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    Layout = "~/Views/Shared/_HomePage.cshtml";
 }
 
-<h2>Index</h2>
+<div class="tophead clearfix">
+    <a href="@Url.RouteUrl("homepage")" class="logo"></a> 
+    @Html.Widget("home_top_header")
+    @*<a href="#" class="topbanner"><img src="temp/top_banner.jpg" width="620" alt="" /></a>*@ 
+</div>
+<div class="nav">
+    @Html.Action("TopMenu", "Posts")
+</div>
+<div class="top_news">
+    @Html.Action("HomePageHeadLine", "Posts")
+    <div class="rightlist_banner">
+        @Html.Widget("home_right_header")
+    </div>
+</div>
+@Html.Partial("ToolBoxMobile")
 
+@Html.Action("HomePagePicturesAndVideos", "Posts")
+<div class="large_banner">
+    @Html.Widget("home_wide_banner")
+</div>
+<div class="mainpage">
+    <div class="leftcol">
+        @Html.Action("HomePageCategories", "Posts")
+    </div>
+    <div class="sidebar">
+        @Html.Partial("ToolBox") 
+        @Html.Action("DiscoveryCategory", "Posts")
+        @Html.Action("TravelViaPictureCategory", "Posts")
+    </div>
+    @Html.Widget("sidebar_banner")
+</div>

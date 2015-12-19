@@ -1,11 +1,13 @@
 ﻿@{
     Layout = "~/Views/Shared/_Root.Head.cshtml";
 }
-@Html.Widget("body_start_html_tag_after")
-@Html.Partial("_Notifications")
+@*@Html.Partial("_Notifications")*@
 @Html.Action("JavaScriptDisabledWarning", "Common")
 @Html.Partial("OldInternetExplorerWarning")
-@RenderBody()
+
+<div class="wrapper">
+    @RenderBody()
+</div>
 @*<div class="master-wrapper-page">
     @Html.Action("AdminHeaderLinks", "Common")
     @Html.Partial("Header")

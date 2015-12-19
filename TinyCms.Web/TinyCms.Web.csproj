@@ -179,6 +179,8 @@
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,6 +191,7 @@
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
     <Compile Include="Infrastructure\GenericUrlRouteProvider.cs" />
     <Compile Include="Infrastructure\RouteProvider.cs" />
+    <Compile Include="Models\Cms\RenderWidgetModel.cs" />
     <Compile Include="Models\Common\FaviconModel.cs" />
     <Compile Include="Models\Common\PagerModel.cs" />
     <Compile Include="Models\Customer\AccountActivationModel.cs" />
@@ -204,6 +207,7 @@
     <Compile Include="Models\Customer\PaswordRecoveryModel.cs" />
     <Compile Include="Models\Customer\RegisterModel.cs" />
     <Compile Include="Models\Customer\RegisterResultModel.cs" />
+    <Compile Include="Models\Customer\UserInfoZone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\Customer\ChangePasswordValidator.cs" />
     <Compile Include="Validators\Customer\CustomerInfoValidator.cs" />
@@ -292,6 +296,7 @@
     <Content Include="Content\farbtastic\wheel.png" />
     <Content Include="Content\files\ExportImport\Index.htm" />
     <Content Include="Content\files\Index.htm" />
+    <Content Include="Content\Images\avatar.png" />
     <Content Include="Content\Images\default-avatar.jpg" />
     <Content Include="Content\Images\default-image.gif" />
     <Content Include="Content\Images\default-image.png" />
@@ -1231,6 +1236,7 @@
     <Content Include="Content\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Content\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Scripts\admin.common.js" />
+    <Content Include="Scripts\boxy.js" />
     <Content Include="Scripts\farbtastic.js" />
     <Content Include="Scripts\fineuploader\edit.gif" />
     <Content Include="Scripts\fineuploader\fineuploader-4.2.2.css" />
@@ -1689,9 +1695,15 @@
     <Content Include="Scripts\public.common.js" />
     <Content Include="Scripts\public.onepagecheckout.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\scrollbar\jquery.scrollbar.css" />
+    <Content Include="Scripts\scrollbar\jquery.scrollbar.js" />
+    <Content Include="Scripts\scrollbar\jquery.scrollbar.min.js" />
+    <Content Include="Scripts\scrollbar\jquery.slimscroll.js" />
+    <Content Include="Scripts\scrollbar\jquery.slimscroll.min.js" />
     <Content Include="Scripts\selectivizr.min.js" />
     <Content Include="Scripts\tag-it.js" />
     <Content Include="Scripts\tag-it.min.js" />
+    <Content Include="Scripts\webvina.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Themes\DefaultClean\Content\css\ie8.css" />
     <Content Include="Themes\DefaultClean\Content\css\print.css" />
@@ -1825,7 +1837,7 @@
     <Content Include="Scripts\kendo\2014.1.318\kendo.window.min.js.map" />
     <Content Include="Views\Shared\_Root.cshtml" />
     <Content Include="Views\Shared\_Root.Head.cshtml" />
-    <Content Include="Views\Shared\_ColumnsOne.cshtml" />
+    <Content Include="Views\Shared\_HomePage.cshtml" />
     <Content Include="Views\Shared\Head.cshtml" />
     <Content Include="Views\Common\Favicon.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
@@ -1844,6 +1856,21 @@
     <Content Include="Views\Common\StoreThemeSelector.cshtml" />
     <Content Include="Views\Common\TaxTypeSelector.cshtml" />
     <Content Include="Views\Shared\OldInternetExplorerWarning.cshtml" />
+    <Content Include="Views\Shared\_OneColumn.cshtml" />
+    <Content Include="Views\Posts\HomePageHeadLine.cshtml" />
+    <Content Include="Views\Posts\TopMenu.cshtml" />
+    <Content Include="Views\Shared\HomePageHeader.cshtml" />
+    <Content Include="Views\Posts\HomePagePicturesAndVideos.cshtml" />
+    <Content Include="Views\Shared\ToolBox.cshtml" />
+    <Content Include="Views\Posts\HomePageCategories.cshtml" />
+    <Content Include="Views\Shared\ToolBoxMobile.cshtml" />
+    <Content Include="Views\Posts\DiscoveryCategory.cshtml" />
+    <Content Include="Views\Posts\TravelViaPictureCategory.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Widget\WidgetsByZone.cshtml" />
+    <Content Include="Views\Customer\Avatar.cshtml" />
+    <Content Include="Views\Customer\UserInfoZone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />

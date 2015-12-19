@@ -6,9 +6,14 @@ using TinyCms.Admin.Extensions;
 using TinyCms.Admin.Models.Customers;
 using TinyCms.Admin.Models.Settings;
 using TinyCms.Core;
+using TinyCms.Core.Domain;
+using TinyCms.Core.Domain.Common;
 using TinyCms.Core.Domain.Customers;
+using TinyCms.Core.Domain.Localization;
 using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Posts;
+using TinyCms.Core.Domain.Security;
+using TinyCms.Core.Domain.Seo;
 using TinyCms.Services.Common;
 using TinyCms.Services.Configuration;
 using TinyCms.Services.Customers;
@@ -20,8 +25,10 @@ using TinyCms.Services.Security;
 using TinyCms.Web.Framework;
 using TinyCms.Web.Framework.Controllers;
 using TinyCms.Web.Framework.Kendoui;
+using TinyCms.Web.Framework.Localization;
 using TinyCms.Web.Framework.Mvc;
 using TinyCms.Web.Framework.Security;
+using TinyCms.Web.Framework.Security.Captcha;
 using TinyCms.Web.Framework.Themes;
 
 namespace TinyCms.Admin.Controllers
@@ -92,6 +99,255 @@ namespace TinyCms.Admin.Controllers
         #endregion
 
         #region Methods
+
+
+
+
+
+        public ActionResult GeneralCommon()
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
+                return AccessDeniedView();
+
+            //set page timeout to 5 minutes
+            this.Server.ScriptTimeout = 300;
+
+            var model = new GeneralCommonSettingsModel();
+            //store information
+            var storeInformationSettings = _settingService.LoadSetting<StoreInformationSettings>();
+            var commonSettings = _settingService.LoadSetting<CommonSettings>();
+            model.StoreInformationSettings.StoreClosed = storeInformationSettings.StoreClosed;
+            //themes
+            model.StoreInformationSettings.DefaultStoreTheme = storeInformationSettings.DefaultStoreTheme;
+            model.StoreInformationSettings.AvailableStoreThemes = _themeProvider
+                .GetThemeConfigurations()
+                .Select(x => new GeneralCommonSettingsModel.StoreInformationSettingsModel.ThemeConfigurationModel
+                {
+                    ThemeTitle = x.ThemeTitle,
+                    ThemeName = x.ThemeName,
+                    PreviewImageUrl = x.PreviewImageUrl,
+                    PreviewText = x.PreviewText,
+                    SupportRtl = x.SupportRtl,
+                    Selected = x.ThemeName.Equals(storeInformationSettings.DefaultStoreTheme, StringComparison.InvariantCultureIgnoreCase)
+                })
+                .ToList();
+            model.StoreInformationSettings.AllowCustomerToSelectTheme = storeInformationSettings.AllowCustomerToSelectTheme;
+            //EU Cookie law
+            model.StoreInformationSettings.DisplayEuCookieLawWarning = storeInformationSettings.DisplayEuCookieLawWarning;
+            //social pages
+            model.StoreInformationSettings.FacebookLink = storeInformationSettings.FacebookLink;
+            model.StoreInformationSettings.TwitterLink = storeInformationSettings.TwitterLink;
+            model.StoreInformationSettings.YoutubeLink = storeInformationSettings.YoutubeLink;
+            model.StoreInformationSettings.GooglePlusLink = storeInformationSettings.GooglePlusLink;
+            //contact us
+            model.StoreInformationSettings.SubjectFieldOnContactUsForm = commonSettings.SubjectFieldOnContactUsForm;
+            model.StoreInformationSettings.UseSystemEmailForContactUsForm = commonSettings.UseSystemEmailForContactUsForm;
+       
+
+            //seo settings
+            var seoSettings = _settingService.LoadSetting<SeoSettings>();
+            model.SeoSettings.PageTitleSeparator = seoSettings.PageTitleSeparator;
+            model.SeoSettings.PageTitleSeoAdjustment = (int)seoSettings.PageTitleSeoAdjustment;
+            model.SeoSettings.PageTitleSeoAdjustmentValues = seoSettings.PageTitleSeoAdjustment.ToSelectList();
+            model.SeoSettings.DefaultTitle = seoSettings.DefaultTitle;
+            model.SeoSettings.DefaultMetaKeywords = seoSettings.DefaultMetaKeywords;
+            model.SeoSettings.DefaultMetaDescription = seoSettings.DefaultMetaDescription;
+            model.SeoSettings.GenerateProductMetaDescription = seoSettings.GenerateProductMetaDescription;
+            model.SeoSettings.ConvertNonWesternChars = seoSettings.ConvertNonWesternChars;
+            model.SeoSettings.CanonicalUrlsEnabled = seoSettings.CanonicalUrlsEnabled;
+            model.SeoSettings.WwwRequirement = (int)seoSettings.WwwRequirement;
+            model.SeoSettings.WwwRequirementValues = seoSettings.WwwRequirement.ToSelectList();
+            model.SeoSettings.EnableJsBundling = seoSettings.EnableJsBundling;
+            model.SeoSettings.EnableCssBundling = seoSettings.EnableCssBundling;
+            model.SeoSettings.TwitterMetaTags = seoSettings.TwitterMetaTags;
+            model.SeoSettings.OpenGraphMetaTags = seoSettings.OpenGraphMetaTags;
+          
+
+            //security settings
+            var securitySettings = _settingService.LoadSetting<SecuritySettings>();
+            var captchaSettings = _settingService.LoadSetting<CaptchaSettings>();
+            model.SecuritySettings.EncryptionKey = securitySettings.EncryptionKey;
+            if (securitySettings.AdminAreaAllowedIpAddresses != null)
+                for (int i = 0; i < securitySettings.AdminAreaAllowedIpAddresses.Count; i++)
+                {
+                    model.SecuritySettings.AdminAreaAllowedIpAddresses += securitySettings.AdminAreaAllowedIpAddresses[i];
+                    if (i != securitySettings.AdminAreaAllowedIpAddresses.Count - 1)
+                        model.SecuritySettings.AdminAreaAllowedIpAddresses += ",";
+                }
+            model.SecuritySettings.ForceSslForAllPages = securitySettings.ForceSslForAllPages;
+            model.SecuritySettings.EnableXsrfProtectionForAdminArea = securitySettings.EnableXsrfProtectionForAdminArea;
+            model.SecuritySettings.EnableXsrfProtectionForPublicStore = securitySettings.EnableXsrfProtectionForPublicStore;
+            model.SecuritySettings.HoneypotEnabled = securitySettings.HoneypotEnabled;
+            model.SecuritySettings.CaptchaEnabled = captchaSettings.Enabled;
+            model.SecuritySettings.CaptchaShowOnLoginPage = captchaSettings.ShowOnLoginPage;
+            model.SecuritySettings.CaptchaShowOnRegistrationPage = captchaSettings.ShowOnRegistrationPage;
+            model.SecuritySettings.CaptchaShowOnContactUsPage = captchaSettings.ShowOnContactUsPage;
+            model.SecuritySettings.CaptchaShowOnEmailWishlistToFriendPage = captchaSettings.ShowOnEmailWishlistToFriendPage;
+            model.SecuritySettings.CaptchaShowOnEmailProductToFriendPage = captchaSettings.ShowOnEmailProductToFriendPage;
+            model.SecuritySettings.CaptchaShowOnBlogCommentPage = captchaSettings.ShowOnBlogCommentPage;
+            model.SecuritySettings.CaptchaShowOnNewsCommentPage = captchaSettings.ShowOnNewsCommentPage;
+            model.SecuritySettings.CaptchaShowOnProductReviewPage = captchaSettings.ShowOnProductReviewPage;
+            model.SecuritySettings.CaptchaShowOnApplyVendorPage = captchaSettings.ShowOnApplyVendorPage;
+            model.SecuritySettings.ReCaptchaPublicKey = captchaSettings.ReCaptchaPublicKey;
+            model.SecuritySettings.ReCaptchaPrivateKey = captchaSettings.ReCaptchaPrivateKey;
+
+       
+
+            //localization
+            var localizationSettings = _settingService.LoadSetting<LocalizationSettings>();
+            model.LocalizationSettings.UseImagesForLanguageSelection = localizationSettings.UseImagesForLanguageSelection;
+            model.LocalizationSettings.SeoFriendlyUrlsForLanguagesEnabled = localizationSettings.SeoFriendlyUrlsForLanguagesEnabled;
+            model.LocalizationSettings.AutomaticallyDetectLanguage = localizationSettings.AutomaticallyDetectLanguage;
+            model.LocalizationSettings.LoadAllLocaleRecordsOnStartup = localizationSettings.LoadAllLocaleRecordsOnStartup;
+            model.LocalizationSettings.LoadAllLocalizedPropertiesOnStartup = localizationSettings.LoadAllLocalizedPropertiesOnStartup;
+            model.LocalizationSettings.LoadAllUrlRecordsOnStartup = localizationSettings.LoadAllUrlRecordsOnStartup;
+
+            //full-text support
+            model.FullTextSettings.Supported = _fulltextService.IsFullTextSupported();
+            model.FullTextSettings.Enabled = commonSettings.UseFullTextSearch;
+            model.FullTextSettings.SearchMode = (int)commonSettings.FullTextMode;
+            model.FullTextSettings.SearchModeValues = commonSettings.FullTextMode.ToSelectList();
+
+
+            return View(model);
+        }
+        [HttpPost]
+        [FormValueRequired("save")]
+        public ActionResult GeneralCommon(GeneralCommonSettingsModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
+                return AccessDeniedView();
+
+
+       
+
+            //store information settings
+            var storeInformationSettings = _settingService.LoadSetting<StoreInformationSettings>();
+            var commonSettings = _settingService.LoadSetting<CommonSettings>();
+            storeInformationSettings.StoreClosed = model.StoreInformationSettings.StoreClosed;
+            storeInformationSettings.DefaultStoreTheme = model.StoreInformationSettings.DefaultStoreTheme;
+            storeInformationSettings.AllowCustomerToSelectTheme = model.StoreInformationSettings.AllowCustomerToSelectTheme;
+            //EU Cookie law
+            storeInformationSettings.DisplayEuCookieLawWarning = model.StoreInformationSettings.DisplayEuCookieLawWarning;
+            //social pages
+            storeInformationSettings.FacebookLink = model.StoreInformationSettings.FacebookLink;
+            storeInformationSettings.TwitterLink = model.StoreInformationSettings.TwitterLink;
+            storeInformationSettings.YoutubeLink = model.StoreInformationSettings.YoutubeLink;
+            storeInformationSettings.GooglePlusLink = model.StoreInformationSettings.GooglePlusLink;
+            //contact us
+            commonSettings.SubjectFieldOnContactUsForm = model.StoreInformationSettings.SubjectFieldOnContactUsForm;
+            commonSettings.UseSystemEmailForContactUsForm = model.StoreInformationSettings.UseSystemEmailForContactUsForm;
+
+
+            _settingService.SaveSetting(storeInformationSettings, x => x.StoreClosed, false);
+            _settingService.SaveSetting(storeInformationSettings, x => x.DefaultStoreTheme, false);
+            _settingService.SaveSetting(storeInformationSettings, x => x.AllowCustomerToSelectTheme, false);
+            _settingService.SaveSetting(storeInformationSettings, x => x.DisplayEuCookieLawWarning, false);
+            _settingService.SaveSetting(storeInformationSettings, x => x.FacebookLink, false);
+            _settingService.SaveSetting(storeInformationSettings, x => x.TwitterLink, false);
+            _settingService.SaveSetting(storeInformationSettings, x => x.YoutubeLink, false);
+            _settingService.SaveSetting(storeInformationSettings, x => x.GooglePlusLink, false);
+            _settingService.SaveSetting(commonSettings, x => x.SubjectFieldOnContactUsForm, false);
+            _settingService.SaveSetting(commonSettings, x => x.UseSystemEmailForContactUsForm, false);
+
+
+
+            //seo settings
+            var seoSettings = _settingService.LoadSetting<SeoSettings>();
+            seoSettings.PageTitleSeparator = model.SeoSettings.PageTitleSeparator;
+            seoSettings.PageTitleSeoAdjustment = (PageTitleSeoAdjustment)model.SeoSettings.PageTitleSeoAdjustment;
+            seoSettings.DefaultTitle = model.SeoSettings.DefaultTitle;
+            seoSettings.DefaultMetaKeywords = model.SeoSettings.DefaultMetaKeywords;
+            seoSettings.DefaultMetaDescription = model.SeoSettings.DefaultMetaDescription;
+            seoSettings.GenerateProductMetaDescription = model.SeoSettings.GenerateProductMetaDescription;
+            seoSettings.ConvertNonWesternChars = model.SeoSettings.ConvertNonWesternChars;
+            seoSettings.CanonicalUrlsEnabled = model.SeoSettings.CanonicalUrlsEnabled;
+            seoSettings.WwwRequirement = (WwwRequirement)model.SeoSettings.WwwRequirement;
+            seoSettings.EnableJsBundling = model.SeoSettings.EnableJsBundling;
+            seoSettings.EnableCssBundling = model.SeoSettings.EnableCssBundling;
+            seoSettings.TwitterMetaTags = model.SeoSettings.TwitterMetaTags;
+            seoSettings.OpenGraphMetaTags = model.SeoSettings.OpenGraphMetaTags;
+
+            _settingService.SaveSetting(seoSettings, x => x.PageTitleSeparator, false);
+            _settingService.SaveSetting(seoSettings, x => x.PageTitleSeoAdjustment, false);
+            _settingService.SaveSetting(seoSettings, x => x.DefaultTitle, false);
+            _settingService.SaveSetting(seoSettings, x => x.DefaultMetaKeywords, false);
+            _settingService.SaveSetting(seoSettings, x => x.DefaultMetaDescription, false);
+            _settingService.SaveSetting(seoSettings, x => x.GenerateProductMetaDescription, false);
+            _settingService.SaveSetting(seoSettings, x => x.ConvertNonWesternChars, false);
+            _settingService.SaveSetting(seoSettings, x => x.CanonicalUrlsEnabled, false);
+            _settingService.SaveSetting(seoSettings, x => x.WwwRequirement, false);
+            _settingService.SaveSetting(seoSettings, x => x.EnableJsBundling, false);
+            _settingService.SaveSetting(seoSettings, x => x.EnableCssBundling, false);
+            _settingService.SaveSetting(seoSettings, x => x.TwitterMetaTags, false);
+            _settingService.SaveSetting(seoSettings, x => x.OpenGraphMetaTags, false);
+
+            //security settings
+            var securitySettings = _settingService.LoadSetting<SecuritySettings>();
+            var captchaSettings = _settingService.LoadSetting<CaptchaSettings>();
+            if (securitySettings.AdminAreaAllowedIpAddresses == null)
+                securitySettings.AdminAreaAllowedIpAddresses = new List<string>();
+            securitySettings.AdminAreaAllowedIpAddresses.Clear();
+            if (!String.IsNullOrEmpty(model.SecuritySettings.AdminAreaAllowedIpAddresses))
+                foreach (string s in model.SecuritySettings.AdminAreaAllowedIpAddresses.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    if (!String.IsNullOrWhiteSpace(s))
+                        securitySettings.AdminAreaAllowedIpAddresses.Add(s.Trim());
+            securitySettings.ForceSslForAllPages = model.SecuritySettings.ForceSslForAllPages;
+            securitySettings.EnableXsrfProtectionForAdminArea = model.SecuritySettings.EnableXsrfProtectionForAdminArea;
+            securitySettings.EnableXsrfProtectionForPublicStore = model.SecuritySettings.EnableXsrfProtectionForPublicStore;
+            securitySettings.HoneypotEnabled = model.SecuritySettings.HoneypotEnabled;
+            _settingService.SaveSetting(securitySettings);
+            captchaSettings.Enabled = model.SecuritySettings.CaptchaEnabled;
+            captchaSettings.ShowOnLoginPage = model.SecuritySettings.CaptchaShowOnLoginPage;
+            captchaSettings.ShowOnRegistrationPage = model.SecuritySettings.CaptchaShowOnRegistrationPage;
+            captchaSettings.ShowOnContactUsPage = model.SecuritySettings.CaptchaShowOnContactUsPage;
+            captchaSettings.ShowOnEmailWishlistToFriendPage = model.SecuritySettings.CaptchaShowOnEmailWishlistToFriendPage;
+            captchaSettings.ShowOnEmailProductToFriendPage = model.SecuritySettings.CaptchaShowOnEmailProductToFriendPage;
+            captchaSettings.ShowOnBlogCommentPage = model.SecuritySettings.CaptchaShowOnBlogCommentPage;
+            captchaSettings.ShowOnNewsCommentPage = model.SecuritySettings.CaptchaShowOnNewsCommentPage;
+            captchaSettings.ShowOnProductReviewPage = model.SecuritySettings.CaptchaShowOnProductReviewPage;
+            captchaSettings.ShowOnApplyVendorPage = model.SecuritySettings.CaptchaShowOnApplyVendorPage;
+            captchaSettings.ReCaptchaPublicKey = model.SecuritySettings.ReCaptchaPublicKey;
+            captchaSettings.ReCaptchaPrivateKey = model.SecuritySettings.ReCaptchaPrivateKey;
+            _settingService.SaveSetting(captchaSettings);
+            if (captchaSettings.Enabled &&
+                (String.IsNullOrWhiteSpace(captchaSettings.ReCaptchaPublicKey) || String.IsNullOrWhiteSpace(captchaSettings.ReCaptchaPrivateKey)))
+            {
+                //captcha is enabled but the keys are not entered
+                ErrorNotification("Captcha is enabled but the appropriate keys are not entered");
+            }
+
+        
+
+            //localization settings
+            var localizationSettings = _settingService.LoadSetting<LocalizationSettings>();
+            localizationSettings.UseImagesForLanguageSelection = model.LocalizationSettings.UseImagesForLanguageSelection;
+            if (localizationSettings.SeoFriendlyUrlsForLanguagesEnabled != model.LocalizationSettings.SeoFriendlyUrlsForLanguagesEnabled)
+            {
+                localizationSettings.SeoFriendlyUrlsForLanguagesEnabled = model.LocalizationSettings.SeoFriendlyUrlsForLanguagesEnabled;
+                //clear cached values of routes
+                System.Web.Routing.RouteTable.Routes.ClearSeoFriendlyUrlsCachedValueForRoutes();
+            }
+            localizationSettings.AutomaticallyDetectLanguage = model.LocalizationSettings.AutomaticallyDetectLanguage;
+            localizationSettings.LoadAllLocaleRecordsOnStartup = model.LocalizationSettings.LoadAllLocaleRecordsOnStartup;
+            localizationSettings.LoadAllLocalizedPropertiesOnStartup = model.LocalizationSettings.LoadAllLocalizedPropertiesOnStartup;
+            localizationSettings.LoadAllUrlRecordsOnStartup = model.LocalizationSettings.LoadAllUrlRecordsOnStartup;
+            _settingService.SaveSetting(localizationSettings);
+
+            //full-text
+            commonSettings.FullTextMode = (FulltextSearchMode)model.FullTextSettings.SearchMode;
+            _settingService.SaveSetting(commonSettings);
+            _settingService.ClearCache();
+            //activity log
+            _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
+
+            SuccessNotification(_localizationService.GetResource("Admin.Configuration.Updated"));
+
+            //selected tab
+            SaveSelectedTabIndex();
+
+            return RedirectToAction("GeneralCommon");
+        }
 
         public ActionResult Catalog()
         {

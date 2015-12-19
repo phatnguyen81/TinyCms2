@@ -1,0 +1,51 @@
+﻿@model LoginModel
+@{
+    Layout = "~/Views/Shared/_OneColumn.cshtml";
+}
+<div class="loginpage" id="loginpage">
+   @using (Html.BeginForm())
+    {
+        var validationSummary = Html.ValidationSummary(true, T("Account.Login.Unsuccessful").Text);<h1>Đăng nhập Vietnam4u</h1>
+        if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+        {
+            <div class="message-error">@validationSummary</div>
+        }
+        <div class="page_inner">
+            <div class="content">
+                @if (Model.UsernamesEnabled)
+                {
+                    <label>
+                        @Html.TextBoxFor(m => m.Username, new {@class = "txtinput username", autofocus = "autofocus", @placeholder = "Tên đăng nhập"})
+                    </label>
+                }
+                else
+                {
+                    <label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "txtinput username", autofocus = "autofocus", @placeholder = "Email" })
+                    </label>
+                }
+                <label>
+                    @Html.PasswordFor(m => m.Password, new { @class = "txtinput password", @placeholder = "Mật khẩu" })
+                </label>
+                @if (Model.DisplayCaptcha)
+                {
+                    <div class="captcha-box">
+                        @Html.Raw(Html.GenerateCaptcha())
+                    </div>
+                }
+                <div class="subact">
+
+                    <label>
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        Ghi nhớ
+                    </label>
+                </div>
+                <p class="actbtn"><a href="#" class="loginbtn">Đăng nhập</a></p>
+                <div class="newact">
+                    <p class="newreg">Chưa có tài khoản?<a href="#" class="regbtn">Đăng ký</a></p>
+                    Đăng nhập bằng <a href="#" class="facelogin icn"></a>
+                </div>
+            </div>
+        </div>
+   }
+</div>

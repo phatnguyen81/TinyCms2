@@ -146,6 +146,13 @@ namespace TinyCms.Web.Controllers
 
             return PartialView();
         }
+
+        [ChildActionOnly]
+        public ActionResult Footer()
+        {
+            return PartialView();
+        }
+
         #endregion
 
     }

@@ -542,6 +542,7 @@ namespace TinyCms.Web.Controllers
             return View(model);
         }
 
+        
         //available even when a store is closed
         [StoreClosed(true)]
         //available even when navigation is not allowed
@@ -1318,5 +1319,31 @@ namespace TinyCms.Web.Controllers
         }
 
         #endregion
+
+        [ChildActionOnly]
+        public ActionResult UserInfoZone()
+        {
+            var model = new UserInfoZoneModel();
+            if (!_workContext.CurrentCustomer.IsRegistered())
+            {
+                model.IsAuthenticated = false;
+                model.AvatarUrl = @Url.Content("~/Content/Images/avatar.png");
+            }
+            else
+            {
+                var customer = _workContext.CurrentCustomer;
+                model.IsAuthenticated = true;
+                model.AvatarUrl = model.AvatarUrl = _pictureService.GetPictureUrl(
+                    customer.GetAttribute<int>(SystemCustomerAttributeNames.AvatarPictureId),
+                    _mediaSettings.AvatarPictureSize,
+                    false);
+                if (!string.IsNullOrWhiteSpace(model.AvatarUrl))
+                {
+                    model.AvatarUrl = @Url.Content("~/Content/Images/avatar.png");
+                }
+            }
+            
+            return View(model);
+        }
     }
 }

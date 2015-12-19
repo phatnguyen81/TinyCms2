@@ -330,3 +330,27 @@ border-width: 1px 0;}
 .newreg {float:right}
 	.regbtn {background: #01a260;color: #fff;font-size:14px;font-weight:bold;width:80px;height:35px;line-height:35px;text-align:center;display:inline-block;vertical-align:middle;border-radius:3px;margin-left:8px}
 	.regbtn:hover {background: #3fbe8a;color: #fff}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}

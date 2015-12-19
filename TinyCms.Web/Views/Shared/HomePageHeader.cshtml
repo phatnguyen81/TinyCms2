@@ -1,0 +1,33 @@
+﻿<div class="header sub mobile">
+    <div class="menu_ctn">
+        <div class="infobar clearfix">
+            <a href="@Url.RouteUrl("homepage")" class="logo"></a>
+            <div class="myinfo subnav">
+            </div>
+            <div class="menuloc selected subnav">
+                <span class="navcate icn"></span>
+                <div class="sub_info">
+                    <span class="toparr icn"></span>
+                    <ul>
+                        <li><a href="#">Tin tức</a></li>
+                        <li><a href="#">Cẩm nang du lịch</a></li>
+                        <li><a href="#">Văn hóa lễ hội</a></li>
+                        <li><a href="#">Ẩm thực vùng miền</a></li>
+                        <li><a href="#">Góc chia sẻ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="header">
+    <div class="inner">
+        <div class="infobar clearfix">
+            <p class="mycontact"><span class="phone_icn icn"></span><strong>0903.754.369</strong> (Mr.Phong)</p>
+            <div class="myinfo selected subnav">
+                @Html.Action("UserInfoZone", "Customer");
+            </div>
+            <div class="menuloc"><span class="navcate icn"></span></div>
+        </div>
+    </div>
+</div>

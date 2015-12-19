@@ -1,0 +1,13 @@
+﻿@model UserInfoZoneModel
+<img src="@Model.AvatarUrl" alt="" class="avt"><span class="botarr icn"></span>
+@if (Model.IsAuthenticated)
+{
+    <div class="sub_info">
+        <span class="toparr icn"></span>
+        <ul>
+            <li><a href="#">Trang cá nhân</a></li>
+            <li><a href="#">Cài đặt</a></li>
+            <li><a href="#">Thoát</a></li>
+        </ul>
+    </div>
+}

@@ -37,7 +37,7 @@ namespace TinyCms.Web
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                new[] { "Nop.Web.Controllers" }
+                new[] { "TinyCms.Web.Controllers" }
             );
         }
 
