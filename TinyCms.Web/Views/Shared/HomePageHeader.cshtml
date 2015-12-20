@@ -3,6 +3,7 @@
         <div class="infobar clearfix">
             <a href="@Url.RouteUrl("homepage")" class="logo"></a>
             <div class="myinfo subnav">
+                @Html.Action("UserInfoZone", "Customer")
             </div>
             <div class="menuloc selected subnav">
                 <span class="navcate icn"></span>
@@ -25,7 +26,7 @@
         <div class="infobar clearfix">
             <p class="mycontact"><span class="phone_icn icn"></span><strong>0903.754.369</strong> (Mr.Phong)</p>
             <div class="myinfo selected subnav">
-                @Html.Action("UserInfoZone", "Customer");
+                @Html.Action("UserInfoZone", "Customer")
             </div>
             <div class="menuloc"><span class="navcate icn"></span></div>
         </div>

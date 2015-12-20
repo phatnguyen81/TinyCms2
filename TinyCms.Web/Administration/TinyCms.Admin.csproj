@@ -208,6 +208,8 @@
     </Compile>
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
+    <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\MappingExtensions.cs" />
@@ -271,6 +273,10 @@
     <Compile Include="Models\Settings\SettingModel.cs" />
     <Compile Include="Models\Settings\StoreScopeConfigurationModel.cs" />
     <Compile Include="Models\Tasks\ScheduleTaskModel.cs" />
+    <Compile Include="Models\Templates\CategoryTemplateModel.cs" />
+    <Compile Include="Models\Templates\TopicTemplateModel.cs" />
+    <Compile Include="Models\Topics\TopicListModel.cs" />
+    <Compile Include="Models\Topics\TopicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\Customers\CustomerAttributeValidator.cs" />
     <Compile Include="Validators\Customers\CustomerAttributeValueValidator.cs" />
@@ -291,6 +297,9 @@
     <Compile Include="Validators\Posts\PostTagValidator.cs" />
     <Compile Include="Validators\Settings\SettingValidator.cs" />
     <Compile Include="Validators\Tasks\ScheduleTaskValidator.cs" />
+    <Compile Include="Validators\Templates\CategoryTemplateValidator.cs" />
+    <Compile Include="Validators\Templates\TopicTemplateValidator.cs" />
+    <Compile Include="Validators\Topics\TopicValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -507,6 +516,14 @@
     <Content Include="Views\Widget\ConfigureWidget.cshtml" />
     <Content Include="Views\Widget\List.cshtml" />
     <Content Include="Views\Widget\WidgetsByZone.cshtml" />
+    <Content Include="Views\Template\CategoryTemplates.cshtml" />
+    <Content Include="Views\Template\ManufacturerTemplates.cshtml" />
+    <Content Include="Views\Template\ProductTemplates.cshtml" />
+    <Content Include="Views\Template\TopicTemplates.cshtml" />
+    <Content Include="Views\Topic\Create.cshtml" />
+    <Content Include="Views\Topic\Edit.cshtml" />
+    <Content Include="Views\Topic\List.cshtml" />
+    <Content Include="Views\Topic\_CreateOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

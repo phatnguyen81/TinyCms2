@@ -1,0 +1,26 @@
+﻿@model RegisterResultModel
+@using TinyCms.Web.Models.Customer;
+@{
+    Layout = "~/Views/Shared/_OneColumn.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Register").Text);
+
+    //continue URL
+    var qs = this.Context.Request.QueryString["returnUrl"];
+    var continueUrl = "";
+    if (!String.IsNullOrEmpty(qs) && Url.IsLocalUrl(qs))
+    {
+        continueUrl = qs;
+    }
+    else
+    {
+        continueUrl = Url.RouteUrl("HomePage");
+    }
+}
+<div class="loginpage reg">
+    <h1>Đăng ký tài khoản</h1>
+    <div class="result">
+        @Model.Result
+    </div>
+</div>

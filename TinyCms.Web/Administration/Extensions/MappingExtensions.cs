@@ -10,12 +10,15 @@ using TinyCms.Admin.Models.Plugins;
 using TinyCms.Admin.Models.Polls;
 using TinyCms.Admin.Models.Posts;
 using TinyCms.Admin.Models.Settings;
+using TinyCms.Admin.Models.Templates;
+using TinyCms.Admin.Models.Topics;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Core.Domain.Localization;
 using TinyCms.Core.Domain.Logging;
 using TinyCms.Core.Domain.Messages;
 using TinyCms.Core.Domain.Polls;
 using TinyCms.Core.Domain.Posts;
+using TinyCms.Core.Domain.Topics;
 using TinyCms.Core.Plugins;
 using TinyCms.Services.Authentication.External;
 using TinyCms.Services.Cms;
@@ -167,6 +170,25 @@ namespace TinyCms.Admin.Extensions
         }
 
         #endregion
+
+        #region Topics
+
+        public static TopicModel ToModel(this Topic entity)
+        {
+            return entity.MapTo<Topic, TopicModel>();
+        }
+
+        public static Topic ToEntity(this TopicModel model)
+        {
+            return model.MapTo<TopicModel, Topic>();
+        }
+
+        public static Topic ToEntity(this TopicModel model, Topic destination)
+        {
+            return model.MapTo(destination);
+        }
+
+        #endregion
        
         #region Log
 
@@ -276,6 +298,10 @@ namespace TinyCms.Admin.Extensions
 
         #region Settings
 
+        public static CustomerUserSettingsModel.CustomerSettingsModel ToModel(this CustomerSettings entity)
+        {
+            return entity.MapTo<CustomerSettings, CustomerUserSettingsModel.CustomerSettingsModel>();
+        }
         public static CustomerSettings ToEntity(this CustomerUserSettingsModel.CustomerSettingsModel model, CustomerSettings destination)
         {
             return model.MapTo(destination);
@@ -300,7 +326,40 @@ namespace TinyCms.Admin.Extensions
         }
 
         #endregion
-     
 
+        #region Templates
+
+        public static CategoryTemplateModel ToModel(this CategoryTemplate entity)
+        {
+            return entity.MapTo<CategoryTemplate, CategoryTemplateModel>();
+        }
+
+        public static CategoryTemplate ToEntity(this CategoryTemplateModel model)
+        {
+            return model.MapTo<CategoryTemplateModel, CategoryTemplate>();
+        }
+
+        public static CategoryTemplate ToEntity(this CategoryTemplateModel model, CategoryTemplate destination)
+        {
+            return model.MapTo(destination);
+        }
+
+
+        public static TopicTemplateModel ToModel(this TopicTemplate entity)
+        {
+            return entity.MapTo<TopicTemplate, TopicTemplateModel>();
+        }
+
+        public static TopicTemplate ToEntity(this TopicTemplateModel model)
+        {
+            return model.MapTo<TopicTemplateModel, TopicTemplate>();
+        }
+
+        public static TopicTemplate ToEntity(this TopicTemplateModel model, TopicTemplate destination)
+        {
+            return model.MapTo(destination);
+        }
+
+        #endregion
     }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TinyCms.Services.Media;
 using TinyCms.Services.Posts;
+using TinyCms.Web.Models.Posts;
 
 namespace TinyCms.Web.Controllers
 {
@@ -49,6 +50,23 @@ namespace TinyCms.Web.Controllers
         public ActionResult TopMenu()
         {
             return PartialView();
+        }
+
+        public void PrepareNewPostModel(NewPostModel model)
+        {
+            model.AvailableCategories = _categoryService.GetAllCategories().Select(q=> new SelectListItem
+            {
+                Text = q.Name,
+                Value = q.Id.ToString()
+            }).ToList();
+        }
+        public ActionResult Write()
+        {
+            var model = new NewPostModel();
+
+            PrepareNewPostModel(model);
+
+            return View(model);
         }
     }
 }

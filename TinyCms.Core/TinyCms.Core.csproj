@@ -167,6 +167,8 @@
     <Compile Include="Domain\Seo\WwwRequirement.cs" />
     <Compile Include="Domain\StoreInformationSettings.cs" />
     <Compile Include="Domain\Tasks\ScheduleTask.cs" />
+    <Compile Include="Domain\Topics\Topic.cs" />
+    <Compile Include="Domain\Topics\TopicTemplate.cs" />
     <Compile Include="Events\EntityDeleted.cs" />
     <Compile Include="Events\EntityInserted.cs" />
     <Compile Include="Events\EntityUpdated.cs" />

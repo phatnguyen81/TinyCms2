@@ -103,6 +103,69 @@ namespace TinyCms.Admin.Controllers
 
 
 
+        public ActionResult CustomerUser()
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
+                return AccessDeniedView();
+
+            var customerSettings = _settingService.LoadSetting<CustomerSettings>();
+            var dateTimeSettings = _settingService.LoadSetting<DateTimeSettings>();
+            var externalAuthenticationSettings = _settingService.LoadSetting<ExternalAuthenticationSettings>();
+
+            //merge settings
+            var model = new CustomerUserSettingsModel();
+            model.CustomerSettings = customerSettings.ToModel();
+
+            model.DateTimeSettings.AllowCustomersToSetTimeZone = dateTimeSettings.AllowCustomersToSetTimeZone;
+            model.DateTimeSettings.DefaultStoreTimeZoneId = _dateTimeHelper.DefaultStoreTimeZone.Id;
+            foreach (TimeZoneInfo timeZone in _dateTimeHelper.GetSystemTimeZones())
+            {
+                model.DateTimeSettings.AvailableTimeZones.Add(new SelectListItem
+                {
+                    Text = timeZone.DisplayName,
+                    Value = timeZone.Id,
+                    Selected = timeZone.Id.Equals(_dateTimeHelper.DefaultStoreTimeZone.Id, StringComparison.InvariantCultureIgnoreCase)
+                });
+            }
+
+            model.ExternalAuthenticationSettings.AutoRegisterEnabled = externalAuthenticationSettings.AutoRegisterEnabled;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CustomerUser(CustomerUserSettingsModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
+                return AccessDeniedView();
+
+
+            var customerSettings = _settingService.LoadSetting<CustomerSettings>();
+            var dateTimeSettings = _settingService.LoadSetting<DateTimeSettings>();
+            var externalAuthenticationSettings = _settingService.LoadSetting<ExternalAuthenticationSettings>();
+
+            customerSettings = model.CustomerSettings.ToEntity(customerSettings);
+            _settingService.SaveSetting(customerSettings);
+
+
+            dateTimeSettings.DefaultStoreTimeZoneId = model.DateTimeSettings.DefaultStoreTimeZoneId;
+            dateTimeSettings.AllowCustomersToSetTimeZone = model.DateTimeSettings.AllowCustomersToSetTimeZone;
+            _settingService.SaveSetting(dateTimeSettings);
+
+            externalAuthenticationSettings.AutoRegisterEnabled = model.ExternalAuthenticationSettings.AutoRegisterEnabled;
+            _settingService.SaveSetting(externalAuthenticationSettings);
+
+            //activity log
+            _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
+
+            SuccessNotification(_localizationService.GetResource("Admin.Configuration.Updated"));
+
+            //selected tab
+            SaveSelectedTabIndex();
+
+            return RedirectToAction("CustomerUser");
+        }
+
+
 
         public ActionResult GeneralCommon()
         {

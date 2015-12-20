@@ -35,6 +35,12 @@ namespace TinyCms.Web.Infrastructure
                             "register/",
                             new { controller = "Customer", action = "Register" },
                             new[] { "TinyCms.Web.Controllers" });
+
+            //logout
+            routes.MapLocalizedRoute("Logout",
+                            "logout/",
+                            new { controller = "Customer", action = "Logout" },
+                            new[] { "TinyCms.Web.Controllers" });
          
             //wishlist
             routes.MapLocalizedRoute("Wishlist",
@@ -109,7 +115,11 @@ namespace TinyCms.Web.Infrastructure
                             new { controller = "News", action = "List" },
                             new[] { "TinyCms.Web.Controllers" });
 
-         
+            //create new post
+            routes.MapLocalizedRoute("CreateNewPost",
+                           "writepost",
+                           new { controller = "Posts", action = "Write" },
+                           new[] { "TinyCms.Web.Controllers" });
 
             //product tags
             routes.MapLocalizedRoute("ProductTagsAll",
@@ -233,6 +243,11 @@ namespace TinyCms.Web.Infrastructure
                             "customer/addressadd",
                             new { controller = "Customer", action = "AddressAdd" },
                             new[] { "TinyCms.Web.Controllers" });
+
+            routes.MapLocalizedRoute("CustomerSummary",
+                           "customer/profile",
+                           new { controller = "Customer", action = "Profile" },
+                           new[] { "TinyCms.Web.Controllers" });
             //customer profile page
             routes.MapLocalizedRoute("CustomerProfile",
                             "profile/{id}",

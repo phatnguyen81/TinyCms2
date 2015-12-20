@@ -4,13 +4,17 @@
 @using TinyCms.Web.Framework.UI
 @{
 
-    
+    Html.AppendCssFileParts("~/Content/jquery-ui-themes/smoothness/jquery-ui-1.10.3.custom.min.css");
     Html.AppendCssFileParts("~/Content/css/style.css");
     Html.AppendCssFileParts("~/Content/css/responsive.css");
     Html.AppendCssFileParts("~/Content/css/popup.css");
+    Html.AddCssFileParts("~/Content/tagit/jquery.tagit.css");
 
+
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Scripts/jquery-ui-1.10.3.custom.min.js");
     Html.AddScriptParts(ResourceLocation.Foot, "~/Scripts/jscript.js");
     Html.AddScriptParts(ResourceLocation.Foot, "~/Scripts/webvina.js");
     Html.AddScriptParts(ResourceLocation.Foot, "~/Scripts/boxy.js");
     Html.AddScriptParts(ResourceLocation.Foot, "~/Scripts/scrollbar/jquery.slimscroll.js");
+    Html.AddScriptParts(ResourceLocation.Foot, "~/Scripts/tag-it.min.js");
 }

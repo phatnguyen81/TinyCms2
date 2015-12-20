@@ -92,5 +92,8 @@ namespace TinyCms.Core.Domain.Posts
         /// </summary>
         public DateTime UpdatedOnUtc { get; set; }
 
+
+        public int CategoryTypeId { get; set; }
+
     }
 }

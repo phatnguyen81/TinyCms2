@@ -9,12 +9,15 @@ using TinyCms.Admin.Models.Messages;
 using TinyCms.Admin.Models.Plugins;
 using TinyCms.Admin.Models.Posts;
 using TinyCms.Admin.Models.Settings;
+using TinyCms.Admin.Models.Templates;
+using TinyCms.Admin.Models.Topics;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Core.Domain.Localization;
 using TinyCms.Core.Domain.Logging;
 using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Messages;
 using TinyCms.Core.Domain.Posts;
+using TinyCms.Core.Domain.Topics;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Core.Plugins;
 using TinyCms.Services.Authentication.External;
@@ -69,6 +72,17 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.AttachmentFilePath, mo => mo.Ignore())
                 .ForMember(dest => dest.AttachmentFileName, mo => mo.Ignore())
                 .ForMember(dest => dest.AttachedDownloadId, mo => mo.Ignore());
+
+            //topcis
+            Mapper.CreateMap<Topic, TopicModel>()
+                .ForMember(dest => dest.AvailableTopicTemplates, mo => mo.Ignore())
+                .ForMember(dest => dest.Url, mo => mo.Ignore())
+                .ForMember(dest => dest.SeName, mo => mo.MapFrom(src => src.GetSeName(0, true, false)))
+                .ForMember(dest => dest.Locales, mo => mo.Ignore())
+                .ForMember(dest => dest.AvailableCustomerRoles, mo => mo.Ignore())
+                .ForMember(dest => dest.SelectedCustomerRoleIds, mo => mo.Ignore())
+                .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
+            Mapper.CreateMap<TopicModel, Topic>();
 
             //category
             Mapper.CreateMap<Category, CategoryModel>()
@@ -296,6 +310,10 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.OnlineCustomerMinutes, mo => mo.Ignore())
                 .ForMember(dest => dest.SuffixDeletedCustomers, mo => mo.Ignore());
 
+            //topic template
+            Mapper.CreateMap<TopicTemplate, TopicTemplateModel>()
+                .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
+            Mapper.CreateMap<TopicTemplateModel, TopicTemplate>();
         }
         
         public int Order

@@ -154,7 +154,7 @@ namespace TinyCms.Services.Posts
         /// <param name="pageSize">Page size</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>Categories</returns>
-        public virtual IPagedList<Category> GetAllCategories(string categoryName = "", 
+        public virtual IPagedList<Category> GetAllCategories(string categoryName = "", int[] categoryTypes = null, 
             int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false)
         {
             var query = _categoryRepository.Table;
@@ -162,6 +162,9 @@ namespace TinyCms.Services.Posts
                 query = query.Where(c => c.Published);
             if (!String.IsNullOrWhiteSpace(categoryName))
                 query = query.Where(c => c.Name.Contains(categoryName));
+            if (categoryTypes != null)
+                query = query.Where(q => categoryTypes.Contains(q.CategoryTypeId));
+
             query = query.Where(c => !c.Deleted);
             query = query.OrderBy(c => c.ParentCategoryId).ThenBy(c => c.DisplayOrder);
             

@@ -245,7 +245,7 @@ namespace TinyCms.Admin.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCategories))
                 return AccessDeniedView();
 
-            var categories = _categoryService.GetAllCategories(model.SearchCategoryName, 
+            var categories = _categoryService.GetAllCategories(model.SearchCategoryName, null,
                 command.Page - 1, command.PageSize, true);
             var gridModel = new DataSourceResult
             {

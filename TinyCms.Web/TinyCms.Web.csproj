@@ -201,6 +201,7 @@
     <Compile Include="Models\Customer\CustomerDownloadableProductsModel.cs" />
     <Compile Include="Models\Customer\CustomerInfoModel.cs" />
     <Compile Include="Models\Customer\CustomerNavigationModel.cs" />
+    <Compile Include="Models\Customer\CustomerProfileModel.cs" />
     <Compile Include="Models\Customer\ExternalAuthenticationMethodModel.cs" />
     <Compile Include="Models\Customer\LoginModel.cs" />
     <Compile Include="Models\Customer\PasswordRecoveryConfirmModel.cs" />
@@ -208,6 +209,8 @@
     <Compile Include="Models\Customer\RegisterModel.cs" />
     <Compile Include="Models\Customer\RegisterResultModel.cs" />
     <Compile Include="Models\Customer\UserInfoZone.cs" />
+    <Compile Include="Models\Posts\NewPostModel.cs" />
+    <Compile Include="Models\Topics\TopicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\Customer\ChangePasswordValidator.cs" />
     <Compile Include="Validators\Customer\CustomerInfoValidator.cs" />
@@ -1871,6 +1874,14 @@
     <Content Include="Views\Widget\WidgetsByZone.cshtml" />
     <Content Include="Views\Customer\Avatar.cshtml" />
     <Content Include="Views\Customer\UserInfoZone.cshtml" />
+    <Content Include="Views\Customer\Register.cshtml" />
+    <Content Include="Views\Customer\RegisterResult.cshtml" />
+    <Content Include="Views\Customer\Info.cshtml" />
+    <Content Include="Views\Customer\Profile.cshtml" />
+    <Content Include="Views\Posts\Write.cshtml" />
+    <Content Include="Views\Topic\TopicBlock.cshtml" />
+    <Content Include="Views\Topic\TopicDetails.cshtml" />
+    <Content Include="Views\Shared\_RootPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />

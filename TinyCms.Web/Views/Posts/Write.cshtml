@@ -1,0 +1,43 @@
+﻿@model NewPostModel
+@{
+    Layout = "~/Views/Shared/_OneColumn.cshtml";
+    ViewBag.Title = "Create";
+
+}
+
+<p class="txthead">Viết bài</p>
+<div class="writeblog_box">
+    <div class="inner_writeblog">
+        <label>
+            <b>Tiêu đề</b>
+            @Html.TextBoxFor(model => model.Title, new { @class = "textinput" })
+        </label>
+        <label>
+            <b>Nội dung</b>
+            @Html.TextAreaFor(model => model.Body, new { @class = "contentblog", rows = "30"  })
+        </label>
+        <label>
+            <b>Chọn chủ đề</b>
+            @Html.DropDownListFor(model => model.CategoryId,Model.AvailableCategories,"[-- Chọn --]")
+        </label>
+        <label>
+            <b>Nhập từ khóa</b>
+            @Html.TextBoxFor(model => model.PostTags, new { @class = "textinput", placeholder = "Các từ khóa cách nhau dấu ," })
+        </label>
+        <p class="writeblogact"><a href="#" class="btn01">Đăng bài</a><a href="#" class="btn01">Xem trước</a><a href="#" class="btn01 cancel">Hủy bỏ</a></p>
+        <div class="clr"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //product tags
+    $(document).ready(function () {
+        var sampleTags = ['e-commerce', 'nopCommerce', 'sample tag', 'money', 'blog', 'moey']
+        $("#PostTags").tagit({
+            availableTags: sampleTags,
+            allowSpaces: true,
+            tagLimit: 5
+        });
+    });
+</script>

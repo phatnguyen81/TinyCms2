@@ -100,6 +100,8 @@
     <Compile Include="Mapping\Posts\PostTagMap.cs" />
     <Compile Include="Mapping\Posts\PostTemplateMap.cs" />
     <Compile Include="Mapping\Tasks\ScheduleTaskMap.cs" />
+    <Compile Include="Mapping\Topics\TopicMap.cs" />
+    <Compile Include="Mapping\Topics\TopicTemplateMap.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NopEntityTypeConfiguration.cs" />
     <Compile Include="NopObjectContext.cs" />

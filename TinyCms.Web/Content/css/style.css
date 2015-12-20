@@ -354,3 +354,7 @@ border-width: 1px 0;}
 .validation-summary-valid {
     display: none;
 }
+
+.regbtn {
+    border: 0px;
+}

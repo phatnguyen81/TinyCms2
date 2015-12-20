@@ -228,6 +228,10 @@
     <Compile Include="Tasks\Task.cs" />
     <Compile Include="Tasks\TaskManager.cs" />
     <Compile Include="Tasks\TaskThread.cs" />
+    <Compile Include="Topics\ITopicService.cs" />
+    <Compile Include="Topics\ITopicTemplateService.cs" />
+    <Compile Include="Topics\TopicService.cs" />
+    <Compile Include="Topics\TopicTemplateService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TinyCms.Core\TinyCms.Core.csproj">

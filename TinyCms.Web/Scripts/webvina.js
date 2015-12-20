@@ -201,11 +201,11 @@ function readCookie(name) {
             sendLogin();
         });
 
-        node.find('.regbtn').click(function (e) {
-            e.preventDefault();
-            bx && bx.close();
-            signup();
-        });
+        //node.find('.regbtn').click(function (e) {
+        //    e.preventDefault();
+        //    bx && bx.close();
+        //    signup();
+        //});
 
         node.find('.facelogin').click(function (e) {
             e.preventDefault();

@@ -1,0 +1,88 @@
+﻿@model RegisterModel
+
+@{
+    Layout = "~/Views/Shared/_OneColumn.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Register").Text);
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="loginpage reg">
+        <h1>Đăng ký Vietnam4u</h1>
+        <div class="page_inner">
+            <div class="content">
+                @if (Model.UsernamesEnabled)
+                {
+                    <label>
+
+                        @Html.TextBoxFor(model => model.Username, new { @class = "txtinput", placeholder = "Tên tài khoản" })
+                        @Html.ValidationMessageFor(model => model.Username)
+                        @*@if (Model.CheckUsernameAvailabilityEnabled)
+                            {
+                                @Html.Partial("_CheckUsernameAvailability")
+                            }*@
+                    </label>
+
+                }
+
+                <label>
+                    @Html.TextBoxFor(model => model.Email, new { @class = "txtinput", placeholder = "Email" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                    <span class="trueicn icn"></span><span class="falseicn icn"></span>
+                </label>
+                <label>
+                    @Html.PasswordFor(model => model.Password, new { @class = "txtinput", placeholder = "Mật khẩu" })
+                    @Html.ValidationMessageFor(model => model.Password)
+                </label>
+                <label>
+                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "txtinput", placeholder = "Xác nhận mật khẩu" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                </label>
+                <label>
+                    @if (Model.DisplayCaptcha)
+                    {
+                        @Html.Raw(Html.GenerateCaptcha())
+                    }
+                </label>
+                @if (Model.AcceptPrivacyPolicyEnabled)
+                {
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#register-button').click(function () {
+                                if ($('#accept-privacy-policy').is(':checked')) {
+                                    //do some stuff
+                                    return true;
+                                }
+                                else {
+                                    //just show validation errors, dont post
+                                    alert('@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Account.Fields.AcceptPrivacyPolicy.Required").Text))');
+                                    return false;
+                                }
+                            });
+                        });
+                    </script>
+                    <div class="subact">
+                        <label>
+                            <input id="accept-privacy-policy" type="checkbox" name="accept-privacy-policy" />
+                            <label for="accept-privacy-policy">@T("Account.Fields.AcceptPrivacyPolicy")</label>
+                            <span class="read" onclick="javascript:OpenWindow('@Url.RouteUrl("TopicPopup", new { SystemName = "privacyinfo" })', 450, 500, true)">@T("Account.Fields.AcceptPrivacyPolicy.Read")</span>
+                        </label>
+                    </div>
+                }
+                <p class="actbtn"><button class="regbtn">Đăng ký</button></p>
+                <p class="errtxt">
+                    @{
+    var validationSummary = Html.ValidationSummary(true);
+                    }
+                    @if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+                    {
+                        <div class="message-error">@validationSummary</div>
+                    }
+                </p>
+            </div>
+        </div>
+    </div>
+}

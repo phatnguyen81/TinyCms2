@@ -36,6 +36,7 @@ using TinyCms.Services.Posts;
 using TinyCms.Services.Security;
 using TinyCms.Services.Seo;
 using TinyCms.Services.Tasks;
+using TinyCms.Services.Topics;
 using TinyCms.Web.Framework.Mvc.Routes;
 using TinyCms.Web.Framework.Themes;
 using TinyCms.Web.Framework.UI;
@@ -144,6 +145,8 @@ namespace TinyCms.Web.Framework
             builder.RegisterType<CategoryTemplateService>().As<ICategoryTemplateService>().InstancePerLifetimeScope();
             builder.RegisterType<PostTemplateService>().As<IPostTemplateService>().InstancePerLifetimeScope();
             builder.RegisterType<CategoryTypeService>().As<ICategoryTypeService>().InstancePerLifetimeScope();
+            builder.RegisterType<TopicService>().As<ITopicService>().InstancePerLifetimeScope();
+            builder.RegisterType<TopicTemplateService>().As<ITopicTemplateService>().InstancePerLifetimeScope();
             
             //use static cache (between HTTP requests)
             builder.RegisterType<SearchTermService>().As<ISearchTermService>().InstancePerLifetimeScope();

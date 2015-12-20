@@ -11,12 +11,10 @@ namespace TinyCms.Admin.Models.Settings
         public CustomerUserSettingsModel()
         {
             CustomerSettings = new CustomerSettingsModel();
-            AddressSettings = new AddressSettingsModel();
             DateTimeSettings = new DateTimeSettingsModel();
             ExternalAuthenticationSettings = new ExternalAuthenticationSettingsModel();
         }
         public CustomerSettingsModel CustomerSettings { get; set; }
-        public AddressSettingsModel AddressSettings { get; set; }
         public DateTimeSettingsModel DateTimeSettings { get; set; }
         public ExternalAuthenticationSettingsModel ExternalAuthenticationSettings { get; set; }
 
@@ -148,50 +146,6 @@ namespace TinyCms.Admin.Models.Settings
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AcceptPrivacyPolicyEnabled")]
             public bool AcceptPrivacyPolicyEnabled { get; set; }
-        }
-
-        public partial class AddressSettingsModel : BaseNopModel
-        {
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.CompanyEnabled")]
-            public bool CompanyEnabled { get; set; }
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.CompanyRequired")]
-            public bool CompanyRequired { get; set; }
-
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.StreetAddressEnabled")]
-            public bool StreetAddressEnabled { get; set; }
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.StreetAddressRequired")]
-            public bool StreetAddressRequired { get; set; }
-
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.StreetAddress2Enabled")]
-            public bool StreetAddress2Enabled { get; set; }
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.StreetAddress2Required")]
-            public bool StreetAddress2Required { get; set; }
-
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.ZipPostalCodeEnabled")]
-            public bool ZipPostalCodeEnabled { get; set; }
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.ZipPostalCodeRequired")]
-            public bool ZipPostalCodeRequired { get; set; }
-
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.CityEnabled")]
-            public bool CityEnabled { get; set; }
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.CityRequired")]
-            public bool CityRequired { get; set; }
-
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.CountryEnabled")]
-            public bool CountryEnabled { get; set; }
-
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.StateProvinceEnabled")]
-            public bool StateProvinceEnabled { get; set; }
-
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.PhoneEnabled")]
-            public bool PhoneEnabled { get; set; }
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.PhoneRequired")]
-            public bool PhoneRequired { get; set; }
-
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.FaxEnabled")]
-            public bool FaxEnabled { get; set; }
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.FaxRequired")]
-            public bool FaxRequired { get; set; }
         }
 
         public partial class DateTimeSettingsModel : BaseNopModel
