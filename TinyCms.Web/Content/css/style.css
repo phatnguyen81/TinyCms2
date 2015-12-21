@@ -359,3 +359,36 @@ border-width: 1px 0;}
     border: 0px;
 }
 
+.removefile {
+    font-size: 18px;
+}
+
+.AttachmentInsertAllBlock{margin-top:0;margin-right:30px}.AttachmentEditor .AttachedFile,
+.AttachmentEditor
+.AttachmentInsertAllBlock{overflow:hidden;zoom:1;vertical-align:middle;padding:5px
+10px}.AttachmentEditor
+.AttachedFile#AttachedFileTemplate{display:none}.AttachmentEditor .AttachedFile
+.Thumbnail{width:54px;height:54px;line-height:50px;display:block;background:#FFF;border:1px
+solid #d7edfc;text-align:center;vertical-align:middle;float:left}.AttachmentEditor .AttachedFile .Thumbnail
+img{max-width:50px;max-height:50px;_width:50px;_height:50px;padding:0;margin:0;vertical-align:middle}.AttachmentEditor .AttachedFile .Thumbnail
+.genericAttachment{background:transparent url('https://nhattao.com/styles/uiflex/xenforo/node-sprite.png') no-repeat -72px 0;display:block;width:36px;height:36px;margin:7px}.AttachmentEditor
+.AttachmentText{margin-left:64px}.AttachmentEditor .AttachedFile
+.Filename{}.AttachmentEditor .secondaryContent
+.label{margin-bottom:2px;font-size:11px;color:rgb(150,150,150)}.AttachmentEditor .secondaryContent
+.controls{line-height:25px}.AttachmentEditor .AttachedFile
+.controls{zoom:1}.AttachmentEditor .AttachedFile .controls:after{content:'.';display:block;height:0;clear:both;visibility:hidden}.AttachmentEditor .AttachedFile
+.ProgressMeter{display:block;padding:2px;border:1px
+solid #a5cae4;-webkit-border-radius:4px;-moz-border-radius:4px;-khtml-border-radius:4px;border-radius:4px;background-color:#FFF;margin-right:75px;margin-top:4px;font-size:14pt;line-height:26px}.AttachmentEditor .AttachedFile .ProgressMeter
+.ProgressGraphic{display:inline-block;width:0%;height:26px;background:#6cb2e4 url('https://nhattao.com/styles/uiflex/xenforo/gradients/category-23px-light.png') repeat-x top;text-align:right} .AttachmentEditor .AttachedFile .ProgressMeter
+.ProgressCounter{display:inline-block;height:26px;padding:0
+10px}.AttachmentEditor .AttachedFile .ProgressMeter .ProgressGraphic
+.ProgressCounter{color:#f0f7fc}.AttachmentEditor .AttachedFile .AttachmentDeleter,
+.AttachmentEditor .AttachedFile
+.AttachmentCanceller{float:right;display:none}.AttachmentEditor
+.AttachmentInsertAllBlock{display:none}.AttachmentEditor .AttachmentInsertAllBlock
+span{float:left;display:block;width:54px;height:34px;background:#FFF url('https://nhattao.com/styles/uiflex/xenforo/widgets/image-attachments.png') no-repeat center;border:1px
+solid #d7edfc;margin-right:10px}.AttachmentEditor
+.AttachmentDeleteAll{float:right}.swfupload{position:absolute;z-index:1}.xenOverlay.attachmentUploader{max-width:500px}.attachmentUploader
+#ctrl_upload{margin:2px
+auto 5px}.attachmentUploader .attachmentConstraints
+dl{margin-top:2px;font-size:11px}

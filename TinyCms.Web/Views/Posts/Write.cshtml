@@ -30,13 +30,66 @@
             <label class="clearfix">
                 <p class="writeblogact" id="container">
                     <a href="#" id="browse" class="btn01">Chọn hình</a>
-                    <a href="#" id="uploadfiles" class="btn01">Upload</a>
                 </p>
             </label>
+          
             <label>
-                <ul id="filelist"></ul> 
-            </label>
+                <div class="AttachmentEditor">
+                    <ol class="AttachmentList New">
+                        <li id="AttachedFileTemplate" class="AttachedFile  secondaryContent">
+                            <div class="Thumbnail">
+                                <span class="genericAttachment"></span>
+                            </div>
+                            <div class="AttachmentText">
+                                <div class="Filename"><a href="#" target="_blank"></a></div>
+                                <input type="button" value="Hủy" class="button smallButton AttachmentCanceller">
+                                <span class="ProgressMeter"><span class="ProgressGraphic"><span class="ProgressCounter">0%</span></span></span>
+                                <div class="label JsOnly" styles="display:none">Chèn:</div>
+                                <div class="controls JsOnly" styles="display:none">
+                                    <input type="button" value="Xóa" class="button smallButton AttachmentDeleter" data-href="attachments/slide-3-1270x415-jpg.4297279/delete?temp_hash=3b6bb413b9d795b366d6e0701c8c2981" style="display: block;">
+                                    <input type="button" name="thumb" value="Thumbnail" class="button smallButton AttachmentInserter">
+                                    <input type="button" name="image" value="Kích thước đầy đủ" class="button smallButton AttachmentInserter">
+                                </div>
+                            </div>
+                        </li>
 
+                        @*<li id="attachment4297279" class="AttachedFile  secondaryContent AttachedImage" style="opacity: 1;">
+
+                            <div class="Thumbnail">
+
+                                <a href="https://nhattao.cdnforo.com/users/2015/12/4310026_5f5957bdf18d82b1e59d87c250d7fada.jpg" target="_blank" data-attachmentid="4297279" class="_not_LbTrigger" data-href="misc/lightbox"><img src="https://nhattao.cdnforo.com/users/2015/12/4310026_5f5957bdf18d82b1e59d87c250d7fada_thumb.jpg" alt="slide-3-1270x415.jpg" class="_not_LbImage" data-src="attachments/slide-3-1270x415-jpg.4297279/?embedded=1&amp;temp_hash=3b6bb413b9d795b366d6e0701c8c2981"></a>
+
+                            </div>
+
+                            <div class="AttachmentText" style="">
+                                <div class="Filename"><a href="https://nhattao.cdnforo.com/users/2015/12/4310026_5f5957bdf18d82b1e59d87c250d7fada.jpg" target="_blank">slide-3-1270x415.jpg</a></div>
+
+
+
+
+
+                                <div class="label JsOnly">Chèn:</div>
+
+
+                                <div class="controls JsOnly">
+                                    <input type="button" value="Xóa" class="button smallButton AttachmentDeleter" data-href="attachments/slide-3-1270x415-jpg.4297279/delete?temp_hash=3b6bb413b9d795b366d6e0701c8c2981" style="display: block;">
+
+
+                                    <input type="button" name="thumb" value="Thumbnail" class="button smallButton AttachmentInserter">
+                                    <input type="button" name="image" value="Kích thước đầy đủ" class="button smallButton AttachmentInserter">
+
+                                </div>
+
+
+                            </div>
+
+                        </li>*@
+                     </ol>
+
+
+
+                </div>
+            </label>
             <p class="writeblogact"><a href="#" class="btn01">Đăng bài</a><a href="#" class="btn01">Xem trước</a><a href="#" class="btn01 cancel">Hủy bỏ</a></p>
             <div class="clr"></div>
         </div>
@@ -56,7 +109,6 @@
 
 
     });
-
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'browse', // you can pass an id...
@@ -77,28 +129,42 @@
             PostInit: function () {
                 document.getElementById('filelist').innerHTML = '';
 
-                document.getElementById('uploadfiles').onclick = function () {
-                    uploader.start();
-                    return false;
-                };
+               
             },
 
             FilesAdded: function (up, files) {
                 plupload.each(files, function (file) {
-                    document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b><a href="#">Delete</a></div>';
+                    var elm = $("#AttachedFileTemplate").clone();
+                    $(elm).attr("id", file.id).addClass("AttachedImage");
+                    $(elm).find(".AttachmentText .Filename a").text(file.name);
+                    $(elm).appendTo(".AttachmentList");
+
+
+                    uploader.start();
                 });
             },
 
             UploadProgress: function (up, file) {
-                document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+                if (file.percent < 100) {
+                    var elm = $("#" + file.id);
+                    $(elm).find(".ProgressGraphic").width(file.percent + "%");
+                    $(elm).find(".ProgressCounter").text(file.percent + "%");
+                }
+                    
             },
 
             Error: function (up, err) {
                 document.getElementById('console').appendChild(document.createTextNode("\nError #" + err.code + ": " + err.message));
             },
 
-            FileUploaded: function(up, file) {
-                
+            FileUploaded: function (up, file, response) {
+                var resObj = $.parseJSON(response.response);
+                var elm = $("#" + file.id);
+                $(elm).find(".ProgressMeter").hide();
+                $(elm).find(".controls").show();
+                $(elm).find(".label").show();
+                $(elm).find(".Thumbnail").html($("<a target='_blank'></a>").attr("href", resObj.imageUrl).append($("<img/>").attr("src", resObj.imageUrl)));
+                $(elm).find(".AttachmentText .Filename a").attr("href", resObj.imageUrl);   
             }
         }
     });

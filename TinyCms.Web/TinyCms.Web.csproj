@@ -179,6 +179,7 @@
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
@@ -303,6 +304,8 @@
     <Content Include="Content\farbtastic\wheel.png" />
     <Content Include="Content\files\ExportImport\Index.htm" />
     <Content Include="Content\files\Index.htm" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\avatar.png" />
     <Content Include="Content\Images\default-avatar.jpg" />
     <Content Include="Content\Images\default-image.gif" />
@@ -1211,6 +1214,7 @@
     <Content Include="Content\tinymce\themes\modern\theme.min.js" />
     <Content Include="Content\tinymce\tinymce.min.js" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="App_Data\GeoLite2-Country.mmdb" />
@@ -1259,6 +1263,11 @@
     <Content Include="Scripts\fineuploader\templates\simple-thumbnails.html" />
     <Content Include="Content\Images\logo_sprt.psd" />
     <Content Include="Content\Images\sprt.psd" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1974,6 +1983,7 @@
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />
     <Folder Include="Themes\DefaultClean\Views\Shared\" />
+    <Folder Include="Views\Picture\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
