@@ -2,42 +2,106 @@
 @{
     Layout = "~/Views/Shared/_OneColumn.cshtml";
     ViewBag.Title = "Create";
-
+    Html.AddScriptParts("~/Scripts/plupload/plupload.full.min.js");
+    Html.AddScriptParts("~/Scripts/plupload/plupload.min.js");
 }
 
 <p class="txthead">Viết bài</p>
-<div class="writeblog_box">
-    <div class="inner_writeblog">
-        <label>
-            <b>Tiêu đề</b>
-            @Html.TextBoxFor(model => model.Title, new { @class = "textinput" })
-        </label>
-        <label>
-            <b>Nội dung</b>
-            @Html.TextAreaFor(model => model.Body, new { @class = "contentblog", rows = "30"  })
-        </label>
-        <label>
-            <b>Chọn chủ đề</b>
-            @Html.DropDownListFor(model => model.CategoryId,Model.AvailableCategories,"[-- Chọn --]")
-        </label>
-        <label>
-            <b>Nhập từ khóa</b>
-            @Html.TextBoxFor(model => model.PostTags, new { @class = "textinput", placeholder = "Các từ khóa cách nhau dấu ," })
-        </label>
-        <p class="writeblogact"><a href="#" class="btn01">Đăng bài</a><a href="#" class="btn01">Xem trước</a><a href="#" class="btn01 cancel">Hủy bỏ</a></p>
-        <div class="clr"></div>
+@using (Html.BeginForm())
+{
+    <div class="writeblog_box">
+        <div class="inner_writeblog">
+            <label>
+                <b>Tiêu đề</b>
+                @Html.TextBoxFor(model => model.Title, new {@class = "textinput"})
+            </label>
+            <label>
+                <b>Nội dung</b>
+                @Html.EditorFor(model => model.Body)
+            </label>
+            <label>
+                <b>Chọn chủ đề</b>
+                @Html.DropDownListFor(model => model.CategoryId, Model.AvailableCategories, "[-- Chọn --]")
+            </label>
+            <label>
+                <b>Nhập từ khóa</b>
+                @Html.TextBoxFor(model => model.PostTags, new {@class = "textinput", placeholder = "Các từ khóa cách nhau dấu ,"})
+            </label>
+            <label class="clearfix">
+                <p class="writeblogact" id="container">
+                    <a href="#" id="browse" class="btn01">Chọn hình</a>
+                    <a href="#" id="uploadfiles" class="btn01">Upload</a>
+                </p>
+            </label>
+            <label>
+                <ul id="filelist"></ul> 
+            </label>
+
+            <p class="writeblogact"><a href="#" class="btn01">Đăng bài</a><a href="#" class="btn01">Xem trước</a><a href="#" class="btn01 cancel">Hủy bỏ</a></p>
+            <div class="clr"></div>
+        </div>
     </div>
-</div>
+}
 
 <script type="text/javascript">
 
     //product tags
     $(document).ready(function () {
-        var sampleTags = ['e-commerce', 'nopCommerce', 'sample tag', 'money', 'blog', 'moey']
+        var sampleTags = ['e-commerce', 'nopCommerce', 'sample tag', 'money', 'blog', 'moey'];
         $("#PostTags").tagit({
             availableTags: sampleTags,
             allowSpaces: true,
             tagLimit: 5
         });
-    });
+
+
+    });
+
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'browse', // you can pass an id...
+        container: document.getElementById('container'), // ... or DOM Element itself
+        url: '@(Url.Content("~/Admin/Picture/AsyncUpload"))',
+        flash_swf_url: '../js/Moxie.swf',
+        silverlight_xap_url: '../js/Moxie.xap',
+
+        filters: {
+            max_file_size: '10mb',
+            mime_types: [
+                { title: "Image files", extensions: "jpg,gif,png,jpeg" }
+                
+            ]
+        },
+
+        init: {
+            PostInit: function () {
+                document.getElementById('filelist').innerHTML = '';
+
+                document.getElementById('uploadfiles').onclick = function () {
+                    uploader.start();
+                    return false;
+                };
+            },
+
+            FilesAdded: function (up, files) {
+                plupload.each(files, function (file) {
+                    document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b><a href="#">Delete</a></div>';
+                });
+            },
+
+            UploadProgress: function (up, file) {
+                document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+            },
+
+            Error: function (up, err) {
+                document.getElementById('console').appendChild(document.createTextNode("\nError #" + err.code + ": " + err.message));
+            },
+
+            FileUploaded: function(up, file) {
+                
+            }
+        }
+    });
+
+    uploader.init();
 </script>

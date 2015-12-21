@@ -90,7 +90,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {1} : comma separated list of customer roles
         /// {2} : current store ID
         /// </remarks>
-        public const string CATEGORY_MENU_MODEL_KEY = "Nop.pres.category.menu-{0}-{1}-{2}";
+        public const string CATEGORY_MENU_MODEL_KEY = "Nop.pres.category.menu-{0}-{1}";
         public const string CATEGORY_MENU_PATTERN_KEY = "Nop.pres.category.menu";
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {1} : current store ID
         /// {2} : comma separated list of customer roles
         /// </remarks>
-        public const string TOPIC_TOP_MENU_MODEL_KEY = "Nop.pres.topic.topmenu-{0}-{1}-{2}";
+        public const string TOPIC_TOP_MENU_MODEL_KEY = "Nop.pres.topic.topmenu-{0}-{1}";
         /// <summary>
         /// Key for TopMenuModel caching
         /// </summary>

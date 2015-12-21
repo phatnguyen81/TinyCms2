@@ -2,14 +2,7 @@
     Layout = "~/Views/Shared/_HomePage.cshtml";
 }
 
-<div class="tophead clearfix">
-    <a href="@Url.RouteUrl("homepage")" class="logo"></a> 
-    @Html.Widget("home_top_header")
-    @*<a href="#" class="topbanner"><img src="temp/top_banner.jpg" width="620" alt="" /></a>*@ 
-</div>
-<div class="nav">
-    @Html.Action("TopMenu", "Posts")
-</div>
+
 <div class="top_news">
     @Html.Action("HomePageHeadLine", "Posts")
     <div class="rightlist_banner">
