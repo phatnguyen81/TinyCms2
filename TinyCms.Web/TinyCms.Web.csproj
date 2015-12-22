@@ -184,6 +184,7 @@
     <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="Extensions\MappingExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +213,7 @@
     <Compile Include="Models\Customer\RegisterResultModel.cs" />
     <Compile Include="Models\Customer\UserInfoZone.cs" />
     <Compile Include="Models\Media\PictureModel.cs" />
+    <Compile Include="Models\Posts\CategoryModel.cs" />
     <Compile Include="Models\Posts\CategoryNavigationModel.cs" />
     <Compile Include="Models\Posts\CategorySimpleModel.cs" />
     <Compile Include="Models\Posts\NewPostModel.cs" />
@@ -1946,7 +1948,7 @@
     <Content Include="Views\Common\TaxTypeSelector.cshtml" />
     <Content Include="Views\Shared\OldInternetExplorerWarning.cshtml" />
     <Content Include="Views\Shared\_OneColumn.cshtml" />
-    <Content Include="Views\Posts\HomePageHeadLine.cshtml" />
+    <Content Include="Views\Posts\HomePageHotNews.cshtml" />
     <Content Include="Views\Posts\TopMenu.cshtml" />
     <Content Include="Views\Shared\HomePageHeader.cshtml" />
     <Content Include="Views\Posts\HomePagePicturesAndVideos.cshtml" />
@@ -1982,6 +1984,7 @@
     <Content Include="Views\Shared\EditorTemplates\Int32Nullable.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Picture.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RichEditor.cshtml" />
+    <Content Include="Views\Posts\HomePagePosts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />

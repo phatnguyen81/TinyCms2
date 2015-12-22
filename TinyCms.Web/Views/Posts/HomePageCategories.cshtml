@@ -1,75 +1,33 @@
-﻿<div class="newsbox">
-    <h2><a href="#">Tin tức</a></h2>
-    <div class="contbox">
-        <div class="newscont">
-            <a href="#" class="boximg"><span class="loading"><img src="temp/contentbox_img.jpg" alt="" width="160" height="120" /></span></a>
-            <div class="detail">
-                <h3><a href="#">Đà Lạt quen mà lạ với 10 điểm dừng chân thú vị</a> </h3>
-                <p>Nếu đã đến Thung lũng Tình Yêu, ga Đà Lạt, thì trong lần trở lại nơi đây, bạn đừng bỏ qua XQ sử quán, Dinh III và chùa Linh Phước. Người dân nơi đây rất tự hào về cà phê của họ</p>
+﻿@model IEnumerable<CategoryModel>
+@if (Model.Any())
+{
+    foreach (CategoryModel category in Model)
+    {
+        if (category.Posts.Any())
+        {
+            var firstPost = category.Posts.First();
+            <div class="newsbox">
+                <h2><a href="@Url.RouteUrl("Category", new {SeName = category.SeName})">@category.Name</a></h2>
+                <div class="contbox">
+                    <div class="newscont">
+                        <a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })" class="boximg"><span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" alt="@firstPost.DefaultPictureModel.AlternateText" width="160" height="120" /></span></a>
+                        <div class="detail">
+                            <h3><a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })">@firstPost.Name</a> </h3>
+                            <p>@Html.Raw(firstPost.ShortDescription)</p>
+                        </div>
+                    </div>
+                    <ul class="listrecent">
+                        @foreach (var post in category.Posts.Skip(1))
+                        {
+                            <li><em></em><a href="@Url.RouteUrl("Post", new { SeName = post.SeName })">@post.Name</a></li>
+                        }
+                    </ul>
+                </div>
             </div>
-        </div>
-        <ul class="listrecent">
-            <li><em></em><a href="#">20 địa danh đẹp nhất của Canada</a></li>
-            <li><em></em><a href="#">Hơn 6.000 người đồng diễn chào mừng Festival biển Nha Trang </a></li>
-            <li><em></em><a href="#">Hội An mở đường dây nóng cho khách du lịch... kêu </a></li>
-            <li><em></em><a href="#">Thánh địa Mỹ Sơn nhìn từ bầu trời </a></li>
-        </ul>
-    </div>
-</div>
-<div class="newsbox">
-    <h2><a href="#">CẨM NANG DU LỊCH</a></h2>
-    <div class="contbox">
-        <div class="newscont">
-            <a href="#" class="boximg"><span class="loading"><img src="temp/contentbox_img02.jpg" alt="" width="160" height="120" /></span></a>
-            <div class="detail">
-                <h3><a href="#">Kinh nghiệm du lịch Sapa mùa đông ngắm tuyết rơi</a> </h3>
-                <p>Sapa luôn là điểm đến hấp dẫn mà bất kỳ dân Phượt nào cũng muốn chinh phục. Đặc biệt, mùa đông năm 2013 Sapa trở nên hấp dẫn hơn bao giờ hết khi có tuyết rơi, những bông tuyết nhỏ</p>
-            </div>
-        </div>
-        <ul class="listrecent">
-            <li><em></em><a href="#">Say đắm ẩm thực Quảng Bình</a></li>
-            <li><em></em><a href="#">Đặc sản Mai Châu – Hương vị núi rừng khó quên</a></li>
-            <li><em></em><a href="#">Một vòng trải nghiệm ẩm thực xứ Huế</a></li>
-            <li><em></em><a href="#">10 món ăn ngon nhất Thụy Sĩ</a></li>
-        </ul>
-    </div>
-</div>
-<div class="newsbox">
-    <h2><a href="#">VĂN HÓA - LỄ HỘI</a></h2>
-    <div class="contbox">
-        <div class="newscont">
-            <a href="#" class="boximg"><span class="loading"><img src="temp/contentbox_img03.jpg" alt="" width="160" height="120" /></span></a>
-            <div class="detail">
-                <h3><a href="#">Lễ hội Nghinh Ông, thú vị tín ngưỡng Việt - Yume</a> </h3>
-                <p>Người dân Việt Nam ảnh hưởng bởi tư duy của nền nông nghiệp lúa nước, thường có tư tưởng trông chờ vào sự may rũi của số phận, nên tín ngưỡng là thứ gì đó thiêng liêng và ảnh hưởng</p>
-            </div>
-        </div>
-        <ul class="listrecent">
-            <li><em></em><a href="#">Trang nghiêm lễ rước Phật tại Huế</a></li>
-            <li><em></em><a href="#">Lễ hội khỉ khởi động Festival biển Nha Trang 2015</a></li>
-            <li><em></em><a href="#">Khám phá 11 lễ hội thú vị nhất thế giới</a></li>
-            <li><em></em><a href="#">Lung linh lễ hội ánh sáng Vivid Sydney 2015</a></li>
-        </ul>
-    </div>
-</div>
-<div class="newsbox">
-    <h2><a href="#">ẨM THỰC VÙNG MIỀN</a></h2>
-    <div class="contbox">
-        <div class="newscont">
-            <a href="#" class="boximg"><span class="loading"><img src="temp/contentbox_img04.jpg" alt="" width="160" height="120" /></span></a>
-            <div class="detail">
-                <h3><a href="#">Lên Tây Bắc thưởng thức những món ăn độc đáo từ "hoa ban"</a> </h3>
-                <p>Tây Bắc là một trong những nơi có nền ẩm thực phong phú và đa dạng, bởi vì thể cũng là điểm thu hút nhiều thực khách đến đây. Đến vào dịp này bạn...xinh, trắng xóa rơi ... </p>
-            </div>
-        </div>
-        <ul class="listrecent">
-            <li><em></em><a href="#">Hương vị thịt vịt gói lá bầu</a></li>
-            <li><em></em><a href="#">Về miền Tây Nam Bộ thưởng thức bánh khọt</a></li>
-            <li><em></em><a href="#">Về miền Trung kiếm tìm hương vị bún quê </a></li>
-            <li><em></em><a href="#">Những món cuốn ngon kiểu Nam Bộ</a></li>
-        </ul>
-    </div>
-</div>
+        }
+    }
+}
+
 <div class="corner_sharing">
     <h2><a href="#">GÓC CHIA SẺ</a></h2>
     <ul>

@@ -53,10 +53,6 @@ namespace TinyCms.Core.Domain.Posts
         /// </summary>
         public string MetaTitle { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the product allows customer reviews
-        /// </summary>
-        public bool AllowCustomerReviews { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the entity is subject to ACL

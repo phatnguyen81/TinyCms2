@@ -149,7 +149,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {2} : language ID
         /// {3} : is connection SSL secured (included in a category picture URL)
         /// </remarks>
-        public const string CATEGORY_HOMEPAGE_KEY = "Nop.pres.category.homepage-{0}-{1}-{2}-{3}";
+        public const string CATEGORY_HOMEPAGE_KEY = "Nop.pres.category.homepage-{0}-{1}-{2}";
         public const string CATEGORY_HOMEPAGE_PATTERN_KEY = "Nop.pres.category.homepage";
         
         /// <summary>
@@ -401,7 +401,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {4} : is connection SSL secured?
         /// {5} : current store ID
         /// </remarks>
-        public const string CATEGORY_PICTURE_MODEL_KEY = "Nop.pres.category.picture-{0}-{1}-{2}-{3}-{4}-{5}";
+        public const string CATEGORY_PICTURE_MODEL_KEY = "Nop.pres.category.picture-{0}-{1}-{2}-{3}-{4}";
         public const string CATEGORY_PICTURE_PATTERN_KEY = "Nop.pres.category.picture";
 
         /// <summary>

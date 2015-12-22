@@ -183,7 +183,7 @@
         <td colspan="2">
             <hr />
         </td>
-    <tr>
+    @*<tr>
         <td class="adminTitle">
             @Html.NopLabelFor(model => model.Published):
         </td>
@@ -191,7 +191,7 @@
             @Html.EditorFor(model => model.Published)
             @Html.ValidationMessageFor(model => model.Published)
         </td>
-    </tr>
+    </tr>*@
     @if (Model.CreatedOn.HasValue)
     {
         <tr>

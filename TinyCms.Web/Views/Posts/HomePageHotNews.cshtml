@@ -1,0 +1,27 @@
+﻿@model IEnumerable<PostOverviewModel>
+@{
+    var posts = Model.ToList();
+}
+@if (Model.Any())
+{
+    var firstPost = posts[0];
+    <div class="hotnews">
+        <a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })"><span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="470" height="260" alt="" class="newsimg" /></span></a>
+        <h1><a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })">@firstPost.Name</a></h1>
+        <p class="content">@firstPost.ShortDescription</p>
+
+        <p class="recent_news">
+
+            @if (Model.Count() > 1)
+            {
+                foreach (var post in posts.Skip(1))
+                {
+                    <em></em>
+                    <a href="@Url.RouteUrl("Post", new { SeName = post.SeName })">@post.Name</a>
+                    <br />
+                }
+            }
+        </p>
+    </div>
+}
+<p class="caption">Các tin khác</p>

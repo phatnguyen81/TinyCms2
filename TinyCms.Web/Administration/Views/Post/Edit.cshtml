@@ -18,7 +18,7 @@
             @if (!Model.Published)
             {
                 <a name="approve" href="@Url.Action("Approve", new { id = Model.Id, continueEditing = false})" class="k-button" >@T("Admin.Common.Approve")</a>
-    <a name="approve-continue" href="@Url.Action("Approve", new { id = Model.Id, continueEditing = true })" class="k-button">@T("Admin.Common.ApproveContinue")</a>
+                <a name="approve-continue" href="@Url.Action("Approve", new { id = Model.Id, continueEditing = true })" class="k-button">@T("Admin.Common.ApproveContinue")</a>
             }
             <span id="post-delete" class="k-button">@T("Admin.Common.Delete")</span>
         </div>

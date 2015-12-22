@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
+using TinyCms.Core.Domain.Catalog;
 using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Posts;
 using TinyCms.Services.Customers;
@@ -15,6 +16,7 @@ using TinyCms.Services.Security;
 using TinyCms.Services.Seo;
 using TinyCms.Services.Topics;
 using TinyCms.Web.Infrastructure.Cache;
+using TinyCms.Web.Models.Media;
 using TinyCms.Web.Models.Posts;
 using TinyCms.Web.Extensions;
 
@@ -91,7 +93,7 @@ namespace TinyCms.Web.Controllers
 
         #endregion
 
-        public ActionResult HomePageHeadLine(int? productThumbPictureSize)
+        public ActionResult HomePageHotNews(int? postThumbPictureSize)
         {
             //var posts = _postService.GetAllPostsDisplayedOnHomePage();
             var categoryType = _categoryTypeService.GetCategoryTypeBySystemName("HotNews");
@@ -102,19 +104,63 @@ namespace TinyCms.Web.Controllers
                     _postService.SearchPosts(
                         categoryIds:
                             _categoryService.GetCategoryByCategoryTypeSystemName("HotNews").Select(q => q.Id).ToArray()).ToList();
-                model = PreparePostOverviewModels(posts, true, productThumbPictureSize).ToList();
+                model = PreparePostOverviewModels(posts, true, postThumbPictureSize).ToList();
             }
             return PartialView(model);
         }
-
+        public ActionResult HomePagePosts(int? postThumbPictureSize)
+        {
+           var posts = _postService.GetAllPostsDisplayedOnHomePage();
+            var model = PreparePostOverviewModels(posts, true, postThumbPictureSize);
+            return PartialView(model);
+        }
         public ActionResult HomePagePicturesAndVideos()
         {
             return PartialView();
         }
 
+        [ChildActionOnly]
         public ActionResult HomePageCategories()
         {
-            return PartialView();
+            string categoriesCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_HOMEPAGE_KEY,
+                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
+                _workContext.WorkingLanguage.Id,
+                _webHelper.IsCurrentConnectionSecured());
+
+            var model = _cacheManager.Get(categoriesCacheKey, () =>
+                _categoryService.GetAllCategoriesDisplayedOnHomePage()
+                .Select(x =>
+                {
+                    var catModel = x.ToModel();
+
+                    //prepare picture model
+                    int pictureSize = _mediaSettings.CategoryThumbPictureSize;
+                    var categoryPictureCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY, x.Id, pictureSize, true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured());
+                    catModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
+                    {
+                        var picture = _pictureService.GetPictureById(x.PictureId);
+                        var pictureModel = new PictureModel
+                        {
+                            FullSizeImageUrl = _pictureService.GetPictureUrl(picture),
+                            ImageUrl = _pictureService.GetPictureUrl(picture, pictureSize),
+                            Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), catModel.Name),
+                            AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), catModel.Name)
+                        };
+                        return pictureModel;
+                    });
+
+                    //prepare post model
+                    catModel.Posts = PreparePostOverviewModels(_postService.SearchPosts(pageSize: 3, orderBy: PostSortingEnum.CreatedOn,categoryIds:new []{catModel.Id}).ToList()).ToList();
+
+                    return catModel;
+                })
+                .ToList()
+            );
+
+            if (model.Count == 0)
+                return Content("");
+
+            return PartialView(model);
         }
 
         public ActionResult DiscoveryCategory()

@@ -4,7 +4,8 @@
 
 
 <div class="top_news">
-    @Html.Action("HomePageHeadLine", "Posts")
+    @Html.Action("HomePageHotNews", "Posts", new { postThumbPictureSize = 500 })
+    @Html.Action("HomePagePosts", "Posts", new { postThumbPictureSize = 200 })
     <div class="rightlist_banner">
         @Html.Widget("home_right_header")
     </div>

@@ -316,7 +316,7 @@ namespace TinyCms.Admin.Controllers
             {
                 model.CopyPostModel.Id = post.Id;
                 model.CopyPostModel.Name = "Copy of " + post.Name;
-                model.CopyPostModel.Published = true;
+               // model.CopyPostModel.Published = true;
                 model.CopyPostModel.CopyImages = true;
             }
 
@@ -482,6 +482,7 @@ namespace TinyCms.Admin.Controllers
                 var post = model.ToEntity();
                 post.CreatedOnUtc = DateTime.UtcNow;
                 post.UpdatedOnUtc = DateTime.UtcNow;
+                post.CreatedBy = _workContext.CurrentCustomer.Id;
                 _postService.InsertPost(post);
                 //search engine name
                 model.SeName = post.ValidateSeName(model.SeName, post.Name, true);
