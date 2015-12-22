@@ -392,3 +392,8 @@ solid #d7edfc;margin-right:10px}.AttachmentEditor
 #ctrl_upload{margin:2px
 auto 5px}.attachmentUploader .attachmentConstraints
 dl{margin-top:2px;font-size:11px}
+
+.previewBox {
+    margin-bottom: 0 5px 20px 5px;
+    display: none;
+}

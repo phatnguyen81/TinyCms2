@@ -20,7 +20,7 @@ namespace TinyCms.Web.Controllers
 
         [HttpPost]
         //do not validate request token (XSRF)
-        [AdminAntiForgery(true)]
+        [UserAntiForgery(true)]
         public ActionResult AsyncUpload()
         {
             //if (!_permissionService.Authorize(StandardPermissionProvider.UploadPictures))
@@ -97,6 +97,24 @@ namespace TinyCms.Web.Controllers
                 imageUrl = _pictureService.GetPictureUrl(picture)
             },
                 "text/plain");
+        }
+
+        [HttpPost]
+        //do not validate request token (XSRF)
+        [UserAntiForgery(true)]
+        public ActionResult Delete(int id)
+        {
+            var picture = _pictureService.GetPictureById(id);
+            if (picture == null)
+                return Json(new
+                {
+                    success = false
+                });
+            _pictureService.DeletePicture(picture);
+            return Json(new
+            {
+                success = true,
+            });
         }
     }
 }

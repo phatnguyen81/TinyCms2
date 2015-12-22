@@ -49,6 +49,7 @@ namespace TinyCms.Admin.Controllers
         private readonly ICacheManager _cacheManager;
         private readonly IDateTimeHelper _dateTimeHelper;
         private readonly IPostTemplateService _postTemplateService;
+        
 
         #endregion
 
@@ -276,6 +277,18 @@ namespace TinyCms.Admin.Controllers
             {
                 model.CreatedOn = _dateTimeHelper.ConvertToUserTime(post.CreatedOnUtc, DateTimeKind.Utc);
                 model.UpdatedOn = _dateTimeHelper.ConvertToUserTime(post.UpdatedOnUtc, DateTimeKind.Utc);
+                if(post.ApprovedOnUtc != null)
+                    model.ApprovedOn = _dateTimeHelper.ConvertToUserTime(post.ApprovedOnUtc.Value, DateTimeKind.Utc);
+                if (model.CreatedBy > 0)
+                {
+                    var userCreated = _customerService.GetCustomerById(model.CreatedBy);
+                    if (userCreated != null) {model.CreatedByName = userCreated.Username;}
+                }
+                if (model.ApprovedBy > 0)
+                {
+                    var userApproved= _customerService.GetCustomerById(model.ApprovedBy);
+                    if (userApproved != null) { model.ApprovedByName = userApproved.Username; }
+                }
             }
 
             //little performance hack here
@@ -570,6 +583,25 @@ namespace TinyCms.Admin.Controllers
             PreparePostModel(model, post, false, true);
             PrepareAclModel(model, post, true);
             return View(model);
+        }
+
+        public ActionResult Approve(int id, bool continueEditing)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
+                return AccessDeniedView();
+
+            var post = _postService.GetPostById(id);
+            if (post == null || post.Deleted)
+                //No post found with the specified id
+                return RedirectToAction("List");
+
+            post.Published = true;
+            post.ApprovedBy = _workContext.CurrentCustomer.Id;
+            post.ApprovedOnUtc = DateTime.UtcNow;
+
+            _postService.UpdatePost(post);
+
+            return continueEditing ? RedirectToAction("Edit", new { id = post.Id }) : RedirectToAction("List");
         }
 
         //delete post

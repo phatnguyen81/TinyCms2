@@ -15,6 +15,11 @@
             <input type="submit" value="@T("Admin.Common.Preview")" onclick="javascript:OpenWindow('@Url.RouteUrl("Post", new { SeName = Model.SeName })', 800, 600, true); return false;" class="k-button" />
             <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
             <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")" />
+            @if (!Model.Published)
+            {
+                <a name="approve" href="@Url.Action("Approve", new { id = Model.Id, continueEditing = false})" class="k-button" >@T("Admin.Common.Approve")</a>
+    <a name="approve-continue" href="@Url.Action("Approve", new { id = Model.Id, continueEditing = true })" class="k-button">@T("Admin.Common.ApproveContinue")</a>
+            }
             <span id="post-delete" class="k-button">@T("Admin.Common.Delete")</span>
         </div>
     </div>

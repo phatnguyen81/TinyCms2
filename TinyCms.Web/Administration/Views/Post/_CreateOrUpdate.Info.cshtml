@@ -138,15 +138,6 @@
 <table class="adminContent">
     <tr>
         <td class="adminTitle">
-            @Html.NopLabelFor(model => model.PictureId):
-        </td>
-        <td class="adminData">
-            @Html.EditorFor(model => model.PictureId)
-            @Html.ValidationMessageFor(model => model.PictureId)
-        </td>
-    </tr>
-    <tr>
-        <td class="adminTitle">
             @Html.NopLabelFor(model => model.AdminComment):
         </td>
         <td class="adminData">
@@ -209,6 +200,39 @@
             </td>
             <td class="adminData">
                 @Model.CreatedOn.Value.ToString("F")
+            </td>
+        </tr>
+    }
+    @if (!string.IsNullOrWhiteSpace(Model.CreatedByName))
+    {
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.CreatedByName):
+            </td>
+            <td class="adminData">
+                @Model.CreatedByName
+            </td>
+        </tr>
+    }
+    @if (Model.ApprovedOn.HasValue)
+    {
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.ApprovedOn):
+            </td>
+            <td class="adminData">
+                @Model.ApprovedOn.Value.ToString("F")
+            </td>
+        </tr>
+    }
+    @if (!string.IsNullOrWhiteSpace(Model.ApprovedByName))
+    {
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.ApprovedByName):
+            </td>
+            <td class="adminData">
+                @Model.ApprovedByName
             </td>
         </tr>
     }

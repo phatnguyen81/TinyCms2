@@ -5,10 +5,10 @@ namespace TinyCms.Core.Domain.Media
     public class MediaSettings : ISettings
     {
         public int AvatarPictureSize { get; set; }
-        public int ProductThumbPictureSize { get; set; }
-        public int ProductDetailsPictureSize { get; set; }
-        public int ProductThumbPictureSizeOnProductDetailsPage { get; set; }
-        public int AssociatedProductPictureSize { get; set; }
+        public int PostThumbPictureSize { get; set; }
+        public int PostDetailsPictureSize { get; set; }
+        public int PostThumbPictureSizeOnPostDetailsPage { get; set; }
+        public int AssociatedPostPictureSize { get; set; }
         public int CategoryThumbPictureSize { get; set; }
         public int ManufacturerThumbPictureSize { get; set; }
         public int VendorThumbPictureSize { get; set; }

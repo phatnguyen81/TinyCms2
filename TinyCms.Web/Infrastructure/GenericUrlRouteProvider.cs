@@ -13,43 +13,43 @@ namespace TinyCms.Web.Infrastructure
             routes.MapGenericPathRoute("GenericUrl",
                                        "{generic_se_name}",
                                        new {controller = "Common", action = "GenericUrl"},
-                                       new[] {"Nop.Web.Controllers"});
+                                       new[] {"TinyCms.Web.Controllers"});
 
             //define this routes to use in UI views (in case if you want to customize some of them later)
-            routes.MapLocalizedRoute("Product",
+            routes.MapLocalizedRoute("Post",
                                      "{SeName}",
-                                     new { controller = "Product", action = "ProductDetails" },
-                                     new[] {"Nop.Web.Controllers"});
+                                     new { controller = "Post", action = "PostDetails" },
+                                     new[] {"TinyCms.Web.Controllers"});
 
             routes.MapLocalizedRoute("Category",
                             "{SeName}",
                             new { controller = "Catalog", action = "Category" },
-                            new[] { "Nop.Web.Controllers" });
+                            new[] { "TinyCms.Web.Controllers" });
 
             routes.MapLocalizedRoute("Manufacturer",
                             "{SeName}",
                             new { controller = "Catalog", action = "Manufacturer" },
-                            new[] { "Nop.Web.Controllers" });
+                            new[] { "TinyCms.Web.Controllers" });
 
             routes.MapLocalizedRoute("Vendor",
                             "{SeName}",
                             new { controller = "Catalog", action = "Vendor" },
-                            new[] { "Nop.Web.Controllers" });
+                            new[] { "TinyCms.Web.Controllers" });
             
             routes.MapLocalizedRoute("NewsItem",
                             "{SeName}",
                             new { controller = "News", action = "NewsItem" },
-                            new[] { "Nop.Web.Controllers" });
+                            new[] { "TinyCms.Web.Controllers" });
 
             routes.MapLocalizedRoute("BlogPost",
                             "{SeName}",
                             new { controller = "Blog", action = "BlogPost" },
-                            new[] { "Nop.Web.Controllers" });
+                            new[] { "TinyCms.Web.Controllers" });
 
             routes.MapLocalizedRoute("Topic",
                             "{SeName}",
                             new { controller = "Topic", action = "TopicDetails" },
-                            new[] { "Nop.Web.Controllers" });
+                            new[] { "TinyCms.Web.Controllers" });
 
 
 
@@ -59,7 +59,7 @@ namespace TinyCms.Web.Infrastructure
             //    "PageNotFound-Wildchar",
             //    "{*url}",
             //    new { controller = "Common", action = "PageNotFound" },
-            //    new[] { "Nop.Web.Controllers" });
+            //    new[] { "TinyCms.Web.Controllers" });
         }
 
         public int Priority

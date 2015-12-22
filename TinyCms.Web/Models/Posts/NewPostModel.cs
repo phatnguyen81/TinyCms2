@@ -20,21 +20,8 @@ namespace TinyCms.Web.Models.Posts
         public List<SelectListItem> AvailableCategories { get; set; }
 
         [UIHint("Picture")]
-        public int PictureId1 { get; set; }
+        public string PictureIds { get; set; }
 
-        [UIHint("Picture")]
-        public int PictureId2 { get; set; }
-
-        [UIHint("Picture")]
-        public int PictureId3 { get; set; }
-
-        [UIHint("Picture")]
-        public int PictureId4 { get; set; }
-
-        [UIHint("Picture")]
-        public int PictureId5 { get; set; }
-
-        [UIHint("Picture")]
         public string PostTags { get; set; }
     }
 }

@@ -14,13 +14,13 @@
                         type: "json",
                         transport: {
                             read: {
-                                url: "@Html.Raw(Url.Action("PostCategoryList", "Post", new { productId = Model.Id }))",
+                                url: "@Html.Raw(Url.Action("PostCategoryList", "Post", new { postId = Model.Id }))",
                                 type: "POST",
                                 dataType: "json",
                                 data: addAntiForgeryToken
                             },
                             create: {
-                                url: "@Html.Raw(Url.Action("PostCategoryInsert", "Post", new { productId = Model.Id }))",
+                                url: "@Html.Raw(Url.Action("PostCategoryInsert", "Post", new { postId = Model.Id }))",
                                 type: "POST",
                                 dataType: "json",
                                 data: addAntiForgeryToken

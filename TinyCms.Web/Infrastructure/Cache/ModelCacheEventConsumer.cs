@@ -362,7 +362,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {4} : is connection SSL secured?
         /// {5} : current store ID
         /// </remarks>
-        public const string PRODUCT_DEFAULTPICTURE_MODEL_KEY = "Nop.pres.product.detailspictures-{0}-{1}-{2}-{3}-{4}-{5}";
+        public const string PRODUCT_DEFAULTPICTURE_MODEL_KEY = "Nop.pres.product.detailspictures-{0}-{1}-{2}-{3}-{4}";
         public const string PRODUCT_DEFAULTPICTURE_PATTERN_KEY = "Nop.pres.product.detailspictures";
 
         /// <summary>

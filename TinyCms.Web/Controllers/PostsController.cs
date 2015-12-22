@@ -5,15 +5,18 @@ using System.Web;
 using System.Web.Mvc;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
+using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Posts;
 using TinyCms.Services.Customers;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Media;
 using TinyCms.Services.Posts;
+using TinyCms.Services.Security;
 using TinyCms.Services.Seo;
 using TinyCms.Services.Topics;
 using TinyCms.Web.Infrastructure.Cache;
 using TinyCms.Web.Models.Posts;
+using TinyCms.Web.Extensions;
 
 namespace TinyCms.Web.Controllers
 {
@@ -21,26 +24,87 @@ namespace TinyCms.Web.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IPostService _postService;
-        private readonly IPictureService _picture;
+        private readonly IPictureService _pictureService;
         private readonly IWorkContext _workContext;
         private readonly ICacheManager _cacheManager;
         private readonly ITopicService _topicService;
+        private readonly IUrlRecordService _urlRecordService;
+        private readonly IPostTagService _postTagService;
+        private readonly IPermissionService _permissionService;
+        private readonly ILocalizationService _localizationService;
+        private readonly IWebHelper _webHelper;
+        private readonly CatalogSettings _catalogSettings;
+        private readonly MediaSettings _mediaSettings;
+        private readonly ICategoryTypeService _categoryTypeService;
 
         public PostsController(ICategoryService categoryService, 
             IPostService postService, 
-            IPictureService picture, IWorkContext workContext, ICacheManager cacheManager, ITopicService topicService)
+            IPictureService pictureService, 
+            IWorkContext workContext, 
+            ICacheManager cacheManager, 
+            ITopicService topicService, 
+            IUrlRecordService urlRecordService, 
+            IPostTagService postTagService, 
+            IPermissionService permissionService, 
+            ILocalizationService localizationService,
+            IWebHelper webHelper, 
+            CatalogSettings catalogSettings,
+            MediaSettings mediaSettings, 
+            ICategoryTypeService categoryTypeService)
         {
             _categoryService = categoryService;
             _postService = postService;
-            _picture = picture;
+            _pictureService = pictureService;
             _workContext = workContext;
             _cacheManager = cacheManager;
             _topicService = topicService;
+            _urlRecordService = urlRecordService;
+            _postTagService = postTagService;
+            _permissionService = permissionService;
+            _localizationService = localizationService;
+            _webHelper = webHelper;
+            _catalogSettings = catalogSettings;
+            _mediaSettings = mediaSettings;
+            _categoryTypeService = categoryTypeService;
         }
 
-        public ActionResult HomePageHeadLine()
+        #region Methods
+        [NonAction]
+        protected virtual IEnumerable<PostOverviewModel> PreparePostOverviewModels(IEnumerable<Post> posts,
+            bool preparePictureModel = true,
+            int? postThumbPictureSize = null)
         {
-            return PartialView();
+            return this.PreparePostOverviewModels(_workContext,
+                _categoryService, 
+                _postService, 
+                _permissionService,
+                _localizationService, 
+                _pictureService, 
+                _webHelper, 
+                _cacheManager,
+                _catalogSettings, 
+                _mediaSettings, 
+                posts,
+                preparePictureModel,
+                postThumbPictureSize);
+        }
+
+        #endregion
+
+        public ActionResult HomePageHeadLine(int? productThumbPictureSize)
+        {
+            //var posts = _postService.GetAllPostsDisplayedOnHomePage();
+            var categoryType = _categoryTypeService.GetCategoryTypeBySystemName("HotNews");
+            var model = new List<PostOverviewModel>();
+            if (categoryType != null)
+            {
+                var posts =
+                    _postService.SearchPosts(
+                        categoryIds:
+                            _categoryService.GetCategoryByCategoryTypeSystemName("HotNews").Select(q => q.Id).ToArray()).ToList();
+                model = PreparePostOverviewModels(posts, true, productThumbPictureSize).ToList();
+            }
+            return PartialView(model);
         }
 
         public ActionResult HomePagePicturesAndVideos()
@@ -70,6 +134,102 @@ namespace TinyCms.Web.Controllers
                 Value = q.Id.ToString()
             }).ToList();
         }
+        [NonAction]
+        protected virtual string[] ParsePostTags(string postTags)
+        {
+            var result = new List<string>();
+            if (!String.IsNullOrWhiteSpace(postTags))
+            {
+                string[] values = postTags.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string val1 in values)
+                    if (!String.IsNullOrEmpty(val1.Trim()))
+                        result.Add(val1.Trim());
+            }
+            return result.ToArray();
+        }
+
+        [NonAction]
+        protected virtual void SavePostTags(Post post, string[] postTags)
+        {
+            if (post == null)
+                throw new ArgumentNullException("post");
+
+            //post tags
+            var existingPostTags = post.PostTags.ToList();
+            var postTagsToRemove = new List<PostTag>();
+            foreach (var existingPostTag in existingPostTags)
+            {
+                bool found = false;
+                foreach (string newPostTag in postTags)
+                {
+                    if (existingPostTag.Name.Equals(newPostTag, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    postTagsToRemove.Add(existingPostTag);
+                }
+            }
+            foreach (var postTag in postTagsToRemove)
+            {
+                post.PostTags.Remove(postTag);
+                _postService.UpdatePost(post);
+            }
+            foreach (string postTagName in postTags)
+            {
+                PostTag postTag;
+                var postTag2 = _postTagService.GetPostTagByName(postTagName);
+                if (postTag2 == null)
+                {
+                    //add new post tag
+                    postTag = new PostTag
+                    {
+                        Name = postTagName
+                    };
+                    _postTagService.InsertPostTag(postTag);
+                }
+                else
+                {
+                    postTag = postTag2;
+                }
+                if (!post.PostTagExists(postTag.Id))
+                {
+                    post.PostTags.Add(postTag);
+                    _postService.UpdatePost(post);
+                }
+            }
+        }
+
+        [NonAction]
+        protected virtual void SavePostPictures(Post post, IEnumerable<int> pictureIds)
+        {
+            if (post == null)
+                throw new ArgumentNullException("post");
+
+            //post pictures
+
+            foreach (int pictureId in pictureIds)
+            {
+                var postPicture = new PostPicture
+                {
+                    PictureId = pictureId,
+                    PostId = post.Id
+                };
+                _postService.InsertPostPicture(postPicture);
+            }
+            
+        }
+
+        [NonAction]
+        protected virtual void UpdatePictureSeoNames(Post post)
+        {
+            foreach (var pp in post.PostPictures)
+                _pictureService.SetSeoFilename(pp.PictureId, _pictureService.GetPictureSeName(post.Name));
+        }
+
         public ActionResult Write()
         {
             var model = new NewPostModel();
@@ -77,6 +237,45 @@ namespace TinyCms.Web.Controllers
             PrepareNewPostModel(model);
 
             return View(model);
+        }
+
+        [HttpPost]
+        public JsonResult Write(NewPostModel model)
+        {
+            var post = new Post
+            {
+                Name = model.Title,
+                FullDescription = model.Body,
+                UpdatedOnUtc = DateTime.UtcNow,
+                CreatedOnUtc = DateTime.UtcNow,
+                CreatedBy = _workContext.CurrentCustomer.Id,
+                Published = false
+            };
+            _postService.InsertPost(post);
+
+            var seName = post.ValidateSeName(string.Empty, post.Name, true);
+            _urlRecordService.SaveSlug(post, seName, 0);
+
+            //tags
+            SavePostTags(post, ParsePostTags(model.PostTags));
+
+            SavePostPictures(post,
+                model.PictureIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                    .Select(int.Parse));
+
+            UpdatePictureSeoNames(post);
+
+            var postCategory = new PostCategory
+            {
+                PostId = post.Id,
+                CategoryId = model.CategoryId
+            };
+            _categoryService.InsertPostCategory(postCategory);
+
+            return Json(new
+            {
+                success = true
+            });
         }
 
         /// <summary>

@@ -1,9 +1,17 @@
-﻿<div class="hotnews">
-    <a href="#"><span class="loading"><img src="temp/hot_news.jpg" width="470" height="260" alt="" class="newsimg" /></span></a>
-    <h1><a href="#">9 trải nghiệm du lịch thay đổi cuộc sống của bạn</a></h1>
-    <p class="content">Chiêm ngưỡng cực quang ở Phần Lan, hòa mình vào lễ hội âm nhạc đường phố ở Rio Carnival hay lênh đênh vịnh Hạ Long bằng thuyền buồm là những trải nghiệm có thể thay đổi cách nhìn nhận của bạn với cuộc sống.</p>
-    <p class="recent_news"><em></em><a href="#">Vịnh Hạ Long là điểm đến hấp dẫn nhất thế giới</a> | <a href="#">10 địa điểm du lịch nhát định bạn phải đến</a></p>
-</div>
+﻿@model IEnumerable<PostOverviewModel>
+           @{
+               var posts = Model.ToList();
+           }
+@if (Model.Any())
+{
+    var firstPost = posts[0];
+    <div class="hotnews">
+        <a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })"><span class="loading"><img src="@firstPost.DefaultPictureModel.FullSizeImageUrl" width="470" height="260" alt="" class="newsimg" /></span></a>
+        <h1><a href="#">@firstPost.Name</a></h1>
+        <p class="content">@firstPost.ShortDescription</p>
+        <p class="recent_news"><em></em><a href="#">Vịnh Hạ Long là điểm đến hấp dẫn nhất thế giới</a> | <a href="#">10 địa điểm du lịch nhát định bạn phải đến</a></p>
+    </div>
+}
 <p class="caption">Các tin khác</p>
 <div class="listnews">
     <div class="toplist"><a href="#"><span class="loading"><img src="temp/toplist_img.jpg" width="178" height="107" alt="" /></span><span> Hội An miễn phí vé vào phố cổ và ra Cù Lao Chàm</span></a></div>

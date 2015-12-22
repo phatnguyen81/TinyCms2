@@ -34,10 +34,6 @@ namespace TinyCms.Core.Domain.Posts
         /// </summary>
         public string AdminComment { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public int PictureId { get; set; }
         
         /// <summary>
         /// Gets or sets a value indicating whether to show the product on home page
@@ -68,15 +64,7 @@ namespace TinyCms.Core.Domain.Posts
         public bool SubjectToAcl { get; set; }
 
 
-        /// <summary>
-        /// Gets or sets the available start date and time
-        /// </summary>
-        public DateTime? AvailableStartDateTimeUtc { get; set; }
-        /// <summary>
-        /// Gets or sets the available end date and time
-        /// </summary>
-        public DateTime? AvailableEndDateTimeUtc { get; set; }
-
+     
         /// <summary>
         /// Gets or sets a display order.
         /// This value is used when sorting associated products (used with "grouped" products)
@@ -115,7 +103,7 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// 
         /// </summary>
-        public DateTime ApprovedOnUtc { get; set; }
+        public DateTime? ApprovedOnUtc { get; set; }
         
 
         /// <summary>

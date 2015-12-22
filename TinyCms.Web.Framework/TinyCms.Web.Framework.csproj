@@ -153,6 +153,7 @@
     <Compile Include="PublicStoreAllowNavigationAttribute.cs" />
     <Compile Include="RemotePost.cs" />
     <Compile Include="RssActionResult.cs" />
+    <Compile Include="Security\UserAntiForgeryAttribute.cs" />
     <Compile Include="Security\AdminAntiForgeryAttribute.cs" />
     <Compile Include="Security\AdminValidateIpAddressAttribute.cs" />
     <Compile Include="Security\Captcha\CaptchaSettings.cs" />

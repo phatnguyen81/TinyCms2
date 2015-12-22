@@ -67,6 +67,8 @@ namespace TinyCms.Services.Posts
         /// </summary>
         private const string PRODUCTCATEGORIES_PATTERN_KEY = "Nop.productcategory.";
 
+        private const string CATEGORIES_BY_CATEGORY_TYPE_SYSTEM_NAME_ID_KEY = "Nop.category.bycategorytypesystemname-{0}-{1}";
+
         #endregion
 
         #region Fields
@@ -79,6 +81,7 @@ namespace TinyCms.Services.Posts
         private readonly IEventPublisher _eventPublisher;
         private readonly ICacheManager _cacheManager;
         private readonly IAclService _aclService;
+        private readonly ICategoryTypeService _categoryTypeService;
         private readonly CatalogSettings _catalogSettings;
 
         #endregion
@@ -108,7 +111,7 @@ namespace TinyCms.Services.Posts
             IWorkContext workContext,
             IEventPublisher eventPublisher,
             IAclService aclService,
-            CatalogSettings catalogSettings)
+            CatalogSettings catalogSettings, ICategoryTypeService categoryTypeService)
         {
             this._cacheManager = cacheManager;
             this._categoryRepository = categoryRepository;
@@ -119,6 +122,7 @@ namespace TinyCms.Services.Posts
             this._eventPublisher = eventPublisher;
             this._aclService = aclService;
             this._catalogSettings = catalogSettings;
+            _categoryTypeService = categoryTypeService;
         }
 
         #endregion
@@ -283,7 +287,26 @@ namespace TinyCms.Services.Posts
 
             return categories;
         }
-                
+
+        public IList<Category> GetCategoryByCategoryTypeSystemName(string systemName, bool showHidden)
+        {
+            string key = string.Format(CATEGORIES_BY_CATEGORY_TYPE_SYSTEM_NAME_ID_KEY, systemName, showHidden);
+            return _cacheManager.Get(key, () =>
+            {
+                var categoryType = _categoryTypeService.GetCategoryTypeBySystemName("systemName");
+                if (categoryType == null) return new List<Category>();
+
+                var query = _categoryRepository.Table;
+                if (!showHidden)
+                    query = query.Where(c => c.Published);
+                query = query.Where(c => c.CategoryTypeId == categoryType.Id);
+                query = query.OrderBy(c => c.DisplayOrder);
+                var categories = query.ToList();
+                return categories;
+            });
+            
+        }
+
         /// <summary>
         /// Gets a category
         /// </summary>

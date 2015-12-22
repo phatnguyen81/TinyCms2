@@ -81,9 +81,11 @@ namespace TinyCms.Admin.Models.Posts
         public bool Published { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.CreatedBy")]
+        public string CreatedByName { get; set; }
         public int CreatedBy { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.ApprovedBy")]
+        public string ApprovedByName { get; set; }
         public int ApprovedBy { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.CreatedOn")]
@@ -96,11 +98,7 @@ namespace TinyCms.Admin.Models.Posts
         public DateTime? ApprovedOn { get; set; }
 
         public IList<PostLocalizedModel> Locales { get; set; }
-
-        [UIHint("Picture")]
-        [NopResourceDisplayName("Admin.Catalog.Posts.Fields.Picture")]
-        public int PictureId { get; set; }
-
+        
         //ACL (customer roles)
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.SubjectToAcl")]
         public bool SubjectToAcl { get; set; }

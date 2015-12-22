@@ -95,5 +95,6 @@ namespace TinyCms.Core.Domain.Posts
 
         public int CategoryTypeId { get; set; }
 
+
     }
 }

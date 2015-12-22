@@ -55,6 +55,8 @@ namespace TinyCms.Services.Posts
         private readonly CatalogSettings _catalogSettings;
         private readonly IEventPublisher _eventPublisher;
         private readonly IAclService _aclService;
+        private readonly IRepository<Category> _categoryRepository;
+        private readonly IRepository<CategoryType> _categoryTypeRepository;
 
         #endregion
 
@@ -102,7 +104,7 @@ namespace TinyCms.Services.Posts
             CommonSettings commonSettings,
             CatalogSettings catalogSettings,
             IEventPublisher eventPublisher,
-            IAclService aclService)
+            IAclService aclService, IRepository<Category> categoryRepository, IRepository<CategoryType> categoryTypeRepository)
         {
             this._cacheManager = cacheManager;
             this._postRepository = postRepository;
@@ -119,6 +121,8 @@ namespace TinyCms.Services.Posts
             this._catalogSettings = catalogSettings;
             this._eventPublisher = eventPublisher;
             this._aclService = aclService;
+            _categoryRepository = categoryRepository;
+            _categoryTypeRepository = categoryTypeRepository;
         }
 
         #endregion
@@ -508,20 +512,14 @@ namespace TinyCms.Services.Posts
                     //unpublished only
                     query = query.Where(p => !p.Published);
                 }
+
+
           
                 //The function 'CurrentUtcDateTime' is not supported by SQL Server Compact. 
                 //That's why we pass the date value
                 var nowUtc = DateTime.UtcNow;
        
             
-                if (!showHidden)
-                {
-                    //available dates
-                    query = query.Where(p =>
-                        (!p.AvailableStartDateTimeUtc.HasValue || p.AvailableStartDateTimeUtc.Value < nowUtc) &&
-                        (!p.AvailableEndDateTimeUtc.HasValue || p.AvailableEndDateTimeUtc.Value > nowUtc));
-                }
-
                 //searching by keyword
                 if (!String.IsNullOrWhiteSpace(keywords))
                 {
