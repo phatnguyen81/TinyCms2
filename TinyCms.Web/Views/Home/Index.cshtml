@@ -1,10 +1,27 @@
-﻿@{
+﻿@using TinyCms.Core.Domain.Posts
+@using TinyCms.Core.Infrastructure
+@{
     Layout = "~/Views/Shared/_HomePage.cshtml";
+    var hotNewsCategoryId = EngineContext.Current.Resolve<CatalogSettings>().HotNewsCategoryId;
+    var hotNewsCategoryNumberPost = EngineContext.Current.Resolve<CatalogSettings>().HotNewsPostNumber;
+
+    var shareCornerCategoryId = EngineContext.Current.Resolve<CatalogSettings>().ShareCornerCategoryId;
+    var shareCornerPostNumber = EngineContext.Current.Resolve<CatalogSettings>().ShareCornerPostNumber;
+
+    var pictureAndVideoCategoryId = EngineContext.Current.Resolve<CatalogSettings>().PictureAndVideoCategoryId;
+    var pictureAndVideoPostNumber = EngineContext.Current.Resolve<CatalogSettings>().PictureAndVideoPostNumber;
+
+    var discoveryCategoryId = EngineContext.Current.Resolve<CatalogSettings>().DiscoveryCategoryId;
+    var discoveryPostNumber = EngineContext.Current.Resolve<CatalogSettings>().DiscoveryPostNumber;
+
+    var travelViaPictureCategoryId = EngineContext.Current.Resolve<CatalogSettings>().TravelViaPictureCategoryId;
+    var travelViaPicturePostNumber = EngineContext.Current.Resolve<CatalogSettings>().TravelViaPicturePostNumber;
 }
 
 
 <div class="top_news">
-    @Html.Action("HomePageHotNews", "Posts", new { postThumbPictureSize = 500 })
+    @*@Html.Action("HomePageHotNews", "Posts", new { postThumbPictureSize = 500 })*@
+    @Html.Action("CategoryBox", "Posts", new { categoryId = hotNewsCategoryId, numberPost = hotNewsCategoryNumberPost, template = "CategoryBox.HotNews", postThumbPictureSize = 500 })
     @Html.Action("HomePagePosts", "Posts", new { postThumbPictureSize = 200 })
     <div class="rightlist_banner">
         @Html.Widget("home_right_header")
@@ -12,19 +29,19 @@
 </div>
 @Html.Partial("ToolBoxMobile")
 
-@Html.Action("HomePagePicturesAndVideos", "Posts")
+@Html.Action("CategoryBox", "Posts", new { categoryId = pictureAndVideoCategoryId, numberPost = pictureAndVideoPostNumber, template = "CategoryBox.PictureAndVideo", postThumbPictureSize = 185 })
 <div class="large_banner">
     @Html.Widget("home_wide_banner")
 </div>
 <div class="mainpage">
     <div class="leftcol">
         @Html.Action("HomePageCategories", "Posts", new { postThumbPictureSize = 160 })
-        @Html.Action("ShareCorner", "Posts", new { postThumbPictureSize = 150 })
+        @Html.Action("CategoryBox", "Posts", new { categoryId = shareCornerCategoryId, numberPost = shareCornerPostNumber, template = "CategoryBox.ShareCorner", postThumbPictureSize = 150 })
     </div>
     <div class="sidebar">
         @Html.Partial("ToolBox") 
-        @Html.Action("DiscoveryCategory", "Posts", new { postThumbPictureSize = 270 })
-        @Html.Action("TravelViaPictureCategory", "Posts", new { postThumbPictureSize = 270 })
+        @Html.Action("CategoryBox", "Posts", new { categoryId = discoveryCategoryId, numberPost = discoveryPostNumber, template = "CategoryBox.Discovery", postThumbPictureSize = 270 })
+        @Html.Action("CategoryBox", "Posts", new { categoryId = travelViaPictureCategoryId, numberPost = travelViaPicturePostNumber, template = "CategoryBox.TravelViaPicture", postThumbPictureSize = 270 })
         <div class="sidebanner">
             @Html.Widget("sidebar_banner")
         </div>

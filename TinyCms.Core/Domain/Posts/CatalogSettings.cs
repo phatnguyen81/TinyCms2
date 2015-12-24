@@ -307,5 +307,29 @@ namespace TinyCms.Core.Domain.Posts
         /// Gets or sets the default value to use for Manufacturer page size (for new manufacturers)
         /// </summary>
         public int DefaultManufacturerPageSize { get; set; }
+
+        public int HotNewsCategoryId { get; set; }
+
+        public int HotNewsPostNumber { get; set; }
+
+        public int ShareCornerCategoryId { get; set; }
+
+        public int ShareCornerPostNumber { get; set; }
+
+        public int PictureAndVideoCategoryId { get; set; }
+
+        public int PictureAndVideoPostNumber { get; set; }
+
+        public int TravelViaPictureCategoryId { get; set; }
+
+        public int TravelViaPicturePostNumber { get; set; }
+
+        public int DiscoveryCategoryId { get; set; }
+
+        public int DiscoveryPostNumber { get; set; }
+
+        public int PromotionCategoryId { get; set; }
+
+        public int PromotionPostNumber { get; set; }
     }
 }

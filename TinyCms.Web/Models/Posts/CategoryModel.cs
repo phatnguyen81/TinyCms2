@@ -56,4 +56,18 @@ namespace TinyCms.Web.Models.Posts
 
 		#endregion
     }
+
+    public partial class CategoryBoxModel : BaseNopEntityModel
+    {
+
+        public CategoryBoxModel()
+        {
+            Posts = new List<PostOverviewModel>();
+        }
+        public string Name { get; set; }
+
+        public string SeName { get; set; }
+
+        public List<PostOverviewModel> Posts { get; set; } 
+    }
 }

@@ -887,19 +887,19 @@ namespace TinyCms.Web.Controllers
                 model.AvatarUrl = @Url.Content("~/Content/Images/avatar.png");
             }
 
-            model.Posts = this.PreparePostOverviewModels(_workContext,
-                _categoryService,
-                _postService,
-                _permissionService,
-                _localizationService,
-                _pictureService,
-                _webHelper,
-                _cacheManager,
-                _catalogSettings,
-                _mediaSettings,
-                posts,
-                preparePictureModel,
-                postThumbPictureSize);
+            //model.Posts = this.PreparePostOverviewModels(_workContext,
+            //    _categoryService,
+            //    _postService,
+            //    _permissionService,
+            //    _localizationService,
+            //    _pictureService,
+            //    _webHelper,
+            //    _cacheManager,
+            //    _catalogSettings,
+            //    _mediaSettings,
+            //    posts,
+            //    preparePictureModel,
+            //    postThumbPictureSize);
 
             return View(model);
         }

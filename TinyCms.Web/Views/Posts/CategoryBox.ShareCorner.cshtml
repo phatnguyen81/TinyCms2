@@ -1,10 +1,10 @@
-﻿@model IEnumerable<PostOverviewModel>
-@if (Model.Any())
+﻿@model CategoryBoxModel
+@if (Model.Posts.Any())
 {
     <div class="corner_sharing">
-        <h2><a href="#">GÓC CHIA SẺ</a></h2>
+        <h2><a href="@Url.RouteUrl("Category", new {Model.SeName})">GÓC CHIA SẺ</a></h2>
         <ul>
-            @foreach (var post in Model)
+            @foreach (var post in Model.Posts)
             {
                 <li>
                     <a href="@Url.RouteUrl("Post", new {SeName = post.SeName})" class="blog_thumb">

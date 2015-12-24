@@ -1953,15 +1953,15 @@
     <Content Include="Views\Common\TaxTypeSelector.cshtml" />
     <Content Include="Views\Shared\OldInternetExplorerWarning.cshtml" />
     <Content Include="Views\Shared\_OneColumn.cshtml" />
-    <Content Include="Views\Posts\HomePageHotNews.cshtml" />
+    <Content Include="Views\Posts\CategoryBox.HotNews.cshtml" />
     <Content Include="Views\Posts\TopMenu.cshtml" />
     <Content Include="Views\Shared\HomePageHeader.cshtml" />
-    <Content Include="Views\Posts\HomePagePicturesAndVideos.cshtml" />
+    <Content Include="Views\Posts\CategoryBox.PictureAndVideo.cshtml" />
     <Content Include="Views\Shared\ToolBox.cshtml" />
     <Content Include="Views\Posts\HomePageCategories.cshtml" />
     <Content Include="Views\Shared\ToolBoxMobile.cshtml" />
-    <Content Include="Views\Posts\DiscoveryCategory.cshtml" />
-    <Content Include="Views\Posts\TravelViaPictureCategory.cshtml" />
+    <Content Include="Views\Posts\CategoryBox.Discovery.cshtml" />
+    <Content Include="Views\Posts\CategoryBox..TravelViaPicture.cshtml" />
     <Content Include="Views\Customer\Login.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Widget\WidgetsByZone.cshtml" />
@@ -1989,7 +1989,7 @@
     <Content Include="Views\Shared\EditorTemplates\Int32Nullable.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RichEditor.cshtml" />
     <Content Include="Views\Posts\HomePagePosts.cshtml" />
-    <Content Include="Views\Posts\ShareCorner.cshtml" />
+    <Content Include="Views\Posts\CategoryBox.ShareCorner.cshtml" />
     <Content Include="Views\Posts\BottomMenu.cshtml" />
     <Content Include="Views\Posts\CategoryTemplate.Default.cshtml" />
     <Content Include="Views\Shared\_TwoColumn.cshtml" />
@@ -1997,7 +1997,7 @@
     <Content Include="Views\Posts\PostTemplate.Post.cshtml" />
     <Content Include="Views\ExternalAuthentication\ExternalMethods.cshtml" />
     <Content Include="Views\Posts\RelatedPosts.cshtml" />
-    <Content Include="Views\Posts\PromotionCategory.cshtml" />
+    <Content Include="Views\Posts\CategoryBox.Promotio.cshtml" />
     <Content Include="Views\Poll\HomePagePolls.cshtml" />
     <Content Include="Views\Poll\PollBlock.cshtml" />
     <Content Include="Views\Poll\_Poll.cshtml" />

@@ -113,6 +113,23 @@ namespace TinyCms.Web.Controllers
 
         #endregion
 
+        [ChildActionOnly]
+        public ActionResult CategoryBox(int categoryId, int numberPost, string template, int? postThumbPictureSize)
+        {
+
+            var category = _categoryService.GetCategoryById(categoryId);
+
+            if (category == null || string.IsNullOrWhiteSpace(template))
+                return Content("");
+
+
+            var model = new CategoryBoxModel {Id = category.Id, SeName = category.GetSeName()};
+
+            var posts = _postService.SearchPosts(pageSize: numberPost, categoryIds: new[] {categoryId}).ToList();
+            model.Posts = PreparePostOverviewModels(posts, postThumbPictureSize != null && postThumbPictureSize > 0, postThumbPictureSize).ToList();
+            return PartialView(template, model);
+        }
+
         public ActionResult HomePageHotNews(int? postThumbPictureSize)
         {
             //var posts = _postService.GetAllPostsDisplayedOnHomePage();

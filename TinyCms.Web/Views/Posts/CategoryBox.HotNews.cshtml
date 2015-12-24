@@ -1,10 +1,7 @@
-﻿@model IEnumerable<PostOverviewModel>
-@{
-    var posts = Model.ToList();
-}
-@if (Model.Any())
+﻿@model CategoryBoxModel
+@if (Model.Posts.Any())
 {
-    var firstPost = posts[0];
+    var firstPost = Model.Posts.First();
     <div class="hotnews">
         <a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })"><span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="470" height="260" alt="" class="newsimg" /></span></a>
         <h1><a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })">@firstPost.Name</a></h1>
@@ -12,9 +9,9 @@
 
         <p class="recent_news">
 
-            @if (Model.Count() > 1)
+            @if (Model.Posts.Count > 1)
             {
-                foreach (var post in posts.Skip(1))
+                foreach (var post in Model.Posts.Skip(1))
                 {
                     <em></em>
                     <a href="@Url.RouteUrl("Post", new { SeName = post.SeName })">@post.Name</a>
