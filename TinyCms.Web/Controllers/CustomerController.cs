@@ -29,6 +29,9 @@ using TinyCms.Web.Framework.Security.Captcha;
 using TinyCms.Web.Framework.Security.Honeypot;
 using TinyCms.Web.Models.Customer;
 using TinyCms.Services.Localization;
+using TinyCms.Services.Posts;
+using TinyCms.Services.Security;
+using TinyCms.Web.Extensions;
 using WebGrease.Css.Extensions;
 
 namespace TinyCms.Web.Controllers
@@ -61,6 +64,9 @@ namespace TinyCms.Web.Controllers
         private readonly SecuritySettings _securitySettings;
         private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
         private readonly StoreInformationSettings _storeInformationSettings;
+        private readonly IPostService _postService;
+        private readonly ICategoryService _categoryService;
+        private readonly IPermissionService _permissionService;
 
         #endregion
 
@@ -89,7 +95,7 @@ namespace TinyCms.Web.Controllers
             SecuritySettings securitySettings,
             ExternalAuthenticationSettings externalAuthenticationSettings,
             StoreInformationSettings storeInformationSettings, 
-            INewsLetterSubscriptionService newsLetterSubscriptionService)
+            INewsLetterSubscriptionService newsLetterSubscriptionService, IPostService postService)
         {
             this._authenticationService = authenticationService;
             this._dateTimeHelper = dateTimeHelper;
@@ -115,6 +121,7 @@ namespace TinyCms.Web.Controllers
             this._externalAuthenticationSettings = externalAuthenticationSettings;
             this._storeInformationSettings = storeInformationSettings;
             _newsLetterSubscriptionService = newsLetterSubscriptionService;
+            _postService = postService;
         }
 
         #endregion
@@ -879,6 +886,21 @@ namespace TinyCms.Web.Controllers
             {
                 model.AvatarUrl = @Url.Content("~/Content/Images/avatar.png");
             }
+
+            model.Posts = this.PreparePostOverviewModels(_workContext,
+                _categoryService,
+                _postService,
+                _permissionService,
+                _localizationService,
+                _pictureService,
+                _webHelper,
+                _cacheManager,
+                _catalogSettings,
+                _mediaSettings,
+                posts,
+                preparePictureModel,
+                postThumbPictureSize);
+
             return View(model);
         }
 

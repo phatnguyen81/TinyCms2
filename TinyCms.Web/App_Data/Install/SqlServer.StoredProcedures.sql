@@ -726,20 +726,26 @@ BEGIN
 	ELSE
 	BEGIN
 		SELECT TOP (@BeforeAfterNumPost * 2) * FROM (
-			SELECT TOP (2*@BeforeAfterNumPost) P.*, ROW_NUMBER() OVER(ORDER BY P.ID) RN
-			FROM POST P
-				INNER JOIN Post_Category_Mapping M ON P.ID = M.PostId
-			WHERE P.ID > @PostId 
-				AND M.CategoryId IN (SELECT CATEGORYID FROM Post_Category_Mapping WHERE POSTID = @PostId)
-				AND (@ShowHidden = 1 OR (P.Deleted = 0 AND P.Published = 1)) 
+			SELECT TOP (2*@BeforeAfterNumPost) X.*, ROW_NUMBER() OVER(ORDER BY X.ID) RN
+			FROM (
+				SELECT DISTINCT P.* FROM POST P
+					INNER JOIN Post_Category_Mapping M ON P.ID = M.PostId
+				WHERE P.ID > @PostId 
+					AND M.CategoryId IN (SELECT CATEGORYID FROM Post_Category_Mapping WHERE POSTID = @PostId)
+					AND (@ShowHidden = 1 OR (P.Deleted = 0 AND P.Published = 1)) 
+				) X
+			ORDER BY X.ID DESC
 			UNION
-			SELECT TOP (2*@BeforeAfterNumPost) P.*, ROW_NUMBER() OVER(ORDER BY P.ID DESC) RN
-			FROM POST P
-				INNER JOIN Post_Category_Mapping M ON P.ID = M.PostId
-			WHERE P.ID < @PostId 
-				AND M.CategoryId IN (SELECT CATEGORYID FROM Post_Category_Mapping WHERE POSTID = @PostId)
-				AND (@ShowHidden = 1 OR (P.Deleted = 0 AND P.Published = 1))
-			ORDER BY P.ID DESC
+			SELECT TOP (2*@BeforeAfterNumPost) X.*, ROW_NUMBER() OVER(ORDER BY X.ID DESC) RN
+			FROM (
+				SELECT DISTINCT P.* FROM POST P
+					INNER JOIN Post_Category_Mapping M ON P.ID = M.PostId
+				WHERE P.ID < @PostId 
+					AND M.CategoryId IN (SELECT CATEGORYID FROM Post_Category_Mapping WHERE POSTID = @PostId)
+					AND (@ShowHidden = 1 OR (P.Deleted = 0 AND P.Published = 1))
+				
+				) X
+			ORDER BY X.ID DESC
 			) A
 		ORDER BY A.RN;
 	END

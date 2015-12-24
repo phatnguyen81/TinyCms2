@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TinyCms.Web.Models.Posts;
 
 namespace TinyCms.Web.Models.Customer
 {
@@ -12,6 +13,8 @@ namespace TinyCms.Web.Models.Customer
         public string RoleName { get; set; }
         public int PostCount { get; set; }
         public string AvatarUrl { get; set; }
+
+        public List<PostOverviewModel> Posts { get; set; }
         //public PostOverview
     }
 }
