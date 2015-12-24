@@ -19,9 +19,9 @@ namespace TinyCms.Services.Authentication.External
 
             if (settings.ActiveAuthenticationMethodSystemNames == null)
                 return false;
-            //foreach (string activeMethodSystemName in settings.ActiveAuthenticationMethodSystemNames)
-            //    if (method.PluginDescriptor.SystemName.Equals(activeMethodSystemName, StringComparison.InvariantCultureIgnoreCase))
-            //        return true;
+            foreach (string activeMethodSystemName in settings.ActiveAuthenticationMethodSystemNames)
+                if (method.PluginDescriptor.SystemName.Equals(activeMethodSystemName, StringComparison.InvariantCultureIgnoreCase))
+                    return true;
             return false;
         }
     }

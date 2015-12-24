@@ -94,7 +94,8 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Controllers
             //    _settingService.DeleteSetting(facebookExternalAuthSettings, x => x.ClientSecret, storeScope);
 
 
-            _settingService.SaveSetting(facebookExternalAuthSettings, x => x.ClientKeyIdentifier, true);
+            _settingService.SaveSetting(facebookExternalAuthSettings, x => x.ClientKeyIdentifier, false);
+            _settingService.SaveSetting(facebookExternalAuthSettings, x => x.ClientSecret, false);
 
             //now clear settings cache
             _settingService.ClearCache();

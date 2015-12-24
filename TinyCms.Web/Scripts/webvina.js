@@ -207,11 +207,11 @@ function readCookie(name) {
         //    signup();
         //});
 
-        node.find('.facelogin').click(function (e) {
-            e.preventDefault();
-            bx && bx.close();
-            loginFB();
-        });
+    //    node.find('.facelogin').click(function (e) {
+    //        e.preventDefault();
+    //        bx && bx.close();
+    //        loginFB();
+    //    });
     }
     login(1);
 

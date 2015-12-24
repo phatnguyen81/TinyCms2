@@ -15,9 +15,10 @@
     var seoSettings = EngineContext.Current.Resolve<SeoSettings>();
 
     //canonical URL
+    var postUrl = Url.RouteUrl("Post", new { SeName = Model.SeName }, this.Request.Url.Scheme);
     if (seoSettings.CanonicalUrlsEnabled)
     {
-        var postUrl = Url.RouteUrl("Post", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+        
         Html.AddCanonicalUrlParts(postUrl);
     }
 
@@ -54,6 +55,9 @@
             <div class="ctn">
                 @Html.Raw(Model.FullDescription)
                 @Html.Action("PollBlock", "Poll", new { systemKeyword = "poll_iphone" })
+                <div class="facebook_share">
+                    <div class="fb-like" data-href="@postUrl" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
+                </div>
             </div>
             <div class="rightside">
                 @Html.Action("RelatedPosts", "Posts")
