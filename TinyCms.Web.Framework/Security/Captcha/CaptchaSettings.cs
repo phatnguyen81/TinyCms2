@@ -30,7 +30,7 @@ namespace TinyCms.Web.Framework.Security.Captcha
         /// <summary>
         /// A value indicating whether CAPTCHA should be displayed on the "email a friend" page
         /// </summary>
-        public bool ShowOnEmailProductToFriendPage { get; set; }
+        public bool ShowOnEmailPostToFriendPage { get; set; }
         /// <summary>
         /// A value indicating whether CAPTCHA should be displayed on the "comment blog" page
         /// </summary>
@@ -42,7 +42,7 @@ namespace TinyCms.Web.Framework.Security.Captcha
         /// <summary>
         /// A value indicating whether CAPTCHA should be displayed on the product reviews page
         /// </summary>
-        public bool ShowOnProductReviewPage { get; set; }
+        public bool ShowOnPostReviewPage { get; set; }
         /// <summary>
         /// A value indicating whether CAPTCHA should be displayed on the "Apply for vendor account" page
         /// </summary>

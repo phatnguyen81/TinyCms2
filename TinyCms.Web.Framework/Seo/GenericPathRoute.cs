@@ -152,51 +152,19 @@ namespace TinyCms.Web.Framework.Seo
                 //process URL
                 switch (urlRecord.EntityName.ToLowerInvariant())
                 {
-                    case "product":
+                    case "post":
                         {
-                            data.Values["controller"] = "Product";
-                            data.Values["action"] = "ProductDetails";
-                            data.Values["productid"] = urlRecord.EntityId;
+                            data.Values["controller"] = "Posts";
+                            data.Values["action"] = "PostDetails";
+                            data.Values["postid"] = urlRecord.EntityId;
                             data.Values["SeName"] = urlRecord.Slug;
                         }
                         break;
                     case "category":
                         {
-                            data.Values["controller"] = "Catalog";
+                            data.Values["controller"] = "Posts";
                             data.Values["action"] = "Category";
                             data.Values["categoryid"] = urlRecord.EntityId;
-                            data.Values["SeName"] = urlRecord.Slug;
-                        }
-                        break;
-                    case "manufacturer":
-                        {
-                            data.Values["controller"] = "Catalog";
-                            data.Values["action"] = "Manufacturer";
-                            data.Values["manufacturerid"] = urlRecord.EntityId;
-                            data.Values["SeName"] = urlRecord.Slug;
-                        }
-                        break;
-                    case "vendor":
-                        {
-                            data.Values["controller"] = "Catalog";
-                            data.Values["action"] = "Vendor";
-                            data.Values["vendorid"] = urlRecord.EntityId;
-                            data.Values["SeName"] = urlRecord.Slug;
-                        }
-                        break;
-                    case "newsitem":
-                        {
-                            data.Values["controller"] = "News";
-                            data.Values["action"] = "NewsItem";
-                            data.Values["newsItemId"] = urlRecord.EntityId;
-                            data.Values["SeName"] = urlRecord.Slug;
-                        }
-                        break;
-                    case "blogpost":
-                        {
-                            data.Values["controller"] = "Blog";
-                            data.Values["action"] = "BlogPost";
-                            data.Values["blogPostId"] = urlRecord.EntityId;
                             data.Values["SeName"] = urlRecord.Slug;
                         }
                         break;

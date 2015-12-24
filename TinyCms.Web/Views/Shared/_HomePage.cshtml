@@ -6,8 +6,7 @@
 <div class="headpage">
     <div class="tophead clearfix">
         <a href="@Url.RouteUrl("homepage")" class="logo"></a>
-        @Html.Widget("home_top_header")
-        @*<a href="#" class="topbanner"><img src="temp/top_banner.jpg" width="620" alt="" /></a>*@
+        <div class="topbanner">@Html.Widget("home_top_header")</div>
     </div>
     <div class="nav">
         @Html.Action("SearchBox", "Posts")

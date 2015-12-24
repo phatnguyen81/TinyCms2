@@ -100,6 +100,11 @@ namespace TinyCms.Services.Cms
             return _widgetZoneRepository.Table.ToList();
         }
 
+        public WidgetZone GetWidgetZoneBySystemName(string systemName)
+        {
+            return _widgetZoneRepository.Table.FirstOrDefault(q => q.SystemName == systemName);
+        }
+
         #endregion
     }
 }

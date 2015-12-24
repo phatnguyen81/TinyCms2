@@ -13,10 +13,10 @@ namespace TinyCms.Web.Infrastructure.Cache
     /// Model cache event consumer (used for caching of presentation layer models)
     /// </summary>
     public partial class ModelCacheEventConsumer: 
-        //languages
-        IConsumer<EntityInserted<Language>>,
-        IConsumer<EntityUpdated<Language>>,
-        IConsumer<EntityDeleted<Language>>,
+            //languages
+            IConsumer<EntityInserted<Language>>,
+            IConsumer<EntityUpdated<Language>>,
+            IConsumer<EntityDeleted<Language>>,
         //settings
         IConsumer<EntityUpdated<Setting>>,
    
@@ -42,35 +42,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         public const string SEARCH_CATEGORIES_MODEL_KEY = "Nop.pres.search.categories-{0}-{1}-{2}";
         public const string SEARCH_CATEGORIES_PATTERN_KEY = "Nop.pres.search.categories";
 
-        /// <summary>
-        /// Key for ManufacturerNavigationModel caching
-        /// </summary>
-        /// <remarks>
-        /// {0} : current manufacturer id
-        /// {1} : language id
-        /// {2} : roles of the current user
-        /// {3} : current store ID
-        /// </remarks>
-        public const string MANUFACTURER_NAVIGATION_MODEL_KEY = "Nop.pres.manufacturer.navigation-{0}-{1}-{2}-{3}";
-        public const string MANUFACTURER_NAVIGATION_PATTERN_KEY = "Nop.pres.manufacturer.navigation";
-
-        /// <summary>
-        /// Key for VendorNavigationModel caching
-        /// </summary>
-        public const string VENDOR_NAVIGATION_MODEL_KEY = "Nop.pres.vendor.navigation";
-        public const string VENDOR_NAVIGATION_PATTERN_KEY = "Nop.pres.vendor.navigation";
-
-        /// <summary>
-        /// Key for caching of a value indicating whether a manufacturer has featured Posts
-        /// </summary>
-        /// <remarks>
-        /// {0} : manufacturer id
-        /// {1} : roles of the current user
-        /// {2} : current store ID
-        /// </remarks>
-        public const string MANUFACTURER_HAS_FEATURED_Posts_KEY = "Nop.pres.manufacturer.hasfeaturedPosts-{0}-{1}-{2}";
-        public const string MANUFACTURER_HAS_FEATURED_Posts_PATTERN_KEY = "Nop.pres.manufacturer.hasfeaturedPosts";
-        
+       
         /// <summary>
         /// Key for CategoryNavigationModel caching
         /// </summary>
@@ -137,7 +109,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {3} : language ID
         /// {4} : is connection SSL secured (included in a category picture URL)
         /// </remarks>
-        public const string CATEGORY_SUBCATEGORIES_KEY = "Nop.pres.category.subcategories-{0}-{1}-{2}-{3}-{4}";
+        public const string CATEGORY_SUBCATEGORIES_KEY = "Nop.pres.category.subcategories-{0}-{1}-{2}-{3}";
         public const string CATEGORY_SUBCATEGORIES_PATTERN_KEY = "Nop.pres.category.subcategories";
 
         /// <summary>
@@ -160,7 +132,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {1} : comma separated list of customer roles
         /// {2} : current store ID
         /// </remarks>
-        public const string CATEGORY_CHILD_IDENTIFIERS_MODEL_KEY = "Nop.pres.category.childidentifiers-{0}-{1}-{2}";
+        public const string CATEGORY_CHILD_IDENTIFIERS_MODEL_KEY = "Nop.pres.category.childidentifiers-{0}-{1}";
         public const string CATEGORY_CHILD_IDENTIFIERS_PATTERN_KEY = "Nop.pres.category.childidentifiers";
 
         /// <summary>
@@ -174,6 +146,16 @@ namespace TinyCms.Web.Infrastructure.Cache
         public const string SPECS_FILTER_PATTERN_KEY = "Nop.pres.filter.specs";
 
         /// <summary>
+        /// Key for "related" product identifiers displayed on the product details page
+        /// </summary>
+        /// <remarks>
+        /// {0} : current product id
+        /// {1} : current store ID
+        /// </remarks>
+        public const string PRODUCTS_RELATED_IDS_KEY = "Nop.pres.related-{0}";
+        public const string PRODUCTS_RELATED_IDS_PATTERN_KEY = "Nop.pres.related";
+
+        /// <summary>
         /// Key for ProductBreadcrumbModel caching
         /// </summary>
         /// <remarks>
@@ -182,7 +164,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {2} : comma separated list of customer roles
         /// {3} : current store ID
         /// </remarks>
-        public const string PRODUCT_BREADCRUMB_MODEL_KEY = "Nop.pres.product.breadcrumb-{0}-{1}-{2}-{3}";
+        public const string PRODUCT_BREADCRUMB_MODEL_KEY = "Nop.pres.product.breadcrumb-{0}-{1}-{2}";
         public const string PRODUCT_BREADCRUMB_PATTERN_KEY = "Nop.pres.product.breadcrumb";
 
         /// <summary>
@@ -193,7 +175,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {1} : language id
         /// {2} : current store ID
         /// </remarks>
-        public const string PRODUCTTAG_BY_PRODUCT_MODEL_KEY = "Nop.pres.producttag.byproduct-{0}-{1}-{2}";
+        public const string PRODUCTTAG_BY_PRODUCT_MODEL_KEY = "Nop.pres.producttag.byproduct-{0}-{1}";
         public const string PRODUCTTAG_BY_PRODUCT_PATTERN_KEY = "Nop.pres.producttag.byproduct";
 
         /// <summary>
@@ -376,7 +358,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {4} : is connection SSL secured?
         /// {5} : current store ID
         /// </remarks>
-        public const string PRODUCT_DETAILS_PICTURES_MODEL_KEY = "Nop.pres.product.picture-{0}-{1}-{2}-{3}-{4}-{5}";
+        public const string PRODUCT_DETAILS_PICTURES_MODEL_KEY = "Nop.pres.product.picture-{0}-{1}-{2}-{3}";
         public const string PRODUCT_DETAILS_TPICTURES_PATTERN_KEY = "Nop.pres.product.picture";
 
         /// <summary>
@@ -401,7 +383,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {4} : is connection SSL secured?
         /// {5} : current store ID
         /// </remarks>
-        public const string CATEGORY_PICTURE_MODEL_KEY = "Nop.pres.category.picture-{0}-{1}-{2}-{3}-{4}";
+        public const string CATEGORY_PICTURE_MODEL_KEY = "Nop.pres.category.picture-{0}-{1}-{2}-{3}";
         public const string CATEGORY_PICTURE_PATTERN_KEY = "Nop.pres.category.picture";
 
         /// <summary>
@@ -595,7 +577,6 @@ namespace TinyCms.Web.Infrastructure.Cache
         {
             //clear all localizable models
             _cacheManager.RemoveByPattern(SEARCH_CATEGORIES_PATTERN_KEY);
-            _cacheManager.RemoveByPattern(MANUFACTURER_NAVIGATION_PATTERN_KEY);
             _cacheManager.RemoveByPattern(PRODUCT_SPECS_PATTERN_KEY);
             _cacheManager.RemoveByPattern(SPECS_FILTER_PATTERN_KEY);
             _cacheManager.RemoveByPattern(TOPIC_PATTERN_KEY);
@@ -611,7 +592,6 @@ namespace TinyCms.Web.Infrastructure.Cache
         {
             //clear all localizable models
             _cacheManager.RemoveByPattern(SEARCH_CATEGORIES_PATTERN_KEY);
-            _cacheManager.RemoveByPattern(MANUFACTURER_NAVIGATION_PATTERN_KEY);
             _cacheManager.RemoveByPattern(PRODUCT_SPECS_PATTERN_KEY);
             _cacheManager.RemoveByPattern(SPECS_FILTER_PATTERN_KEY);
             _cacheManager.RemoveByPattern(TOPIC_PATTERN_KEY);
@@ -627,7 +607,6 @@ namespace TinyCms.Web.Infrastructure.Cache
         {
             //clear all localizable models
             _cacheManager.RemoveByPattern(SEARCH_CATEGORIES_PATTERN_KEY);
-            _cacheManager.RemoveByPattern(MANUFACTURER_NAVIGATION_PATTERN_KEY);
             _cacheManager.RemoveByPattern(PRODUCT_SPECS_PATTERN_KEY);
             _cacheManager.RemoveByPattern(SPECS_FILTER_PATTERN_KEY);
             _cacheManager.RemoveByPattern(TOPIC_PATTERN_KEY);
@@ -645,8 +624,6 @@ namespace TinyCms.Web.Infrastructure.Cache
         {
             //clear models which depend on settings
             _cacheManager.RemoveByPattern(PRODUCTTAG_POPULAR_PATTERN_KEY); //depends on CatalogSettings.NumberOfProductTags
-            _cacheManager.RemoveByPattern(MANUFACTURER_NAVIGATION_PATTERN_KEY); //depends on CatalogSettings.ManufacturersBlockItemsToDisplay
-            _cacheManager.RemoveByPattern(VENDOR_NAVIGATION_PATTERN_KEY); //depends on VendorSettings.VendorBlockItemsToDisplay
             _cacheManager.RemoveByPattern(CATEGORY_NAVIGATION_PATTERN_KEY); //depends on CatalogSettings.ShowCategoryProductNumber and CatalogSettings.ShowCategoryProductNumberIncludingSubcategories
             _cacheManager.RemoveByPattern(CATEGORY_MENU_PATTERN_KEY); //depends on CatalogSettings.ShowCategoryProductNumber and CatalogSettings.ShowCategoryProductNumberIncludingSubcategories
             _cacheManager.RemoveByPattern(CATEGORY_NUMBER_OF_Posts_PATTERN_KEY); //depends on CatalogSettings.ShowCategoryProductNumberIncludingSubcategories

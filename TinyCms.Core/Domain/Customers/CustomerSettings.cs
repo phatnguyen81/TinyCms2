@@ -83,7 +83,7 @@ namespace TinyCms.Core.Domain.Customers
         /// <summary>
         /// Gets or sets a value indicating whether to hide 'Downloable products' tab on 'My account' page
         /// </summary>
-        public bool HideDownloadableProductsTab { get; set; }
+        public bool HideDownloadablePostsTab { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to hide 'Back in stock subscriptions' tab on 'My account' page
@@ -93,7 +93,7 @@ namespace TinyCms.Core.Domain.Customers
         /// <summary>
         /// Gets or sets a value indicating whether to validate user when downloading products
         /// </summary>
-        public bool DownloadableProductsValidateUser { get; set; }
+        public bool DownloadablePostsValidateUser { get; set; }
 
         /// <summary>
         /// Customer name formatting

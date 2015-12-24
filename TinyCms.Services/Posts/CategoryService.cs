@@ -293,7 +293,7 @@ namespace TinyCms.Services.Posts
             string key = string.Format(CATEGORIES_BY_CATEGORY_TYPE_SYSTEM_NAME_ID_KEY, systemName, showHidden);
             return _cacheManager.Get(key, () =>
             {
-                var categoryType = _categoryTypeService.GetCategoryTypeBySystemName("systemName");
+                var categoryType = _categoryTypeService.GetCategoryTypeBySystemName(systemName);
                 if (categoryType == null) return new List<Category>();
 
                 var query = _categoryRepository.Table;

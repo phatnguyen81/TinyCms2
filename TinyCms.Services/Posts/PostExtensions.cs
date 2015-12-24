@@ -28,6 +28,22 @@ namespace TinyCms.Services.Posts
             return result;
         }
 
+        /// <summary>
+        /// Finds a related post item by specified identifiers
+        /// </summary>
+        /// <param name="source">Source</param>
+        /// <param name="postId1">The first post identifier</param>
+        /// <param name="postId2">The second post identifier</param>
+        /// <returns>Related post</returns>
+        public static RelatedPost FindRelatedPost(this IList<RelatedPost> source,
+            int postId1, int postId2)
+        {
+            foreach (RelatedPost relatedPost in source)
+                if (relatedPost.PostId1 == postId1 && relatedPost.PostId2 == postId2)
+                    return relatedPost;
+            return null;
+        }
+
   
     }
 }

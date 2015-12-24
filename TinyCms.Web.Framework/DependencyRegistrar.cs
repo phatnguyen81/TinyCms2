@@ -11,6 +11,7 @@ using TinyCms.Core;
 using TinyCms.Core.Caching;
 using TinyCms.Core.Configuration;
 using TinyCms.Core.Data;
+using TinyCms.Core.Domain.Posts;
 using TinyCms.Core.Fakes;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Core.Infrastructure.DependencyManagement;

@@ -24,7 +24,7 @@ namespace TinyCms.Services.Posts
         /// <remarks>
         /// {0} : store ID
         /// </remarks>
-        private const string POSTTAG_COUNT_KEY = "Nop.posttag.count-{0}";
+        private const string POSTTAG_COUNT_KEY = "Nop.posttag.count";
 
         /// <summary>
         /// Key pattern to clear cache
@@ -89,9 +89,9 @@ namespace TinyCms.Services.Posts
         /// </summary>
         /// <param name="storeId">Store identifier</param>
         /// <returns>Dictionary of "post tag ID : post count"</returns>
-        private Dictionary<int, int> GetPostCount(int storeId)
+        private Dictionary<int, int> GetPostCount()
         {
-            string key = string.Format(POSTTAG_COUNT_KEY, storeId);
+            string key = string.Format(POSTTAG_COUNT_KEY);
             return _cacheManager.Get(key, () =>
             {
 
@@ -103,16 +103,10 @@ namespace TinyCms.Services.Posts
                     #region Use stored procedure
 
                     //prepare parameters
-                    var pStoreId = _dataProvider.GetParameter();
-                    pStoreId.ParameterName = "StoreId";
-                    pStoreId.Value = storeId;
-                    pStoreId.DbType = DbType.Int32;
-
 
                     //invoke stored procedure
                     var result = _dbContext.SqlQuery<PostTagWithCount>(
-                        "Exec PostTagCountLoadAll @StoreId",
-                        pStoreId);
+                        "Exec PostTagCountLoadAll");
 
                     var dictionary = new Dictionary<int, int>();
                     foreach (var item in result)
@@ -248,9 +242,9 @@ namespace TinyCms.Services.Posts
         /// <param name="postTagId">Post tag identifier</param>
         /// <param name="storeId">Store identifier</param>
         /// <returns>Number of posts</returns>
-        public virtual int GetPostCount(int postTagId, int storeId)
+        public virtual int GetPostCount(int postTagId)
         {
-            var dictionary = GetPostCount(storeId);
+            var dictionary = GetPostCount();
             if (dictionary.ContainsKey(postTagId))
                 return dictionary[postTagId];
             

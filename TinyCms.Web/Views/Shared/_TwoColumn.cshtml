@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+@Html.Partial("Header")
+<div class="headpage">
+    <div class="mainpage">
+        <div class="leftcol">
+            @RenderBody()
+        </div>
+        <div class="sidebar">
+            @Html.Action("DiscoveryCategory", "Posts", new { postThumbPictureSize = 270 })
+            @Html.Action("TravelViaPictureCategory", "Posts", new { postThumbPictureSize = 270 })
+            <div class="sidebanner">
+                @Html.Widget("sidebar_banner")
+            </div>
+        </div>
+    </div>
+    @Html.Action("Footer", "Common")
+</div>

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<PostOverviewModel>
+@if (Model.Any())
+{
+    <div class="other_news">
+        <h2>Tin tức khác</h2>
+        <ul>
+            @foreach (var post in Model)
+            {
+                <li>
+                    <a href="@Url.RouteUrl("Post", new {SeName = post.SeName})">
+                        <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText"> @post.Name
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+}

@@ -122,6 +122,45 @@ namespace TinyCms.Admin.Models.Posts
 
         #region Nested classes
 
+        public partial class RelatedPostModel : BaseNopEntityModel
+        {
+            public int PostId2 { get; set; }
+
+            [NopResourceDisplayName("Admin.Catalog.Posts.RelatedPosts.Fields.Post")]
+            public string Post2Name { get; set; }
+
+            [NopResourceDisplayName("Admin.Catalog.Posts.RelatedPosts.Fields.DisplayOrder")]
+            public int DisplayOrder { get; set; }
+        }
+        public partial class AddRelatedPostModel : BaseNopModel
+        {
+            public AddRelatedPostModel()
+            {
+                AvailableCategories = new List<SelectListItem>();
+            }
+
+            [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchPostName")]
+            [AllowHtml]
+            public string SearchPostName { get; set; }
+            [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchCategory")]
+            public int SearchCategoryId { get; set; }
+            [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchManufacturer")]
+            public int SearchManufacturerId { get; set; }
+            [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchStore")]
+            public int SearchStoreId { get; set; }
+            [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchVendor")]
+            public int SearchVendorId { get; set; }
+            [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchPostType")]
+            public int SearchPostTypeId { get; set; }
+
+            public IList<SelectListItem> AvailableCategories { get; set; }
+
+            public int PostId { get; set; }
+
+            public int[] SelectedPostIds { get; set; }
+
+        }
+
        
         public partial class PostPictureModel : BaseNopEntityModel
         {

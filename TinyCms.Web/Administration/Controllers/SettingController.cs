@@ -215,7 +215,7 @@ namespace TinyCms.Admin.Controllers
             model.SeoSettings.DefaultTitle = seoSettings.DefaultTitle;
             model.SeoSettings.DefaultMetaKeywords = seoSettings.DefaultMetaKeywords;
             model.SeoSettings.DefaultMetaDescription = seoSettings.DefaultMetaDescription;
-            model.SeoSettings.GenerateProductMetaDescription = seoSettings.GenerateProductMetaDescription;
+            model.SeoSettings.GeneratePostMetaDescription = seoSettings.GeneratePostMetaDescription;
             model.SeoSettings.ConvertNonWesternChars = seoSettings.ConvertNonWesternChars;
             model.SeoSettings.CanonicalUrlsEnabled = seoSettings.CanonicalUrlsEnabled;
             model.SeoSettings.WwwRequirement = (int)seoSettings.WwwRequirement;
@@ -246,10 +246,10 @@ namespace TinyCms.Admin.Controllers
             model.SecuritySettings.CaptchaShowOnRegistrationPage = captchaSettings.ShowOnRegistrationPage;
             model.SecuritySettings.CaptchaShowOnContactUsPage = captchaSettings.ShowOnContactUsPage;
             model.SecuritySettings.CaptchaShowOnEmailWishlistToFriendPage = captchaSettings.ShowOnEmailWishlistToFriendPage;
-            model.SecuritySettings.CaptchaShowOnEmailProductToFriendPage = captchaSettings.ShowOnEmailProductToFriendPage;
+            model.SecuritySettings.CaptchaShowOnEmailPostToFriendPage = captchaSettings.ShowOnEmailPostToFriendPage;
             model.SecuritySettings.CaptchaShowOnBlogCommentPage = captchaSettings.ShowOnBlogCommentPage;
             model.SecuritySettings.CaptchaShowOnNewsCommentPage = captchaSettings.ShowOnNewsCommentPage;
-            model.SecuritySettings.CaptchaShowOnProductReviewPage = captchaSettings.ShowOnProductReviewPage;
+            model.SecuritySettings.CaptchaShowOnPostReviewPage = captchaSettings.ShowOnPostReviewPage;
             model.SecuritySettings.CaptchaShowOnApplyVendorPage = captchaSettings.ShowOnApplyVendorPage;
             model.SecuritySettings.ReCaptchaPublicKey = captchaSettings.ReCaptchaPublicKey;
             model.SecuritySettings.ReCaptchaPrivateKey = captchaSettings.ReCaptchaPrivateKey;
@@ -322,7 +322,7 @@ namespace TinyCms.Admin.Controllers
             seoSettings.DefaultTitle = model.SeoSettings.DefaultTitle;
             seoSettings.DefaultMetaKeywords = model.SeoSettings.DefaultMetaKeywords;
             seoSettings.DefaultMetaDescription = model.SeoSettings.DefaultMetaDescription;
-            seoSettings.GenerateProductMetaDescription = model.SeoSettings.GenerateProductMetaDescription;
+            seoSettings.GeneratePostMetaDescription = model.SeoSettings.GeneratePostMetaDescription;
             seoSettings.ConvertNonWesternChars = model.SeoSettings.ConvertNonWesternChars;
             seoSettings.CanonicalUrlsEnabled = model.SeoSettings.CanonicalUrlsEnabled;
             seoSettings.WwwRequirement = (WwwRequirement)model.SeoSettings.WwwRequirement;
@@ -336,7 +336,7 @@ namespace TinyCms.Admin.Controllers
             _settingService.SaveSetting(seoSettings, x => x.DefaultTitle, false);
             _settingService.SaveSetting(seoSettings, x => x.DefaultMetaKeywords, false);
             _settingService.SaveSetting(seoSettings, x => x.DefaultMetaDescription, false);
-            _settingService.SaveSetting(seoSettings, x => x.GenerateProductMetaDescription, false);
+            _settingService.SaveSetting(seoSettings, x => x.GeneratePostMetaDescription, false);
             _settingService.SaveSetting(seoSettings, x => x.ConvertNonWesternChars, false);
             _settingService.SaveSetting(seoSettings, x => x.CanonicalUrlsEnabled, false);
             _settingService.SaveSetting(seoSettings, x => x.WwwRequirement, false);
@@ -365,10 +365,10 @@ namespace TinyCms.Admin.Controllers
             captchaSettings.ShowOnRegistrationPage = model.SecuritySettings.CaptchaShowOnRegistrationPage;
             captchaSettings.ShowOnContactUsPage = model.SecuritySettings.CaptchaShowOnContactUsPage;
             captchaSettings.ShowOnEmailWishlistToFriendPage = model.SecuritySettings.CaptchaShowOnEmailWishlistToFriendPage;
-            captchaSettings.ShowOnEmailProductToFriendPage = model.SecuritySettings.CaptchaShowOnEmailProductToFriendPage;
+            captchaSettings.ShowOnEmailPostToFriendPage = model.SecuritySettings.CaptchaShowOnEmailPostToFriendPage;
             captchaSettings.ShowOnBlogCommentPage = model.SecuritySettings.CaptchaShowOnBlogCommentPage;
             captchaSettings.ShowOnNewsCommentPage = model.SecuritySettings.CaptchaShowOnNewsCommentPage;
-            captchaSettings.ShowOnProductReviewPage = model.SecuritySettings.CaptchaShowOnProductReviewPage;
+            captchaSettings.ShowOnPostReviewPage = model.SecuritySettings.CaptchaShowOnPostReviewPage;
             captchaSettings.ShowOnApplyVendorPage = model.SecuritySettings.CaptchaShowOnApplyVendorPage;
             captchaSettings.ReCaptchaPublicKey = model.SecuritySettings.ReCaptchaPublicKey;
             captchaSettings.ReCaptchaPrivateKey = model.SecuritySettings.ReCaptchaPrivateKey;
@@ -421,56 +421,56 @@ namespace TinyCms.Admin.Controllers
             //load settings for a chosen store scope
             var catalogSettings = _settingService.LoadSetting<CatalogSettings>();
             var model = catalogSettings.ToModel();
-                model.AllowViewUnpublishedProductPage_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.AllowViewUnpublishedProductPage);
-                model.DisplayDiscontinuedMessageForUnpublishedProducts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.DisplayDiscontinuedMessageForUnpublishedProducts);
-                model.ShowProductSku_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowProductSku);
+                model.AllowViewUnpublishedPostPage_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.AllowViewUnpublishedPostPage);
+                model.DisplayDiscontinuedMessageForUnpublishedPosts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.DisplayDiscontinuedMessageForUnpublishedPosts);
+                model.ShowPostSku_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowPostSku);
                 model.ShowManufacturerPartNumber_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowManufacturerPartNumber);
                 model.ShowGtin_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowGtin);
                 model.ShowFreeShippingNotification_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowFreeShippingNotification);
-                model.AllowProductSorting_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.AllowProductSorting);
-                model.AllowProductViewModeChanging_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.AllowProductViewModeChanging);
-                model.ShowProductsFromSubcategories_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowProductsFromSubcategories);
-                model.ShowCategoryProductNumber_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowCategoryProductNumber);
-                model.ShowCategoryProductNumberIncludingSubcategories_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowCategoryProductNumberIncludingSubcategories);
+                model.AllowPostSorting_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.AllowPostSorting);
+                model.AllowPostViewModeChanging_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.AllowPostViewModeChanging);
+                model.ShowPostsFromSubcategories_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowPostsFromSubcategories);
+                model.ShowCategoryPostNumber_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowCategoryPostNumber);
+                model.ShowCategoryPostNumberIncludingSubcategories_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowCategoryPostNumberIncludingSubcategories);
                 model.CategoryBreadcrumbEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.CategoryBreadcrumbEnabled);
                 model.ShowShareButton_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowShareButton);
                 model.PageShareCode_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.PageShareCode);
-                model.ProductReviewsMustBeApproved_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ProductReviewsMustBeApproved);
-                model.AllowAnonymousUsersToReviewProduct_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.AllowAnonymousUsersToReviewProduct);
-                model.NotifyStoreOwnerAboutNewProductReviews_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.NotifyStoreOwnerAboutNewProductReviews);
+                model.PostReviewsMustBeApproved_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.PostReviewsMustBeApproved);
+                model.AllowAnonymousUsersToReviewPost_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.AllowAnonymousUsersToReviewPost);
+                model.NotifyStoreOwnerAboutNewPostReviews_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.NotifyStoreOwnerAboutNewPostReviews);
                 model.EmailAFriendEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.EmailAFriendEnabled);
                 model.AllowAnonymousUsersToEmailAFriend_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.AllowAnonymousUsersToEmailAFriend);
-                model.RecentlyViewedProductsNumber_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.RecentlyViewedProductsNumber);
-                model.RecentlyViewedProductsEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.RecentlyViewedProductsEnabled);
-                model.NewProductsNumber_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.NewProductsNumber);
-                model.NewProductsEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.NewProductsEnabled);
-                model.CompareProductsEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.CompareProductsEnabled);
+                model.RecentlyViewedPostsNumber_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.RecentlyViewedPostsNumber);
+                model.RecentlyViewedPostsEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.RecentlyViewedPostsEnabled);
+                model.NewPostsNumber_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.NewPostsNumber);
+                model.NewPostsEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.NewPostsEnabled);
+                model.ComparePostsEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ComparePostsEnabled);
                 model.ShowBestsellersOnHomepage_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowBestsellersOnHomepage);
                 model.NumberOfBestsellersOnHomepage_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.NumberOfBestsellersOnHomepage);
-                model.SearchPageProductsPerPage_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.SearchPageProductsPerPage);
+                model.SearchPagePostsPerPage_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.SearchPagePostsPerPage);
                 model.SearchPageAllowCustomersToSelectPageSize_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.SearchPageAllowCustomersToSelectPageSize);
                 model.SearchPagePageSizeOptions_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.SearchPagePageSizeOptions);
-                model.ProductSearchAutoCompleteEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ProductSearchAutoCompleteEnabled);
-                model.ProductSearchAutoCompleteNumberOfProducts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ProductSearchAutoCompleteNumberOfProducts);
-                model.ShowProductImagesInSearchAutoComplete_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowProductImagesInSearchAutoComplete);
-                model.ProductSearchTermMinimumLength_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ProductSearchTermMinimumLength);
-                model.ProductsAlsoPurchasedEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ProductsAlsoPurchasedEnabled);
-                model.ProductsAlsoPurchasedNumber_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ProductsAlsoPurchasedNumber);
-                model.NumberOfProductTags_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.NumberOfPostTags);
-                model.ProductsByTagPageSize_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ProductsByTagPageSize);
-                model.ProductsByTagAllowCustomersToSelectPageSize_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ProductsByTagAllowCustomersToSelectPageSize);
-                model.ProductsByTagPageSizeOptions_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ProductsByTagPageSizeOptions);
-                model.IncludeShortDescriptionInCompareProducts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.IncludeShortDescriptionInCompareProducts);
-                model.IncludeFullDescriptionInCompareProducts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.IncludeFullDescriptionInCompareProducts);
+                model.PostSearchAutoCompleteEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.PostSearchAutoCompleteEnabled);
+                model.PostSearchAutoCompleteNumberOfPosts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.PostSearchAutoCompleteNumberOfPosts);
+                model.ShowPostImagesInSearchAutoComplete_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ShowPostImagesInSearchAutoComplete);
+                model.PostSearchTermMinimumLength_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.PostSearchTermMinimumLength);
+                model.PostsAlsoPurchasedEnabled_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.PostsAlsoPurchasedEnabled);
+                model.PostsAlsoPurchasedNumber_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.PostsAlsoPurchasedNumber);
+                model.NumberOfPostTags_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.NumberOfPostTags);
+                model.PostsByTagPageSize_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.PostsByTagPageSize);
+                model.PostsByTagAllowCustomersToSelectPageSize_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.PostsByTagAllowCustomersToSelectPageSize);
+                model.PostsByTagPageSizeOptions_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.PostsByTagPageSizeOptions);
+                model.IncludeShortDescriptionInComparePosts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.IncludeShortDescriptionInComparePosts);
+                model.IncludeFullDescriptionInComparePosts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.IncludeFullDescriptionInComparePosts);
                 model.IgnoreDiscounts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.IgnoreDiscounts);
-                model.IgnoreFeaturedProducts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.IgnoreFeaturedProducts);
+                model.IgnoreFeaturedPosts_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.IgnoreFeaturedPosts);
                 model.IgnoreAcl_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.IgnoreAcl);
                 model.IgnoreStoreLimitations_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.IgnoreStoreLimitations);
-                model.CacheProductPrices_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.CacheProductPrices);
+                model.CachePostPrices_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.CachePostPrices);
                 model.ManufacturersBlockItemsToDisplay_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.ManufacturersBlockItemsToDisplay);
                 model.DisplayTaxShippingInfoFooter_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.DisplayTaxShippingInfoFooter);
-                model.DisplayTaxShippingInfoProductDetailsPage_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.DisplayTaxShippingInfoProductDetailsPage);
-                model.DisplayTaxShippingInfoProductBoxes_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.DisplayTaxShippingInfoProductBoxes);
+                model.DisplayTaxShippingInfoPostDetailsPage_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.DisplayTaxShippingInfoPostDetailsPage);
+                model.DisplayTaxShippingInfoPostBoxes_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.DisplayTaxShippingInfoPostBoxes);
                 model.DisplayTaxShippingInfoShoppingCart_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.DisplayTaxShippingInfoShoppingCart);
                 model.DisplayTaxShippingInfoWishlist_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.DisplayTaxShippingInfoWishlist);
                 model.DisplayTaxShippingInfoOrderDetailsPage_OverrideForStore = _settingService.SettingExists(catalogSettings, x => x.DisplayTaxShippingInfoOrderDetailsPage);
@@ -491,20 +491,20 @@ namespace TinyCms.Admin.Controllers
              * This behavior can increase performance because cached settings will not be cleared 
              * and loaded from database after each update */
 
-            //if (model.AllowViewUnpublishedProductPage_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.AllowViewUnpublishedProductPage, false);
+            //if (model.AllowViewUnpublishedPostPage_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.AllowViewUnpublishedPostPage, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.AllowViewUnpublishedProductPage);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.AllowViewUnpublishedPostPage);
 
-            //if (model.DisplayDiscontinuedMessageForUnpublishedProducts_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.DisplayDiscontinuedMessageForUnpublishedProducts, false);
+            //if (model.DisplayDiscontinuedMessageForUnpublishedPosts_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.DisplayDiscontinuedMessageForUnpublishedPosts, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.DisplayDiscontinuedMessageForUnpublishedProducts);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.DisplayDiscontinuedMessageForUnpublishedPosts);
 
-            //if (model.ShowProductSku_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ShowProductSku, false);
+            //if (model.ShowPostSku_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.ShowPostSku, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ShowProductSku);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.ShowPostSku);
             
             //if (model.ShowManufacturerPartNumber_OverrideForStore || storeScope == 0)
             //    _settingService.SaveSetting(catalogSettings, x => x.ShowManufacturerPartNumber, false);
@@ -521,30 +521,30 @@ namespace TinyCms.Admin.Controllers
             //else if (storeScope > 0)
             //    _settingService.DeleteSetting(catalogSettings, x => x.ShowFreeShippingNotification);
             
-            //if (model.AllowProductSorting_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.AllowProductSorting, false);
+            //if (model.AllowPostSorting_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.AllowPostSorting, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.AllowProductSorting);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.AllowPostSorting);
             
-            //if (model.AllowProductViewModeChanging_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.AllowProductViewModeChanging, false);
+            //if (model.AllowPostViewModeChanging_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.AllowPostViewModeChanging, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.AllowProductViewModeChanging);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.AllowPostViewModeChanging);
             
-            //if (model.ShowProductsFromSubcategories_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ShowProductsFromSubcategories, false);
+            //if (model.ShowPostsFromSubcategories_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.ShowPostsFromSubcategories, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ShowProductsFromSubcategories);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.ShowPostsFromSubcategories);
             
-            //if (model.ShowCategoryProductNumber_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ShowCategoryProductNumber, false);
+            //if (model.ShowCategoryPostNumber_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.ShowCategoryPostNumber, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ShowCategoryProductNumber);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.ShowCategoryPostNumber);
             
-            //if (model.ShowCategoryProductNumberIncludingSubcategories_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ShowCategoryProductNumberIncludingSubcategories, false);
+            //if (model.ShowCategoryPostNumberIncludingSubcategories_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.ShowCategoryPostNumberIncludingSubcategories, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ShowCategoryProductNumberIncludingSubcategories);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.ShowCategoryPostNumberIncludingSubcategories);
             
             //if (model.CategoryBreadcrumbEnabled_OverrideForStore || storeScope == 0)
             //    _settingService.SaveSetting(catalogSettings, x => x.CategoryBreadcrumbEnabled, false);
@@ -561,20 +561,20 @@ namespace TinyCms.Admin.Controllers
             //else if (storeScope > 0)
             //    _settingService.DeleteSetting(catalogSettings, x => x.PageShareCode);
 
-            //if (model.ProductReviewsMustBeApproved_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ProductReviewsMustBeApproved, false);
+            //if (model.PostReviewsMustBeApproved_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.PostReviewsMustBeApproved, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ProductReviewsMustBeApproved);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.PostReviewsMustBeApproved);
             
-            //if (model.AllowAnonymousUsersToReviewProduct_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.AllowAnonymousUsersToReviewProduct, false);
+            //if (model.AllowAnonymousUsersToReviewPost_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.AllowAnonymousUsersToReviewPost, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.AllowAnonymousUsersToReviewProduct);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.AllowAnonymousUsersToReviewPost);
             
-            //if (model.NotifyStoreOwnerAboutNewProductReviews_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.NotifyStoreOwnerAboutNewProductReviews, false);
+            //if (model.NotifyStoreOwnerAboutNewPostReviews_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.NotifyStoreOwnerAboutNewPostReviews, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.NotifyStoreOwnerAboutNewProductReviews);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.NotifyStoreOwnerAboutNewPostReviews);
             
             //if (model.EmailAFriendEnabled_OverrideForStore || storeScope == 0)
             //    _settingService.SaveSetting(catalogSettings, x => x.EmailAFriendEnabled, false);
@@ -586,30 +586,30 @@ namespace TinyCms.Admin.Controllers
             //else if (storeScope > 0)
             //    _settingService.DeleteSetting(catalogSettings, x => x.AllowAnonymousUsersToEmailAFriend);
             
-            //if (model.RecentlyViewedProductsNumber_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.RecentlyViewedProductsNumber, false);
+            //if (model.RecentlyViewedPostsNumber_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.RecentlyViewedPostsNumber, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.RecentlyViewedProductsNumber);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.RecentlyViewedPostsNumber);
             
-            //if (model.RecentlyViewedProductsEnabled_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.RecentlyViewedProductsEnabled, false);
+            //if (model.RecentlyViewedPostsEnabled_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.RecentlyViewedPostsEnabled, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.RecentlyViewedProductsEnabled);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.RecentlyViewedPostsEnabled);
             
-            //if (model.NewProductsNumber_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.NewProductsNumber, false);
+            //if (model.NewPostsNumber_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.NewPostsNumber, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.NewProductsNumber);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.NewPostsNumber);
             
-            //if (model.NewProductsEnabled_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.NewProductsEnabled, false);
+            //if (model.NewPostsEnabled_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.NewPostsEnabled, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.NewProductsEnabled);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.NewPostsEnabled);
             
-            //if (model.CompareProductsEnabled_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.CompareProductsEnabled, false);
+            //if (model.ComparePostsEnabled_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.ComparePostsEnabled, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.CompareProductsEnabled);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.ComparePostsEnabled);
             
             //if (model.ShowBestsellersOnHomepage_OverrideForStore || storeScope == 0)
             //    _settingService.SaveSetting(catalogSettings, x => x.ShowBestsellersOnHomepage, false);
@@ -621,10 +621,10 @@ namespace TinyCms.Admin.Controllers
             //else if (storeScope > 0)
             //    _settingService.DeleteSetting(catalogSettings, x => x.NumberOfBestsellersOnHomepage);
             
-            //if (model.SearchPageProductsPerPage_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.SearchPageProductsPerPage, false);
+            //if (model.SearchPagePostsPerPage_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.SearchPagePostsPerPage, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.SearchPageProductsPerPage);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.SearchPagePostsPerPage);
 
             //if (model.SearchPageAllowCustomersToSelectPageSize_OverrideForStore || storeScope == 0)
             //    _settingService.SaveSetting(catalogSettings, x => x.SearchPageAllowCustomersToSelectPageSize, false);
@@ -636,75 +636,75 @@ namespace TinyCms.Admin.Controllers
             //else if (storeScope > 0)
             //    _settingService.DeleteSetting(catalogSettings, x => x.SearchPagePageSizeOptions);
             
-            //if (model.ProductSearchAutoCompleteEnabled_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ProductSearchAutoCompleteEnabled, false);
+            //if (model.PostSearchAutoCompleteEnabled_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.PostSearchAutoCompleteEnabled, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ProductSearchAutoCompleteEnabled);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.PostSearchAutoCompleteEnabled);
             
-            //if (model.ProductSearchAutoCompleteNumberOfProducts_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ProductSearchAutoCompleteNumberOfProducts, false);
+            //if (model.PostSearchAutoCompleteNumberOfPosts_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.PostSearchAutoCompleteNumberOfPosts, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ProductSearchAutoCompleteNumberOfProducts);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.PostSearchAutoCompleteNumberOfPosts);
             
-            //if (model.ShowProductImagesInSearchAutoComplete_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ShowProductImagesInSearchAutoComplete, false);
+            //if (model.ShowPostImagesInSearchAutoComplete_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.ShowPostImagesInSearchAutoComplete, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ShowProductImagesInSearchAutoComplete);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.ShowPostImagesInSearchAutoComplete);
 
-            //if (model.ProductSearchTermMinimumLength_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ProductSearchTermMinimumLength, false);
+            //if (model.PostSearchTermMinimumLength_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.PostSearchTermMinimumLength, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ProductSearchTermMinimumLength);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.PostSearchTermMinimumLength);
             
-            //if (model.ProductsAlsoPurchasedEnabled_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ProductsAlsoPurchasedEnabled, false);
+            //if (model.PostsAlsoPurchasedEnabled_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.PostsAlsoPurchasedEnabled, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ProductsAlsoPurchasedEnabled);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.PostsAlsoPurchasedEnabled);
             
-            //if (model.ProductsAlsoPurchasedNumber_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ProductsAlsoPurchasedNumber, false);
+            //if (model.PostsAlsoPurchasedNumber_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.PostsAlsoPurchasedNumber, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ProductsAlsoPurchasedNumber);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.PostsAlsoPurchasedNumber);
             
-            //if (model.NumberOfProductTags_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.NumberOfProductTags, false);
+            //if (model.NumberOfPostTags_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.NumberOfPostTags, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.NumberOfProductTags);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.NumberOfPostTags);
             
-            //if (model.ProductsByTagPageSize_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ProductsByTagPageSize, false);
+            //if (model.PostsByTagPageSize_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.PostsByTagPageSize, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ProductsByTagPageSize);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.PostsByTagPageSize);
             
-            //if (model.ProductsByTagAllowCustomersToSelectPageSize_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ProductsByTagAllowCustomersToSelectPageSize, false);
+            //if (model.PostsByTagAllowCustomersToSelectPageSize_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.PostsByTagAllowCustomersToSelectPageSize, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ProductsByTagAllowCustomersToSelectPageSize);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.PostsByTagAllowCustomersToSelectPageSize);
             
-            //if (model.ProductsByTagPageSizeOptions_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.ProductsByTagPageSizeOptions, false);
+            //if (model.PostsByTagPageSizeOptions_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.PostsByTagPageSizeOptions, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.ProductsByTagPageSizeOptions);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.PostsByTagPageSizeOptions);
             
-            //if (model.IncludeShortDescriptionInCompareProducts_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.IncludeShortDescriptionInCompareProducts, false);
+            //if (model.IncludeShortDescriptionInComparePosts_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.IncludeShortDescriptionInComparePosts, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.IncludeShortDescriptionInCompareProducts);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.IncludeShortDescriptionInComparePosts);
             
-            //if (model.IncludeFullDescriptionInCompareProducts_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.IncludeFullDescriptionInCompareProducts, false);
+            //if (model.IncludeFullDescriptionInComparePosts_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.IncludeFullDescriptionInComparePosts, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.IncludeFullDescriptionInCompareProducts);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.IncludeFullDescriptionInComparePosts);
             
             //if (model.IgnoreDiscounts_OverrideForStore || storeScope == 0)
             //    _settingService.SaveSetting(catalogSettings, x => x.IgnoreDiscounts, false);
             //else if (storeScope > 0)
             //    _settingService.DeleteSetting(catalogSettings, x => x.IgnoreDiscounts);
             
-            //if (model.IgnoreFeaturedProducts_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.IgnoreFeaturedProducts, false);
+            //if (model.IgnoreFeaturedPosts_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.IgnoreFeaturedPosts, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.IgnoreFeaturedProducts);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.IgnoreFeaturedPosts);
 
             //if (model.IgnoreAcl_OverrideForStore || storeScope == 0)
             //    _settingService.SaveSetting(catalogSettings, x => x.IgnoreAcl, false);
@@ -716,10 +716,10 @@ namespace TinyCms.Admin.Controllers
             //else if (storeScope > 0)
             //    _settingService.DeleteSetting(catalogSettings, x => x.IgnoreStoreLimitations);
 
-            //if (model.CacheProductPrices_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.CacheProductPrices, false);
+            //if (model.CachePostPrices_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.CachePostPrices, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.CacheProductPrices);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.CachePostPrices);
 
             //if (model.ManufacturersBlockItemsToDisplay_OverrideForStore || storeScope == 0)
             //    _settingService.SaveSetting(catalogSettings, x => x.ManufacturersBlockItemsToDisplay, false);
@@ -731,15 +731,15 @@ namespace TinyCms.Admin.Controllers
             //else if (storeScope > 0)
             //    _settingService.DeleteSetting(catalogSettings, x => x.DisplayTaxShippingInfoFooter);
 
-            //if (model.DisplayTaxShippingInfoProductDetailsPage_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.DisplayTaxShippingInfoProductDetailsPage, false);
+            //if (model.DisplayTaxShippingInfoPostDetailsPage_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.DisplayTaxShippingInfoPostDetailsPage, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.DisplayTaxShippingInfoProductDetailsPage);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.DisplayTaxShippingInfoPostDetailsPage);
 
-            //if (model.DisplayTaxShippingInfoProductBoxes_OverrideForStore || storeScope == 0)
-            //    _settingService.SaveSetting(catalogSettings, x => x.DisplayTaxShippingInfoProductBoxes, false);
+            //if (model.DisplayTaxShippingInfoPostBoxes_OverrideForStore || storeScope == 0)
+            //    _settingService.SaveSetting(catalogSettings, x => x.DisplayTaxShippingInfoPostBoxes, false);
             //else if (storeScope > 0)
-            //    _settingService.DeleteSetting(catalogSettings, x => x.DisplayTaxShippingInfoProductBoxes);
+            //    _settingService.DeleteSetting(catalogSettings, x => x.DisplayTaxShippingInfoPostBoxes);
 
             //if (model.DisplayTaxShippingInfoShoppingCart_OverrideForStore || storeScope == 0)
             //    _settingService.SaveSetting(catalogSettings, x => x.DisplayTaxShippingInfoShoppingCart, false);

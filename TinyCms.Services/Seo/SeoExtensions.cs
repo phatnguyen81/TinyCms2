@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TinyCms.Core;
 using TinyCms.Core.Domain.Catalog;
+using TinyCms.Core.Domain.Posts;
 using TinyCms.Core.Domain.Seo;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Services.Localization;
@@ -18,8 +19,35 @@ namespace TinyCms.Services.Seo
         private static readonly object s_lock = new object();
 
         #endregion
-        
-      
+
+        #region Post tag
+
+        /// <summary>
+        /// Gets post tag SE (search engine) name
+        /// </summary>
+        /// <param name="postTag">Post tag</param>
+        /// <returns>Post tag SE (search engine) name</returns>
+        public static string GetSeName(this PostTag postTag)
+        {
+            var workContext = EngineContext.Current.Resolve<IWorkContext>();
+            return GetSeName(postTag, workContext.WorkingLanguage.Id);
+        }
+
+        /// <summary>
+        /// Gets post tag SE (search engine) name
+        /// </summary>
+        /// <param name="postTag">Post tag</param>
+        /// <param name="languageId">Language identifier</param>
+        /// <returns>Post tag SE (search engine) name</returns>
+        public static string GetSeName(this PostTag postTag, int languageId)
+        {
+            if (postTag == null)
+                throw new ArgumentNullException("postTag");
+            string seName = GetSeName(postTag.GetLocalized(x => x.Name, languageId));
+            return seName;
+        }
+
+        #endregion
 
         #region General
 

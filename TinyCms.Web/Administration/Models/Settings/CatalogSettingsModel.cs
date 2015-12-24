@@ -7,17 +7,17 @@ namespace TinyCms.Admin.Models.Settings
     public partial class CatalogSettingsModel : BaseNopModel
     {
         
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.AllowViewUnpublishedProductPage")]
-        public bool AllowViewUnpublishedProductPage { get; set; }
-        public bool AllowViewUnpublishedProductPage_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.AllowViewUnpublishedPostPage")]
+        public bool AllowViewUnpublishedPostPage { get; set; }
+        public bool AllowViewUnpublishedPostPage_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.DisplayDiscontinuedMessageForUnpublishedProducts")]
-        public bool DisplayDiscontinuedMessageForUnpublishedProducts { get; set; }
-        public bool DisplayDiscontinuedMessageForUnpublishedProducts_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.DisplayDiscontinuedMessageForUnpublishedPosts")]
+        public bool DisplayDiscontinuedMessageForUnpublishedPosts { get; set; }
+        public bool DisplayDiscontinuedMessageForUnpublishedPosts_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowProductSku")]
-        public bool ShowProductSku { get; set; }
-        public bool ShowProductSku_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowPostSku")]
+        public bool ShowPostSku { get; set; }
+        public bool ShowPostSku_OverrideForStore { get; set; }
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowManufacturerPartNumber")]
         public bool ShowManufacturerPartNumber { get; set; }
@@ -31,25 +31,25 @@ namespace TinyCms.Admin.Models.Settings
         public bool ShowFreeShippingNotification { get; set; }
         public bool ShowFreeShippingNotification_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.AllowProductSorting")]
-        public bool AllowProductSorting { get; set; }
-        public bool AllowProductSorting_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.AllowPostSorting")]
+        public bool AllowPostSorting { get; set; }
+        public bool AllowPostSorting_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.AllowProductViewModeChanging")]
-        public bool AllowProductViewModeChanging { get; set; }
-        public bool AllowProductViewModeChanging_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.AllowPostViewModeChanging")]
+        public bool AllowPostViewModeChanging { get; set; }
+        public bool AllowPostViewModeChanging_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowProductsFromSubcategories")]
-        public bool ShowProductsFromSubcategories { get; set; }
-        public bool ShowProductsFromSubcategories_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowPostsFromSubcategories")]
+        public bool ShowPostsFromSubcategories { get; set; }
+        public bool ShowPostsFromSubcategories_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowCategoryProductNumber")]
-        public bool ShowCategoryProductNumber { get; set; }
-        public bool ShowCategoryProductNumber_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowCategoryPostNumber")]
+        public bool ShowCategoryPostNumber { get; set; }
+        public bool ShowCategoryPostNumber_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowCategoryProductNumberIncludingSubcategories")]
-        public bool ShowCategoryProductNumberIncludingSubcategories { get; set; }
-        public bool ShowCategoryProductNumberIncludingSubcategories_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowCategoryPostNumberIncludingSubcategories")]
+        public bool ShowCategoryPostNumberIncludingSubcategories { get; set; }
+        public bool ShowCategoryPostNumberIncludingSubcategories_OverrideForStore { get; set; }
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.CategoryBreadcrumbEnabled")]
         public bool CategoryBreadcrumbEnabled { get; set; }
@@ -64,17 +64,17 @@ namespace TinyCms.Admin.Models.Settings
         public string PageShareCode { get; set; }
         public bool PageShareCode_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ProductReviewsMustBeApproved")]
-        public bool ProductReviewsMustBeApproved { get; set; }
-        public bool ProductReviewsMustBeApproved_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostReviewsMustBeApproved")]
+        public bool PostReviewsMustBeApproved { get; set; }
+        public bool PostReviewsMustBeApproved_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToReviewProduct")]
-        public bool AllowAnonymousUsersToReviewProduct { get; set; }
-        public bool AllowAnonymousUsersToReviewProduct_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.AllowAnonymousUsersToReviewPost")]
+        public bool AllowAnonymousUsersToReviewPost { get; set; }
+        public bool AllowAnonymousUsersToReviewPost_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.NotifyStoreOwnerAboutNewProductReviews")]
-        public bool NotifyStoreOwnerAboutNewProductReviews { get; set; }
-        public bool NotifyStoreOwnerAboutNewProductReviews_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.NotifyStoreOwnerAboutNewPostReviews")]
+        public bool NotifyStoreOwnerAboutNewPostReviews { get; set; }
+        public bool NotifyStoreOwnerAboutNewPostReviews_OverrideForStore { get; set; }
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.EmailAFriendEnabled")]
         public bool EmailAFriendEnabled { get; set; }
@@ -84,25 +84,25 @@ namespace TinyCms.Admin.Models.Settings
         public bool AllowAnonymousUsersToEmailAFriend { get; set; }
         public bool AllowAnonymousUsersToEmailAFriend_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.RecentlyViewedProductsNumber")]
-        public int RecentlyViewedProductsNumber { get; set; }
-        public bool RecentlyViewedProductsNumber_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.RecentlyViewedPostsNumber")]
+        public int RecentlyViewedPostsNumber { get; set; }
+        public bool RecentlyViewedPostsNumber_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.RecentlyViewedProductsEnabled")]
-        public bool RecentlyViewedProductsEnabled { get; set; }
-        public bool RecentlyViewedProductsEnabled_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.RecentlyViewedPostsEnabled")]
+        public bool RecentlyViewedPostsEnabled { get; set; }
+        public bool RecentlyViewedPostsEnabled_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.NewProductsNumber")]
-        public int NewProductsNumber { get; set; }
-        public bool NewProductsNumber_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.NewPostsNumber")]
+        public int NewPostsNumber { get; set; }
+        public bool NewPostsNumber_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.NewProductsEnabled")]
-        public bool NewProductsEnabled { get; set; }
-        public bool NewProductsEnabled_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.NewPostsEnabled")]
+        public bool NewPostsEnabled { get; set; }
+        public bool NewPostsEnabled_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.CompareProductsEnabled")]
-        public bool CompareProductsEnabled { get; set; }
-        public bool CompareProductsEnabled_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ComparePostsEnabled")]
+        public bool ComparePostsEnabled { get; set; }
+        public bool ComparePostsEnabled_OverrideForStore { get; set; }
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowBestsellersOnHomepage")]
         public bool ShowBestsellersOnHomepage { get; set; }
@@ -112,9 +112,9 @@ namespace TinyCms.Admin.Models.Settings
         public int NumberOfBestsellersOnHomepage { get; set; }
         public bool NumberOfBestsellersOnHomepage_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.SearchPageProductsPerPage")]
-        public int SearchPageProductsPerPage { get; set; }
-        public bool SearchPageProductsPerPage_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.SearchPagePostsPerPage")]
+        public int SearchPagePostsPerPage { get; set; }
+        public bool SearchPagePostsPerPage_OverrideForStore { get; set; }
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.SearchPageAllowCustomersToSelectPageSize")]
         public bool SearchPageAllowCustomersToSelectPageSize { get; set; }
@@ -124,61 +124,61 @@ namespace TinyCms.Admin.Models.Settings
         public string SearchPagePageSizeOptions { get; set; }
         public bool SearchPagePageSizeOptions_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ProductSearchAutoCompleteEnabled")]
-        public bool ProductSearchAutoCompleteEnabled { get; set; }
-        public bool ProductSearchAutoCompleteEnabled_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostSearchAutoCompleteEnabled")]
+        public bool PostSearchAutoCompleteEnabled { get; set; }
+        public bool PostSearchAutoCompleteEnabled_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ProductSearchAutoCompleteNumberOfProducts")]
-        public int ProductSearchAutoCompleteNumberOfProducts { get; set; }
-        public bool ProductSearchAutoCompleteNumberOfProducts_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostSearchAutoCompleteNumberOfPosts")]
+        public int PostSearchAutoCompleteNumberOfPosts { get; set; }
+        public bool PostSearchAutoCompleteNumberOfPosts_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowProductImagesInSearchAutoComplete")]
-        public bool ShowProductImagesInSearchAutoComplete { get; set; }
-        public bool ShowProductImagesInSearchAutoComplete_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShowPostImagesInSearchAutoComplete")]
+        public bool ShowPostImagesInSearchAutoComplete { get; set; }
+        public bool ShowPostImagesInSearchAutoComplete_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ProductSearchTermMinimumLength")]
-        public int ProductSearchTermMinimumLength { get; set; }
-        public bool ProductSearchTermMinimumLength_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostSearchTermMinimumLength")]
+        public int PostSearchTermMinimumLength { get; set; }
+        public bool PostSearchTermMinimumLength_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedEnabled")]
-        public bool ProductsAlsoPurchasedEnabled { get; set; }
-        public bool ProductsAlsoPurchasedEnabled_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostsAlsoPurchasedEnabled")]
+        public bool PostsAlsoPurchasedEnabled { get; set; }
+        public bool PostsAlsoPurchasedEnabled_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ProductsAlsoPurchasedNumber")]
-        public int ProductsAlsoPurchasedNumber { get; set; }
-        public bool ProductsAlsoPurchasedNumber_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostsAlsoPurchasedNumber")]
+        public int PostsAlsoPurchasedNumber { get; set; }
+        public bool PostsAlsoPurchasedNumber_OverrideForStore { get; set; }
         
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.NumberOfProductTags")]
-        public int NumberOfProductTags { get; set; }
-        public bool NumberOfProductTags_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.NumberOfPostTags")]
+        public int NumberOfPostTags { get; set; }
+        public bool NumberOfPostTags_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ProductsByTagPageSize")]
-        public int ProductsByTagPageSize { get; set; }
-        public bool ProductsByTagPageSize_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostsByTagPageSize")]
+        public int PostsByTagPageSize { get; set; }
+        public bool PostsByTagPageSize_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ProductsByTagAllowCustomersToSelectPageSize")]
-        public bool ProductsByTagAllowCustomersToSelectPageSize { get; set; }
-        public bool ProductsByTagAllowCustomersToSelectPageSize_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostsByTagAllowCustomersToSelectPageSize")]
+        public bool PostsByTagAllowCustomersToSelectPageSize { get; set; }
+        public bool PostsByTagAllowCustomersToSelectPageSize_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ProductsByTagPageSizeOptions")]
-        public string ProductsByTagPageSizeOptions { get; set; }
-        public bool ProductsByTagPageSizeOptions_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostsByTagPageSizeOptions")]
+        public string PostsByTagPageSizeOptions { get; set; }
+        public bool PostsByTagPageSizeOptions_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.IncludeShortDescriptionInCompareProducts")]
-        public bool IncludeShortDescriptionInCompareProducts { get; set; }
-        public bool IncludeShortDescriptionInCompareProducts_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.IncludeShortDescriptionInComparePosts")]
+        public bool IncludeShortDescriptionInComparePosts { get; set; }
+        public bool IncludeShortDescriptionInComparePosts_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.IncludeFullDescriptionInCompareProducts")]
-        public bool IncludeFullDescriptionInCompareProducts { get; set; }
-        public bool IncludeFullDescriptionInCompareProducts_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.IncludeFullDescriptionInComparePosts")]
+        public bool IncludeFullDescriptionInComparePosts { get; set; }
+        public bool IncludeFullDescriptionInComparePosts_OverrideForStore { get; set; }
         
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.IgnoreDiscounts")]
         public bool IgnoreDiscounts { get; set; }
         public bool IgnoreDiscounts_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.IgnoreFeaturedProducts")]
-        public bool IgnoreFeaturedProducts { get; set; }
-        public bool IgnoreFeaturedProducts_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.IgnoreFeaturedPosts")]
+        public bool IgnoreFeaturedPosts { get; set; }
+        public bool IgnoreFeaturedPosts_OverrideForStore { get; set; }
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.IgnoreAcl")]
         public bool IgnoreAcl { get; set; }
@@ -188,9 +188,9 @@ namespace TinyCms.Admin.Models.Settings
         public bool IgnoreStoreLimitations { get; set; }
         public bool IgnoreStoreLimitations_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.CacheProductPrices")]
-        public bool CacheProductPrices { get; set; }
-        public bool CacheProductPrices_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.CachePostPrices")]
+        public bool CachePostPrices { get; set; }
+        public bool CachePostPrices_OverrideForStore { get; set; }
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ManufacturersBlockItemsToDisplay")]
         public int ManufacturersBlockItemsToDisplay { get; set; }
@@ -200,13 +200,13 @@ namespace TinyCms.Admin.Models.Settings
         public bool DisplayTaxShippingInfoFooter { get; set; }
         public bool DisplayTaxShippingInfoFooter_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoProductDetailsPage")]
-        public bool DisplayTaxShippingInfoProductDetailsPage { get; set; }
-        public bool DisplayTaxShippingInfoProductDetailsPage_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoPostDetailsPage")]
+        public bool DisplayTaxShippingInfoPostDetailsPage { get; set; }
+        public bool DisplayTaxShippingInfoPostDetailsPage_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoProductBoxes")]
-        public bool DisplayTaxShippingInfoProductBoxes { get; set; }
-        public bool DisplayTaxShippingInfoProductBoxes_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoPostBoxes")]
+        public bool DisplayTaxShippingInfoPostBoxes { get; set; }
+        public bool DisplayTaxShippingInfoPostBoxes_OverrideForStore { get; set; }
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.DisplayTaxShippingInfoShoppingCart")]
         public bool DisplayTaxShippingInfoShoppingCart { get; set; }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
+using System.Linq;
 using System.Web.Routing;
 using Nop.Plugin.Widgets.AdsBanner.Data;
 using TinyCms.Core;
@@ -21,15 +22,17 @@ namespace Nop.Plugin.Widgets.AdsBanner
         private readonly IPictureService _pictureService;
         private readonly ISettingService _settingService;
         private readonly IWebHelper _webHelper;
+        private readonly IWidgetService _widgetService;
         private readonly AdsBannerObjectContext _context;
 
         public AdsBannerPlugin(IPictureService pictureService, 
-            ISettingService settingService, IWebHelper webHelper, AdsBannerObjectContext context)
+            ISettingService settingService, IWebHelper webHelper, AdsBannerObjectContext context, IWidgetService widgetService)
         {
             this._pictureService = pictureService;
             this._settingService = settingService;
             this._webHelper = webHelper;
             _context = context;
+            _widgetService = widgetService;
         }
 
         /// <summary>
@@ -38,7 +41,7 @@ namespace Nop.Plugin.Widgets.AdsBanner
         /// <returns>Widget zones</returns>
         public IList<string> GetWidgetZones()
         {
-            return new List<string> { "home_page_top" };
+            return _widgetService.LoaddAllWidgetZones().Select(q => q.SystemName).ToList();
         }
 
         /// <summary>

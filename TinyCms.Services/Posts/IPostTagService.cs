@@ -52,6 +52,6 @@ namespace TinyCms.Services.Posts
         /// <param name="postTagId">Post tag identifier</param>
         /// <param name="storeId">Store identifier</param>
         /// <returns>Number of posts</returns>
-        int GetPostCount(int postTagId, int storeId);
+        int GetPostCount(int postTagId);
     }
 }

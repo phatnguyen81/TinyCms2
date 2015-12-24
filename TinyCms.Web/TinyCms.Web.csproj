@@ -176,10 +176,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BasePublicController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\ExternalAuthenticationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PictureController.cs" />
+    <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
@@ -188,8 +191,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\BackwardCompatibility1XRouteProvider.cs" />
-    <Compile Include="Infrastructure\BackwardCompatibility2XRouteProvider.cs" />
     <Compile Include="Infrastructure\Cache\ModelCacheEventConsumer.cs" />
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
     <Compile Include="Infrastructure\GenericUrlRouteProvider.cs" />
@@ -213,11 +214,15 @@
     <Compile Include="Models\Customer\RegisterResultModel.cs" />
     <Compile Include="Models\Customer\UserInfoZone.cs" />
     <Compile Include="Models\Media\PictureModel.cs" />
+    <Compile Include="Models\Polls\PollModel.cs" />
+    <Compile Include="Models\Posts\PostsPagingFilteringModel.cs" />
     <Compile Include="Models\Posts\CategoryModel.cs" />
     <Compile Include="Models\Posts\CategoryNavigationModel.cs" />
     <Compile Include="Models\Posts\CategorySimpleModel.cs" />
     <Compile Include="Models\Posts\NewPostModel.cs" />
     <Compile Include="Models\Posts\PostOverviewModel.cs" />
+    <Compile Include="Models\Posts\PostDetailsModel.cs" />
+    <Compile Include="Models\Posts\PostTagModel.cs" />
     <Compile Include="Models\Posts\TopMenuModel.cs" />
     <Compile Include="Models\Topics\TopicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1982,13 +1987,26 @@
     <Content Include="Views\Shared\EditorTemplates\Download.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int32Nullable.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Picture.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RichEditor.cshtml" />
     <Content Include="Views\Posts\HomePagePosts.cshtml" />
+    <Content Include="Views\Posts\ShareCorner.cshtml" />
+    <Content Include="Views\Posts\BottomMenu.cshtml" />
+    <Content Include="Views\Posts\CategoryTemplate.Default.cshtml" />
+    <Content Include="Views\Shared\_TwoColumn.cshtml" />
+    <Content Include="Views\Posts\TopViewPosts.cshtml" />
+    <Content Include="Views\Posts\PostTemplate.Post.cshtml" />
+    <Content Include="Views\ExternalAuthentication\ExternalMethods.cshtml" />
+    <Content Include="Views\Posts\RelatedPosts.cshtml" />
+    <Content Include="Views\Posts\PromotionCategory.cshtml" />
+    <Content Include="Views\Poll\HomePagePolls.cshtml" />
+    <Content Include="Views\Poll\PollBlock.cshtml" />
+    <Content Include="Views\Poll\_Poll.cshtml" />
+    <Content Include="Views\Posts\OtherPosts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />
     <Folder Include="Themes\DefaultClean\Views\Shared\" />
+    <Folder Include="Views\Category\" />
     <Folder Include="Views\Picture\" />
   </ItemGroup>
   <ItemGroup>

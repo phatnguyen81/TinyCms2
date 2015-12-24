@@ -1,8 +1,28 @@
-﻿<div class="boxctn">
-    <h2><span class="headrib"></span></h2>
-    <a href="#"><span class="loading"><img src="temp/sidebar_bigimg.jpg" width="267" height="164" alt="" class="bigimg" /></span><span class="txlink">Những địa danh nhất định phải ghé ở Nha Trang </span></a>
-    <ul class="listboxnews">
-        <li><span class="rightarr icn"></span><a href="#">Những lý do khiến bạn nên du lịch Côn Đảo</a></li>
-        <li><span class="rightarr icn"></span><a href="#">Đồi chè Cầu Đất – bản tình ca giữa núi rừng Đà Lạt</a></li>
-    </ul>
-</div>
+﻿@model IEnumerable<PostOverviewModel>
+@{
+    var posts = Model.ToList();
+}
+@if (Model.Any())
+{
+    var firstPost = posts[0];
+    <div class="boxctn">
+        <h2><span class="headrib"></span></h2>
+        <a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })">
+            <span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="267" height="164" alt="@firstPost.DefaultPictureModel.AlternateText" class="bigimg" /></span>
+            <span class="txlink">@firstPost.Name</span>
+        </a>
+        @if (Model.Count() > 1)
+        {
+            <ul class="listboxnews">
+                @foreach (var post in posts.Skip(1))
+                {
+                    <li>
+                        <span class="rightarr icn"></span>
+                        <a href="@Url.RouteUrl("Post", new { SeName = post.SeName })">@post.Name</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+}
+

@@ -1,0 +1,131 @@
+﻿@model PostModel
+
+
+    @if (Model.Id > 0)
+    {
+            
+    <table class="adminContent">
+        <tr>
+            <td>
+                <div id="relatedposts-grid"></div>
+
+                <script>
+                    $(document).ready(function () {
+                        $("#relatedposts-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("RelatedPostList", "Post", new { postId = Model.Id }))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    },
+                                    update: {
+                                        url:"@Html.Raw(Url.Action("RelatedPostUpdate", "Post"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    },
+                                    destroy: {
+                                        url: "@Html.Raw(Url.Action("RelatedPostDelete", "Post"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: addAntiForgeryToken
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors",
+                                    model: {
+                                        id: "Id",
+                                        fields: {
+                                            Post2Name: { editable: false, type: "string" },
+                                            DisplayOrder: {editable: true, type: "number" },
+                                            PostId2: { editable: false, type: "number" }
+                                        }
+                                    }
+                                },
+                                requestEnd: function(e) {
+                                    if(e.type=="update") {
+                                        this.read();
+                                    }
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: {
+                                refresh: true,
+                                numeric: false,
+                                previousNext: false,
+                                info: false
+                            },
+                            editable: {
+                                confirmation: false,
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                            columns: [{
+                                field: "Post2Name",
+                                title: "@T("Admin.Catalog.Posts.RelatedPosts.Fields.Post")"
+                            }, {
+                                field: "DisplayOrder",
+                                title: "@T("Admin.Catalog.Posts.RelatedPosts.Fields.DisplayOrder")",
+                                //integer format
+                                format: "{0:0}",
+                                width: 150
+                            }, {
+                                field: "PostId2",
+                                title: "@T("Admin.Common.View")",
+                                width: 100,
+                                template: '<a href="@Url.Content("~/Admin/Post/Edit/")#=PostId2#">@T("Admin.Common.View")</a>'
+                            }, {
+                                command: [{
+                                    name: "edit",
+                                    text: {
+                                        edit: "@T("Admin.Common.Edit")",
+                                        update: "@T("Admin.Common.Update")",
+                                        cancel: "@T("Admin.Common.Cancel")"
+                                    }
+                                }, {
+                                    name: "destroy",
+                                    text: "@T("Admin.Common.Delete")"
+                                }],
+                                width: 200
+                            }]
+                        });
+                    });
+                </script>
+            </td>
+        </tr>
+        <tr>
+            <td width="100%">
+                <input type="submit" id="btnAddNewRelatedPost" value="@T("Admin.Catalog.Posts.RelatedPosts.AddNew")" onclick="javascript:OpenWindow('@(Url.Action("RelatedPostAddPopup", "Post", new { postId = Model.Id, btnId = "btnRefreshRelatedPosts", formId = "post-form" }))    ', 800, 800, true); return false;" class="k-button" />
+                <input type="submit" id="btnRefreshRelatedPosts" style="display: none" />
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#btnRefreshRelatedPosts').click(function () {
+                            //refresh grid
+                            var grid = $("#relatedposts-grid").data('kendoGrid');
+                            grid.dataSource.read();
+
+                            //return false to don't reload a page
+                            return false;
+                        });
+                    });
+                </script>
+            </td>
+        </tr>
+    </table>
+    }
+    else
+    {
+    @T("Admin.Catalog.Posts.RelatedPosts.SaveBeforeEdit")
+    }

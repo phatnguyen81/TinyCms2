@@ -57,7 +57,7 @@ namespace TinyCms.Services.Posts
         private readonly IAclService _aclService;
         private readonly IRepository<Category> _categoryRepository;
         private readonly IRepository<CategoryType> _categoryTypeRepository;
-
+        private readonly IRepository<RelatedPost> _relatedPostRepository;
         #endregion
 
         #region Ctor
@@ -104,7 +104,9 @@ namespace TinyCms.Services.Posts
             CommonSettings commonSettings,
             CatalogSettings catalogSettings,
             IEventPublisher eventPublisher,
-            IAclService aclService, IRepository<Category> categoryRepository, IRepository<CategoryType> categoryTypeRepository)
+            IAclService aclService, IRepository<Category> categoryRepository, 
+            IRepository<CategoryType> categoryTypeRepository,
+            IRepository<RelatedPost> relatedPostRepository)
         {
             this._cacheManager = cacheManager;
             this._postRepository = postRepository;
@@ -123,6 +125,7 @@ namespace TinyCms.Services.Posts
             this._aclService = aclService;
             _categoryRepository = categoryRepository;
             _categoryTypeRepository = categoryTypeRepository;
+            _relatedPostRepository = relatedPostRepository;
         }
 
         #endregion
@@ -160,7 +163,35 @@ namespace TinyCms.Services.Posts
             var posts = query.ToList();
             return posts;
         }
-        
+
+        public IList<Post> GetOrtherPosts(int postId, int beforeAfterNumPost, bool showHidden = false)
+        {
+            var pPostId = _dataProvider.GetParameter();
+            pPostId.ParameterName = "PostId";
+            pPostId.Value = postId;
+            pPostId.DbType = DbType.Int32;
+
+            var pBeforeAfterNumPost = _dataProvider.GetParameter();
+            pBeforeAfterNumPost.ParameterName = "BeforeAfterNumPost";
+            pBeforeAfterNumPost.Value = beforeAfterNumPost;
+            pBeforeAfterNumPost.DbType = DbType.Int32;
+
+            var pShowHidden = _dataProvider.GetParameter();
+            pShowHidden.ParameterName = "ShowHidden";
+            pShowHidden.Value = showHidden;
+            pShowHidden.DbType = DbType.Boolean;
+
+            //invoke stored procedure
+            var posts = _dbContext.ExecuteStoredProcedureList<Post>(
+                "PostLoadOtherPost",
+                pPostId,
+                pBeforeAfterNumPost,
+                pShowHidden);
+            //get filterable specification attribute option identifier
+            //return posts
+            return posts;
+        }
+
         /// <summary>
         /// Gets post
         /// </summary>
@@ -614,6 +645,11 @@ namespace TinyCms.Services.Posts
                     //creation date
                     query = query.OrderByDescending(p => p.CreatedOnUtc);
                 }
+                else if (orderBy == PostSortingEnum.ViewCount)
+                {
+                    //creation date
+                    query = query.OrderByDescending(p => p.ViewCount);
+                }
                 else
                 {
                     //actually this code is not reachable
@@ -746,6 +782,88 @@ namespace TinyCms.Services.Posts
 
         #endregion
 
+
+        #region Related posts
+
+        /// <summary>
+        /// Deletes a related post
+        /// </summary>
+        /// <param name="relatedPost">Related post</param>
+        public virtual void DeleteRelatedPost(RelatedPost relatedPost)
+        {
+            if (relatedPost == null)
+                throw new ArgumentNullException("relatedPost");
+
+            _relatedPostRepository.Delete(relatedPost);
+
+            //event notification
+            _eventPublisher.EntityDeleted(relatedPost);
+        }
+
+        /// <summary>
+        /// Gets related posts by post identifier
+        /// </summary>
+        /// <param name="postId1">The first post identifier</param>
+        /// <param name="showHidden">A value indicating whether to show hidden records</param>
+        /// <returns>Related posts</returns>
+        public virtual IList<RelatedPost> GetRelatedPostsByPostId1(int postId1, bool showHidden = false)
+        {
+            var query = from rp in _relatedPostRepository.Table
+                        join p in _postRepository.Table on rp.PostId2 equals p.Id
+                        where rp.PostId1 == postId1 &&
+                        !p.Deleted &&
+                        (showHidden || p.Published)
+                        orderby rp.DisplayOrder
+                        select rp;
+            var relatedPosts = query.ToList();
+
+            return relatedPosts;
+        }
+
+        /// <summary>
+        /// Gets a related post
+        /// </summary>
+        /// <param name="relatedPostId">Related post identifier</param>
+        /// <returns>Related post</returns>
+        public virtual RelatedPost GetRelatedPostById(int relatedPostId)
+        {
+            if (relatedPostId == 0)
+                return null;
+
+            return _relatedPostRepository.GetById(relatedPostId);
+        }
+
+        /// <summary>
+        /// Inserts a related post
+        /// </summary>
+        /// <param name="relatedPost">Related post</param>
+        public virtual void InsertRelatedPost(RelatedPost relatedPost)
+        {
+            if (relatedPost == null)
+                throw new ArgumentNullException("relatedPost");
+
+            _relatedPostRepository.Insert(relatedPost);
+
+            //event notification
+            _eventPublisher.EntityInserted(relatedPost);
+        }
+
+        /// <summary>
+        /// Updates a related post
+        /// </summary>
+        /// <param name="relatedPost">Related post</param>
+        public virtual void UpdateRelatedPost(RelatedPost relatedPost)
+        {
+            if (relatedPost == null)
+                throw new ArgumentNullException("relatedPost");
+
+            _relatedPostRepository.Update(relatedPost);
+
+            //event notification
+            _eventPublisher.EntityUpdated(relatedPost);
+        }
+
+        #endregion
 
         #endregion
     }

@@ -1,37 +1,5 @@
 ﻿<div class="footer">
-    <div class="inner_footer clearfix">
-        <div class="subcate"> <a href="#" class="head">Trang chủ</a> </div>
-        <div class="subcate">
-            <a href="#" class="head">Cẩm nang du lịch</a>
-            <ul>
-                <li><a href="#">Việt Nam</a></li>
-                <li><a href="#">Quốc tế</a></li>
-            </ul>
-        </div>
-        <div class="subcate">
-            <a href="#" class="head">Văn hóa lễ hội</a>
-            <ul>
-                <li><a href="#">Festival</a></li>
-                <li><a href="#">Lễ hội truyền thống</a></li>
-            </ul>
-        </div>
-        <div class="subcate">
-            <a href="#" class="head">Ẩm thực vùng miền</a>
-            <ul>
-                <li><a href="#">Đặc sản 3 vùng</a></li>
-                <li><a href="#">Ẩm thực Việt Nam</a></li>
-                <li><a href="#">Ẩm thực Thế giới</a></li>
-            </ul>
-        </div>
-        <div class="subcate">
-            <a href="#" class="head">Góc chia sẻ</a>
-            <ul>
-                <li><a href="#">Du lịch trong nước</a></li>
-                <li><a href="#">Du lịch ngoài nước</a></li>
-                <li><a href="#">Chia sẻ ẩm thực</a></li>
-            </ul>
-        </div>
-    </div>
+   @Html.Action("BottomMenu","Posts")
 </div>
 <div class="copyright">
     <a href="@Url.RouteUrl("homepage")" class="logo"></a>

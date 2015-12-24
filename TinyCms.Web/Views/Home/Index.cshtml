@@ -18,12 +18,16 @@
 </div>
 <div class="mainpage">
     <div class="leftcol">
-        @Html.Action("HomePageCategories", "Posts")
+        @Html.Action("HomePageCategories", "Posts", new { postThumbPictureSize = 160 })
+        @Html.Action("ShareCorner", "Posts", new { postThumbPictureSize = 150 })
     </div>
     <div class="sidebar">
         @Html.Partial("ToolBox") 
-        @Html.Action("DiscoveryCategory", "Posts")
-        @Html.Action("TravelViaPictureCategory", "Posts")
+        @Html.Action("DiscoveryCategory", "Posts", new { postThumbPictureSize = 270 })
+        @Html.Action("TravelViaPictureCategory", "Posts", new { postThumbPictureSize = 270 })
+        <div class="sidebanner">
+            @Html.Widget("sidebar_banner")
+        </div>
     </div>
-    @Html.Widget("sidebar_banner")
+
 </div>

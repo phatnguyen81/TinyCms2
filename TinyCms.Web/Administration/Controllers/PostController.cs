@@ -347,11 +347,11 @@ namespace TinyCms.Admin.Controllers
 
           
 
-            //default values
-            if (setPredefinedValues)
-            {
-                model.Published = true;
-            }
+            ////default values
+            //if (setPredefinedValues)
+            //{
+            //    model.Published = true;
+            //}
         }
 
         [NonAction]
@@ -938,12 +938,12 @@ namespace TinyCms.Admin.Controllers
 
             var tags = _postTagService.GetAllPostTags()
                 //order by post count
-                .OrderByDescending(x => _postTagService.GetPostCount(x.Id, 0))
+                .OrderByDescending(x => _postTagService.GetPostCount(x.Id))
                 .Select(x => new PostTagModel
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    PostCount = _postTagService.GetPostCount(x.Id, 0)
+                    PostCount = _postTagService.GetPostCount(x.Id)
                 })
                 .ToList();
 
@@ -985,7 +985,7 @@ namespace TinyCms.Admin.Controllers
             {
                 Id = postTag.Id,
                 Name = postTag.Name,
-                PostCount = _postTagService.GetPostCount(postTag.Id, 0)
+                PostCount = _postTagService.GetPostCount(postTag.Id)
             };
             //locales
             AddLocales(_languageService, model.Locales, (locale, languageId) =>
@@ -1021,6 +1021,145 @@ namespace TinyCms.Admin.Controllers
             }
 
             //If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        #endregion
+
+        #region Related posts
+
+        [HttpPost]
+        public ActionResult RelatedPostList(DataSourceRequest command, int postId)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
+                return AccessDeniedView();
+
+            var relatedPosts = _postService.GetRelatedPostsByPostId1(postId, true);
+            var relatedPostsModel = relatedPosts
+                .Select(x => new PostModel.RelatedPostModel
+                {
+                    Id = x.Id,
+                    //PostId1 = x.PostId1,
+                    PostId2 = x.PostId2,
+                    Post2Name = _postService.GetPostById(x.PostId2).Name,
+                    DisplayOrder = x.DisplayOrder
+                })
+                .ToList();
+
+            var gridModel = new DataSourceResult
+            {
+                Data = relatedPostsModel,
+                Total = relatedPostsModel.Count
+            };
+
+            return Json(gridModel);
+        }
+
+        [HttpPost]
+        public ActionResult RelatedPostUpdate(PostModel.RelatedPostModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
+                return AccessDeniedView();
+
+            var relatedPost = _postService.GetRelatedPostById(model.Id);
+            if (relatedPost == null)
+                throw new ArgumentException("No related post found with the specified id");
+
+
+            relatedPost.DisplayOrder = model.DisplayOrder;
+            _postService.UpdateRelatedPost(relatedPost);
+
+            return new NullJsonResult();
+        }
+
+        [HttpPost]
+        public ActionResult RelatedPostDelete(int id)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
+                return AccessDeniedView();
+
+            var relatedPost = _postService.GetRelatedPostById(id);
+            if (relatedPost == null)
+                throw new ArgumentException("No related post found with the specified id");
+
+            var postId = relatedPost.PostId1;
+
+
+            _postService.DeleteRelatedPost(relatedPost);
+
+            return new NullJsonResult();
+        }
+
+        public ActionResult RelatedPostAddPopup(int postId)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
+                return AccessDeniedView();
+
+            var model = new PostModel.AddRelatedPostModel();
+
+            //categories
+            model.AvailableCategories.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
+            var categories = _categoryService.GetAllCategories(showHidden: true);
+            foreach (var c in categories)
+                model.AvailableCategories.Add(new SelectListItem { Text = c.GetFormattedBreadCrumb(categories), Value = c.Id.ToString() });
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult RelatedPostAddPopupList(DataSourceRequest command, PostModel.AddRelatedPostModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
+                return AccessDeniedView();
+
+
+            var posts = _postService.SearchPosts(
+                categoryIds: new List<int> { model.SearchCategoryId },
+                keywords: model.SearchPostName,
+                pageIndex: command.Page - 1,
+                pageSize: command.PageSize,
+                showHidden: true
+                );
+            var gridModel = new DataSourceResult();
+            gridModel.Data = posts.Select(x => x.ToModel());
+            gridModel.Total = posts.TotalCount;
+
+            return Json(gridModel);
+        }
+
+        [HttpPost]
+        [FormValueRequired("save")]
+        public ActionResult RelatedPostAddPopup(string btnId, string formId, PostModel.AddRelatedPostModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
+                return AccessDeniedView();
+
+            if (model.SelectedPostIds != null)
+            {
+                foreach (int id in model.SelectedPostIds)
+                {
+                    var post = _postService.GetPostById(id);
+                    if (post != null)
+                    {
+
+                        var existingRelatedPosts = _postService.GetRelatedPostsByPostId1(model.PostId);
+                        if (existingRelatedPosts.FindRelatedPost(model.PostId, id) == null)
+                        {
+                            _postService.InsertRelatedPost(
+                                new RelatedPost
+                                {
+                                    PostId1 = model.PostId,
+                                    PostId2 = id,
+                                    DisplayOrder = 1
+                                });
+                        }
+                    }
+                }
+            }
+
+            ViewBag.RefreshPage = true;
+            ViewBag.btnId = btnId;
+            ViewBag.formId = formId;
             return View(model);
         }
 

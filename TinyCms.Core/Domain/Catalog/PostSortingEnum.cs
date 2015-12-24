@@ -21,5 +21,9 @@
         /// Product creation date
         /// </summary>
         CreatedOn = 15,
+        /// <summary>
+        /// ViewCount 
+        /// </summary>
+        ViewCount = 20
     }
 }

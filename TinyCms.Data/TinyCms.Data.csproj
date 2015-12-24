@@ -99,6 +99,7 @@
     <Compile Include="Mapping\Posts\PostPictureMap.cs" />
     <Compile Include="Mapping\Posts\PostTagMap.cs" />
     <Compile Include="Mapping\Posts\PostTemplateMap.cs" />
+    <Compile Include="Mapping\Posts\RelatedPostMap.cs" />
     <Compile Include="Mapping\Tasks\ScheduleTaskMap.cs" />
     <Compile Include="Mapping\Topics\TopicMap.cs" />
     <Compile Include="Mapping\Topics\TopicTemplateMap.cs" />

@@ -13,6 +13,8 @@ namespace TinyCms.Web.Models.Posts
             Posts = new List<PostOverviewModel>();
             SubCategories = new List<SubCategoryModel>();
             CategoryBreadcrumb = new List<CategoryModel>();
+
+            PagingFilteringContext = new PostsPagingFilteringModel();
         }
 
         public string Name { get; set; }
@@ -31,7 +33,8 @@ namespace TinyCms.Web.Models.Posts
 
         public IList<PostOverviewModel> FeaturedPosts { get; set; }
         public IList<PostOverviewModel> Posts { get; set; }
-        
+
+        public PostsPagingFilteringModel PagingFilteringContext { get; set; }
 
 		#region Nested Classes
 

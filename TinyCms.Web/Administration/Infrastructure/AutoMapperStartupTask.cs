@@ -7,6 +7,7 @@ using TinyCms.Admin.Models.Localization;
 using TinyCms.Admin.Models.Logging;
 using TinyCms.Admin.Models.Messages;
 using TinyCms.Admin.Models.Plugins;
+using TinyCms.Admin.Models.Polls;
 using TinyCms.Admin.Models.Posts;
 using TinyCms.Admin.Models.Settings;
 using TinyCms.Admin.Models.Templates;
@@ -16,6 +17,7 @@ using TinyCms.Core.Domain.Localization;
 using TinyCms.Core.Domain.Logging;
 using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Messages;
+using TinyCms.Core.Domain.Polls;
 using TinyCms.Core.Domain.Posts;
 using TinyCms.Core.Domain.Topics;
 using TinyCms.Core.Infrastructure;
@@ -120,6 +122,7 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.UpdatedOnUtc, mo => mo.Ignore())
                 .ForMember(dest => dest.Deleted, mo => mo.Ignore())
                 .ForMember(dest => dest.PostCategories, mo => mo.Ignore())
+                .ForMember(dest => dest.Published, mo => mo.Ignore())
                 .ForMember(dest => dest.PostPictures, mo => mo.Ignore());
             //logs
             Mapper.CreateMap<Log, LogModel>()
@@ -169,6 +172,18 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.LogoUrl, mo => mo.Ignore())
                 .ForMember(dest => dest.Locales, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
+
+            //news
+            Mapper.CreateMap<Poll, PollModel>()
+                .ForMember(dest => dest.StartDate, mo => mo.Ignore())
+                .ForMember(dest => dest.EndDate, mo => mo.Ignore())
+                .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
+            Mapper.CreateMap<PollModel, Poll>()
+                .ForMember(dest => dest.PollAnswers, mo => mo.Ignore())
+                .ForMember(dest => dest.Language, mo => mo.Ignore())
+                .ForMember(dest => dest.StartDateUtc, mo => mo.Ignore())
+                .ForMember(dest => dest.EndDateUtc, mo => mo.Ignore());
+
             //customer roles
             Mapper.CreateMap<CustomerRole, CustomerRoleModel>()
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
@@ -213,69 +228,69 @@ namespace TinyCms.Admin.Infrastructure
             //Settings
            
             Mapper.CreateMap<CatalogSettings, CatalogSettingsModel>()
-                .ForMember(dest => dest.AllowViewUnpublishedProductPage_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.DisplayDiscontinuedMessageForUnpublishedProducts_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ShowProductSku_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.AllowViewUnpublishedPostPage_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.DisplayDiscontinuedMessageForUnpublishedPosts_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.ShowPostSku_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.ShowManufacturerPartNumber_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.ShowGtin_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.ShowFreeShippingNotification_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.AllowProductSorting_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.AllowProductViewModeChanging_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ShowProductsFromSubcategories_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ShowCategoryProductNumber_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ShowCategoryProductNumberIncludingSubcategories_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.AllowPostSorting_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.AllowPostViewModeChanging_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.ShowPostsFromSubcategories_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.ShowCategoryPostNumber_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.ShowCategoryPostNumberIncludingSubcategories_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.CategoryBreadcrumbEnabled_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.ShowShareButton_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.PageShareCode_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductReviewsMustBeApproved_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.AllowAnonymousUsersToReviewProduct_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.NotifyStoreOwnerAboutNewProductReviews_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.PostReviewsMustBeApproved_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.AllowAnonymousUsersToReviewPost_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.NotifyStoreOwnerAboutNewPostReviews_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.EmailAFriendEnabled_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.AllowAnonymousUsersToEmailAFriend_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.RecentlyViewedProductsNumber_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.RecentlyViewedProductsEnabled_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.NewProductsNumber_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.NewProductsEnabled_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.CompareProductsEnabled_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.RecentlyViewedPostsNumber_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.RecentlyViewedPostsEnabled_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.NewPostsNumber_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.NewPostsEnabled_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.ComparePostsEnabled_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.ShowBestsellersOnHomepage_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.NumberOfBestsellersOnHomepage_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.SearchPageProductsPerPage_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.SearchPagePostsPerPage_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.SearchPageAllowCustomersToSelectPageSize_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.SearchPagePageSizeOptions_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductSearchAutoCompleteEnabled_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductSearchAutoCompleteNumberOfProducts_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ShowProductImagesInSearchAutoComplete_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductSearchTermMinimumLength_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductsAlsoPurchasedEnabled_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductsAlsoPurchasedNumber_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.NumberOfProductTags_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductsByTagPageSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductsByTagAllowCustomersToSelectPageSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductsByTagPageSizeOptions_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.IncludeShortDescriptionInCompareProducts_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.IncludeFullDescriptionInCompareProducts_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.PostSearchAutoCompleteEnabled_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.PostSearchAutoCompleteNumberOfPosts_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.ShowPostImagesInSearchAutoComplete_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.PostSearchTermMinimumLength_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.PostsAlsoPurchasedEnabled_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.PostsAlsoPurchasedNumber_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.NumberOfPostTags_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.PostsByTagPageSize_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.PostsByTagAllowCustomersToSelectPageSize_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.PostsByTagPageSizeOptions_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.IncludeShortDescriptionInComparePosts_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.IncludeFullDescriptionInComparePosts_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.IgnoreDiscounts_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.IgnoreFeaturedProducts_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.IgnoreFeaturedPosts_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.IgnoreAcl_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.IgnoreStoreLimitations_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.CacheProductPrices_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.CachePostPrices_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.ManufacturersBlockItemsToDisplay_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.DisplayTaxShippingInfoFooter_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.DisplayTaxShippingInfoProductDetailsPage_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.DisplayTaxShippingInfoProductBoxes_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.DisplayTaxShippingInfoPostDetailsPage_OverrideForStore, mo => mo.Ignore())
+                .ForMember(dest => dest.DisplayTaxShippingInfoPostBoxes_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.DisplayTaxShippingInfoShoppingCart_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.DisplayTaxShippingInfoWishlist_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.DisplayTaxShippingInfoOrderDetailsPage_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<CatalogSettingsModel, CatalogSettings>()
-                .ForMember(dest => dest.PublishBackProductWhenCancellingOrders, mo => mo.Ignore())
+                .ForMember(dest => dest.PublishBackPostWhenCancellingOrders, mo => mo.Ignore())
                 .ForMember(dest => dest.DefaultViewMode, mo => mo.Ignore())
-                .ForMember(dest => dest.DefaultProductRatingValue, mo => mo.Ignore())
-                .ForMember(dest => dest.IncludeFeaturedProductsInNormalLists, mo => mo.Ignore())
+                .ForMember(dest => dest.DefaultPostRatingValue, mo => mo.Ignore())
+                .ForMember(dest => dest.IncludeFeaturedPostsInNormalLists, mo => mo.Ignore())
                 .ForMember(dest => dest.AjaxProcessAttributeChange, mo => mo.Ignore())
                 .ForMember(dest => dest.MaximumBackInStockSubscriptions, mo => mo.Ignore())
                 .ForMember(dest => dest.DisplayTierPricesWithDiscounts, mo => mo.Ignore())
-                .ForMember(dest => dest.CompareProductsNumber, mo => mo.Ignore())
+                .ForMember(dest => dest.ComparePostsNumber, mo => mo.Ignore())
                 .ForMember(dest => dest.DefaultCategoryPageSizeOptions, mo => mo.Ignore())
                 .ForMember(dest => dest.DefaultCategoryPageSize, mo => mo.Ignore())
                 .ForMember(dest => dest.DefaultManufacturerPageSizeOptions, mo => mo.Ignore())
@@ -284,19 +299,6 @@ namespace TinyCms.Admin.Infrastructure
             Mapper.CreateMap<MediaSettings, MediaSettingsModel>()
                 .ForMember(dest => dest.PicturesStoredIntoDatabase, mo => mo.Ignore())
                 .ForMember(dest => dest.ActiveStoreScopeConfiguration, mo => mo.Ignore())
-                .ForMember(dest => dest.AvatarPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductDetailsPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ProductThumbPictureSizeOnProductDetailsPage_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.AssociatedProductPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.CategoryThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ManufacturerThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.VendorThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.CartThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.MiniCartThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.MaximumImageSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.MultipleThumbDirectories_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.DefaultImageQuality_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<MediaSettingsModel, MediaSettings>()
                 .ForMember(dest => dest.DefaultPictureZoomEnabled, mo => mo.Ignore())
@@ -306,7 +308,7 @@ namespace TinyCms.Admin.Infrastructure
             Mapper.CreateMap<CustomerUserSettingsModel.CustomerSettingsModel, CustomerSettings>()
                 .ForMember(dest => dest.HashedPasswordFormat, mo => mo.Ignore())
                 .ForMember(dest => dest.AvatarMaximumSizeBytes, mo => mo.Ignore())
-                .ForMember(dest => dest.DownloadableProductsValidateUser, mo => mo.Ignore())
+                .ForMember(dest => dest.DownloadablePostsValidateUser, mo => mo.Ignore())
                 .ForMember(dest => dest.OnlineCustomerMinutes, mo => mo.Ignore())
                 .ForMember(dest => dest.SuffixDeletedCustomers, mo => mo.Ignore());
 

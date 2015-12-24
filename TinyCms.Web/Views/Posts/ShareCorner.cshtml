@@ -1,0 +1,21 @@
+﻿@model IEnumerable<PostOverviewModel>
+@if (Model.Any())
+{
+    <div class="corner_sharing">
+        <h2><a href="#">GÓC CHIA SẺ</a></h2>
+        <ul>
+            @foreach (var post in Model)
+            {
+                <li>
+                    <a href="@Url.RouteUrl("Post", new {SeName = post.SeName})" class="blog_thumb">
+                        <span class="loading"><img src="@post.DefaultPictureModel.ImageUrl" width="148" height="102" alt="@post.DefaultPictureModel.AlternateText" /></span>
+                    </a>
+                    <div class="detailtxt">
+                        <a href="@Url.RouteUrl("Post", new {SeName = post.SeName})" class="blogtitle">@post.Name</a>
+                        <p class="content">@Html.Raw(post.ShortDescription)</p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}

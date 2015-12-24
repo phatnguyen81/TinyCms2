@@ -633,6 +633,8 @@ BEGIN
 		SET @sql_orderby = ' p.[Price] DESC'
 	ELSE IF @OrderBy = 15 /* creation date */
 		SET @sql_orderby = ' p.[CreatedOnUtc] DESC'
+		ELSE IF @OrderBy = 20 /* view count */
+		SET @sql_orderby = ' p.[ViewCount] DESC'
 	ELSE /* default sorting, 0 (position) */
 	BEGIN
 		--category position (display order)
@@ -706,3 +708,39 @@ BEGIN
 END
 
 GO
+
+
+CREATE PROCEDURE [dbo].[PostLoadOtherPost]
+	@PostId				int,
+	@BeforeAfterNumPost	int = 2, 
+	@ShowHidden			bit = 0
+AS
+BEGIN
+	DECLARE @BeforeCount int,
+		@AfterCount int;
+
+	if not exists(select 1 from post where id = @PostId)
+	BEGIN
+		SELECT * FROM POST WHERE 1=0;
+	END
+	ELSE
+	BEGIN
+		SELECT TOP (@BeforeAfterNumPost * 2) * FROM (
+			SELECT TOP (2*@BeforeAfterNumPost) P.*, ROW_NUMBER() OVER(ORDER BY P.ID) RN
+			FROM POST P
+				INNER JOIN Post_Category_Mapping M ON P.ID = M.PostId
+			WHERE P.ID > @PostId 
+				AND M.CategoryId IN (SELECT CATEGORYID FROM Post_Category_Mapping WHERE POSTID = @PostId)
+				AND (@ShowHidden = 1 OR (P.Deleted = 0 AND P.Published = 1)) 
+			UNION
+			SELECT TOP (2*@BeforeAfterNumPost) P.*, ROW_NUMBER() OVER(ORDER BY P.ID DESC) RN
+			FROM POST P
+				INNER JOIN Post_Category_Mapping M ON P.ID = M.PostId
+			WHERE P.ID < @PostId 
+				AND M.CategoryId IN (SELECT CATEGORYID FROM Post_Category_Mapping WHERE POSTID = @PostId)
+				AND (@ShowHidden = 1 OR (P.Deleted = 0 AND P.Published = 1))
+			ORDER BY P.ID DESC
+			) A
+		ORDER BY A.RN;
+	END
+END

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Nop.Plugin.Widgets.AdsBanner.Domain;
 using Nop.Plugin.Widgets.AdsBanner.Extensions;
 using Nop.Plugin.Widgets.AdsBanner.Infrastructure.Cache;
 using Nop.Plugin.Widgets.AdsBanner.Models;
@@ -69,7 +71,7 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
         [HttpPost]
         public ActionResult List(DataSourceRequest command, AdsBannerListModel model)
         {
-            var adsbanners = _adsBannerService.GetAllAdsBanners(model.SearchAdsBannerName,null,null,
+            var adsbanners = _adsBannerService.GetAllAdsBanners(model.SearchAdsBannerName,null,
                 command.Page - 1, command.PageSize, true);
             var gridModel = new DataSourceResult
             {
@@ -158,6 +160,9 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
                     new { area = "Admin", systemName = "Widgets.AdsBanner" });
             if (ModelState.IsValid)
             {
+
+                adsbanner = model.ToEntity(adsbanner);
+
                 int prevPictureId = adsbanner.PictureId;
 
                 _adsBannerService.UpdateAdsBanner(adsbanner);
@@ -194,13 +199,29 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
             SuccessNotification(_localizationService.GetResource("Plugins.Widgets.AdsBanner.Deleted"));
             return RedirectToAction("ConfigureWidget", "Widget", new { area = "Admin", systemName = "Widgets.AdsBanner" });
         }
-   
+
+        public List<ShowAdsBannerModel> PrepareShowAdsBannerModel(IList<AdsBannerRecord> adsBanners )
+        {
+            return adsBanners.Select(q =>
+            {
+                var model = new ShowAdsBannerModel
+                {
+                    PictureUrl = _pictureService.GetPictureUrl(q.PictureId),
+                    Link = q.Url
+                };
+                return model;
+            }).ToList();
+        }
+
         [ChildActionOnly]
         public ActionResult PublicInfo(string widgetZone, object additionalData = null)
         {
 
             var model = new PublicInfoModel();
 
+            var wz = _widgetService.GetWidgetZoneBySystemName(widgetZone);
+
+            model.AdsBanners = PrepareShowAdsBannerModel(_adsBannerService.GetAllAdsBanners(widgetZoneId: wz.Id).ToList());
 
             return View("~/Plugins/Widgets.AdsBanner/Views/WidgetsAdsBanner/PublicInfo.cshtml", model);
         }

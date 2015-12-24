@@ -153,6 +153,12 @@ namespace TinyCms.Web.Controllers
             return PartialView();
         }
 
+        public ActionResult GenericUrl()
+        {
+            //seems that no entity was found
+            return InvokeHttp404();
+        }
+
         #endregion
 
     }

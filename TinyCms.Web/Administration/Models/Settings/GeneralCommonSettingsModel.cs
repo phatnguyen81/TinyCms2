@@ -102,9 +102,9 @@ namespace TinyCms.Admin.Models.Settings
             [AllowHtml]
             public string DefaultMetaDescription { get; set; }
 
-            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.GenerateProductMetaDescription")]
+            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.GeneratePostMetaDescription")]
             [AllowHtml]
-            public bool GenerateProductMetaDescription { get; set; }
+            public bool GeneratePostMetaDescription { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.ConvertNonWesternChars")]
             public bool ConvertNonWesternChars { get; set; }
@@ -166,8 +166,8 @@ namespace TinyCms.Admin.Models.Settings
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailWishlistToFriendPage")]
             public bool CaptchaShowOnEmailWishlistToFriendPage { get; set; }
 
-            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailProductToFriendPage")]
-            public bool CaptchaShowOnEmailProductToFriendPage { get; set; }
+            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailPostToFriendPage")]
+            public bool CaptchaShowOnEmailPostToFriendPage { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnBlogCommentPage")]
             public bool CaptchaShowOnBlogCommentPage { get; set; }
@@ -175,8 +175,8 @@ namespace TinyCms.Admin.Models.Settings
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnNewsCommentPage")]
             public bool CaptchaShowOnNewsCommentPage { get; set; }
 
-            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnProductReviewPage")]
-            public bool CaptchaShowOnProductReviewPage { get; set; }
+            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnPostReviewPage")]
+            public bool CaptchaShowOnPostReviewPage { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnApplyVendorPage")]
             public bool CaptchaShowOnApplyVendorPage { get; set; }

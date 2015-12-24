@@ -23,29 +23,10 @@ namespace TinyCms.Web.Infrastructure
 
             routes.MapLocalizedRoute("Category",
                             "{SeName}",
-                            new { controller = "Catalog", action = "Category" },
+                            new { controller = "Posts", action = "Category" },
                             new[] { "TinyCms.Web.Controllers" });
 
-            routes.MapLocalizedRoute("Manufacturer",
-                            "{SeName}",
-                            new { controller = "Catalog", action = "Manufacturer" },
-                            new[] { "TinyCms.Web.Controllers" });
-
-            routes.MapLocalizedRoute("Vendor",
-                            "{SeName}",
-                            new { controller = "Catalog", action = "Vendor" },
-                            new[] { "TinyCms.Web.Controllers" });
             
-            routes.MapLocalizedRoute("NewsItem",
-                            "{SeName}",
-                            new { controller = "News", action = "NewsItem" },
-                            new[] { "TinyCms.Web.Controllers" });
-
-            routes.MapLocalizedRoute("BlogPost",
-                            "{SeName}",
-                            new { controller = "Blog", action = "BlogPost" },
-                            new[] { "TinyCms.Web.Controllers" });
-
             routes.MapLocalizedRoute("Topic",
                             "{SeName}",
                             new { controller = "Topic", action = "TopicDetails" },

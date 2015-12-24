@@ -24,6 +24,12 @@ namespace TinyCms.Services.Posts
         /// </summary>
         /// <returns>Posts</returns>
         IList<Post> GetAllPostsDisplayedOnHomePage();
+
+        /// <summary>
+        /// Gets all posts displayed on the home page
+        /// </summary>
+        /// <returns>Posts</returns>
+        IList<Post> GetOrtherPosts(int postId, int beforeAfterNumPost, bool showHidden = false);
         
         /// <summary>
         /// Gets post
@@ -153,6 +159,42 @@ namespace TinyCms.Services.Posts
 
         #endregion
 
+        #region Related posts
+
+        /// <summary>
+        /// Deletes a related post
+        /// </summary>
+        /// <param name="relatedPost">Related post</param>
+        void DeleteRelatedPost(RelatedPost relatedPost);
+
+        /// <summary>
+        /// Gets related posts by post identifier
+        /// </summary>
+        /// <param name="postId1">The first post identifier</param>
+        /// <param name="showHidden">A value indicating whether to show hidden records</param>
+        /// <returns>Related posts</returns>
+        IList<RelatedPost> GetRelatedPostsByPostId1(int postId1, bool showHidden = false);
+
+        /// <summary>
+        /// Gets a related post
+        /// </summary>
+        /// <param name="relatedPostId">Related post identifier</param>
+        /// <returns>Related post</returns>
+        RelatedPost GetRelatedPostById(int relatedPostId);
+
+        /// <summary>
+        /// Inserts a related post
+        /// </summary>
+        /// <param name="relatedPost">Related post</param>
+        void InsertRelatedPost(RelatedPost relatedPost);
+
+        /// <summary>
+        /// Updates a related post
+        /// </summary>
+        /// <param name="relatedPost">Related post</param>
+        void UpdateRelatedPost(RelatedPost relatedPost);
+
+        #endregion
 
     }
 }

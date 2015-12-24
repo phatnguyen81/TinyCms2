@@ -1,0 +1,68 @@
+﻿@model PostDetailsModel
+@using TinyCms.Core
+@using TinyCms.Core.Domain
+@using TinyCms.Core.Domain.Seo;
+@using TinyCms.Core.Infrastructure;
+@using TinyCms.Services.Localization;
+@{
+    Layout = "~/Views/Shared/_TwoColumn.cshtml";
+
+    //title, meta
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+
+    var seoSettings = EngineContext.Current.Resolve<SeoSettings>();
+
+    //canonical URL
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        var postUrl = Url.RouteUrl("Post", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+        Html.AddCanonicalUrlParts(postUrl);
+    }
+
+    //open graph META tags
+    if (seoSettings.OpenGraphMetaTags)
+    {
+        var storeName = EngineContext.Current.Resolve<StoreInformationSettings>().Name;
+        Html.AddHeadCustomParts("<meta property=\"og:type\" content=\"post\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:title\" content=\"" + Html.Encode(Model.Name) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:description\" content=\"" + Html.Encode(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:url\" content=\"" + Request.Url.AbsoluteUri + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:site_name\" content=\"" + Html.Encode(storeName) + "\" />");
+    }
+
+    //Twitter META tags
+    if (seoSettings.TwitterMetaTags)
+    {
+        var storeName = EngineContext.Current.Resolve<StoreInformationSettings>().Name;
+        Html.AddHeadCustomParts("<meta property=\"twitter:card\" content=\"summary\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:site\" content=\"" + Html.Encode(storeName) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:title\" content=\"" + Html.Encode(Model.Name) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:description\" content=\"" + Html.Encode(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:url\" content=\"" + Request.Url.AbsoluteUri + "\" />");
+    }
+}
+<div class="leftcol">
+    <div class="news_detail">
+        <h1><a href="@Url.RouteUrl("Category", new { SeName = Model.Breadcrumb.CategoryBreadcrumb.Last().SeName })">@Model.Breadcrumb.CategoryBreadcrumb.Last().Name</a></h1>
+        <p class="title">@Model.Name</p>
+        <p class="desc">@Html.Raw(Model.ShortDescription)</p>
+        <div class="content_box">
+            <div class="ctn">
+                @Html.Raw(Model.FullDescription)
+                @Html.Action("PollBlock", "Poll", new { systemKeyword = "poll_iphone" })
+            </div>
+            <div class="rightside">
+                @Html.Action("RelatedPosts", "Posts")
+                @Html.Action("PromotionCategory", "Posts", new {postThumbPictureSize = 80})
+                <div class="subside_banner">
+                    @Html.Widget("subside_banner")
+                </div>
+            </div>
+            @Html.Action("OtherPosts", "Posts", new { postId = Model.Id, postThumbPictureSize =160})
+        </div>
+    </div>
+</div>

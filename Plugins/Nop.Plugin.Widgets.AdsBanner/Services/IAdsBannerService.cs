@@ -10,7 +10,7 @@ namespace Nop.Plugin.Widgets.AdsBanner.Services
 {
     public interface IAdsBannerService
     {
-        IPagedList<AdsBannerRecord> GetAllAdsBanners(string name = "", DateTime? fromDateTimeUtc = null, DateTime? toDateTimeUtc = null,
+        IPagedList<AdsBannerRecord> GetAllAdsBanners(string name = "", int? widgetZoneId = null,
             int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
 
         AdsBannerRecord GetById(int id);

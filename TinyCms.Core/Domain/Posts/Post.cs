@@ -59,7 +59,9 @@ namespace TinyCms.Core.Domain.Posts
         /// </summary>
         public bool SubjectToAcl { get; set; }
 
-
+        public int ViewCount { get; set; }
+        public int ShareCount { get; set; }
+        public int LikeCount { get; set; }
      
         /// <summary>
         /// Gets or sets a display order.
@@ -100,6 +102,8 @@ namespace TinyCms.Core.Domain.Posts
         /// 
         /// </summary>
         public DateTime? ApprovedOnUtc { get; set; }
+
+        public int PostTemplateId { get; set; }
         
 
         /// <summary>
@@ -129,6 +133,7 @@ namespace TinyCms.Core.Domain.Posts
             get { return _postTags ?? (_postTags = new List<PostTag>()); }
             protected set { _postTags = value; }
         }
+
 
     }
 }

@@ -28,7 +28,9 @@
         <li @Html.RenderSelectedTabIndex(3, GetSelectedTabIndex())>
             @T("Admin.Catalog.Posts.Categories")
         </li>
-        
+        <li @Html.RenderSelectedTabIndex(4, GetSelectedTabIndex())>
+            @T("Admin.Catalog.Posts.RelatedPosts")
+        </li>
     </ul>
     <div>
         @TabInfo()
@@ -42,7 +44,9 @@
     <div>
         @TabCategories()
     </div>
-  
+    <div>
+        @TabRelatedPosts()
+    </div>
 </div>
 
 @{
@@ -75,3 +79,7 @@
     @Html.Partial("_CreateOrUpdate.Pictures", Model)
 }
 
+@helper TabRelatedPosts()
+{
+    @Html.Partial("_CreateOrUpdate.RelatedPosts", Model)
+}

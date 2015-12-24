@@ -90,6 +90,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\ModelCacheEventConsumer.cs" />
     <Compile Include="Controllers\WidgetsAdsBannerController.cs" />
     <Compile Include="Data\AdsBannerObjectContext.cs" />
     <Compile Include="Data\AdsBannerRecordMap.cs" />

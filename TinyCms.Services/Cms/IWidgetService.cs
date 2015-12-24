@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using TinyCms.Core.Domain.Cms;
 
 namespace TinyCms.Services.Cms
@@ -38,5 +39,7 @@ namespace TinyCms.Services.Cms
         IList<IWidgetPlugin> LoadAllWidgets(int storeId = 0);
 
         IList<WidgetZone> LoaddAllWidgetZones();
+
+        WidgetZone GetWidgetZoneBySystemName(string systemName);
     }
 }

@@ -472,7 +472,7 @@
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\List.cshtml" />
-    <Content Include="Views\Category\ProductAddPopup.cshtml" />
+    <Content Include="Views\Category\PostAddPopup.cshtml" />
     <Content Include="Views\Category\Tree.cshtml" />
     <Content Include="Views\Category\_CreateOrUpdate.cshtml" />
     <Content Include="Views\Common\AclDisabledWarning.cshtml" />
@@ -492,8 +492,7 @@
     <Content Include="Views\Post\ProductAttributeValueCreatePopup.cshtml" />
     <Content Include="Views\Post\ProductAttributeValueEditPopup.cshtml" />
     <Content Include="Views\Post\ProductTags.cshtml" />
-    <Content Include="Views\Post\RelatedProductAddPopup.cshtml" />
-    <Content Include="Views\Post\RequiredProductAddPopup.cshtml" />
+    <Content Include="Views\Post\RelatedPostAddPopup.cshtml" />
     <Content Include="Views\Post\_CreateOrUpdate.Acl.cshtml" />
     <Content Include="Views\Post\_CreateOrUpdate.Categories.cshtml" />
     <Content Include="Views\Post\_CreateOrUpdate.cshtml" />
@@ -513,6 +512,7 @@
     <Content Include="Views\Topic\Edit.cshtml" />
     <Content Include="Views\Topic\List.cshtml" />
     <Content Include="Views\Topic\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Post\_CreateOrUpdate.RelatedPosts.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

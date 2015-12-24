@@ -52,8 +52,8 @@ namespace TinyCms.Admin.Models.Settings
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.NotifyNewCustomerRegistration")]
             public bool NotifyNewCustomerRegistration { get; set; }
 
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.HideDownloadableProductsTab")]
-            public bool HideDownloadableProductsTab { get; set; }
+            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.HideDownloadablePostsTab")]
+            public bool HideDownloadablePostsTab { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.HideBackInStockSubscriptionsTab")]
             public bool HideBackInStockSubscriptionsTab { get; set; }

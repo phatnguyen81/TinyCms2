@@ -1,9 +1,28 @@
-﻿
-<div class="boxctn">
-    <h2><a href="#" class="headtitle">DU LỊCH QUA ẢNH</a></h2>
-    <a href="#" class="thumb"><span class="loading"><img src="temp/sidebar_box_img.jpg" width="268" height="135" alt="" class="bigimg" /> </span><span class="linetxt">Du Lịch Miền Tây Mỹ Tho - Cần Thơ</span></a>
-    <ul class="subimg">
-        <li><a href="#"><span class="loading"><img src="temp/sidebar_s_img.jpg" width="130" height="80" alt="" /></span></a></li>
-        <li><a href="#"><span class="loading"><img src="temp/sidebar_s_img02.jpg" width="130" height="80" alt="" /></span></a></li>
-    </ul>
-</div>
+﻿@model IEnumerable<PostOverviewModel>
+@{
+    var posts = Model.ToList();
+}
+@if (Model.Any())
+{
+    var firstPost = posts[0];
+    <div class="boxctn">
+        <h2><a href="#" class="headtitle">DU LỊCH QUA ẢNH</a></h2>
+        <a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })" class="thumb">
+            <span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="268" height="135" alt="@firstPost.DefaultPictureModel.AlternateText" class="bigimg" /></span>
+            <span class="linetxt">@firstPost.Name</span>
+        </a>
+        @if (Model.Count() > 1)
+        {
+            <ul class="subimg">
+                @foreach (var post in posts.Skip(1))
+                {
+                    <li>
+                        <a href="@Url.RouteUrl("Post", new { SeName = post.SeName })">
+                            <span class="loading"><img src="@post.DefaultPictureModel.ImageUrl" width="130" height="80" alt="@post.DefaultPictureModel.AlternateText" /></span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+}

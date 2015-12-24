@@ -10,21 +10,21 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets a value indicating details pages of unpublished product details pages could be open (for SEO optimization)
         /// </summary>
-        public bool AllowViewUnpublishedProductPage { get; set; }
+        public bool AllowViewUnpublishedPostPage { get; set; }
         /// <summary>
-        /// Gets or sets a value indicating customers should see "discontinued" message when visibting details pages of unpublished products (if "AllowViewUnpublishedProductPage" is "true)
+        /// Gets or sets a value indicating customers should see "discontinued" message when visibting details pages of unpublished products (if "AllowViewUnpublishedPostPage" is "true)
         /// </summary>
-        public bool DisplayDiscontinuedMessageForUnpublishedProducts { get; set; }
+        public bool DisplayDiscontinuedMessageForUnpublishedPosts { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether "Published" or "Disable buy/wishlist buttons" flags should be updated after order cancellation (deletion).
         /// Of course, when qty > configured minimum stock level
         /// </summary>
-        public bool PublishBackProductWhenCancellingOrders { get; set; }
+        public bool PublishBackPostWhenCancellingOrders { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to display product SKU
         /// </summary>
-        public bool ShowProductSku { get; set; }
+        public bool ShowPostSku { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to display manufacturer part number of a product
@@ -44,12 +44,12 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets a value indicating whether product sorting is enabled
         /// </summary>
-        public bool AllowProductSorting { get; set; }
+        public bool AllowPostSorting { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether customers are allowed to change product view mode
         /// </summary>
-        public bool AllowProductViewModeChanging { get; set; }
+        public bool AllowPostViewModeChanging { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether customers are allowed to change product view mode
@@ -59,17 +59,17 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets a value indicating whether a category details page should include products from subcategories
         /// </summary>
-        public bool ShowProductsFromSubcategories { get; set; }
+        public bool ShowPostsFromSubcategories { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether number of products should be displayed beside each category
         /// </summary>
-        public bool ShowCategoryProductNumber { get; set; }
+        public bool ShowCategoryPostNumber { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether we include subcategories (when 'ShowCategoryProductNumber' is 'true')
+        /// Gets or sets a value indicating whether we include subcategories (when 'ShowCategoryPostNumber' is 'true')
         /// </summary>
-        public bool ShowCategoryProductNumberIncludingSubcategories { get; set; }
+        public bool ShowCategoryPostNumberIncludingSubcategories { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether category breadcrumb is enabled
@@ -89,22 +89,22 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets a value indicating product reviews must be approved
         /// </summary>
-        public bool ProductReviewsMustBeApproved { get; set; }
+        public bool PostReviewsMustBeApproved { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating the default rating value of the product reviews
         /// </summary>
-        public int DefaultProductRatingValue { get; set; }
+        public int DefaultPostRatingValue { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to allow anonymous users write product reviews.
         /// </summary>
-        public bool AllowAnonymousUsersToReviewProduct { get; set; }
+        public bool AllowAnonymousUsersToReviewPost { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether notification of a store owner about new product reviews is enabled
         /// </summary>
-        public bool NotifyStoreOwnerAboutNewProductReviews { get; set; }
+        public bool NotifyStoreOwnerAboutNewPostReviews { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether product 'Email a friend' feature is enabled
@@ -119,45 +119,45 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets a number of "Recently viewed products"
         /// </summary>
-        public int RecentlyViewedProductsNumber { get; set; }
+        public int RecentlyViewedPostsNumber { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether "Recently viewed products" feature is enabled
         /// </summary>
-        public bool RecentlyViewedProductsEnabled { get; set; }
+        public bool RecentlyViewedPostsEnabled { get; set; }
         /// <summary>
         /// Gets or sets a number of products on the "New products" page
         /// </summary>
-        public int NewProductsNumber { get; set; }
+        public int NewPostsNumber { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether "New products" page is enabled
         /// </summary>
-        public bool NewProductsEnabled { get; set; }
+        public bool NewPostsEnabled { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether "Compare products" feature is enabled
         /// </summary>
-        public bool CompareProductsEnabled { get; set; }
+        public bool ComparePostsEnabled { get; set; }
         /// <summary>
         /// Gets or sets an allowed number of products to be compared
         /// </summary>
-        public int CompareProductsNumber { get; set; }
+        public int ComparePostsNumber { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether autocomplete is enabled
         /// </summary>
-        public bool ProductSearchAutoCompleteEnabled { get; set; }
+        public bool PostSearchAutoCompleteEnabled { get; set; }
         /// <summary>
         /// Gets or sets a number of products to return when using "autocomplete" feature
         /// </summary>
-        public int ProductSearchAutoCompleteNumberOfProducts { get; set; }
+        public int PostSearchAutoCompleteNumberOfPosts { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether to show product images in the auto complete search
         /// </summary>
-        public bool ShowProductImagesInSearchAutoComplete { get; set; }
+        public bool ShowPostImagesInSearchAutoComplete { get; set; }
         /// <summary>
         /// Gets or sets a minimum search term length
         /// </summary>
-        public int ProductSearchTermMinimumLength { get; set; }
+        public int PostSearchTermMinimumLength { get; set; }
         
         /// <summary>
         /// Gets or sets a value indicating whether to show bestsellers on home page
@@ -171,7 +171,7 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets a number of products per page on the search products page
         /// </summary>
-        public int SearchPageProductsPerPage { get; set; }
+        public int SearchPagePostsPerPage { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether customers are allowed to select page size on the search products page
         /// </summary>
@@ -184,12 +184,12 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets "List of products purchased by other customers who purchased the above" option is enable
         /// </summary>
-        public bool ProductsAlsoPurchasedEnabled { get; set; }
+        public bool PostsAlsoPurchasedEnabled { get; set; }
 
         /// <summary>
         /// Gets or sets a number of products also purchased by other customers to display
         /// </summary>
-        public int ProductsAlsoPurchasedNumber { get; set; }
+        public int PostsAlsoPurchasedNumber { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether we should process attribute change using AJAX. It's used for dynamical attribute change, SKU/GTIN update of combinations, conditional attributes
@@ -204,30 +204,30 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets a number of products per page on 'products by tag' page
         /// </summary>
-        public int ProductsByTagPageSize { get; set; }
+        public int PostsByTagPageSize { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether customers can select the page size for 'products by tag'
         /// </summary>
-        public bool ProductsByTagAllowCustomersToSelectPageSize { get; set; }
+        public bool PostsByTagAllowCustomersToSelectPageSize { get; set; }
 
         /// <summary>
         /// Gets or sets the available customer selectable page size options for 'products by tag'
         /// </summary>
-        public string ProductsByTagPageSizeOptions { get; set; }
+        public string PostsByTagPageSizeOptions { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to include "Short description" in compare products
         /// </summary>
-        public bool IncludeShortDescriptionInCompareProducts { get; set; }
+        public bool IncludeShortDescriptionInComparePosts { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether to include "Full description" in compare products
         /// </summary>
-        public bool IncludeFullDescriptionInCompareProducts { get; set; }
+        public bool IncludeFullDescriptionInComparePosts { get; set; }
         /// <summary>
         /// An option indicating whether products on category and manufacturer pages should include featured products as well
         /// </summary>
-        public bool IncludeFeaturedProductsInNormalLists { get; set; }
+        public bool IncludeFeaturedPostsInNormalLists { get; set; }
         
         /// <summary>
         /// Gets or sets a value indicating whether tier prices should be displayed with applied discounts (if available)
@@ -241,7 +241,7 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets a value indicating whether to ignore featured products (side-wide). It can significantly improve performance when enabled.
         /// </summary>
-        public bool IgnoreFeaturedProducts { get; set; }
+        public bool IgnoreFeaturedPosts { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether to ignore ACL rules (side-wide). It can significantly improve performance when enabled.
         /// </summary>
@@ -253,7 +253,7 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets a value indicating whether to cache product prices. It can significantly improve performance when enabled.
         /// </summary>
-        public bool CacheProductPrices { get; set; }
+        public bool CachePostPrices { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating maximum number of 'back in stock' subscription
@@ -272,11 +272,11 @@ namespace TinyCms.Core.Domain.Posts
         /// <summary>
         /// Gets or sets a value indicating whether to display information about shipping and tax on product details pages (used in Germany)
         /// </summary>
-        public bool DisplayTaxShippingInfoProductDetailsPage { get; set; }
+        public bool DisplayTaxShippingInfoPostDetailsPage { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether to display information about shipping and tax in product boxes (used in Germany)
         /// </summary>
-        public bool DisplayTaxShippingInfoProductBoxes { get; set; }
+        public bool DisplayTaxShippingInfoPostBoxes { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether to display information about shipping and tax on shopping cart page (used in Germany)
         /// </summary>

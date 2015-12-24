@@ -2,14 +2,14 @@
     Layout = "~/Administration/Views/Shared/_AdminPopupLayout.cshtml";
 }
 
-@model CategoryModel.AddCategoryProductModel
+@model CategoryModel.AddCategoryPostModel
 
 @{
-    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
-    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+    var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
 
     //page title
-    ViewBag.Title = T("Admin.Catalog.Categories.Products.AddNew").Text;
+    ViewBag.Title = T("Admin.Catalog.Categories.Posts.AddNew").Text;
 }
 @using (Html.BeginForm())
 {
@@ -17,7 +17,7 @@
     <div class="section-header">
         <div class="title">
             <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
-            @T("Admin.Catalog.Categories.Products.AddNew")
+            @T("Admin.Catalog.Categories.Posts.AddNew")
         </div>
     </div>    
     
@@ -34,10 +34,10 @@
     <table width="100%">
         <tr>
             <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SearchProductName):
+                @Html.NopLabelFor(model => model.SearchPostName):
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.SearchProductName)
+                @Html.EditorFor(model => model.SearchPostName)
             </td>
         </tr>
         <tr>
@@ -74,31 +74,31 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SearchProductTypeId):
+                @Html.NopLabelFor(model => model.SearchPostTypeId):
             </td>
             <td class="adminData">
-                @Html.DropDownList("SearchProductTypeId", Model.AvailableProductTypes)
+                @Html.DropDownList("SearchPostTypeId", Model.AvailablePostTypes)
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="button" id="search-products" class="k-button" value="@T("Admin.Common.Search")" />
+                <input type="button" id="search-posts" class="k-button" value="@T("Admin.Common.Search")" />
             </td>
         </tr>
     </table>
     <table class="adminContent">
         <tr>
             <td>
-                <div id="products-grid"></div>
+                <div id="posts-grid"></div>
 
                 <script>
                 $(document).ready(function () {
-                    $("#products-grid").kendoGrid({
+                    $("#posts-grid").kendoGrid({
                         dataSource: {
                             type: "json",
                             transport: {
                                 read: {
-                                    url: "@Html.Raw(Url.Action("ProductAddPopupList", "Category"))",
+                                    url: "@Html.Raw(Url.Action("PostAddPopupList", "Category"))",
                                     type: "POST",
                                     dataType: "json",
                                     data: additionalData
@@ -132,15 +132,15 @@
                             field: "Id",
                             headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
                             headerAttributes: { style: "text-align:center" },
-                            template: "<input type='checkbox' name='SelectedProductIds' value='#=Id#' class='checkboxGroups' />",
+                            template: "<input type='checkbox' name='SelectedPostIds' value='#=Id#' class='checkboxGroups' />",
                             attributes: { style: "text-align:center" },
                             width: 50
                         }, {
                             field: "Name",
-                            title: "@T("Admin.Catalog.Products.Fields.Name")"
+                            title: "@T("Admin.Catalog.Posts.Fields.Name")"
                         }, {
                             field: "Published",
-                            title: "@T("Admin.Catalog.Products.Fields.Published")",
+                            title: "@T("Admin.Catalog.Posts.Fields.Published")",
                             width: 100,
                             headerAttributes: { style: "text-align:center" },
                             attributes: { style: "text-align:center" },
@@ -152,8 +152,8 @@
 
                 <script type="text/javascript">
                     $(document).ready(function() {
-                        $('#search-products').click(function() {
-                            var grid = $('#products-grid').data('kendoGrid');
+                        $('#search-posts').click(function() {
+                            var grid = $('#posts-grid').data('kendoGrid');
                             grid.dataSource.page(1); //new search. Set page size to 1
                             //grid.dataSource.read(); we already loaded the grid above using "page" function
                             //clear selected checkboxes
@@ -161,9 +161,9 @@
                             return false;
                         });
 
-                        $("#@Html.FieldIdFor(model => model.SearchProductName)").keydown(function(event) {
+                        $("#@Html.FieldIdFor(model => model.SearchPostName)").keydown(function(event) {
                             if (event.keyCode == 13) {
-                                $("#search-products").click();
+                                $("#search-posts").click();
                                 return false;
                             }
                         });
@@ -173,27 +173,27 @@
                             $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
                         });
 
-                        $('#products-grid').on('change', 'input[type=checkbox][id!=mastercheckbox]', function(e) {
+                        $('#posts-grid').on('change', 'input[type=checkbox][id!=mastercheckbox]', function(e) {
                             updateMasterCheckbox();
                         });
                     });
 
                     function additionalData() {
                         var data = {
-                            SearchProductName: $('#@Html.FieldIdFor(model => model.SearchProductName)').val(),
+                            SearchPostName: $('#@Html.FieldIdFor(model => model.SearchPostName)').val(),
                             SearchCategoryId: $('#SearchCategoryId').val(),
                             SearchManufacturerId: $('#SearchManufacturerId').val(),
                             SearchStoreId: $('#SearchStoreId').val(),
                             SearchVendorId: $('#SearchVendorId').val(),
-                            SearchProductTypeId: $('#SearchProductTypeId').val()
+                            SearchPostTypeId: $('#SearchPostTypeId').val()
                         };
                         addAntiForgeryToken(data);
                         return data;
                     }
 
                     function updateMasterCheckbox() {
-                        var numChkBoxes = $('#products-grid input[type=checkbox][id!=mastercheckbox]').length;
-                        var numChkBoxesChecked = $('#products-grid input[type=checkbox][id!=mastercheckbox]:checked').length;
+                        var numChkBoxes = $('#posts-grid input[type=checkbox][id!=mastercheckbox]').length;
+                        var numChkBoxesChecked = $('#posts-grid input[type=checkbox][id!=mastercheckbox]:checked').length;
                         $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
                     }
 

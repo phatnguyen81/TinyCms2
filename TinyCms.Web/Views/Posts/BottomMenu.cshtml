@@ -1,0 +1,24 @@
+﻿@model TopMenuModel
+<div class="inner_footer clearfix">
+    <div class="subcate"> <a href="@Url.RouteUrl("homepage")" class="head">Trang chủ</a> </div>
+    @{
+        var rootCategories = Model.Categories.Where(x => x.IncludeInTopMenu).ToList();
+    }
+    @foreach (var category in rootCategories)
+    {
+        <div class="subcate">
+            <a href="@Url.RouteUrl("Category", new {category.SeName})" class="head">@category.Name</a>
+            @if (category.SubCategories.Any())
+            {
+                <ul>
+                    @foreach (var sub in category.SubCategories)
+                    {
+                        <li><a href="@Url.RouteUrl("Category", new {category.SeName})">@sub.Name</a></li>
+                    }
+                </ul>
+            }
+        </div>
+    }
+</div>
+
+

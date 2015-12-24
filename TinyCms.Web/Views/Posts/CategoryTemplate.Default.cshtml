@@ -1,0 +1,80 @@
+﻿@using TinyCms.Core.Domain.Common
+@using TinyCms.Core.Domain.Seo
+@using TinyCms.Core.Infrastructure
+@model CategoryModel
+@{
+    Layout = "~/Views/Shared/_TwoColumn.cshtml";
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+
+    var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
+    if (canonicalUrlsEnabled)
+    {
+        var categoryUrl = Url.RouteUrl("Category", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+        Html.AddCanonicalUrlParts(categoryUrl);
+    }
+
+}
+
+<div class="cate_detail">
+    <h1>@Model.Name</h1>
+        @if (Model.SubCategories.Any())
+        {
+            <p class="subcate">
+                @foreach (var subcat in Model.SubCategories)
+                {
+                    <a href="@Url.RouteUrl("Category",new {subcat.SeName})">@subcat.Name</a>
+                }
+            </p>
+        }
+        @if (Model.Posts.Any())
+        {
+            var firstPost = Model.Posts.First();
+            <div class="top_cate">
+                <div class="inner_cate clearfix">
+                    <a href="@Url.RouteUrl("Post", new {firstPost.SeName})" class="thumb_topcate">
+                        <img src="@firstPost.DefaultPictureModel.ImageUrl" width="300" height="187" alt="@firstPost.DefaultPictureModel.AlternateText">
+                    </a>
+                    <div class="topcate_dt">
+                        <h2><a href="@Url.RouteUrl("Post", new {firstPost.SeName})"> @firstPost.Name </a>
+                        </h2>
+                        <p>@Html.Raw(firstPost.ShortDescription)</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            foreach (var post in Model.Posts.Skip(1))
+             {
+                 <div class="catebox">
+                     <div class="newscont">
+                         <a class="boximg" href="@Url.RouteUrl("Post", new {post.SeName})">
+                             <img width="143" height="105" alt="@post.DefaultPictureModel.AlternateText" src="@post.DefaultPictureModel.ImageUrl">
+                         </a>
+                         <div class="detail">
+                             <h3>
+                                 <a href="@Url.RouteUrl("Post", new {post.SeName})">@post.Name</a>
+                             </h3>
+                             <p>@Html.Raw(post.Name)</p>
+                         </div>
+                     </div>
+                 </div>
+             }
+
+        }
+    <div class="clr"></div>
+    @{
+        var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+    }
+    @if (!pager.IsEmpty())
+    {
+        <div class="pager">
+            @pager
+        </div>
+    }
+    
+</div>
+
+<div class="rightside">
+    @Html.Action("TopViewPosts", "Posts", new { categoryId = Model.Id, postThumbPictureSize = 160})   
+</div>
