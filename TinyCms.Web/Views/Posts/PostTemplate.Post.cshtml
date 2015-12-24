@@ -48,13 +48,14 @@
 }
 <div class="leftcol">
     <div class="news_detail">
-        <h1><a href="@Url.RouteUrl("Category", new { SeName = Model.Breadcrumb.CategoryBreadcrumb.Last().SeName })">@Model.Breadcrumb.CategoryBreadcrumb.Last().Name</a></h1>
+        <h1><a href="@Url.RouteUrl("Category", new {SeName = Model.Breadcrumb.CategoryBreadcrumb.Last().SeName})">@Model.Breadcrumb.CategoryBreadcrumb.Last().Name</a>
+        </h1>
         <p class="title">@Model.Name</p>
         <p class="desc">@Html.Raw(Model.ShortDescription)</p>
         <div class="content_box">
             <div class="ctn">
                 @Html.Raw(Model.FullDescription)
-                @Html.Action("PollBlock", "Poll", new { systemKeyword = "poll_iphone" })
+                @Html.Action("PollBlock", "Poll", new {systemKeyword = "poll_iphone"})
                 <div class="facebook_share">
                     <div class="fb-like" data-href="@postUrl" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
                 </div>
@@ -66,7 +67,16 @@
                     @Html.Widget("subside_banner")
                 </div>
             </div>
-            @Html.Action("OtherPosts", "Posts", new { postId = Model.Id, postThumbPictureSize =160})
+            @Html.Action("OtherPosts", "Posts", new {postId = Model.Id, postThumbPictureSize = 160})
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    FB.Event.subscribe('edge.create', fb_change_callback);
+    FB.Event.subscribe('edge.remove', fb_change_callback);
+    FB.Event.subscribe('comment.remove', fb_change_callback);
+    FB.Event.subscribe('comment.remove', fb_change_callback);
+    function fb_change_callback() {
+        $.post("@Url.Action("UpdatePost","Posts")", { postId: @Model.Id });
+    }
+</script>

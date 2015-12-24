@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
 using TinyCms.Core.Domain.Catalog;
@@ -588,7 +590,7 @@ namespace TinyCms.Web.Controllers
             var model = category.ToModel();
 
             //page size
-            PreparePageSizeOptions(model.PagingFilteringContext, command, 1);
+            PreparePageSizeOptions(model.PagingFilteringContext, command, 10);
 
             
 
@@ -871,6 +873,10 @@ namespace TinyCms.Web.Controllers
                 return InvokeHttp404();
             var model = PreparePostDetailsPageModel(post);
 
+            post.ViewCount += 1;
+
+            _postService.UpdatePost(post);
+
             //save as recently viewed
            // _recentlyViewedPostsService.AddPostToRecentlyViewedList(post.Id);
 
@@ -907,6 +913,36 @@ namespace TinyCms.Web.Controllers
             var posts = _postService.GetOrtherPosts(postId, 2);
             var model = PreparePostOverviewModels(posts, true, postThumbPictureSize);
             return PartialView(model);
+        }
+
+        [HttpPost]
+        public void UpdatePost(int postId)
+        {
+            var post = _postService.GetPostById(postId);
+            if (post != null)
+            {
+                WebClient web = new WebClient();
+                string url = string.Format("https://api.facebook.com/method/fql.query?query=SELECT share_count, comment_count FROM link_stat where url='" + @Url.RouteUrl("Post",new {SeName = post.GetSeName()}) + "'");
+                string response = web.DownloadString(url);
+                XmlDocument xml = new XmlDocument();
+                xml.Load(response);
+                var shareCounts = xml.SelectNodes("//fql_query_response/link_stat/share_count");
+                var updateDb = false;
+                if (shareCounts != null && shareCounts.Count > 0 && int.Parse(shareCounts[0].Value) != post.ShareCount)
+                {
+                    post.ShareCount = int.Parse(shareCounts[0].Value);
+                    updateDb = true;
+                }
+
+                var commentCounts = xml.SelectNodes("//fql_query_response/link_stat/comment_count");
+                if (commentCounts != null || commentCounts.Count > 0 && int.Parse(commentCounts[0].Value) != post.CommentCount)
+                {
+                    post.CommentCount = int.Parse(commentCounts[0].Value);
+                    updateDb = true;
+                }
+                
+                if(updateDb) _postService.UpdatePost(post);
+            }
         }
         #endregion
     }

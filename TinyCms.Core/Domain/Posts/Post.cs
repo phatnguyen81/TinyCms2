@@ -61,7 +61,7 @@ namespace TinyCms.Core.Domain.Posts
 
         public int ViewCount { get; set; }
         public int ShareCount { get; set; }
-        public int LikeCount { get; set; }
+        public int CommentCount { get; set; }
      
         /// <summary>
         /// Gets or sets a display order.
