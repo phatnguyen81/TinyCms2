@@ -922,7 +922,7 @@ namespace TinyCms.Web.Controllers
             if (post != null)
             {
                 WebClient web = new WebClient();
-                string url = string.Format("https://api.facebook.com/method/fql.query?query=SELECT share_count, comment_count FROM link_stat where url='" + @Url.RouteUrl("Post",new {SeName = post.GetSeName()}) + "'");
+                string url = string.Format("https://api.facebook.com/method/fql.query?query=SELECT share_count, comment_count FROM link_stat where url='{0}'", @Url.RouteUrl("Post",new {SeName = post.GetSeName()})) ;
                 string response = web.DownloadString(url);
                 XmlDocument xml = new XmlDocument();
                 xml.Load(response);

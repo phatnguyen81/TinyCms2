@@ -57,7 +57,7 @@
                 @Html.Raw(Model.FullDescription)
                 @Html.Action("PollBlock", "Poll", new {systemKeyword = "poll_iphone"})
                 <div class="facebook_share">
-                    <div class="fb-like" data-href="@postUrl" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
+                    <div class="fb-like" data-href="@postUrl" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 </div>
             </div>
             <div class="rightside">
@@ -68,14 +68,15 @@
                 </div>
             </div>
             @Html.Action("OtherPosts", "Posts", new {postId = Model.Id, postThumbPictureSize = 160})
+            <div class="comment">
+                <div class="fb-comments" data-href="@postUrl" data-width="100%" data-numposts="10"></div>
+            </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    FB.Event.subscribe('edge.create', fb_change_callback);
-    FB.Event.subscribe('edge.remove', fb_change_callback);
-    FB.Event.subscribe('comment.remove', fb_change_callback);
-    FB.Event.subscribe('comment.remove', fb_change_callback);
+  
+
     function fb_change_callback() {
         $.post("@Url.Action("UpdatePost","Posts")", { postId: @Model.Id });
     }
