@@ -117,10 +117,6 @@ namespace TinyCms.Admin.Models.Posts
             public AddCategoryPostModel()
             {
                 AvailableCategories = new List<SelectListItem>();
-                AvailableManufacturers = new List<SelectListItem>();
-                AvailableStores = new List<SelectListItem>();
-                AvailableVendors = new List<SelectListItem>();
-                AvailablePostTypes = new List<SelectListItem>();
             }
 
             [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchPostName")]
@@ -128,21 +124,8 @@ namespace TinyCms.Admin.Models.Posts
             public string SearchPostName { get; set; }
             [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchCategory")]
             public int SearchCategoryId { get; set; }
-            [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchManufacturer")]
-            public int SearchManufacturerId { get; set; }
-            [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchStore")]
-            public int SearchStoreId { get; set; }
-            [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchVendor")]
-            public int SearchVendorId { get; set; }
-            [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchPostType")]
-            public int SearchPostTypeId { get; set; }
 
             public IList<SelectListItem> AvailableCategories { get; set; }
-            public IList<SelectListItem> AvailableManufacturers { get; set; }
-            public IList<SelectListItem> AvailableStores { get; set; }
-            public IList<SelectListItem> AvailableVendors { get; set; }
-            public IList<SelectListItem> AvailablePostTypes { get; set; }
-
             public int CategoryId { get; set; }
 
             public int[] SelectedPostIds { get; set; }

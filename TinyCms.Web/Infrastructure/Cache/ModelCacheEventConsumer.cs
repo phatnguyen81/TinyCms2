@@ -228,7 +228,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {2} : store id
         /// {3} : comma separated list of customer roles
         /// </remarks>
-        public const string TOPIC_MODEL_BY_SYSTEMNAME_KEY = "Nop.pres.topic.details.bysystemname-{0}-{1}-{2}-{3}";
+        public const string TOPIC_MODEL_BY_SYSTEMNAME_KEY = "Nop.pres.topic.details.bysystemname-{0}-{1}-{2}";
         /// <summary>
         /// Key for TopicModel caching
         /// </summary>
@@ -238,7 +238,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {2} : store id
         /// {3} : comma separated list of customer roles
         /// </remarks>
-        public const string TOPIC_MODEL_BY_ID_KEY = "Nop.pres.topic.details.byid-{0}-{1}-{2}-{3}";
+        public const string TOPIC_MODEL_BY_ID_KEY = "Nop.pres.topic.details.byid-{0}-{1}-{2}";
         /// <summary>
         /// Key for TopicModel caching
         /// </summary>

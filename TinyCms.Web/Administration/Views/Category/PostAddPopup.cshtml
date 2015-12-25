@@ -49,38 +49,6 @@
             </td>
         </tr>
         <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SearchManufacturerId):
-            </td>
-            <td class="adminData">
-                @Html.DropDownList("SearchManufacturerId", Model.AvailableManufacturers)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SearchStoreId):
-            </td>
-            <td class="adminData">
-                @Html.DropDownList("SearchStoreId", Model.AvailableStores)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SearchVendorId):
-            </td>
-            <td class="adminData">
-                @Html.DropDownList("SearchVendorId", Model.AvailableVendors)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SearchPostTypeId):
-            </td>
-            <td class="adminData">
-                @Html.DropDownList("SearchPostTypeId", Model.AvailablePostTypes)
-            </td>
-        </tr>
-        <tr>
             <td colspan="2">
                 <input type="button" id="search-posts" class="k-button" value="@T("Admin.Common.Search")" />
             </td>
@@ -181,11 +149,7 @@
                     function additionalData() {
                         var data = {
                             SearchPostName: $('#@Html.FieldIdFor(model => model.SearchPostName)').val(),
-                            SearchCategoryId: $('#SearchCategoryId').val(),
-                            SearchManufacturerId: $('#SearchManufacturerId').val(),
-                            SearchStoreId: $('#SearchStoreId').val(),
-                            SearchVendorId: $('#SearchVendorId').val(),
-                            SearchPostTypeId: $('#SearchPostTypeId').val()
+                            SearchCategoryId: $('#SearchCategoryId').val()
                         };
                         addAntiForgeryToken(data);
                         return data;

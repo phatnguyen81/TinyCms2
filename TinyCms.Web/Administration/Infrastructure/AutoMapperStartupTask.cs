@@ -120,10 +120,15 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.PostTags, mo => mo.Ignore())
                 .ForMember(dest => dest.CreatedOnUtc, mo => mo.Ignore())
                 .ForMember(dest => dest.UpdatedOnUtc, mo => mo.Ignore())
+                .ForMember(dest => dest.ApprovedOnUtc, mo => mo.Ignore())
                 .ForMember(dest => dest.Deleted, mo => mo.Ignore())
                 .ForMember(dest => dest.PostCategories, mo => mo.Ignore())
                 .ForMember(dest => dest.Published, mo => mo.Ignore())
+                .ForMember(dest => dest.CreatedBy, mo => mo.Ignore())
+                .ForMember(dest => dest.ApprovedBy, mo => mo.Ignore())
+                .ForMember(dest => dest.UpdatedOnUtc, mo => mo.Ignore())
                 .ForMember(dest => dest.PostPictures, mo => mo.Ignore());
+
             //logs
             Mapper.CreateMap<Log, LogModel>()
                 .ForMember(dest => dest.CustomerEmail, mo => mo.Ignore())

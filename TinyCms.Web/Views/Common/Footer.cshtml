@@ -4,13 +4,7 @@
 <div class="copyright">
     <a href="@Url.RouteUrl("homepage")" class="logo"></a>
     <div class="leftcol">
-        <p>
-            <b>Trang tin tổng hợp du lịch</b><br />
-            Giấy phép báo điện tử số: 339/GP-BTTTT. <br />
-            Tổng Biên tập: Lê Kiếm Phong<br />
-            Cơ quan chủ quản: Vietnam4u.<br />
-            Tòa soạn: 68 Trần Thái Tông, Q1, TPHCM.
-        </p>
+        @Html.Action("TopicBlock", "Topic", new { systemName = "FooterInfo"})
     </div>
 </div>
 <div class="tool_rightbar"> <a href="#" class="emailbtn icn"></a> <a href="@Url.RouteUrl("homepage")" class="homebtn icn"></a> <a href="#" class="gotopbtn icn"></a> </div>

@@ -488,10 +488,6 @@
     <Content Include="Views\Post\EditPostTag.cshtml" />
     <Content Include="Views\Post\List.cshtml" />
     <Content Include="Views\Post\LowStockReport.cshtml" />
-    <Content Include="Views\Post\ProductAttributeConditionPopup.cshtml" />
-    <Content Include="Views\Post\ProductAttributeValidationRulesPopup.cshtml" />
-    <Content Include="Views\Post\ProductAttributeValueCreatePopup.cshtml" />
-    <Content Include="Views\Post\ProductAttributeValueEditPopup.cshtml" />
     <Content Include="Views\Post\PostTags.cshtml" />
     <Content Include="Views\Post\RelatedPostAddPopup.cshtml" />
     <Content Include="Views\Post\_CreateOrUpdate.Acl.cshtml" />

@@ -184,6 +184,7 @@
     <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
