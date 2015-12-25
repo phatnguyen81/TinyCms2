@@ -313,6 +313,7 @@
     <Content Include="Content\images\ajax-loading.gif" />
     <Content Include="Content\images\ajax_loader_small.gif" />
     <Content Include="Content\images\blue_button_bg.gif" />
+    <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\error-message.gif" />
     <Content Include="Content\images\google-maps.gif" />
     <Content Include="Content\images\grey_button_bg.gif" />
@@ -484,14 +485,14 @@
     <Content Include="Views\Post\CrossSellProductAddPopup.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
     <Content Include="Views\Post\EditAttributeValues.cshtml" />
-    <Content Include="Views\Post\EditProductTag.cshtml" />
+    <Content Include="Views\Post\EditPostTag.cshtml" />
     <Content Include="Views\Post\List.cshtml" />
     <Content Include="Views\Post\LowStockReport.cshtml" />
     <Content Include="Views\Post\ProductAttributeConditionPopup.cshtml" />
     <Content Include="Views\Post\ProductAttributeValidationRulesPopup.cshtml" />
     <Content Include="Views\Post\ProductAttributeValueCreatePopup.cshtml" />
     <Content Include="Views\Post\ProductAttributeValueEditPopup.cshtml" />
-    <Content Include="Views\Post\ProductTags.cshtml" />
+    <Content Include="Views\Post\PostTags.cshtml" />
     <Content Include="Views\Post\RelatedPostAddPopup.cshtml" />
     <Content Include="Views\Post\_CreateOrUpdate.Acl.cshtml" />
     <Content Include="Views\Post\_CreateOrUpdate.Categories.cshtml" />

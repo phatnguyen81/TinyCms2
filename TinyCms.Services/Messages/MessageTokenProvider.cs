@@ -72,7 +72,27 @@ namespace TinyCms.Services.Messages
 
         public string[] GetListOfAllowedTokens()
         {
-            throw new NotImplementedException();
+            var allowedTokens = new List<string>
+            {
+                "%Store.Name%",
+                "%Store.URL%",
+                "%Store.Email%",
+                "%Store.CompanyName%",
+                "%Store.CompanyAddress%",
+                "%Store.CompanyPhoneNumber%",
+                "%Customer.Email%", 
+                "%Customer.Username%",
+                "%Customer.FullName%",
+                "%Customer.FirstName%",
+                "%Customer.LastName%",
+                "%Customer.PasswordRecoveryURL%", 
+                "%Customer.AccountActivationURL%", 
+                "%Post.ID%", 
+                "%Post.Name%",
+                "%Post.ShortDescription%", 
+                "%Post.PostURLForCustomer%"
+            };
+            return allowedTokens.ToArray();
         }
         
         #endregion

@@ -9,46 +9,82 @@
 <div class="mainpage profile">
     <div class="infobox">
         <div class="info_content">
-            <div class="avtthumb"><img src="@Model.AvatarUrl" alt="" /><a href="#" class="change_avt" title="Đổi avatar"><span class="camera icn"></span></a></div>
+            <div class="avtthumb">
+                <img src="@Model.AvatarUrl" alt="avatar" id="avatar"/>
+                <a href="#" class="change_avt" title="Đổi avatar"><span class="camera icn"></span></a>
+            </div>
+            <input type="file" style="display: none;" id="fileAvatar"/>
             <p class="username">@Model.Username</p>
             <p class="position">@Model.RoleName</p>
             <p class="numblog">Số lượng bài viết: <span>0</span></p>
             <a href="@Url.RouteUrl("CreateNewPost")" class="btn01">Viết bài mới</a>
         </div>
         <div class="infoblog">
-            <table width="100%" border="1">
-                <tr>
-                    <th scope="col">Tên bài viết</th>
-                    <th scope="col">Lượt xem</th>
-                    <th scope="col">Lượt bình luận</th>
-                    <th scope="col">Lượt chia sẻ</th>
-                </tr>
-                <tr>
-                    <td><a href="#"><img src="temp/contentbox_img.jpg" class="blog_info" /> <span>Đà Lạt quen mà lạ với 10 điểm dừng chân thú vị</span></a></td>
-                    <td>20</td>
-                    <td>5</td>
-                    <td>6</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><img src="temp/contentbox_img.jpg" class="blog_info" /> <span>Đà Lạt quen mà lạ với 10 điểm dừng chân thú vị</span></a></td>
-                    <td>30</td>
-                    <td>12</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><img src="temp/contentbox_img.jpg" class="blog_info" /> <span>Đà Lạt quen mà lạ với 10 điểm dừng chân thú vị</span></a></td>
-                    <td>35</td>
-                    <td>16</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><img src="temp/contentbox_img.jpg" class="blog_info" /> <span>Đà Lạt quen mà lạ với 10 điểm dừng chân thú vị</span></a></td>
-                    <td>45</td>
-                    <td>7</td>
-                    <td>9</td>
-                </tr>
-            </table>
-            <p class="err">Hiện tại bạn chưa có bài viết nào, <a href="#">Viết ngay</a></p>
+            @if (Model.Posts.Any())
+            {
+                <table width="100%" border="1">
+                    <tr>
+                        <th scope="col">Tên bài viết</th>
+                        <th scope="col">Lượt xem</th>
+                        <th scope="col">Lượt bình luận</th>
+                        <th scope="col">Lượt chia sẻ</th>
+                    </tr>
+                    @foreach (var post in Model.Posts)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@Url.RouteUrl("Post", new {post.SeName})">
+                                    <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText" class="blog_info"/>
+                                    <span>@post.Name</span>
+                                </a>
+                            </td>
+                            <td>@post.ViewCount</td>
+                            <td>@post.CommentCount</td>
+                            <td>@post.ShareCount</td>
+                        </tr>
+                    }
+
+                </table>
+                <div class="clr"></div>
+                var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+                if (!pager.IsEmpty())
+                {
+                    <div class="pager">
+                        @pager
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="err">Hiện tại bạn chưa có bài viết nào, <a href="@Url.RouteUrl("CreateNewPost")">Viết ngay</a></p>
+            }
+            
+            
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('.change_avt').click(function() {
+        $("#fileAvatar").trigger("click");
+    });
+    $("#fileAvatar").change(function () {
+        var formData = new FormData();
+        formData.append("uploadedFile", $("#fileAvatar")[0].files[0]);
+        $.ajax({
+            url: '@Url.Action("ChangeAvatar","Customer")',
+            data: formData,
+            dataType: "json",
+            type: "POST",
+            contentType: false,
+            processData: false
+        }).done(function (result) {
+            if (result.success) {
+                d = new Date();
+                $("#avatar, img.avt").attr("src", result.avatarUrl + "?" + d.getTime());
+            } else {
+                alert(result.message);
+            }
+        });
+
+    });
+</script>

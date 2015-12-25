@@ -114,7 +114,7 @@
     <Compile Include="CustomerLastActivityAttribute.cs" />
     <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Events\AdminTabStripCreated.cs" />
-    <Compile Include="Events\ProductSearchEvent.cs" />
+    <Compile Include="Events\PostSearchEvent.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="HtmlExtensions.cs" />
     <Compile Include="Kendoui\DataSourceRequest.cs" />

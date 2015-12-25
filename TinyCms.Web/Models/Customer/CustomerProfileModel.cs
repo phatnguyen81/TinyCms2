@@ -8,6 +8,11 @@ namespace TinyCms.Web.Models.Customer
 {
     public class CustomerProfileModel
     {
+
+        public CustomerProfileModel()
+        {
+            PagingFilteringContext = new ProfilePagingFilteringModel();
+        }
         public string Username { get; set; }
         public string Email { get; set; }
         public string RoleName { get; set; }
@@ -15,6 +20,8 @@ namespace TinyCms.Web.Models.Customer
         public string AvatarUrl { get; set; }
 
         public List<PostOverviewModel> Posts { get; set; }
+
+        public ProfilePagingFilteringModel PagingFilteringContext { get; set; }
         //public PostOverview
     }
 }

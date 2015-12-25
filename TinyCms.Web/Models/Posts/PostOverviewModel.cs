@@ -14,6 +14,9 @@ namespace TinyCms.Web.Models.Posts
         public string ShortDescription { get; set; }
         public string FullDescription { get; set; }
         public string SeName { get; set; }
+        public int ViewCount { get; set; }
+        public int CommentCount { get; set; }
+        public int ShareCount { get; set; }
 
         public bool MarkAsNew { get; set; }
 

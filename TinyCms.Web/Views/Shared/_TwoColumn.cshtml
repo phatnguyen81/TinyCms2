@@ -1,5 +1,12 @@
-﻿@{
+﻿@using TinyCms.Core.Domain.Posts
+@using TinyCms.Core.Infrastructure
+@{
     Layout = "~/Views/Shared/_Root.cshtml";
+    var discoveryCategoryId = EngineContext.Current.Resolve<CatalogSettings>().DiscoveryCategoryId;
+    var discoveryPostNumber = EngineContext.Current.Resolve<CatalogSettings>().DiscoveryPostNumber;
+
+    var travelViaPictureCategoryId = EngineContext.Current.Resolve<CatalogSettings>().TravelViaPictureCategoryId;
+    var travelViaPicturePostNumber = EngineContext.Current.Resolve<CatalogSettings>().TravelViaPicturePostNumber;
 }
 @Html.Partial("Header")
 <div class="headpage">
@@ -8,8 +15,8 @@
             @RenderBody()
         </div>
         <div class="sidebar">
-            @Html.Action("DiscoveryCategory", "Posts", new { postThumbPictureSize = 270 })
-            @Html.Action("TravelViaPictureCategory", "Posts", new { postThumbPictureSize = 270 })
+            @Html.Action("CategoryBox", "Posts", new { categoryId = discoveryCategoryId, numberPost = discoveryPostNumber, template = "CategoryBox.Discovery", postThumbPictureSize = 270 })
+            @Html.Action("CategoryBox", "Posts", new { categoryId = travelViaPictureCategoryId, numberPost = travelViaPicturePostNumber, template = "CategoryBox.TravelViaPicture", postThumbPictureSize = 270 })
             <div class="sidebanner">
                 @Html.Widget("sidebar_banner")
             </div>

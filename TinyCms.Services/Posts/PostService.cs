@@ -160,7 +160,7 @@ namespace TinyCms.Services.Posts
                         !p.Deleted &&
                         p.ShowOnHomePage
                         select p;
-            var posts = query.ToList();
+            var posts = query.OrderByDescending(p => p.CreatedOnUtc).ToList();
             return posts;
         }
 
@@ -348,6 +348,7 @@ namespace TinyCms.Services.Posts
         public virtual IPagedList<Post> SearchPosts(
             int pageIndex = 0,
             int pageSize = int.MaxValue,
+            int createdBy = 0,
             IList<int> categoryIds = null,
             bool? featuredPosts = null,
             int postTagId = 0,
@@ -404,6 +405,11 @@ namespace TinyCms.Services.Posts
                     pageSize = int.MaxValue - 1;
                 
                 //prepare parameters
+                var pCreatedBy = _dataProvider.GetParameter();
+                pCreatedBy.ParameterName = "CreatedBy";
+                pCreatedBy.Value = createdBy;
+                pCreatedBy.DbType = DbType.Int32;
+
                 var pCategoryIds = _dataProvider.GetParameter();
                 pCategoryIds.ParameterName = "CategoryIds";
                 pCategoryIds.Value = commaSeparatedCategoryIds != null ? (object)commaSeparatedCategoryIds : DBNull.Value;
@@ -493,6 +499,7 @@ namespace TinyCms.Services.Posts
                 //invoke stored procedure
                 var posts = _dbContext.ExecuteStoredProcedureList<Post>(
                     "PostLoadAllPaged",
+                    pCreatedBy,
                     pCategoryIds,
                     pPostTagId,
                     pFeaturedPosts,
@@ -580,6 +587,10 @@ namespace TinyCms.Services.Posts
                             select p;
                 }
 
+                if (createdBy > 0)
+                {
+                    query = query.Where(q => q.CreatedBy == createdBy);
+                }
              
                 //category filtering
                 if (categoryIds != null && categoryIds.Count > 0)

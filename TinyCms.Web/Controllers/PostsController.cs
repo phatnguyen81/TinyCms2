@@ -8,11 +8,14 @@ using System.Xml;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
 using TinyCms.Core.Domain.Catalog;
+using TinyCms.Core.Domain.Common;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Posts;
 using TinyCms.Core.Domain.Seo;
+using TinyCms.Services.Common;
 using TinyCms.Services.Customers;
+using TinyCms.Services.Events;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Logging;
 using TinyCms.Services.Media;
@@ -25,6 +28,7 @@ using TinyCms.Web.Infrastructure.Cache;
 using TinyCms.Web.Models.Media;
 using TinyCms.Web.Models.Posts;
 using TinyCms.Web.Extensions;
+using TinyCms.Web.Framework.Events;
 
 namespace TinyCms.Web.Controllers
 {
@@ -49,6 +53,8 @@ namespace TinyCms.Web.Controllers
         private readonly ICategoryTemplateService _categoryTemplateService;
         private readonly IPostTemplateService _postTemplateService;
         private readonly SeoSettings _seoSettings;
+        private readonly ISearchTermService _searchTermService;
+        private readonly IEventPublisher _eventPublisher;
         public PostsController(ICategoryService categoryService, 
             IPostService postService, 
             IPictureService pictureService, 
@@ -67,7 +73,9 @@ namespace TinyCms.Web.Controllers
             ICategoryTemplateService categoryTemplateService,
             ICustomerActivityService customerActivityService, 
             SeoSettings seoSettings, 
-            IPostTemplateService postTemplateService)
+            IPostTemplateService postTemplateService, 
+            ISearchTermService searchTermService,
+            IEventPublisher eventPublisher)
         {
             _categoryService = categoryService;
             _postService = postService;
@@ -88,7 +96,10 @@ namespace TinyCms.Web.Controllers
             _customerActivityService = customerActivityService;
             _seoSettings = seoSettings;
             _postTemplateService = postTemplateService;
+            _searchTermService = searchTermService;
+            _eventPublisher = eventPublisher;
         }
+
 
         #region Methods
         [NonAction]
@@ -111,171 +122,11 @@ namespace TinyCms.Web.Controllers
                 postThumbPictureSize);
         }
 
-        #endregion
 
-        [ChildActionOnly]
-        public ActionResult CategoryBox(int categoryId, int numberPost, string template, int? postThumbPictureSize)
-        {
-
-            var category = _categoryService.GetCategoryById(categoryId);
-
-            if (category == null || string.IsNullOrWhiteSpace(template))
-                return Content("");
-
-
-            var model = new CategoryBoxModel {Id = category.Id, SeName = category.GetSeName()};
-
-            var posts = _postService.SearchPosts(pageSize: numberPost, categoryIds: new[] {categoryId}).ToList();
-            model.Posts = PreparePostOverviewModels(posts, postThumbPictureSize != null && postThumbPictureSize > 0, postThumbPictureSize).ToList();
-            return PartialView(template, model);
-        }
-
-        public ActionResult HomePageHotNews(int? postThumbPictureSize)
-        {
-            //var posts = _postService.GetAllPostsDisplayedOnHomePage();
-            var categoryType = _categoryTypeService.GetCategoryTypeBySystemName("HotNews");
-            var model = new List<PostOverviewModel>();
-            if (categoryType != null)
-            {
-                var posts =
-                    _postService.SearchPosts(
-                        categoryIds:
-                            _categoryService.GetCategoryByCategoryTypeSystemName("HotNews").Select(q => q.Id).ToArray()).ToList();
-                model = PreparePostOverviewModels(posts, true, postThumbPictureSize).ToList();
-            }
-            return PartialView(model);
-        }
-        public ActionResult HomePagePosts(int? postThumbPictureSize)
-        {
-           var posts = _postService.GetAllPostsDisplayedOnHomePage();
-            var model = PreparePostOverviewModels(posts, true, postThumbPictureSize);
-            return PartialView(model);
-        }
-        public ActionResult HomePagePicturesAndVideos(int? postThumbPictureSize)
-        {
-            var categoryType = _categoryTypeService.GetCategoryTypeBySystemName("PictureAndVideo");
-            var model = new List<PostOverviewModel>();
-            if (categoryType != null)
-            {
-                var posts =
-                    _postService.SearchPosts(pageSize:5,
-                        categoryIds:
-                            _categoryService.GetCategoryByCategoryTypeSystemName("PictureAndVideo").Select(q => q.Id).ToArray()).ToList();
-                model = PreparePostOverviewModels(posts, true, postThumbPictureSize).ToList();
-            }
-            return PartialView(model);
-        }
-
-        [ChildActionOnly]
-        public ActionResult HomePageCategories()
-        {
-            string categoriesCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_HOMEPAGE_KEY,
-                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
-                _workContext.WorkingLanguage.Id,
-                _webHelper.IsCurrentConnectionSecured());
-
-            var model = _cacheManager.Get(categoriesCacheKey, () =>
-                _categoryService.GetAllCategoriesDisplayedOnHomePage()
-                .Select(x =>
-                {
-                    var catModel = x.ToModel();
-
-                    //prepare picture model
-                    int pictureSize = _mediaSettings.CategoryThumbPictureSize;
-                    var categoryPictureCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY, x.Id, pictureSize, true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured());
-                    catModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
-                    {
-                        var picture = _pictureService.GetPictureById(x.PictureId);
-                        var pictureModel = new PictureModel
-                        {
-                            FullSizeImageUrl = _pictureService.GetPictureUrl(picture),
-                            ImageUrl = _pictureService.GetPictureUrl(picture, pictureSize),
-                            Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), catModel.Name),
-                            AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), catModel.Name)
-                        };
-                        return pictureModel;
-                    });
-
-                    //prepare post model
-                    catModel.Posts = PreparePostOverviewModels(_postService.SearchPosts(pageSize: 3, orderBy: PostSortingEnum.CreatedOn,categoryIds:new []{catModel.Id}).ToList()).ToList();
-
-                    return catModel;
-                })
-                .ToList()
-            );
-
-            if (model.Count == 0)
-                return Content("");
-
-            return PartialView(model);
-        }
-
-         [ChildActionOnly]
-        public ActionResult ShareCorner(int? postThumbPictureSize)
-        {
-            var categoryType = _categoryTypeService.GetCategoryTypeBySystemName("ShareCorner");
-            var model = new List<PostOverviewModel>();
-            if (categoryType != null)
-            {
-                var posts =
-                    _postService.SearchPosts(pageSize:6,
-                        categoryIds:
-                            _categoryService.GetCategoryByCategoryTypeSystemName("ShareCorner").Select(q => q.Id).ToArray()).ToList();
-                model = PreparePostOverviewModels(posts, true, postThumbPictureSize).ToList();
-            }
-            return PartialView(model);
-        }
-
-         [ChildActionOnly]
-        public ActionResult DiscoveryCategory(int? postThumbPictureSize)
-        {
-            var categoryType = _categoryTypeService.GetCategoryTypeBySystemName("Discovery");
-            var model = new List<PostOverviewModel>();
-            if (categoryType != null)
-            {
-                var posts =
-                    _postService.SearchPosts(pageSize: 3,
-                        categoryIds:
-                            _categoryService.GetCategoryByCategoryTypeSystemName("Discovery").Select(q => q.Id).ToArray()).ToList();
-                model = PreparePostOverviewModels(posts, true, postThumbPictureSize).ToList();
-            }
-            return PartialView(model);
-        }
-
-         [ChildActionOnly]
-        public ActionResult PromotionCategory(int? postThumbPictureSize)
-        {
-            var categoryType = _categoryTypeService.GetCategoryTypeBySystemName("Promotion");
-            var model = new List<PostOverviewModel>();
-            if (categoryType != null)
-            {
-                var posts =
-                    _postService.SearchPosts(pageSize: 4,
-                        categoryIds:
-                            _categoryService.GetCategoryByCategoryTypeSystemName("Promotion").Select(q => q.Id).ToArray()).ToList();
-                model = PreparePostOverviewModels(posts, true, postThumbPictureSize).ToList();
-            }
-            return PartialView(model);
-        }
-         [ChildActionOnly]
-        public ActionResult TravelViaPictureCategory(int? postThumbPictureSize)
-        {
-            var categoryType = _categoryTypeService.GetCategoryTypeBySystemName("TravelViaPicture");
-            var model = new List<PostOverviewModel>();
-            if (categoryType != null)
-            {
-                var posts =
-                    _postService.SearchPosts(pageSize: 3,
-                        categoryIds:
-                            _categoryService.GetCategoryByCategoryTypeSystemName("TravelViaPicture").Select(q => q.Id).ToArray()).ToList();
-                model = PreparePostOverviewModels(posts, true, postThumbPictureSize).ToList();
-            }
-            return PartialView(model);
-        }
 
         public void PrepareNewPostModel(NewPostModel model)
         {
-            model.AvailableCategories = _categoryService.GetAllCategories().Select(q=> new SelectListItem
+            model.AvailableCategories = _categoryService.GetAllCategories().Select(q => new SelectListItem
             {
                 Text = q.Name,
                 Value = q.Id.ToString()
@@ -367,7 +218,7 @@ namespace TinyCms.Web.Controllers
                 };
                 _postService.InsertPostPicture(postPicture);
             }
-            
+
         }
 
         [NonAction]
@@ -377,53 +228,127 @@ namespace TinyCms.Web.Controllers
                 _pictureService.SetSeoFilename(pp.PictureId, _pictureService.GetPictureSeName(post.Name));
         }
 
-        public ActionResult Write()
+        #endregion
+
+
+
+        #region Searching
+
+        [NopHttpsRequirement(SslRequirement.No)]
+        [ValidateInput(false)]
+        public ActionResult Search(SearchModel model, PostsPagingFilteringModel command)
         {
-            var model = new NewPostModel();
+          
+            if (model == null)
+                model = new SearchModel();
 
-            PrepareNewPostModel(model);
+            var searchTerms = model.q;
+            if (searchTerms == null)
+                searchTerms = "";
+            searchTerms = searchTerms.Trim();
 
+
+
+            //page size
+            PreparePageSizeOptions(model.PagingFilteringContext, command,
+                10);
+
+
+            string cacheKey = string.Format(ModelCacheEventConsumer.SEARCH_CATEGORIES_MODEL_KEY,
+                _workContext.WorkingLanguage.Id,
+                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
+            var categories = _cacheManager.Get(cacheKey, () =>
+            {
+                var categoriesModel = new List<SearchModel.CategoryModel>();
+                //all categories
+                var allCategories = _categoryService.GetAllCategories();
+                foreach (var c in allCategories)
+                {
+                    //generate full category name (breadcrumb)
+                    string categoryBreadcrumb = "";
+                    var breadcrumb = c.GetCategoryBreadCrumb(allCategories, _aclService);
+                    for (int i = 0; i <= breadcrumb.Count - 1; i++)
+                    {
+                        categoryBreadcrumb += breadcrumb[i].GetLocalized(x => x.Name);
+                        if (i != breadcrumb.Count - 1)
+                            categoryBreadcrumb += " >> ";
+                    }
+                    categoriesModel.Add(new SearchModel.CategoryModel
+                    {
+                        Id = c.Id,
+                        Breadcrumb = categoryBreadcrumb
+                    });
+                }
+                return categoriesModel;
+            });
+          
+            IPagedList<Post> posts = new PagedList<Post>(new List<Post>(), 0, 1);
+            // only search if query string search keyword is set (used to avoid searching or displaying search term min length error message on /search page load)
+            if (Request.Params["q"] != null)
+            {
+                if (searchTerms.Length < _catalogSettings.PostSearchTermMinimumLength)
+                {
+                    model.Warning = string.Format(_localizationService.GetResource("Search.SearchTermMinimumLengthIsNCharacters"), _catalogSettings.PostSearchTermMinimumLength);
+                }
+                else
+                {
+
+                    //posts
+                    posts = _postService.SearchPosts(
+                        keywords: searchTerms,
+                        searchDescriptions: true,
+                        searchPostTags: true,
+                        languageId: _workContext.WorkingLanguage.Id,
+                        pageIndex: command.PageNumber - 1,
+                        pageSize: command.PageSize);
+                    model.Posts = PreparePostOverviewModels(posts).ToList();
+
+                    model.NoResults = !model.Posts.Any();
+
+                    //search term statistics
+                    if (!String.IsNullOrEmpty(searchTerms))
+                    {
+                        var searchTerm = _searchTermService.GetSearchTermByKeyword(searchTerms);
+                        if (searchTerm != null)
+                        {
+                            searchTerm.Count++;
+                            _searchTermService.UpdateSearchTerm(searchTerm);
+                        }
+                        else
+                        {
+                            searchTerm = new SearchTerm
+                            {
+                                Keyword = searchTerms,
+                                Count = 1
+                            };
+                            _searchTermService.InsertSearchTerm(searchTerm);
+                        }
+                    }
+
+                    //event
+                    _eventPublisher.Publish(new PostSearchEvent
+                    {
+                        SearchTerm = searchTerms,
+                        SearchInDescriptions = true,
+                        WorkingLanguageId = _workContext.WorkingLanguage.Id
+                    });
+                }
+            }
+
+            model.PagingFilteringContext.LoadPagedList(posts);
             return View(model);
         }
 
-        [HttpPost]
-        public JsonResult Write(NewPostModel model)
+        [ChildActionOnly]
+        public ActionResult SearchBox()
         {
-            var post = new Post
-            {
-                Name = model.Title,
-                FullDescription = model.Body,
-                UpdatedOnUtc = DateTime.UtcNow,
-                CreatedOnUtc = DateTime.UtcNow,
-                CreatedBy = _workContext.CurrentCustomer.Id,
-                Published = false
-            };
-            _postService.InsertPost(post);
-
-            var seName = post.ValidateSeName(string.Empty, post.Name, true);
-            _urlRecordService.SaveSlug(post, seName, 0);
-
-            //tags
-            SavePostTags(post, ParsePostTags(model.PostTags));
-
-            SavePostPictures(post,
-                model.PictureIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                    .Select(int.Parse));
-
-            UpdatePictureSeoNames(post);
-
-            var postCategory = new PostCategory
-            {
-                PostId = post.Id,
-                CategoryId = model.CategoryId
-            };
-            _categoryService.InsertPostCategory(postCategory);
-
-            return Json(new
-            {
-                success = true
-            });
+            return PartialView();
         }
+        #endregion
+
+
+
+
 
         /// <summary>
         /// Prepare category (simple) models
@@ -475,11 +400,7 @@ namespace TinyCms.Web.Controllers
             return result;
         }
 
-        [ChildActionOnly]
-        public ActionResult SearchBox()
-        {
-            return PartialView();
-        }
+       
 
         [ChildActionOnly]
         public ActionResult TopMenu()
@@ -546,6 +467,7 @@ namespace TinyCms.Web.Controllers
         }
 
         #region Categories
+
         [NonAction]
         protected virtual void PreparePageSizeOptions(PostsPagingFilteringModel pagingFilteringModel, PostsPagingFilteringModel command,
             int fixedPageSize)
@@ -587,6 +509,66 @@ namespace TinyCms.Web.Controllers
                 return categoriesIds;
             });
         }
+        [ChildActionOnly]
+        public ActionResult HomePageCategories()
+        {
+            string categoriesCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_HOMEPAGE_KEY,
+                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
+                _workContext.WorkingLanguage.Id,
+                _webHelper.IsCurrentConnectionSecured());
+
+            var model = _cacheManager.Get(categoriesCacheKey, () =>
+                _categoryService.GetAllCategoriesDisplayedOnHomePage()
+                .Select(x =>
+                {
+                    var catModel = x.ToModel();
+
+                    //prepare picture model
+                    int pictureSize = _mediaSettings.CategoryThumbPictureSize;
+                    var categoryPictureCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY, x.Id, pictureSize, true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured());
+                    catModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
+                    {
+                        var picture = _pictureService.GetPictureById(x.PictureId);
+                        var pictureModel = new PictureModel
+                        {
+                            FullSizeImageUrl = _pictureService.GetPictureUrl(picture),
+                            ImageUrl = _pictureService.GetPictureUrl(picture, pictureSize),
+                            Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), catModel.Name),
+                            AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), catModel.Name)
+                        };
+                        return pictureModel;
+                    });
+
+                    //prepare post model
+                    catModel.Posts = PreparePostOverviewModels(_postService.SearchPosts(pageSize: 3, orderBy: PostSortingEnum.CreatedOn, categoryIds: new[] { catModel.Id }).ToList()).ToList();
+
+                    return catModel;
+                })
+                .ToList()
+            );
+
+            if (model.Count == 0)
+                return Content("");
+
+            return PartialView(model);
+        }
+        [ChildActionOnly]
+        public ActionResult CategoryBox(int categoryId, int numberPost, string template, int? postThumbPictureSize)
+        {
+
+            var category = _categoryService.GetCategoryById(categoryId);
+
+            if (category == null || string.IsNullOrWhiteSpace(template))
+                return Content("");
+
+
+            var model = new CategoryBoxModel { Id = category.Id, SeName = category.GetSeName() };
+
+            var posts = _postService.SearchPosts(pageSize: numberPost, categoryIds: new[] { categoryId }).ToList();
+            model.Posts = PreparePostOverviewModels(posts, postThumbPictureSize != null && postThumbPictureSize > 0, postThumbPictureSize).ToList();
+            return PartialView(template, model);
+        }
+
 
         [NopHttpsRequirement(SslRequirement.No)]
         public ActionResult Category(int categoryId, PostsPagingFilteringModel command)
@@ -697,6 +679,53 @@ namespace TinyCms.Web.Controllers
 
         #region Post
 
+        public ActionResult Write()
+        {
+            var model = new NewPostModel();
+
+            PrepareNewPostModel(model);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public JsonResult Write(NewPostModel model)
+        {
+            var post = new Post
+            {
+                Name = model.Title,
+                FullDescription = model.Body,
+                UpdatedOnUtc = DateTime.UtcNow,
+                CreatedOnUtc = DateTime.UtcNow,
+                CreatedBy = _workContext.CurrentCustomer.Id,
+                Published = false
+            };
+            _postService.InsertPost(post);
+
+            var seName = post.ValidateSeName(string.Empty, post.Name, true);
+            _urlRecordService.SaveSlug(post, seName, 0);
+
+            //tags
+            SavePostTags(post, ParsePostTags(model.PostTags));
+
+            SavePostPictures(post,
+                model.PictureIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                    .Select(int.Parse));
+
+            UpdatePictureSeoNames(post);
+
+            var postCategory = new PostCategory
+            {
+                PostId = post.Id,
+                CategoryId = model.CategoryId
+            };
+            _categoryService.InsertPostCategory(postCategory);
+
+            return Json(new
+            {
+                success = true
+            });
+        }
         protected virtual PostDetailsModel PreparePostDetailsPageModel(Post post)
         {
             if (post == null)
@@ -902,7 +931,13 @@ namespace TinyCms.Web.Controllers
 
             return View(model.PostTemplateViewPath, model);
         }
-
+        [ChildActionOnly]
+        public ActionResult HomePagePosts(int? postThumbPictureSize)
+        {
+            var posts = _postService.GetAllPostsDisplayedOnHomePage();
+            var model = PreparePostOverviewModels(posts, true, postThumbPictureSize);
+            return PartialView(model);
+        }
 
         [ChildActionOnly]
         public ActionResult RelatedPosts(int postId)
@@ -961,6 +996,39 @@ namespace TinyCms.Web.Controllers
                 if(updateDb) _postService.UpdatePost(post);
             }
         }
+        #endregion
+
+        #region Post tag
+
+        [NopHttpsRequirement(SslRequirement.No)]
+        public ActionResult PostsByTag(int postTagId, PostsPagingFilteringModel command)
+        {
+            var postTag = _postTagService.GetPostTagById(postTagId);
+            if (postTag == null)
+                return InvokeHttp404();
+
+            var model = new PostsByTagModel
+            {
+                Id = postTag.Id,
+                TagName = postTag.GetLocalized(y => y.Name),
+                TagSeName = postTag.GetSeName()
+            };
+
+            //page size
+            PreparePageSizeOptions(model.PagingFilteringContext, command, 10);
+
+
+            //posts
+            var posts = _postService.SearchPosts(
+                postTagId: postTag.Id,
+                pageIndex: command.PageNumber - 1,
+                pageSize: command.PageSize);
+            model.Posts = PreparePostOverviewModels(posts).ToList();
+
+            model.PagingFilteringContext.LoadPagedList(posts);
+            return View(model);
+        }
+
         #endregion
     }
 }

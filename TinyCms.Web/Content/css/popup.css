@@ -1,0 +1,36 @@
+.bg_overlay {background-color: rgba(0, 0, 0, 0.3);width:100%;height:100%;display:block;position:fixed;top:0;left:0;overflow:auto;z-index:99}
+/*Login*/
+.popup {width:400px;height:auto;position:relative;border:1px solid #36bdda;z-index:999;background: #fff}
+.popup h1 {font-size:14px;font-weight:bold;padding:10px 15px;border-bottom:1px solid #e4e4e4;background: #36bdda;color:#fff}
+	.close_popup {width:16px;height:15px;display:block;float:right;background-position: -80px 0;margin-top:2px;transition:opacity 0.8s ease 0s}
+	.close_popup:hover {background-position: -101px 0}
+.popup .popup_inner {padding:15px;}
+.popup .popup_inner .content {width:100%;}
+.popup .popup_inner .txtinput {width:100%;height:30px;line-height:30px;border:1px solid #e4e4e4;padding-left:10px;display:block;margin-bottom:10px;border-radius:3px}
+.subact .checkbox {margin:0 5px 0 0;display:inline-block;vertical-align:-2px}
+.subact .forgetpw {float:right;}
+.popup .actbtn {margin:12px 0}
+	.loginbtn {width:100%;height:35px;line-height:35px;text-align:center;background: #36bdda;color: #fff;font-weight:bold;display:block;font-size:14px;text-transform:uppercase;border-radius:3px}
+	.loginbtn:hover {background: #44c8e4;color: #fff}
+	.facelogin {width:32px;height:32px;display:inline-block;vertical-align:middle;margin-left:6px;transition:opacity 0.8s ease 0s}
+	.facelogin:hover {background-position: -35px 0}
+.newreg {float:right}
+	.regbtn {background: #01a260;color: #fff;font-size:14px;font-weight:bold;width:80px;height:35px;line-height:35px;text-align:center;display:inline-block;vertical-align:middle;border-radius:3px;margin-left:8px}
+	.regbtn:hover {background: #3fbe8a;color: #fff}
+
+.popup.reg label {position:relative;width:100%;display:block}	
+.popup.reg label a {font-weight:bold}
+.popup.reg label a:hover {text-decoration:underline}
+.popup.reg .actbtn {margin:12px 0 0 0}
+.popup.reg .regbtn {width:100%;margin:0}
+	.trueicn {width:17px;height:12px;display:block;background-position: -128px 0;position:absolute;top:12px;right:10px}
+	.falseicn {width:12px;height:11px;display:block;background-position: -151px 0;position:absolute;top:12px;right:13px}
+.errtxt {color: #ff0000;padding-top:10px}
+	.successicn {width:20px;height:21px;display:inline-block;background-position:-168px 0;vertical-align:middle;margin-right:5px;}
+	.scctxt {text-align:center;font-size:13px}
+	
+/*.popup.vote {width:350px}*/
+.popup.vote .wrapper {padding:15px;}
+.popup.vote .quesvote {font-size:14px;font-weight:bold;margin-bottom:15px;text-align:center;line-height:22px}
+.popup.vote tr {line-height:25px;margin:0 auto}
+.popup.vote .graph {margin:0 8px}

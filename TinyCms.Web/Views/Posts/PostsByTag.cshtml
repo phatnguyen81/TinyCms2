@@ -1,0 +1,51 @@
+﻿@using TinyCms.Core.Domain.Seo
+@using TinyCms.Core.Infrastructure
+@model PostsByTagModel
+@{
+    Layout = "~/Views/Shared/_TwoColumn.cshtml";
+    Html.AddTitleParts("Tag: " + Model.TagName);
+
+    var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
+    if (canonicalUrlsEnabled)
+    {
+        var categoryUrl = Url.RouteUrl("PostsByTag", new {postTagId = Model.Id, SeName = Model.TagSeName}, this.Request.Url.Scheme);
+        Html.AddCanonicalUrlParts(categoryUrl);
+    }
+
+}
+
+<div class="search_detail">
+    <h1>Tag: @Model.TagName</h1>
+    @if (Model.Posts.Any())
+    {
+        foreach (var post in Model.Posts)
+        {
+            <div class="catebox">
+                <div class="newscont">
+                    <a class="boximg" href="@Url.RouteUrl("Post", new {post.SeName})">
+                        <img width="143" height="105" alt="@post.DefaultPictureModel.AlternateText" src="@post.DefaultPictureModel.ImageUrl">
+                    </a>
+                    <div class="detail">
+                        <h3>
+                            <a href="@Url.RouteUrl("Post", new {post.SeName})">@post.Name</a>
+                        </h3>
+                        <p>@Html.Raw(post.Name)</p>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+    <div class="clr"></div>
+    @{
+        var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+    }
+    @if (!pager.IsEmpty())
+    {
+        <div class="pager">
+            @pager
+        </div>
+    }
+
+</div>
+

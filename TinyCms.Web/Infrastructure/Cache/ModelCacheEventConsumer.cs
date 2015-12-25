@@ -39,7 +39,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {1} : roles of the current user
         /// {2} : current store ID
         /// </remarks>
-        public const string SEARCH_CATEGORIES_MODEL_KEY = "Nop.pres.search.categories-{0}-{1}-{2}";
+        public const string SEARCH_CATEGORIES_MODEL_KEY = "Nop.pres.search.categories-{0}-{1}";
         public const string SEARCH_CATEGORIES_PATTERN_KEY = "Nop.pres.search.categories";
 
        

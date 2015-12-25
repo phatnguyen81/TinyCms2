@@ -253,6 +253,7 @@ GO
 
 CREATE PROCEDURE [dbo].[PostLoadAllPaged]
 (
+	@CreatedBy		int = 0,
 	@CategoryIds		nvarchar(MAX) = null,	--a list of category IDs (comma-separated list). e.g. 1,2,3
 	@PostTagId		int = 0,
 	@FeaturedPosts	bit = null,	--0 featured only , 1 not featured only, null - load all Posts
@@ -573,6 +574,13 @@ BEGIN
 	BEGIN
 		SET @sql = @sql + '
 		AND pptm.PostTag_Id = ' + CAST(@PostTagId AS nvarchar(max))
+	END
+
+	--filter by create user
+	IF @CreatedBy > 0
+	BEGIN
+		SET @sql = @sql + '
+		AND p.CreatedBy = ' + CAST(@CreatedBy AS nvarchar(max))
 	END
 	
 	--"Published" property

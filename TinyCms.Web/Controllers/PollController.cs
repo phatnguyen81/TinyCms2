@@ -42,12 +42,12 @@ namespace TinyCms.Web.Controllers
         #region Utilities
 
         [NonAction]
-        protected virtual PollModel PreparePollModel(Poll poll, bool setAlreadyVotedProperty)
+        protected virtual PollModel PreparePollModel(Poll poll, bool? setAlreadyVotedProperty)
         {
             var model = new PollModel
             {
                 Id = poll.Id,
-                AlreadyVoted = setAlreadyVotedProperty && _pollService.AlreadyVoted(poll.Id, _workContext.CurrentCustomer.Id),
+                AlreadyVoted = setAlreadyVotedProperty == null ? _pollService.AlreadyVoted(poll.Id, _workContext.CurrentCustomer.Id) : setAlreadyVotedProperty.Value,
                 Name = poll.Name
             };
             var answers = poll.PollAnswers.OrderBy(x => x.DisplayOrder);
@@ -72,7 +72,7 @@ namespace TinyCms.Web.Controllers
         #region Methods
 
         [ChildActionOnly]
-        public ActionResult PollBlock(string systemKeyword)
+        public ActionResult PollBlock(string systemKeyword, bool showResult = false)
         {
             if (String.IsNullOrWhiteSpace(systemKeyword))
                 return Content("");
@@ -96,9 +96,28 @@ namespace TinyCms.Web.Controllers
             //"AlreadyVoted" property of "PollModel" object depends on the current customer. Let's update it.
             //But first we need to clone the cached model (the updated one should not be cached)
             var model = (PollModel)cachedModel.Clone();
-            model.AlreadyVoted = _pollService.AlreadyVoted(model.Id, _workContext.CurrentCustomer.Id);
+            model.AlreadyVoted = showResult? true : _pollService.AlreadyVoted(model.Id, _workContext.CurrentCustomer.Id);
 
             return PartialView(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult VoteResult(int pollAnswerId)
+        {
+            var pollAnswer = _pollService.GetPollAnswerById(pollAnswerId);
+            if (pollAnswer == null)
+                return Json(new
+                {
+                    error = "No poll answer found with the specified id",
+                });
+
+            var poll = pollAnswer.Poll;
+           
+            return Json(new
+            {
+                html = this.RenderPartialViewToString("_Poll", PreparePollModel(poll, true)),
+            });
         }
 
         [HttpPost]
@@ -142,7 +161,7 @@ namespace TinyCms.Web.Controllers
 
             return Json(new
             {
-                html = this.RenderPartialViewToString("_Poll", PreparePollModel(poll, true)),
+                html = this.RenderPartialViewToString("_Poll", PreparePollModel(poll, null)),
             });
         }
         
@@ -160,6 +179,31 @@ namespace TinyCms.Web.Controllers
             foreach (var p in cachedModel)
             {
                 var pollModel = (PollModel) p.Clone();
+                pollModel.AlreadyVoted = _pollService.AlreadyVoted(pollModel.Id, _workContext.CurrentCustomer.Id);
+                model.Add(pollModel);
+            }
+
+            if (model.Count == 0)
+                Content("");
+
+            return PartialView(model);
+        }
+
+
+        [ChildActionOnly]
+        public ActionResult RandomPolls()
+        {
+            var cacheKey = string.Format(ModelCacheEventConsumer.HOMEPAGE_POLLS_MODEL_KEY, _workContext.WorkingLanguage.Id);
+            var cachedModel = _cacheManager.Get(cacheKey, () =>
+                _pollService.GetPolls(_workContext.WorkingLanguage.Id, true)
+                .Select(x => PreparePollModel(x, false))
+                .ToList());
+            //"AlreadyVoted" property of "PollModel" object depends on the current customer. Let's update it.
+            //But first we need to clone the cached model (the updated one should not be cached)
+            var model = new List<PollModel>();
+            foreach (var p in cachedModel)
+            {
+                var pollModel = (PollModel)p.Clone();
                 pollModel.AlreadyVoted = _pollService.AlreadyVoted(pollModel.Id, _workContext.CurrentCustomer.Id);
                 model.Add(pollModel);
             }

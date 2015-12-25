@@ -52,7 +52,10 @@ namespace TinyCms.Web.Extensions
                     Name = post.GetLocalized(x => x.Name),
                     ShortDescription = post.GetLocalized(x => x.ShortDescription),
                     FullDescription = post.GetLocalized(x => x.FullDescription),
-                    SeName = post.GetSeName()
+                    SeName = post.GetSeName(),
+                    ViewCount = post.ViewCount,
+                    ShareCount = post.ShareCount,
+                    CommentCount = post.CommentCount
                 };
                
 

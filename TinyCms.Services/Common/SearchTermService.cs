@@ -66,13 +66,13 @@ namespace TinyCms.Services.Common
         /// <param name="keyword">Search term keyword</param>
         /// <param name="storeId">Store identifier</param>
         /// <returns>Search term</returns>
-        public virtual SearchTerm GetSearchTermByKeyword(string keyword, int storeId)
+        public virtual SearchTerm GetSearchTermByKeyword(string keyword)
         {
             if (String.IsNullOrEmpty(keyword))
                 return null;
 
             var query = from st in _searchTermRepository.Table
-                        where st.Keyword == keyword && st.StoreId == storeId
+                        where st.Keyword == keyword
                         orderby st.Id
                         select st;
             var searchTerm = query.FirstOrDefault();

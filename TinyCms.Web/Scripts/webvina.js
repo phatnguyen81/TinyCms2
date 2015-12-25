@@ -507,24 +507,24 @@ $(function () {
         }
     });
 
-    //survey module
-    $('#surveyresultlink').click(function (e) {
-        e.preventDefault();
-        surveyResultBoard(false);
-    });
+    ////survey module
+    //$('#surveyresultlink').click(function (e) {
+    //    e.preventDefault();
+    //    surveyResultBoard(false);
+    //});
 
-    $('#surveyresultbutton').click(function (e) {
-        e.preventDefault();
+    //$('#surveyresultbutton').click(function (e) {
+    //    e.preventDefault();
 
-        var flag = $('#surveyresultbutton').attr('vote') == '1';
-        var a = $('#surveyquestion').attr('surveyid');
-        if (readCookie("survey_" + a) != null)
-        {
-            flag = false;
-        }
+    //    var flag = $('#surveyresultbutton').attr('vote') == '1';
+    //    var a = $('#surveyquestion').attr('surveyid');
+    //    if (readCookie("survey_" + a) != null)
+    //    {
+    //        flag = false;
+    //    }
 
-        surveyResultBoard( flag );
-    });
+    //    surveyResultBoard( flag );
+    //});
 
     function surveyResultBoard(isvoting) {
         var tpl = '<div class="content">\

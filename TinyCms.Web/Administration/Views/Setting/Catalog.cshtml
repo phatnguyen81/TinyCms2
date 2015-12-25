@@ -143,6 +143,24 @@
         </tr>
         <tr>
             <td class="adminTitle">
+                @Html.NopLabelFor(model => model.ShareCornerCategoryId):
+            </td>
+            <td class="adminData">
+                @Html.DropDownListFor(model => model.ShareCornerCategoryId, Model.AvailableCategories)
+                @Html.ValidationMessageFor(model => model.ShareCornerCategoryId)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.ShareCornerPostNumber):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ShareCornerPostNumber)
+                @Html.ValidationMessageFor(model => model.ShareCornerPostNumber)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
                 @Html.NopLabelFor(model => model.DiscoveryCategoryId):
             </td>
             <td class="adminData">
@@ -391,5 +409,6 @@
                 @Html.ValidationMessageFor(model => model.PostSearchTermMinimumLength)
             </td>
         </tr>
+
     </table>
 }

@@ -27,7 +27,7 @@ namespace TinyCms.Services.Common
         /// <param name="keyword">Search term keyword</param>
         /// <param name="storeId">Store identifier</param>
         /// <returns>Search term</returns>
-        SearchTerm GetSearchTermByKeyword(string keyword, int storeId);
+        SearchTerm GetSearchTermByKeyword(string keyword);
 
         /// <summary>
         /// Gets a search term statistics

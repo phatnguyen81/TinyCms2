@@ -1,10 +1,10 @@
 ﻿@{
     Layout = "~/Administration/Views/Shared/_AdminPopupLayout.cshtml";
 }
-@model ProductTagModel
+@model PostTagModel
 @{
     //page title
-    ViewBag.Title = T("Admin.Catalog.ProductTags.EditTagDetails").Text;
+    ViewBag.Title = T("Admin.Catalog.PostTags.EditTagDetails").Text;
 }
 @using (Html.BeginForm())
 {
@@ -12,11 +12,11 @@
     <div class="section-header">
         <div class="title">
             <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
-            @T("Admin.Catalog.ProductTags.EditTagDetails")- @Model.Name
+            @T("Admin.Catalog.PostTags.EditTagDetails")- @Model.Name
         </div>
         <div class="options">
             <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
         </div>
     </div>
-    @Html.Partial("_CreateOrUpdateProductTag", Model)
+    @Html.Partial("_CreateOrUpdatePostTag", Model)
 }

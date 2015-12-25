@@ -68,7 +68,7 @@ namespace TinyCms.Web.Infrastructure
             //product search
             routes.MapLocalizedRoute("Postsearch",
                             "search/",
-                            new { controller = "Catalog", action = "Search" },
+                            new { controller = "Posts", action = "Search" },
                             new[] { "TinyCms.Web.Controllers" });
             routes.MapLocalizedRoute("PostsearchAutoComplete",
                             "catalog/searchtermautocomplete",
@@ -137,9 +137,9 @@ namespace TinyCms.Web.Infrastructure
 
             //product tags
             routes.MapLocalizedRoute("PostsByTag",
-                            "producttag/{productTagId}/{SeName}",
-                            new { controller = "Catalog", action = "PostsByTag", SeName = UrlParameter.Optional },
-                            new { productTagId = @"\d+" },
+                            "producttag/{postTagId}/{SeName}",
+                            new { controller = "Posts", action = "PostsByTag", SeName = UrlParameter.Optional },
+                            new { postTagId = @"\d+" },
                             new[] { "TinyCms.Web.Controllers" });
             
             //product email a friend

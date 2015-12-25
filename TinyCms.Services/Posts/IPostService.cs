@@ -99,6 +99,7 @@ namespace TinyCms.Services.Posts
         IPagedList<Post> SearchPosts(
             int pageIndex = 0,
             int pageSize = int.MaxValue,
+            int createBy = 0,
             IList<int> categoryIds = null,
             bool? featuredPosts = null,
             int postTagId = 0,

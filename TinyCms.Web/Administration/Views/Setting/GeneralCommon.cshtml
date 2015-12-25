@@ -244,11 +244,11 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SeoSettings.GenerateProductMetaDescription):
+                @Html.NopLabelFor(model => model.SeoSettings.GeneratePostMetaDescription):
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.SeoSettings.GenerateProductMetaDescription)
-                @Html.ValidationMessageFor(model => model.SeoSettings.GenerateProductMetaDescription)
+                @Html.EditorFor(model => model.SeoSettings.GeneratePostMetaDescription)
+                @Html.ValidationMessageFor(model => model.SeoSettings.GeneratePostMetaDescription)
             </td>
         </tr>
         <tr>
@@ -332,10 +332,10 @@
             $('#ssCaptchaShowOnRegistrationPagepnl').show();
             $('#ssCaptchaShowOnContactUsPagepnl').show();
             $('#ssCaptchaShowOnEmailWishlistToFriendPagepnl').show();
-            $('#ssCaptchaShowOnEmailProductToFriendPagepnl').show();
+            $('#ssCaptchaShowOnEmailPostToFriendPagepnl').show();
             $('#ssCaptchaShowOnBlogCommentPagepnl').show();
             $('#ssCaptchaShowOnNewsCommentPagepnl').show();
-            $('#ssCaptchaShowOnProductReviewPagepnl').show();
+            $('#ssCaptchaShowOnPostReviewPagepnl').show();
             $('#ssCaptchaShowOnApplyVendorPagepnl').show();
             $('#ssReCaptchaPublicKeypnl').show();
             $('#ssReCaptchaPrivateKeypnl').show();
@@ -345,10 +345,10 @@
             $('#ssCaptchaShowOnRegistrationPagepnl').hide();
             $('#ssCaptchaShowOnContactUsPagepnl').hide();
             $('#ssCaptchaShowOnEmailWishlistToFriendPagepnl').hide();
-            $('#ssCaptchaShowOnEmailProductToFriendPagepnl').hide();
+            $('#ssCaptchaShowOnEmailPostToFriendPagepnl').hide();
             $('#ssCaptchaShowOnBlogCommentPagepnl').hide();
             $('#ssCaptchaShowOnNewsCommentPagepnl').hide();
-            $('#ssCaptchaShowOnProductReviewPagepnl').hide();
+            $('#ssCaptchaShowOnPostReviewPagepnl').hide();
             $('#ssCaptchaShowOnApplyVendorPagepnl').hide();
             $('#ssReCaptchaPublicKeypnl').hide();
             $('#ssReCaptchaPrivateKeypnl').hide();
@@ -469,13 +469,13 @@
                 @Html.ValidationMessageFor(model => model.SecuritySettings.CaptchaShowOnEmailWishlistToFriendPage)
             </td>
         </tr>
-        <tr id="ssCaptchaShowOnEmailProductToFriendPagepnl">
+        <tr id="ssCaptchaShowOnEmailPostToFriendPagepnl">
             <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SecuritySettings.CaptchaShowOnEmailProductToFriendPage):
+                @Html.NopLabelFor(model => model.SecuritySettings.CaptchaShowOnEmailPostToFriendPage):
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.SecuritySettings.CaptchaShowOnEmailProductToFriendPage)
-                @Html.ValidationMessageFor(model => model.SecuritySettings.CaptchaShowOnEmailProductToFriendPage)
+                @Html.EditorFor(model => model.SecuritySettings.CaptchaShowOnEmailPostToFriendPage)
+                @Html.ValidationMessageFor(model => model.SecuritySettings.CaptchaShowOnEmailPostToFriendPage)
             </td>
         </tr>
         <tr id="ssCaptchaShowOnBlogCommentPagepnl">
@@ -496,13 +496,13 @@
                 @Html.ValidationMessageFor(model => model.SecuritySettings.CaptchaShowOnNewsCommentPage)
             </td>
         </tr>
-        <tr id="ssCaptchaShowOnProductReviewPagepnl">
+        <tr id="ssCaptchaShowOnPostReviewPagepnl">
             <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SecuritySettings.CaptchaShowOnProductReviewPage):
+                @Html.NopLabelFor(model => model.SecuritySettings.CaptchaShowOnPostReviewPage):
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.SecuritySettings.CaptchaShowOnProductReviewPage)
-                @Html.ValidationMessageFor(model => model.SecuritySettings.CaptchaShowOnProductReviewPage)
+                @Html.EditorFor(model => model.SecuritySettings.CaptchaShowOnPostReviewPage)
+                @Html.ValidationMessageFor(model => model.SecuritySettings.CaptchaShowOnPostReviewPage)
             </td>
         </tr>
         <tr id="ssCaptchaShowOnApplyVendorPagepnl">

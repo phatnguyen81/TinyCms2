@@ -4,7 +4,25 @@
     <strong class="poll-display-text">@Model.Name</strong>
     @if (Model.AlreadyVoted)
     {
-        <ul class="poll-results">
+
+        <table align="center">
+            <tbody>
+            @foreach (var item in Model.Answers)
+            {
+                <tr>
+                    <td align="left" style="width: 45%"> @(item.Name)&nbsp;&nbsp; </td>
+                    <td align="left" style="width: 40%" height="16px" width="200">
+                        <div style="background: #01a260; display: block; height: 16px; width: 100%; background: #d3d3d3;">
+                            <div style="background: #01a260; display: block; height: 100%; width: @(item.PercentOfTotalVotes)%;">&nbsp;</div>
+                        </div>
+                    </td>
+                    <td align="right">&nbsp;&nbsp;<strong> @(item.PercentOfTotalVotes.ToString("0.00")) % </strong></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+        @*<ul class="poll-results">
             @foreach (var item in Model.Answers)
             {
                 <li class="answer">
@@ -12,7 +30,7 @@
                 </li>
             }
         </ul>
-        <span class="poll-total-votes">@string.Format(T("Polls.TotalVotes").Text, Model.TotalVotes)</span>
+        <span class="poll-total-votes">@string.Format(T("Polls.TotalVotes").Text, Model.TotalVotes)</span>*@
     }
     else
     {
@@ -26,48 +44,75 @@
                 </p>
             }
         <p>
-            <input type="button" value="@T("Polls.Vote")" id="vote-poll-@(Model.Id)" class="btn01" />
+            <input type="button" value="@T("Polls.Vote")" id="vote-poll-@(Model.Id)" class="btn01" /> <a href="#" id="surveyresultlink">Xem kết quả</a>
             <span id="poll-voting-progress-@(Model.Id)" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
         </p>
         <div class="poll-vote-error" id="block-poll-vote-error-@(Model.Id)">
         </div>
-        
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#vote-poll-@(Model.Id)').click(function () {
-                var pollAnswerId = $("input:radio[name=pollanswers-@(Model.Id)]:checked").val();
-                if (typeof (pollAnswerId) == 'undefined') {
-                    alert('@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Polls.SelectAnswer").Text))');
-                }
-                else {
-                    var voteProgress = $("#poll-voting-progress-@(Model.Id)");
-                    voteProgress.show();
-                    $.ajax({
-                        cache: false,
-                        type: "POST",
-                        url: "@(Url.RouteUrl("PollVote"))",
-                        data: { "pollAnswerId": pollAnswerId },
-                        success: function (data) {
-                            voteProgress.hide();
 
-                            if (data.error) {
-                                $("#block-poll-vote-error-@(Model.Id)").html(data.error);
-                                $('#block-poll-vote-error-@(Model.Id)').fadeIn("slow").delay(2000).fadeOut("slow");
-                            }
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#vote-poll-@(Model.Id)').click(function () {
+            var pollAnswerId = $("input:radio[name=pollanswers-@(Model.Id)]:checked").val();
+            if (typeof (pollAnswerId) == 'undefined') {
+                alert('@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Polls.SelectAnswer").Text))');
+            }
+            else {
+                var voteProgress = $("#poll-voting-progress-@(Model.Id)");
+                voteProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "@(Url.RouteUrl("PollVote"))",
+                    data: { "pollAnswerId": pollAnswerId },
+                    success: function (data) {
+                        voteProgress.hide();
 
-                            if (data.html) {
-                                $("#poll-block-@(Model.Id)").replaceWith(data.html);
-                            }
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                            alert('Failed to vote.');
-                            voteProgress.hide();
+                        if (data.error) {
+                            $("#block-poll-vote-error-@(Model.Id)").html(data.error);
+                            $('#block-poll-vote-error-@(Model.Id)').fadeIn("slow").delay(2000).fadeOut("slow");
                         }
-                    });
-                }
-                return false;
-            });
+
+                        if (data.html) {
+                            $("#poll-block-@(Model.Id)").replaceWith(data.html);
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to vote.');
+                        voteProgress.hide();
+                    }
+                });
+            }
+            return false;
         });
-        </script>
+        $('#surveyresultlink').click(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "@(Url.Action("VoteResult", "Poll"))",
+                data: { "pollAnswerId": @Model.Id, showResult: true },
+                success: function (data) {
+
+                    if (data.error) {
+                        $("#block-poll-vote-error-@(Model.Id)").html(data.error);
+                        $('#block-poll-vote-error-@(Model.Id)').fadeIn("slow").delay(2000).fadeOut("slow");
+                    }
+
+                    if (data.html) {
+
+                        var bx = $.boxy.alert('Kết quả bình chọn', data.html);
+                        bx.getNode().find('.popup').addClass('vote');
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to vote.');
+                }
+            });
+
+        });
+    });
+    </script>
     }
 </div>

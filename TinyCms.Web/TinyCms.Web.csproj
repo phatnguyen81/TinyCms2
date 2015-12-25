@@ -210,6 +210,7 @@
     <Compile Include="Models\Customer\LoginModel.cs" />
     <Compile Include="Models\Customer\PasswordRecoveryConfirmModel.cs" />
     <Compile Include="Models\Customer\PaswordRecoveryModel.cs" />
+    <Compile Include="Models\Customer\ProfilePagingFilteringModel.cs" />
     <Compile Include="Models\Customer\RegisterModel.cs" />
     <Compile Include="Models\Customer\RegisterResultModel.cs" />
     <Compile Include="Models\Customer\UserInfoZone.cs" />
@@ -223,6 +224,8 @@
     <Compile Include="Models\Posts\PostOverviewModel.cs" />
     <Compile Include="Models\Posts\PostDetailsModel.cs" />
     <Compile Include="Models\Posts\PostTagModel.cs" />
+    <Compile Include="Models\Posts\PostsByTagModel.cs" />
+    <Compile Include="Models\Posts\SearchModel.cs" />
     <Compile Include="Models\Posts\TopMenuModel.cs" />
     <Compile Include="Models\Topics\TopicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1997,11 +2000,15 @@
     <Content Include="Views\Posts\PostTemplate.Post.cshtml" />
     <Content Include="Views\ExternalAuthentication\ExternalMethods.cshtml" />
     <Content Include="Views\Posts\RelatedPosts.cshtml" />
-    <Content Include="Views\Posts\CategoryBox.Promotio.cshtml" />
+    <Content Include="Views\Posts\CategoryBox.Promotion.cshtml" />
     <Content Include="Views\Poll\HomePagePolls.cshtml" />
     <Content Include="Views\Poll\PollBlock.cshtml" />
     <Content Include="Views\Poll\_Poll.cshtml" />
     <Content Include="Views\Posts\OtherPosts.cshtml" />
+    <Content Include="Views\Customer\ChangePassword.cshtml" />
+    <Content Include="Views\Posts\Search.cshtml" />
+    <Content Include="Views\Posts\PostsByTag.cshtml" />
+    <Content Include="Views\Poll\RandomPolls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />

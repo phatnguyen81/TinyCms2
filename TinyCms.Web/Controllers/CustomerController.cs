@@ -5,12 +5,14 @@ using System.Runtime.Serialization;
 using System.Web;
 using System.Web.Mvc;
 using TinyCms.Core;
+using TinyCms.Core.Caching;
 using TinyCms.Core.Domain;
 using TinyCms.Core.Domain.Catalog;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Core.Domain.Localization;
 using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Messages;
+using TinyCms.Core.Domain.Posts;
 using TinyCms.Core.Domain.Security;
 using TinyCms.Services.Authentication;
 using TinyCms.Services.Authentication.External;
@@ -56,6 +58,8 @@ namespace TinyCms.Web.Controllers
         private readonly ICustomerActivityService _customerActivityService;
         private readonly IEventPublisher _eventPublisher;
         private readonly INewsLetterSubscriptionService _newsLetterSubscriptionService;
+        private readonly ICacheManager _cacheManager;
+        private readonly CatalogSettings _catalogSettings;
 
         private readonly MediaSettings _mediaSettings;
         private readonly IWorkflowMessageService _workflowMessageService;
@@ -74,7 +78,7 @@ namespace TinyCms.Web.Controllers
 
         public CustomerController(IAuthenticationService authenticationService,
             IDateTimeHelper dateTimeHelper,
-            DateTimeSettings dateTimeSettings, 
+            DateTimeSettings dateTimeSettings,
             ILocalizationService localizationService,
             IWorkContext workContext,
             ICustomerService customerService,
@@ -83,7 +87,7 @@ namespace TinyCms.Web.Controllers
             IGenericAttributeService genericAttributeService,
             ICustomerRegistrationService customerRegistrationService,
             CustomerSettings customerSettings,
-            IPictureService pictureService, 
+            IPictureService pictureService,
             IOpenAuthenticationService openAuthenticationService,
             IWebHelper webHelper,
             ICustomerActivityService customerActivityService,
@@ -94,8 +98,8 @@ namespace TinyCms.Web.Controllers
             CaptchaSettings captchaSettings,
             SecuritySettings securitySettings,
             ExternalAuthenticationSettings externalAuthenticationSettings,
-            StoreInformationSettings storeInformationSettings, 
-            INewsLetterSubscriptionService newsLetterSubscriptionService, IPostService postService)
+            StoreInformationSettings storeInformationSettings,
+            INewsLetterSubscriptionService newsLetterSubscriptionService, IPostService postService, ICacheManager cacheManager, CatalogSettings catalogSettings, ICategoryService categoryService, IPermissionService permissionService)
         {
             this._authenticationService = authenticationService;
             this._dateTimeHelper = dateTimeHelper;
@@ -122,12 +126,40 @@ namespace TinyCms.Web.Controllers
             this._storeInformationSettings = storeInformationSettings;
             _newsLetterSubscriptionService = newsLetterSubscriptionService;
             _postService = postService;
+            _cacheManager = cacheManager;
+            _catalogSettings = catalogSettings;
+            _categoryService = categoryService;
+            _permissionService = permissionService;
         }
 
         #endregion
 
         #region Utilities
-        
+
+        [NonAction]
+        protected virtual void PreparePageSizeOptions(ProfilePagingFilteringModel pagingFilteringModel, ProfilePagingFilteringModel command,
+            int fixedPageSize)
+        {
+            if (pagingFilteringModel == null)
+                throw new ArgumentNullException("pagingFilteringModel");
+
+            if (command == null)
+                throw new ArgumentNullException("command");
+
+            if (command.PageNumber <= 0)
+            {
+                command.PageNumber = 1;
+            }
+            command.PageSize = fixedPageSize;
+
+            //ensure pge size is specified
+            if (command.PageSize <= 0)
+            {
+                command.PageSize = fixedPageSize;
+            }
+        }
+
+
         [NonAction]
         protected virtual void TryAssociateAccountWithExternalAccount(Customer customer)
         {
@@ -185,7 +217,7 @@ namespace TinyCms.Web.Controllers
 
                 //set already selected attributes
                 var selectedAttributesXml = !String.IsNullOrEmpty(overrideAttributesXml) ?
-                    overrideAttributesXml : 
+                    overrideAttributesXml :
                     customer.GetAttribute<string>(SystemCustomerAttributeNames.CustomCustomerAttributes, _genericAttributeService);
                 switch (attribute.AttributeControlType)
                 {
@@ -250,10 +282,10 @@ namespace TinyCms.Web.Controllers
             if (customer == null)
                 throw new ArgumentNullException("customer");
 
-        
+
             if (!excludeProperties)
             {
-            
+
 
                 model.Email = customer.Email;
                 model.Username = customer.Username;
@@ -264,7 +296,7 @@ namespace TinyCms.Web.Controllers
                     model.Username = customer.Username;
             }
 
-         
+
             model.UsernamesEnabled = _customerSettings.UsernamesEnabled;
             model.AllowUsersToChangeUsernames = _customerSettings.AllowUsersToChangeUsernames;
             model.CheckUsernameAvailabilityEnabled = _customerSettings.CheckUsernameAvailabilityEnabled;
@@ -305,7 +337,7 @@ namespace TinyCms.Web.Controllers
             model.UsernamesEnabled = _customerSettings.UsernamesEnabled;
             model.CheckUsernameAvailabilityEnabled = _customerSettings.CheckUsernameAvailabilityEnabled;
             model.DisplayCaptcha = _captchaSettings.Enabled && _captchaSettings.ShowOnRegistrationPage;
-            
+
             //custom customer attributes
             var customAttributes = PrepareCustomCustomerAttributes(_workContext.CurrentCustomer, overrideCustomCustomerAttributesXml);
             customAttributes.ForEach(model.CustomerAttributes.Add);
@@ -342,12 +374,12 @@ namespace TinyCms.Web.Controllers
                             var cblAttributes = form[controlId];
                             if (!String.IsNullOrEmpty(cblAttributes))
                             {
-                                foreach (var item in cblAttributes.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                                foreach (var item in cblAttributes.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                                 {
-                                        int selectedAttributeId = int.Parse(item);
-                                        if (selectedAttributeId > 0)
-                                            attributesXml = _customerAttributeParser.AddCustomerAttribute(attributesXml,
-                                                attribute, selectedAttributeId.ToString());
+                                    int selectedAttributeId = int.Parse(item);
+                                    if (selectedAttributeId > 0)
+                                        attributesXml = _customerAttributeParser.AddCustomerAttribute(attributesXml,
+                                            attribute, selectedAttributeId.ToString());
                                 }
                             }
                         }
@@ -381,7 +413,7 @@ namespace TinyCms.Web.Controllers
                     case AttributeControlType.Datepicker:
                     case AttributeControlType.ColorSquares:
                     case AttributeControlType.FileUpload:
-                        //not supported customer attributes
+                    //not supported customer attributes
                     default:
                         break;
                 }
@@ -446,7 +478,7 @@ namespace TinyCms.Web.Controllers
 
                             if (String.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
                                 return RedirectToRoute("HomePage");
-                            
+
                             return Redirect(returnUrl);
                         }
                     case CustomerLoginResults.CustomerNotExist:
@@ -474,7 +506,7 @@ namespace TinyCms.Web.Controllers
             return View(model);
         }
 
-        
+
         //available even when a store is closed
         [StoreClosed(true)]
         //available even when navigation is not allowed
@@ -672,12 +704,12 @@ namespace TinyCms.Web.Controllers
             //check whether registration is allowed
             if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
                 return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.Disabled });
-            
+
             if (_workContext.CurrentCustomer.IsRegistered())
             {
                 //Already registered customer. 
                 _authenticationService.SignOut();
-                
+
                 //Save a new record
                 _workContext.CurrentCustomer = _customerService.InsertGuestCustomer();
             }
@@ -705,20 +737,20 @@ namespace TinyCms.Web.Controllers
                 }
 
                 bool isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
-                var registrationRequest = new CustomerRegistrationRequest(customer, 
+                var registrationRequest = new CustomerRegistrationRequest(customer,
                     model.Email,
-                    _customerSettings.UsernamesEnabled ? model.Username : model.Email, 
-                    model.Password, 
+                    _customerSettings.UsernamesEnabled ? model.Username : model.Email,
+                    model.Password,
                     _customerSettings.DefaultPasswordFormat,
                     isApproved);
                 var registrationResult = _customerRegistrationService.RegisterCustomer(registrationRequest);
                 if (registrationResult.Success)
                 {
-                   
+
 
                     //save customer attributes
                     _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CustomCustomerAttributes, customerAttributesXml);
-                    
+
                     //login customer now
                     if (isApproved)
                         _authenticationService.SignIn(customer, true);
@@ -834,7 +866,7 @@ namespace TinyCms.Web.Controllers
 
             return Json(new { Available = usernameAvailable, Text = statusText });
         }
-        
+
         [NopHttpsRequirement(SslRequirement.Yes)]
         //available even when navigation is not allowed
         [PublicStoreAllowNavigation(true)]
@@ -857,7 +889,7 @@ namespace TinyCms.Web.Controllers
             _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.AccountActivationToken, "");
             //send welcome message
             _workflowMessageService.SendCustomerWelcomeMessage(customer, _workContext.WorkingLanguage.Id);
-            
+
             var model = new AccountActivationModel();
             model.Result = _localizationService.GetResource("Account.AccountActivation.Activated");
             return View(model);
@@ -867,7 +899,7 @@ namespace TinyCms.Web.Controllers
 
         #region My account / Info
 
-        public ActionResult Profile()
+        public ActionResult Profile(ProfilePagingFilteringModel command)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return new HttpUnauthorizedResult();
@@ -887,20 +919,30 @@ namespace TinyCms.Web.Controllers
                 model.AvatarUrl = @Url.Content("~/Content/Images/avatar.png");
             }
 
-            //model.Posts = this.PreparePostOverviewModels(_workContext,
-            //    _categoryService,
-            //    _postService,
-            //    _permissionService,
-            //    _localizationService,
-            //    _pictureService,
-            //    _webHelper,
-            //    _cacheManager,
-            //    _catalogSettings,
-            //    _mediaSettings,
-            //    posts,
-            //    preparePictureModel,
-            //    postThumbPictureSize);
+            //page size
+            PreparePageSizeOptions(model.PagingFilteringContext, command, 10);
 
+
+            var posts = _postService.SearchPosts(
+               orderBy: PostSortingEnum.CreatedOn,
+               createBy: _workContext.CurrentCustomer.Id,
+               pageIndex: command.PageNumber - 1,
+               pageSize: command.PageSize);
+
+            model.Posts = this.PreparePostOverviewModels(_workContext,
+                _categoryService,
+                _postService,
+                _permissionService,
+                _localizationService,
+                _pictureService,
+                _webHelper,
+                _cacheManager,
+                _catalogSettings,
+                _mediaSettings,
+                posts,
+                true,
+                120).ToList();
+            model.PagingFilteringContext.LoadPagedList(posts);
             return View(model);
         }
 
@@ -975,8 +1017,8 @@ namespace TinyCms.Web.Controllers
                         }
                     }
 
-                  
-                   
+
+
                     //save customer attributes
                     _genericAttributeService.SaveAttribute(_workContext.CurrentCustomer, SystemCustomerAttributeNames.CustomCustomerAttributes, customerAttributesXml);
 
@@ -1045,7 +1087,7 @@ namespace TinyCms.Web.Controllers
                     model.Result = _localizationService.GetResource("Account.ChangePassword.Success");
                     return View(model);
                 }
-                
+
                 //errors
                 foreach (var error in changePasswordResult.Errors)
                     ModelState.AddModelError("", error);
@@ -1059,6 +1101,62 @@ namespace TinyCms.Web.Controllers
         #endregion
 
         #region My account / Avatar
+
+        [HttpPost]
+        public ActionResult ChangeAvatar(HttpPostedFileBase uploadedFile)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Json(new { success = false, message = "Xin vui lòng đăng nhập" });
+
+            var customer = _workContext.CurrentCustomer;
+
+            try
+            {
+                var customerAvatar =
+                    _pictureService.GetPictureById(
+                        customer.GetAttribute<int>(SystemCustomerAttributeNames.AvatarPictureId));
+
+
+
+                if ((uploadedFile != null) && (!String.IsNullOrEmpty(uploadedFile.FileName)))
+                {
+                    int avatarMaxSize = _customerSettings.AvatarMaximumSizeBytes;
+                    if (uploadedFile.ContentLength > avatarMaxSize)
+                        throw new NopException(
+                            string.Format(
+                                _localizationService.GetResource("Account.Avatar.MaximumUploadedFileSize"),
+                                avatarMaxSize));
+
+                    byte[] customerPictureBinary = uploadedFile.GetPictureBits();
+                    if (customerAvatar != null)
+                        customerAvatar = _pictureService.UpdatePicture(customerAvatar.Id, customerPictureBinary,
+                            uploadedFile.ContentType, null);
+                    else
+                        customerAvatar = _pictureService.InsertPicture(customerPictureBinary,
+                            uploadedFile.ContentType, null);
+                }
+
+                int customerAvatarId = 0;
+                if (customerAvatar != null)
+                    customerAvatarId = customerAvatar.Id;
+
+                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.AvatarPictureId,
+                    customerAvatarId);
+
+                return Json(new
+                {
+                    success = true,
+                    avatarUrl = _pictureService.GetPictureUrl(
+                        customer.GetAttribute<int>(SystemCustomerAttributeNames.AvatarPictureId),
+                        _mediaSettings.AvatarPictureSize,
+                        false)
+                });
+            }
+            catch (Exception exc)
+            {
+                return Json(new { success = false, message = exc.Message });
+            }
+        }
 
         [NopHttpsRequirement(SslRequirement.Yes)]
         public ActionResult Avatar()
@@ -1091,7 +1189,7 @@ namespace TinyCms.Web.Controllers
                 return RedirectToRoute("CustomerInfo");
 
             var customer = _workContext.CurrentCustomer;
-            
+
             if (ModelState.IsValid)
             {
                 try
@@ -1182,7 +1280,7 @@ namespace TinyCms.Web.Controllers
                     model.AvatarUrl = @Url.Content("~/Content/Images/avatar.png");
                 }
             }
-            
+
             return PartialView(model);
         }
     }

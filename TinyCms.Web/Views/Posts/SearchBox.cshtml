@@ -1,4 +1,7 @@
-﻿<div class="search_news">
-    <input type="text" class="searchinput" value="Tìm kiếm" />
-    <span class="searchicn icn"></span>
-</div>
+﻿@using (Html.BeginRouteForm("Postsearch", FormMethod.Get))
+{
+    <div class="search_news">
+        <input type="text" class="searchinput" name="q" placeholder="Tìm kiếm"/>
+        <button class="searchicn icn"></button>
+    </div>
+}  
