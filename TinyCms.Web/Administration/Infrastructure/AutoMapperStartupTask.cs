@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Owin.BuilderProperties;
 using TinyCms.Admin.Models.Cms;
 using TinyCms.Admin.Models.Customers;
 using TinyCms.Admin.Models.ExternalAuthentication;

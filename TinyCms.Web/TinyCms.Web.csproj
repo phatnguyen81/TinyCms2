@@ -276,7 +276,6 @@
     <Content Include="App_Data\Localization\Installation\installation.ur.xml" />
     <Content Include="App_Data\Localization\Installation\installation.vi.xml" />
     <Content Include="App_Data\Localization\Installation\installation.zhs.xml" />
-    <Content Include="App_Data\Settings.txt" />
     <Content Include="Content\BBEditor\ed.js" />
     <Content Include="Content\BBEditor\images\bold.gif" />
     <Content Include="Content\BBEditor\images\code.gif" />
@@ -1136,6 +1135,7 @@
     <Content Include="Content\tinymce\themes\modern\theme.min.js" />
     <Content Include="Content\tinymce\tinymce.min.js" />
     <Content Include="favicon.ico" />
+    <Content Include="FileNotFound.htm" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1188,6 +1188,7 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\Files.pubxml" />
+    <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

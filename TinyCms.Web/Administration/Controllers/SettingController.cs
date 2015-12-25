@@ -478,6 +478,49 @@ namespace TinyCms.Admin.Controllers
             return RedirectToAction("Catalog");
         }
 
+        [HttpPost, ActionName("GeneralCommon")]
+        [FormValueRequired("togglefulltext")]
+        public ActionResult ToggleFullText(GeneralCommonSettingsModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
+                return AccessDeniedView();
+
+            var commonSettings = _settingService.LoadSetting<CommonSettings>();
+            try
+            {
+                if (!_fulltextService.IsFullTextSupported())
+                    throw new NopException(_localizationService.GetResource("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.NotSupported"));
+
+                if (commonSettings.UseFullTextSearch)
+                {
+                    _fulltextService.DisableFullText();
+
+                    commonSettings.UseFullTextSearch = false;
+                    _settingService.SaveSetting(commonSettings);
+
+                    SuccessNotification(_localizationService.GetResource("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Disabled"));
+                }
+                else
+                {
+                    _fulltextService.EnableFullText();
+
+                    commonSettings.UseFullTextSearch = true;
+                    _settingService.SaveSetting(commonSettings);
+
+                    SuccessNotification(_localizationService.GetResource("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Enabled"));
+                }
+            }
+            catch (Exception exc)
+            {
+                ErrorNotification(exc);
+            }
+
+            //selected tab
+            SaveSelectedTabIndex();
+
+            return RedirectToAction("GeneralCommon");
+        }
+
         //all settings
         public ActionResult AllSettings()
         {

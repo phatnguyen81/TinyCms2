@@ -76,5 +76,6 @@
 </div>
 
 <div class="rightside">
-    @Html.Action("TopViewPosts", "Posts", new { categoryId = Model.Id, postThumbPictureSize = 160})   
+    @Html.Action("TopViewPosts", "Posts", new {categoryId = Model.Id, postThumbPictureSize = 160})
+    <div class="subside_banner">@Html.Widget("subside_banner")</div>
 </div>

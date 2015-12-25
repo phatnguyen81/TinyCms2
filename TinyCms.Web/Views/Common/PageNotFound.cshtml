@@ -4,11 +4,10 @@
     //title
     Html.AddTitleParts(T("PageTitle.PageNotFound").Text);
 }
-<div class="page not-found-page">
-    <div class="page-title">
-        <h1>@T("PageTitle.PageNotFound")</h1>
-    </div>
-    <div class="page-body">
-        @Html.Action("TopicBlock", "Topic", new { systemName = "PageNotFound" })
-    </div>
+
+<div class="page404">
+    <h2>@T("PageTitle.PageNotFound")</h2>
+    <p>@Html.Action("TopicBlock", "Topic", new { systemName = "PageNotFound" })</p>
+    <p>Quay về <a href="@Url.RouteUrl("homepage")">Trang chủ</a></p>
 </div>
+

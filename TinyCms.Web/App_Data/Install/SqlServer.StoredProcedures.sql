@@ -84,28 +84,28 @@ AS
 BEGIN
 	--create catalog
 	EXEC('
-	IF NOT EXISTS (SELECT 1 FROM sys.fulltext_catalogs WHERE [name] = ''nopCommerceFullTextCatalog'')
-		CREATE FULLTEXT CATALOG [nopCommerceFullTextCatalog] AS DEFAULT')
+	IF NOT EXISTS (SELECT 1 FROM sys.fulltext_catalogs WHERE [name] = ''tinyCmsFullTextCatalog'')
+		CREATE FULLTEXT CATALOG [tinyCmsFullTextCatalog] AS DEFAULT')
 	
 	--create indexes
 	DECLARE @create_index_text nvarchar(4000)
 	SET @create_index_text = '
-	IF NOT EXISTS (SELECT 1 FROM sys.fulltext_indexes WHERE object_id = object_id(''[Product]''))
-		CREATE FULLTEXT INDEX ON [Product]([Name], [ShortDescription], [FullDescription], [Sku])
-		KEY INDEX [' + dbo.[nop_getprimarykey_indexname] ('Product') +  '] ON [nopCommerceFullTextCatalog] WITH CHANGE_TRACKING AUTO'
+	IF NOT EXISTS (SELECT 1 FROM sys.fulltext_indexes WHERE object_id = object_id(''[Post]''))
+		CREATE FULLTEXT INDEX ON [Post]([Name], [ShortDescription], [FullDescription])
+		KEY INDEX [' + dbo.[nop_getprimarykey_indexname] ('Post') +  '] ON [tinyCmsFullTextCatalog] WITH CHANGE_TRACKING AUTO'
 	EXEC(@create_index_text)
 	
 
 	SET @create_index_text = '
 	IF NOT EXISTS (SELECT 1 FROM sys.fulltext_indexes WHERE object_id = object_id(''[LocalizedProperty]''))
 		CREATE FULLTEXT INDEX ON [LocalizedProperty]([LocaleValue])
-		KEY INDEX [' + dbo.[nop_getprimarykey_indexname] ('LocalizedProperty') +  '] ON [nopCommerceFullTextCatalog] WITH CHANGE_TRACKING AUTO'
+		KEY INDEX [' + dbo.[nop_getprimarykey_indexname] ('LocalizedProperty') +  '] ON [tinyCmsFullTextCatalog] WITH CHANGE_TRACKING AUTO'
 	EXEC(@create_index_text)
 
 	SET @create_index_text = '
-	IF NOT EXISTS (SELECT 1 FROM sys.fulltext_indexes WHERE object_id = object_id(''[ProductTag]''))
-		CREATE FULLTEXT INDEX ON [ProductTag]([Name])
-		KEY INDEX [' + dbo.[nop_getprimarykey_indexname] ('ProductTag') +  '] ON [nopCommerceFullTextCatalog] WITH CHANGE_TRACKING AUTO'
+	IF NOT EXISTS (SELECT 1 FROM sys.fulltext_indexes WHERE object_id = object_id(''[PostTag]''))
+		CREATE FULLTEXT INDEX ON [PostTag]([Name])
+		KEY INDEX [' + dbo.[nop_getprimarykey_indexname] ('PostTag') +  '] ON [tinyCmsFullTextCatalog] WITH CHANGE_TRACKING AUTO'
 	EXEC(@create_index_text)
 END
 GO
@@ -117,8 +117,8 @@ AS
 BEGIN
 	EXEC('
 	--drop indexes
-	IF EXISTS (SELECT 1 FROM sys.fulltext_indexes WHERE object_id = object_id(''[Product]''))
-		DROP FULLTEXT INDEX ON [Product]
+	IF EXISTS (SELECT 1 FROM sys.fulltext_indexes WHERE object_id = object_id(''[Post]''))
+		DROP FULLTEXT INDEX ON [Post]
 	')
 
 	EXEC('
@@ -127,14 +127,14 @@ BEGIN
 	')
 
 	EXEC('
-	IF EXISTS (SELECT 1 FROM sys.fulltext_indexes WHERE object_id = object_id(''[ProductTag]''))
-		DROP FULLTEXT INDEX ON [ProductTag]
+	IF EXISTS (SELECT 1 FROM sys.fulltext_indexes WHERE object_id = object_id(''[PostTag]''))
+		DROP FULLTEXT INDEX ON [PostTag]
 	')
 
 	--drop catalog
 	EXEC('
-	IF EXISTS (SELECT 1 FROM sys.fulltext_catalogs WHERE [name] = ''nopCommerceFullTextCatalog'')
-		DROP FULLTEXT CATALOG [nopCommerceFullTextCatalog]
+	IF EXISTS (SELECT 1 FROM sys.fulltext_catalogs WHERE [name] = ''tinyCmsFullTextCatalog'')
+		DROP FULLTEXT CATALOG [tinyCmsFullTextCatalog]
 	')
 END
 GO
