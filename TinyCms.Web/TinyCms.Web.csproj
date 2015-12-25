@@ -1916,6 +1916,7 @@
     <Content Include="Views\Posts\Search.cshtml" />
     <Content Include="Views\Posts\PostsByTag.cshtml" />
     <Content Include="Views\Poll\RandomPolls.cshtml" />
+    <Content Include="Views\Posts\CategoryBox.TravelViaPicture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />
