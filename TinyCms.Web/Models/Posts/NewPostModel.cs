@@ -9,12 +9,15 @@ namespace TinyCms.Web.Models.Posts
 {
     public class NewPostModel
     {
+        [Required(ErrorMessage = "Vui lòng nhập tiêu đề")]
         public string Title { get; set; }
 
         [AllowHtml]
         [UIHint("RichEditor")]
+        [Required(ErrorMessage = "Vui lòng nhập nội dung")]
         public string Body { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng chọn chuyên mục")]
         public int CategoryId { get; set; }
 
         public List<SelectListItem> AvailableCategories { get; set; }

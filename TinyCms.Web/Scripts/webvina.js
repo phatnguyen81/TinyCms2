@@ -595,3 +595,9 @@ function doSubmit(formName) {
 
 
 
+function showLoading() {
+    $(".loading").show();
+}
+function hideLoading() {
+    $(".loading").hide();
+}

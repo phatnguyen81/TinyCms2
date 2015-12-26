@@ -37,6 +37,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -1985,4 +1987,48 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <Target Name="ExcludeRootBinariesDeployment">
+    <ItemGroup>
+      <RootBinFiles Include="bin\*">
+        <InProject>false</InProject>
+      </RootBinFiles>
+    </ItemGroup>
+    <PropertyGroup>
+      <ExcludeFilesFromDeployment>
+		**\*.Debug.config;
+		**\*.Release.config;
+		**\obj\**;
+		**\bin\*.xml;
+		**\*.cs;
+		**\packages.config;
+		**\*.csproj;
+		**\*.csproj.user;
+		Administration\bin\**;
+		App_Data\InstalledPlugins.txt;
+		App_Data\Settings.txt;
+		App_Data\Nop.Db.sdf;
+		bin\Nop.Admin.dll.config;
+		bin\Nop.Web.dll.config;
+		Content\Files\ExportImport\*.txt;
+		Content\Files\ExportImport\*.xml;
+		Content\Images\Thumbs\*.jpg;
+		Content\Images\Thumbs\*.jpeg;
+		Content\Images\Thumbs\*.png;
+		Content\Images\Thumbs\*.gif;
+		Properties\**\*;
+      </ExcludeFilesFromDeployment>
+    </PropertyGroup>
+  </Target>
+  <PropertyGroup>
+    <PluginsBinDirectory>$(ProjectDir)\Plugins\Bin\</PluginsBinDirectory>
+  </PropertyGroup>
+  <Target Name="CreatePluginsBinDirectory">
+    <MakeDir Directories="$(PluginsBinDirectory)" />
+    <!-- Now copy an empty file from \Content\Files to ensure that \Plugins\bin\ is also deployed-->
+    <Copy SourceFiles="$(ProjectDir)Content\Files\Index.htm" DestinationFolder="$(ProjectDir)Plugins\bin\" ContinueOnError="true" />
+  </Target>
+  <Target Name="AfterBuild" DependsOnTargets="MvcBuildViews">
+    <CallTarget Targets="ExcludeRootBinariesDeployment" />
+    <CallTarget Targets="CreatePluginsBinDirectory" />
+  </Target>
 </Project>

@@ -14,7 +14,7 @@
 <p class="txthead">Viết bài</p>
 @using (Html.BeginForm(null,null,FormMethod.Post,new {id = "frmPost"}))
 {   
-    @Html.ValidationSummary(false)
+    @Html.ValidationSummary(true)
     <div class="writeblog_box">
         <div class="inner_writeblog">
             <label>
@@ -60,46 +60,11 @@
                                 </div>
                             </div>
                         </li>
-
-                        @*<li id="attachment4297279" class="AttachedFile  secondaryContent AttachedImage" style="opacity: 1;">
-
-                            <div class="Thumbnail">
-
-                                <a href="https://nhattao.cdnforo.com/users/2015/12/4310026_5f5957bdf18d82b1e59d87c250d7fada.jpg" target="_blank" data-attachmentid="4297279" class="_not_LbTrigger" data-href="misc/lightbox"><img src="https://nhattao.cdnforo.com/users/2015/12/4310026_5f5957bdf18d82b1e59d87c250d7fada_thumb.jpg" alt="slide-3-1270x415.jpg" class="_not_LbImage" data-src="attachments/slide-3-1270x415-jpg.4297279/?embedded=1&amp;temp_hash=3b6bb413b9d795b366d6e0701c8c2981"></a>
-
-                            </div>
-
-                            <div class="AttachmentText" style="">
-                                <div class="Filename"><a href="https://nhattao.cdnforo.com/users/2015/12/4310026_5f5957bdf18d82b1e59d87c250d7fada.jpg" target="_blank">slide-3-1270x415.jpg</a></div>
-
-
-
-
-
-                                <div class="label JsOnly">Chèn:</div>
-
-
-                                <div class="controls JsOnly">
-                                    <input type="button" value="Xóa" class="button smallButton AttachmentDeleter" data-href="attachments/slide-3-1270x415-jpg.4297279/delete?temp_hash=3b6bb413b9d795b366d6e0701c8c2981" style="display: block;">
-
-
-                                    <input type="button" name="thumb" value="Thumbnail" class="button smallButton AttachmentInserter">
-                                    <input type="button" name="image" value="Kích thước đầy đủ" class="button smallButton AttachmentInserter">
-
-                                </div>
-
-
-                            </div>
-
-                        </li>*@
                      </ol>
-
-
-
                 </div>
             </label>
             <p class="writeblogact">
-                <a href="#" class="btn01" id="btnSend" onclick="$('#frmPost').submit()">Đăng bài</a>
+                <button href="#" class="btn01" id="btnSend">Đăng bài</button>
                 <a href="#" class="btn01" id="btnPreview">Xem trước</a>
                 <a href="@Url.RouteUrl("CustomerSummary")" class="btn01 cancel">Hủy bỏ</a>
             </p>
@@ -118,31 +83,32 @@
             allowSpaces: true,
             tagLimit: 5
         });
-        $("#btnPreview").click(function () {
+        $("#btnPreview").click(function() {
             tinyMCE.triggerSave();
             $('.previewBox').html($("#Body").val());
             $('.previewBox').show();
         });
         $(document).submit(function (e) {
-            
-            tinyMCE.triggerSave();
-            var form = new FormData();
-            form.append("Title", $("#Title").val());
-            form.append("Body", $("#Body").val());
-            form.append("PostTags", $("#PostTags").val());
-            form.append("CategoryId", $("#CategoryId").val());
-            var ids = [];
+            e.preventDefault();
+            if ($("#frmPost").valid()) {
+                tinyMCE.triggerSave();
+                var form = new FormData();
+                form.append("Title", $("#Title").val());
+                form.append("Body", $("#Body").val());
+                form.append("PostTags", $("#PostTags").val());
+                form.append("CategoryId", $("#CategoryId").val());
+                var ids = [];
 
-            $.each($(".AttachmentList li"), function(index, value) {
-                var pictureId = $(this).data("pictureId");
-                if(pictureId && pictureId != '')
-                ids.push(pictureId);
-            });
+                $.each($(".AttachmentList li"), function(index, value) {
+                    var pictureId = $(this).data("pictureId");
+                    if (pictureId && pictureId != '')
+                        ids.push(pictureId);
+                });
 
-            form.append("PictureIds", ids.join());
-
-            $.ajax({
-                    url: '@(Url.Action("Write", "Posts"))',
+                form.append("PictureIds", ids.join());
+                showLoading();
+                $.ajax({
+                        url: '@(Url.Action("Write", "Posts"))',
                     data: form,
                     type: "POST",
                     dataType: "json",
@@ -151,15 +117,18 @@
                 })
                 .done(function(result) {
                     if (result.success) {
-                        alert("thanh cong");
+                        alert("Đăng bài thành công");
                     } else {
-                        alert("that bai");
+                        alert("Có lỗi xảy ra: " + result.message);
                     }
                 })
                 .fail(function() {
-                    alert("error");
-                });
-            e.preventDefault();
+                    alert("Có lỗi xảy ra");
+                }).always(function() {
+                    hideLoading();
+                });;
+            }
+
         });
     });
    

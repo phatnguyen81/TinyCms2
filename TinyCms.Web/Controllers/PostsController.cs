@@ -708,10 +708,12 @@ namespace TinyCms.Web.Controllers
             //tags
             SavePostTags(post, ParsePostTags(model.PostTags));
 
-            SavePostPictures(post,
-                model.PictureIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                    .Select(int.Parse));
-
+            if (model.PictureIds != null && model.PictureIds.Any())
+            {
+                SavePostPictures(post,
+                    model.PictureIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                        .Select(int.Parse));
+            }
             UpdatePictureSeoNames(post);
 
             var postCategory = new PostCategory
