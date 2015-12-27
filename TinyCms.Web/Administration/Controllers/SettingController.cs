@@ -183,6 +183,16 @@ namespace TinyCms.Admin.Controllers
             var storeInformationSettings = _settingService.LoadSetting<StoreInformationSettings>();
             var commonSettings = _settingService.LoadSetting<CommonSettings>();
             model.StoreInformationSettings.StoreClosed = storeInformationSettings.StoreClosed;
+            model.StoreInformationSettings.Name = storeInformationSettings.Name;
+            model.StoreInformationSettings.Url = storeInformationSettings.Url;
+            model.StoreInformationSettings.Hosts = storeInformationSettings.Hosts;
+            model.StoreInformationSettings.DefaultLanguageId = storeInformationSettings.DefaultLanguageId;
+           
+            //social setting
+            var socialSettings = _settingService.LoadSetting<SocialSettings>();
+            model.SocialSettings.FacebookAppId = socialSettings.FacebookAppId;
+            model.SocialSettings.FacebookAppSecret = socialSettings.FacebookAppSecret;
+            
             //themes
             model.StoreInformationSettings.DefaultStoreTheme = storeInformationSettings.DefaultStoreTheme;
             model.StoreInformationSettings.AvailableStoreThemes = _themeProvider
@@ -293,6 +303,17 @@ namespace TinyCms.Admin.Controllers
             storeInformationSettings.StoreClosed = model.StoreInformationSettings.StoreClosed;
             storeInformationSettings.DefaultStoreTheme = model.StoreInformationSettings.DefaultStoreTheme;
             storeInformationSettings.AllowCustomerToSelectTheme = model.StoreInformationSettings.AllowCustomerToSelectTheme;
+            storeInformationSettings.Name = model.StoreInformationSettings.Name;
+            storeInformationSettings.Url = model.StoreInformationSettings.Url;
+            if (!string.IsNullOrWhiteSpace(storeInformationSettings.Url) && !storeInformationSettings.Url.EndsWith("/"))
+                storeInformationSettings.Url += "/";
+            storeInformationSettings.SslEnabled = model.StoreInformationSettings.SslEnabled;
+            storeInformationSettings.Hosts = model.StoreInformationSettings.Hosts;
+            //social
+            var socialSettings = _settingService.LoadSetting<SocialSettings>();
+            socialSettings.FacebookAppId = model.SocialSettings.FacebookAppId;
+            socialSettings.FacebookAppSecret = model.SocialSettings.FacebookAppSecret;
+            _settingService.SaveSetting(socialSettings);
             //EU Cookie law
             storeInformationSettings.DisplayEuCookieLawWarning = model.StoreInformationSettings.DisplayEuCookieLawWarning;
             //social pages
@@ -316,7 +337,8 @@ namespace TinyCms.Admin.Controllers
             _settingService.SaveSetting(commonSettings, x => x.SubjectFieldOnContactUsForm, false);
             _settingService.SaveSetting(commonSettings, x => x.UseSystemEmailForContactUsForm, false);
 
-
+            _settingService.SaveSetting(storeInformationSettings);
+            _settingService.SaveSetting(commonSettings);
 
             //seo settings
             var seoSettings = _settingService.LoadSetting<SeoSettings>();

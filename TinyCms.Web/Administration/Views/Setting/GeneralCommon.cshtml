@@ -46,6 +46,9 @@
             <li @Html.RenderSelectedTabIndex(4, GetSelectedTabIndex())>
                 @T("Admin.Configuration.Settings.GeneralCommon.FullTextSettings")
             </li>
+            <li @Html.RenderSelectedTabIndex(5, GetSelectedTabIndex())>
+                @T("Admin.Configuration.Settings.GeneralCommon.SocialSettings")
+            </li>
         </ul>
         <div>
             @TabStoreInformationSettings()
@@ -61,6 +64,9 @@
         </div>
         <div>
             @TabFullTextSettings()
+        </div>
+        <div>
+            @TabSocialSettings()
         </div>
     </div>
 
@@ -84,6 +90,42 @@
 @helper TabStoreInformationSettings()
 {
     <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.StoreInformationSettings.Name):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.StoreInformationSettings.Name)
+                @Html.ValidationMessageFor(model => model.StoreInformationSettings.Name)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.StoreInformationSettings.Url):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.StoreInformationSettings.Url)
+                @Html.ValidationMessageFor(model => model.StoreInformationSettings.Url)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.StoreInformationSettings.Hosts):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.StoreInformationSettings.Hosts)
+                @Html.ValidationMessageFor(model => model.StoreInformationSettings.Hosts)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.StoreInformationSettings.SslEnabled):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.StoreInformationSettings.SslEnabled)
+                @Html.ValidationMessageFor(model => model.StoreInformationSettings.SslEnabled)
+            </td>
+        </tr>
         <tr>
             <td class="adminTitle">
                 @Html.NopLabelFor(model => model.StoreInformationSettings.StoreClosed):
@@ -643,5 +685,28 @@
             </tr>
                 }
         }
+    </table>
+}
+@helper TabSocialSettings()
+{
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.SocialSettings.FacebookAppId):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SocialSettings.FacebookAppId)
+                @Html.ValidationMessageFor(model => model.SocialSettings.FacebookAppId)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.SocialSettings.FacebookAppSecret):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SocialSettings.FacebookAppSecret)
+                @Html.ValidationMessageFor(model => model.SocialSettings.FacebookAppSecret)
+            </td>
+        </tr>
     </table>
 }

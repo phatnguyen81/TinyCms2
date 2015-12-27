@@ -15,9 +15,11 @@ namespace TinyCms.Admin.Models.Settings
             SecuritySettings = new SecuritySettingsModel();
             LocalizationSettings = new LocalizationSettingsModel();
             FullTextSettings = new FullTextSettingsModel();
+            SocialSettings = new SocialSettingsModel();
         }
 
         public StoreInformationSettingsModel StoreInformationSettings { get; set; }
+        public SocialSettingsModel SocialSettings { get; set; }
         public SeoSettingsModel SeoSettings { get; set; }
         public SecuritySettingsModel SecuritySettings { get; set; }
         public LocalizationSettingsModel LocalizationSettings { get; set; }
@@ -64,6 +66,48 @@ namespace TinyCms.Admin.Models.Settings
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.UseSystemEmailForContactUsForm")]
             public bool UseSystemEmailForContactUsForm { get; set; }
+
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Gets or sets the store URL
+            /// </summary>
+            public string Url { get; set; }
+
+            /// <summary>
+            /// Gets or sets a value indicating whether SSL is enabled
+            /// </summary>
+            public bool SslEnabled { get; set; }
+
+            /// <summary>
+            /// Gets or sets the store secure URL (HTTPS)
+            /// </summary>
+            public string SecureUrl { get; set; }
+
+            /// <summary>
+            /// Gets or sets the comma separated list of possible HTTP_HOST values
+            /// </summary>
+            public string Hosts { get; set; }
+
+            /// <summary>
+            /// Gets or sets the identifier of the default language for this store; 0 is set when we use the default language display order
+            /// </summary>
+            public int DefaultLanguageId { get; set; }
+
+            /// <summary>
+            /// Gets or sets the company name
+            /// </summary>
+            public string CompanyName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the company address
+            /// </summary>
+            public string CompanyAddress { get; set; }
+
+            /// <summary>
+            /// Gets or sets the store phone number
+            /// </summary>
+            public string CompanyPhoneNumber { get; set; }
             
             #region Nested classes
 
@@ -220,6 +264,15 @@ namespace TinyCms.Admin.Models.Settings
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.SearchMode")]
             public int SearchMode { get; set; }
             public SelectList SearchModeValues { get; set; }
+        }
+
+        public partial class SocialSettingsModel : BaseNopModel
+        {
+            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.FacebookAppId")]
+            public string FacebookAppId { get; set; }
+
+            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.FacebookAppSecret")]
+            public string FacebookAppSecret { get; set; } 
         }
         
         #endregion

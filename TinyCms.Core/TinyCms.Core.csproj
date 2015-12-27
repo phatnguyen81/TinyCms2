@@ -95,6 +95,7 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Domain\Catalog\AttributeControlType.cs" />
     <Compile Include="Domain\Catalog\PostSortingEnum.cs" />
+    <Compile Include="Domain\Common\SocialSettings.cs" />
     <Compile Include="Domain\Posts\RelatedPost.cs" />
     <Compile Include="Domain\Cms\WidgetZone.cs" />
     <Compile Include="Domain\Cms\WidgetSettings.cs" />

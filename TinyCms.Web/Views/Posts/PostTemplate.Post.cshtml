@@ -88,7 +88,10 @@
 </div>
 <script type="text/javascript">
   
-
+    FB.Event.subscribe('edge.create', fb_change_callback);
+    FB.Event.subscribe('edge.remove', fb_change_callback);
+    FB.Event.subscribe('comment.create', fb_change_callback);
+    FB.Event.subscribe('comment.remove', fb_change_callback);
     function fb_change_callback() {
         $.post("@Url.Action("UpdatePost","Posts")", { postId: @Model.Id });
     }
