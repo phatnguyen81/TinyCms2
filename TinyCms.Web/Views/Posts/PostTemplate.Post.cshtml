@@ -10,8 +10,8 @@
 
     //title, meta
     Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
-    Html.AddMetaDescriptionParts(Model.MetaDescription);
-    Html.AddMetaKeywordParts(Model.MetaKeywords);
+    Html.AddMetaDescriptionParts(Html.Encode(Html.Raw(Model.MetaDescription)));
+    Html.AddMetaKeywordParts(Html.Encode(Html.Raw(Model.MetaKeywords)));
 
     var seoSettings = EngineContext.Current.Resolve<SeoSettings>();
 
@@ -28,8 +28,8 @@
     {
         var storeName = EngineContext.Current.Resolve<StoreInformationSettings>().Name;
         Html.AddHeadCustomParts("<meta property=\"og:type\" content=\"post\" />");
-        Html.AddHeadCustomParts("<meta property=\"og:title\" content=\"" + Html.Encode(Model.Name) + "\" />");
-        Html.AddHeadCustomParts("<meta property=\"og:description\" content=\"" + Html.Encode(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:title\" content=\"" + Html.Encode(Html.Raw(Model.Name)) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:description\" content=\"" + Html.Encode(Html.Raw(Model.MetaDescription)) + "\" />");
         Html.AddHeadCustomParts("<meta property=\"og:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
         Html.AddHeadCustomParts("<meta property=\"og:url\" content=\"" + Request.Url.AbsoluteUri + "\" />");
         Html.AddHeadCustomParts("<meta property=\"og:site_name\" content=\"" + Html.Encode(storeName) + "\" />");
@@ -41,8 +41,8 @@
         var storeName = EngineContext.Current.Resolve<StoreInformationSettings>().Name;
         Html.AddHeadCustomParts("<meta property=\"twitter:card\" content=\"summary\" />");
         Html.AddHeadCustomParts("<meta property=\"twitter:site\" content=\"" + Html.Encode(storeName) + "\" />");
-        Html.AddHeadCustomParts("<meta property=\"twitter:title\" content=\"" + Html.Encode(Model.Name) + "\" />");
-        Html.AddHeadCustomParts("<meta property=\"twitter:description\" content=\"" + Html.Encode(Model.MetaDescription) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:title\" content=\"" + Html.Encode(Html.Raw(Model.Name)) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:description\" content=\"" + Html.Encode(Html.Raw(Model.MetaDescription)) + "\" />");
         Html.AddHeadCustomParts("<meta property=\"twitter:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
         Html.AddHeadCustomParts("<meta property=\"twitter:url\" content=\"" + Request.Url.AbsoluteUri + "\" />");
     }
@@ -87,11 +87,16 @@
     </div>
 </div>
 <script type="text/javascript">
-  
-    FB.Event.subscribe('edge.create', fb_change_callback);
-    FB.Event.subscribe('edge.remove', fb_change_callback);
-    FB.Event.subscribe('comment.create', fb_change_callback);
-    FB.Event.subscribe('comment.remove', fb_change_callback);
+
+    $(document).on(
+        'fbload',
+        function() {
+            FB.Event.subscribe('edge.create', fb_change_callback);
+            FB.Event.subscribe('edge.remove', fb_change_callback);
+            FB.Event.subscribe('comment.create', fb_change_callback);
+            FB.Event.subscribe('comment.remove', fb_change_callback);
+        }
+    );
     function fb_change_callback() {
         $.post("@Url.Action("UpdatePost","Posts")", { postId: @Model.Id });
     }

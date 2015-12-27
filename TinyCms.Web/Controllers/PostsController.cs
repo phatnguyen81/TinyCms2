@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
+using Newtonsoft.Json;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
 using TinyCms.Core.Domain.Catalog;
@@ -975,33 +976,33 @@ namespace TinyCms.Web.Controllers
         }
 
         [HttpPost]
-        public void UpdatePost(int postId)
+        public ActionResult UpdatePost(int postId)
         {
             var post = _postService.GetPostById(postId);
-            if (post != null)
+            if (post == null) return Content("");
+            var web = new WebClient();
+            var url = string.Format("https://api.facebook.com/method/links.getStats?format=json&urls={0}", @Url.RouteUrl("Post", new { SeName = post.GetSeName() }, this.Request.Url.Scheme));
+            //var url = "https://api.facebook.com/method/links.getStats?format=json&urls=http://vietnam4u.vn/mot-dieu-thuoc-la-vut-di-gia-300-euro-o-italy";
+            var response = web.DownloadString(url);
+            var updateDb = false;
+            var result = JsonConvert.DeserializeObject<List<FacebookStats>>(response);
+            if(result != null && result.Count > 0)
             {
-                WebClient web = new WebClient();
-                string url = string.Format("https://api.facebook.com/method/fql.query?query=SELECT share_count, comment_count FROM link_stat where url='{0}'", @Url.RouteUrl("Post",new {SeName = post.GetSeName()})) ;
-                string response = web.DownloadString(url);
-                XmlDocument xml = new XmlDocument();
-                xml.Load(response);
-                var shareCounts = xml.SelectNodes("//fql_query_response/link_stat/share_count");
-                var updateDb = false;
-                if (shareCounts != null && shareCounts.Count > 0 && int.Parse(shareCounts[0].Value) != post.ShareCount)
+                if (result[0].commentsbox_count != post.CommentCount)
                 {
-                    post.ShareCount = int.Parse(shareCounts[0].Value);
+                    post.CommentCount = result[0].commentsbox_count;
                     updateDb = true;
                 }
-
-                var commentCounts = xml.SelectNodes("//fql_query_response/link_stat/comment_count");
-                if (commentCounts != null || commentCounts.Count > 0 && int.Parse(commentCounts[0].Value) != post.CommentCount)
+                if (result[0].share_count != post.ShareCount)
                 {
-                    post.CommentCount = int.Parse(commentCounts[0].Value);
+                    post.ShareCount = result[0].share_count;
                     updateDb = true;
                 }
-                
-                if(updateDb) _postService.UpdatePost(post);
             }
+                
+            if(updateDb) _postService.UpdatePost(post);
+
+            return Content(url);
         }
         #endregion
 

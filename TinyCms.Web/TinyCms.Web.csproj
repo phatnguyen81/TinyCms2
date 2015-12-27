@@ -183,6 +183,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ExternalAuthenticationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KeepAliveController.cs" />
     <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Models\Customer\UserInfoZone.cs" />
     <Compile Include="Models\Media\PictureModel.cs" />
     <Compile Include="Models\Polls\PollModel.cs" />
+    <Compile Include="Models\Posts\FacebookStats.cs" />
     <Compile Include="Models\Posts\PostsPagingFilteringModel.cs" />
     <Compile Include="Models\Posts\CategoryModel.cs" />
     <Compile Include="Models\Posts\CategoryNavigationModel.cs" />
