@@ -126,11 +126,16 @@ namespace TinyCms.Web.Controllers
 
         public void PrepareNewPostModel(NewPostModel model)
         {
-            model.AvailableCategories = _categoryService.GetAllCategories().Select(q => new SelectListItem
+            var allCategories = _categoryService.GetAllCategories();
+            foreach (var category in allCategories)
             {
-                Text = q.Name,
-                Value = q.Id.ToString()
-            }).ToList();
+                model.AvailableCategories.Add(new SelectListItem
+                {
+                    Text = category.GetFormattedBreadCrumb(allCategories),
+                    Value = category.Id.ToString()
+                });
+            }
+
         }
         [NonAction]
         protected virtual string[] ParsePostTags(string postTags)

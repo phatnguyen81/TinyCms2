@@ -129,5 +129,11 @@
 
         return bx;
     };
+    $.boxy.confirm = function (title, content, onOK) {
 
+        var bx = new $.boxy({ title: title, content: content, onOK: onOK, textOK: "Đồng ý", textCancel: "Đóng" });
+        bx.show();
+
+        return bx;
+    };
 })($);

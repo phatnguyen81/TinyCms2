@@ -9,6 +9,10 @@ namespace TinyCms.Web.Models.Posts
 {
     public class NewPostModel
     {
+        public NewPostModel()
+        {
+            AvailableCategories = new List<SelectListItem>();
+        }
         [Required(ErrorMessage = "Vui lòng nhập tiêu đề")]
         public string Title { get; set; }
 

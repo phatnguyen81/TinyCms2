@@ -14,28 +14,23 @@
 <p class="txthead">Viết bài</p>
 @using (Html.BeginForm(null,null,FormMethod.Post,new {id = "frmPost"}))
 {   
-    @Html.ValidationSummary(true)
     <div class="writeblog_box">
         <div class="inner_writeblog">
             <label>
                 <b>Tiêu đề</b>
                 @Html.TextBoxFor(model => model.Title, new {@class = "textinput"})
-                @Html.ValidationMessageFor(model => model.Title)
             </label>
             <label>
                 <b>Nội dung</b>
                 @Html.EditorFor(model => model.Body)
-                @Html.ValidationMessageFor(model => model.Body)
             </label>
             <label>
                 <b>Chọn chủ đề</b>
                 @Html.DropDownListFor(model => model.CategoryId, Model.AvailableCategories, "[-- Chọn --]")
-                @Html.ValidationMessageFor(model => model.CategoryId)
             </label>
             <label>
                 <b>Nhập từ khóa</b>
                 @Html.TextBoxFor(model => model.PostTags, new {@class = "textinput", placeholder = "Các từ khóa cách nhau dấu ,"})
-                @Html.HiddenFor(model => model.PictureIds)
             </label>
             <label class="clearfix">
                 <p class="writeblogact" id="container">
@@ -88,46 +83,71 @@
             $('.previewBox').html($("#Body").val());
             $('.previewBox').show();
         });
-        $(document).submit(function (e) {
-            e.preventDefault();
-            if ($("#frmPost").valid()) {
-                tinyMCE.triggerSave();
-                var form = new FormData();
-                form.append("Title", $("#Title").val());
-                form.append("Body", $("#Body").val());
-                form.append("PostTags", $("#PostTags").val());
-                form.append("CategoryId", $("#CategoryId").val());
-                var ids = [];
 
-                $.each($(".AttachmentList li"), function(index, value) {
-                    var pictureId = $(this).data("pictureId");
-                    if (pictureId && pictureId != '')
-                        ids.push(pictureId);
-                });
-
-                form.append("PictureIds", ids.join());
-                showLoading();
-                $.ajax({
-                        url: '@(Url.Action("Write", "Posts"))',
-                    data: form,
-                    type: "POST",
-                    dataType: "json",
-                    processData: false,
-                    contentType: false
-                })
-                .done(function(result) {
-                    if (result.success) {
-                        alert("Đăng bài thành công");
-                    } else {
-                        alert("Có lỗi xảy ra: " + result.message);
-                    }
-                })
-                .fail(function() {
-                    alert("Có lỗi xảy ra");
-                }).always(function() {
-                    hideLoading();
-                });;
+        function validateForm() {
+            if ($("#Title").val() == "") {
+                $.boxy.alert('Lỗi', "Chưa nhập tiêu đề");
+                return false;
             }
+            if ($("#Body").val() == "") {
+                $.boxy.alert('Lỗi', "Chưa nhập nội dung");
+                return false;
+            }
+            if ($("#CategoryId").val() == "") {
+                $.boxy.alert('Lỗi', "Chưa chọn chủ đề");
+                return false;
+            }
+            return true;
+        }
+
+        function sendPost() {
+            var form = new FormData();
+            form.append("Title", $("#Title").val());
+            form.append("Body", $("#Body").val());
+            form.append("PostTags", $("#PostTags").val());
+            form.append("CategoryId", $("#CategoryId").val());
+            var ids = [];
+
+            $.each($(".AttachmentList li"), function (index, value) {
+                var pictureId = $(this).data("pictureId");
+                if (pictureId && pictureId != '')
+                    ids.push(pictureId);
+            });
+
+            form.append("PictureIds", ids.join());
+            showLoading();
+            $.ajax({
+                url: '@(Url.Action("Write", "Posts"))',
+                data: form,
+                type: "POST",
+                dataType: "json",
+                processData: false,
+                contentType: false
+            })
+            .done(function (result) {
+                if (result.success) {
+                    alert("Đăng bài thành công");
+                    location.reload();
+                } else {
+                    alert("Có lỗi xảy ra: " + result.message);
+                }
+            })
+            .fail(function () {
+                alert("Có lỗi xảy ra");
+            }).always(function () {
+                hideLoading();
+            });;
+        }
+
+        $(document).submit(function (e) {
+
+            e.preventDefault();
+            if (validateForm()) {
+                if (confirm("Bạn có muốn gửi bài viết này?")) {
+                    sendPost();
+                }
+            }
+            
 
         });
     });
@@ -196,7 +216,14 @@
             }
         }
     });
+    function getStats(id) {
+        var body = tinymce.get(id).getBody(), text = tinymce.trim(body.innerText || body.textContent);
 
+        return {
+            chars: text.length,
+            words: text.split(/[\w\u2019\'-]+/).length
+        };
+    }
     function insertImage(obj) {
         var href = $(obj).data("href");
         tinyMCE.execCommand('mceInsertContent', false, '<img height="100%" width="100%" src="' + href + '"/>');

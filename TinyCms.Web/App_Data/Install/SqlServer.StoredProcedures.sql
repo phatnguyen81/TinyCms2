@@ -610,8 +610,7 @@ BEGIN
 	IF @ShowHidden = 0
 	BEGIN
 		SET @sql = @sql + '
-		AND p.Deleted = 0
-		AND (getutcdate() BETWEEN ISNULL(p.AvailableStartDateTimeUtc, ''1/1/1900'') and ISNULL(p.AvailableEndDateTimeUtc, ''1/1/2999''))'
+		AND p.Deleted = 0'
 	END
 	
 	--show hidden and ACL
