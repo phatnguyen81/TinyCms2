@@ -72,13 +72,13 @@
                     <div class="fb-like" data-href="@postUrl" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 </div>
             </div>
-            <div class="rightside">
+            @*<div class="rightside">
                 @Html.Action("RelatedPosts", "Posts")
                 @Html.Action("CategoryBox", "Posts", new { categoryId = promotionCategoryId, numberPost = promotionPostNumber, template = "CategoryBox.Promotion", postThumbPictureSize = 80 })
                 <div class="subside_banner">
                     @Html.Widget("subside_banner")
                 </div>
-            </div>
+            </div>*@
             @Html.Action("OtherPosts", "Posts", new {postId = Model.Id, postThumbPictureSize = 160})
             <div class="comment">
                 <div class="fb-comments" data-href="@postUrl" data-width="100%" data-numposts="10"></div>

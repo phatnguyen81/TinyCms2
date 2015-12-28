@@ -16,7 +16,7 @@
             <input type="file" style="display: none;" id="fileAvatar"/>
             <p class="username">@Model.Username</p>
             <p class="position">@Model.RoleName</p>
-            <p class="numblog">Số lượng bài viết: <span>0</span></p>
+            <p class="numblog">Số lượng bài viết: <span>@Model.TotalPosts.ToString("#,##0")</span></p>
             <a href="@Url.RouteUrl("CreateNewPost")" class="btn01">Viết bài mới</a>
         </div>
         <div class="infoblog">
@@ -38,9 +38,9 @@
                                     <span>@post.Name</span>
                                 </a>
                             </td>
-                            <td>@post.ViewCount</td>
-                            <td>@post.CommentCount</td>
-                            <td>@post.ShareCount</td>
+                            <td>@post.ViewCount.ToString("#,##0")</td>
+                            <td>@post.CommentCount.ToString("#,##0")</td>
+                            <td>@post.ShareCount.ToString("#,##0")</td>
                         </tr>
                     }
 

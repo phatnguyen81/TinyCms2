@@ -19,6 +19,8 @@ namespace TinyCms.Web.Models.Customer
         public int PostCount { get; set; }
         public string AvatarUrl { get; set; }
 
+        public int TotalPosts { get; set; }
+
         public List<PostOverviewModel> Posts { get; set; }
 
         public ProfilePagingFilteringModel PagingFilteringContext { get; set; }

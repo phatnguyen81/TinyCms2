@@ -48,7 +48,7 @@ a:hover {color: #006ba0;}
 .tophead .topbanner {float:right}
 .logo {width:216px;height:58px;display:block;margin-top:20px;float:left}
 .sub_info {position:absolute;top:33px;right:0;z-index:99;display:none}
-.myinfo.selected .sub_info {display:none}
+.myinfo.selected .sub_info {display:block}
 .myinfo.selected .avt, .myinfo:hover .avt, .header.sub .myinfo.selected .avt, .header.sub .myinfo:hover .avt  {border:1px solid #006ba0}
 .sub_info ul {background-color: #fff;border: 1px solid #e4e4e4;border-radius: 3px;box-shadow: 0 0 5px rgba(163, 188, 210, 0.5);
 transition: opacity 0.3s ease 0s;}
@@ -180,7 +180,7 @@ transition: opacity 0.3s ease 0s;}
 
 /*Categlory*/
 .cate_detail {width:500px;float:left}
-.cate_detail h1,.search_detail h1 {font-size:18px;font-weight:bold;text-transform:uppercase;color: #36bdda}
+.cate_detail h1 {font-size:18px;font-weight:bold;text-transform:uppercase;color: #36bdda}
 .cate_detail .subcate {margin-top:8px;font-size:14px}
 .cate_detail .subcate a.selected {color:#006ba0;font-weight:bold}
 .cate_detail .subcate span {margin:0 5px}
@@ -197,7 +197,7 @@ transition: opacity 0.3s ease 0s;}
 .topcate_view li a {padding:10px 0;display:block;font-weight:bold}
 .topcate_view img {width:100%;height:100%;display:block;margin-bottom:3px}
 .catebox {width:100%;margin-top:15px;border-bottom:1px solid #e4e4e4;float:left;padding-bottom:15px}
-.catebox .newscont {float: left;width: 100%;}
+.catebox .newscont {float: left;}
 .catebox .boximg {display: block;float: left;height: 105px;margin-right: 10px;width: 143px;}
 .catebox .newscont .detail h3 {font-size:14px;margin-bottom:5px}
 	.viewmorebtn {padding:5px 0;font-weight:bold;border:1px solid #e4e4e4;display:block;width:100px;text-align:center;clear:both;margin:15px auto 0}
@@ -208,8 +208,8 @@ transition: opacity 0.3s ease 0s;}
 .news_detail .title {font-size:22px;font-weight:bold;line-height:30px;margin-top:5px}
 .news_detail .desc {font-size:14px;font-weight:bold;padding:5px 0 0;line-height:21px;margin-bottom:10px}
 .news_detail .content_box {width:100%;float:left;}
-.news_detail .content_box .ctn {width:500px;float:left;display:block;}
-.news_detail .content_box .ctn img {margin:0 0 5px;width:100%}
+.news_detail .content_box .ctn {width:100%;float:left;display:block;}
+.news_detail .content_box .ctn img {margin:0 0 5px;width:100%;text-align:center}
 .news_detail .content_box .ctn p {font-size: 12px;line-height: 18px;margin-bottom: 10px;}
 .news_detail .content_box .ctn p em {display:none}
 .news_detail .content_box .rightside {margin-top:0}

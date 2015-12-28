@@ -929,6 +929,8 @@ namespace TinyCms.Web.Controllers
                pageIndex: command.PageNumber - 1,
                pageSize: command.PageSize);
 
+            model.TotalPosts = posts.TotalCount;
+
             model.Posts = this.PreparePostOverviewModels(_workContext,
                 _categoryService,
                 _postService,
