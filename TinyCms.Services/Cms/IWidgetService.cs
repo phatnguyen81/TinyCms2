@@ -14,7 +14,7 @@ namespace TinyCms.Services.Cms
         /// </summary>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <returns>Widgets</returns>
-        IList<IWidgetPlugin> LoadActiveWidgets(int storeId = 0);
+        IList<IWidgetPlugin> LoadActiveWidgets();
 
         /// <summary>
         /// Load active widgets
@@ -22,7 +22,7 @@ namespace TinyCms.Services.Cms
         /// <param name="widgetZone">Widget zone</param>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <returns>Widgets</returns>
-        IList<IWidgetPlugin> LoadActiveWidgetsByWidgetZone(string widgetZone, int storeId = 0);
+        IList<IWidgetPlugin> LoadActiveWidgetsByWidgetZone(string widgetZone);
 
         /// <summary>
         /// Load widget by system name
@@ -36,10 +36,12 @@ namespace TinyCms.Services.Cms
         /// </summary>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <returns>Widgets</returns>
-        IList<IWidgetPlugin> LoadAllWidgets(int storeId = 0);
+        IList<IWidgetPlugin> LoadAllWidgets();
 
         IList<WidgetZone> LoaddAllWidgetZones();
 
         WidgetZone GetWidgetZoneBySystemName(string systemName);
+
+        IList<WidgetZone> GetAllWidgetZones();
     }
 }

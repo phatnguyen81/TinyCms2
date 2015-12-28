@@ -13,6 +13,11 @@ namespace Nop.Plugin.Widgets.AdsBanner.Services
         IPagedList<AdsBannerRecord> GetAllAdsBanners(string name = "", int? widgetZoneId = null,
             int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
 
+
+        IPagedList<AdsBannerRecord> GetAllAdsBannersActiveFromNow(string name = "", int? widgetZoneId = null,
+            int pageIndex = 0, int pageSize = int.MaxValue);
+
+
         AdsBannerRecord GetById(int id);
 
         void InsertAdsBanner(AdsBannerRecord adsBannerRecord);

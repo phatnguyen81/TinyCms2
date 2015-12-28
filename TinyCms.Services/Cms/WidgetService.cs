@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TinyCms.Core.Caching;
 using TinyCms.Core.Data;
 using TinyCms.Core.Domain.Cms;
 using TinyCms.Core.Plugins;
@@ -13,6 +14,7 @@ namespace TinyCms.Services.Cms
     public partial class WidgetService : IWidgetService
     {
         #region Constants
+        private const string WIDGETZONE_ALL_KEY = "Nop.lsr.all";
         #endregion
 
         #region Fields
@@ -20,6 +22,7 @@ namespace TinyCms.Services.Cms
         private readonly IPluginFinder _pluginFinder;
         private readonly WidgetSettings _widgetSettings;
         private readonly IRepository<WidgetZone> _widgetZoneRepository;
+        private readonly ICacheManager _cacheManager;
 
         #endregion
         
@@ -32,11 +35,13 @@ namespace TinyCms.Services.Cms
         /// <param name="widgetSettings">Widget settings</param>
         /// <param name="widgetZoneRepository"></param>
         public WidgetService(IPluginFinder pluginFinder,
-            WidgetSettings widgetSettings, IRepository<WidgetZone> widgetZoneRepository)
+            WidgetSettings widgetSettings, IRepository<WidgetZone> widgetZoneRepository,
+            ICacheManager cacheManager)
         {
             this._pluginFinder = pluginFinder;
             this._widgetSettings = widgetSettings;
             _widgetZoneRepository = widgetZoneRepository;
+            _cacheManager = cacheManager;
         }
 
         #endregion
@@ -48,9 +53,9 @@ namespace TinyCms.Services.Cms
         /// </summary>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <returns>Widgets</returns>
-        public virtual IList<IWidgetPlugin> LoadActiveWidgets(int storeId = 0)
+        public virtual IList<IWidgetPlugin> LoadActiveWidgets()
         {
-            return LoadAllWidgets(storeId)
+            return LoadAllWidgets()
                    .Where(x => _widgetSettings.ActiveWidgetSystemNames.Contains(x.PluginDescriptor.SystemName, StringComparer.InvariantCultureIgnoreCase))
                    .ToList();
         }
@@ -61,12 +66,12 @@ namespace TinyCms.Services.Cms
         /// <param name="widgetZone">Widget zone</param>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <returns>Widgets</returns>
-        public virtual IList<IWidgetPlugin> LoadActiveWidgetsByWidgetZone(string  widgetZone, int storeId = 0)
+        public virtual IList<IWidgetPlugin> LoadActiveWidgetsByWidgetZone(string  widgetZone)
         {
             if (String.IsNullOrWhiteSpace(widgetZone))
                 return new List<IWidgetPlugin>();
 
-            return LoadActiveWidgets(storeId)
+            return LoadActiveWidgets()
                    .Where(x => x.GetWidgetZones().Contains(widgetZone, StringComparer.InvariantCultureIgnoreCase))
                    .ToList();
         }
@@ -90,9 +95,9 @@ namespace TinyCms.Services.Cms
         /// </summary>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <returns>Widgets</returns>
-        public virtual IList<IWidgetPlugin> LoadAllWidgets(int storeId = 0)
+        public virtual IList<IWidgetPlugin> LoadAllWidgets()
         {
-            return _pluginFinder.GetPlugins<IWidgetPlugin>(storeId: storeId).ToList();
+            return _pluginFinder.GetPlugins<IWidgetPlugin>().ToList();
         }
 
         public IList<WidgetZone> LoaddAllWidgetZones()
@@ -103,6 +108,12 @@ namespace TinyCms.Services.Cms
         public WidgetZone GetWidgetZoneBySystemName(string systemName)
         {
             return _widgetZoneRepository.Table.FirstOrDefault(q => q.SystemName == systemName);
+        }
+
+        public IList<WidgetZone> GetAllWidgetZones()
+        {
+            string key = string.Format(WIDGETZONE_ALL_KEY);
+            return _cacheManager.Get(key, () => _widgetZoneRepository.Table.ToList());
         }
 
         #endregion

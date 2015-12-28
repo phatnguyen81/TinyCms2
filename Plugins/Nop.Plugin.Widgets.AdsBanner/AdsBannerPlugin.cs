@@ -1,13 +1,15 @@
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Web.Routing;
 using Nop.Plugin.Widgets.AdsBanner.Data;
+using Nop.Plugin.Widgets.AdsBanner.Domain;
 using TinyCms.Core;
+using TinyCms.Core.Caching;
+using TinyCms.Core.Events;
 using TinyCms.Core.Plugins;
 using TinyCms.Services.Cms;
 using TinyCms.Services.Configuration;
+using TinyCms.Services.Events;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Media;
 
@@ -17,22 +19,28 @@ namespace Nop.Plugin.Widgets.AdsBanner
     /// <summary>
     /// PLugin
     /// </summary>
-    public class AdsBannerPlugin : BasePlugin, IWidgetPlugin
+    public class AdsBannerPlugin : BasePlugin, IWidgetPlugin, IConsumer<EntityUpdated<AdsBannerRecord>>, IConsumer<EntityInserted<AdsBannerRecord>>, IConsumer<EntityDeleted<AdsBannerRecord>>
     {
+        public const string SEARCH_ALL_ADSBANNERS_MODEL_KEY = "Cms.pres.search.adsbanners";
+        public const string SEARCH_ACTIVEFROMNOW_ADSBANNERS_MODEL_KEY = "Cms.pres.search.adsbanners-{0}";
+
+
         private readonly IPictureService _pictureService;
         private readonly ISettingService _settingService;
         private readonly IWebHelper _webHelper;
         private readonly IWidgetService _widgetService;
+        private readonly ICacheManager _cacheManager;
         private readonly AdsBannerObjectContext _context;
 
         public AdsBannerPlugin(IPictureService pictureService, 
-            ISettingService settingService, IWebHelper webHelper, AdsBannerObjectContext context, IWidgetService widgetService)
+            ISettingService settingService, IWebHelper webHelper, AdsBannerObjectContext context, IWidgetService widgetService, ICacheManager cacheManager)
         {
             this._pictureService = pictureService;
             this._settingService = settingService;
             this._webHelper = webHelper;
             _context = context;
             _widgetService = widgetService;
+            _cacheManager = cacheManager;
         }
 
         /// <summary>
@@ -145,6 +153,21 @@ namespace Nop.Plugin.Widgets.AdsBanner
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.BackToList");
 
             base.Uninstall();
+        }
+
+        public void HandleEvent(EntityUpdated<AdsBannerRecord> eventMessage)
+        {
+            _cacheManager.RemoveByPattern(SEARCH_ALL_ADSBANNERS_MODEL_KEY);
+        }
+
+        public void HandleEvent(EntityInserted<AdsBannerRecord> eventMessage)
+        {
+            _cacheManager.RemoveByPattern(SEARCH_ALL_ADSBANNERS_MODEL_KEY);
+        }
+
+        public void HandleEvent(EntityDeleted<AdsBannerRecord> eventMessage)
+        {
+            _cacheManager.RemoveByPattern(SEARCH_ALL_ADSBANNERS_MODEL_KEY);
         }
     }
 }
