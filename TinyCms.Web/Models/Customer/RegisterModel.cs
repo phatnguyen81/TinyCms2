@@ -38,7 +38,13 @@ namespace TinyCms.Web.Models.Customer
         [AllowHtml]
         public string ConfirmPassword { get; set; }
 
-        
+        [AllowHtml]
+        public string FullName { get; set; }
+
+        [AllowHtml]
+        public string Phone { get; set; }
+
+
         public bool AcceptPrivacyPolicyEnabled { get; set; }
 
         public bool DisplayCaptcha { get; set; }

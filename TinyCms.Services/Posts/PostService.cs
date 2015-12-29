@@ -350,6 +350,7 @@ namespace TinyCms.Services.Posts
             int pageSize = int.MaxValue,
             int createdBy = 0,
             IList<int> categoryIds = null,
+            int postTemplateId = 0,
             bool? featuredPosts = null,
             int postTagId = 0,
             string keywords = null,
@@ -414,6 +415,11 @@ namespace TinyCms.Services.Posts
                 pCategoryIds.ParameterName = "CategoryIds";
                 pCategoryIds.Value = commaSeparatedCategoryIds != null ? (object)commaSeparatedCategoryIds : DBNull.Value;
                 pCategoryIds.DbType = DbType.String;
+
+                var pPostTemplateId = _dataProvider.GetParameter();
+                pPostTemplateId.ParameterName = "PostTemplateId";
+                pPostTemplateId.Value = postTemplateId;
+                pPostTemplateId.DbType = DbType.Int32;
                 
                 var pPostTagId = _dataProvider.GetParameter();
                 pPostTagId.ParameterName = "PostTagId";
@@ -501,6 +507,7 @@ namespace TinyCms.Services.Posts
                     "PostLoadAllPaged",
                     pCreatedBy,
                     pCategoryIds,
+                    pPostTemplateId,
                     pPostTagId,
                     pFeaturedPosts,
                     pKeywords,
@@ -601,6 +608,10 @@ namespace TinyCms.Services.Posts
                             select p;
                 }
 
+                if (postTemplateId >= 0)
+                {
+                    query = query.Where(p => p.PostTemplateId == postTemplateId);
+                }
          
                 //related posts filtering
                 //if (relatedToPostId > 0)
@@ -713,7 +724,21 @@ namespace TinyCms.Services.Posts
             UpdatePost(post);
         }
 
-       
+        public IList<Post> GetRandomPosts(int numPost, int templateId = 0, int excludePostId = 0)
+        {
+            var query = _postRepository.Table;
+            if (templateId > 0)
+            {
+                query = query.Where(q => q.PostTemplateId == templateId);
+            }
+
+            if (excludePostId > 0)
+            {
+                query = query.Where(q => q.Id != excludePostId);
+            }
+
+            return query.OrderBy(x => Guid.NewGuid()).Take(numPost).OrderByDescending(q => q.CreatedOnUtc).ToList();
+        }
         #endregion
 
         #region Post pictures

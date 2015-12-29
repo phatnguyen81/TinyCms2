@@ -1,0 +1,88 @@
+﻿@model LoginModel
+           @using (Html.BeginForm())
+           {
+               <div class="content">
+                   @if (Model.UsernamesEnabled)
+                   {
+                       <label>
+                           @Html.TextBoxFor(m => m.Username, new {@class = "txtinput username", autofocus = "autofocus", @placeholder = "Tên đăng nhập"})
+                       </label>
+                   }
+                   else
+                   {
+                       <label>
+                           @Html.TextBoxFor(m => m.Email, new {@class = "txtinput username", autofocus = "autofocus", @placeholder = "Email"})
+                       </label>
+                   }
+                   <label>
+                       @Html.PasswordFor(m => m.Password, new {@class = "txtinput password", @placeholder = "Mật khẩu"})
+                   </label>
+                   @if (Model.DisplayCaptcha)
+                   {
+                       <div class="captcha-box">
+                           @Html.Raw(Html.GenerateCaptcha())
+                       </div>
+                   }
+                   <div class="subact">
+
+                       <label>
+                           @Html.CheckBoxFor(m => m.RememberMe)
+                           Ghi nhớ
+                       </label>
+                   </div>
+                   <p class="actbtn"><button href="#" class="loginbtn">Đăng nhập</button>
+                   </p>
+                   <div class="newact">
+                       <p class="newreg">
+                           Chưa có tài khoản?
+                           <a href="#" class="regbtn" onclick="closePopup(); showPopup('@Url.Action("Register","Customer", new {popup = true})','Đăng ký tài khoản'); return false;">Đăng ký</a>
+                       </p>
+                       @Html.Action("ExternalMethods", "ExternalAuthentication")
+                       @*Đăng nhập bằng <a href="#" class="facelogin icn"></a>*@
+                   </div>
+               </div>
+           }
+<script type="text/javascript">
+    $('.loginbtn').click(function (e) {
+        e.preventDefault();
+        @if (Model.UsernamesEnabled)
+        {
+        <text>
+            if ($("#Username").val() == "") {
+                $.boxy.alert("Lỗi đăng nhập", "Vui lòng nhập tên đăng nhập");
+                return;
+            }
+        </text>
+        }
+        else
+        {
+        <text>
+            if ($("#Email").val() == "") {
+                $.boxy.alert("Lỗi đăng nhập", "Vui lòng nhập email");
+                return;
+            }
+        </text>
+        }
+
+        if ($("#Password").val() == "") {
+            $.boxy.alert("Lỗi đăng nhập", "Vui lòng nhập mật khẩu");
+            return;
+        }
+
+        $.ajax({
+            url: '@Url.Action("_AjaxLogin", "Customer")',
+            data: $(this).closest("form").serialize(),
+            type: "POST",
+            dataType: "json"
+        }).done(function (data) {
+            if (data.success) {
+                //location.reload();
+                window.location.href = '@Url.RouteUrl("homepage")';
+            } else {
+                $.boxy.alert("Lỗi đăng nhập", data.message);
+            }
+        }).fail(function (jqXHR, textStatus) {
+            $.boxy.alert("Lỗi đăng nhập", "Request failed: " + textStatus);
+        });
+    });
+</script>

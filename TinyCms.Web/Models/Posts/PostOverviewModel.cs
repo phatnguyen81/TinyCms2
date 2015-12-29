@@ -1,4 +1,6 @@
-﻿using TinyCms.Web.Framework.Mvc;
+﻿using System;
+using System.EnterpriseServices.Internal;
+using TinyCms.Web.Framework.Mvc;
 using TinyCms.Web.Models.Media;
 
 namespace TinyCms.Web.Models.Posts
@@ -18,8 +20,9 @@ namespace TinyCms.Web.Models.Posts
         public int CommentCount { get; set; }
         public int ShareCount { get; set; }
 
-        public bool MarkAsNew { get; set; }
+        public DateTime CreatedOn { get; set; }
 
+        public bool Publish { get; set; }
         //picture
         public PictureModel DefaultPictureModel { get; set; }
 

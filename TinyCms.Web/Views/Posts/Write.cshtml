@@ -21,6 +21,10 @@
                 @Html.TextBoxFor(model => model.Title, new {@class = "textinput"})
             </label>
             <label>
+                <b>Nội dung ngắn</b>
+                @Html.TextAreaFor(model => model.Short,new {rows = 5, style="width:100%;"})
+            </label>
+            <label>
                 <b>Nội dung</b>
                 @Html.EditorFor(model => model.Body)
             </label>
@@ -87,6 +91,10 @@
         function validateForm() {
             if ($("#Title").val() == "") {
                 $.boxy.alert('Lỗi', "Chưa nhập tiêu đề");
+                return false;
+            }
+            if ($("#Short").val() == "") {
+                $.boxy.alert('Lỗi', "Chưa nhập nội dung ngắn");
                 return false;
             }
             if ($("#Body").val() == "") {

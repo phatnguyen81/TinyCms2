@@ -14,5 +14,5 @@
 }
 else
 {
-    <a href="@Url.RouteUrl("Login")"><img src="@Model.AvatarUrl" alt="" class="avt"></a>
+    <a href="#" onclick="showPopup('@Url.Action("Login", "Customer", new {popup = true})','Đăng nhập'); return false;"><img src="@Model.AvatarUrl" alt="" class="avt"></a>
 }

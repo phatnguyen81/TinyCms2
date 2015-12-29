@@ -8,6 +8,7 @@ using TinyCms.Core;
 using TinyCms.Core.Caching;
 using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Posts;
+using TinyCms.Services.Helpers;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Media;
 using TinyCms.Services.Posts;
@@ -33,6 +34,7 @@ namespace TinyCms.Web.Extensions
             IPictureService pictureService,
             IWebHelper webHelper,
             ICacheManager cacheManager,
+            IDateTimeHelper _dateTimeHelper,
             CatalogSettings catalogSettings,
             MediaSettings mediaSettings,
             IEnumerable<Post> posts,
@@ -55,7 +57,9 @@ namespace TinyCms.Web.Extensions
                     SeName = post.GetSeName(),
                     ViewCount = post.ViewCount,
                     ShareCount = post.ShareCount,
-                    CommentCount = post.CommentCount
+                    CommentCount = post.CommentCount,
+                    CreatedOn = _dateTimeHelper.ConvertToUserTime(post.CreatedOnUtc),
+                    Publish = post.Published
                 };
                
 

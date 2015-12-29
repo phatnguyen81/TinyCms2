@@ -101,6 +101,7 @@ namespace TinyCms.Services.Posts
             int pageSize = int.MaxValue,
             int createBy = 0,
             IList<int> categoryIds = null,
+            int postTemplateId = 0,
             bool? featuredPosts = null,
             int postTagId = 0,
             string keywords = null,
@@ -119,6 +120,7 @@ namespace TinyCms.Services.Posts
         /// <param name="post">Post</param>
         void UpdatePostReviewTotals(Post post);
 
+        IList<Post> GetRandomPosts(int numPost, int templateId = 0, int excludePostId = 0);
        
       
         #endregion

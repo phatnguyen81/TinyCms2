@@ -25,18 +25,35 @@
                 <table width="100%" border="1">
                     <tr>
                         <th scope="col">Tên bài viết</th>
+                        <th scope="col">Ngày gửi</th>
+                        <th scope="col">Trạng thái</th>
                         <th scope="col">Lượt xem</th>
                         <th scope="col">Lượt bình luận</th>
                         <th scope="col">Lượt chia sẻ</th>
+                        
                     </tr>
                     @foreach (var post in Model.Posts)
                     {
                         <tr>
                             <td>
-                                <a href="@Url.RouteUrl("Post", new {post.SeName})">
-                                    <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText" class="blog_info"/>
+                                @if (post.Publish)
+                                {
+                                    <a href="@Url.RouteUrl("Post", new {post.SeName})">
+                                        <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText" class="blog_info"/>
+                                        <span>@post.Name</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText" class="blog_info" />
                                     <span>@post.Name</span>
-                                </a>
+                                }
+                            </td>
+                            <td>
+                                @post.CreatedOn.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+                            <td>
+                                @(post.Publish?"Đã duyệt": "Chưa duyệt")
                             </td>
                             <td>@post.ViewCount.ToString("#,##0")</td>
                             <td>@post.CommentCount.ToString("#,##0")</td>

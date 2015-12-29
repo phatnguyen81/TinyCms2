@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Web;
 using TinyCms.Core;
+using TinyCms.Core.Domain;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Core.Domain.Messages;
 using TinyCms.Core.Html;
@@ -49,7 +50,12 @@ namespace TinyCms.Services.Messages
 
         #region Utilities
 
-      
+        protected virtual string GetStoreUrl(int storeId = 0, bool useSsl = false)
+        {
+            var storeSettings = EngineContext.Current.Resolve<StoreInformationSettings>();
+
+            return useSsl ? storeSettings.SecureUrl : storeSettings.Url;
+        }
 
         #endregion
 
@@ -57,7 +63,21 @@ namespace TinyCms.Services.Messages
 
         public void AddCustomerTokens(IList<Token> tokens, Customer customer)
         {
-            throw new NotImplementedException();
+            tokens.Add(new Token("Customer.Email", customer.Email));
+            tokens.Add(new Token("Customer.Username", customer.Username));
+            tokens.Add(new Token("Customer.FullName", customer.GetFullName()));
+
+
+
+            //note: we do not use SEO friendly URLS because we can get errors caused by having .(dot) in the URL (from the email address)
+            //TODO add a method for getting URL (use routing because it handles all SEO friendly URLs)
+            string passwordRecoveryUrl = string.Format("{0}passwordrecovery/confirm?token={1}&email={2}", GetStoreUrl(), customer.GetAttribute<string>(SystemCustomerAttributeNames.PasswordRecoveryToken), HttpUtility.UrlEncode(customer.Email));
+            string accountActivationUrl = string.Format("{0}customer/activation?token={1}&email={2}", GetStoreUrl(), customer.GetAttribute<string>(SystemCustomerAttributeNames.AccountActivationToken), HttpUtility.UrlEncode(customer.Email));
+            tokens.Add(new Token("Customer.PasswordRecoveryURL", passwordRecoveryUrl, true));
+            tokens.Add(new Token("Customer.AccountActivationURL", accountActivationUrl, true));
+
+            //event notification
+            _eventPublisher.EntityTokensAdded(customer, tokens);
         }
 
         public void AddNewsLetterSubscriptionTokens(IList<Token> tokens, NewsLetterSubscription subscription)

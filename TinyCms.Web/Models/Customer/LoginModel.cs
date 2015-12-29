@@ -10,8 +10,7 @@ namespace TinyCms.Web.Models.Customer
     [Validator(typeof(LoginValidator))]
     public partial class LoginModel : BaseNopModel
     {
-        public bool CheckoutAsGuest { get; set; }
-
+        
         [NopResourceDisplayName("Account.Login.Fields.Email")]
         [AllowHtml]
         public string Email { get; set; }

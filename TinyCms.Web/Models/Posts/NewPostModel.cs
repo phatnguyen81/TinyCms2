@@ -16,6 +16,8 @@ namespace TinyCms.Web.Models.Posts
         [Required(ErrorMessage = "Vui lòng nhập tiêu đề")]
         public string Title { get; set; }
 
+        public string Short { get; set; }
+
         [AllowHtml]
         [UIHint("RichEditor")]
         [Required(ErrorMessage = "Vui lòng nhập nội dung")]

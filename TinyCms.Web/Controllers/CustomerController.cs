@@ -431,15 +431,15 @@ namespace TinyCms.Web.Controllers
         [StoreClosed(true)]
         //available even when navigation is not allowed
         [PublicStoreAllowNavigation(true)]
-        public ActionResult Login(bool? checkoutAsGuest)
+        public ActionResult Login(bool popup = false)
         {
             var model = new LoginModel();
             model.UsernamesEnabled = _customerSettings.UsernamesEnabled;
-            model.CheckoutAsGuest = checkoutAsGuest.GetValueOrDefault();
             model.DisplayCaptcha = _captchaSettings.Enabled && _captchaSettings.ShowOnLoginPage;
+            if (popup) return PartialView("LoginBlock", model);
             return View(model);
         }
-
+      
         [HttpPost]
         [CaptchaValidator]
         //available even when a store is closed
@@ -506,6 +506,73 @@ namespace TinyCms.Web.Controllers
             return View(model);
         }
 
+
+        [HttpPost]
+        public ActionResult _AjaxLogin(LoginModel model)
+        {
+
+            if (_customerSettings.UsernamesEnabled && model.Username != null)
+                {
+                    model.Username = model.Username.Trim();
+                }
+                var loginResult = _customerRegistrationService.ValidateCustomer(_customerSettings.UsernamesEnabled ? model.Username : model.Email, model.Password);
+            switch (loginResult)
+            {
+                case CustomerLoginResults.Successful:
+                {
+                    var customer = _customerSettings.UsernamesEnabled
+                        ? _customerService.GetCustomerByUsername(model.Username)
+                        : _customerService.GetCustomerByEmail(model.Email);
+
+                    //sign in new customer
+                    _authenticationService.SignIn(customer, model.RememberMe);
+
+                    //raise event       
+                    _eventPublisher.Publish(new CustomerLoggedinEvent(customer));
+
+                    //activity log
+                    _customerActivityService.InsertActivity("PublicStore.Login",
+                        _localizationService.GetResource("ActivityLog.PublicStore.Login"), customer);
+                    return Json(new
+                    {
+                        success = true
+                    });
+                }
+                case CustomerLoginResults.CustomerNotExist:
+                    return Json(new
+                    {
+                        success = true,
+                        message = _localizationService.GetResource("Account.Login.WrongCredentials.CustomerNotExist")
+                    });
+                case CustomerLoginResults.Deleted:
+                    return Json(new
+                    {
+                        success = true,
+                        message = _localizationService.GetResource("Account.Login.WrongCredentials.Deleted")
+                    });
+                    break;
+                case CustomerLoginResults.NotActive:
+                    return Json(new
+                    {
+                        success = true,
+                        message = _localizationService.GetResource("Account.Login.WrongCredentials.NotActive")
+                    });
+                case CustomerLoginResults.NotRegistered:
+                    return Json(new
+                    {
+                        success = true,
+                        message = _localizationService.GetResource("Account.Login.WrongCredentials.NotRegistered")
+                    });
+                case CustomerLoginResults.WrongPassword:
+                default:
+               return Json(new
+                    {
+                        success = true,
+                        message = _localizationService.GetResource("Account.Login.WrongCredentials")
+                    });
+            }
+
+        }
 
         //available even when a store is closed
         [StoreClosed(true)]
@@ -679,7 +746,7 @@ namespace TinyCms.Web.Controllers
         [NopHttpsRequirement(SslRequirement.Yes)]
         //available even when navigation is not allowed
         [PublicStoreAllowNavigation(true)]
-        public ActionResult Register()
+        public ActionResult Register(bool popup = false)
         {
             //check whether registration is allowed
             if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
@@ -688,6 +755,8 @@ namespace TinyCms.Web.Controllers
             var model = new RegisterModel();
             PrepareCustomerRegisterModel(model, false);
             //enable newsletter by default
+
+            if (popup) return PartialView("RegisterBlock", model);
 
             return View(model);
         }
@@ -804,6 +873,143 @@ namespace TinyCms.Web.Controllers
             //If we got this far, something failed, redisplay form
             PrepareCustomerRegisterModel(model, true, customerAttributesXml);
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult _AjaxRegister(RegisterModel model, FormCollection form)
+        {
+
+            if (model.Password != model.ConfirmPassword)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Mật khẩu chưa giống nhau"
+                });
+            }
+
+            //check whether registration is allowed
+            if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = _localizationService.GetResource("Account.Register.Result.Disabled")
+                });
+            }
+
+            if (_workContext.CurrentCustomer.IsRegistered())
+            {
+                //Already registered customer. 
+                _authenticationService.SignOut();
+
+                //Save a new record
+                _workContext.CurrentCustomer = _customerService.InsertGuestCustomer();
+            }
+            var customer = _workContext.CurrentCustomer;
+
+            //custom customer attributes
+            var customerAttributesXml = ParseCustomCustomerAttributes(form);
+            var customerAttributeWarnings = _customerAttributeParser.GetAttributeWarnings(customerAttributesXml);
+            if (customerAttributeWarnings != null && customerAttributeWarnings.Count > 0)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = string.Join("<br />", customerAttributeWarnings)
+                });
+            }
+
+            if (_customerSettings.UsernamesEnabled && model.Username != null)
+            {
+                model.Username = model.Username.Trim();
+            }
+
+            bool isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
+            var registrationRequest = new CustomerRegistrationRequest(customer,
+                model.Email,
+                _customerSettings.UsernamesEnabled ? model.Username : model.Email,
+                model.Password,
+                _customerSettings.DefaultPasswordFormat,
+                isApproved);
+                var registrationResult = _customerRegistrationService.RegisterCustomer(registrationRequest);
+            if (registrationResult.Success)
+            {
+
+                //form fields
+                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FullName, model.FullName);
+                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
+
+                //save customer attributes
+                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CustomCustomerAttributes,
+                    customerAttributesXml);
+
+                //login customer now
+                if (isApproved)
+                    _authenticationService.SignIn(customer, true);
+
+                //associated with external account (if possible)
+                TryAssociateAccountWithExternalAccount(customer);
+                //notifications
+                if (_customerSettings.NotifyNewCustomerRegistration)
+                    _workflowMessageService.SendCustomerRegisteredNotificationMessage(customer,
+                        _localizationSettings.DefaultAdminLanguageId);
+
+                //raise event       
+                _eventPublisher.Publish(new CustomerRegisteredEvent(customer));
+
+                switch (_customerSettings.UserRegistrationType)
+                {
+                    case UserRegistrationType.EmailValidation:
+                    {
+                        //email validation message
+                        _genericAttributeService.SaveAttribute(customer,
+                            SystemCustomerAttributeNames.AccountActivationToken, Guid.NewGuid().ToString());
+                        _workflowMessageService.SendCustomerEmailValidationMessage(customer,
+                            _workContext.WorkingLanguage.Id);
+
+                        //result
+                        return Json(new
+                        {
+                            success = true,
+                            message = _localizationService.GetResource("Account.Register.Result.EmailValidation")
+                        });
+                    }
+                    case UserRegistrationType.AdminApproval:
+                    {
+                        return Json(new
+                        {
+                            success = true,
+                            message = _localizationService.GetResource("Account.Register.Result.AdminApproval")
+                        });
+                    }
+                    case UserRegistrationType.Standard:
+                    {
+                        //send customer welcome message
+                        _workflowMessageService.SendCustomerWelcomeMessage(customer, _workContext.WorkingLanguage.Id);
+
+                        return Json(new
+                        {
+                            success = true,
+                            message = _localizationService.GetResource("Account.Register.Result.Standard")
+                        });
+                    }
+                    default:
+                    {
+                        return Json(new
+                        {
+                            success = true,
+                            message = _localizationService.GetResource("Account.Register.Result.Standard")
+                        });
+                    }
+                }
+            }
+            //errors
+            return Json(new
+            {
+                success = false,
+                message = string.Join("<br />", registrationResult.Errors)
+            });
         }
 
         //available even when navigation is not allowed
@@ -924,10 +1130,10 @@ namespace TinyCms.Web.Controllers
 
 
             var posts = _postService.SearchPosts(
-               orderBy: PostSortingEnum.CreatedOn,
-               createBy: _workContext.CurrentCustomer.Id,
-               pageIndex: command.PageNumber - 1,
-               pageSize: command.PageSize);
+                orderBy: PostSortingEnum.CreatedOn,
+                createBy: _workContext.CurrentCustomer.Id,
+                pageIndex: command.PageNumber - 1,
+                pageSize: command.PageSize, showHidden: true);
 
             model.TotalPosts = posts.TotalCount;
 
@@ -939,6 +1145,7 @@ namespace TinyCms.Web.Controllers
                 _pictureService,
                 _webHelper,
                 _cacheManager,
+                _dateTimeHelper,
                 _catalogSettings,
                 _mediaSettings,
                 posts,

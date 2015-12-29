@@ -149,71 +149,71 @@ function readCookie(name) {
         });
     }
 
-    function login()
-    {
-        var node;
-        var bx;
+    //function login()
+    //{
+    //    var node;
+    //    var bx;
 
-        if (arguments.length > 0) {
+    //    if (arguments.length > 0) {
             
-            node = $('#loginpage');
-        }
-        else
-        {
-            var tpl = '<label><input type="text" class="txtinput username" value="" placeholder="Tài khoản"></label>\
-            <label><input type="password" class="txtinput password" value="" placeholder="Mật khẩu"></label>\
-            <div class="subact">\
-                <label><input type="checkbox" checked class="checkbox">Ghi nhớ</label>\
-            </div>\
-            <p class="actbtn"><a href="#" class="loginbtn">Đăng nhập</a></p>\
-            <div class="newact"><p class="newreg">Chưa có tài khoản?<a href="#" class="regbtn">Đăng ký</a></p>Đăng nhập bằng <a href="#" class="facelogin icn"></a></div>';
+    //        node = $('#loginpage');
+    //    }
+    //    else
+    //    {
+    //        var tpl = '<label><input type="text" class="txtinput username" value="" placeholder="Tài khoản"></label>\
+    //        <label><input type="password" class="txtinput password" value="" placeholder="Mật khẩu"></label>\
+    //        <div class="subact">\
+    //            <label><input type="checkbox" checked class="checkbox">Ghi nhớ</label>\
+    //        </div>\
+    //        <p class="actbtn"><a href="#" class="loginbtn">Đăng nhập</a></p>\
+    //        <div class="newact"><p class="newreg">Chưa có tài khoản?<a href="#" class="regbtn">Đăng ký</a></p>Đăng nhập bằng <a href="#" class="facelogin icn"></a></div>';
 
-            bx = $.boxy.alert('Đăng nhập', tpl);
-            node = bx.getNode();
-        }
+    //        bx = $.boxy.alert('Đăng nhập', tpl);
+    //        node = bx.getNode();
+    //    }
 
-        function sendLogin()
-        {
-            var username = node.find('.username').val().trim();
-            var password = node.find('.password').val();
+    //    function sendLogin()
+    //    {
+    //        var username = node.find('.username').val().trim();
+    //        var password = node.find('.password').val();
 
-            if (username && password) {
-                $(node).find("form").submit();
-            }
-            else {
-                $.boxy.alert('Thông báo', 'Vui lòng nhập thông tin đăng nhập!');
-            }
-        }
+    //        if (username && password) {
+    //            $(node).find("form").submit();
+    //        }
+    //        else {
+    //            $.boxy.alert('Thông báo', 'Vui lòng nhập thông tin đăng nhập!');
+    //        }
+    //    }
 
-        node.find('.password').keypress(function (e) {
+    //    node.find('.password').keypress(function (e) {
 
-            var key = e.which || e.keyCode;
-            if (key == 13)
-            {
-                node.find('.password').blur();
-                sendLogin();
-            }
-        });
-
-        node.find('.loginbtn').click(function (e) {
-            e.preventDefault();
-
-            sendLogin();
-        });
-
-        //node.find('.regbtn').click(function (e) {
-        //    e.preventDefault();
-        //    bx && bx.close();
-        //    signup();
-        //});
-
-    //    node.find('.facelogin').click(function (e) {
-    //        e.preventDefault();
-    //        bx && bx.close();
-    //        loginFB();
+    //        var key = e.which || e.keyCode;
+    //        if (key == 13)
+    //        {
+    //            node.find('.password').blur();
+    //            sendLogin();
+    //        }
     //    });
-    }
-    login(1);
+
+    //    node.find('.loginbtn').click(function (e) {
+    //        e.preventDefault();
+
+    //        sendLogin();
+    //    });
+
+    //    //node.find('.regbtn').click(function (e) {
+    //    //    e.preventDefault();
+    //    //    bx && bx.close();
+    //    //    signup();
+    //    //});
+
+    ////    node.find('.facelogin').click(function (e) {
+    ////        e.preventDefault();
+    ////        bx && bx.close();
+    ////        loginFB();
+    ////    });
+    //}
+    //login(1);
 
     function signup() {
         var tpl = '<label><input type="text" class="txtinput username" value="" placeholder="Tên tài khoản"></label>\
@@ -592,8 +592,24 @@ $(function () {
 function doSubmit(formName) {
     document.getElementById(formName + 'frm').submit();
 }
+function closePopup() {
+    $(".bg_overlay").remove();
+}
+function showPopup(url, title) {
+    var overlay = $("<div class='bg_overlay'><div class='popup'><h1><a href='#' class='close_popup icn'></a>" + title + "</h1><div class='popup_inner'></div></div></div>");
+    overlay.appendTo($('body'));
+    var popup = $(overlay).find('.popup');
+    $(popup).css('top', (($(window).height() - $(popup).height()) / 2));
+    $(popup).css('left', (($(window).width() - $(popup).width()) / 2));
+    $(overlay).find(".popup_inner").load(url,function() {
+        $(popup).css('top', (($(window).height() - $(popup).height()) / 2));
+        $(popup).css('left', (($(window).width() - $(popup).width()) / 2));
+    });
+    $(overlay).find(".close_popup").click(function () {
+        $(overlay).remove();
+    });
 
-
+}
 
 function showLoading() {
     $(".loading").show();

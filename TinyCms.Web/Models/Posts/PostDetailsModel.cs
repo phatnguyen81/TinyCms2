@@ -31,6 +31,8 @@ namespace TinyCms.Web.Models.Posts
         public string MetaTitle { get; set; }
         public string SeName { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
         public PostBreadcrumbModel Breadcrumb { get; set; }
 
 

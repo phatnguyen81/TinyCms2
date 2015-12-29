@@ -14,25 +14,41 @@
 
 }
 
-<div class="search_detail">
-    <h1>Tìm kiếm từ khóa: @Model.q</h1>
+<div class="searchpage">
+    @using (Html.BeginForm())
+    {
+        <p>
+            @Html.TextBoxFor(model => model.q, new {placeholder = "Tìm kiếm", @class = "searchinput"})
+            <input type="submit" href="#" class="btn01" value="Tìm kiếm" style="height: 36px;"/>
+        </p>
+        <span class="searchicn icn"></span>
+      
+    }
+    <p class="keysearch">Bài viết về <b>"@Model.q"</b></p>
     @if (Model.Posts.Any())
     {
         foreach (var post in Model.Posts)
         {
+
             <div class="catebox">
                 <div class="newscont">
-                    <a class="boximg" href="@Url.RouteUrl("Post", new {post.SeName})">
-                        <img width="143" height="105" alt="@post.DefaultPictureModel.AlternateText" src="@post.DefaultPictureModel.ImageUrl">
+                    <a href="@Url.RouteUrl("Post", new {post.SeName})" class="boximg">
+                        <span class="loading">
+                            <img width="143" height="105" alt="@post.DefaultPictureModel.AlternateText" src="@post.DefaultPictureModel.ImageUrl"/>
+                        </span>
                     </a>
                     <div class="detail">
                         <h3>
-                            <a href="@Url.RouteUrl("Post", new {post.SeName})">@post.Name</a>
+                            <a href="@Url.RouteUrl("Post", new {post.SeName})">
+                               @post.Name
+                            </a>
                         </h3>
-                        <p>@Html.Raw(post.Name)</p>
+                        <p class="time_post">@post.CreatedOn.ToString("HH:mm dd/MM/yyyy")</p>
+                        @Html.Raw(post.Name)
                     </div>
                 </div>
             </div>
+
         }
 
     }

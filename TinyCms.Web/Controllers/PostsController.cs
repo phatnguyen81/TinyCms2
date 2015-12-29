@@ -17,6 +17,7 @@ using TinyCms.Core.Domain.Seo;
 using TinyCms.Services.Common;
 using TinyCms.Services.Customers;
 using TinyCms.Services.Events;
+using TinyCms.Services.Helpers;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Logging;
 using TinyCms.Services.Media;
@@ -56,6 +57,7 @@ namespace TinyCms.Web.Controllers
         private readonly SeoSettings _seoSettings;
         private readonly ISearchTermService _searchTermService;
         private readonly IEventPublisher _eventPublisher;
+        private readonly IDateTimeHelper _dateTimeHelper;
         public PostsController(ICategoryService categoryService, 
             IPostService postService, 
             IPictureService pictureService, 
@@ -76,7 +78,8 @@ namespace TinyCms.Web.Controllers
             SeoSettings seoSettings, 
             IPostTemplateService postTemplateService, 
             ISearchTermService searchTermService,
-            IEventPublisher eventPublisher)
+            IEventPublisher eventPublisher, 
+            IDateTimeHelper dateTimeHelper)
         {
             _categoryService = categoryService;
             _postService = postService;
@@ -99,6 +102,7 @@ namespace TinyCms.Web.Controllers
             _postTemplateService = postTemplateService;
             _searchTermService = searchTermService;
             _eventPublisher = eventPublisher;
+            _dateTimeHelper = dateTimeHelper;
         }
 
 
@@ -116,6 +120,7 @@ namespace TinyCms.Web.Controllers
                 _pictureService, 
                 _webHelper, 
                 _cacheManager,
+                _dateTimeHelper,
                 _catalogSettings, 
                 _mediaSettings, 
                 posts,
@@ -704,6 +709,7 @@ namespace TinyCms.Web.Controllers
                 UpdatedOnUtc = DateTime.UtcNow,
                 CreatedOnUtc = DateTime.UtcNow,
                 CreatedBy = _workContext.CurrentCustomer.Id,
+                ShortDescription = model.Short,
                 Published = false
             };
             _postService.InsertPost(post);
@@ -750,7 +756,8 @@ namespace TinyCms.Web.Controllers
                 MetaKeywords = post.GetLocalized(x => x.MetaKeywords),
                 MetaDescription = post.GetLocalized(x => x.MetaDescription),
                 MetaTitle = post.GetLocalized(x => x.MetaTitle),
-                SeName = post.GetSeName()
+                SeName = post.GetSeName(),
+                CreatedOn = _dateTimeHelper.ConvertToUserTime(post.CreatedOnUtc)
             };
 
             //automatically generate post description?
@@ -1003,6 +1010,16 @@ namespace TinyCms.Web.Controllers
             if(updateDb) _postService.UpdatePost(post);
 
             return Content(url);
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetRandomPost(int postId, int numberPost, string template, int? postThumbPictureSize)
+        {
+            var post = _postService.GetPostById(postId);
+            var model =
+                PreparePostOverviewModels(_postService.GetRandomPosts(numberPost, templateId: post.PostTemplateId,
+                    excludePostId: post.Id));
+            return PartialView(template, model);
         }
         #endregion
 

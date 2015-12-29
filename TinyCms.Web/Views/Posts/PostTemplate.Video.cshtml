@@ -1,0 +1,124 @@
+﻿@model PostDetailsModel
+@using TinyCms.Core
+@using TinyCms.Core.Domain
+@using TinyCms.Core.Domain.Posts
+@using TinyCms.Core.Domain.Seo;
+@using TinyCms.Core.Infrastructure;
+@using TinyCms.Services.Localization;
+@{
+    Layout = "~/Views/Shared/_OneColumnVideo.cshtml";
+
+    //title, meta
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    Html.AddMetaDescriptionParts(Html.Encode(Html.Raw(Model.MetaDescription)));
+    Html.AddMetaKeywordParts(Html.Encode(Html.Raw(Model.MetaKeywords)));
+
+    var seoSettings = EngineContext.Current.Resolve<SeoSettings>();
+
+    //canonical URL
+    var postUrl = Url.RouteUrl("Post", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+    if (seoSettings.CanonicalUrlsEnabled)
+    {
+        
+        Html.AddCanonicalUrlParts(postUrl);
+    }
+
+    //open graph META tags
+    if (seoSettings.OpenGraphMetaTags)
+    {
+        var storeName = EngineContext.Current.Resolve<StoreInformationSettings>().Name;
+        Html.AddHeadCustomParts("<meta property=\"og:type\" content=\"post\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:title\" content=\"" + Html.Encode(Html.Raw(Model.Name)) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:description\" content=\"" + Html.Encode(Html.Raw(Model.MetaDescription)) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:url\" content=\"" + Request.Url.AbsoluteUri + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"og:site_name\" content=\"" + Html.Encode(storeName) + "\" />");
+    }
+
+    //Twitter META tags
+    if (seoSettings.TwitterMetaTags)
+    {
+        var storeName = EngineContext.Current.Resolve<StoreInformationSettings>().Name;
+        Html.AddHeadCustomParts("<meta property=\"twitter:card\" content=\"summary\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:site\" content=\"" + Html.Encode(storeName) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:title\" content=\"" + Html.Encode(Html.Raw(Model.Name)) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:description\" content=\"" + Html.Encode(Html.Raw(Model.MetaDescription)) + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:image\" content=\"" + Model.DefaultPictureModel.ImageUrl + "\" />");
+        Html.AddHeadCustomParts("<meta property=\"twitter:url\" content=\"" + Request.Url.AbsoluteUri + "\" />");
+    }
+
+    var promotionCategoryId = EngineContext.Current.Resolve<CatalogSettings>().PromotionCategoryId;
+    var promotionPostNumber = EngineContext.Current.Resolve<CatalogSettings>().PromotionPostNumber;
+}
+<div class="videoboard">
+    <p class="headtxt">Video</p>
+    <div class="video_detail">
+        @Html.Raw(Model.FullDescription)
+    </div>
+</div>
+    
+<div class="mainpage videoctn">
+    <div class="leftcol">
+        <p class="video_title">@Model.Name</p>
+        <p class="datecreate">Ngày đăng: @Model.CreatedOn.ToString("dd/MM/yyyy")</p>
+        <p class="content">
+            @Html.Raw(Model.ShortDescription)
+        </p>
+        @Html.Action("GetRandomPost", "Posts", new { postId = Model.Id, numberPost = 4, template = "GetRandomPost.Video", postThumbPictureSize=200 })
+        <div class="comment">
+            <div class="fb-comments" data-href="@postUrl" data-width="100%" data-numposts="10"></div>
+        </div>
+    </div>
+    <div class="sidebar">
+        @Html.Action("GetRandomPost", "Posts", new { postId = Model.Id, numberPost = 4, template = "GetRandomPost.Video", postThumbPictureSize = 200 })
+    </div>
+    @Html.Action("Footer", "Common")
+</div>
+
+
+
+
+    @*<div class="videoboard">
+        <div class="news_detail">
+            <h1>
+                <a href="@Url.RouteUrl("Category", new {SeName = Model.Breadcrumb.CategoryBreadcrumb.Last().SeName})">@Model.Breadcrumb.CategoryBreadcrumb.Last().Name</a>
+            </h1>
+            <p class="title">@Model.Name</p>
+            <p class="desc">@Html.Raw(Model.ShortDescription)</p>
+
+            <div class="content_box">
+                <div class="ctn">
+                    @Html.Raw(Model.FullDescription)
+                    <div class="posttags clearfix">
+                        @foreach (var tag in Model.PostTags)
+                        {
+                            <a href="@Url.RouteUrl("PostsByTag", new { postTagId = tag.Id, tag.SeName })"><span class="fa fa-tag"></span> @tag.Name</a>
+                        }
+                    </div>
+                    @Html.Action("PollBlock", "Poll", new { systemKeyword = "poll_iphone" })
+                    <div class="facebook_share">
+                        <div class="fb-like" data-href="@postUrl" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                    </div>
+                </div>
+                @Html.Action("OtherPosts", "Posts", new { postId = Model.Id, postThumbPictureSize = 160 })
+                <div class="comment">
+                    <div class="fb-comments" data-href="@postUrl" data-width="100%" data-numposts="10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $(document).on(
+            'fbload',
+            function() {
+                FB.Event.subscribe('edge.create', fb_change_callback);
+                FB.Event.subscribe('edge.remove', fb_change_callback);
+                FB.Event.subscribe('comment.create', fb_change_callback);
+                FB.Event.subscribe('comment.remove', fb_change_callback);
+            }
+        );
+        function fb_change_callback() {
+            $.post("@Url.Action("UpdatePost","Posts")", { postId: @Model.Id });
+        }
+    </script>*@
