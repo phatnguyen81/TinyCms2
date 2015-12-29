@@ -41,7 +41,9 @@ namespace Nop.Plugin.Widgets.AdsBanner.Infrastructure
                 .WithParameter(ResolvedParameter.ForNamed<IDbContext>(CONTEXT_NAME))
                 .InstancePerLifetimeScope();
 
-          
+            builder.RegisterType<AdsBannerService>().As<IAdsBannerService>()
+               .WithParameter(ResolvedParameter.ForNamed<ICacheManager>("nop_cache_static"))
+               .InstancePerLifetimeScope();
         }
 
         /// <summary>

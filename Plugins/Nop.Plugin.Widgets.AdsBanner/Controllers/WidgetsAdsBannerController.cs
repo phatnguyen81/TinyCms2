@@ -237,17 +237,10 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
         public ActionResult PublicInfo(string widgetZone, object additionalData = null)
         {
 
-            string cacheKey = string.Format(AdsBannerPlugin.SEARCH_ACTIVEFROMNOW_ADSBANNERS_MODEL_KEY,
-                widgetZone);
-            var adsBannerModels = _cacheManager.Get(cacheKey, () =>
-            {
-                var wz = _widgetService.GetAllWidgetZones().FirstOrDefault(q => q.SystemName == widgetZone);
-                var adsbanner = _adsBannerService.GetAllAdsBannersActiveFromNow(widgetZoneId: wz.Id).ToList();
-                var now = DateTime.UtcNow;
-                return PrepareShowAdsBannerModel(adsbanner.Where(q => q.FromDateUtc == null || q.FromDateUtc <= now).ToList());
-            });
-
-            var model = new PublicInfoModel {AdsBanners = adsBannerModels};
+            var wz = _widgetService.GetAllWidgetZones().FirstOrDefault(q => q.SystemName == widgetZone);
+            var adsbanner = _adsBannerService.GetAllAdsBannersActiveFromNow(widgetZoneId: wz.Id).ToList();
+            var now = DateTime.UtcNow;
+            var model = new PublicInfoModel { AdsBanners = PrepareShowAdsBannerModel(adsbanner.Where(q => q.FromDateUtc == null || q.FromDateUtc <= now).ToList()) };
 
 
             return View("~/Plugins/Widgets.AdsBanner/Views/WidgetsAdsBanner/PublicInfo.cshtml", model);
