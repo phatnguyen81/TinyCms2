@@ -328,6 +328,39 @@ namespace TinyCms.Services.Customers
             _customerService.UpdateCustomer(customer);
         }
 
+        /// <summary>
+        /// Sets a user email
+        //</summary>
+        /// <param name="customer">Customer</param>
+        /// <param name="newEmail">New email</param>
+        public virtual void SetEmail(Customer customer, string newEmail)
+        {
+            if (customer == null)
+                throw new ArgumentNullException("customer");
+
+            if (newEmail == null)
+                throw new NopException("Email cannot be null");
+
+            newEmail = newEmail.Trim();
+            string oldEmail = customer.Email;
+
+            if (!CommonHelper.IsValidEmail(newEmail))
+                throw new NopException(_localizationService.GetResource("Account.EmailUsernameErrors.NewEmailIsNotValid"));
+
+            if (newEmail.Length > 100)
+                throw new NopException(_localizationService.GetResource("Account.EmailUsernameErrors.EmailTooLong"));
+
+            var customer2 = _customerService.GetCustomerByEmail(newEmail);
+            if (customer2 != null && customer.Id != customer2.Id)
+                throw new NopException(_localizationService.GetResource("Account.EmailUsernameErrors.EmailAlreadyExists"));
+
+            customer.Email = newEmail;
+            _customerService.UpdateCustomer(customer);
+
+          
+        }
+
+
         #endregion
     }
 }

@@ -24,14 +24,13 @@
         </li>
         @if (Model.Id > 0)
         {
-            <li @Html.RenderSelectedTabIndex(6, GetSelectedTabIndex())>
+            <li @Html.RenderSelectedTabIndex(3, GetSelectedTabIndex())>
                 @T("Admin.Customers.Customers.ActivityLog")
             </li>
-            <li @Html.RenderSelectedTabIndex(7, GetSelectedTabIndex())>
+            <li @Html.RenderSelectedTabIndex(4, GetSelectedTabIndex())>
                 @T("Admin.Customers.Customers.Impersonate")
             </li>
         }
-     
     </ul>
     <div>
         @TabInfo()
@@ -48,7 +47,6 @@
             @TabImpersonate()
         </div>
     }
-   
 </div>
 
 @{
@@ -66,7 +64,6 @@
 
 @helper TabInfo()
 {
-
     <table class="adminContent customer-info-tab">
         @if (Model.UsernamesEnabled)
         {
@@ -196,6 +193,7 @@
                 </td>
             </tr>
         }
+       
         @if (Model.GenderEnabled)
         {
             <tr>
@@ -216,20 +214,20 @@
         }
         <tr>
             <td class="adminTitle">
-                @Html.NopLabelFor(model => model.FullName):
+                @Html.NopLabelFor(model => model.FirstName):
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.FullName)
-                @Html.ValidationMessageFor(model => model.FullName)
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
             </td>
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.NopLabelFor(model => model.Phone):
+                @Html.NopLabelFor(model => model.LastName):
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.Phone)
-                @Html.ValidationMessageFor(model => model.Phone)
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
             </td>
         </tr>
         @if (Model.DateOfBirthEnabled)
@@ -378,27 +376,7 @@
             </tr>
         }
       
-        @*@if (Model.AvailableNewsletterSubscriptionStores != null && Model.AvailableNewsletterSubscriptionStores.Count > 0)
-        {
-            <tr>
-                <td class="adminTitle">
-                    @Html.NopLabelFor(model => model.SelectedNewsletterSubscriptionStoreIds):
-                </td>
-                <td class="adminData">
-                    @foreach (var store in Model.AvailableNewsletterSubscriptionStores)
-                    {
-                        <div>
-                            <input type="checkbox" name="SelectedNewsletterSubscriptionStoreIds" value="@store.Id" checked="@(Model.SelectedNewsletterSubscriptionStoreIds != null && Model.SelectedNewsletterSubscriptionStoreIds.Contains(store.Id))" />(@(store.Name))
-                        </div>
-
-                    }
-                </td>
-            </tr>
-        }
-        else
-        {
-            @T("Admin.Customers.Customers.Fields.CustomerRoles.NoRoles")
-        }*@
+       
         <tr>
             <td class="adminTitle">
                 @Html.NopLabelFor(model => model.Active):

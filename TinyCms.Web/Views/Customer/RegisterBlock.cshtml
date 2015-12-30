@@ -2,10 +2,6 @@
 @using (Html.BeginForm())
 {
     <div class="content">
-        <label>
-            @Html.TextBoxFor(model => model.FullName, new { @class = "txtinput", placeholder = "Họ và tên (*)" })
-            @Html.ValidationMessageFor(model => model.FullName)
-        </label>
 
         @if (Model.UsernamesEnabled)
         {
@@ -26,13 +22,25 @@
             @Html.ValidationMessageFor(model => model.Password)
         </label>
         <label>
-            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "txtinput", placeholder = "Xác nhận mật khẩu (*)" })
+            @Html.PasswordFor(model => model.ConfirmPassword, new {@class = "txtinput", placeholder = "Xác nhận mật khẩu (*)"})
             @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </label>
-        <div class="inputs">
-            @Html.TextBoxFor(model => model.Phone, new { @class = "txtinput", placeholder = "Số điện thoại" })
-            @Html.ValidationMessageFor(model => model.Phone)
-        </div>
+                @if (Model.CustomerAttributes.Count > 0)
+                {
+                    <label>
+                        @if (Model.CustomerAttributes.Count > 0)
+                        {
+                            @Html.Partial("_CustomerAttributes", Model.CustomerAttributes)
+                        }
+                    </label>
+                }
+        @if (Model.PhoneEnabled)
+        {
+            <div class="inputs">
+                @Html.TextBoxFor(model => model.Phone, new {@class = "txtinput", placeholder = "Số điện thoại"})
+                @Html.ValidationMessageFor(model => model.Phone)
+            </div>
+        }
         <label>
             @if (Model.DisplayCaptcha)
             {
@@ -68,46 +76,46 @@
 
     </div>
     <script type="text/javascript">
-        $('.regbtn').click(function (e) {
-            e.preventDefault();
+    $('.regbtn').click(function (e) {
+        e.preventDefault();
 
-            if ($("#FullName").val() == "") {
-                $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập họ và tên");
-                return;
-            }
+        if ($("#FullName").val() == "") {
+            $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập họ và tên");
+            return;
+        }
 
-            @if (Model.UsernamesEnabled)
+        @if (Model.UsernamesEnabled)
             {
                 <text>
-                    if ($("#Username").val() == "") {
-                        $.boxy.alert("Lỗi đăng nhập", "Vui lòng nhập tên đăng nhập");
-                        return;
-                    }
-                </text>
+        if ($("#Username").val() == "") {
+            $.boxy.alert("Lỗi đăng nhập", "Vui lòng nhập tên đăng nhập");
+            return;
+        }
+        </text>
             }
 
-            if ($("#Email").val() == "") {
-                $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập email");
-                return;
-            }
+        if ($("#Email").val() == "") {
+            $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập email");
+            return;
+        }
 
-            if ($("#Password").val() == "" || $("#ConfirmPassword").val() == "") {
-                $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập mật khẩu");
-                return;
-            }
+        if ($("#Password").val() == "" || $("#ConfirmPassword").val() == "") {
+            $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập mật khẩu");
+            return;
+        }
 
-        
-            $.ajax({
-                url: '@Url.Action("_AjaxRegister", "Customer")',
+
+        $.ajax({
+            url: '@Url.Action("_AjaxRegister", "Customer")',
                 data: $(this).closest("form").serialize(),
                 type: "POST",
                 dataType: "json"
             }).done(function (data) {
                 if (data.success) {
                     $.boxy.alert("Thông báo", '<p class="scctxt"><span class="successicn icn"></span>Chúc mừng bạn đã đăng ký thành công</p>', function () {
-                        location.reload();
+                        window.location.href = '@Url.RouteUrl("homepage")';
                     });
-                    
+
                 } else {
                     $.boxy.alert("Lỗi đăng nhập", data.message);
                 }

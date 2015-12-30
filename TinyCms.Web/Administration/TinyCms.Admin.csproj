@@ -176,6 +176,7 @@
     <Compile Include="Controllers\BaseAdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\CustomerAttributeController.cs" />
     <Compile Include="Controllers\CustomerController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -435,7 +436,7 @@
     <Content Include="Views\Setting\AllSettings.cshtml" />
     <Content Include="Views\Setting\Blog.cshtml" />
     <Content Include="Views\Setting\Catalog.cshtml" />
-    <Content Include="Views\Setting\CustomerUser.cshtml" />
+    <Content Include="Views\Setting\CustomerUser1.cshtml" />
     <Content Include="Views\Setting\Forum.cshtml" />
     <Content Include="Views\Setting\GeneralCommon.cshtml" />
     <Content Include="Views\Setting\Media.cshtml" />
@@ -496,7 +497,9 @@
     <Content Include="Views\Topic\_CreateOrUpdate.cshtml" />
     <Content Include="Views\Post\_CreateOrUpdate.RelatedPosts.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Setting\CustomerUser.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

@@ -333,6 +333,8 @@ namespace TinyCms.Web.Controllers
                 throw new ArgumentNullException("model");
 
             //form fields
+            model.PhoneEnabled = _customerSettings.PhoneEnabled;
+            model.PhoneRequired = _customerSettings.PhoneRequired;
             model.AcceptPrivacyPolicyEnabled = _customerSettings.AcceptPrivacyPolicyEnabled;
             model.UsernamesEnabled = _customerSettings.UsernamesEnabled;
             model.CheckUsernameAvailabilityEnabled = _customerSettings.CheckUsernameAvailabilityEnabled;
@@ -508,69 +510,88 @@ namespace TinyCms.Web.Controllers
 
 
         [HttpPost]
-        public ActionResult _AjaxLogin(LoginModel model)
+        public ActionResult _AjaxLogin(LoginModel model, string returnUrl)
         {
 
-            if (_customerSettings.UsernamesEnabled && model.Username != null)
+            if (ModelState.IsValid)
+            {
+                if (_customerSettings.UsernamesEnabled && model.Username != null)
                 {
                     model.Username = model.Username.Trim();
                 }
-                var loginResult = _customerRegistrationService.ValidateCustomer(_customerSettings.UsernamesEnabled ? model.Username : model.Email, model.Password);
-            switch (loginResult)
-            {
-                case CustomerLoginResults.Successful:
+                var loginResult =
+                    _customerRegistrationService.ValidateCustomer(
+                        _customerSettings.UsernamesEnabled ? model.Username : model.Email, model.Password);
+                switch (loginResult)
                 {
-                    var customer = _customerSettings.UsernamesEnabled
-                        ? _customerService.GetCustomerByUsername(model.Username)
-                        : _customerService.GetCustomerByEmail(model.Email);
-
-                    //sign in new customer
-                    _authenticationService.SignIn(customer, model.RememberMe);
-
-                    //raise event       
-                    _eventPublisher.Publish(new CustomerLoggedinEvent(customer));
-
-                    //activity log
-                    _customerActivityService.InsertActivity("PublicStore.Login",
-                        _localizationService.GetResource("ActivityLog.PublicStore.Login"), customer);
-                    return Json(new
+                    case CustomerLoginResults.Successful:
                     {
-                        success = true
-                    });
+                        var customer = _customerSettings.UsernamesEnabled
+                            ? _customerService.GetCustomerByUsername(model.Username)
+                            : _customerService.GetCustomerByEmail(model.Email);
+
+                        //sign in new customer
+                        _authenticationService.SignIn(customer, model.RememberMe);
+
+                        //raise event       
+                        _eventPublisher.Publish(new CustomerLoggedinEvent(customer));
+
+                        //activity log
+                        _customerActivityService.InsertActivity("PublicStore.Login",
+                            _localizationService.GetResource("ActivityLog.PublicStore.Login"), customer);
+
+
+                        if (String.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
+                            returnUrl = string.Empty;
+
+                        return Json(new
+                        {
+                            success = true,
+                            returnUrl
+                        });
+                    }
+                    case CustomerLoginResults.CustomerNotExist:
+                        return Json(new
+                        {
+                            success = false,
+                            message =
+                                _localizationService.GetResource("Account.Login.WrongCredentials.CustomerNotExist")
+                        });
+                    case CustomerLoginResults.Deleted:
+                        return Json(new
+                        {
+                            success = false,
+                            message = _localizationService.GetResource("Account.Login.WrongCredentials.Deleted")
+                        });
+                        break;
+                    case CustomerLoginResults.NotActive:
+                        return Json(new
+                        {
+                            success = false,
+                            message = _localizationService.GetResource("Account.Login.WrongCredentials.NotActive")
+                        });
+                    case CustomerLoginResults.NotRegistered:
+                        return Json(new
+                        {
+                            success = false,
+                            message = _localizationService.GetResource("Account.Login.WrongCredentials.NotRegistered")
+                        });
+                    case CustomerLoginResults.WrongPassword:
+                    default:
+                        return Json(new
+                        {
+                            success = false,
+                            message = _localizationService.GetResource("Account.Login.WrongCredentials")
+                        });
                 }
-                case CustomerLoginResults.CustomerNotExist:
-                    return Json(new
-                    {
-                        success = false,
-                        message = _localizationService.GetResource("Account.Login.WrongCredentials.CustomerNotExist")
-                    });
-                case CustomerLoginResults.Deleted:
-                    return Json(new
-                    {
-                        success = false,
-                        message = _localizationService.GetResource("Account.Login.WrongCredentials.Deleted")
-                    });
-                    break;
-                case CustomerLoginResults.NotActive:
-                    return Json(new
-                    {
-                        success = false,
-                        message = _localizationService.GetResource("Account.Login.WrongCredentials.NotActive")
-                    });
-                case CustomerLoginResults.NotRegistered:
-                    return Json(new
-                    {
-                        success = false,
-                        message = _localizationService.GetResource("Account.Login.WrongCredentials.NotRegistered")
-                    });
-                case CustomerLoginResults.WrongPassword:
-                default:
-               return Json(new
-                    {
-                        success = false,
-                        message = _localizationService.GetResource("Account.Login.WrongCredentials")
-                    });
             }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+            return Json(new
+            {
+                success = false,
+                message = string.Join("<br />", errors.Select(q => q.ErrorMessage))
+            });
 
         }
 
@@ -919,96 +940,106 @@ namespace TinyCms.Web.Controllers
                     message = string.Join("<br />", customerAttributeWarnings)
                 });
             }
-
-            if (_customerSettings.UsernamesEnabled && model.Username != null)
+            if (ModelState.IsValid)
             {
-                model.Username = model.Username.Trim();
-            }
-
-            bool isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
-            var registrationRequest = new CustomerRegistrationRequest(customer,
-                model.Email,
-                _customerSettings.UsernamesEnabled ? model.Username : model.Email,
-                model.Password,
-                _customerSettings.DefaultPasswordFormat,
-                isApproved);
-                var registrationResult = _customerRegistrationService.RegisterCustomer(registrationRequest);
-            if (registrationResult.Success)
-            {
-
-                //form fields
-                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FullName, model.FullName);
-                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
-
-                //save customer attributes
-                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CustomCustomerAttributes,
-                    customerAttributesXml);
-
-                //login customer now
-                if (isApproved)
-                    _authenticationService.SignIn(customer, true);
-
-                //associated with external account (if possible)
-                TryAssociateAccountWithExternalAccount(customer);
-                //notifications
-                if (_customerSettings.NotifyNewCustomerRegistration)
-                    _workflowMessageService.SendCustomerRegisteredNotificationMessage(customer,
-                        _localizationSettings.DefaultAdminLanguageId);
-
-                //raise event       
-                _eventPublisher.Publish(new CustomerRegisteredEvent(customer));
-
-                switch (_customerSettings.UserRegistrationType)
+                if (_customerSettings.UsernamesEnabled && model.Username != null)
                 {
-                    case UserRegistrationType.EmailValidation:
-                    {
-                        //email validation message
-                        _genericAttributeService.SaveAttribute(customer,
-                            SystemCustomerAttributeNames.AccountActivationToken, Guid.NewGuid().ToString());
-                        _workflowMessageService.SendCustomerEmailValidationMessage(customer,
-                            _workContext.WorkingLanguage.Id);
+                    model.Username = model.Username.Trim();
+                }
 
-                        //result
-                        return Json(new
-                        {
-                            success = true,
-                            message = _localizationService.GetResource("Account.Register.Result.EmailValidation")
-                        });
-                    }
-                    case UserRegistrationType.AdminApproval:
-                    {
-                        return Json(new
-                        {
-                            success = true,
-                            message = _localizationService.GetResource("Account.Register.Result.AdminApproval")
-                        });
-                    }
-                    case UserRegistrationType.Standard:
-                    {
-                        //send customer welcome message
-                        _workflowMessageService.SendCustomerWelcomeMessage(customer, _workContext.WorkingLanguage.Id);
+                bool isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
+                var registrationRequest = new CustomerRegistrationRequest(customer,
+                    model.Email,
+                    _customerSettings.UsernamesEnabled ? model.Username : model.Email,
+                    model.Password,
+                    _customerSettings.DefaultPasswordFormat,
+                    isApproved);
+                var registrationResult = _customerRegistrationService.RegisterCustomer(registrationRequest);
+                if (registrationResult.Success)
+                {
 
-                        return Json(new
-                        {
-                            success = true,
-                            message = _localizationService.GetResource("Account.Register.Result.Standard")
-                        });
-                    }
-                    default:
+                    //form fields
+                    if (_customerSettings.PhoneEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
+
+                    //save customer attributes
+                    _genericAttributeService.SaveAttribute(customer,
+                        SystemCustomerAttributeNames.CustomCustomerAttributes,
+                        customerAttributesXml);
+
+                    //login customer now
+                    if (isApproved)
+                        _authenticationService.SignIn(customer, true);
+
+                    //associated with external account (if possible)
+                    TryAssociateAccountWithExternalAccount(customer);
+                    //notifications
+                    if (_customerSettings.NotifyNewCustomerRegistration)
+                        _workflowMessageService.SendCustomerRegisteredNotificationMessage(customer,
+                            _localizationSettings.DefaultAdminLanguageId);
+
+                    //raise event       
+                    _eventPublisher.Publish(new CustomerRegisteredEvent(customer));
+
+                    switch (_customerSettings.UserRegistrationType)
                     {
-                        return Json(new
+                        case UserRegistrationType.EmailValidation:
                         {
-                            success = true,
-                            message = _localizationService.GetResource("Account.Register.Result.Standard")
-                        });
+                            //email validation message
+                            _genericAttributeService.SaveAttribute(customer,
+                                SystemCustomerAttributeNames.AccountActivationToken, Guid.NewGuid().ToString());
+                            _workflowMessageService.SendCustomerEmailValidationMessage(customer,
+                                _workContext.WorkingLanguage.Id);
+
+                            //result
+                            return Json(new
+                            {
+                                success = true,
+                                message = _localizationService.GetResource("Account.Register.Result.EmailValidation")
+                            });
+                        }
+                        case UserRegistrationType.AdminApproval:
+                        {
+                            return Json(new
+                            {
+                                success = true,
+                                message = _localizationService.GetResource("Account.Register.Result.AdminApproval")
+                            });
+                        }
+                        case UserRegistrationType.Standard:
+                        {
+                            //send customer welcome message
+                            _workflowMessageService.SendCustomerWelcomeMessage(customer, _workContext.WorkingLanguage.Id);
+
+                            return Json(new
+                            {
+                                success = true,
+                                message = _localizationService.GetResource("Account.Register.Result.Standard")
+                            });
+                        }
+                        default:
+                        {
+                            return Json(new
+                            {
+                                success = true,
+                                message = _localizationService.GetResource("Account.Register.Result.Standard")
+                            });
+                        }
                     }
                 }
+                //errors
+                return Json(new
+                {
+                    success = false,
+                    message = string.Join("<br />", registrationResult.Errors)
+                });
             }
-            //errors
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+
             return Json(new
             {
                 success = false,
-                message = string.Join("<br />", registrationResult.Errors)
+                message = string.Join("<br />", errors.Select(q=>q.ErrorMessage))
             });
         }
 

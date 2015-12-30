@@ -103,9 +103,6 @@ namespace TinyCms.Admin.Controllers
 
         #region Methods
 
-
-
-
         public ActionResult CustomerUser()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))

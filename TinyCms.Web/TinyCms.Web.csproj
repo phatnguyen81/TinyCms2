@@ -1952,6 +1952,7 @@
     <Content Include="Views\Shared\_OneColumnVideo.cshtml" />
     <Content Include="Views\Posts\GetRandomPost.Video.cshtml" />
     <Content Include="Views\Posts\GetRandomPost.Search.cshtml" />
+    <Content Include="Views\Customer\_CustomerAttributes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />

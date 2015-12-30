@@ -511,7 +511,7 @@ namespace TinyCms.Admin.Controllers
 
             return Json(gridModel);
         }
-        
+
         public ActionResult Create()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
@@ -557,7 +557,7 @@ namespace TinyCms.Admin.Controllers
                 ModelState.AddModelError("", customerRolesError);
                 ErrorNotification(customerRolesError, false);
             }
-            
+
             if (ModelState.IsValid)
             {
                 var customer = new Customer
@@ -573,75 +573,37 @@ namespace TinyCms.Admin.Controllers
                 _customerService.InsertCustomer(customer);
 
                 //form fields
-
-                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FullName, model.FullName);
-                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
-                //if (_dateTimeSettings.AllowCustomersToSetTimeZone)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId, model.TimeZoneId);
-                //if (_customerSettings.GenderEnabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender, model.Gender);
-                //_genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName, model.FirstName);
-                //_genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName, model.LastName);
-                //if (_customerSettings.DateOfBirthEnabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth, model.DateOfBirth);
-                //if (_customerSettings.CompanyEnabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company, model.Company);
-                //if (_customerSettings.StreetAddressEnabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress, model.StreetAddress);
-                //if (_customerSettings.StreetAddress2Enabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2, model.StreetAddress2);
-                //if (_customerSettings.ZipPostalCodeEnabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode, model.ZipPostalCode);
-                //if (_customerSettings.CityEnabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.City, model.City);
-                //if (_customerSettings.CountryEnabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId, model.CountryId);
-                //if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId, model.StateProvinceId);
-                //if (_customerSettings.PhoneEnabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
-                //if (_customerSettings.FaxEnabled)
-                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Fax, model.Fax);
+                if (_dateTimeSettings.AllowCustomersToSetTimeZone)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId, model.TimeZoneId);
+                if (_customerSettings.GenderEnabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender, model.Gender);
+                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName, model.FirstName);
+                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName, model.LastName);
+                if (_customerSettings.DateOfBirthEnabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth, model.DateOfBirth);
+                if (_customerSettings.CompanyEnabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company, model.Company);
+                if (_customerSettings.StreetAddressEnabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress, model.StreetAddress);
+                if (_customerSettings.StreetAddress2Enabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2, model.StreetAddress2);
+                if (_customerSettings.ZipPostalCodeEnabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode, model.ZipPostalCode);
+                if (_customerSettings.CityEnabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.City, model.City);
+                if (_customerSettings.CountryEnabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId, model.CountryId);
+                if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId, model.StateProvinceId);
+                if (_customerSettings.PhoneEnabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
+                if (_customerSettings.FaxEnabled)
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Fax, model.Fax);
 
                 //custom customer attributes
                 var customerAttributes = ParseCustomCustomerAttributes(customer, form);
                 _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CustomCustomerAttributes, customerAttributes);
 
-
-                //newsletter subscriptions
-                //if (!String.IsNullOrEmpty(customer.Email))
-                //{
-                //    var allStores = _storeService.GetAllStores();
-                //    foreach (var store in allStores)
-                //    {
-                //        var newsletterSubscription = _newsLetterSubscriptionService
-                //            .GetNewsLetterSubscriptionByEmailAndStoreId(customer.Email, store.Id);
-                //        if (model.SelectedNewsletterSubscriptionStoreIds != null &&
-                //            model.SelectedNewsletterSubscriptionStoreIds.Contains(store.Id))
-                //        {
-                //            //subscribed
-                //            if (newsletterSubscription == null)
-                //            {
-                //                _newsLetterSubscriptionService.InsertNewsLetterSubscription(new NewsLetterSubscription
-                //                {
-                //                    NewsLetterSubscriptionGuid = Guid.NewGuid(),
-                //                    Email = customer.Email,
-                //                    Active = true,
-                //                    StoreId = store.Id,
-                //                    CreatedOnUtc = DateTime.UtcNow
-                //                });
-                //            }
-                //        }
-                //        else
-                //        {
-                //            //not subscribed
-                //            if (newsletterSubscription != null)
-                //            {
-                //                _newsLetterSubscriptionService.DeleteNewsLetterSubscription(newsletterSubscription);
-                //            }
-                //        }
-                //    }
-                //}
 
                 //password
                 if (!String.IsNullOrWhiteSpace(model.Password))
@@ -659,35 +621,15 @@ namespace TinyCms.Admin.Controllers
                 foreach (var customerRole in newCustomerRoles)
                 {
                     //ensure that the current customer cannot add to "Administrators" system role if he's not an admin himself
-                    if (customerRole.SystemName == SystemCustomerRoleNames.Administrators && 
+                    if (customerRole.SystemName == SystemCustomerRoleNames.Administrators &&
                         !_workContext.CurrentCustomer.IsAdmin())
                         continue;
 
                     customer.CustomerRoles.Add(customerRole);
                 }
                 _customerService.UpdateCustomer(customer);
-                
 
-                ////ensure that a customer with a vendor associated is not in "Administrators" role
-                ////otherwise, he won't be have access to the other functionality in admin area
-                //if (customer.IsAdmin() && customer.VendorId > 0)
-                //{
-                //    customer.VendorId = 0;
-                //    _customerService.UpdateCustomer(customer);
-                //    ErrorNotification(_localizationService.GetResource("Admin.Customers.Customers.AdminCouldNotbeVendor"));
-                //}
 
-                ////ensure that a customer in the Vendors role has a vendor account associated.
-                ////otherwise, he will have access to ALL products
-                //if (customer.IsVendor() && customer.VendorId == 0)
-                //{
-                //    var vendorRole = customer
-                //        .CustomerRoles
-                //        .FirstOrDefault(x => x.SystemName == SystemCustomerRoleNames.Vendors);
-                //    customer.CustomerRoles.Remove(vendorRole);
-                //    _customerService.UpdateCustomer(customer);
-                //    ErrorNotification(_localizationService.GetResource("Admin.Customers.Customers.CannotBeInVendoRoleWithoutVendorAssociated"));
-                //}
 
                 //activity log
                 _customerActivityService.InsertActivity("AddNewCustomer", _localizationService.GetResource("ActivityLog.AddNewCustomer"), customer.Id);
@@ -741,7 +683,7 @@ namespace TinyCms.Admin.Controllers
                 ModelState.AddModelError("", customerRolesError);
                 ErrorNotification(customerRolesError, false);
             }
-            
+
             if (ModelState.IsValid)
             {
                 try
@@ -749,14 +691,14 @@ namespace TinyCms.Admin.Controllers
                     customer.AdminComment = model.AdminComment;
                     customer.Active = model.Active;
                     //email
-                    //if (!String.IsNullOrWhiteSpace(model.Email))
-                    //{
-                    //    _customerRegistrationService.SetEmail(customer, model.Email);
-                    //}
-                    //else
-                    //{
-                    //    customer.Email = model.Email;
-                    //}
+                    if (!String.IsNullOrWhiteSpace(model.Email))
+                    {
+                        _customerRegistrationService.SetEmail(customer, model.Email);
+                    }
+                    else
+                    {
+                        customer.Email = model.Email;
+                    }
 
                     //username
                     if (_customerSettings.UsernamesEnabled && _customerSettings.AllowUsersToChangeUsernames)
@@ -771,76 +713,40 @@ namespace TinyCms.Admin.Controllers
                         }
                     }
 
-
+               
                     //form fields
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FullName, model.FullName);
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
-
-                    //if (_dateTimeSettings.AllowCustomersToSetTimeZone)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId, model.TimeZoneId);
-                    //if (_customerSettings.GenderEnabled)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender, model.Gender);
-                    //_genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName, model.FirstName);
-                    //_genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName, model.LastName);
-                    //if (_customerSettings.DateOfBirthEnabled)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth, model.DateOfBirth);
-                    //if (_customerSettings.CompanyEnabled)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company, model.Company);
-                    //if (_customerSettings.StreetAddressEnabled)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress, model.StreetAddress);
-                    //if (_customerSettings.StreetAddress2Enabled)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2, model.StreetAddress2);
-                    //if (_customerSettings.ZipPostalCodeEnabled)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode, model.ZipPostalCode);
-                    //if (_customerSettings.CityEnabled)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.City, model.City);
-                    //if (_customerSettings.CountryEnabled)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId, model.CountryId);
-                    //if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId, model.StateProvinceId);
-                    ////if (_customerSettings.PhoneEnabled)
-                    ////    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
-                    //if (_customerSettings.FaxEnabled)
-                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Fax, model.Fax);
+                    if (_dateTimeSettings.AllowCustomersToSetTimeZone)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId, model.TimeZoneId);
+                    if (_customerSettings.GenderEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender, model.Gender);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName, model.FirstName);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName, model.LastName);
+                    if (_customerSettings.DateOfBirthEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth, model.DateOfBirth);
+                    if (_customerSettings.CompanyEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company, model.Company);
+                    if (_customerSettings.StreetAddressEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress, model.StreetAddress);
+                    if (_customerSettings.StreetAddress2Enabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2, model.StreetAddress2);
+                    if (_customerSettings.ZipPostalCodeEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode, model.ZipPostalCode);
+                    if (_customerSettings.CityEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.City, model.City);
+                    if (_customerSettings.CountryEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId, model.CountryId);
+                    if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId, model.StateProvinceId);
+                    if (_customerSettings.PhoneEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
+                    if (_customerSettings.FaxEnabled)
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Fax, model.Fax);
 
                     //custom customer attributes
                     var customerAttributes = ParseCustomCustomerAttributes(customer, form);
                     _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CustomCustomerAttributes, customerAttributes);
 
-                    //newsletter subscriptions
-                    //if (!String.IsNullOrEmpty(customer.Email))
-                    //{
-                    //    var allStores = _storeService.GetAllStores();
-                    //    foreach (var store in allStores)
-                    //    {
-                    //        var newsletterSubscription = _newsLetterSubscriptionService
-                    //            .GetNewsLetterSubscriptionByEmailAndStoreId(customer.Email, store.Id);
-                    //        if (model.SelectedNewsletterSubscriptionStoreIds != null &&
-                    //            model.SelectedNewsletterSubscriptionStoreIds.Contains(store.Id))
-                    //        {
-                    //            //subscribed
-                    //            if (newsletterSubscription == null)
-                    //            {
-                    //                _newsLetterSubscriptionService.InsertNewsLetterSubscription(new NewsLetterSubscription
-                    //                {
-                    //                    NewsLetterSubscriptionGuid = Guid.NewGuid(),
-                    //                    Email = customer.Email,
-                    //                    Active = true,
-                    //                    StoreId = store.Id,
-                    //                    CreatedOnUtc = DateTime.UtcNow
-                    //                });
-                    //            }
-                    //        }
-                    //        else
-                    //        {
-                    //            //not subscribed
-                    //            if (newsletterSubscription != null)
-                    //            {
-                    //                _newsLetterSubscriptionService.DeleteNewsLetterSubscription(newsletterSubscription);
-                    //            }
-                    //        }
-                    //    }
-                    //}
+              
 
 
                     //customer roles
@@ -867,9 +773,9 @@ namespace TinyCms.Admin.Controllers
                         }
                     }
                     _customerService.UpdateCustomer(customer);
-                    
 
-                 
+
+                  
 
                     //activity log
                     _customerActivityService.InsertActivity("EditCustomer", _localizationService.GetResource("ActivityLog.EditCustomer"), customer.Id);
@@ -880,7 +786,7 @@ namespace TinyCms.Admin.Controllers
                         //selected tab
                         SaveSelectedTabIndex();
 
-                        return RedirectToAction("Edit",  new {id = customer.Id});
+                        return RedirectToAction("Edit", new { id = customer.Id });
                     }
                     return RedirectToAction("List");
                 }
@@ -895,7 +801,7 @@ namespace TinyCms.Admin.Controllers
             PrepareCustomerModel(model, customer, true);
             return View(model);
         }
-        
+
         [HttpPost, ActionName("Edit")]
         [FormValueRequired("changepassword")]
         public ActionResult ChangePassword(CustomerModel model)
@@ -920,8 +826,9 @@ namespace TinyCms.Admin.Controllers
                         ErrorNotification(error);
             }
 
-            return RedirectToAction("Edit",  new {id = customer.Id});
+            return RedirectToAction("Edit", new { id = customer.Id });
         }
+        
       
       
         [HttpPost]

@@ -52,6 +52,7 @@
         <div>
             @TabCustomerFormFields()
         </div>
+    
         <div>
             @TabDateTimeSettings()
         </div>
@@ -199,7 +200,24 @@
                 @Html.ValidationMessageFor(model => model.CustomerSettings.NotifyNewCustomerRegistration)
             </td>
         </tr>
-  
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.CustomerSettings.HideDownloadablePostsTab):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.CustomerSettings.HideDownloadablePostsTab)
+                @Html.ValidationMessageFor(model => model.CustomerSettings.HideDownloadablePostsTab)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.CustomerSettings.HideBackInStockSubscriptionsTab):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.CustomerSettings.HideBackInStockSubscriptionsTab)
+                @Html.ValidationMessageFor(model => model.CustomerSettings.HideBackInStockSubscriptionsTab)
+            </td>
+        </tr>
         <tr>
             <td class="adminTitle">
                 @Html.NopLabelFor(model => model.CustomerSettings.CustomerNameFormat):
@@ -621,7 +639,7 @@
         </tr>
     </table>
     //render custom customer attributes
-    @Html.Action("ListBlock", "CustomerAttribute")
+    @*@Html.Action("ListBlock", "CustomerAttribute")*@
 }
 
 @helper TabDateTimeSettings()

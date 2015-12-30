@@ -29,6 +29,13 @@ namespace TinyCms.Services.Customers
         /// <returns>Result</returns>
         ChangePasswordResult ChangePassword(ChangePasswordRequest request);
 
+        /// <summary>
+        /// Sets a user email
+        /// </summary>
+        /// <param name="customer">Customer</param>
+        /// <param name="newEmail">New email</param>
+        void SetEmail(Customer customer, string newEmail);
+
        
         /// <summary>
         /// Sets a customer username
