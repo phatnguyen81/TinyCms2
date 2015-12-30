@@ -1,4 +1,4 @@
-﻿tinymce.addI18n('hu', {
+tinymce.addI18n('hu', {
     'YouTube Tooltip'   : "YouTube",
     'YouTube Title'     : "Youtube videó beillesztése",
     'Youtube URL'       : 'Link megosztása',
