@@ -18,8 +18,21 @@
 }
 
 <div class="cate_detail">
-    <h1>@Model.Name</h1>
-        @if (Model.SubCategories.Any())
+    
+    @if (Model.ParentCategory != null)
+    {
+        <h1>@Model.ParentCategory.Name</h1>
+        <p class="subcate">
+            @foreach (var subcat in Model.ParentCategory.SubCategories)
+            {
+                <a href="@Url.RouteUrl("Category",new {subcat.SeName})" @(subcat.Id == Model.Id ? "class=selected":"")>@subcat.Name</a>
+            }
+        </p>
+    }
+    else
+    {
+        <h1>@Model.Name</h1>
+        if (Model.SubCategories.Any())
         {
             <p class="subcate">
                 @foreach (var subcat in Model.SubCategories)
@@ -28,6 +41,8 @@
                 }
             </p>
         }
+    }
+      
         @if (Model.Posts.Any())
         {
             var firstPost = Model.Posts.First();

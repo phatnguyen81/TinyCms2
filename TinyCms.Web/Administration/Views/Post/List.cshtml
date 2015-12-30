@@ -67,79 +67,113 @@
                 <div id="posts-grid"></div>
 
                 <script>
-                    $(document).ready(function() {
-                        $("#posts-grid").kendoGrid({
-                            dataSource: {
-                                type: "json",
-                                transport: {
-                                    read: {
-                                        url: "@Html.Raw(Url.Action("PostList", "Post"))",
-                                        type: "POST",
-                                        dataType: "json",
-                                        data: additionalData
-                                    }
-                                },
-                                schema: {
-                                    data: "Data",
-                                    total: "Total",
-                                    errors: "Errors"
-                                },
-                                error: function(e) {
-                                    display_kendoui_grid_error(e);
-                                    // Cancel the changes
-                                    this.cancelChanges();
-                                },
-                                pageSize: @(defaultGridPageSize),
-                                serverPaging: true,
-                                serverFiltering: true,
-                                serverSorting: true
-                            },
-                            pageable: {
-                                refresh: true,
-                                pageSizes: [@(gridPageSizes)]
-                            },
-                            editable: {
-                                confirmation: false,
-                                mode: "inline"
-                            },
-                            scrollable: false,
-                            dataBound: onDataBound,
-                            columns: [
-                                {
-                                    field: "Id",
-                                    headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
-                                    headerAttributes: { style: "text-align:center" },
-                                    attributes: { style: "text-align:center" },
-                                    template: "<input type='checkbox' value='#=Id#' class='checkboxGroups'/>",
-                                    width: 50
-                                },
-                                {
-                                    field: "PictureThumbnailUrl",
-                                    title: "@T("Admin.Catalog.Posts.Fields.PictureThumbnailUrl")",
-                                    template: '<img src="#=PictureThumbnailUrl#" />',
-                                    width: 100
-                                },
-                                {
-                                    field: "Name",
-                                    title: "@T("Admin.Catalog.Posts.Fields.Name")",
-                                    width: 300
-                                }, {
-                                    field: "Published",
-                                    title: "@T("Admin.Catalog.Posts.Fields.Published")",
-                                    width: 100,
-                                    headerAttributes: { style: "text-align:center" },
-                                    attributes: { style: "text-align:center" },
-                                    template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Published#.gif" />'
-                                }, {
-                                    field: "Id",
-                                    title: "@T("Admin.Common.Edit")",
-                                    width: 100,
-                                    template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
-                                }
-                            ]
-                        } );
-                    });
-                </script>
+    $(document).ready(function() {
+        $("#posts-grid").kendoGrid({
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: {
+                        url: "@Html.Raw(Url.Action("PostList", "Post"))",
+                        type: "POST",
+                        dataType: "json",
+                        data: additionalData
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    errors: "Errors"
+                },
+                error: function(e) {
+                    display_kendoui_grid_error(e);
+                    // Cancel the changes
+                    this.cancelChanges();
+                },
+                pageSize: @(defaultGridPageSize),
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true
+            },
+            pageable: {
+                refresh: true,
+                pageSizes: [@(gridPageSizes)]
+            },
+            editable: {
+                confirmation: false,
+                mode: "inline"
+            },
+            scrollable: false,
+            dataBound: onDataBound,
+            columns: [
+                {
+                    field: "Id",
+                    headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
+                    headerAttributes: { style: "text-align:center" },
+                    attributes: { style: "text-align:center" },
+                    template: "<input type='checkbox' value='#=Id#' class='checkboxGroups'/>",
+                    width: 50
+                },
+                {
+                    field: "PictureThumbnailUrl",
+                    title: "@T("Admin.Catalog.Posts.Fields.PictureThumbnailUrl")",
+                    template: '<img src="#=PictureThumbnailUrl#" />',
+                    width: 100
+                },
+                {
+                    field: "Name",
+                    title: "@T("Admin.Catalog.Posts.Fields.Name")",
+                    width: 300
+                }, {
+                    field: "ViewCount",
+                    title: "@T("Admin.Catalog.Posts.Fields.ViewCount")",
+                    attributes: { style: "text-align:right" }
+                },
+                {
+                    field: "ShareCount",
+                    title: "@T("Admin.Catalog.Posts.Fields.ShareCount")",
+                    attributes: { style: "text-align:right" }
+                }, {
+                    field: "CommentCount",
+                    title: "@T("Admin.Catalog.Posts.Fields.CommentCount")",
+                    attributes: { style: "text-align:right" }
+                }, {
+                    field: "CreatedByName",
+                    title: "@T("Admin.Catalog.Posts.Fields.CreatedBy")",
+                    attributes: { style: "text-align:center" }
+
+                }, {
+                    field: "CreatedOn",
+                    title: "@T("Admin.Catalog.Posts.Fields.CreatedOn")",
+                    attributes: { style: "text-align:center" },
+                    type: "date", format: "{0:dd/MM/yyyy HH:mm}"
+                }
+                , {
+                    field: "ApprovedByName",
+                    title: "@T("Admin.Catalog.Posts.Fields.ApprovedBy")",
+                    attributes: { style: "text-align:center" }
+                }, {
+                    field: "ApprovedOn",
+                    title: "@T("Admin.Catalog.Posts.Fields.ApprovedOn")",
+                    attributes: { style: "text-align:center" },
+                    type: "date", format: "{0:dd/MM/yyyy HH:mm}"
+                }
+                , {
+                    field: "Published",
+                    title: "@T("Admin.Catalog.Posts.Fields.Published")",
+                    width: 100,
+                    headerAttributes: { style: "text-align:center" },
+                    attributes: { style: "text-align:center" },
+                    template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Published#.gif" />'
+                }, {
+                    field: "Id",
+                    title: "@T("Admin.Common.Edit")",
+                    width: 100,
+                    template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
+                }
+        ]
+    });
+    });
+</script>
             </td>
         </tr>
     </table>

@@ -437,6 +437,18 @@ namespace TinyCms.Admin.Controllers
             gridModel.Data = posts.Select(x =>
             {
                 var postModel = x.ToModel();
+                var createdBy = _customerService.GetCustomerById(x.CreatedBy);
+                if (createdBy != null)
+                    postModel.CreatedByName = createdBy.Username;
+
+                var approvedBy = _customerService.GetCustomerById(x.ApprovedBy);
+                if (approvedBy != null)
+                    postModel.ApprovedByName = approvedBy.Username;
+
+                postModel.CreatedOn = _dateTimeHelper.ConvertToUserTime(x.CreatedOnUtc);
+                if (x.ApprovedOnUtc != null)
+                    postModel.ApprovedOn = _dateTimeHelper.ConvertToUserTime(x.ApprovedOnUtc.Value);
+
                 //little hack here:
                 //ensure that post full descriptions are not returned
                 //otherwise, we can get the following error if posts have too long descriptions:

@@ -216,20 +216,20 @@
         }
         <tr>
             <td class="adminTitle">
-                @Html.NopLabelFor(model => model.FirstName):
+                @Html.NopLabelFor(model => model.FullName):
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.FirstName)
-                @Html.ValidationMessageFor(model => model.FirstName)
+                @Html.EditorFor(model => model.FullName)
+                @Html.ValidationMessageFor(model => model.FullName)
             </td>
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.NopLabelFor(model => model.LastName):
+                @Html.NopLabelFor(model => model.Phone):
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.LastName)
-                @Html.ValidationMessageFor(model => model.LastName)
+                @Html.EditorFor(model => model.Phone)
+                @Html.ValidationMessageFor(model => model.Phone)
             </td>
         </tr>
         @if (Model.DateOfBirthEnabled)

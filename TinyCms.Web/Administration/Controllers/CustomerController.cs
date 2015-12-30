@@ -573,32 +573,35 @@ namespace TinyCms.Admin.Controllers
                 _customerService.InsertCustomer(customer);
 
                 //form fields
-                if (_dateTimeSettings.AllowCustomersToSetTimeZone)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId, model.TimeZoneId);
-                if (_customerSettings.GenderEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender, model.Gender);
-                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName, model.FirstName);
-                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName, model.LastName);
-                if (_customerSettings.DateOfBirthEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth, model.DateOfBirth);
-                if (_customerSettings.CompanyEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company, model.Company);
-                if (_customerSettings.StreetAddressEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress, model.StreetAddress);
-                if (_customerSettings.StreetAddress2Enabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2, model.StreetAddress2);
-                if (_customerSettings.ZipPostalCodeEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode, model.ZipPostalCode);
-                if (_customerSettings.CityEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.City, model.City);
-                if (_customerSettings.CountryEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId, model.CountryId);
-                if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId, model.StateProvinceId);
-                if (_customerSettings.PhoneEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
-                if (_customerSettings.FaxEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Fax, model.Fax);
+
+                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FullName, model.FullName);
+                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
+                //if (_dateTimeSettings.AllowCustomersToSetTimeZone)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId, model.TimeZoneId);
+                //if (_customerSettings.GenderEnabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender, model.Gender);
+                //_genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName, model.FirstName);
+                //_genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName, model.LastName);
+                //if (_customerSettings.DateOfBirthEnabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth, model.DateOfBirth);
+                //if (_customerSettings.CompanyEnabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company, model.Company);
+                //if (_customerSettings.StreetAddressEnabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress, model.StreetAddress);
+                //if (_customerSettings.StreetAddress2Enabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2, model.StreetAddress2);
+                //if (_customerSettings.ZipPostalCodeEnabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode, model.ZipPostalCode);
+                //if (_customerSettings.CityEnabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.City, model.City);
+                //if (_customerSettings.CountryEnabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId, model.CountryId);
+                //if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId, model.StateProvinceId);
+                //if (_customerSettings.PhoneEnabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
+                //if (_customerSettings.FaxEnabled)
+                //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Fax, model.Fax);
 
                 //custom customer attributes
                 var customerAttributes = ParseCustomCustomerAttributes(customer, form);
@@ -770,32 +773,35 @@ namespace TinyCms.Admin.Controllers
 
 
                     //form fields
-                    if (_dateTimeSettings.AllowCustomersToSetTimeZone)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId, model.TimeZoneId);
-                    if (_customerSettings.GenderEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender, model.Gender);
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName, model.FirstName);
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName, model.LastName);
-                    if (_customerSettings.DateOfBirthEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth, model.DateOfBirth);
-                    if (_customerSettings.CompanyEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company, model.Company);
-                    if (_customerSettings.StreetAddressEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress, model.StreetAddress);
-                    if (_customerSettings.StreetAddress2Enabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2, model.StreetAddress2);
-                    if (_customerSettings.ZipPostalCodeEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode, model.ZipPostalCode);
-                    if (_customerSettings.CityEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.City, model.City);
-                    if (_customerSettings.CountryEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId, model.CountryId);
-                    if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId, model.StateProvinceId);
-                    if (_customerSettings.PhoneEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
-                    if (_customerSettings.FaxEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Fax, model.Fax);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FullName, model.FullName);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
+
+                    //if (_dateTimeSettings.AllowCustomersToSetTimeZone)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId, model.TimeZoneId);
+                    //if (_customerSettings.GenderEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender, model.Gender);
+                    //_genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName, model.FirstName);
+                    //_genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName, model.LastName);
+                    //if (_customerSettings.DateOfBirthEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth, model.DateOfBirth);
+                    //if (_customerSettings.CompanyEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company, model.Company);
+                    //if (_customerSettings.StreetAddressEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress, model.StreetAddress);
+                    //if (_customerSettings.StreetAddress2Enabled)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2, model.StreetAddress2);
+                    //if (_customerSettings.ZipPostalCodeEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode, model.ZipPostalCode);
+                    //if (_customerSettings.CityEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.City, model.City);
+                    //if (_customerSettings.CountryEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId, model.CountryId);
+                    //if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId, model.StateProvinceId);
+                    ////if (_customerSettings.PhoneEnabled)
+                    ////    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
+                    //if (_customerSettings.FaxEnabled)
+                    //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Fax, model.Fax);
 
                     //custom customer attributes
                     var customerAttributes = ParseCustomCustomerAttributes(customer, form);

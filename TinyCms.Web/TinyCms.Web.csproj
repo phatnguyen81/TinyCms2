@@ -1928,6 +1928,7 @@
     <Content Include="Views\Posts\PostTemplate.Video.cshtml" />
     <Content Include="Views\Shared\_OneColumnVideo.cshtml" />
     <Content Include="Views\Posts\GetRandomPost.Video.cshtml" />
+    <Content Include="Views\Posts\GetRandomPost.Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />

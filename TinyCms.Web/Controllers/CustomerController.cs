@@ -541,33 +541,33 @@ namespace TinyCms.Web.Controllers
                 case CustomerLoginResults.CustomerNotExist:
                     return Json(new
                     {
-                        success = true,
+                        success = false,
                         message = _localizationService.GetResource("Account.Login.WrongCredentials.CustomerNotExist")
                     });
                 case CustomerLoginResults.Deleted:
                     return Json(new
                     {
-                        success = true,
+                        success = false,
                         message = _localizationService.GetResource("Account.Login.WrongCredentials.Deleted")
                     });
                     break;
                 case CustomerLoginResults.NotActive:
                     return Json(new
                     {
-                        success = true,
+                        success = false,
                         message = _localizationService.GetResource("Account.Login.WrongCredentials.NotActive")
                     });
                 case CustomerLoginResults.NotRegistered:
                     return Json(new
                     {
-                        success = true,
+                        success = false,
                         message = _localizationService.GetResource("Account.Login.WrongCredentials.NotRegistered")
                     });
                 case CustomerLoginResults.WrongPassword:
                 default:
                return Json(new
                     {
-                        success = true,
+                        success = false,
                         message = _localizationService.GetResource("Account.Login.WrongCredentials")
                     });
             }

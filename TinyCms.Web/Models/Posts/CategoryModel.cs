@@ -28,6 +28,9 @@ namespace TinyCms.Web.Models.Posts
 
         public bool DisplayCategoryBreadcrumb { get; set; }
         public IList<CategoryModel> CategoryBreadcrumb { get; set; }
+
+        public CategoryModel ParentCategory { get; set; }
+
         
         public IList<SubCategoryModel> SubCategories { get; set; }
 
@@ -56,6 +59,7 @@ namespace TinyCms.Web.Models.Posts
 
 		#endregion
     }
+
 
     public partial class CategoryBoxModel : BaseNopEntityModel
     {

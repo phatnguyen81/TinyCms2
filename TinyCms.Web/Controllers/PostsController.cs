@@ -601,9 +601,55 @@ namespace TinyCms.Web.Controllers
 
             //page size
             PreparePageSizeOptions(model.PagingFilteringContext, command, 10);
+            if (category.ParentCategoryId > 0)
+            {
+                model.ParentCategory = _categoryService.GetCategoryById(category.ParentCategoryId).ToModel();
+                string subCategoriesOfParentCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_SUBCATEGORIES_KEY,
+                    model.ParentCategory.Id,
+                    string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
+                    _workContext.WorkingLanguage.Id,
+                    _webHelper.IsCurrentConnectionSecured());
+                model.ParentCategory.SubCategories = _cacheManager.Get(subCategoriesOfParentCacheKey, () =>
+                    _categoryService.GetAllCategoriesByParentCategoryId(category.ParentCategoryId)
+                        .Select(x =>
+                        {
+                            var subCatModel = new CategoryModel.SubCategoryModel
+                            {
+                                Id = x.Id,
+                                Name = x.GetLocalized(y => y.Name),
+                                SeName = x.GetSeName(),
+                                Description = x.GetLocalized(y => y.Description)
+                            };
 
-            
+                            //prepare picture model
+                            int pictureSize = _mediaSettings.CategoryThumbPictureSize;
+                            var categoryPictureCacheKey =
+                                string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY, x.Id, pictureSize,
+                                    true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured());
+                            subCatModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
+                            {
+                                var picture = _pictureService.GetPictureById(x.PictureId);
+                                var pictureModel = new PictureModel
+                                {
+                                    FullSizeImageUrl = _pictureService.GetPictureUrl(picture),
+                                    ImageUrl = _pictureService.GetPictureUrl(picture, pictureSize),
+                                    Title =
+                                        string.Format(
+                                            _localizationService.GetResource("Media.Category.ImageLinkTitleFormat"),
+                                            subCatModel.Name),
+                                    AlternateText =
+                                        string.Format(
+                                            _localizationService.GetResource("Media.Category.ImageAlternateTextFormat"),
+                                            subCatModel.Name)
+                                };
+                                return pictureModel;
+                            });
 
+                            return subCatModel;
+                        })
+                        .ToList()
+                    );
+            }
 
             //subcategories
             string subCategoriesCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_SUBCATEGORIES_KEY,
@@ -643,11 +689,6 @@ namespace TinyCms.Web.Controllers
                 })
                 .ToList()
             );
-
-
-
-
-         
 
             var categoryIds = new List<int>();
             categoryIds.Add(category.Id);
@@ -1015,10 +1056,11 @@ namespace TinyCms.Web.Controllers
         [ChildActionOnly]
         public ActionResult GetRandomPost(int postId, int numberPost, string template, int? postThumbPictureSize)
         {
+
             var post = _postService.GetPostById(postId);
             var model =
-                PreparePostOverviewModels(_postService.GetRandomPosts(numberPost, templateId: post.PostTemplateId,
-                    excludePostId: post.Id));
+                PreparePostOverviewModels(_postService.GetRandomPosts(numberPost, templateId: 0,
+                    excludePostId: post == null ? 0 : post.Id));
             return PartialView(template, model);
         }
         #endregion

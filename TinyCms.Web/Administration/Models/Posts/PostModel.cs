@@ -97,6 +97,7 @@ namespace TinyCms.Admin.Models.Posts
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.ApprovedOn")]
         public DateTime? ApprovedOn { get; set; }
 
+
         public IList<PostLocalizedModel> Locales { get; set; }
         
         //ACL (customer roles)
@@ -108,7 +109,11 @@ namespace TinyCms.Admin.Models.Posts
 
         public int[] SelectedCustomerRoleIds { get; set; }
 
+        public int ViewCount { get; set; }
 
+        public int ShareCount { get; set; }
+
+        public int CommentCount { get; set; }
 
         //categories
         public IList<SelectListItem> AvailableCategories { get; set; }
