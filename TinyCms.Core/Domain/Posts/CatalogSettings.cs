@@ -21,26 +21,7 @@ namespace TinyCms.Core.Domain.Posts
         /// </summary>
         public bool PublishBackPostWhenCancellingOrders { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether to display product SKU
-        /// </summary>
-        public bool ShowPostSku { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to display manufacturer part number of a product
-        /// </summary>
-        public bool ShowManufacturerPartNumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to display GTIN of a product
-        /// </summary>
-        public bool ShowGtin { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether "Free shipping" icon should be displayed for products
-        /// </summary>
-        public bool ShowFreeShippingNotification { get; set; }
-
+        
         /// <summary>
         /// Gets or sets a value indicating whether product sorting is enabled
         /// </summary>
@@ -331,5 +312,7 @@ namespace TinyCms.Core.Domain.Posts
         public int PromotionCategoryId { get; set; }
 
         public int PromotionPostNumber { get; set; }
+
+        public int VideoPostTemplateId { get; set; }
     }
 }

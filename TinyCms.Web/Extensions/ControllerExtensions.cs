@@ -58,6 +58,7 @@ namespace TinyCms.Web.Extensions
                     ViewCount = post.ViewCount,
                     ShareCount = post.ShareCount,
                     CommentCount = post.CommentCount,
+                    PostTemplateId = post.PostTemplateId,
                     CreatedOn = _dateTimeHelper.ConvertToUserTime(post.CreatedOnUtc),
                     Publish = post.Published
                 };

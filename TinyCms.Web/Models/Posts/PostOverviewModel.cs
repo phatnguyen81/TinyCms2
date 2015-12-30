@@ -22,6 +22,8 @@ namespace TinyCms.Web.Models.Posts
 
         public DateTime CreatedOn { get; set; }
 
+        public int PostTemplateId { get; set; }
+
         public bool Publish { get; set; }
         //picture
         public PictureModel DefaultPictureModel { get; set; }

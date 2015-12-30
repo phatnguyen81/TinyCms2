@@ -551,7 +551,7 @@ namespace TinyCms.Web.Controllers
                     });
 
                     //prepare post model
-                    catModel.Posts = PreparePostOverviewModels(_postService.SearchPosts(pageSize: 3, orderBy: PostSortingEnum.CreatedOn, categoryIds: new[] { catModel.Id }).ToList()).ToList();
+                    catModel.Posts = PreparePostOverviewModels(_postService.SearchPosts(pageSize: 4, orderBy: PostSortingEnum.CreatedOn, categoryIds: new[] { catModel.Id }).ToList()).ToList();
 
                     return catModel;
                 })

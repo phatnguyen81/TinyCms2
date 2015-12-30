@@ -6,6 +6,6 @@
 @foreach (var ads in Model.AdsBanners)
 {
     <a href="@ads.Link" target="_blank">
-        <img src="@ads.PictureUrl" style="width:100%;"/>
+        <img src="@ads.PictureUrl" style="width:100%;" alt="@ads.Text"/>
     </a>
 }

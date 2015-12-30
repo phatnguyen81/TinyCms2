@@ -21,7 +21,11 @@
     
     @if (Model.ParentCategory != null)
     {
-        <h1>@Model.ParentCategory.Name</h1>
+        <h1>
+            <a href="@Url.RouteUrl("Category", new { Model.ParentCategory.SeName })">
+                @Model.ParentCategory.Name
+            </a>
+        </h1>
         <p class="subcate">
             @foreach (var subcat in Model.ParentCategory.SubCategories)
             {
