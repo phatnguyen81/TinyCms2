@@ -727,6 +727,7 @@ namespace TinyCms.Services.Posts
         public IList<Post> GetRandomPosts(int numPost, int templateId = 0, int excludePostId = 0)
         {
             var query = _postRepository.Table;
+            query = query.Where(q => q.Published && !q.Deleted);
             if (templateId > 0)
             {
                 query = query.Where(q => q.PostTemplateId == templateId);
