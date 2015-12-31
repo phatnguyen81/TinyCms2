@@ -22,7 +22,6 @@ namespace TinyCms.Web.Validators.Customer
             {
                 RuleFor(x => x.Username).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Username.Required"));
             }
-            
 
 
             RuleFor(x => x.Password).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Password.Required"));
@@ -30,7 +29,12 @@ namespace TinyCms.Web.Validators.Customer
             RuleFor(x => x.ConfirmPassword).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.ConfirmPassword.Required"));
             RuleFor(x => x.ConfirmPassword).Equal(x => x.Password).WithMessage(localizationService.GetResource("Account.Fields.Password.EnteredPasswordsDoNotMatch"));
 
-          
+            //form fields
+            
+            if (customerSettings.PhoneRequired && customerSettings.PhoneEnabled)
+            {
+                RuleFor(x => x.Phone).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Phone.Required"));
+            }
         }
     }
 }

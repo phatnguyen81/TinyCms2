@@ -49,20 +49,7 @@
         </label>
         @if (Model.AcceptPrivacyPolicyEnabled)
         {
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('#register-button').click(function() {
-                        if ($('#accept-privacy-policy').is(':checked')) {
-                            //do some stuff
-                            return true;
-                        } else {
-                            //just show validation errors, dont post
-                            alert('@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Account.Fields.AcceptPrivacyPolicy.Required").Text))');
-                            return false;
-                        }
-                    });
-                });
-            </script>
+         
             <div class="subact">
                 <label>
                     <input id="accept-privacy-policy" type="checkbox" name="accept-privacy-policy"/>
@@ -102,6 +89,12 @@
         if ($("#Password").val() == "" || $("#ConfirmPassword").val() == "") {
             $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập mật khẩu");
             return;
+        }
+
+        if (!$('#accept-privacy-policy').is(':checked')) {
+            //just show validation errors, dont post
+            $.boxy.alert("Lỗi đăng ký", "@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Account.Fields.AcceptPrivacyPolicy.Required").Text))");
+            return false;
         }
 
 
