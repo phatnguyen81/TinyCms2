@@ -1946,7 +1946,6 @@
     <Content Include="Views\Posts\CategoryBox.TravelViaPicture.cshtml" />
     <Content Include="Views\Shared\_Social.cshtml" />
     <Content Include="Views\Customer\LoginBlock.cshtml" />
-    <Content Include="Views\Customer\LoginPopup.cshtml" />
     <Content Include="Views\Customer\RegisterBlock.cshtml" />
     <Content Include="Views\Posts\PostTemplate.Video.cshtml" />
     <Content Include="Views\Shared\_OneColumnVideo.cshtml" />
