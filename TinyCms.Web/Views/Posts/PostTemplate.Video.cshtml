@@ -70,7 +70,7 @@
         </div>
     </div>
     <div class="sidebar">
-        @Html.Action("GetRandomPost", "Posts", new { postId = Model.Id, numberPost = 4, template = "GetRandomPost.Video", postThumbPictureSize = 200 })
+        @Html.Action("GetRandomPost", "Posts", new { postId = Model.Id, numberPost = 4, template = "GetRandomPost.Video", postThumbPictureSize = 200, samePostTemplate = true })
     </div>
     @Html.Action("Footer", "Common")
 </div>

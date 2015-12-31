@@ -1054,12 +1054,12 @@ namespace TinyCms.Web.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult GetRandomPost(int postId, int numberPost, string template, int? postThumbPictureSize)
+        public ActionResult GetRandomPost(int postId, int numberPost, string template, bool? samePostTemplate, int? postThumbPictureSize)
         {
 
             var post = _postService.GetPostById(postId);
             var model =
-                PreparePostOverviewModels(_postService.GetRandomPosts(numberPost, templateId: 0,
+                PreparePostOverviewModels(_postService.GetRandomPosts(numberPost, templateId: (samePostTemplate != null && samePostTemplate.Value)?(post == null ? 0 : post.PostTemplateId): 0,
                     excludePostId: post == null ? 0 : post.Id));
             return PartialView(template, model);
         }

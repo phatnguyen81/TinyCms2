@@ -33,7 +33,8 @@
     @Html.NopScripts(this.Url, ResourceLocation.Head)
     @Html.NopCanonicalUrls()
     @*Favicon - upload favicon.ico file to the root directory*@
-    @Html.Action("Favicon", "Common")
+    @*@Html.Action("Favicon", "Common")*@
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")?v=1" />
     @if (displayMiniProfiler)
     {
         @StackExchange.Profiling.MiniProfiler.RenderIncludes()

@@ -115,7 +115,7 @@ namespace TinyCms.Web.Controllers
         }
         //favicon
         [ChildActionOnly]
-        public ActionResult Favicon()
+        public ActionResult Favicon(int? version)
         {
             //try loading a store specific favicon
             var faviconFileName = "favicon.ico";
