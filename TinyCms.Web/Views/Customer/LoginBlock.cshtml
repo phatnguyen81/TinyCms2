@@ -25,7 +25,7 @@
                        </div>
                    }
                    <div class="subact">
-
+                       @Html.RouteLink(T("Account.Login.ForgotPassword").Text, "PasswordRecovery", null,new { @class = "forgetpw" })
                        <label>
                            @Html.CheckBoxFor(m => m.RememberMe)
                            Ghi nhớ

@@ -1,10 +1,14 @@
 ﻿<div class="footer">
-   @Html.Action("BottomMenu","Posts")
+    @Html.Action("BottomMenu", "Posts")
 </div>
 <div class="copyright">
     <a href="@Url.RouteUrl("homepage")" class="logo"></a>
     <div class="leftcol">
-        @Html.Action("TopicBlock", "Topic", new { systemName = "FooterInfo"})
+        @Html.Action("TopicBlock", "Topic", new { systemName = "FooterInfo" })
     </div>
 </div>
-<div class="tool_rightbar"> <a href="#" class="emailbtn icn"></a> <a href="@Url.RouteUrl("homepage")" class="homebtn icn"></a> <a href="#" class="gotopbtn icn"></a> </div>
+<div class="tool_rightbar">
+    <a href="mailto:jimmy180983@gmail.com" class="emailbtn icn"></a>
+    <a href="@Url.RouteUrl("homepage")" class="homebtn icn"></a> 
+    <a href="#" class="gotopbtn icn"></a>
+</div>
