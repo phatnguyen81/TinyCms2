@@ -14,5 +14,11 @@
 }
 else
 {
-    <a href="#" onclick="showPopup('@Url.Action("Login", "Customer", new {popup = true})','Đăng nhập'); return false;"><img src="@Model.AvatarUrl" alt="" class="avt"></a>
+    <a href="@Url.Action("Login", "Customer")"><img src="@Model.AvatarUrl" alt="" class="avt"></a>
+    <script type="text/javascript">
+        $(".header:not('.mobile') .myinfo a").click(function (e) {
+            e.preventDefault();
+            showPopup('@Url.Action("Login", "Customer", new {popup = true})', 'Đăng nhập'); 
+        });
+    </script>
 }

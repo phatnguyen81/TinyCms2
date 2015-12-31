@@ -1443,3 +1443,12 @@ dl{margin-top:2px;font-size:11px}
 .recoverypass .results {
     color: red;
 }
+
+
+.popup-window .topic-page {
+	padding: 15px;
+}
+
+.read {
+    font-weight: bold;
+}

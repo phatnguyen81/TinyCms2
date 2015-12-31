@@ -36,14 +36,18 @@
                    <div class="newact">
                        <p class="newreg">
                            Chưa có tài khoản?
-                           <a href="#" class="regbtn" onclick="closePopup(); showPopup('@Url.Action("Register","Customer", new {popup = true})','Đăng ký tài khoản'); return false;">Đăng ký</a>
+                           <a href="@Url.Action("Register","Customer")" class="regbtn">Đăng ký</a>
                        </p>
                        @Html.Action("ExternalMethods", "ExternalAuthentication")
-                       @*Đăng nhập bằng <a href="#" class="facelogin icn"></a>*@
                    </div>
                </div>
            }
 <script type="text/javascript">
+    $('.popup .regbtn').click(function (e) {
+        e.preventDefault();
+        closePopup();
+        showPopup('@Url.Action("Register","Customer", new {popup = true})', 'Đăng ký tài khoản'); 
+    });
     $('.loginbtn').click(function (e) {
         e.preventDefault();
         @if (Model.UsernamesEnabled)
