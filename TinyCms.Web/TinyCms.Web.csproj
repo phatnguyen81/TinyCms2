@@ -1953,6 +1953,8 @@
     <Content Include="Views\Posts\GetRandomPost.Video.cshtml" />
     <Content Include="Views\Posts\GetRandomPost.Search.cshtml" />
     <Content Include="Views\Customer\_CustomerAttributes.cshtml" />
+    <Content Include="Views\Customer\PasswordRecovery.cshtml" />
+    <Content Include="Views\Customer\PasswordRecoveryConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />

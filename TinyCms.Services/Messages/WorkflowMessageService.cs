@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TinyCms.Core.Domain;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Core.Domain.Messages;
+using TinyCms.Core.Infrastructure;
 using TinyCms.Services.Customers;
 using TinyCms.Services.Events;
 using TinyCms.Services.Localization;
@@ -165,6 +167,7 @@ namespace TinyCms.Services.Messages
 
             //tokens
             var tokens = new List<Token>();
+            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(), emailAccount);
             _messageTokenProvider.AddCustomerTokens(tokens, customer);
 
             //event notification
@@ -199,6 +202,7 @@ namespace TinyCms.Services.Messages
 
             //tokens
             var tokens = new List<Token>();
+            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(), emailAccount);
             _messageTokenProvider.AddCustomerTokens(tokens, customer);
 
             //event notification
@@ -233,6 +237,7 @@ namespace TinyCms.Services.Messages
 
             //tokens
             var tokens = new List<Token>();
+            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(), emailAccount);
             _messageTokenProvider.AddCustomerTokens(tokens, customer);
 
 
@@ -268,6 +273,7 @@ namespace TinyCms.Services.Messages
 
             //tokens
             var tokens = new List<Token>();
+            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(), emailAccount);
             _messageTokenProvider.AddCustomerTokens(tokens, customer);
 
 
