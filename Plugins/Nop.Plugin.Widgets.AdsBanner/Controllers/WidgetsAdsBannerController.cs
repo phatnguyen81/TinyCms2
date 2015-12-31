@@ -227,7 +227,8 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
                 var model = new ShowAdsBannerModel
                 {
                     PictureUrl = _pictureService.GetPictureUrl(q.PictureId),
-                    Link = q.Url
+                    Link = q.Url,
+                    Text = q.Name
                 };
                 return model;
             }).ToList();

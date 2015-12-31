@@ -6,32 +6,30 @@
 {
     var firstPost = posts.First();
     <div class="listnews">
-        <div class="wraplistnews">
-            <div class="toplist">
-                <a href="@Url.RouteUrl("Post", new {SeName = firstPost.SeName})">
-                    <span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="170" height="107" alt="@firstPost.DefaultPictureModel.AlternateText" /></span>
-                    <span> @firstPost.Name</span>
-                </a>
-            </div>
-            @if (posts.Count > 1)
-            {
-                <ul>
-                    @foreach (var post in posts.Skip(1))
-                    {
-                        <li>
-                            <a href="@Url.RouteUrl("Post", new {SeName = post.SeName})">
-                                @post.Name
-                            </a>
-                        </li>
-                    }
-                </ul>
-            }
+        <div class="toplist">
+            <a href="@Url.RouteUrl("Post", new {SeName = firstPost.SeName})">
+                <span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="170" height="107" alt="@firstPost.DefaultPictureModel.AlternateText" /></span>
+                <span> @firstPost.Name</span>
+            </a>
         </div>
+        @if (posts.Count > 1)
+        {
+            <ul>
+                @foreach (var post in posts.Skip(1))
+                {
+                    <li>
+                        <a href="@Url.RouteUrl("Post", new {SeName = post.SeName})">
+                            @post.Name
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
     </div>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $(".listnews").niceScroll({cursorcolor:"#aaa"});
+        $(document).ready(function () {
+            $(".listnews").niceScroll({ cursorcolor: "#aaa" });
         });
-        
+
     </script>
 }

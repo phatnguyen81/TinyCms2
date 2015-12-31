@@ -1,4 +1,4 @@
-Group: ExternalAuth methods
+﻿Group: ExternalAuth methods
 FriendlyName: Facebook authentication
 SystemName: ExternalAuth.Facebook
 Version: 1.0

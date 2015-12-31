@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyCms.Web", "TinyCms.Web\TinyCms.Web.csproj", "{3E3A8188-0DEE-4D0B-BE6D-D5FC2CB7DD04}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nop.Plugin.ExternalAuth.Facebook", "Plugins\Nop.Plugin.ExternalAuth.Facebook\Nop.Plugin.ExternalAuth.Facebook.csproj", "{446FED73-BCA1-4D8F-BC13-EA1507C7EF29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nop.Plugin.Widgets.AdsBanner", "Plugins\Nop.Plugin.Widgets.AdsBanner\Nop.Plugin.Widgets.AdsBanner.csproj", "{9978B382-0BCD-4621-B6B5-52E0E3B5F464}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nop.Plugin.Widgets.GoogleAnalytics", "Plugins\Nop.Plugin.Widgets.GoogleAnalytics\Nop.Plugin.Widgets.GoogleAnalytics.csproj", "{C2B83AF5-80F6-4B8C-8628-FA7DE10C3BB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{9978B382-0BCD-4621-B6B5-52E0E3B5F464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9978B382-0BCD-4621-B6B5-52E0E3B5F464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9978B382-0BCD-4621-B6B5-52E0E3B5F464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2B83AF5-80F6-4B8C-8628-FA7DE10C3BB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2B83AF5-80F6-4B8C-8628-FA7DE10C3BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2B83AF5-80F6-4B8C-8628-FA7DE10C3BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2B83AF5-80F6-4B8C-8628-FA7DE10C3BB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,5 +72,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{446FED73-BCA1-4D8F-BC13-EA1507C7EF29} = {C84602C1-BD8B-461F-9513-456DBCB6FED2}
 		{9978B382-0BCD-4621-B6B5-52E0E3B5F464} = {C84602C1-BD8B-461F-9513-456DBCB6FED2}
+		{C2B83AF5-80F6-4B8C-8628-FA7DE10C3BB5} = {C84602C1-BD8B-461F-9513-456DBCB6FED2}
 	EndGlobalSection
 EndGlobal
