@@ -402,26 +402,14 @@ namespace TinyCms.Admin.Controllers
                     var entityName = x.EntityName != null ? x.EntityName.ToLowerInvariant() : "";
                     switch (entityName)
                     {
-                        case "blogpost":
-                            detailsUrl = Url.Action("Edit", "Blog", new { id = x.EntityId });
-                            break;
                         case "category":
                             detailsUrl = Url.Action("Edit", "Category", new { id = x.EntityId });
                             break;
-                        case "manufacturer":
-                            detailsUrl = Url.Action("Edit", "Manufacturer", new { id = x.EntityId });
-                            break;
-                        case "product":
-                            detailsUrl = Url.Action("Edit", "Product", new { id = x.EntityId });
-                            break;
-                        case "newsitem":
-                            detailsUrl = Url.Action("Edit", "News", new { id = x.EntityId });
+                        case "post":
+                            detailsUrl = Url.Action("Edit", "Post", new { id = x.EntityId });
                             break;
                         case "topic":
                             detailsUrl = Url.Action("Edit", "Topic", new { id = x.EntityId });
-                            break;
-                        case "vendor":
-                            detailsUrl = Url.Action("Edit", "Vendor", new { id = x.EntityId });
                             break;
                         default:
                             break;

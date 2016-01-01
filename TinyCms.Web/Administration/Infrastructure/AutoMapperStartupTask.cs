@@ -266,6 +266,20 @@ namespace TinyCms.Admin.Infrastructure
             Mapper.CreateMap<TopicTemplate, TopicTemplateModel>()
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<TopicTemplateModel, TopicTemplate>();
+
+
+            //category template
+            Mapper.CreateMap<CategoryTemplate, CategoryTemplateModel>()
+                .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
+            Mapper.CreateMap<CategoryTemplateModel, CategoryTemplate>();
+            //post template
+            Mapper.CreateMap<PostTemplate, PostTemplateModel>()
+                .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
+            Mapper.CreateMap<PostTemplateModel, PostTemplate>();
+            //topic template
+            Mapper.CreateMap<TopicTemplate, TopicTemplateModel>()
+                .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
+            Mapper.CreateMap<TopicTemplateModel, TopicTemplate>();
         }
         
         public int Order

@@ -122,93 +122,93 @@ namespace TinyCms.Admin.Controllers
 
         #endregion
 
-     
 
-        //#region Post templates
 
-        //public ActionResult PostTemplates()
-        //{
-        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
-        //        return AccessDeniedView();
+        #region Post templates
 
-        //    return View();
-        //}
+        public ActionResult PostTemplates()
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
+                return AccessDeniedView();
 
-        //[HttpPost]
-        //public ActionResult PostTemplates(DataSourceRequest command)
-        //{
-        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
-        //        return AccessDeniedView();
+            return View();
+        }
 
-        //    var templatesModel = _postTemplateService.GetAllPostTemplates()
-        //        .Select(x => x.ToModel())
-        //        .ToList();
-        //    var model = new DataSourceResult
-        //    {
-        //        Data = templatesModel,
-        //        Total = templatesModel.Count
-        //    };
+        [HttpPost]
+        public ActionResult PostTemplates(DataSourceRequest command)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
+                return AccessDeniedView();
 
-        //    return new JsonResult
-        //    {
-        //        Data = model
-        //    };
-        //}
+            var templatesModel = _postTemplateService.GetAllPostTemplates()
+                .Select(x => x.ToModel())
+                .ToList();
+            var model = new DataSourceResult
+            {
+                Data = templatesModel,
+                Total = templatesModel.Count
+            };
 
-        //[HttpPost]
-        //public ActionResult PostTemplateUpdate(PostTemplateModel model)
-        //{
-        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
-        //        return AccessDeniedView();
+            return new JsonResult
+            {
+                Data = model
+            };
+        }
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
-        //    }
+        [HttpPost]
+        public ActionResult PostTemplateUpdate(PostTemplateModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
+                return AccessDeniedView();
 
-        //    var template = _postTemplateService.GetPostTemplateById(model.Id);
-        //    if (template == null)
-        //        throw new ArgumentException("No template found with the specified id");
-        //    template = model.ToEntity(template);
-        //    _postTemplateService.UpdatePostTemplate(template);
+            if (!ModelState.IsValid)
+            {
+                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+            }
 
-        //    return new NullJsonResult();
-        //}
+            var template = _postTemplateService.GetPostTemplateById(model.Id);
+            if (template == null)
+                throw new ArgumentException("No template found with the specified id");
+            template = model.ToEntity(template);
+            _postTemplateService.UpdatePostTemplate(template);
 
-        //[HttpPost]
-        //public ActionResult PostTemplateAdd([Bind(Exclude = "Id")] PostTemplateModel model)
-        //{
-        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
-        //        return AccessDeniedView();
+            return new NullJsonResult();
+        }
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
-        //    }
+        [HttpPost]
+        public ActionResult PostTemplateAdd([Bind(Exclude = "Id")] PostTemplateModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
+                return AccessDeniedView();
 
-        //    var template = new PostTemplate();
-        //    template = model.ToEntity(template);
-        //    _postTemplateService.InsertPostTemplate(template);
+            if (!ModelState.IsValid)
+            {
+                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+            }
 
-        //    return new NullJsonResult();
-        //}
+            var template = new PostTemplate();
+            template = model.ToEntity(template);
+            _postTemplateService.InsertPostTemplate(template);
 
-        //[HttpPost]
-        //public ActionResult PostTemplateDelete(int id)
-        //{
-        //    if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
-        //        return AccessDeniedView();
+            return new NullJsonResult();
+        }
 
-        //    var template = _postTemplateService.GetPostTemplateById(id);
-        //    if (template == null)
-        //        throw new ArgumentException("No template found with the specified id");
+        [HttpPost]
+        public ActionResult PostTemplateDelete(int id)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
+                return AccessDeniedView();
 
-        //    _postTemplateService.DeletePostTemplate(template);
+            var template = _postTemplateService.GetPostTemplateById(id);
+            if (template == null)
+                throw new ArgumentException("No template found with the specified id");
 
-        //    return new NullJsonResult();
-        //}
+            _postTemplateService.DeletePostTemplate(template);
 
-        //#endregion
+            return new NullJsonResult();
+        }
+
+        #endregion
 
         #region Topic templates
 

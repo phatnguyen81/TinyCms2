@@ -275,6 +275,7 @@
     <Compile Include="Models\Settings\StoreScopeConfigurationModel.cs" />
     <Compile Include="Models\Tasks\ScheduleTaskModel.cs" />
     <Compile Include="Models\Templates\CategoryTemplateModel.cs" />
+    <Compile Include="Models\Templates\PostTemplateModel.cs" />
     <Compile Include="Models\Templates\TopicTemplateModel.cs" />
     <Compile Include="Models\Topics\TopicListModel.cs" />
     <Compile Include="Models\Topics\TopicModel.cs" />
@@ -296,6 +297,7 @@
     <Compile Include="Validators\Posts\CategoryValidator.cs" />
     <Compile Include="Validators\Posts\PostValidator.cs" />
     <Compile Include="Validators\Posts\PostTagValidator.cs" />
+    <Compile Include="Validators\Templates\PostTemplateValidator.cs" />
     <Compile Include="Validators\Settings\SettingValidator.cs" />
     <Compile Include="Validators\Tasks\ScheduleTaskValidator.cs" />
     <Compile Include="Validators\Templates\CategoryTemplateValidator.cs" />
@@ -488,7 +490,6 @@
     <Content Include="Views\Widget\List.cshtml" />
     <Content Include="Views\Widget\WidgetsByZone.cshtml" />
     <Content Include="Views\Template\CategoryTemplates.cshtml" />
-    <Content Include="Views\Template\ManufacturerTemplates.cshtml" />
     <Content Include="Views\Template\ProductTemplates.cshtml" />
     <Content Include="Views\Template\TopicTemplates.cshtml" />
     <Content Include="Views\Topic\Create.cshtml" />

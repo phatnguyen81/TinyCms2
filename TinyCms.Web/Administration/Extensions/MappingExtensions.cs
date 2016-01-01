@@ -360,6 +360,22 @@ namespace TinyCms.Admin.Extensions
             return model.MapTo(destination);
         }
 
+        public static PostTemplateModel ToModel(this PostTemplate entity)
+        {
+            return entity.MapTo<PostTemplate, PostTemplateModel>();
+        }
+
+        public static PostTemplate ToEntity(this PostTemplateModel model)
+        {
+            return model.MapTo<PostTemplateModel, PostTemplate>();
+        }
+
+        public static PostTemplate ToEntity(this PostTemplateModel model, PostTemplate destination)
+        {
+            return model.MapTo(destination);
+        }
+
+
         #endregion
     }
 }
