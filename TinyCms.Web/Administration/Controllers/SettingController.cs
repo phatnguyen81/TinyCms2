@@ -651,6 +651,56 @@ namespace TinyCms.Admin.Controllers
 
             return new NullJsonResult();
         }
+
+        public ActionResult Media()
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
+                return AccessDeniedView();
+
+            //load settings for a chosen store scope
+            var mediaSettings = _settingService.LoadSetting<MediaSettings>();
+            var model = mediaSettings.ToModel();
+            model.PicturesStoredIntoDatabase = _pictureService.StoreInDb;
+            return View(model);
+        }
+        [HttpPost]
+        [FormValueRequired("save")]
+        public ActionResult Media(MediaSettingsModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
+                return AccessDeniedView();
+
+            //load settings for a chosen store scope
+            var mediaSettings = _settingService.LoadSetting<MediaSettings>();
+            mediaSettings = model.ToEntity(mediaSettings);
+
+            _settingService.SaveSetting(mediaSettings);
+
+            //now clear settings cache
+            _settingService.ClearCache();
+
+            //activity log
+            _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
+
+            SuccessNotification(_localizationService.GetResource("Admin.Configuration.Updated"));
+            return RedirectToAction("Media");
+        }
+        [HttpPost, ActionName("Media")]
+        [FormValueRequired("change-picture-storage")]
+        public ActionResult ChangePictureStorage()
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
+                return AccessDeniedView();
+
+            _pictureService.StoreInDb = !_pictureService.StoreInDb;
+
+            //activity log
+            _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
+
+            SuccessNotification(_localizationService.GetResource("Admin.Configuration.Updated"));
+            return RedirectToAction("Media");
+        }
+
         #endregion
     }
 }

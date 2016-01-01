@@ -490,7 +490,7 @@
     <Content Include="Views\Widget\List.cshtml" />
     <Content Include="Views\Widget\WidgetsByZone.cshtml" />
     <Content Include="Views\Template\CategoryTemplates.cshtml" />
-    <Content Include="Views\Template\ProductTemplates.cshtml" />
+    <Content Include="Views\Template\PostTemplates.cshtml" />
     <Content Include="Views\Template\TopicTemplates.cshtml" />
     <Content Include="Views\Topic\Create.cshtml" />
     <Content Include="Views\Topic\Edit.cshtml" />

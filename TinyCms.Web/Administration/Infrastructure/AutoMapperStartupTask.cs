@@ -206,16 +206,6 @@ namespace TinyCms.Admin.Infrastructure
 
             Mapper.CreateMap<MediaSettings, MediaSettingsModel>()
                 .ForMember(dest => dest.PicturesStoredIntoDatabase, mo => mo.Ignore())
-                .ForMember(dest => dest.ActiveStoreScopeConfiguration, mo => mo.Ignore())
-                .ForMember(dest => dest.AvatarPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.CategoryThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.ManufacturerThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.VendorThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.CartThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.MiniCartThumbPictureSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.MaximumImageSize_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.MultipleThumbDirectories_OverrideForStore, mo => mo.Ignore())
-                .ForMember(dest => dest.DefaultImageQuality_OverrideForStore, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<MediaSettingsModel, MediaSettings>()
                 .ForMember(dest => dest.DefaultPictureZoomEnabled, mo => mo.Ignore())
@@ -229,6 +219,13 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.SuffixDeletedCustomers, mo => mo.Ignore());
 
             //Settings
+
+            Mapper.CreateMap<MediaSettings, MediaSettingsModel>()
+              .ForMember(dest => dest.PicturesStoredIntoDatabase, mo => mo.Ignore())
+              .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
+            Mapper.CreateMap<MediaSettingsModel, MediaSettings>()
+                .ForMember(dest => dest.DefaultPictureZoomEnabled, mo => mo.Ignore())
+                .ForMember(dest => dest.AutoCompleteSearchThumbPictureSize, mo => mo.Ignore());
            
             Mapper.CreateMap<CatalogSettings, CatalogSettingsModel>()
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
@@ -248,7 +245,6 @@ namespace TinyCms.Admin.Infrastructure
            
             Mapper.CreateMap<MediaSettings, MediaSettingsModel>()
                 .ForMember(dest => dest.PicturesStoredIntoDatabase, mo => mo.Ignore())
-                .ForMember(dest => dest.ActiveStoreScopeConfiguration, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<MediaSettingsModel, MediaSettings>()
                 .ForMember(dest => dest.DefaultPictureZoomEnabled, mo => mo.Ignore())

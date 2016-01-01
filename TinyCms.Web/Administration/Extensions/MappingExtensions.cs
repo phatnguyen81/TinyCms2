@@ -15,6 +15,7 @@ using TinyCms.Admin.Models.Topics;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Core.Domain.Localization;
 using TinyCms.Core.Domain.Logging;
+using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Messages;
 using TinyCms.Core.Domain.Polls;
 using TinyCms.Core.Domain.Posts;
@@ -312,6 +313,15 @@ namespace TinyCms.Admin.Extensions
             return entity.MapTo<CatalogSettings, CatalogSettingsModel>();
         }
         public static CatalogSettings ToEntity(this CatalogSettingsModel model, CatalogSettings destination)
+        {
+            return model.MapTo(destination);
+        }
+
+        public static MediaSettingsModel ToModel(this MediaSettings entity)
+        {
+            return entity.MapTo<MediaSettings, MediaSettingsModel>();
+        }
+        public static MediaSettings ToEntity(this MediaSettingsModel model, MediaSettings destination)
         {
             return model.MapTo(destination);
         }
