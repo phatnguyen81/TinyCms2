@@ -550,7 +550,7 @@ namespace TinyCms.Web.Infrastructure.Cache
         /// {1} : roles of the current user
         /// {2} : current store ID
         /// </remarks>
-        public const string SITEMAP_SEO_MODEL_KEY = "Nop.pres.sitemap.seo-{0}-{1}-{2}";
+        public const string SITEMAP_SEO_MODEL_KEY = "Nop.pres.sitemap.seo-{0}-{1}";
         public const string SITEMAP_PATTERN_KEY = "Nop.pres.sitemap";
 
         /// <summary>

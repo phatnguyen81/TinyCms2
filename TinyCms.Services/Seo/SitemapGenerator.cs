@@ -8,6 +8,8 @@ using TinyCms.Core;
 using TinyCms.Core.Domain.Catalog;
 using TinyCms.Core.Domain.Common;
 using TinyCms.Core.Domain.Security;
+using TinyCms.Services.Posts;
+using TinyCms.Services.Topics;
 
 namespace TinyCms.Services.Seo
 {
@@ -18,6 +20,9 @@ namespace TinyCms.Services.Seo
     {
         #region Fields
 
+        private readonly IPostService _postService;
+        private readonly ITopicService _topicService;
+        private readonly ICategoryService _categoryService;
         private readonly CommonSettings _commonSettings;
         private readonly SecuritySettings _securitySettings;
 
@@ -30,10 +35,13 @@ namespace TinyCms.Services.Seo
 
         public SitemapGenerator(
             CommonSettings commonSettings,
-            SecuritySettings securitySettings)
+            SecuritySettings securitySettings, ITopicService topicService, IPostService postService, ICategoryService categoryService)
         {
             this._commonSettings = commonSettings;
             this._securitySettings = securitySettings;
+            _topicService = topicService;
+            _postService = postService;
+            _categoryService = categoryService;
         }
 
         #endregion
@@ -71,16 +79,46 @@ namespace TinyCms.Services.Seo
             //home page
             var homePageUrl = urlHelper.RouteUrl("HomePage", null, GetHttpProtocol());
             WriteUrlLocation(homePageUrl, UpdateFrequency.Weekly, DateTime.UtcNow);
-            //search products
-            var productSearchUrl = urlHelper.RouteUrl("ProductSearch", null, GetHttpProtocol());
-            WriteUrlLocation(productSearchUrl, UpdateFrequency.Weekly, DateTime.UtcNow);
+            //search posts
+            var postSearchUrl = urlHelper.RouteUrl("PostSearch", null, GetHttpProtocol());
+            WriteUrlLocation(postSearchUrl, UpdateFrequency.Weekly, DateTime.UtcNow);
             //contact us
-            var contactUsUrl = urlHelper.RouteUrl("ContactUs", null, GetHttpProtocol());
-            WriteUrlLocation(contactUsUrl, UpdateFrequency.Weekly, DateTime.UtcNow);
+            //var contactUsUrl = urlHelper.RouteUrl("ContactUs", null, GetHttpProtocol());
+            //WriteUrlLocation(contactUsUrl, UpdateFrequency.Weekly, DateTime.UtcNow);
+         
+            //categories
+            if (_commonSettings.SitemapIncludeCategories)
+            {
+                WriteCategories(urlHelper, 0);
+            }
+            //topics
+            WriteTopics(urlHelper);
         
         }
 
+        protected virtual void WriteTopics(UrlHelper urlHelper)
+        {
+            var topics = _topicService.GetAllTopics()
+                .Where(t => t.IncludeInSitemap)
+                .ToList();
+            foreach (var topic in topics)
+            {
+                var url = urlHelper.RouteUrl("Topic", new { SeName = topic.GetSeName() }, GetHttpProtocol());
+                WriteUrlLocation(url, UpdateFrequency.Weekly, DateTime.UtcNow);
+            }
+        }
 
+        protected virtual void WriteCategories(UrlHelper urlHelper, int parentCategoryId)
+        {
+            var categories = _categoryService.GetAllCategoriesByParentCategoryId(parentCategoryId);
+            foreach (var category in categories)
+            {
+                var url = urlHelper.RouteUrl("Category", new { SeName = category.GetSeName() }, GetHttpProtocol());
+                WriteUrlLocation(url, UpdateFrequency.Weekly, category.UpdatedOnUtc);
+
+                WriteCategories(urlHelper, category.Id);
+            }
+        }
         #endregion
 
         #region Methods

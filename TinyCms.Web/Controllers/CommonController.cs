@@ -12,14 +12,17 @@ using TinyCms.Core.Domain.Localization;
 using TinyCms.Core.Domain.Messages;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Services.Common;
+using TinyCms.Services.Customers;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Logging;
 using TinyCms.Services.Messages;
 using TinyCms.Services.Security;
 using TinyCms.Services.Seo;
 using TinyCms.Web.Framework;
+using TinyCms.Web.Framework.Security;
 using TinyCms.Web.Framework.Security.Captcha;
 using TinyCms.Web.Framework.Themes;
+using TinyCms.Web.Infrastructure.Cache;
 using TinyCms.Web.Models.Common;
 
 namespace TinyCms.Web.Controllers
@@ -310,7 +313,21 @@ namespace TinyCms.Web.Controllers
             Response.Write(sb.ToString());
             return null;
         }
+        //SEO sitemap page
+        [NopHttpsRequirement(SslRequirement.No)]
+        //available even when a store is closed
+        [StoreClosed(true)]
+        public ActionResult SitemapXml()
+        {
+            if (!_commonSettings.SitemapEnabled)
+                return RedirectToRoute("HomePage");
 
+            string cacheKey = string.Format(ModelCacheEventConsumer.SITEMAP_SEO_MODEL_KEY,
+                _workContext.WorkingLanguage.Id,
+                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
+            var siteMap = _cacheManager.Get(cacheKey, () => _sitemapGenerator.Generate(this.Url));
+            return Content(siteMap, "text/xml");
+        }
         #endregion
 
     }

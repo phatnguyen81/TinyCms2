@@ -66,7 +66,7 @@ namespace TinyCms.Web.Infrastructure
                             new[] { "TinyCms.Web.Controllers" });
 
             //product search
-            routes.MapLocalizedRoute("Postsearch",
+            routes.MapLocalizedRoute("PostSearch",
                             "search/",
                             new { controller = "Posts", action = "Search" },
                             new[] { "TinyCms.Web.Controllers" });
