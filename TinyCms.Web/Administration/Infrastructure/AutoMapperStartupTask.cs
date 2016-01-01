@@ -35,7 +35,6 @@ namespace TinyCms.Admin.Infrastructure
             
             //language
             Mapper.CreateMap<Language, LanguageModel>()
-                .ForMember(dest => dest.AvailableCurrencies, mo => mo.Ignore())
                 .ForMember(dest => dest.FlagFileNames, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<LanguageModel, Language>()
