@@ -505,14 +505,7 @@ namespace TinyCms.Admin.Controllers
 
             return PartialView();
         }
-        [ChildActionOnly]
-        public ActionResult PopularSearchTermsReport()
-        {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
-                return Content("");
 
-            return PartialView();
-        }
         #endregion
     }
 }
