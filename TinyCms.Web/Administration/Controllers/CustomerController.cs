@@ -48,6 +48,7 @@ namespace TinyCms.Admin.Controllers
         private readonly ICustomerAttributeParser _customerAttributeParser;
         private readonly ICustomerAttributeService _customerAttributeService;
         private readonly IWorkflowMessageService _workflowMessageService;
+        private readonly ICustomerReportService _customerReportService;
 
         #endregion
 
@@ -71,7 +72,7 @@ namespace TinyCms.Admin.Controllers
             IOpenAuthenticationService openAuthenticationService,
             ICustomerAttributeParser customerAttributeParser,
             ICustomerAttributeService customerAttributeService,
-            IWorkflowMessageService workflowMessageService)
+            IWorkflowMessageService workflowMessageService, ICustomerReportService customerReportService)
         {
             this._customerService = customerService;
             this._newsLetterSubscriptionService = newsLetterSubscriptionService;
@@ -92,6 +93,7 @@ namespace TinyCms.Admin.Controllers
             this._customerAttributeParser = customerAttributeParser;
             this._customerAttributeService = customerAttributeService;
             this._workflowMessageService = workflowMessageService;
+            _customerReportService = customerReportService;
         }
 
         #endregion
@@ -113,6 +115,37 @@ namespace TinyCms.Admin.Controllers
             }
             return sb.ToString();
         }
+
+
+        [NonAction]
+        protected virtual IList<RegisteredCustomerReportLineModel> GetReportRegisteredCustomersModel()
+        {
+            var report = new List<RegisteredCustomerReportLineModel>();
+            report.Add(new RegisteredCustomerReportLineModel
+            {
+                Period = _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.7days"),
+                Customers = _customerReportService.GetRegisteredCustomersReport(7)
+            });
+
+            report.Add(new RegisteredCustomerReportLineModel
+            {
+                Period = _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.14days"),
+                Customers = _customerReportService.GetRegisteredCustomersReport(14)
+            });
+            report.Add(new RegisteredCustomerReportLineModel
+            {
+                Period = _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.month"),
+                Customers = _customerReportService.GetRegisteredCustomersReport(30)
+            });
+            report.Add(new RegisteredCustomerReportLineModel
+            {
+                Period = _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.year"),
+                Customers = _customerReportService.GetRegisteredCustomersReport(365)
+            });
+
+            return report;
+        }
+
 
         [NonAction]
         protected virtual IList<CustomerModel.AssociatedExternalAuthModel> GetAssociatedExternalAuthRecords(Customer customer)
@@ -1031,10 +1064,36 @@ namespace TinyCms.Admin.Controllers
         //}
         
         #endregion
-        
-     
-    
-    
+
+        #region Reports
+
+        [ChildActionOnly]
+        public ActionResult ReportRegisteredCustomers()
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
+                return Content("");
+
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult ReportRegisteredCustomersList(DataSourceRequest command)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
+                return Content("");
+
+            var model = GetReportRegisteredCustomersModel();
+            var gridModel = new DataSourceResult
+            {
+                Data = model,
+                Total = model.Count
+            };
+
+            return Json(gridModel);
+        }
+
+        #endregion
+
+
         #region Activity log
 
         [HttpPost]

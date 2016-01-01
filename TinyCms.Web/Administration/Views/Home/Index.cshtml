@@ -5,7 +5,6 @@
     ViewBag.Title = T("Admin.Dashboard").Text;
 
     var permissionService = EngineContext.Current.Resolve<IPermissionService>();
-    var canManageOrders = permissionService.Authorize(StandardPermissionProvider.ManageOrders);
     var canManageCustomers = permissionService.Authorize(StandardPermissionProvider.ManageCustomers);
     var canManagePosts = permissionService.Authorize(StandardPermissionProvider.ManagePosts);
 }
@@ -23,8 +22,34 @@
                     @T("Admin.Dashboard.StoreStatistics")
                 </div>
             </div>
-         
+            @if (canManageCustomers)
+            {
+                <table class="stats">
+                    <tbody>
+                        <tr>
+                            @if (canManageCustomers)
+                            {
+                                <td class="customerstatistics">
+                                    <div class="statisticsTitle">
+                                        @T("Admin.Customers.Reports.RegisteredCustomers")
+                                    </div>
+                                    @Html.Action("ReportRegisteredCustomers", "Customer")
+                                </td>
+                            }
+                            @if (canManagePosts)
+                            {
+                                <td class="search-term-statistics">
+                                    <div class="statisticsTitle">
+                                        @T("Admin.SearchTermReport")
+                                    </div>
+                                    @Html.Action("PopularSearchTermsReport", "Common")
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            }
         </td>
-        
+
     </tr>
 </table>
