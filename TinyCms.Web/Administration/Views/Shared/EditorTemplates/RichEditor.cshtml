@@ -79,9 +79,7 @@
             }
             //we should set "convert_urls" set to "false" (because of "relative_urls" requirement)
             //otherwise, it'll break existing links when editing message template
-            convert_urls: false,
-            image_advtab: true,
-            image_dimensions: false
+            convert_urls: false
         };
 
         function getAdditionalEditorSettings@(random)(settings) {
@@ -90,7 +88,6 @@
         }
 
         tinyMCE.init(getAdditionalEditorSettings@(random)(defaultEditorSettings@(random)));
-
     });
 </script>
 @Html.TextArea(string.Empty, /* Name suffix */
