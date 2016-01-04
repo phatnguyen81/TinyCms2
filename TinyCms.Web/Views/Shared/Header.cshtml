@@ -1,7 +1,26 @@
-﻿<div class="header sub">
+﻿@{
+    
+    //current category ID
+    int currentCategoryId = 0;
+    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.RequestContext.RouteData.Values["action"].ToString().Equals("category", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentCategoryId = Convert.ToInt32(Url.RequestContext.RouteData.Values["categoryId"].ToString());
+    }
+    //current post ID
+    int currentPostId = 0;
+    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("post", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.RequestContext.RouteData.Values["action"].ToString().Equals("postdetails", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentPostId = Convert.ToInt32(Url.RequestContext.RouteData.Values["postId"].ToString());
+    }
+}
+
+<div class="header sub">
     <div class="menu_ctn">
         <div class="infobar clearfix">
             <a href="@Url.RouteUrl("homepage")" class="logo"></a>
+            @Html.Action("CategoryNavigation", "Posts", new { currentCategoryId = currentCategoryId, currentPostId = currentPostId })
             <div class="myinfo subnav">
                 @Html.Action("UserInfoZone", "Customer")
             </div>

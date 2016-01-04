@@ -727,6 +727,39 @@ namespace TinyCms.Web.Controllers
 
             return View(templateViewPath, model);
         }
+
+        [ChildActionOnly]
+        public ActionResult CategoryNavigation(int currentCategoryId, int currentPostId)
+        {
+            //get active category
+            int activeCategoryId = 0;
+            if (currentCategoryId > 0)
+            {
+                //category details page
+                activeCategoryId = currentCategoryId;
+            }
+            else if (currentPostId > 0)
+            {
+                //post details page
+                var postCategories = _categoryService.GetPostCategoriesByPostId(currentPostId);
+                if (postCategories.Count > 0)
+                    activeCategoryId = postCategories[0].CategoryId;
+            }
+
+            string cacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_NAVIGATION_MODEL_KEY,
+                _workContext.WorkingLanguage.Id,
+                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
+            var cachedModel = _cacheManager.Get(cacheKey, () => PrepareCategorySimpleModels(0, false).ToList());
+
+            var model = new CategoryNavigationModel
+            {
+                CurrentCategoryId = activeCategoryId,
+                Categories = cachedModel
+            };
+
+            return PartialView(model);
+        }
+
         #endregion
 
         #region Post

@@ -9,6 +9,12 @@
 </div>
 <div class="tool_rightbar">
     <a href="mailto:jimmy180983@gmail.com" class="emailbtn icn"></a>
-    <a href="@Url.RouteUrl("homepage")" class="homebtn icn"></a> 
-    <a href="#" class="gotopbtn icn"></a>
+    <a href="@Url.RouteUrl("homepage")" class="homebtn icn"></a>
+    <a href="#top" class="gotopbtn icn"></a>
 </div>
+<script type="text/javascript">
+    $('a[href=#top]').click(function (e) {
+        e.preventDefault();
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+    });
+</script>

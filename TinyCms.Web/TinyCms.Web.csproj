@@ -1941,6 +1941,8 @@
     <Content Include="Views\Customer\_CustomerAttributes.cshtml" />
     <Content Include="Views\Customer\PasswordRecovery.cshtml" />
     <Content Include="Views\Customer\PasswordRecoveryConfirm.cshtml" />
+    <Content Include="Views\Shared\_OneColumnWithoutFooter.cshtml" />
+    <Content Include="Views\Posts\CategoryNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />

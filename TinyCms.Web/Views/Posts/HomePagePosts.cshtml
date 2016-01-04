@@ -27,9 +27,21 @@
         }
     </div>
     <script type="text/javascript">
+        var niceScroll;
         $(document).ready(function () {
-            $(".listnews").niceScroll({ cursorcolor: "#aaa" });
+            enableNiceScroll();
         });
-
+        function enableNiceScroll() {
+            if (niceScroll && $(window).width() <= 400) {
+                niceScroll.remove();
+                niceScroll = null;
+            }
+            if (!niceScroll && $(window).width() > 400) {
+                niceScroll = $(".listnews").niceScroll({ cursorcolor: "#aaa" });
+            }
+        }
+        $(window).resize(function () {
+            enableNiceScroll();
+        });
     </script>
 }
