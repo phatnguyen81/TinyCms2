@@ -152,7 +152,7 @@ namespace TinyCms.Services.Posts
         /// Gets all posts displayed on the home page
         /// </summary>
         /// <returns>Posts</returns>
-        public virtual IList<Post> GetAllPostsDisplayedOnHomePage()
+        public virtual IList<Post> GetAllPostsDisplayedOnHomePage(int top = 0)
         {
             var query = from p in _postRepository.Table
                         orderby p.DisplayOrder, p.Name
@@ -160,7 +160,13 @@ namespace TinyCms.Services.Posts
                         !p.Deleted &&
                         p.ShowOnHomePage
                         select p;
-            var posts = query.OrderByDescending(p => p.CreatedOnUtc).ToList();
+            query = query.OrderByDescending(p => p.CreatedOnUtc);
+            if (top > 0)
+            {
+                query = query.Take(top);
+            }
+            var posts = query.ToList();
+            
             return posts;
         }
 

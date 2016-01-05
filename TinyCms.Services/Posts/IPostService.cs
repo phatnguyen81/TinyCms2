@@ -23,7 +23,7 @@ namespace TinyCms.Services.Posts
         /// Gets all posts displayed on the home page
         /// </summary>
         /// <returns>Posts</returns>
-        IList<Post> GetAllPostsDisplayedOnHomePage();
+        IList<Post> GetAllPostsDisplayedOnHomePage(int top = 0);
 
         /// <summary>
         /// Gets all posts displayed on the home page

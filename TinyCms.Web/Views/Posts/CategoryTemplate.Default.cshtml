@@ -17,6 +17,11 @@
 
 }
 
+<div class="rightside">
+    @Html.Action("TopViewPosts", "Posts", new { categoryId = Model.Id, postThumbPictureSize = 160 })
+    <div class="subside_banner">@Html.Widget("subside_banner")</div>
+</div>
+
 <div class="cate_detail">
     
     @if (Model.ParentCategory != null)
@@ -35,7 +40,7 @@
     }
     else
     {
-        <h1>@Model.Name</h1>
+        <h1><a>@Model.Name</a></h1>
         if (Model.SubCategories.Any())
         {
             <p class="subcate">
@@ -92,9 +97,4 @@
         </div>
     }
     
-</div>
-
-<div class="rightside">
-    @Html.Action("TopViewPosts", "Posts", new {categoryId = Model.Id, postThumbPictureSize = 160})
-    <div class="subside_banner">@Html.Widget("subside_banner")</div>
 </div>

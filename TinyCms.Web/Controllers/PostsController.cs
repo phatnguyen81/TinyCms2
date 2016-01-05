@@ -1023,7 +1023,7 @@ namespace TinyCms.Web.Controllers
         [ChildActionOnly]
         public ActionResult HomePagePosts(int? postThumbPictureSize)
         {
-            var posts = _postService.GetAllPostsDisplayedOnHomePage();
+            var posts = _postService.GetAllPostsDisplayedOnHomePage(7);
             var model = PreparePostOverviewModels(posts, true, postThumbPictureSize);
             return PartialView(model);
         }
