@@ -749,7 +749,7 @@ namespace TinyCms.Web.Controllers
             string cacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_NAVIGATION_MODEL_KEY,
                 _workContext.WorkingLanguage.Id,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
-            var cachedModel = _cacheManager.Get(cacheKey, () => PrepareCategorySimpleModels(0, false).ToList());
+            var cachedModel = _cacheManager.Get(cacheKey, () => PrepareCategorySimpleModels(0).ToList());
 
             var model = new CategoryNavigationModel
             {

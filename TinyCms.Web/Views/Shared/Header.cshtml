@@ -2,14 +2,14 @@
     
     //current category ID
     int currentCategoryId = 0;
-    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("posts", StringComparison.InvariantCultureIgnoreCase) &&
         Url.RequestContext.RouteData.Values["action"].ToString().Equals("category", StringComparison.InvariantCultureIgnoreCase))
     {
         currentCategoryId = Convert.ToInt32(Url.RequestContext.RouteData.Values["categoryId"].ToString());
     }
     //current post ID
     int currentPostId = 0;
-    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("post", StringComparison.InvariantCultureIgnoreCase) &&
+    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("posts", StringComparison.InvariantCultureIgnoreCase) &&
         Url.RequestContext.RouteData.Values["action"].ToString().Equals("postdetails", StringComparison.InvariantCultureIgnoreCase))
     {
         currentPostId = Convert.ToInt32(Url.RequestContext.RouteData.Values["postId"].ToString());
@@ -23,6 +23,23 @@
             @Html.Action("CategoryNavigation", "Posts", new { currentCategoryId = currentCategoryId, currentPostId = currentPostId })
             <div class="myinfo subnav">
                 @Html.Action("UserInfoZone", "Customer")
+            </div>
+        </div>
+    </div>
+</div>
+<div class="header sub mobile">
+    <div class="menu_ctn">
+        <div class="infobar clearfix">
+            <a href="@Url.RouteUrl("homepage")" class="logo"></a>
+            <div class="myinfo subnav">
+                @Html.Action("UserInfoZone", "Customer")
+            </div>
+            <div class="menuloc subnav">
+                <span class="navcate icn"></span>
+                <div class="sub_info">
+                    <span class="toparr icn"></span>
+                    @Html.Action("TopMenu", "Posts")
+                </div>
             </div>
         </div>
     </div>

@@ -31,16 +31,16 @@
         liClass += " last";
     }
     <li class="@liClass">
-        <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">
+        <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })" class="@liClass">
             @category.Name
-        @if (category.NumberOfProducts.HasValue)
-        {
-            <text> </text>@T("Categories.TotalProducts", category.NumberOfProducts.Value)
+            @if (category.NumberOfProducts.HasValue)
+            {
+                <text> </text>@T("Categories.TotalProducts", category.NumberOfProducts.Value)
 
-        }
-                
-            </a>
-            @{
+            }
+
+        </a>
+            @*@{
                 if (category.Id == Model.CurrentCategoryId ||
                     category.SubCategories.Count(BreadCrumbContainsCurrentCategoryId) > 0)
                 {
@@ -54,7 +54,7 @@
                         </ul>
                     }
                 }
-            }
+            }*@
         </li>
 }
 <ul class="detailnav">

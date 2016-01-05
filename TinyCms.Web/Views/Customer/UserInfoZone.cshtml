@@ -16,9 +16,13 @@ else
 {
     <a href="@Url.Action("Login", "Customer")"><img src="@Model.AvatarUrl" alt="" class="avt"></a>
     <script type="text/javascript">
-        $(".header:not('.mobile') .myinfo a").click(function (e) {
+        $(".header .myinfo a").click(function(e) {
             e.preventDefault();
-            showPopup('@Url.Action("Login", "Customer", new {popup = true})', 'Đăng nhập'); 
+            if ($(window).width() > 400) {
+                showPopup('@Url.Action("Login", "Customer", new {popup = true})', 'Đăng nhập');
+            } else {
+                window.location = '@Url.RouteUrl("login")';
+            }
         });
     </script>
 }
