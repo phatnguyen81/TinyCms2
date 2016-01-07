@@ -323,8 +323,8 @@
     <Content Include="Content\files\Index.htm" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\Images\avatar.png" />
     <Content Include="Content\Images\default-avatar.jpg" />
+    <Content Include="Content\Images\default-avatar-old.jpg" />
     <Content Include="Content\Images\default-image.gif" />
     <Content Include="Content\Images\default-image.png" />
     <Content Include="Content\Images\flags\ad.png" />

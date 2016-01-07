@@ -441,7 +441,7 @@ namespace TinyCms.Web.Controllers
             if (popup) return PartialView("LoginBlock", model);
             return View(model);
         }
-      
+
         [HttpPost]
         [CaptchaValidator]
         //available even when a store is closed
@@ -525,31 +525,31 @@ namespace TinyCms.Web.Controllers
                 switch (loginResult)
                 {
                     case CustomerLoginResults.Successful:
-                    {
-                        var customer = _customerSettings.UsernamesEnabled
-                            ? _customerService.GetCustomerByUsername(model.Username)
-                            : _customerService.GetCustomerByEmail(model.Email);
-
-                        //sign in new customer
-                        _authenticationService.SignIn(customer, model.RememberMe);
-
-                        //raise event       
-                        _eventPublisher.Publish(new CustomerLoggedinEvent(customer));
-
-                        //activity log
-                        _customerActivityService.InsertActivity("PublicStore.Login",
-                            _localizationService.GetResource("ActivityLog.PublicStore.Login"), customer);
-
-
-                        if (String.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
-                            returnUrl = string.Empty;
-
-                        return Json(new
                         {
-                            success = true,
-                            returnUrl
-                        });
-                    }
+                            var customer = _customerSettings.UsernamesEnabled
+                                ? _customerService.GetCustomerByUsername(model.Username)
+                                : _customerService.GetCustomerByEmail(model.Email);
+
+                            //sign in new customer
+                            _authenticationService.SignIn(customer, model.RememberMe);
+
+                            //raise event       
+                            _eventPublisher.Publish(new CustomerLoggedinEvent(customer));
+
+                            //activity log
+                            _customerActivityService.InsertActivity("PublicStore.Login",
+                                _localizationService.GetResource("ActivityLog.PublicStore.Login"), customer);
+
+
+                            if (String.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
+                                returnUrl = string.Empty;
+
+                            return Json(new
+                            {
+                                success = true,
+                                returnUrl
+                            });
+                        }
                     case CustomerLoginResults.CustomerNotExist:
                         return Json(new
                         {
@@ -984,47 +984,47 @@ namespace TinyCms.Web.Controllers
                     switch (_customerSettings.UserRegistrationType)
                     {
                         case UserRegistrationType.EmailValidation:
-                        {
-                            //email validation message
-                            _genericAttributeService.SaveAttribute(customer,
-                                SystemCustomerAttributeNames.AccountActivationToken, Guid.NewGuid().ToString());
-                            _workflowMessageService.SendCustomerEmailValidationMessage(customer,
-                                _workContext.WorkingLanguage.Id);
-
-                            //result
-                            return Json(new
                             {
-                                success = true,
-                                message = _localizationService.GetResource("Account.Register.Result.EmailValidation")
-                            });
-                        }
+                                //email validation message
+                                _genericAttributeService.SaveAttribute(customer,
+                                    SystemCustomerAttributeNames.AccountActivationToken, Guid.NewGuid().ToString());
+                                _workflowMessageService.SendCustomerEmailValidationMessage(customer,
+                                    _workContext.WorkingLanguage.Id);
+
+                                //result
+                                return Json(new
+                                {
+                                    success = true,
+                                    message = _localizationService.GetResource("Account.Register.Result.EmailValidation")
+                                });
+                            }
                         case UserRegistrationType.AdminApproval:
-                        {
-                            return Json(new
                             {
-                                success = true,
-                                message = _localizationService.GetResource("Account.Register.Result.AdminApproval")
-                            });
-                        }
+                                return Json(new
+                                {
+                                    success = true,
+                                    message = _localizationService.GetResource("Account.Register.Result.AdminApproval")
+                                });
+                            }
                         case UserRegistrationType.Standard:
-                        {
-                            //send customer welcome message
-                            _workflowMessageService.SendCustomerWelcomeMessage(customer, _workContext.WorkingLanguage.Id);
+                            {
+                                //send customer welcome message
+                                _workflowMessageService.SendCustomerWelcomeMessage(customer, _workContext.WorkingLanguage.Id);
 
-                            return Json(new
-                            {
-                                success = true,
-                                message = _localizationService.GetResource("Account.Register.Result.Standard")
-                            });
-                        }
+                                return Json(new
+                                {
+                                    success = true,
+                                    message = _localizationService.GetResource("Account.Register.Result.Standard")
+                                });
+                            }
                         default:
-                        {
-                            return Json(new
                             {
-                                success = true,
-                                message = _localizationService.GetResource("Account.Register.Result.Standard")
-                            });
-                        }
+                                return Json(new
+                                {
+                                    success = true,
+                                    message = _localizationService.GetResource("Account.Register.Result.Standard")
+                                });
+                            }
                     }
                 }
                 //errors
@@ -1039,7 +1039,7 @@ namespace TinyCms.Web.Controllers
             return Json(new
             {
                 success = false,
-                message = string.Join("<br />", errors.Select(q=>q.ErrorMessage))
+                message = string.Join("<br />", errors.Select(q => q.ErrorMessage))
             });
         }
 
@@ -1505,20 +1505,21 @@ namespace TinyCms.Web.Controllers
             if (!_workContext.CurrentCustomer.IsRegistered())
             {
                 model.IsAuthenticated = false;
-                model.AvatarUrl = @Url.Content("~/Content/Images/avatar.png");
+                model.AvatarUrl = _pictureService.GetPictureUrl(
+                    null,
+                    _mediaSettings.AvatarPictureSize,
+                    _customerSettings.DefaultAvatarEnabled,
+                    defaultPictureType: PictureType.Avatar);
             }
             else
             {
                 var customer = _workContext.CurrentCustomer;
                 model.IsAuthenticated = true;
-                model.AvatarUrl = model.AvatarUrl = _pictureService.GetPictureUrl(
+                model.AvatarUrl = _pictureService.GetPictureUrl(
                     customer.GetAttribute<int>(SystemCustomerAttributeNames.AvatarPictureId),
                     _mediaSettings.AvatarPictureSize,
-                    false);
-                if (string.IsNullOrWhiteSpace(model.AvatarUrl))
-                {
-                    model.AvatarUrl = @Url.Content("~/Content/Images/avatar.png");
-                }
+                     _customerSettings.DefaultAvatarEnabled,
+                    defaultPictureType: PictureType.Avatar);
             }
 
             return PartialView(model);
