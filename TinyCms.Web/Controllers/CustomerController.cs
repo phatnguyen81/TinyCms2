@@ -1141,20 +1141,29 @@ namespace TinyCms.Web.Controllers
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return new HttpUnauthorizedResult();
 
+            var customer = _workContext.CurrentCustomer;
+            var selectedCustomerAttributes = customer.GetAttribute<string>(SystemCustomerAttributeNames.CustomCustomerAttributes, _genericAttributeService);
+            var fullNameAttrubute =
+                _customerAttributeService.GetAllCustomerAttributes().FirstOrDefault(q => q.Name == "Full name");
+            var fullname = string.Empty;
+            if (fullNameAttrubute != null)
+            {
+                var values = _customerAttributeParser.ParseValues(selectedCustomerAttributes, fullNameAttrubute.Id);
+                if (values.Count > 0) fullname = values[0];
+            }
+            
             var model = new CustomerProfileModel
             {
-                Username = _workContext.CurrentCustomer.Username,
-                Email = _workContext.CurrentCustomer.Email,
-                RoleName = string.Join(",", _workContext.CurrentCustomer.CustomerRoles.Select(q => q.Name))
+                Username = customer.Username,
+                Email = customer.Email,
+                RoleName = string.Join(",", customer.CustomerRoles.Select(q => q.Name)),
+                Fullname = fullname
             };
             model.AvatarUrl = model.AvatarUrl = _pictureService.GetPictureUrl(
                   _workContext.CurrentCustomer.GetAttribute<int>(SystemCustomerAttributeNames.AvatarPictureId),
                   _mediaSettings.AvatarPictureSize,
-                  false);
-            if (string.IsNullOrWhiteSpace(model.AvatarUrl))
-            {
-                model.AvatarUrl = @Url.Content("~/Content/Images/avatar.png");
-            }
+                    _customerSettings.DefaultAvatarEnabled,
+                    defaultPictureType: PictureType.Avatar);
 
             //page size
             PreparePageSizeOptions(model.PagingFilteringContext, command, 10);

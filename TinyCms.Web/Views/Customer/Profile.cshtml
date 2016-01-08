@@ -13,7 +13,7 @@
             <a href="#" class="change_avt" title="Đổi avatar"><span class="camera icn"></span></a>
         </div>
         <input type="file" style="display: none;" id="fileAvatar" />
-        <p class="username">@Model.Username</p>
+        <p class="username">@(string.IsNullOrWhiteSpace(Model.Fullname)?Model.Username:Model.Fullname)</p>
         <p class="position">@Model.RoleName</p>
         <p class="numblog">Số lượng bài viết: <span>@Model.TotalPosts.ToString("#,##0")</span></p>
         <a href="@Url.RouteUrl("CreateNewPost")" class="btn01">Viết bài mới</a>
