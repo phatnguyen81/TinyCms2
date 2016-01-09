@@ -6,7 +6,7 @@
 @using TinyCms.Core.Infrastructure;
 @using TinyCms.Services.Localization;
 @{
-    Layout = "~/Views/Shared/_TwoColumn.cshtml";
+    Layout = "~/Views/Shared/_OneColumn.cshtml";
 
     //title, meta
     Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
@@ -49,42 +49,64 @@
 
     var promotionCategoryId = EngineContext.Current.Resolve<CatalogSettings>().PromotionCategoryId;
     var promotionPostNumber = EngineContext.Current.Resolve<CatalogSettings>().PromotionPostNumber;
+
+    var travelViaPictureCategoryId = EngineContext.Current.Resolve<CatalogSettings>().TravelViaPictureCategoryId;
+    var travelViaPicturePostNumber = EngineContext.Current.Resolve<CatalogSettings>().TravelViaPicturePostNumber;
+
+    var summerTourismId = EngineContext.Current.Resolve<CatalogSettings>().SummerTourismId;
+    var summerTourismPostNumber = EngineContext.Current.Resolve<CatalogSettings>().SummerTourismPostNumber;
 }
-<div class="news_detail">
-    <h1>
-        <a href="@Url.RouteUrl("Category", new {SeName = Model.Breadcrumb.CategoryBreadcrumb.Last().SeName})">@Model.Breadcrumb.CategoryBreadcrumb.Last().Name</a>
-    </h1>
-    <p class="title">@Model.Name</p>
-    <p class="time_post">@Model.CreatedOn.ToString("HH:mm dd/MM/yyyy")</p>
-    <p class="desc">@Html.Raw(Model.ShortDescription)</p>
 
-    <div class="content_box">
-        <div class="ctn">
-            @Html.Raw(Model.FullDescription)
-            <div class="posttags clearfix">
-                @foreach (var tag in Model.PostTags)
-                {
-                    <a href="@Url.RouteUrl("PostsByTag", new { postTagId = tag.Id, tag.SeName })"><span class="fa fa-tag"></span> @tag.Name</a>
-                }
-            </div>
-            @*@Html.Action("RandomPolls", "Poll")*@
-            @Html.Action("PollBlock", "Poll", new { systemKeyword = "poll_iphone" })
-            <div class="facebook_share">
-                <div class="fb-like" data-href="@postUrl" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-            </div>
-        </div>
-        @*<div class="rightside">
-                @Html.Action("RelatedPosts", "Posts")
-                @Html.Action("CategoryBox", "Posts", new { categoryId = promotionCategoryId, numberPost = promotionPostNumber, template = "CategoryBox.Promotion", postThumbPictureSize = 80 })
-                <div class="subside_banner">
-                    @Html.Widget("subside_banner")
+<div class="leftcol">
+    <div class="news_detail">
+        <h1>
+            <a href="@Url.RouteUrl("Category", new {SeName = Model.Breadcrumb.CategoryBreadcrumb.Last().SeName})">@Model.Breadcrumb.CategoryBreadcrumb.Last().Name</a>
+        </h1>
+        <p class="title">@Model.Name</p>
+        <p class="time_post">@Model.CreatedOn.ToString("HH:mm dd/MM/yyyy")</p>
+        <p class="desc">@Html.Raw(Model.ShortDescription)</p>
+
+        <div class="content_box">
+            <div class="ctn">
+                @Html.Raw(Model.FullDescription)
+                <div class="posttags clearfix">
+                    @foreach (var tag in Model.PostTags)
+                    {
+                        <a href="@Url.RouteUrl("PostsByTag", new { postTagId = tag.Id, tag.SeName })"><span class="fa fa-tag"></span> @tag.Name</a>
+                    }
                 </div>
-            </div>*@
-        <div class="comment">
-            <div class="fb-comments" data-href="@postUrl" data-width="100%" data-numposts="10"></div>
-        </div>
-        @Html.Action("OtherPosts", "Posts", new { postId = Model.Id, postThumbPictureSize = 160 })
+                @*@Html.Action("RandomPolls", "Poll")*@
+                @Html.Action("PollBlock", "Poll", new { systemKeyword = "poll_iphone" })
+                <div class="facebook_share">
+                    <div class="fb-like" data-href="@postUrl" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                </div>
+            </div>
+            @*<div class="rightside">
+                    @Html.Action("RelatedPosts", "Posts")
+                    @Html.Action("CategoryBox", "Posts", new { categoryId = promotionCategoryId, numberPost = promotionPostNumber, template = "CategoryBox.Promotion", postThumbPictureSize = 80 })
+                    <div class="subside_banner">
+                        @Html.Widget("subside_banner")
+                    </div>
+                </div>*@
+            <div class="comment">
+                <div class="fb-comments" data-href="@postUrl" data-width="100%" data-numposts="10"></div>
+            </div>
+            @Html.Action("OtherPosts", "Posts", new { postId = Model.Id, postThumbPictureSize = 160 })
 
+        </div>
+    </div>
+</div>
+<div class="sidebar">
+  @Html.Action("CategoryBox", "Posts", new { categoryId = summerTourismId, numberPost = summerTourismPostNumber, template = "CategoryBox.SummerTourism", postThumbPictureSize = 270 })
+    <div class="listctn clearfix">
+       @Html.Action("RelatedPosts", "Posts")
+    </div>
+    @Html.Action("CategoryBox", "Posts", new { categoryId = travelViaPictureCategoryId, numberPost = travelViaPicturePostNumber, template = "CategoryBox.TravelViaPicture", postThumbPictureSize = 270 })
+    <div class="listctn clearfix">
+        @Html.Action("CategoryBox", "Posts", new { categoryId = promotionCategoryId, numberPost = promotionPostNumber, template = "CategoryBox.Promotion", postThumbPictureSize = 80 })
+    </div>
+    <div class="sidebanner">
+        @Html.Widget("sidebar_banner")
     </div>
 </div>
 <script type="text/javascript">

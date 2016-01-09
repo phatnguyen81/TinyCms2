@@ -1943,6 +1943,7 @@
     <Content Include="Views\Customer\PasswordRecoveryConfirm.cshtml" />
     <Content Include="Views\Shared\_OneColumnWithoutFooter.cshtml" />
     <Content Include="Views\Posts\CategoryNavigation.cshtml" />
+    <Content Include="Views\Posts\CategoryBox.SummerTourism.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roxy_Fileman\tmp\" />

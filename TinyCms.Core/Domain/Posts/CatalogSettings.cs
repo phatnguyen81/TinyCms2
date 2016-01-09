@@ -313,6 +313,10 @@ namespace TinyCms.Core.Domain.Posts
 
         public int PromotionPostNumber { get; set; }
 
+        public int SummerTourismId { get; set; }
+
+        public int SummerTourismPostNumber { get; set; }
+
         public int VideoPostTemplateId { get; set; }
     }
 }

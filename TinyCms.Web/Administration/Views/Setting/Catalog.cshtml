@@ -215,6 +215,24 @@
         </tr>
         <tr>
             <td class="adminTitle">
+                @Html.NopLabelFor(model => model.SummerTourismId):
+            </td>
+            <td class="adminData">
+                @Html.DropDownListFor(model => model.SummerTourismId, Model.AvailableCategories)
+                @Html.ValidationMessageFor(model => model.SummerTourismId)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.SummerTourismPostNumber):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SummerTourismPostNumber)
+                @Html.ValidationMessageFor(model => model.SummerTourismPostNumber)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
                 @Html.NopLabelFor(model => model.ShowPostsFromSubcategories):
             </td>
             <td class="adminData">

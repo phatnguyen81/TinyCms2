@@ -1045,7 +1045,7 @@ namespace TinyCms.Web.Controllers
             if (posts.Count == 0)
                 return Content("");
 
-            var model = PreparePostOverviewModels(posts, false).ToList();
+            var model = PreparePostOverviewModels(posts, true, 100).ToList();
             return PartialView(model);
         }
         [ChildActionOnly]

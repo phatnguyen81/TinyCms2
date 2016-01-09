@@ -107,5 +107,11 @@ namespace TinyCms.Admin.Models.Settings
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PromotionPostNumber")]
         public int PromotionPostNumber { get; set; }
+
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.SummerTourismId")]
+        public int SummerTourismId { get; set; }
+
+        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.SummerTourismPostNumber")]
+        public int SummerTourismPostNumber { get; set; }
     }
 }

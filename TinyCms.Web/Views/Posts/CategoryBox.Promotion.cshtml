@@ -1,14 +1,18 @@
 ﻿@model CategoryBoxModel
 @if (Model.Posts.Any())
 {
-    <div class="saleoff">
         <h2><a href="@Url.RouteUrl("Category", new {Model.SeName})">Khuyến mãi</a></h2>
         <ul>
             @foreach (var post in Model.Posts)
             {
-                <li><a href="@Url.RouteUrl("Post", new {SeName = post.SeName})"><img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText"/><b>@post.Name</b></a></li>
+                <li>
+                    <a href="@Url.RouteUrl("Post", new {SeName = post.SeName})" class="thumbrelatenew">
+                        <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText" />
+                    </a>
+                    <a class="titlenews" href="@Url.RouteUrl("Post", new {SeName = post.SeName})">@post.Name</a>
+                    <p class="time_post">@post.CreatedOn.ToString("HH:mm dd/MM/yyyy")</p>
+                </li>
             }
         </ul>
-    </div>
 }
 
