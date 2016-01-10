@@ -9,15 +9,23 @@
 <div class="infobox">
     <div class="info_content">
         <div class="avtthumb">
-            <img src="@Model.AvatarUrl" alt="avatar" id="avatar" />
+            <img src="@Model.AvatarUrl" alt="avatar" id="avatar"/>
             <a href="#" class="change_avt" title="Đổi avatar"><span class="camera icn"></span></a>
         </div>
-        <input type="file" style="display: none;" id="fileAvatar" />
-        <p class="username">@(string.IsNullOrWhiteSpace(Model.Fullname)?Model.Username:Model.Fullname)</p>
+        <input type="file" style="display: none;" id="fileAvatar"/>
+        <p class="username">@(string.IsNullOrWhiteSpace(Model.Fullname) ? Model.Username : Model.Fullname)</p>
         <p class="position">@Model.RoleName</p>
         <p class="numblog">Số lượng bài viết: <span>@Model.TotalPosts.ToString("#,##0")</span></p>
         <a href="@Url.RouteUrl("CreateNewPost")" class="btn01">Viết bài mới</a>
+
     </div>
+   
+        @using (Html.BeginForm(null,null,FormMethod.Get))
+        {
+            <div>
+                @Html.DropDownListFor(model => model.Status, Model.StatusList)
+            </div>
+        }
     <div class="infoblog">
         @if (Model.Posts.Any())
         {
@@ -101,5 +109,8 @@
             }
         });
 
+    });
+    $("#Status").change(function() {
+        $(this).closest('form').submit();
     });
 </script>

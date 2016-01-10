@@ -8,10 +8,11 @@
             {
                 <li>
                     <a href="@Url.RouteUrl("Post", new {SeName = post.SeName})">
-                        <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText"> @post.Name
+                        <span class="loading"><img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText" /></span><h2>@post.Name</h2>
                     </a>
                 </li>
             }
         </ul>
     </div>
 }
+

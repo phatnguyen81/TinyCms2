@@ -5,6 +5,7 @@
 @if (posts.Count > 0)
 {
     var firstPost = posts.First();
+    <p class="caption">Các tin khác</p>
     <div class="listnews">
         <div class="toplist">
             <a href="@Url.RouteUrl("Post", new {SeName = firstPost.SeName})">

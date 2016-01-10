@@ -291,6 +291,7 @@
     <Content Include="Content\BBEditor\images\underline.gif" />
     <Content Include="Content\BBEditor\images\unlink.gif" />
     <Content Include="Content\BBEditor\images\unordered.gif" />
+    <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\popup.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
@@ -323,6 +324,8 @@
     <Content Include="Content\files\Index.htm" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\font\Roboto\roboto_font.css" />
     <Content Include="Content\Images\default-avatar.jpg" />
     <Content Include="Content\Images\default-avatar-old.jpg" />
     <Content Include="Content\Images\default-image.gif" />
@@ -1199,6 +1202,16 @@
     <Content Include="Content\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Content\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Content\tinymce\plugins\youtube\README.md" />
+    <Content Include="Content\font\fontawesome-webfont.eot" />
+    <Content Include="Content\font\fontawesome-webfont.ttf" />
+    <Content Include="Content\font\fontawesome-webfont.woff" />
+    <Content Include="Content\font\fontawesome-webfont.woff2" />
+    <Content Include="Content\font\FontAwesome.otf" />
+    <Content Include="Content\font\Roboto\Roboto-Bold.woff" />
+    <Content Include="Content\font\Roboto\Roboto-BoldItalic.woff" />
+    <Content Include="Content\font\Roboto\Roboto-Italic.woff" />
+    <Content Include="Content\font\Roboto\Roboto-Light.woff" />
+    <Content Include="Content\font\Roboto\Roboto-Regular.woff" />
     <None Include="Properties\PublishProfiles\Files.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

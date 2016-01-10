@@ -98,7 +98,8 @@ transition: opacity 0.3s ease 0s;}
 
 .rightlist_banner {float:right}
 .rightlist_banner a:first-child {display:block;margin-bottom:10px}
-
+.rightlist_banner a:first-child img {width:300px;height:250px;display:block;}
+.rightlist_banner a:last-child img {width:300px;height:120px;display:block;}
 .toolbox.inpage {clear:both;display:none}
 .toolbox.inpage table, .toolbox.inpage table td  {border: 1px solid #e4e4e4;text-align:center}
 .toolbox.inpage table td {padding:5px 0}
@@ -118,7 +119,7 @@ transition: opacity 0.3s ease 0s;}
 /*Mainpage*/
 .large_banner {margin-top:15px;float:left}
 .mainpage {float:left;width:980px;margin-top:15px;}
-.mainpage .leftcol {width:670px;float:left;display:block}
+.mainpage .leftcol {margin-right:310px;}
 .mainpage .leftcol .newsbox {margin:20px 0;float:left;}
 .mainpage .leftcol .newsbox h2, .corner_sharing h2 {border-bottom:1px solid #e4e4e4;padding-bottom:5px;}
 .mainpage .leftcol .newsbox h2 a, .corner_sharing h2 a {font-size:16px;font-weight:bold;text-transform:uppercase;padding:0 0 4px 0}
@@ -166,10 +167,13 @@ transition: opacity 0.3s ease 0s;}
 	.headrib {width:94px;height:19px;display:block;background-position: -232px 0}
 .boxctn .headtitle {color: #de4206}
 .boxctn .linetxt {background-color: rgba(0, 0, 0, 0.8);color: #dedede;padding:3px 5px;position:absolute;top:121px;left:0;width:258px; text-overflow: ellipsis;overflow:hidden;white-space:nowrap;}
-.boxctn .subimg li {display:inline-block;margin-right:5px;}
+.boxctn .subimg li {display:inline-block;margin-right:4px;}
 .boxctn .subimg li:last-child {margin-right:0}
 .sidebanner {margin-top:15px}
-.sidebanner img {margin-bottom:10px}
+.sidebanner a img {margin-bottom:10px;}
+.sidebanner a:first-child img {width:292px;height:124px;}
+.sidebanner a:last-child img {width:292px;height:243px;}
+
 /*Footer*/
 .footer {background: #f8f8f8;border-top:1px solid #e4e4e4;width:980px;margin:15px auto 0;float:left}
 .footer .inner_footer {padding:20px}
@@ -195,7 +199,7 @@ transition: opacity 0.3s ease 0s;}
 .cate_detail .top_cate .thumb_topcate img {width:100%;display:block}
 .cate_detail .top_cate .topcate_dt h2 {font-size:16px;margin-bottom:5px}
 .rightside {float:right;width:157px;display:block;margin-top:56px}
-.subside_banner {margin-top:15px}
+.subside_banner {margin-top:15px;width:158px;overflow: hidden;max-height:600px;}
 .topcate_view h2 {font-weight:bold;padding:5px 0;text-transform:uppercase;border:1px solid #e4e4e4;border-width:1px 0;}
 .topcate_view li {border-bottom:1px dashed #e4e4e4}
 .topcate_view li:last-child {border-bottom: 0 none}
@@ -226,11 +230,11 @@ transition: opacity 0.3s ease 0s;}
 .related_news li {padding: 8px 0;border-top:1px dashed #e4e4e4}
 .related_news li:first-child {border-top:0 none}
 .related_news li a {font-weight:bold}
-.other_news {float:left;border-top:1px solid #e4e4e4}
-.other_news h2 {text-transform:uppercase;margin:15px 0 10px;font-size:14px}
-.other_news li {float:left;width:24.2%;margin-right:1%}
+.other_news {float:left;border-top:1px solid #e4e4e4;margin-bottom: 20px;}
+.other_news h2 {margin:5px 0 10px;font-size:12px}
+.other_news li {float:left;width:23.5%;margin-right:2%;overflow: hidden}
 .other_news li:last-child {margin-right:0;}
-.other_news li img {width:160px;height:120px;display:block;margin-bottom:3px}
+.other_news li img {width:100%;height:120px;display:block;margin-bottom:3px}
 .other_news li a {font-weight:bold;margin-top:3px;}
 .comment {float:left;clear:both;margin:15px 0;width:100%}
 .comment h2 {font-size:14px;font-weight:bold;text-transform:uppercase}
@@ -251,6 +255,7 @@ border-width: 1px 0;}
 .searchpage form ul {float:left;clear:both;margin-top:8px}
 .searchpage form li {float:left;margin-right:15px}
 .searchpage .keysearch {float:left;clear:both;margin-top:25px;font-size:14px;border-bottom:1px solid #e4e4e4;padding-bottom:10px;width:100%}
+.searchpage {float: left;}
 
 .mainpage.videoctn {margin-top:20px}
 .videoboard {margin-top:15px}
@@ -269,7 +274,7 @@ border-width: 1px 0;}
 .leftcol .other_video {display:none}
 
 .infobox {min-height:300px;display:block}
-.info_content {width:260px;float:left;}
+.info_content {width:100%;float:left;}
 .info_content .avtthumb {width:100px;height:100px;display:block;float:left;margin-right:15px;position:relative;transition: opacity 0.8s ease 0s;}
 .info_content .change_avt {position:absolute;left:0;top:0;width:102px;height:102px;display:none;background: rgba(0, 0, 0, 0.05);border-radius:100%;opacity:0}
 .info_content .avtthumb:hover .change_avt {display:block;opacity:1}
@@ -296,6 +301,8 @@ border-width: 1px 0;}
 .writeblog_box label {display:block;margin-bottom:10px;width:100%;display:block}
 .writeblog_box .textinput {display:block;margin:5px 0 10px;width:100%;color: #000;height:30px;border:1px solid #e4e4e4;-webkit-appearance: none;padding-left:5px}
 .writeblog_box select{height:25px;margin-left:10px;width:50%;display:block;margin:5px 0 10px;border:1px solid #e4e4e4;}
+.writeblog_box textarea#Short {border: 1px solid #e4e4e4;}
+.writeblog_box .mce-panel {border-color: #e4e4e4;}
 .writeblog_box .contentblog {width:100%;display:block;margin:5px 0 10px;resize:none;color: #000;border:1px solid #e4e4e4;-webkit-appearance: none;padding:5px}
 .writeblogact {margin:15px 0 0;}
 .writeblogact .btn01 {margin-right:10px;height:30px;line-height:30px;}
@@ -340,6 +347,11 @@ border-width: 1px 0;}
 .listctn .thumbrelatenew {float:left;margin-right:10px}
 .listctn .otherimg {width:80px;height:80px;display:block}
 .listctn .titlenews {font-weight:bold;line-height:18px;font-size:15px;} 
+
+.pluginButton {background: #5d7dae !important;padding: 0 10px !important;
+height: 25px !important;line-height: 25px !important;text-shadow: none !important;}
+.pluginButton:hover {background: #3653a8 !important;}
+._2pi8 {padding:0 !important;}
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error {

@@ -1136,7 +1136,7 @@ namespace TinyCms.Web.Controllers
 
         #region My account / Info
 
-        public ActionResult Profile(ProfilePagingFilteringModel command)
+        public ActionResult Profile(CustomerProfileModel model, ProfilePagingFilteringModel command)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return new HttpUnauthorizedResult();
@@ -1151,14 +1151,11 @@ namespace TinyCms.Web.Controllers
                 var values = _customerAttributeParser.ParseValues(selectedCustomerAttributes, fullNameAttrubute.Id);
                 if (values.Count > 0) fullname = values[0];
             }
-            
-            var model = new CustomerProfileModel
-            {
-                Username = customer.Username,
-                Email = customer.Email,
-                RoleName = string.Join(",", customer.CustomerRoles.Select(q => q.Name)),
-                Fullname = fullname
-            };
+
+            model.Username = customer.Username;
+            model.Email = customer.Email;
+            model.RoleName = string.Join(",", customer.CustomerRoles.Select(q => q.Name));
+            model.Fullname = fullname;
             model.AvatarUrl = model.AvatarUrl = _pictureService.GetPictureUrl(
                   _workContext.CurrentCustomer.GetAttribute<int>(SystemCustomerAttributeNames.AvatarPictureId),
                   _mediaSettings.AvatarPictureSize,
@@ -1168,12 +1165,17 @@ namespace TinyCms.Web.Controllers
             //page size
             PreparePageSizeOptions(model.PagingFilteringContext, command, 10);
 
+            var overridePublished = (bool?) null;
+            if (!string.IsNullOrWhiteSpace(model.Status))
+            {
+                overridePublished = model.Status == "Approved";
+            }
 
             var posts = _postService.SearchPosts(
                 orderBy: PostSortingEnum.CreatedOn,
                 createBy: _workContext.CurrentCustomer.Id,
                 pageIndex: command.PageNumber - 1,
-                pageSize: command.PageSize, showHidden: true);
+                pageSize: command.PageSize, showHidden: true, overridePublished: overridePublished);
 
             model.TotalPosts = posts.TotalCount;
 
