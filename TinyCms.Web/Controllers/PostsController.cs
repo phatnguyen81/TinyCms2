@@ -1034,7 +1034,7 @@ namespace TinyCms.Web.Controllers
             //load and cache report
             var postIds = _cacheManager.Get(string.Format(ModelCacheEventConsumer.PRODUCTS_RELATED_IDS_KEY, postId),
                 () =>
-                    _postService.GetRelatedPostsByPostId1(postId).Select(x => x.PostId2).ToArray()
+                    _postService.GetRelatedPostsByPostId1(postId,3).Select(x => x.PostId2).ToArray()
                     );
 
             //load posts

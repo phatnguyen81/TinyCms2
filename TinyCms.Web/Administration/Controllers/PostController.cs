@@ -1046,7 +1046,7 @@ namespace TinyCms.Admin.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
                 return AccessDeniedView();
 
-            var relatedPosts = _postService.GetRelatedPostsByPostId1(postId, true);
+            var relatedPosts = _postService.GetRelatedPostsByPostId1(postId, showHidden: true);
             var relatedPostsModel = relatedPosts
                 .Select(x => new PostModel.RelatedPostModel
                 {

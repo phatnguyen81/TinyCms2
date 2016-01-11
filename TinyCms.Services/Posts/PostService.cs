@@ -849,7 +849,7 @@ namespace TinyCms.Services.Posts
         /// <param name="postId1">The first post identifier</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>Related posts</returns>
-        public virtual IList<RelatedPost> GetRelatedPostsByPostId1(int postId1, bool showHidden = false)
+        public virtual IList<RelatedPost> GetRelatedPostsByPostId1(int postId1, int top = 0, bool showHidden = false)
         {
             var query = from rp in _relatedPostRepository.Table
                         join p in _postRepository.Table on rp.PostId2 equals p.Id
@@ -858,6 +858,10 @@ namespace TinyCms.Services.Posts
                         (showHidden || p.Published)
                         orderby rp.DisplayOrder
                         select rp;
+            if (top > 0)
+            {
+                query = query.Take(top);
+            }
             var relatedPosts = query.ToList();
 
             return relatedPosts;

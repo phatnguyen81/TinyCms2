@@ -176,7 +176,7 @@ namespace TinyCms.Services.Posts
         /// <param name="postId1">The first post identifier</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>Related posts</returns>
-        IList<RelatedPost> GetRelatedPostsByPostId1(int postId1, bool showHidden = false);
+        IList<RelatedPost> GetRelatedPostsByPostId1(int postId1, int top = 0, bool showHidden = false);
 
         /// <summary>
         /// Gets a related post
