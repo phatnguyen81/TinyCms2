@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+﻿    using System.Web.Mvc;
 using Nop.Plugin.ExternalAuth.Facebook.Core;
 using Nop.Plugin.ExternalAuth.Facebook.Models;
 using TinyCms.Core;
@@ -157,6 +157,7 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Controllers
             }
 
             if (result.Result != null) return result.Result;
+            SuccessNotification("Đăng nhập facebook thành công");
             return HttpContext.Request.IsAuthenticated ? new RedirectResult(!string.IsNullOrEmpty(returnUrl) ? returnUrl : "~/") : new RedirectResult(Url.LogOn(returnUrl));
         }
         

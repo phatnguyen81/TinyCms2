@@ -38,7 +38,7 @@
                            Chưa có tài khoản?
                            <a href="@Url.Action("Register","Customer")" class="regbtn">Đăng ký</a>
                        </p>
-                       @Html.Action("ExternalMethods", "ExternalAuthentication")
+                       @Html.Action("ExternalMethods", "ExternalAuthentication", new { returnUrl = Model.ReturnUrl })
                    </div>
                </div>
            }

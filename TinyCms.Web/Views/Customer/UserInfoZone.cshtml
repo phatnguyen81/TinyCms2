@@ -19,10 +19,11 @@ else
         $(".header .myinfo a").click(function(e) {
             e.preventDefault();
             if ($(window).width() > 400) {
-                showPopup('@Url.Action("Login", "Customer", new {popup = true})', 'Đăng nhập');
+                var url = '@Html.Raw(Url.Action("Login", "Customer", new { popup = true, returnUrl = Request.RawUrl }))';
+                showPopup(url, 'Đăng nhập');
             } else {
                 window.location = '@Url.RouteUrl("login")';
             }
         });
-    </script>
+</script>
 }

@@ -433,11 +433,12 @@ namespace TinyCms.Web.Controllers
         [StoreClosed(true)]
         //available even when navigation is not allowed
         [PublicStoreAllowNavigation(true)]
-        public ActionResult Login(bool popup = false)
+        public ActionResult Login(bool popup = false, string returnUrl = null)
         {
             var model = new LoginModel();
             model.UsernamesEnabled = _customerSettings.UsernamesEnabled;
             model.DisplayCaptcha = _captchaSettings.Enabled && _captchaSettings.ShowOnLoginPage;
+            model.ReturnUrl = returnUrl;
             if (popup) return PartialView("LoginBlock", model);
             return View(model);
         }

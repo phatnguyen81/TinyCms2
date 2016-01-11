@@ -22,7 +22,7 @@
    
         @using (Html.BeginForm(null,null,FormMethod.Get))
         {
-            <div>
+            <div style="float: right">
                 @Html.DropDownListFor(model => model.Status, Model.StatusList)
             </div>
         }

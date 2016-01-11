@@ -1,2 +1,2 @@
 DataProvider: sqlserver
-DataConnectionString: Data Source=.\SQLEXPRESS2014;Initial Catalog=TinyCms;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Admin@123
+DataConnectionString: Data Source=.\SQLEXPRESS2k8;Initial Catalog=TinyCms;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Admin@123
