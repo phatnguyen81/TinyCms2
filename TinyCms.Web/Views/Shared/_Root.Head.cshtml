@@ -1,8 +1,9 @@
-﻿@using TinyCms.Core.Domain.Common;
-@using TinyCms.Core.Infrastructure;
+﻿@using StackExchange.Profiling
+@using TinyCms.Core.Domain
+@using TinyCms.Core.Domain.Common
 @using TinyCms.Core.Infrastructure
 @{
-    var displayMiniProfiler = EngineContext.Current.Resolve<TinyCms.Core.Domain.StoreInformationSettings>().DisplayMiniProfilerInPublicStore;
+    var displayMiniProfiler = EngineContext.Current.Resolve<StoreInformationSettings>().DisplayMiniProfilerInPublicStore;
 
     //X-UA-Compatible tag
     var commonSettings = EngineContext.Current.Resolve<CommonSettings>();
@@ -35,7 +36,7 @@
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")?v=1" />
     @if (displayMiniProfiler)
     {
-        @StackExchange.Profiling.MiniProfiler.RenderIncludes()
+        @MiniProfiler.RenderIncludes()
     }
     <!--Powered by nopCommerce - http://www.nopCommerce.com-->
 </head>
