@@ -155,7 +155,7 @@
 	.other_video li img {height:135px;}
 
 	/*Video*/
-	.loginpage {padding:0;border:0 none;}
+	.loginpage {padding:0;border:0 none;width:100%}
 	.loginpage h1 {text-align: center}
 }
 

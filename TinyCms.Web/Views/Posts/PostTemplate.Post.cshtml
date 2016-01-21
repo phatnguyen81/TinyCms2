@@ -58,9 +58,7 @@
 }
 <div class="sidebar">
     @Html.Action("CategoryBox", "Posts", new { categoryId = summerTourismId, numberPost = summerTourismPostNumber, template = "CategoryBox.SummerTourism", postThumbPictureSize = 270 })
-    <div class="listctn clearfix">
-        @Html.Action("RelatedPosts", "Posts")
-    </div>
+    @Html.Action("RelatedPosts", "Posts")
     @Html.Action("CategoryBox", "Posts", new { categoryId = travelViaPictureCategoryId, numberPost = travelViaPicturePostNumber, template = "CategoryBox.TravelViaPicture", postThumbPictureSize = 270 })
     <div class="listctn clearfix">
         @Html.Action("CategoryBox", "Posts", new { categoryId = promotionCategoryId, numberPost = promotionPostNumber, template = "CategoryBox.Promotion", postThumbPictureSize = 80 })
