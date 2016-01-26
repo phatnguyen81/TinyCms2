@@ -2,8 +2,6 @@
 @using TinyCms.Core.Infrastructure
 @{
     Layout = "~/Views/Shared/_HomePage.cshtml";
-    var hotNewsCategoryId = EngineContext.Current.Resolve<CatalogSettings>().HotNewsCategoryId;
-    var hotNewsCategoryNumberPost = EngineContext.Current.Resolve<CatalogSettings>().HotNewsPostNumber;
 
     var shareCornerCategoryId = EngineContext.Current.Resolve<CatalogSettings>().ShareCornerCategoryId;
     var shareCornerPostNumber = EngineContext.Current.Resolve<CatalogSettings>().ShareCornerPostNumber;
@@ -21,8 +19,8 @@
 
 <div class="top_news">
     @*@Html.Action("HomePageHotNews", "Posts", new { postThumbPictureSize = 500 })*@
-    @Html.Action("CategoryBox", "Posts", new { categoryId = hotNewsCategoryId, numberPost = hotNewsCategoryNumberPost, template = "CategoryBox.HotNews", postThumbPictureSize = 500 })
-    @Html.Action("HomePagePosts", "Posts", new { postThumbPictureSize = 200 })
+    @*@Html.Action("CategoryBox", "Posts", new { categoryId = hotNewsCategoryId, numberPost = hotNewsCategoryNumberPost, template = "CategoryBox.HotNews", postThumbPictureSize = 500 })*@
+    @Html.Action("HomePagePosts", "Posts", new { postThumbPictureSize = 600 })
     <div class="rightlist_banner">
         @Html.Widget("home_right_header")
     </div>

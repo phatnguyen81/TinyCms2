@@ -289,10 +289,6 @@ namespace TinyCms.Core.Domain.Posts
         /// </summary>
         public int DefaultManufacturerPageSize { get; set; }
 
-        public int HotNewsCategoryId { get; set; }
-
-        public int HotNewsPostNumber { get; set; }
-
         public int ShareCornerCategoryId { get; set; }
 
         public int ShareCornerPostNumber { get; set; }

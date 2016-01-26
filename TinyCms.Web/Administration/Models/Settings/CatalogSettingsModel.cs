@@ -72,12 +72,6 @@ namespace TinyCms.Admin.Models.Settings
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.IgnoreStoreLimitations")]
         public bool IgnoreStoreLimitations { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.HotNewsCategoryId")]
-        public int HotNewsCategoryId { get; set; }
-
-        [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.HotNewsPostNumber")]
-        public int HotNewsPostNumber { get; set; }
-
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ShareCornerCategoryId")]
         public int ShareCornerCategoryId { get; set; }
 
