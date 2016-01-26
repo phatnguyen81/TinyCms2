@@ -13,7 +13,7 @@
                     <td align="left" style="width: 45%"> @(item.Name)&nbsp;&nbsp; </td>
                     <td align="left" style="width: 40%" height="16px" width="200">
                         <div style="background: #01a260; display: block; height: 16px; width: 100%; background: #d3d3d3;">
-                            <div style="background: #01a260; display: block; height: 100%; width: @(item.PercentOfTotalVotes)%;">&nbsp;</div>
+                            <div style="background: #01a260; display: block; height: 100%; width: @(Math.Round(item.PercentOfTotalVotes,0))%;">&nbsp;</div>
                         </div>
                     </td>
                     <td align="right">&nbsp;&nbsp;<strong> @(item.PercentOfTotalVotes.ToString("0.00")) % </strong></td>
