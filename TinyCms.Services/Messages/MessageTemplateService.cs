@@ -9,46 +9,12 @@ using TinyCms.Services.Localization;
 
 namespace TinyCms.Services.Messages
 {
-    public partial class MessageTemplateService: IMessageTemplateService
+    public class MessageTemplateService : IMessageTemplateService
     {
-        #region Constants
-
-        /// <summary>
-        /// Key for caching
-        /// </summary>
-        /// <remarks>
-        /// {0} : store ID
-        /// </remarks>
-        private const string MESSAGETEMPLATES_ALL_KEY = "Nop.messagetemplate.all";
-        /// <summary>
-        /// Key for caching
-        /// </summary>
-        /// <remarks>
-        /// {0} : template name
-        /// {1} : store ID
-        /// </remarks>
-        private const string MESSAGETEMPLATES_BY_NAME_KEY = "Nop.messagetemplate.name-{0}";
-        /// <summary>
-        /// Key pattern to clear cache
-        /// </summary>
-        private const string MESSAGETEMPLATES_PATTERN_KEY = "Nop.messagetemplate.";
-
-        #endregion
-
-        #region Fields
-
-        private readonly IRepository<MessageTemplate> _messageTemplateRepository;
-        private readonly ILanguageService _languageService;
-        private readonly ILocalizedEntityService _localizedEntityService;
-        private readonly IEventPublisher _eventPublisher;
-        private readonly ICacheManager _cacheManager;
-
-        #endregion
-
         #region Ctor
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="cacheManager">Cache manager</param>
         /// <param name="storeMappingRepository">Store mapping repository</param>
@@ -64,19 +30,55 @@ namespace TinyCms.Services.Messages
             IRepository<MessageTemplate> messageTemplateRepository,
             IEventPublisher eventPublisher)
         {
-            this._cacheManager = cacheManager;
-            this._languageService = languageService;
-            this._localizedEntityService = localizedEntityService;
-            this._messageTemplateRepository = messageTemplateRepository;
-            this._eventPublisher = eventPublisher;
+            _cacheManager = cacheManager;
+            _languageService = languageService;
+            _localizedEntityService = localizedEntityService;
+            _messageTemplateRepository = messageTemplateRepository;
+            _eventPublisher = eventPublisher;
         }
+
+        #endregion
+
+        #region Constants
+
+        /// <summary>
+        ///     Key for caching
+        /// </summary>
+        /// <remarks>
+        ///     {0} : store ID
+        /// </remarks>
+        private const string MESSAGETEMPLATES_ALL_KEY = "Nop.messagetemplate.all";
+
+        /// <summary>
+        ///     Key for caching
+        /// </summary>
+        /// <remarks>
+        ///     {0} : template name
+        ///     {1} : store ID
+        /// </remarks>
+        private const string MESSAGETEMPLATES_BY_NAME_KEY = "Nop.messagetemplate.name-{0}";
+
+        /// <summary>
+        ///     Key pattern to clear cache
+        /// </summary>
+        private const string MESSAGETEMPLATES_PATTERN_KEY = "Nop.messagetemplate.";
+
+        #endregion
+
+        #region Fields
+
+        private readonly IRepository<MessageTemplate> _messageTemplateRepository;
+        private readonly ILanguageService _languageService;
+        private readonly ILocalizedEntityService _localizedEntityService;
+        private readonly IEventPublisher _eventPublisher;
+        private readonly ICacheManager _cacheManager;
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Delete a message template
+        ///     Delete a message template
         /// </summary>
         /// <param name="messageTemplate">Message template</param>
         public virtual void DeleteMessageTemplate(MessageTemplate messageTemplate)
@@ -93,7 +95,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Inserts a message template
+        ///     Inserts a message template
         /// </summary>
         /// <param name="messageTemplate">Message template</param>
         public virtual void InsertMessageTemplate(MessageTemplate messageTemplate)
@@ -110,7 +112,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Updates a message template
+        ///     Updates a message template
         /// </summary>
         /// <param name="messageTemplate">Message template</param>
         public virtual void UpdateMessageTemplate(MessageTemplate messageTemplate)
@@ -127,7 +129,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Gets a message template
+        ///     Gets a message template
         /// </summary>
         /// <param name="messageTemplateId">Message template identifier</param>
         /// <returns>Message template</returns>
@@ -140,7 +142,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Gets a message template
+        ///     Gets a message template
         /// </summary>
         /// <param name="messageTemplateName">Message template name</param>
         /// <param name="storeId">Store identifier</param>
@@ -150,7 +152,7 @@ namespace TinyCms.Services.Messages
             if (string.IsNullOrWhiteSpace(messageTemplateName))
                 throw new ArgumentException("messageTemplateName");
 
-            string key = string.Format(MESSAGETEMPLATES_BY_NAME_KEY, messageTemplateName);
+            var key = string.Format(MESSAGETEMPLATES_BY_NAME_KEY, messageTemplateName);
             return _cacheManager.Get(key, () =>
             {
                 var query = _messageTemplateRepository.Table;
@@ -158,20 +160,19 @@ namespace TinyCms.Services.Messages
                 query = query.OrderBy(t => t.Id);
                 query = query.OrderBy(t => t.Id);
                 var templates = query.ToList();
-                
+
                 return templates.FirstOrDefault();
             });
-
         }
 
         /// <summary>
-        /// Gets all message templates
+        ///     Gets all message templates
         /// </summary>
         /// <param name="storeId">Store identifier; pass 0 to load all records</param>
         /// <returns>Message template list</returns>
         public virtual IList<MessageTemplate> GetAllMessageTemplates()
         {
-            string key = string.Format(MESSAGETEMPLATES_ALL_KEY);
+            var key = string.Format(MESSAGETEMPLATES_ALL_KEY);
             return _cacheManager.Get(key, () =>
             {
                 var query = _messageTemplateRepository.Table;
@@ -182,7 +183,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Create a copy of message template with all depended data
+        ///     Create a copy of message template with all depended data
         /// </summary>
         /// <param name="messageTemplate">Message template</param>
         /// <returns>Message template copy</returns>
@@ -211,7 +212,8 @@ namespace TinyCms.Services.Messages
             {
                 var bccEmailAddresses = messageTemplate.GetLocalized(x => x.BccEmailAddresses, lang.Id, false, false);
                 if (!String.IsNullOrEmpty(bccEmailAddresses))
-                    _localizedEntityService.SaveLocalizedValue(mtCopy, x => x.BccEmailAddresses, bccEmailAddresses, lang.Id);
+                    _localizedEntityService.SaveLocalizedValue(mtCopy, x => x.BccEmailAddresses, bccEmailAddresses,
+                        lang.Id);
 
                 var subject = messageTemplate.GetLocalized(x => x.Subject, lang.Id, false, false);
                 if (!String.IsNullOrEmpty(subject))

@@ -1,18 +1,17 @@
-﻿
-using System.Web.Routing;
+﻿using System.Web.Routing;
 using TinyCms.Services.Seo;
 
 namespace TinyCms.Web.Framework.Seo
 {
     /// <summary>
-    /// Event to handle unknow URL record entity names
+    ///     Event to handle unknow URL record entity names
     /// </summary>
     public class CustomUrlRecordEntityNameRequested
     {
         public CustomUrlRecordEntityNameRequested(RouteData routeData, UrlRecordService.UrlRecordForCaching urlRecord)
         {
-            this.RouteData = routeData;
-            this.UrlRecord = urlRecord;
+            RouteData = routeData;
+            UrlRecord = urlRecord;
         }
 
         public RouteData RouteData { get; private set; }

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Web.Mvc;
 using TinyCms.Core;
@@ -27,8 +26,55 @@ using TinyCms.Web.Models.Common;
 
 namespace TinyCms.Web.Controllers
 {
-    public partial class CommonController : BasePublicController
+    public class CommonController : BasePublicController
     {
+        #region Constructors
+
+        public CommonController(
+            ILanguageService languageService,
+            ILocalizationService localizationService,
+            IWorkContext workContext,
+            IQueuedEmailService queuedEmailService,
+            IEmailAccountService emailAccountService,
+            ISitemapGenerator sitemapGenerator,
+            IThemeContext themeContext,
+            IThemeProvider themeProvider,
+            IGenericAttributeService genericAttributeService,
+            IWebHelper webHelper,
+            IPermissionService permissionService,
+            ICacheManager cacheManager,
+            ICustomerActivityService customerActivityService,
+            CustomerSettings customerSettings,
+            StoreInformationSettings storeInformationSettings,
+            EmailAccountSettings emailAccountSettings,
+            CommonSettings commonSettings,
+            LocalizationSettings localizationSettings,
+            CaptchaSettings captchaSettings)
+        {
+            _languageService = languageService;
+            _localizationService = localizationService;
+            _workContext = workContext;
+            _queuedEmailService = queuedEmailService;
+            _emailAccountService = emailAccountService;
+            _sitemapGenerator = sitemapGenerator;
+            _themeContext = themeContext;
+            _themeProvider = themeProvider;
+            _genericAttributeService = genericAttributeService;
+            _webHelper = webHelper;
+            _permissionService = permissionService;
+            _cacheManager = cacheManager;
+            _customerActivityService = customerActivityService;
+
+            _customerSettings = customerSettings;
+            _storeInformationSettings = storeInformationSettings;
+            _emailAccountSettings = emailAccountSettings;
+            _commonSettings = commonSettings;
+            _localizationSettings = localizationSettings;
+            _captchaSettings = captchaSettings;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly ILanguageService _languageService;
@@ -54,80 +100,33 @@ namespace TinyCms.Web.Controllers
 
         #endregion
 
-        #region Constructors
-
-        public CommonController(
-            ILanguageService languageService,
-            ILocalizationService localizationService,
-            IWorkContext workContext, 
-            IQueuedEmailService queuedEmailService, 
-            IEmailAccountService emailAccountService,
-            ISitemapGenerator sitemapGenerator,
-            IThemeContext themeContext,
-            IThemeProvider themeProvider,
-            IGenericAttributeService genericAttributeService, 
-            IWebHelper webHelper,
-            IPermissionService permissionService,
-            ICacheManager cacheManager,
-            ICustomerActivityService customerActivityService,
-            CustomerSettings customerSettings, 
-            StoreInformationSettings storeInformationSettings,
-            EmailAccountSettings emailAccountSettings,
-            CommonSettings commonSettings, 
-            LocalizationSettings localizationSettings, 
-            CaptchaSettings captchaSettings)
-        {
-            this._languageService = languageService;
-            this._localizationService = localizationService;
-            this._workContext = workContext;
-            this._queuedEmailService = queuedEmailService;
-            this._emailAccountService = emailAccountService;
-            this._sitemapGenerator = sitemapGenerator;
-            this._themeContext = themeContext;
-            this._themeProvider = themeProvider;
-            this._genericAttributeService = genericAttributeService;
-            this._webHelper = webHelper;
-            this._permissionService = permissionService;
-            this._cacheManager = cacheManager;
-            this._customerActivityService = customerActivityService;
-
-            this._customerSettings = customerSettings;
-            this._storeInformationSettings = storeInformationSettings;
-            this._emailAccountSettings = emailAccountSettings;
-            this._commonSettings = commonSettings;
-            this._localizationSettings = localizationSettings;
-            this._captchaSettings = captchaSettings;
-        }
-
-        #endregion
-
         #region Utilities
 
-     
         #endregion
-       
+
         #region Methods
 
         //page not found
         public ActionResult PageNotFound()
         {
-            this.Response.StatusCode = 404;
-            this.Response.TrySkipIisCustomErrors = true;
+            Response.StatusCode = 404;
+            Response.TrySkipIisCustomErrors = true;
 
             return View();
         }
+
         //favicon
         [ChildActionOnly]
         public ActionResult Favicon(int? version)
         {
             //try loading a store specific favicon
             var faviconFileName = "favicon.ico";
-            var localFaviconPath = System.IO.Path.Combine(Request.PhysicalApplicationPath, faviconFileName);
+            var localFaviconPath = Path.Combine(Request.PhysicalApplicationPath, faviconFileName);
             if (!System.IO.File.Exists(localFaviconPath))
             {
                 //try loading a generic favicon
                 faviconFileName = "favicon.ico";
-                localFaviconPath = System.IO.Path.Combine(Request.PhysicalApplicationPath, faviconFileName);
+                localFaviconPath = Path.Combine(Request.PhysicalApplicationPath, faviconFileName);
                 if (!System.IO.File.Exists(localFaviconPath))
                 {
                     return Content("");
@@ -173,11 +172,11 @@ namespace TinyCms.Web.Controllers
             var sb = new StringBuilder();
 
             //if robots.txt exists, let's use it
-            string robotsFile = System.IO.Path.Combine(_webHelper.MapPath("~/"), "robots.custom.txt");
+            var robotsFile = Path.Combine(_webHelper.MapPath("~/"), "robots.custom.txt");
             if (System.IO.File.Exists(robotsFile))
             {
                 //the robots.txt file exists
-                string robotsFileContent = System.IO.File.ReadAllText(robotsFile);
+                var robotsFileContent = System.IO.File.ReadAllText(robotsFile);
                 sb.Append(robotsFileContent);
             }
             else
@@ -191,7 +190,7 @@ namespace TinyCms.Web.Controllers
                     "/content/files/exportimport/",
                     "/country/getstatesbycountryid",
                     "/install",
-                    "/setproductreviewhelpfulness",
+                    "/setproductreviewhelpfulness"
                 };
                 var localizableDisallowPaths = new List<string>
                 {
@@ -248,7 +247,7 @@ namespace TinyCms.Web.Controllers
                     "/viewpm",
                     "/uploadfileproductattribute",
                     "/uploadfilecheckoutattribute",
-                    "/wishlist",
+                    "/wishlist"
                 };
 
 
@@ -300,10 +299,10 @@ namespace TinyCms.Web.Controllers
                 }
 
                 //load and add robots.txt additions to the end of file.
-                string robotsAdditionsFile = System.IO.Path.Combine(_webHelper.MapPath("~/"), "robots.additions.txt");
+                var robotsAdditionsFile = Path.Combine(_webHelper.MapPath("~/"), "robots.additions.txt");
                 if (System.IO.File.Exists(robotsAdditionsFile))
                 {
-                    string robotsFileContent = System.IO.File.ReadAllText(robotsAdditionsFile);
+                    var robotsFileContent = System.IO.File.ReadAllText(robotsAdditionsFile);
                     sb.Append(robotsFileContent);
                 }
             }
@@ -313,6 +312,7 @@ namespace TinyCms.Web.Controllers
             Response.Write(sb.ToString());
             return null;
         }
+
         //SEO sitemap page
         [NopHttpsRequirement(SslRequirement.No)]
         //available even when a store is closed
@@ -322,13 +322,13 @@ namespace TinyCms.Web.Controllers
             if (!_commonSettings.SitemapEnabled)
                 return RedirectToRoute("HomePage");
 
-            string cacheKey = string.Format(ModelCacheEventConsumer.SITEMAP_SEO_MODEL_KEY,
+            var cacheKey = string.Format(ModelCacheEventConsumer.SITEMAP_SEO_MODEL_KEY,
                 _workContext.WorkingLanguage.Id,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
-            var siteMap = _cacheManager.Get(cacheKey, () => _sitemapGenerator.Generate(this.Url));
+            var siteMap = _cacheManager.Get(cacheKey, () => _sitemapGenerator.Generate(Url));
             return Content(siteMap, "text/xml");
         }
-        #endregion
 
+        #endregion
     }
 }

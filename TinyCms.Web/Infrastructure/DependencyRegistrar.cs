@@ -9,12 +9,12 @@ using TinyCms.Web.Controllers;
 namespace TinyCms.Web.Infrastructure
 {
     /// <summary>
-    /// Dependency registrar
+    ///     Dependency registrar
     /// </summary>
     public class DependencyRegistrar : IDependencyRegistrar
     {
         /// <summary>
-        /// Register services and interfaces
+        ///     Register services and interfaces
         /// </summary>
         /// <param name="builder">Container builder</param>
         /// <param name="typeFinder">Type finder</param>
@@ -24,11 +24,10 @@ namespace TinyCms.Web.Infrastructure
             //we cache presentation models between requests
             builder.RegisterType<CommonController>()
                 .WithParameter(ResolvedParameter.ForNamed<ICacheManager>("nop_cache_static"));
-            
         }
 
         /// <summary>
-        /// Order of this dependency registrar implementation
+        ///     Order of this dependency registrar implementation
         /// </summary>
         public int Order
         {

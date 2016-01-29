@@ -14,35 +14,35 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class WidgetController : BaseAdminController
-	{
-		#region Fields
+    public class WidgetController : BaseAdminController
+    {
+        #region Constructors
+
+        public WidgetController(IWidgetService widgetService,
+            IPermissionService permissionService, ISettingService settingService,
+            WidgetSettings widgetSettings, IPluginFinder pluginFinder)
+        {
+            _widgetService = widgetService;
+            _permissionService = permissionService;
+            _settingService = settingService;
+            _widgetSettings = widgetSettings;
+            _pluginFinder = pluginFinder;
+        }
+
+        #endregion
+
+        #region Fields
 
         private readonly IWidgetService _widgetService;
         private readonly IPermissionService _permissionService;
         private readonly ISettingService _settingService;
         private readonly WidgetSettings _widgetSettings;
-	    private readonly IPluginFinder _pluginFinder;
+        private readonly IPluginFinder _pluginFinder;
 
-	    #endregion
+        #endregion
 
-		#region Constructors
-
-        public WidgetController(IWidgetService widgetService,
-            IPermissionService permissionService, ISettingService settingService,
-            WidgetSettings widgetSettings, IPluginFinder pluginFinder)
-		{
-            this._widgetService = widgetService;
-            this._permissionService = permissionService;
-            this._settingService = settingService;
-            this._widgetSettings = widgetSettings;
-            this._pluginFinder = pluginFinder;
-		}
-
-		#endregion 
-        
         #region Methods
-        
+
         public ActionResult Index()
         {
             return RedirectToAction("List");
@@ -114,7 +114,7 @@ namespace TinyCms.Admin.Controllers
 
             return new NullJsonResult();
         }
-        
+
         public ActionResult ConfigureWidget(string systemName)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageWidgets))
@@ -159,6 +159,7 @@ namespace TinyCms.Admin.Controllers
 
             return PartialView(model);
         }
+
         #endregion
     }
 }

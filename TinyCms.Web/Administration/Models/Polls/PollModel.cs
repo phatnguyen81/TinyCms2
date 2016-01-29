@@ -8,8 +8,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Polls
 {
-    [Validator(typeof(PollValidator))]
-    public partial class PollModel : BaseNopEntityModel
+    [Validator(typeof (PollValidator))]
+    public class PollModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.ContentManagement.Polls.Fields.Language")]
         public int LanguageId { get; set; }
@@ -45,6 +45,5 @@ namespace TinyCms.Admin.Models.Polls
         [NopResourceDisplayName("Admin.ContentManagement.Polls.Fields.EndDate")]
         [UIHint("DateTimeNullable")]
         public DateTime? EndDate { get; set; }
-
     }
 }

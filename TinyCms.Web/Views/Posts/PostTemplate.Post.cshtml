@@ -1,10 +1,8 @@
-﻿@model PostDetailsModel
-@using TinyCms.Core
-@using TinyCms.Core.Domain
+﻿@using TinyCms.Core.Domain
 @using TinyCms.Core.Domain.Posts
-@using TinyCms.Core.Domain.Seo;
-@using TinyCms.Core.Infrastructure;
-@using TinyCms.Services.Localization;
+@using TinyCms.Core.Domain.Seo
+@using TinyCms.Core.Infrastructure
+@model PostDetailsModel
 @{
     Layout = "~/Views/Shared/_OneColumn.cshtml";
 
@@ -16,10 +14,9 @@
     var seoSettings = EngineContext.Current.Resolve<SeoSettings>();
 
     //canonical URL
-    var postUrl = Url.RouteUrl("Post", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+    var postUrl = Url.RouteUrl("Post", new {Model.SeName}, Request.Url.Scheme);
     if (seoSettings.CanonicalUrlsEnabled)
     {
-
         Html.AddCanonicalUrlParts(postUrl);
     }
 
@@ -57,11 +54,11 @@
     var summerTourismPostNumber = EngineContext.Current.Resolve<CatalogSettings>().SummerTourismPostNumber;
 }
 <div class="sidebar">
-    @Html.Action("CategoryBox", "Posts", new { categoryId = summerTourismId, numberPost = summerTourismPostNumber, template = "CategoryBox.SummerTourism", postThumbPictureSize = 270 })
+    @Html.Action("CategoryBox", "Posts", new {categoryId = summerTourismId, numberPost = summerTourismPostNumber, template = "CategoryBox.SummerTourism", postThumbPictureSize = 270})
     @Html.Action("RelatedPosts", "Posts")
-    @Html.Action("CategoryBox", "Posts", new { categoryId = travelViaPictureCategoryId, numberPost = travelViaPicturePostNumber, template = "CategoryBox.TravelViaPicture", postThumbPictureSize = 270 })
+    @Html.Action("CategoryBox", "Posts", new {categoryId = travelViaPictureCategoryId, numberPost = travelViaPicturePostNumber, template = "CategoryBox.TravelViaPicture", postThumbPictureSize = 270})
     <div class="listctn clearfix">
-        @Html.Action("CategoryBox", "Posts", new { categoryId = promotionCategoryId, numberPost = promotionPostNumber, template = "CategoryBox.Promotion", postThumbPictureSize = 80 })
+        @Html.Action("CategoryBox", "Posts", new {categoryId = promotionCategoryId, numberPost = promotionPostNumber, template = "CategoryBox.Promotion", postThumbPictureSize = 80})
     </div>
     <div class="sidebanner">
         @Html.Widget("post_sidebar_banner")
@@ -70,7 +67,7 @@
 <div class="leftcol">
     <div class="news_detail">
         <h1>
-            <a href="@Url.RouteUrl("Category", new {SeName = Model.Breadcrumb.CategoryBreadcrumb.Last().SeName})">@Model.Breadcrumb.CategoryBreadcrumb.Last().Name</a>
+            <a href="@Url.RouteUrl("Category", new {Model.Breadcrumb.CategoryBreadcrumb.Last().SeName})">@Model.Breadcrumb.CategoryBreadcrumb.Last().Name</a>
         </h1>
         <p class="title">@Model.Name</p>
         <p class="time_post">@Model.CreatedOn.ToString("HH:mm dd/MM/yyyy")</p>
@@ -82,11 +79,12 @@
                 <div class="posttags clearfix">
                     @foreach (var tag in Model.PostTags)
                     {
-                        <a href="@Url.RouteUrl("PostsByTag", new { postTagId = tag.Id, tag.SeName })"><span class="fa fa-tag"></span> @tag.Name</a>
+                        <a href="@Url.RouteUrl("PostsByTag", new {postTagId = tag.Id, tag.SeName})">
+                            <span class="fa fa-tag"></span> @tag.Name</a>
                     }
                 </div>
                 @*@Html.Action("RandomPolls", "Poll")*@
-                @Html.Action("PollBlock", "Poll", new { systemKeyword = "poll_iphone" })
+                @Html.Action("PollBlock", "Poll", new {systemKeyword = "poll_iphone"})
                 <div class="facebook_share">
                     <div class="fb-like" data-href="@postUrl" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 </div>
@@ -101,7 +99,7 @@
             <div class="comment">
                 <div class="fb-comments" data-href="@postUrl" data-width="100%" data-numposts="10"></div>
             </div>
-            @Html.Action("OtherPosts", "Posts", new { postId = Model.Id, postThumbPictureSize = 160 })
+            @Html.Action("OtherPosts", "Posts", new {postId = Model.Id, postThumbPictureSize = 160})
 
         </div>
     </div>
@@ -109,15 +107,16 @@
 <script type="text/javascript">
 
     $(document).on(
-        'fbload',
+        "fbload",
         function() {
-            FB.Event.subscribe('edge.create', fb_change_callback);
-            FB.Event.subscribe('edge.remove', fb_change_callback);
-            FB.Event.subscribe('comment.create', fb_change_callback);
-            FB.Event.subscribe('comment.remove', fb_change_callback);
+            FB.Event.subscribe("edge.create", fb_change_callback);
+            FB.Event.subscribe("edge.remove", fb_change_callback);
+            FB.Event.subscribe("comment.create", fb_change_callback);
+            FB.Event.subscribe("comment.remove", fb_change_callback);
         }
     );
+
     function fb_change_callback() {
-        $.post("@Url.Action("UpdatePost","Posts")", { postId: @Model.Id });
+        $.post("@Url.Action("UpdatePost", "Posts")", { postId: @Model.Id });
     }
 </script>

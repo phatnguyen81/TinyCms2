@@ -14,7 +14,7 @@ namespace TinyCms.Services.Customers
     public static class CustomerExtensions
     {
         /// <summary>
-        /// Get full name
+        ///     Get full name
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <returns>Customer full name</returns>
@@ -25,7 +25,7 @@ namespace TinyCms.Services.Customers
             var firstName = customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName);
             var lastName = customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName);
 
-            string fullName = "";
+            var fullName = "";
             if (!String.IsNullOrWhiteSpace(firstName) && !String.IsNullOrWhiteSpace(lastName))
                 fullName = string.Format("{0} {1}", firstName, lastName);
             else
@@ -38,8 +38,9 @@ namespace TinyCms.Services.Customers
             }
             return fullName;
         }
+
         /// <summary>
-        /// Formats the customer name
+        ///     Formats the customer name
         /// </summary>
         /// <param name="customer">Source</param>
         /// <param name="stripTooLong">Strip too long customer name</param>
@@ -55,7 +56,7 @@ namespace TinyCms.Services.Customers
                 return EngineContext.Current.Resolve<ILocalizationService>().GetResource("Customer.Guest");
             }
 
-            string result = string.Empty;
+            var result = string.Empty;
             switch (EngineContext.Current.Resolve<CustomerSettings>().CustomerNameFormat)
             {
                 case CustomerNameFormat.ShowEmails:
@@ -82,9 +83,8 @@ namespace TinyCms.Services.Customers
             return result;
         }
 
-
         /// <summary>
-        /// Gets coupon codes
+        ///     Gets coupon codes
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <returns>Coupon codes</returns>
@@ -94,8 +94,9 @@ namespace TinyCms.Services.Customers
                 throw new ArgumentNullException("customer");
 
             var genericAttributeService = EngineContext.Current.Resolve<IGenericAttributeService>();
-            var existingGiftCartCouponCodes = customer.GetAttribute<string>(SystemCustomerAttributeNames.GiftCardCouponCodes,
-                genericAttributeService);
+            var existingGiftCartCouponCodes =
+                customer.GetAttribute<string>(SystemCustomerAttributeNames.GiftCardCouponCodes,
+                    genericAttributeService);
 
             var couponCodes = new List<string>();
             if (String.IsNullOrEmpty(existingGiftCartCouponCodes))
@@ -111,7 +112,7 @@ namespace TinyCms.Services.Customers
                 {
                     if (node1.Attributes != null && node1.Attributes["Code"] != null)
                     {
-                        string code = node1.Attributes["Code"].InnerText.Trim();
+                        var code = node1.Attributes["Code"].InnerText.Trim();
                         couponCodes.Add(code);
                     }
                 }
@@ -122,8 +123,9 @@ namespace TinyCms.Services.Customers
             }
             return couponCodes.ToArray();
         }
+
         /// <summary>
-        /// Adds a coupon code
+        ///     Adds a coupon code
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="couponCode">Coupon code</param>
@@ -134,11 +136,12 @@ namespace TinyCms.Services.Customers
                 throw new ArgumentNullException("customer");
 
             var genericAttributeService = EngineContext.Current.Resolve<IGenericAttributeService>();
-            string result = string.Empty;
+            var result = string.Empty;
             try
             {
-                var existingGiftCartCouponCodes = customer.GetAttribute<string>(SystemCustomerAttributeNames.GiftCardCouponCodes,
-                    genericAttributeService);
+                var existingGiftCartCouponCodes =
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.GiftCardCouponCodes,
+                        genericAttributeService);
 
                 couponCode = couponCode.Trim().ToLower();
 
@@ -152,7 +155,7 @@ namespace TinyCms.Services.Customers
                 {
                     xmlDoc.LoadXml(existingGiftCartCouponCodes);
                 }
-                var rootElement = (XmlElement)xmlDoc.SelectSingleNode(@"//GiftCardCouponCodes");
+                var rootElement = (XmlElement) xmlDoc.SelectSingleNode(@"//GiftCardCouponCodes");
 
                 XmlElement gcElement = null;
                 //find existing
@@ -161,10 +164,10 @@ namespace TinyCms.Services.Customers
                 {
                     if (node1.Attributes != null && node1.Attributes["Code"] != null)
                     {
-                        string couponCodeAttribute = node1.Attributes["Code"].InnerText.Trim();
+                        var couponCodeAttribute = node1.Attributes["Code"].InnerText.Trim();
                         if (couponCodeAttribute.ToLower() == couponCode.ToLower())
                         {
-                            gcElement = (XmlElement)node1;
+                            gcElement = (XmlElement) node1;
                             break;
                         }
                     }
@@ -188,8 +191,9 @@ namespace TinyCms.Services.Customers
             //apply new value
             genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.GiftCardCouponCodes, result);
         }
+
         /// <summary>
-        /// Removes a coupon code
+        ///     Removes a coupon code
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="couponCode">Coupon code to remove</param>
@@ -204,16 +208,17 @@ namespace TinyCms.Services.Customers
 
             //clear them
             var genericAttributeService = EngineContext.Current.Resolve<IGenericAttributeService>();
-            genericAttributeService.SaveAttribute<string>(customer, SystemCustomerAttributeNames.GiftCardCouponCodes, null);
+            genericAttributeService.SaveAttribute<string>(customer, SystemCustomerAttributeNames.GiftCardCouponCodes,
+                null);
 
             //save again except removed one
-            foreach (string existingCouponCode in existingCouponCodes)
+            foreach (var existingCouponCode in existingCouponCodes)
                 if (!existingCouponCode.Equals(couponCode, StringComparison.InvariantCultureIgnoreCase))
                     customer.ApplyGiftCardCouponCode(existingCouponCode);
         }
 
         /// <summary>
-        /// Check whether password recovery token is valid
+        ///     Check whether password recovery token is valid
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="token">Token to validate</param>
@@ -232,8 +237,9 @@ namespace TinyCms.Services.Customers
 
             return true;
         }
+
         /// <summary>
-        /// Check whether password recovery link is expired
+        ///     Check whether password recovery link is expired
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="customerSettings">Customer settings</param>
@@ -248,8 +254,9 @@ namespace TinyCms.Services.Customers
 
             if (customerSettings.PasswordRecoveryLinkDaysValid == 0)
                 return false;
-            
-            var geneatedDate = customer.GetAttribute<DateTime?>(SystemCustomerAttributeNames.PasswordRecoveryTokenDateGenerated);
+
+            var geneatedDate =
+                customer.GetAttribute<DateTime?>(SystemCustomerAttributeNames.PasswordRecoveryTokenDateGenerated);
             if (!geneatedDate.HasValue)
                 return false;
 
@@ -261,7 +268,7 @@ namespace TinyCms.Services.Customers
         }
 
         /// <summary>
-        /// Get customer role identifiers
+        ///     Get customer role identifiers
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="showHidden">A value indicating whether to load hidden records</param>
@@ -272,9 +279,9 @@ namespace TinyCms.Services.Customers
                 throw new ArgumentNullException("customer");
 
             var customerRolesIds = customer.CustomerRoles
-               .Where(cr => showHidden || cr.Active)
-               .Select(cr => cr.Id)
-               .ToArray();
+                .Where(cr => showHidden || cr.Active)
+                .Select(cr => cr.Id)
+                .ToArray();
 
             return customerRolesIds;
         }

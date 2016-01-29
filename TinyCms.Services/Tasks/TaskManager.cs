@@ -7,24 +7,40 @@ using TinyCms.Core.Infrastructure;
 namespace TinyCms.Services.Tasks
 {
     /// <summary>
-    /// Represents task manager
+    ///     Represents task manager
     /// </summary>
-    public partial class TaskManager
+    public class TaskManager
     {
+        private const int _notRunTasksInterval = 60*30; //30 minutes
         private static readonly TaskManager _taskManager = new TaskManager();
         private readonly List<TaskThread> _taskThreads = new List<TaskThread>();
-        private const int _notRunTasksInterval = 60 * 30; //30 minutes
 
         private TaskManager()
         {
         }
-        
+
         /// <summary>
-        /// Initializes the task manager
+        ///     Gets the task mamanger instance
+        /// </summary>
+        public static TaskManager Instance
+        {
+            get { return _taskManager; }
+        }
+
+        /// <summary>
+        ///     Gets a list of task threads of this task manager
+        /// </summary>
+        public IList<TaskThread> TaskThreads
+        {
+            get { return new ReadOnlyCollection<TaskThread>(_taskThreads); }
+        }
+
+        /// <summary>
+        ///     Initializes the task manager
         /// </summary>
         public void Initialize()
         {
-            this._taskThreads.Clear();
+            _taskThreads.Clear();
 
             var taskService = EngineContext.Current.Resolve<IScheduleTaskService>();
             var scheduleTasks = taskService
@@ -45,7 +61,7 @@ namespace TinyCms.Services.Tasks
                     var task = new Task(scheduleTask);
                     taskThread.AddTask(task);
                 }
-                this._taskThreads.Add(taskThread);
+                _taskThreads.Add(taskThread);
             }
 
             //sometimes a task period could be set to several hours (or even days).
@@ -62,58 +78,36 @@ namespace TinyCms.Services.Tasks
                 var taskThread = new TaskThread
                 {
                     RunOnlyOnce = true,
-                    Seconds = 60 * 5 //let's run such tasks in 5 minutes after application start
+                    Seconds = 60*5 //let's run such tasks in 5 minutes after application start
                 };
                 foreach (var scheduleTask in notRunTasks)
                 {
                     var task = new Task(scheduleTask);
                     taskThread.AddTask(task);
                 }
-                this._taskThreads.Add(taskThread);
+                _taskThreads.Add(taskThread);
             }
         }
 
         /// <summary>
-        /// Starts the task manager
+        ///     Starts the task manager
         /// </summary>
         public void Start()
         {
-            foreach (var taskThread in this._taskThreads)
+            foreach (var taskThread in _taskThreads)
             {
                 taskThread.InitTimer();
             }
         }
 
         /// <summary>
-        /// Stops the task manager
+        ///     Stops the task manager
         /// </summary>
         public void Stop()
         {
-            foreach (var taskThread in this._taskThreads)
+            foreach (var taskThread in _taskThreads)
             {
                 taskThread.Dispose();
-            }
-        }
-
-        /// <summary>
-        /// Gets the task mamanger instance
-        /// </summary>
-        public static TaskManager Instance
-        {
-            get
-            {
-                return _taskManager;
-            }
-        }
-
-        /// <summary>
-        /// Gets a list of task threads of this task manager
-        /// </summary>
-        public IList<TaskThread> TaskThreads
-        {
-            get
-            {
-                return new ReadOnlyCollection<TaskThread>(this._taskThreads);
             }
         }
     }

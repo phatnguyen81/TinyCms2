@@ -5,7 +5,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.ExternalAuthentication
 {
-    public partial class AuthenticationMethodModel : BaseNopModel
+    public class AuthenticationMethodModel : BaseNopModel
     {
         [NopResourceDisplayName("Admin.Configuration.ExternalAuthenticationMethods.Fields.FriendlyName")]
         [AllowHtml]
@@ -20,8 +20,6 @@ namespace TinyCms.Admin.Models.ExternalAuthentication
 
         [NopResourceDisplayName("Admin.Configuration.ExternalAuthenticationMethods.Fields.IsActive")]
         public bool IsActive { get; set; }
-
-
 
         public string ConfigurationActionName { get; set; }
         public string ConfigurationControllerName { get; set; }

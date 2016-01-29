@@ -7,8 +7,8 @@ using TinyCms.Web.Validators.Customer;
 
 namespace TinyCms.Web.Models.Customer
 {
-    [Validator(typeof(ChangePasswordValidator))]
-    public partial class ChangePasswordModel : BaseNopModel
+    [Validator(typeof (ChangePasswordValidator))]
+    public class ChangePasswordModel : BaseNopModel
     {
         [AllowHtml]
         [DataType(DataType.Password)]
@@ -26,6 +26,5 @@ namespace TinyCms.Web.Models.Customer
         public string ConfirmNewPassword { get; set; }
 
         public string Result { get; set; }
-
     }
 }

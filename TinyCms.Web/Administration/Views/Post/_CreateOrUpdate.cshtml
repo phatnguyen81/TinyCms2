@@ -3,7 +3,7 @@
 @Html.HiddenFor(model => model.Id)
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#post-edit").kendoTabStrip({
             animation: {
                 open: {
@@ -51,7 +51,7 @@
 
 @{
     //custom tabs
-    var eventMessage = new AdminTabStripCreated(this.Html, "post-edit");
+    var eventMessage = new AdminTabStripCreated(Html, "post-edit");
     EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
     foreach (var eventBlock in eventMessage.BlocksToRender)
     {
@@ -63,23 +63,13 @@
 <input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
 
 @helper TabInfo()
-{ 
-    @Html.Partial("_CreateOrUpdate.Info", Model)
-}
+{ @Html.Partial("_CreateOrUpdate.Info", Model) }
 @helper TabSeo()
-{
-    @Html.Partial("_CreateOrUpdate.SEO", Model)
-}
+{ @Html.Partial("_CreateOrUpdate.SEO", Model) }
 @helper TabCategories()
-{
-    @Html.Partial("_CreateOrUpdate.Categories", Model)
-}
+{ @Html.Partial("_CreateOrUpdate.Categories", Model) }
 @helper TabPictures()
-{
-    @Html.Partial("_CreateOrUpdate.Pictures", Model)
-}
+{ @Html.Partial("_CreateOrUpdate.Pictures", Model) }
 
 @helper TabRelatedPosts()
-{
-    @Html.Partial("_CreateOrUpdate.RelatedPosts", Model)
-}
+{ @Html.Partial("_CreateOrUpdate.RelatedPosts", Model) }

@@ -1,16 +1,17 @@
 namespace TinyCms.Core.Domain.Messages
 {
     /// <summary>
-    /// Represents priority of queued email
+    ///     Represents priority of queued email
     /// </summary>
     public enum QueuedEmailPriority
     {
         /// <summary>
-        /// Low
+        ///     Low
         /// </summary>
         Low = 0,
+
         /// <summary>
-        /// High
+        ///     High
         /// </summary>
         High = 5
     }

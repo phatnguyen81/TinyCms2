@@ -1,9 +1,9 @@
 namespace TinyCms.Core.Html.CodeFormatter
 {
     /// <summary>
-    /// Handles all of the options for changing the rendered code.
+    ///     Handles all of the options for changing the rendered code.
     /// </summary>
-    public partial class HighlightOptions
+    public class HighlightOptions
     {
         public string Code { get; set; }
         public bool DisplayLineNumbers { get; set; }
@@ -12,4 +12,3 @@ namespace TinyCms.Core.Html.CodeFormatter
         public bool AlternateLineNumbers { get; set; }
     }
 }
-

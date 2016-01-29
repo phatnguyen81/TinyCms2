@@ -4,53 +4,53 @@ using TinyCms.Core.Domain.Seo;
 namespace TinyCms.Services.Seo
 {
     /// <summary>
-    /// Provides information about URL records
+    ///     Provides information about URL records
     /// </summary>
-    public partial interface  IUrlRecordService
+    public interface IUrlRecordService
     {
         /// <summary>
-        /// Deletes an URL record
+        ///     Deletes an URL record
         /// </summary>
         /// <param name="urlRecord">URL record</param>
         void DeleteUrlRecord(UrlRecord urlRecord);
 
         /// <summary>
-        /// Gets an URL record
+        ///     Gets an URL record
         /// </summary>
         /// <param name="urlRecordId">URL record identifier</param>
         /// <returns>URL record</returns>
         UrlRecord GetUrlRecordById(int urlRecordId);
 
         /// <summary>
-        /// Inserts an URL record
+        ///     Inserts an URL record
         /// </summary>
         /// <param name="urlRecord">URL record</param>
         void InsertUrlRecord(UrlRecord urlRecord);
 
         /// <summary>
-        /// Updates the URL record
+        ///     Updates the URL record
         /// </summary>
         /// <param name="urlRecord">URL record</param>
         void UpdateUrlRecord(UrlRecord urlRecord);
 
         /// <summary>
-        /// Find URL record
+        ///     Find URL record
         /// </summary>
         /// <param name="slug">Slug</param>
         /// <returns>Found URL record</returns>
         UrlRecord GetBySlug(string slug);
 
         /// <summary>
-        /// Find URL record (cached version).
-        /// This method works absolutely the same way as "GetBySlug" one but caches the results.
-        /// Hence, it's used only for performance optimization in public store
+        ///     Find URL record (cached version).
+        ///     This method works absolutely the same way as "GetBySlug" one but caches the results.
+        ///     Hence, it's used only for performance optimization in public store
         /// </summary>
         /// <param name="slug">Slug</param>
         /// <returns>Found URL record</returns>
         UrlRecordService.UrlRecordForCaching GetBySlugCached(string slug);
 
         /// <summary>
-        /// Gets all URL records
+        ///     Gets all URL records
         /// </summary>
         /// <param name="slug">Slug</param>
         /// <param name="pageIndex">Page index</param>
@@ -59,7 +59,7 @@ namespace TinyCms.Services.Seo
         IPagedList<UrlRecord> GetAllUrlRecords(string slug = "", int pageIndex = 0, int pageSize = int.MaxValue);
 
         /// <summary>
-        /// Find slug
+        ///     Find slug
         /// </summary>
         /// <param name="entityId">Entity identifier</param>
         /// <param name="entityName">Entity name</param>
@@ -68,7 +68,7 @@ namespace TinyCms.Services.Seo
         string GetActiveSlug(int entityId, string entityName, int languageId);
 
         /// <summary>
-        /// Save slug
+        ///     Save slug
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Entity</param>

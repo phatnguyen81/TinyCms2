@@ -4,15 +4,14 @@ using TinyCms.Core.Data;
 
 namespace TinyCms.Data
 {
-    public partial class EfDataProviderManager : BaseDataProviderManager
+    public class EfDataProviderManager : BaseDataProviderManager
     {
-        public EfDataProviderManager(DataSettings settings):base(settings)
+        public EfDataProviderManager(DataSettings settings) : base(settings)
         {
         }
 
         public override IDataProvider LoadDataProvider()
         {
-
             var providerName = Settings.DataProvider;
             if (String.IsNullOrWhiteSpace(providerName))
                 throw new NopException("Data Settings doesn't contain a providerName");
@@ -27,6 +26,5 @@ namespace TinyCms.Data
                     throw new NopException(string.Format("Not supported dataprovider name: {0}", providerName));
             }
         }
-
     }
 }

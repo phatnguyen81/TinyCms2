@@ -1,37 +1,42 @@
-
 namespace TinyCms.Services.Seo
 {
     /// <summary>
-    /// Represents a sitemap update frequency
+    ///     Represents a sitemap update frequency
     /// </summary>
     public enum UpdateFrequency
     {
         /// <summary>
-        /// Always
+        ///     Always
         /// </summary>
         Always,
+
         /// <summary>
-        /// Hourly
+        ///     Hourly
         /// </summary>
         Hourly,
+
         /// <summary>
-        /// Daily
+        ///     Daily
         /// </summary>
         Daily,
+
         /// <summary>
-        /// Weekly
+        ///     Weekly
         /// </summary>
         Weekly,
+
         /// <summary>
-        /// Monthly
+        ///     Monthly
         /// </summary>
         Monthly,
+
         /// <summary>
-        /// Yearly
+        ///     Yearly
         /// </summary>
         Yearly,
+
         /// <summary>
-        /// Never
+        ///     Never
         /// </summary>
         Never
     }

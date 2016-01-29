@@ -5,7 +5,7 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-customers.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-customers.png")" alt=""/>
         @T("Admin.Customers.CustomerRoles")
     </div>
     <div class="options">
@@ -19,7 +19,7 @@
             <div id="customerroles-grid"></div>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#customerroles-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -56,7 +56,8 @@
                             mode: "inline"
                         },
                         scrollable: false,
-                        columns: [{
+                        columns: [
+                        {
                             field: "Name",
                             title: "@T("Admin.Customers.CustomerRoles.Fields.Name")",
                             width: 300
@@ -66,23 +67,46 @@
                             width: 100,
                             headerAttributes: { style: "text-align:center" },
                             attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Active#.gif" />'
-                        },{
-                            field: "IsSystemRole",
-                            title: "@T("Admin.Customers.CustomerRoles.Fields.IsSystemRole")",
-                            width: 100,
-                            headerAttributes: { style: "text-align:center" },
-                            attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IsSystemRole#.gif" />'
-                        },{
-                            field: "Id",
-                            title: "@T("Admin.Common.Edit")",
-                            width: 100,
-                            template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
-                        }]
+                            template: "<img src=\"@Url.Content(\
+                                                      "~/Administration/Content/images/\")active-#=Active#.gif\" />"
+}
+
+    ,
+        {
+            "IsSystemRole",
+            "@T("
+            Admin.Customers.CustomerRoles.Fields.IsSystemRole
+            ")",
+            100,
+            {
+                "text-align:center"
+            }
+        ,
+            {
+                "text-align:center"
+            }
+        ,
+            "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=IsSystemRole#.gif\" />"
+        }
+    ,
+
+{
+    private field 
+: "Id",
+    private title 
+: "@T("
+    private Admin.Common.Edit 
+")",
+    private width 
+: 100,
+    private template 
+: "<a href=\"Edit/#=Id#\">@T(\"Admin.Common.Edit\")</a>"
+}
+]
+}
+);
                     });
-                });
-            </script>
+                    </script>
         </td>
     </tr>
 </table>

@@ -6,15 +6,15 @@ using System.Web.Hosting;
 namespace TinyCms.Core.Data
 {
     /// <summary>
-    /// Manager of data settings (connection string)
+    ///     Manager of data settings (connection string)
     /// </summary>
-    public partial class DataSettingsManager
+    public class DataSettingsManager
     {
         protected const char separator = ':';
         protected const string filename = "Settings.txt";
 
         /// <summary>
-        /// Maps a virtual path to a physical disk path.
+        ///     Maps a virtual path to a physical disk path.
         /// </summary>
         /// <param name="path">The path to map. E.g. "~/bin"</param>
         /// <returns>The physical path. E.g. "c:\inetpub\wwwroot\bin"</returns>
@@ -27,13 +27,13 @@ namespace TinyCms.Core.Data
             }
 
             //not hosted. For example, run in unit tests
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             path = path.Replace("~/", "").TrimStart('/').Replace('/', '\\');
             return Path.Combine(baseDirectory, path);
         }
 
         /// <summary>
-        /// Parse settings
+        ///     Parse settings
         /// </summary>
         /// <param name="text">Text of settings file</param>
         /// <returns>Parsed data settings</returns>
@@ -60,8 +60,8 @@ namespace TinyCms.Core.Data
                 {
                     continue;
                 }
-                string key = setting.Substring(0, separatorIndex).Trim();
-                string value = setting.Substring(separatorIndex + 1).Trim();
+                var key = setting.Substring(0, separatorIndex).Trim();
+                var value = setting.Substring(separatorIndex + 1).Trim();
 
                 switch (key)
                 {
@@ -72,7 +72,7 @@ namespace TinyCms.Core.Data
                         shellSettings.DataConnectionString = value;
                         break;
                     default:
-                        shellSettings.RawDataSettings.Add(key,value);
+                        shellSettings.RawDataSettings.Add(key, value);
                         break;
                 }
             }
@@ -81,7 +81,7 @@ namespace TinyCms.Core.Data
         }
 
         /// <summary>
-        /// Convert data settings to string representation
+        ///     Convert data settings to string representation
         /// </summary>
         /// <param name="settings">Settings</param>
         /// <returns>Text</returns>
@@ -91,14 +91,14 @@ namespace TinyCms.Core.Data
                 return "";
 
             return string.Format("DataProvider: {0}{2}DataConnectionString: {1}{2}",
-                                 settings.DataProvider,
-                                 settings.DataConnectionString,
-                                 Environment.NewLine
+                settings.DataProvider,
+                settings.DataConnectionString,
+                Environment.NewLine
                 );
         }
 
         /// <summary>
-        /// Load settings
+        ///     Load settings
         /// </summary>
         /// <param name="filePath">File path; pass null to use default settings file path</param>
         /// <returns></returns>
@@ -111,15 +111,15 @@ namespace TinyCms.Core.Data
             }
             if (File.Exists(filePath))
             {
-                string text = File.ReadAllText(filePath);
+                var text = File.ReadAllText(filePath);
                 return ParseSettings(text);
             }
-            
+
             return new DataSettings();
         }
 
         /// <summary>
-        /// Save settings to a file
+        ///     Save settings to a file
         /// </summary>
         /// <param name="settings"></param>
         public virtual void SaveSettings(DataSettings settings)
@@ -128,7 +128,7 @@ namespace TinyCms.Core.Data
                 throw new ArgumentNullException("settings");
 
             //use webHelper.MapPath instead of HostingEnvironment.MapPath which is not available in unit tests
-            string filePath = Path.Combine(MapPath("~/App_Data/"), filename);
+            var filePath = Path.Combine(MapPath("~/App_Data/"), filename);
             if (!File.Exists(filePath))
             {
                 using (File.Create(filePath))
@@ -136,7 +136,7 @@ namespace TinyCms.Core.Data
                     //we use 'using' to close the file after it's created
                 }
             }
-            
+
             var text = ComposeSettings(settings);
             File.WriteAllText(filePath, text);
         }

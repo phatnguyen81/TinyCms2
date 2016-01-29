@@ -8,14 +8,14 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Settings.Vendor")
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
         </div>
     </div>
-    
+
     @Html.Action("StoreScopeConfiguration", "Setting")
     @Html.ValidationSummary(false)
     <table class="adminContent">

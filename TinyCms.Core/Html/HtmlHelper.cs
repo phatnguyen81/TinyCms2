@@ -6,13 +6,14 @@ using System.Web;
 namespace TinyCms.Core.Html
 {
     /// <summary>
-    /// Represents a HTML helper
+    ///     Represents a HTML helper
     /// </summary>
-    public partial class HtmlHelper
+    public class HtmlHelper
     {
         #region Fields
-        private readonly static Regex paragraphStartRegex = new Regex("<p>", RegexOptions.IgnoreCase);
-        private readonly static Regex paragraphEndRegex = new Regex("</p>", RegexOptions.IgnoreCase);
+
+        private static readonly Regex paragraphStartRegex = new Regex("<p>", RegexOptions.IgnoreCase);
+        private static readonly Regex paragraphEndRegex = new Regex("</p>", RegexOptions.IgnoreCase);
         //private static Regex ampRegex = new Regex("&(?!(?:#[0-9]{2,4};|[a-z0-9]+;))", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         #endregion
@@ -24,12 +25,13 @@ namespace TinyCms.Core.Html
             if (String.IsNullOrEmpty(text))
                 return string.Empty;
 
-            const string allowedTags = "br,hr,b,i,u,a,div,ol,ul,li,blockquote,img,span,p,em,strong,font,pre,h1,h2,h3,h4,h5,h6,address,cite";
+            const string allowedTags =
+                "br,hr,b,i,u,a,div,ol,ul,li,blockquote,img,span,p,em,strong,font,pre,h1,h2,h3,h4,h5,h6,address,cite";
 
             var m = Regex.Matches(text, "<.*?>", RegexOptions.IgnoreCase);
-            for (int i = m.Count - 1; i >= 0; i--)
+            for (var i = m.Count - 1; i >= 0; i--)
             {
-                string tag = text.Substring(m[i].Index + 1, m[i].Length - 1).Trim().ToLower();
+                var tag = text.Substring(m[i].Index + 1, m[i].Length - 1).Trim().ToLower();
 
                 if (!IsValidTag(tag, allowedTags))
                 {
@@ -42,29 +44,31 @@ namespace TinyCms.Core.Html
 
         private static bool IsValidTag(string tag, string tags)
         {
-            string[] allowedTags = tags.Split(',');
+            var allowedTags = tags.Split(',');
             if (tag.IndexOf("javascript") >= 0) return false;
             if (tag.IndexOf("vbscript") >= 0) return false;
             if (tag.IndexOf("onclick") >= 0) return false;
 
-            var endchars = new [] { ' ', '>', '/', '\t' };
+            var endchars = new[] {' ', '>', '/', '\t'};
 
-            int pos = tag.IndexOfAny(endchars, 1);
+            var pos = tag.IndexOfAny(endchars, 1);
             if (pos > 0) tag = tag.Substring(0, pos);
             if (tag[0] == '/') tag = tag.Substring(1);
 
-            foreach (string aTag in allowedTags)
+            foreach (var aTag in allowedTags)
             {
                 if (tag == aTag) return true;
             }
 
             return false;
         }
+
         #endregion
 
         #region Methods
+
         /// <summary>
-        /// Formats the text
+        ///     Formats the text
         /// </summary>
         /// <param name="text">Text</param>
         /// <param name="stripTags">A value indicating whether to strip tags</param>
@@ -75,10 +79,9 @@ namespace TinyCms.Core.Html
         /// <param name="addNoFollowTag">A value indicating whether to add "noFollow" tag</param>
         /// <returns>Formatted text</returns>
         public static string FormatText(string text, bool stripTags,
-            bool convertPlainTextToHtml, bool allowHtml, 
+            bool convertPlainTextToHtml, bool allowHtml,
             bool allowBBCode, bool resolveLinks, bool addNoFollowTag)
         {
-
             if (String.IsNullOrEmpty(text))
                 return string.Empty;
 
@@ -117,9 +120,9 @@ namespace TinyCms.Core.Html
             }
             return text;
         }
-        
+
         /// <summary>
-        /// Strips tags
+        ///     Strips tags
         /// </summary>
         /// <param name="text">Text</param>
         /// <returns>Formatted text</returns>
@@ -130,13 +133,16 @@ namespace TinyCms.Core.Html
 
             text = Regex.Replace(text, @"(>)(\r|\n)*(<)", "><");
             text = Regex.Replace(text, "(<[^>]*>)([^<]*)", "$2");
-            text = Regex.Replace(text, "(&#x?[0-9]{2,4};|&quot;|&amp;|&nbsp;|&lt;|&gt;|&euro;|&copy;|&reg;|&permil;|&Dagger;|&dagger;|&lsaquo;|&rsaquo;|&bdquo;|&rdquo;|&ldquo;|&sbquo;|&rsquo;|&lsquo;|&mdash;|&ndash;|&rlm;|&lrm;|&zwj;|&zwnj;|&thinsp;|&emsp;|&ensp;|&tilde;|&circ;|&Yuml;|&scaron;|&Scaron;)", "@");
+            text = Regex.Replace(text,
+                "(&#x?[0-9]{2,4};|&quot;|&amp;|&nbsp;|&lt;|&gt;|&euro;|&copy;|&reg;|&permil;|&Dagger;|&dagger;|&lsaquo;|&rsaquo;|&bdquo;|&rdquo;|&ldquo;|&sbquo;|&rsquo;|&lsquo;|&mdash;|&ndash;|&rlm;|&lrm;|&zwj;|&zwnj;|&thinsp;|&emsp;|&ensp;|&tilde;|&circ;|&Yuml;|&scaron;|&Scaron;)",
+                "@");
 
             return text;
         }
 
         /// <summary>
-        /// replace anchor text (remove a tag from the following url <a href="http://example.com">Name</a> and output only the string "Name")
+        ///     replace anchor text (remove a tag from the following url <a href="http://example.com">Name</a> and output only the
+        ///     string "Name")
         /// </summary>
         /// <param name="text">Text</param>
         /// <returns>Text</returns>
@@ -150,7 +156,7 @@ namespace TinyCms.Core.Html
         }
 
         /// <summary>
-        /// Converts plain text to HTML
+        ///     Converts plain text to HTML
         /// </summary>
         /// <param name="text">Text</param>
         /// <returns>Formatted text</returns>
@@ -167,13 +173,16 @@ namespace TinyCms.Core.Html
 
             return text;
         }
-        
+
         /// <summary>
-        /// Converts HTML to plain text
+        ///     Converts HTML to plain text
         /// </summary>
         /// <param name="text">Text</param>
         /// <param name="decode">A value indicating whether to decode text</param>
-        /// <param name="replaceAnchorTags">A value indicating whether to replace anchor text (remove a tag from the following url <a href="http://example.com">Name</a> and output only the string "Name")</param>
+        /// <param name="replaceAnchorTags">
+        ///     A value indicating whether to replace anchor text (remove a tag from the following url
+        ///     <a href="http://example.com">Name</a> and output only the string "Name")
+        /// </param>
         /// <returns>Formatted text</returns>
         public static string ConvertHtmlToPlainText(string text,
             bool decode = false, bool replaceAnchorTags = false)
@@ -197,7 +206,7 @@ namespace TinyCms.Core.Html
         }
 
         /// <summary>
-        /// Converts text to paragraph
+        ///     Converts text to paragraph
         /// </summary>
         /// <param name="text">Text</param>
         /// <returns>Formatted text</returns>
@@ -211,9 +220,9 @@ namespace TinyCms.Core.Html
             text = text.Replace("\r\n", "\n").Replace("\r", "\n");
             text = text + "\n\n";
             text = text.Replace("\n\n", "\n");
-            var strArray = text.Split(new [] { '\n' });
+            var strArray = text.Split('\n');
             var builder = new StringBuilder();
-            foreach (string str in strArray)
+            foreach (var str in strArray)
             {
                 if ((str != null) && (str.Trim().Length > 0))
                 {
@@ -222,6 +231,7 @@ namespace TinyCms.Core.Html
             }
             return builder.ToString();
         }
+
         #endregion
     }
 }

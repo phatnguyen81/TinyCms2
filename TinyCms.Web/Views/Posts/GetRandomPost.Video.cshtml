@@ -9,11 +9,11 @@
             @foreach (var post in Model)
             {
                 <li>
-                    <a href="@Url.RouteUrl("Post", new { post.SeName })" class="videothumb">
+                    <a href="@Url.RouteUrl("Post", new {post.SeName})" class="videothumb">
                         <span class="loading">
                             <img src="@post.DefaultPictureModel.ImageUrl" width="185" height="135" alt="@post.DefaultPictureModel.AlternateText" />
                         </span>
-                    </a><a href="@Url.RouteUrl("Post", new { post.SeName })">@post.Name</a>
+                    </a><a href="@Url.RouteUrl("Post", new {post.SeName})">@post.Name</a>
                     <p class="datecreate">Ngày đăng: @post.CreatedOn.ToString("dd/MM/yyy")</p>
                 </li>
             }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using System.Web.Mvc;
 using TinyCms.Core;
 using TinyCms.Core.Data;
@@ -10,7 +9,8 @@ using TinyCms.Web.Framework.Localization;
 namespace TinyCms.Web.Framework
 {
     /// <summary>
-    /// Attribute which ensures that store URL contains a language SEO code if "SEO friendly URLs with multiple languages" setting is enabled
+    ///     Attribute which ensures that store URL contains a language SEO code if "SEO friendly URLs with multiple languages"
+    ///     setting is enabled
     /// </summary>
     public class LanguageSeoCodeAttribute : ActionFilterAttribute
     {
@@ -19,7 +19,7 @@ namespace TinyCms.Web.Framework
             if (filterContext == null || filterContext.HttpContext == null)
                 return;
 
-            HttpRequestBase request = filterContext.HttpContext.Request;
+            var request = filterContext.HttpContext.Request;
             if (request == null)
                 return;
 
@@ -37,15 +37,16 @@ namespace TinyCms.Web.Framework
             var localizationSettings = EngineContext.Current.Resolve<LocalizationSettings>();
             if (!localizationSettings.SeoFriendlyUrlsForLanguagesEnabled)
                 return;
-            
+
             //ensure that this route is registered and localizable (LocalizedRoute in RouteProvider.cs)
-            if (filterContext.RouteData == null || filterContext.RouteData.Route == null || !(filterContext.RouteData.Route is LocalizedRoute))
+            if (filterContext.RouteData == null || filterContext.RouteData.Route == null ||
+                !(filterContext.RouteData.Route is LocalizedRoute))
                 return;
 
 
             //process current URL
             var pageUrl = filterContext.HttpContext.Request.RawUrl;
-            string applicationPath = filterContext.HttpContext.Request.ApplicationPath;
+            var applicationPath = filterContext.HttpContext.Request.ApplicationPath;
             if (pageUrl.IsLocalizedUrl(applicationPath, true))
                 //already localized URL
                 return;

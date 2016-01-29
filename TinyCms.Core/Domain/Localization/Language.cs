@@ -1,47 +1,46 @@
 using System.Collections.Generic;
-using TinyCms.Core.Domain.Localization;
 
 namespace TinyCms.Core.Domain.Localization
 {
     /// <summary>
-    /// Represents a language
+    ///     Represents a language
     /// </summary>
-    public partial class Language : BaseEntity
+    public class Language : BaseEntity
     {
         private ICollection<LocaleStringResource> _localeStringResources;
 
         /// <summary>
-        /// Gets or sets the name
+        ///     Gets or sets the name
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the language culture
+        ///     Gets or sets the language culture
         /// </summary>
         public string LanguageCulture { get; set; }
 
         /// <summary>
-        /// Gets or sets the unique SEO code
+        ///     Gets or sets the unique SEO code
         /// </summary>
         public string UniqueSeoCode { get; set; }
-        
+
         /// <summary>
-        /// Gets or sets the flag image file name
+        ///     Gets or sets the flag image file name
         /// </summary>
         public string FlagImageFileName { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the language is published
+        ///     Gets or sets a value indicating whether the language is published
         /// </summary>
         public bool Published { get; set; }
 
         /// <summary>
-        /// Gets or sets the display order
+        ///     Gets or sets the display order
         /// </summary>
         public int DisplayOrder { get; set; }
-        
+
         /// <summary>
-        /// Gets or sets locale string resources
+        ///     Gets or sets locale string resources
         /// </summary>
         public virtual ICollection<LocaleStringResource> LocaleStringResources
         {

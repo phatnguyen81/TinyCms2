@@ -9,42 +9,18 @@ using TinyCms.Services.Logging;
 namespace TinyCms.Services.Tasks
 {
     /// <summary>
-    /// Task
+    ///     Task
     /// </summary>
-    public partial class Task
+    public class Task
     {
-        #region Ctor
-
-        /// <summary>
-        /// Ctor for Task
-        /// </summary>
-        private Task()
-        {
-            this.Enabled = true;
-        }
-
-        /// <summary>
-        /// Ctor for Task
-        /// </summary>
-        /// <param name="task">Task </param>
-        public Task(ScheduleTask task)
-        {
-            this.Type = task.Type;
-            this.Enabled = task.Enabled;
-            this.StopOnError = task.StopOnError;
-            this.Name = task.Name;
-        }
-
-        #endregion
-
         #region Utilities
 
         private ITask CreateTask(ILifetimeScope scope)
         {
             ITask task = null;
-            if (this.Enabled)
+            if (Enabled)
             {
-                var type2 = System.Type.GetType(this.Type);
+                var type2 = System.Type.GetType(Type);
                 if (type2 != null)
                 {
                     object instance;
@@ -64,11 +40,14 @@ namespace TinyCms.Services.Tasks
         #region Methods
 
         /// <summary>
-        /// Executes the task
+        ///     Executes the task
         /// </summary>
         /// <param name="throwException">A value indicating whether exception should be thrown if some error happens</param>
         /// <param name="dispose">A value indicating whether all instances should be disposed after task run</param>
-        /// <param name="ensureRunOnOneWebFarmInstance">A value indicating whether we should ensure this task is run on one farm node at a time</param>
+        /// <param name="ensureRunOnOneWebFarmInstance">
+        ///     A value indicating whether we should ensure this task is run on one farm
+        ///     node at a time
+        /// </param>
         public void Execute(bool throwException = false, bool dispose = true, bool ensureRunOnOneWebFarmInstance = true)
         {
             //background tasks has an issue with Autofac
@@ -77,7 +56,7 @@ namespace TinyCms.Services.Tasks
             //this way we can also dispose resources once a task is completed
             var scope = EngineContext.Current.ContainerManager.Scope();
             var scheduleTaskService = EngineContext.Current.ContainerManager.Resolve<IScheduleTaskService>("", scope);
-            var scheduleTask = scheduleTaskService.GetTaskByType(this.Type);
+            var scheduleTask = scheduleTaskService.GetTaskByType(Type);
 
             try
             {
@@ -88,7 +67,8 @@ namespace TinyCms.Services.Tasks
                     var nopConfig = EngineContext.Current.ContainerManager.Resolve<NopConfig>("", scope);
                     if (nopConfig.MultipleInstancesEnabled)
                     {
-                        var machineNameProvider = EngineContext.Current.ContainerManager.Resolve<IMachineNameProvider>("", scope);
+                        var machineNameProvider =
+                            EngineContext.Current.ContainerManager.Resolve<IMachineNameProvider>("", scope);
                         var machineName = machineNameProvider.GetMachineName();
                         if (String.IsNullOrEmpty(machineName))
                         {
@@ -111,28 +91,28 @@ namespace TinyCms.Services.Tasks
                 }
 
                 //initialize and execute
-                var task = this.CreateTask(scope);
+                var task = CreateTask(scope);
                 if (task != null)
                 {
-                    this.LastStartUtc = DateTime.UtcNow;
+                    LastStartUtc = DateTime.UtcNow;
                     if (scheduleTask != null)
                     {
                         //update appropriate datetime properties
-                        scheduleTask.LastStartUtc = this.LastStartUtc;
+                        scheduleTask.LastStartUtc = LastStartUtc;
                         scheduleTaskService.UpdateTask(scheduleTask);
                     }
                     task.Execute();
-                    this.LastEndUtc = this.LastSuccessUtc = DateTime.UtcNow;
+                    LastEndUtc = LastSuccessUtc = DateTime.UtcNow;
                 }
             }
             catch (Exception exc)
             {
-                this.Enabled = !this.StopOnError;
-                this.LastEndUtc = DateTime.UtcNow;
+                Enabled = !StopOnError;
+                LastEndUtc = DateTime.UtcNow;
 
                 //log error
                 var logger = EngineContext.Current.ContainerManager.Resolve<ILogger>("", scope);
-                logger.Error(string.Format("Error while running the '{0}' schedule task. {1}", this.Name, exc.Message), exc);
+                logger.Error(string.Format("Error while running the '{0}' schedule task. {1}", Name, exc.Message), exc);
                 if (throwException)
                     throw;
             }
@@ -140,8 +120,8 @@ namespace TinyCms.Services.Tasks
             if (scheduleTask != null)
             {
                 //update appropriate datetime properties
-                scheduleTask.LastEndUtc = this.LastEndUtc;
-                scheduleTask.LastSuccessUtc = this.LastSuccessUtc;
+                scheduleTask.LastEndUtc = LastEndUtc;
+                scheduleTask.LastSuccessUtc = LastSuccessUtc;
                 scheduleTaskService.UpdateTask(scheduleTask);
             }
 
@@ -154,40 +134,64 @@ namespace TinyCms.Services.Tasks
 
         #endregion
 
+        #region Ctor
+
+        /// <summary>
+        ///     Ctor for Task
+        /// </summary>
+        private Task()
+        {
+            Enabled = true;
+        }
+
+        /// <summary>
+        ///     Ctor for Task
+        /// </summary>
+        /// <param name="task">Task </param>
+        public Task(ScheduleTask task)
+        {
+            Type = task.Type;
+            Enabled = task.Enabled;
+            StopOnError = task.StopOnError;
+            Name = task.Name;
+        }
+
+        #endregion
+
         #region Properties
 
         /// <summary>
-        /// Datetime of the last start
+        ///     Datetime of the last start
         /// </summary>
         public DateTime? LastStartUtc { get; private set; }
 
         /// <summary>
-        /// Datetime of the last end
+        ///     Datetime of the last end
         /// </summary>
         public DateTime? LastEndUtc { get; private set; }
 
         /// <summary>
-        /// Datetime of the last success
+        ///     Datetime of the last success
         /// </summary>
         public DateTime? LastSuccessUtc { get; private set; }
 
         /// <summary>
-        /// A value indicating type of the task
+        ///     A value indicating type of the task
         /// </summary>
         public string Type { get; private set; }
 
         /// <summary>
-        /// A value indicating whether to stop task on error
+        ///     A value indicating whether to stop task on error
         /// </summary>
         public bool StopOnError { get; private set; }
 
         /// <summary>
-        /// Get the task name
+        ///     Get the task name
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
-        /// A value indicating whether the task is enabled
+        ///     A value indicating whether the task is enabled
         /// </summary>
         public bool Enabled { get; set; }
 

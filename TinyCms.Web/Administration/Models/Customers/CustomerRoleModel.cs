@@ -7,8 +7,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Customers
 {
-    [Validator(typeof(CustomerRoleValidator))]
-    public partial class CustomerRoleModel : BaseNopEntityModel
+    [Validator(typeof (CustomerRoleValidator))]
+    public class CustomerRoleModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.Customers.CustomerRoles.Fields.Name")]
         [AllowHtml]
@@ -23,10 +23,9 @@ namespace TinyCms.Admin.Models.Customers
         [NopResourceDisplayName("Admin.Customers.CustomerRoles.Fields.SystemName")]
         public string SystemName { get; set; }
 
-      
         #region Nested classes
 
-        public partial class AssociateProductToCustomerRoleModel : BaseNopModel
+        public class AssociateProductToCustomerRoleModel : BaseNopModel
         {
             public AssociateProductToCustomerRoleModel()
             {
@@ -40,14 +39,19 @@ namespace TinyCms.Admin.Models.Customers
             [NopResourceDisplayName("Admin.Catalog.Products.List.SearchProductName")]
             [AllowHtml]
             public string SearchProductName { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Products.List.SearchCategory")]
             public int SearchCategoryId { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Products.List.SearchManufacturer")]
             public int SearchManufacturerId { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Products.List.SearchStore")]
             public int SearchStoreId { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Products.List.SearchVendor")]
             public int SearchVendorId { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Products.List.SearchProductType")]
             public int SearchProductTypeId { get; set; }
 
@@ -56,13 +60,11 @@ namespace TinyCms.Admin.Models.Customers
             public IList<SelectListItem> AvailableStores { get; set; }
             public IList<SelectListItem> AvailableVendors { get; set; }
             public IList<SelectListItem> AvailableProductTypes { get; set; }
-
             //vendor
             public bool IsLoggedInAsVendor { get; set; }
-
-
             public int AssociatedToProductId { get; set; }
         }
+
         #endregion
     }
 }

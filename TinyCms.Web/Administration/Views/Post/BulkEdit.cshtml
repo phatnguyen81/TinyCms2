@@ -12,13 +12,13 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt=""/>
             @T("Admin.Catalog.BulkEdit")
         </div>
         <div class="options">
         </div>
     </div>
-    
+
     <table width="100%">
         <tr>
             <td class="adminTitle">
@@ -54,183 +54,237 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="button" id="search-products" class="k-button" value="@T("Admin.Common.Search")" />
+                <input type="button" id="search-products" class="k-button" value="@T("Admin.Common.Search")"/>
             </td>
         </tr>
     </table>
     <table class="adminContent">
-        <tr>
-            <td>
-                <div id="products-grid"></div>
+    <tr>
+    <td>
+    <div id="products-grid"></div>
 
-                <script>
-                    $(document).ready(function() {
-                        $("#products-grid").kendoGrid({
-                            dataSource: {
-                                type: "json",
-                                transport: {
-                                    read: {
-                                        url: "@Html.Raw(Url.Action("BulkEditSelect", "Product"))",
-                                        type: "POST",
-                                        dataType: "json",
-                                        data: additionalData
-                                    },
-                                    update: {
-                                        url: "@Html.Raw(Url.Action("BulkEditUpdate", "Product"))",
-                                        type: "POST",
-                                        dataType: "json"
-                                    },
-                                    destroy: {
-                                        url: "@Html.Raw(Url.Action("BulkEditDelete", "Product"))",
-                                        type: "POST",
-                                        dataType: "json"
-                                    },
-                                    parameterMap: function(data, operation) {
-                                        if (operation != "read") {
-                                            //post the entities so the ASP.NET DefaultModelBinder will understand them:
-                                            //products[0].Name="name"
-                                            //products[0].Id = 1
-                                            //products[1].Name="name"
-                                            //products[1].Id = 1
+    <script>
+        $(document).ready(function() {
+            $("#products-grid").kendoGrid({
+                dataSource: {
+                    type: "json",
+                    transport: {
+                        read: {
+                            url: "@Html.Raw(Url.Action("BulkEditSelect", "Product"))",
+                            type: "POST",
+                            dataType: "json",
+                            data: additionalData
+                        },
+                        update: {
+                            url: "@Html.Raw(Url.Action("BulkEditUpdate", "Product"))",
+                            type: "POST",
+                            dataType: "json"
+                        },
+                        destroy: {
+                            url: "@Html.Raw(Url.Action("BulkEditDelete", "Product"))",
+                            type: "POST",
+                            dataType: "json"
+                        },
+                        parameterMap: function(data, operation) {
+                            if (operation != "read") {
+                                //post the entities so the ASP.NET DefaultModelBinder will understand them:
+                                //products[0].Name="name"
+                                //products[0].Id = 1
+                                //products[1].Name="name"
+                                //products[1].Id = 1
 
-                                            var result = {};
+                                var result = {};
 
-                                            for (var i = 0; i < data.models.length; i++) {
-                                                var entity = data.models[i];
+                                for (var i = 0; i < data.models.length; i++) {
+                                    var entity = data.models[i];
 
-                                                for (var member in entity) {
-                                                    result["products[" + i + "]." + member] = entity[member];
-                                                }
-                                            }
-                                            
-                                            addAntiForgeryToken(result);
-                                            return result;
-                                        } else {
-                                            addAntiForgeryToken(data);
-                                            //return JSON.stringify(data);
-                                            return data;
-                                        }
+                                    for (var member in entity) {
+                                        result["products[" + i + "]." + member] = entity[member];
                                     }
-                                },
-                                schema: {
-                                    data: "Data",
-                                    total: "Total",
-                                    errors: "Errors",
-                                    model: {
-                                        id: "Id",
-                                        fields: {
-                                            Name: { editable: false, type: "string" },
-                                            ProductId: { editable: false, type: "number" },
-                                            Sku: { editable: true, type: "string" },
-                                            Price: { editable: true, type: "number" },
-                                            OldPrice: { editable: true, type: "number" },
-                                            ManageInventoryMethod: { editable: false, type: "string" },
-                                            StockQuantity: { editable: true, type: "number" },
-                                            Published: { editable: true, type: "boolean" },
-                                            Id: { editable: false, type: "number" }
-                                        }
-                                    }
-                                },
-                                requestEnd: function (e) {
-                                    if (e.type == "update") {
-                                        this.read();
-                                    }
-                                },
-                                error: function(e) {
-                                    display_kendoui_grid_error(e);
-                                    // Cancel the changes
-                                    this.cancelChanges();
-                                },
-                                //bulk editing
-                                batch: true,
-                                pageSize: @(defaultGridPageSize),
-                                serverPaging: true,
-                                serverFiltering: true,
-                                serverSorting: true
-                            },
-                            pageable: {
-                                refresh: true,
-                                pageSizes: [@(gridPageSizes)]
-                            },
-                            toolbar: ["save", "cancel"],
-                            editable: {
-                                confirmation: false,
-                                //bulk editing
-                                mode: "incell"
-                            },
-                            scrollable: false,
-                            columns: [ {
-                                    field: "Name",
-                                    title: "@T("Admin.Catalog.BulkEdit.Fields.Name")",
-                                    width: 200
-                                }, {
-                                    field: "ProductId",
-                                    title: "@T("Admin.Common.View")",
-                                    width: 100,
-                                    template: '<a href="@Url.Content("~/Admin/Product/Edit/")#=Id#">@T("Admin.Common.View")</a>'
-                                },{
-                                    field: "Sku",
-                                    title: "@T("Admin.Catalog.BulkEdit.Fields.Sku")",
-                                    width: 150
-                                }, {
-                                    field: "Price",
-                                    title: "@T("Admin.Catalog.BulkEdit.Fields.Price")",
-                                    width: 150,
-                                    editor: function (container, options) {
-                                        $('<input name="' + options.field + '"/>')
-                                            .appendTo(container)
-                                            .kendoNumericTextBox({
-                                                format: "{0:n4}",
-                                                decimals: 4
-                                            });
-                                    }
-                                }, {
-                                    field: "OldPrice",
-                                    title: "@T("Admin.Catalog.BulkEdit.Fields.OldPrice")",
-                                    width: 150,
-                                    editor: function (container, options) {
-                                        $('<input name="' + options.field + '"/>')
-                                            .appendTo(container)
-                                            .kendoNumericTextBox({
-                                                format: "{0:n4}",
-                                                decimals: 4
-                                            });
-                                    }
-                                }, {
-                                    field: "ManageInventoryMethod",
-                                    title: "@T("Admin.Catalog.BulkEdit.Fields.ManageInventoryMethod")",
-                                    width: 150
-                                }, {
-                                    field: "StockQuantity",
-                                    title: "@T("Admin.Catalog.BulkEdit.Fields.StockQuantity")",
-                                    //integer format
-                                    format: "{0:0}",
-                                    width: 150
-                                },{
-                                    field: "Published",
-                                    title: "@T("Admin.Catalog.BulkEdit.Fields.Published")",
-                                    width: 200
-                                }, {
-                                    command: { name: "destroy", text: "@T("Admin.Common.Delete")" }, 
-                                    title: "@T("Admin.Common.Delete")",
-                                    width: 100
                                 }
-                            ]
-                        } );
+
+                                addAntiForgeryToken(result);
+                                return result;
+                            } else {
+                                addAntiForgeryToken(data);
+                                //return JSON.stringify(data);
+                                return data;
+                            }
+                        }
+                    },
+                    schema: {
+                        data: "Data",
+                        total: "Total",
+                        errors: "Errors",
+                        model: {
+                            id: "Id",
+                            fields: {
+                                Name: { editable: false, type: "string" },
+                                ProductId: { editable: false, type: "number" },
+                                Sku: { editable: true, type: "string" },
+                                Price: { editable: true, type: "number" },
+                                OldPrice: { editable: true, type: "number" },
+                                ManageInventoryMethod: { editable: false, type: "string" },
+                                StockQuantity: { editable: true, type: "number" },
+                                Published: { editable: true, type: "boolean" },
+                                Id: { editable: false, type: "number" }
+                            }
+                        }
+                    },
+                    requestEnd: function(e) {
+                        if (e.type == "update") {
+                            this.read();
+                        }
+                    },
+                    error: function(e) {
+                        display_kendoui_grid_error(e);
+                        // Cancel the changes
+                        this.cancelChanges();
+                    },
+                    //bulk editing
+                    batch: true,
+                    pageSize: @(defaultGridPageSize),
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: [@(gridPageSizes)]
+                },
+                toolbar: ["save", "cancel"],
+                editable: {
+                    confirmation: false,
+                    //bulk editing
+                    mode: "incell"
+                },
+                scrollable: false,
+                columns: [
+                {
+                    field: "Name",
+                    title: "@T("Admin.Catalog.BulkEdit.Fields.Name")",
+                    width: 200
+                }, {
+                    field: "ProductId",
+                    title: "@T("Admin.Common.View")",
+                    width: 100,
+                    template: "<a href=\"@Url.Content(\
+                                             "~/Admin/Product/Edit/\")#=Id#\">@T(\"Admin.Common.View\")</a>"
+},
+    {
+        "Sku",
+        "@T("
+        Admin.Catalog.BulkEdit.Fields.Sku
+        ")",
+        150
+    }
+                                             ,
+    {
+        "Price",
+        "@T("
+        Admin.Catalog.BulkEdit.Fields.Price
+        ")",
+        150,
+        function(container, options)
+        {
+        $
+            ("<input name=\"" + options.field + "\"/>")
+                .appendTo(container)
+                .kendoNumericTextBox(
+            {
+                "{0:n4}",
+                4
+            }
+        )
+            ;
+        }
+    }
+                                             ,
+    {
+        "OldPrice",
+        "@T("
+        Admin.Catalog.BulkEdit.Fields.OldPrice
+        ")",
+        150,
+        function(container, options)
+        {
+        $
+            ("<input name=\"" + options.field + "\"/>")
+                .appendTo(container)
+                .kendoNumericTextBox(
+            {
+                "{0:n4}",
+                4
+            }
+        )
+            ;
+        }
+    }
+                                             ,
+    {
+        "ManageInventoryMethod",
+        "@T("
+        Admin.Catalog.BulkEdit.Fields.ManageInventoryMethod
+        ")",
+        150
+    }
+                                             ,
+    {
+        "StockQuantity",
+        "@T("
+        Admin.Catalog.BulkEdit.Fields.StockQuantity
+        ")",
+        //integer format
+        "{0:0}",
+        150
+    }
+                                             ,
+    {
+        "Published",
+        "@T("
+        Admin.Catalog.BulkEdit.Fields.Published
+        ")",
+        200
+    }
+                                             ,
+    {
+        {
+            "destroy",
+            "@T("
+            Admin.Common.Delete
+            ")"
+        }
+    ,
+        "@T("
+        Admin.Common.Delete
+        ")",
+        100
+    }
+                                             ]
+}
+
+    );
+            });
+            </script>
+
+    <script type="text/javascript">
+
+            $(document).ready(function() {
+                    $("#search-products").click(function() {
+                        var grid = $("#products-grid").data("kendoGrid");
+                        grid.dataSource.page(1); //new search. Set page size to 1
+                        //grid.dataSource.read(); we already loaded the grid above using "page" function
+                        return false;
                     });
-                </script>
 
-                <script type="text/javascript">
-
-                    $(document).ready(function () {
-                        $('#search-products').click(function () {
-                            var grid = $('#products-grid').data('kendoGrid');
-                            grid.dataSource.page(1); //new search. Set page size to 1
-                            //grid.dataSource.read(); we already loaded the grid above using "page" function
-                            return false;
-                        });
-        
-                        $("#@Html.FieldIdFor(model => model.SearchProductName)").keydown(function (event) {
+                    $("#@Htm l
+                        .
+        private Fiel ;
+        private Id ;
+        private or(model =>;
+        private model.Sea      private hProductName 
+    );
+                            ").keydown(function (event) {;
                             if (event.keyCode == 13) {
                                 $("#search-products").click();
                                 return false;
@@ -240,16 +294,26 @@
 
                     function additionalData() {
                         var data = {
-                            SearchProductName: $('#@Html.FieldIdFor(model => model.SearchProductName)').val(),
-                            SearchCategoryId: $('#SearchCategoryId').val(),
-                            SearchManufacturerId: $('#SearchManufacturerId').val(),
-                            SearchProductTypeId: $('#SearchProductTypeId').val()
-                        };
-                        addAntiForgeryToken(data);
-                        return data;
+                            Sea
+                            ch
+                            roductName: $("#@Html.F
+                            ieldIdFor (
+        private model 
+    =>
+        private model.SearchProductName 
+    );
+                                               SearchCategoryId: $("#SearchCategoryId").val(),
+                            SearchManufacturerId:;
+                        $("#SearchManufacturerId").val(),
+                            SearchProductTypeId:;
+                        $("#SearchProductTypeId").val();
+                    };
+
+                    addAntiForgeryToken(data);
+                    return data;
                     }
                 </script>
-            </td>
-        </tr>
+    </td>
+    </tr>
     </table>
-}
+    }

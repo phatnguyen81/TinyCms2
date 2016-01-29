@@ -12,15 +12,17 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
 
         public OAuthAuthenticationParameters(string providerSystemName)
         {
-            this._providerSystemName = providerSystemName;
+            _providerSystemName = providerSystemName;
         }
 
         public override IList<UserClaims> UserClaims
         {
-            get
-            {
-                return _claims;
-            }
+            get { return _claims; }
+        }
+
+        public override string ProviderSystemName
+        {
+            get { return _providerSystemName; }
         }
 
         public void AddClaim(UserClaims claim)
@@ -29,11 +31,6 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
                 _claims = new List<UserClaims>();
 
             _claims.Add(claim);
-        }
-
-        public override string ProviderSystemName
-        {
-            get { return _providerSystemName; }
         }
     }
 }

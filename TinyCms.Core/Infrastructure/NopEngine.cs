@@ -4,35 +4,41 @@ using System.Linq;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
-using TinyCms.Core.Infrastructure;
 using TinyCms.Core.Configuration;
 using TinyCms.Core.Infrastructure.DependencyManagement;
 
 namespace TinyCms.Core.Infrastructure
 {
     /// <summary>
-    /// Engine
+    ///     Engine
     /// </summary>
     public class NopEngine : IEngine
     {
-        #region Fields
+        #region Properties
 
-        private ContainerManager _containerManager;
+        /// <summary>
+        ///     Container manager
+        /// </summary>
+        public ContainerManager ContainerManager { get; private set; }
+
+        #endregion
+
+        #region Fields
 
         #endregion
 
         #region Utilities
 
         /// <summary>
-        /// Run startup tasks
+        ///     Run startup tasks
         /// </summary>
         protected virtual void RunStartupTasks()
         {
-            var typeFinder = _containerManager.Resolve<ITypeFinder>();
+            var typeFinder = ContainerManager.Resolve<ITypeFinder>();
             var startUpTaskTypes = typeFinder.FindClassesOfType<IStartupTask>();
             var startUpTasks = new List<IStartupTask>();
             foreach (var startUpTaskType in startUpTaskTypes)
-                startUpTasks.Add((IStartupTask)Activator.CreateInstance(startUpTaskType));
+                startUpTasks.Add((IStartupTask) Activator.CreateInstance(startUpTaskType));
             //sort
             startUpTasks = startUpTasks.AsQueryable().OrderBy(st => st.Order).ToList();
             foreach (var startUpTask in startUpTasks)
@@ -40,14 +46,14 @@ namespace TinyCms.Core.Infrastructure
         }
 
         /// <summary>
-        /// Register dependencies
+        ///     Register dependencies
         /// </summary>
         /// <param name="config">Config</param>
         protected virtual void RegisterDependencies(NopConfig config)
         {
             var builder = new ContainerBuilder();
             var container = builder.Build();
-            this._containerManager = new ContainerManager(container);
+            ContainerManager = new ContainerManager(container);
 
             //we create new instance of ContainerBuilder
             //because Build() or Update() method can only be called once on a ContainerBuilder.
@@ -79,9 +85,9 @@ namespace TinyCms.Core.Infrastructure
         #endregion
 
         #region Methods
-        
+
         /// <summary>
-        /// Initialize components and plugins in the nop environment.
+        ///     Initialize components and plugins in the nop environment.
         /// </summary>
         /// <param name="config">Config</param>
         public void Initialize(NopConfig config)
@@ -94,21 +100,20 @@ namespace TinyCms.Core.Infrastructure
             {
                 RunStartupTasks();
             }
-
         }
 
         /// <summary>
-        /// Resolve dependency
+        ///     Resolve dependency
         /// </summary>
         /// <typeparam name="T">T</typeparam>
         /// <returns></returns>
         public T Resolve<T>() where T : class
-		{
+        {
             return ContainerManager.Resolve<T>();
-		}
+        }
 
         /// <summary>
-        ///  Resolve dependency
+        ///     Resolve dependency
         /// </summary>
         /// <param name="type">Type</param>
         /// <returns></returns>
@@ -116,27 +121,15 @@ namespace TinyCms.Core.Infrastructure
         {
             return ContainerManager.Resolve(type);
         }
-        
+
         /// <summary>
-        /// Resolve dependencies
+        ///     Resolve dependencies
         /// </summary>
         /// <typeparam name="T">T</typeparam>
         /// <returns></returns>
         public T[] ResolveAll<T>()
         {
             return ContainerManager.ResolveAll<T>();
-        }
-
-		#endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Container manager
-        /// </summary>
-        public ContainerManager ContainerManager
-        {
-            get { return _containerManager; }
         }
 
         #endregion

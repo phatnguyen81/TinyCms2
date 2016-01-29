@@ -12,7 +12,7 @@
     <Value>Administrator Passwort ist notwendig</Value>
   </LocaleResource>
   <LocaleResource Name="ConfigureDirectoryPermissions">
-     <Value>Das Konto '{0}' hat keine Ändern Rechte für Ordner '{1}'. Bitte diese Rechte einstellen.</Value> 
+    <Value>Das Konto '{0}' hat keine Ändern Rechte für Ordner '{1}'. Bitte diese Rechte einstellen.</Value>
   </LocaleResource>
   <LocaleResource Name="ConfigureFilePermissions">
     <Value>Das Konto '{0}' hat keine Ändern Rechte für Datei '{1}'. Bitte diese Rechte einstellen.</Value>
@@ -132,7 +132,7 @@
     <Value>nopCommerce ist die führende Shop E-Commerce Lösung. Dieser Wizard führt Sie durch die Konfiguration von nopCommerce</Value>
   </LocaleResource>
   <LocaleResource Name="Tooltip2">
- <Value>Um den Wizard abzuschliessen müssen Sie die Daten Ihres Datenbankservers kennen ("connection string"). Bitte kontaktieren Sie gegebenenfalls Ihren ISP. Falls Sie auf einem lokalen Computer installieren benötigen Sie eventuell Informationen von Ihrem Systemadministrator</Value> 
+    <Value>Um den Wizard abzuschliessen müssen Sie die Daten Ihres Datenbankservers kennen ("connection string"). Bitte kontaktieren Sie gegebenenfalls Ihren ISP. Falls Sie auf einem lokalen Computer installieren benötigen Sie eventuell Informationen von Ihrem Systemadministrator</Value>
   </LocaleResource>
   <LocaleResource Name="WindowsAuthentication">
     <Value>Integrierte Windows Authentifizierung verwenden</Value>

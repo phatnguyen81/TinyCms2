@@ -12,91 +12,95 @@ Supports Thumbs: true
     background: #222;
     padding: 10px;
 }
+
 .theme-dark .nivoSlider {
-	position:relative;
-	background:#fff url(loading.gif) no-repeat 50% 50%;
-    margin-bottom:10px;
+    background: #fff url(loading.gif) no-repeat 50% 50%;
+    margin-bottom: 10px;
     overflow: visible;
+    position: relative;
 }
+
 .theme-dark .nivoSlider img {
-	position:absolute;
-	top:0px;
-	left:0px;
-	display:none;
+    display: none;
+    left: 0px;
+    position: absolute;
+    top: 0px;
 }
+
 .theme-dark .nivoSlider a {
-	border:0;
-	display:block;
+    border: 0;
+    display: block;
 }
 
 .theme-dark .nivo-controlNav {
-	text-align: left;
-	padding: 0;
-	position: relative;
-	z-index: 10;
+    padding: 0;
+    position: relative;
+    text-align: left;
+    z-index: 10;
 }
+
 .theme-dark .nivo-controlNav a {
-	display:inline-block;
-	width:10px;
-	height:10px;
-	background:url(bullets.png) no-repeat 0 2px;
-	text-indent:-9999px;
-	border:0;
-	margin: 0 2px;
+    background: url(bullets.png) no-repeat 0 2px;
+    border: 0;
+    display: inline-block;
+    height: 10px;
+    margin: 0 2px;
+    text-indent: -9999px;
+    width: 10px;
 }
-.theme-dark .nivo-controlNav a.active {
-	background-position:0 100%;
-}
+
+.theme-dark .nivo-controlNav a.active { background-position: 0 100%; }
 
 .theme-dark .nivo-directionNav a {
-	display:block;
-	width:30px;
-	height:30px;
-	background: url(arrows.png) no-repeat;
-	text-indent:-9999px;
-	border:0;
-	top: auto;
-	bottom: -36px;
-	z-index: 11;
+    background: url(arrows.png) no-repeat;
+    border: 0;
+    bottom: -36px;
+    display: block;
+    height: 30px;
+    text-indent: -9999px;
+    top: auto;
+    width: 30px;
+    z-index: 11;
 }
+
 .theme-dark .nivo-directionNav a:hover {
-    background-color: #333;
-    -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    background-color: #333;
     border-radius: 2px;
 }
+
 .theme-dark a.nivo-nextNav {
-	background-position:-16px 50%;
-	right:0px;
+    background-position: -16px 50%;
+    right: 0px;
 }
+
 .theme-dark a.nivo-prevNav {
-    background-position:11px 50%;
+    background-position: 11px 50%;
     left: auto;
-	right: 35px;
+    right: 35px;
 }
 
-.theme-dark .nivo-caption {
-    font-family: Helvetica, Arial, sans-serif;
-}
+.theme-dark .nivo-caption { font-family: Helvetica, Arial, sans-serif; }
+
 .theme-dark .nivo-caption a {
-    color:#fff;
-    border-bottom:1px dotted #fff;
-}
-.theme-dark .nivo-caption a:hover {
-    color:#fff;
+    border-bottom: 1px dotted #fff;
+    color: #fff;
 }
 
-.theme-dark .nivo-controlNav.nivo-thumbs-enabled {
-	width: 80%;
-}
+.theme-dark .nivo-caption a:hover { color: #fff; }
+
+.theme-dark .nivo-controlNav.nivo-thumbs-enabled { width: 80%; }
+
 .theme-dark .nivo-controlNav.nivo-thumbs-enabled a {
-	width: auto;
-	height: auto;
-	background: none;
-	margin-bottom: 5px;
+    background: none;
+    height: auto;
+    margin-bottom: 5px;
+    width: auto;
 }
+
 .theme-dark .nivo-controlNav.nivo-thumbs-enabled img {
-	display: block;
-	width: 120px;
-	height: auto;
+    display: block;
+    height: auto;
+    width: 120px;
 }

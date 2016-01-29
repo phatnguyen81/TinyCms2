@@ -1,14 +1,14 @@
 ﻿@model PluginListModel
-@{    
+@{
     //page title
     ViewBag.Title = T("Admin.Configuration.Plugins.Local").Text;
 }
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "plugins-form" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new {id = "plugins-form"}))
 {
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Plugins.Local")
         </div>
         <div class="options">
@@ -16,133 +16,345 @@
         </div>
     </div>
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             //install a plugin
-            $("#plugins-grid").on("click", ".install-plugin-link", function (e) {
+            $("#plugins-grid").on("click", ".install-plugin-link", function(e) {
                 $("html, body").animate({ scrollTop: 0 }, 400);
-                showThrobber('@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Admin.Configuration.Plugins.Fields.Install.Progress").Text))');
-                return true;
-            });
+                showThrobber("@Html.Raw(HttpUtility.JavaScriptStringEncode(T(\
+                                  "Admin.Configuration.Plugins.Fields.Install.Progress\").Text))")
+                                  ;
+                                  return true;
+})
+                                  ;
 
-            //uninstall a plugin
-            $("#plugins-grid").on("click", ".uninstall-plugin-link", function (e) {
-                $("html, body").animate({ scrollTop: 0 }, 400);
-                showThrobber('@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Admin.Configuration.Plugins.Fields.Uninstall.Progress").Text))');
-                return true;
-            });
-        });
-    </script>
-    <p>
-        <h4>@T("Admin.Configuration.Plugins.Description"):</h4>
-        <ol>
-            <li>@T("Admin.Configuration.Plugins.Description.Step1")</li>
-            <li>@T("Admin.Configuration.Plugins.Description.Step2")</li>
-            <li>@T("Admin.Configuration.Plugins.Description.Step3")</li>
-            <li>@T("Admin.Configuration.Plugins.Description.Step4")</li>
-            <li>@T("Admin.Configuration.Plugins.Description.Step5")</li>
-        </ol>
+                                  //uninstall a plugin
+                                  $
+                                  ("#plugins-grid").on("click", ".uninstall-plugin-link", function(e)
+    {
+    $
+        ("html, body").animate(
+        {
+            0
+        }
+    ,
+        400)
+        ;
+        showThrobber("@Html.Raw(HttpUtility.JavaScriptStringEncode(T(\"Admin.Configuration.Plugins.Fields.Uninstall.Progress\").Text))");
+        return true;
+    }
+                                  )
+                                  ;
+}
+
+    );; </script>
+                    <p>
+    <h4>    private @T("Admin.Configura tion.Plugins.Description"):</h4>
+        <
+    ol>
+            <li> @T("Admin.Configura tion.Plugins.Description.Step1")</li>
+          
+      <li> @T("Admin.Configura tion.Plugins.Description.Step2")</li>
+          
+      <li> @T("Admin.Configura tion.Plugins.Description.Step3")</li>
+          
+      <li> @T("Admin.Configura tion.Plugins.Description.Step4")</li>
+          
+      <li> @T("Admin.Configura tion.Plugins.Description.Step5")</li>
+        </
+    ol>
         <p>
             You can download more nopCommerce plugins on our <a href="http://www.nopcommerce.com/extensions-and-themes.aspx?utm_source=admin-panel&utm_medium=plugins&utm_campaign=admin-panel" target="_blank">extensions directory</a>
-        </p>
-    </p>
-    <table class="adminContent">
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SearchLoadModeId):
-            </td>
-            <td class="adminData">
-                @Html.DropDownList("SearchLoadModeId", Model.AvailableLoadModes)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.SearchGroup):
-            </td>
-            <td class="adminData">
-                @Html.DropDownList("SearchGroup", Model.AvailableGroups)
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="button" id="search-plugins" class="k-button" value="@T("Admin.Common.Search")" />
-            </td>
-        </tr>
-        </table>
-    <table class="adminContent">
-        <tr>
-            <td>
-                <div id="plugins-grid"></div>
-                <script>
-                    $(document).ready(function() {
-                        $("#plugins-grid").kendoGrid({
-                            dataSource: {
-                                type: "json",
-                                transport: {
-                                    read: {
-                                        url: "@Html.Raw(Url.Action("ListSelect", "Plugin"))",
-                                        type: "POST",
-                                        dataType: "json",
-                                        data: additionalData
-                                    }
+        < /
+        p 
+    >
+        </
+        p 
+    >
+
+        private    
+        <
+
+        table cl 
+
+        private a
+            ss = "adm    i
+        private nCont 
+
+        private nt 
+    "> 
+        <
+        tr 
+    >
+
+
+        private  <
+
+        t
+            d 
+
+        class ="adi
+
+        private tl 
+
+        private  ">
+
+        No 
+        private Label Fo 
+        r(
+        private mode
+            l.SearchLoadModeI 
+
+        d 
+    ):
+        </
+        td 
+    >
+
+        private  <
+
+        t
+            d 
+
+        class ="ada
+
+        private ta 
+
+        private  >
+
+        private t("SearchLoadModeI 
+        d 
+    ", Model. Available
+        private oadMods 
+    )
+        </
+        td 
+    >
+        tr 
+
+        private  > 
+    
+            <
+
+        tr 
+    >
+
+        private
+            private  <
+
+        t
+            d 
+
+        class ="adi
+
+        private tl 
+
+        private  ">
+
+        No 
+        private Label Fo 
+        r(
+        private
+            model.SearchGroup 
+
+    ):
+        </
+        td 
+    >
+
+        private  <
+
+        t
+            d 
+
+        class ="ada
+
+        private ta 
+
+        private  >
+
+        private t("SearchGroup",
+        M
+            od 
+
+        el.Available
+            roups 
+
+    )
+        </
+        td 
+    >
+        tr 
+
+        private  > 
+    
+            <
+
+        tr 
+    >
+
+        private
+            private  <
+
+        t
+            d 
+
+        colspan 
+    ="
+
+
+        private                     <
+        input tyo 
+        private n 
+    " id="
+        sea r 
+        ch 
+    -
+        plugi 
+        private s 
+    " 
+
+        class ="k -button
+
+        private valu e = "@T("
+        Admin 
+
+        private Commo
+            n.Sear 
+
+        private ch 
+    ")" />
+          
+        </
+        td 
+    >
+        tr 
+        private  >
+
+
+        private  </
+        table 
+    >
+        bl 
+        private e cla 
+        ss 
+    ="adm    i
+        private nCont 
+
+        private nt 
+    "> 
+        <
+        tr 
+    >
+
+
+        private  <
+
+        t
+            d 
+
+    >
+
+        private     
+        <
+
+        div id = "g
+        private rid 
+    ">< / div>
+
+        private      
+        <
+
+        script 
+    >
+
+        private         
+        $(
+
+        doc(f 
+        private unction(
+            )
+
+        private 
+        {
+        $)
+
+            .
+            kendoGrid(
+            {
+            private
+                (Url.Actio
+                n("ListSelect", "Plugin"))
+                ",
+            }
+        } ,
+    },
+                                   
+                                                                
+                                                 display_kendrid_error(e);
+                                    // Cancel thnges
+                                    this.cancelCs();
                                 },
-                                schema: {
-                                    data: "Data",
-                                    total: "Total",
-                                    errors: "Errors"
-                                },
-                                error: function(e) {
-                                    display_kendoui_grid_error(e);
-                                    // Cancel the changes
-                                    this.cancelChanges();
-                                },
-                                serverPaging: true,
-                                serverFiltering: true,
-                                serverSorting: true
-                            },
-                            pageable: {
-                                refresh: true,
-                                numeric: false,
-                                previousNext: false,
-                                info: false
-                            },
-                            editable: {
-                                confirmation: false,
-                                mode: "inline"
-                            },
-                            scrollable: false,
-                            columns: [
-                                {
-                                    field: "Group",
-                                    title: "@T("Admin.Configuration.Plugins.Fields.Group")"
-                                }, {
-                                    field: "LogoUrl",
-                                    title: "@T("Admin.Configuration.Plugins.Fields.Logo")",
-                                    width: 100,
-                                    template: '<img src="#=LogoUrl#" />',
-                                    headerAttributes: { style: "text-align:center" },
-                                    attributes: { style: "text-align:center" }
-                                }, {
-                                    field: "FriendlyName",
-                                    title: "@T("Admin.Configuration.Plugins.Info")",
-                                    template: '<b>#:FriendlyName#</b>' +
-                                        '<br />@T("Admin.Configuration.Plugins.Fields.Version"): #:Version#' +
-                                        '<br />@T("Admin.Configuration.Plugins.Fields.Author"): #:Author#' +
-                                        '<br />@T("Admin.Configuration.Plugins.Fields.SystemName"): #:SystemName#' +
-                                        '<br />@T("Admin.Configuration.Plugins.Fields.DisplayOrder"): #:DisplayOrder#' +
-                                        '<br />@T("Admin.Configuration.Plugins.Fields.Installed"): <img src="@Url.Content("~/Administration/Content/images/")active-#=Installed#.gif" />' +
-                                        '# if(CanChangeEnabled) {# <br />@T("Admin.Configuration.Plugins.Fields.IsEnabled"): <img src="@Url.Content("~/Administration/Content/images/")active-#=IsEnabled#.gif" /> #} #' +
-                                        //allow configuration only when a plugin has a configuration URL specified
-                                        '<br /># if(ConfigurationUrl && ConfigurationUrl.length > 0) {# <a class="plugin-button plugin-button-configure" href="#=ConfigurationUrl#">@T("Admin.Configuration.Plugins.Fields.Configure")</a>&nbsp;&nbsp;&nbsp; #} #' +
-                                        '<a class="plugin-button plugin-button-edit" href="javascript:OpenWindow(\'@Url.Content("~/Admin/Plugin/EditPopup")?systemName=#=SystemName#&btnId=btnRefresh&formId=plugins-form\', 800, 300, true);">@T("Admin.Common.Edit")</a>'
-                                }, {
-                                    field: "Installed",
-                                    title: "@T("Admin.Configuration.Plugins.Fields.Installation")",
-                                    template: '# if(Installed) {# <input type="submit" name="uninstall-plugin-link-#=SystemName#" class="plugin-button uninstall-plugin-link" value="@T("Admin.Configuration.Plugins.Fields.Uninstall")" /> #} else {#  <input type="submit" name="install-plugin-link-#=SystemName#" class="plugin-button install-plugin-link" value="@T("Admin.Configuration.Plugins.Fields.Install")" /> #} #',
-                                    headerAttributes: {style: "text-align:center" },
-                                    attributes: { style: "text-align:center" }
-                                }
-                            ]
-                        });
+         
+                                                                                                                                          },
+         
+                                                                                                                                                                               },
+         
+                                                                                                             },
+         
+                                                                                                                                                      urati
+                                               on.Plugins.Fields.Group")"
+            
+                                                                   }, {
+                       
+         
+                                                           urati
+                on.Plugins.Fields.Logo")",
+           
+                                                            oUrl#\" />",
+                                 i
+                                     r" },
+            
+                                  
+                               i
+                                   r" }
+             
+                                               
+         
+                                                                urati
+                on.Plugins.Info")",
+           
+                                      e#</b>" +
+                                         "<br />@T(\"Ad.Configuration.Plugins.Fields.Version\"): #:Version#" +
+    "<br />@T(\"Admin  .Configuration.Plugins.Fields.Aut
+
+    or\"):                          
+    "<br />@T(\"Admin. C oni g urat
+    ion.Plugins.Fields.SystemName\"): #:Sy                  "<br />@T(\"Admin. C oni g urat
+    ion.Plugins.Fields.DisplayOrder\"): #:Disp                  "<br />@T(\"Admin. C oni g urat
+    ion.Plugins.Fields.Installed\"): <img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=Installed#                  "
+# if(CanChangeEna
+                
+
+bled) {
+# <br />@T(\"Admin.Configuration.Plugins.Fields.IsEnabled\"): <img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=IsEnabled#.gif\                  //allow configuration only when a plugin has a configuration U                  "<br /># if(ConfigurationUrl && ConfigurationUrl.length > 0) {# <a class=\"plugin-button plugin-button-configure\" href=\"#=ConfigurationUrl#\">@T(\"Admin.Configuration.Plugins.Fields.Configure\")</a>&nbsp;&nbsp;&n                  "<a class=\"plugin-button plugin-button-edit\" href=\"javascript:OpenWindow('@Url.Content(\"~/Admin/Plugin/EditPopup\")?systemName=#=SystemName#&btnId=btnRefresh&formId=plugins-form', 800, 300, true);\">@T(\"Admin.Common. 
+     
+
+             
+             field:       
+       
+          title: "@T("Admin.Configuration.Plugins.F 
+ields.Inst         
+          template: "# if(Installed) {# <input type=\"submit\" name=\"uninstall-plugin-link-#=SystemName#\" class=\"plugin-button uninstall-plugin-link\" value=\"@T(\"Admin.Configuration.Plugins.Fields.Uninstall\")\" /> #} else {#  <input type=\"submit\" name=\"install-plugin-link-#=SystemName#\" class=\"plugin-button install-plugin-link\" value=\"@T(\"Admin.Configuration.Plugins.Fields.Install\")                 
+ 
+    h
+        tributes: {style: "
+    e
+xt-           
+ 
+        a 
+ttributes: { style: "
+ext      
+                  });
                     });
                 </script>
             </td>
@@ -152,9 +364,9 @@
                 <input type="submit" id="btnRefresh" style="display: none" />
                 <script type="text/javascript">
                     $(document).ready(function () {
-                        $('#btnRefresh').click(function () {
+                        $("#btnRefresh").click(function () {
                             //refresh grid
-                            var grid = $("#plugins-grid").data('kendoGrid');
+                            var grid = $("#plugins-grid").data("kendoGrid");
                             grid.dataSource.read();
 
                             //return false to don't reload a page
@@ -165,9 +377,9 @@
                 <script type="text/javascript">
                     $(document).ready(function () {
                         //search button
-                        $('#search-plugins').click(function () {
+                        $("#search-plugins").click(function () {
                             //search
-                            var grid = $('#plugins-grid').data('kendoGrid');
+                            var grid = $("#plugins-grid").data("kendoGrid");
                             grid.dataSource.read();
 
                             return false;
@@ -176,8 +388,8 @@
 
                     function additionalData() {
                         var data = {
-                            SearchLoadModeId: $('#SearchLoadModeId').val(),
-                            SearchGroup: $('#SearchGroup').val()
+                            SearchLoadModeId: $("#SearchLoadModeId").val(),
+                            SearchGroup: $("#SearchGroup").val()
                         };
                         addAntiForgeryToken(data);
                         return data;
@@ -185,6 +397,6 @@
 
                 </script>
             </td>
-        </tr>
+        </t    r>
     </table>
 }

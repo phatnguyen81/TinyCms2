@@ -1,12 +1,12 @@
 namespace TinyCms.Core.Caching
 {
     /// <summary>
-    /// Represents a NopNullCache (caches nothing)
+    ///     Represents a NopNullCache (caches nothing)
     /// </summary>
-    public partial class NopNullCache : ICacheManager
+    public class NopNullCache : ICacheManager
     {
         /// <summary>
-        /// Gets or sets the value associated with the specified key.
+        ///     Gets or sets the value associated with the specified key.
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="key">The key of the value to get.</param>
@@ -17,7 +17,7 @@ namespace TinyCms.Core.Caching
         }
 
         /// <summary>
-        /// Adds the specified key and object to the cache.
+        ///     Adds the specified key and object to the cache.
         /// </summary>
         /// <param name="key">key</param>
         /// <param name="data">Data</param>
@@ -27,7 +27,7 @@ namespace TinyCms.Core.Caching
         }
 
         /// <summary>
-        /// Gets a value indicating whether the value associated with the specified key is cached
+        ///     Gets a value indicating whether the value associated with the specified key is cached
         /// </summary>
         /// <param name="key">key</param>
         /// <returns>Result</returns>
@@ -37,7 +37,7 @@ namespace TinyCms.Core.Caching
         }
 
         /// <summary>
-        /// Removes the value with the specified key from the cache
+        ///     Removes the value with the specified key from the cache
         /// </summary>
         /// <param name="key">/key</param>
         public virtual void Remove(string key)
@@ -45,7 +45,7 @@ namespace TinyCms.Core.Caching
         }
 
         /// <summary>
-        /// Removes items by pattern
+        ///     Removes items by pattern
         /// </summary>
         /// <param name="pattern">pattern</param>
         public virtual void RemoveByPattern(string pattern)
@@ -53,14 +53,14 @@ namespace TinyCms.Core.Caching
         }
 
         /// <summary>
-        /// Clear all cache data
+        ///     Clear all cache data
         /// </summary>
         public virtual void Clear()
         {
         }
 
         /// <summary>
-        /// Dispose
+        ///     Dispose
         /// </summary>
         public virtual void Dispose()
         {

@@ -7,12 +7,12 @@ using TinyCms.Core.Domain.Logging;
 namespace TinyCms.Services.Logging
 {
     /// <summary>
-    /// Null logger
+    ///     Null logger
     /// </summary>
-    public partial class NullLogger : ILogger
+    public class NullLogger : ILogger
     {
         /// <summary>
-        /// Determines whether a log level is enabled
+        ///     Determines whether a log level is enabled
         /// </summary>
         /// <param name="level">Log level</param>
         /// <returns>Result</returns>
@@ -22,7 +22,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Deletes a log item
+        ///     Deletes a log item
         /// </summary>
         /// <param name="log">Log item</param>
         public virtual void DeleteLog(Log log)
@@ -30,14 +30,14 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Clears a log
+        ///     Clears a log
         /// </summary>
         public virtual void ClearLog()
         {
         }
 
         /// <summary>
-        /// Gets all log items
+        ///     Gets all log items
         /// </summary>
         /// <param name="fromUtc">Log item creation from; null to load all records</param>
         /// <param name="toUtc">Log item creation to; null to load all records</param>
@@ -47,14 +47,14 @@ namespace TinyCms.Services.Logging
         /// <param name="pageSize">Page size</param>
         /// <returns>Log item items</returns>
         public virtual IPagedList<Log> GetAllLogs(DateTime? fromUtc = null, DateTime? toUtc = null,
-            string message = "", LogLevel? logLevel = null, 
+            string message = "", LogLevel? logLevel = null,
             int pageIndex = 0, int pageSize = int.MaxValue)
         {
             return new PagedList<Log>(new List<Log>(), pageIndex, pageSize);
         }
 
         /// <summary>
-        /// Gets a log item
+        ///     Gets a log item
         /// </summary>
         /// <param name="logId">Log item identifier</param>
         /// <returns>Log item</returns>
@@ -64,7 +64,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Get log items by identifiers
+        ///     Get log items by identifiers
         /// </summary>
         /// <param name="logIds">Log item identifiers</param>
         /// <returns>Log items</returns>
@@ -74,14 +74,15 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Inserts a log item
+        ///     Inserts a log item
         /// </summary>
         /// <param name="logLevel">Log level</param>
         /// <param name="shortMessage">The short message</param>
         /// <param name="fullMessage">The full message</param>
         /// <param name="customer">The customer to associate log record with</param>
         /// <returns>A log item</returns>
-        public virtual Log InsertLog(LogLevel logLevel, string shortMessage, string fullMessage = "", Customer customer = null)
+        public virtual Log InsertLog(LogLevel logLevel, string shortMessage, string fullMessage = "",
+            Customer customer = null)
         {
             return null;
         }

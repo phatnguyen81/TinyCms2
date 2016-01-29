@@ -8,12 +8,12 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Settings.Order.ReturnRequestReasons.AddNew") @Html.ActionLink("(" + T("Admin.Configuration.Settings.Order.ReturnRequestReasons.BackToList") + ")", "ReturnRequestReasonList")
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
-            <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
+            <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")"/>
         </div>
     </div>
     @Html.Partial("_CreateOrUpdate.ReturnRequestReason", Model)

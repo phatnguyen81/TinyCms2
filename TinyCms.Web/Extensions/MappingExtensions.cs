@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using TinyCms.Core.Domain.Posts;
+﻿using TinyCms.Core.Domain.Posts;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Seo;
 using TinyCms.Web.Models.Posts;
@@ -11,7 +7,6 @@ namespace TinyCms.Web.Extensions
 {
     public static class MappingExtensions
     {
-
         //category
         public static CategoryModel ToModel(this Category entity)
         {
@@ -26,7 +21,7 @@ namespace TinyCms.Web.Extensions
                 MetaKeywords = entity.GetLocalized(x => x.MetaKeywords),
                 MetaDescription = entity.GetLocalized(x => x.MetaDescription),
                 MetaTitle = entity.GetLocalized(x => x.MetaTitle),
-                SeName = entity.GetSeName(),
+                SeName = entity.GetSeName()
             };
             return model;
         }

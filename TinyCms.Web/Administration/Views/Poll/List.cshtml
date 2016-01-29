@@ -1,6 +1,7 @@
-﻿@{
-    var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
-    var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+﻿@using TinyCms.Core.Domain.Common
+@{
+    var defaultGridPageSize = EngineContext.Current.Resolve<AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<AdminAreaSettings>().GridPageSizes;
 
     //page title
     ViewBag.Title = T("Admin.ContentManagement.Polls").Text;
@@ -8,7 +9,7 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-content.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-content.png")" alt=""/>
         @T("Admin.ContentManagement.Polls")
     </div>
     <div class="options">
@@ -21,7 +22,7 @@
             <div id="polls-grid"></div>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#polls-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -57,13 +58,14 @@
                             mode: "inline"
                         },
                         scrollable: false,
-                        columns: [{
+                        columns: [
+                        {
                             field: "Name",
                             title: "@T("Admin.ContentManagement.Polls.Fields.Name")"
                         }, {
                             field: "LanguageName",
                             title: "@T("Admin.ContentManagement.Polls.Fields.Language")"
-                        },{
+                        }, {
                             field: "DisplayOrder",
                             title: "@T("Admin.ContentManagement.Polls.Fields.DisplayOrder")",
                             width: 200,
@@ -73,35 +75,76 @@
                             width: 100,
                             headerAttributes: { style: "text-align:center" },
                             attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Published#.gif" />'
-                        }, {
-                            field: "ShowOnHomePage",
-                            title: "@T("Admin.ContentManagement.Polls.Fields.ShowOnHomePage")",
-                            width: 100,
-                            headerAttributes: { style: "text-align:center" },
-                            attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=ShowOnHomePage#.gif" />'
-                        }, {
-                            field: "StartDate",
-                            title: "@T("Admin.ContentManagement.Polls.Fields.StartDate")",
-                            width: 200,
-                            type: "date",
-                            format: "{0:G}"
-                        }, {
-                            field: "EndDate",
-                            title: "@T("Admin.ContentManagement.Polls.Fields.EndDate")",
-                            width: 200,
-                            type: "date",
-                            format: "{0:G}"
-                        }, {
-                            field: "Id",
-                            title: "@T("Admin.Common.Edit")",
-                            width: 100,
-                            template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
-                        }]
+                            template: "<img src=\"@Url.Content(\
+                                                      "~/Administration/Content/images/\")active-#=Published#.gif\" />"
+}
+
+    ,
+        {
+            "ShowOnHomePage",
+            "@T("
+            Admin.ContentManagement.Polls.Fields.ShowOnHomePage
+            ")",
+            100,
+            {
+                "text-align:center"
+            }
+        ,
+            {
+                "text-align:center"
+            }
+        ,
+            "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=ShowOnHomePage#.gif\" />"
+        }
+    ,
+
+{
+    private field 
+: "StartDate",
+    private title 
+: "@T("
+    private Admin.ContentManagement.Polls.Fields.StartDate 
+")",
+    private width 
+: 200,
+    private type 
+: "date",
+    private format 
+: "{0:G}"
+}
+,
+{
+    private field 
+: "EndDate",
+    private title 
+: "@T("
+    private Admin.ContentManagement.Polls.Fields.EndDate 
+")",
+    private width 
+: 200,
+    private type 
+: "date",
+    private format 
+: "{0:G}"
+}
+,
+{
+    private field 
+: "Id",
+    private title 
+: "@T("
+    private Admin.Common.Edit 
+")",
+    private width 
+: 100,
+    private template 
+: "<a href=\"Edit/#=Id#\">@T(\"Admin.Common.Edit\")</a>"
+}
+]
+}
+);
                     });
-                });
-            </script>
+                    </script>
         </td>
     </tr>
 </table>

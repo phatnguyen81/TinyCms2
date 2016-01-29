@@ -12,7 +12,7 @@
         <td>
             <div id="customerattributes-grid"></div>
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#customerattributes-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -49,7 +49,8 @@
                             mode: "inline"
                         },
                         scrollable: false,
-                        columns: [{
+                        columns: [
+                        {
                             field: "Name",
                             title: "@T("Admin.Customers.CustomerAttributes.Fields.Name")",
                             width: 300
@@ -57,26 +58,43 @@
                             field: "AttributeControlTypeName",
                             title: "@T("Admin.Customers.CustomerAttributes.Fields.AttributeControlType")",
                             width: 200
-                        },{
+                        }, {
                             field: "IsRequired",
                             title: "@T("Admin.Customers.CustomerAttributes.Fields.IsRequired")",
                             width: 100,
                             headerAttributes: { style: "text-align:center" },
                             attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IsRequired#.gif" />'
-                        }, {
-                            field: "DisplayOrder",
-                            title: "@T("Admin.Customers.CustomerAttributes.Fields.DisplayOrder")",
-                            width: 100
-                        }, {
-                            field: "Id",
-                            title: "@T("Admin.Common.Edit")",
-                            width: 100,
-                            template: '<a href="@Url.Content("~/Admin/CustomerAttribute/Edit/")#=Id#">@T("Admin.Common.Edit")</a>'
-                        }]
+                            template: "<img src=\"@Url.Content(\
+                                                      "~/Administration/Content/images/\")active-#=IsRequired#.gif\" />"
+}
+
+    ,
+        {
+            "DisplayOrder",
+            "@T("
+            Admin.Customers.CustomerAttributes.Fields.DisplayOrder
+            ")",
+            100
+        }
+    ,
+
+{
+    private field 
+: "Id",
+    private title 
+: "@T("
+    private Admin.Common.Edit 
+")",
+    private width 
+: 100,
+    private template 
+: "<a href=\"@Url.Content(\"~/Admin/CustomerAttribute/Edit/\")#=Id#\">@T(\"Admin.Common.Edit\")</a>"
+}
+]
+}
+);
                     });
-                });
-            </script>
+                    </script>
         </td>
     </tr>
 </table>

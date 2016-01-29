@@ -6,10 +6,10 @@ using System.Collections.Generic;
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// Open authentication parameters
+    ///     Open authentication parameters
     /// </summary>
     [Serializable]
-    public abstract partial class OpenAuthenticationParameters
+    public abstract class OpenAuthenticationParameters
     {
         public abstract string ProviderSystemName { get; }
         public string ExternalIdentifier { get; set; }

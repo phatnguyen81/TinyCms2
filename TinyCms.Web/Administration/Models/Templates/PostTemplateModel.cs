@@ -6,8 +6,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Templates
 {
-    [Validator(typeof(PostTemplateValidator))]
-    public partial class PostTemplateModel : BaseNopEntityModel
+    [Validator(typeof (PostTemplateValidator))]
+    public class PostTemplateModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.System.Templates.Product.Name")]
         [AllowHtml]

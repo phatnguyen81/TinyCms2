@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using TinyCms.Web.Framework;
 using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Settings
 {
-    public partial class GeneralCommonSettingsModel : BaseNopModel
+    public class GeneralCommonSettingsModel : BaseNopModel
     {
         public GeneralCommonSettingsModel()
         {
@@ -25,22 +24,22 @@ namespace TinyCms.Admin.Models.Settings
         public LocalizationSettingsModel LocalizationSettings { get; set; }
         public FullTextSettingsModel FullTextSettings { get; set; }
 
-
         #region Nested classes
 
-        public partial class StoreInformationSettingsModel : BaseNopModel
+        public class StoreInformationSettingsModel : BaseNopModel
         {
             public StoreInformationSettingsModel()
             {
-                this.AvailableStoreThemes = new List<ThemeConfigurationModel>();
+                AvailableStoreThemes = new List<ThemeConfigurationModel>();
             }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.StoreClosed")]
             public bool StoreClosed { get; set; }
-            
+
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.DefaultStoreTheme")]
             [AllowHtml]
             public string DefaultStoreTheme { get; set; }
+
             public IList<ThemeConfigurationModel> AvailableStoreThemes { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.AllowCustomerToSelectTheme")]
@@ -48,7 +47,7 @@ namespace TinyCms.Admin.Models.Settings
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.DisplayEuCookieLawWarning")]
             public bool DisplayEuCookieLawWarning { get; set; }
-            
+
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.FacebookLink")]
             public string FacebookLink { get; set; }
 
@@ -70,48 +69,49 @@ namespace TinyCms.Admin.Models.Settings
             public string Name { get; set; }
 
             /// <summary>
-            /// Gets or sets the store URL
+            ///     Gets or sets the store URL
             /// </summary>
             public string Url { get; set; }
 
             /// <summary>
-            /// Gets or sets a value indicating whether SSL is enabled
+            ///     Gets or sets a value indicating whether SSL is enabled
             /// </summary>
             public bool SslEnabled { get; set; }
 
             /// <summary>
-            /// Gets or sets the store secure URL (HTTPS)
+            ///     Gets or sets the store secure URL (HTTPS)
             /// </summary>
             public string SecureUrl { get; set; }
 
             /// <summary>
-            /// Gets or sets the comma separated list of possible HTTP_HOST values
+            ///     Gets or sets the comma separated list of possible HTTP_HOST values
             /// </summary>
             public string Hosts { get; set; }
 
             /// <summary>
-            /// Gets or sets the identifier of the default language for this store; 0 is set when we use the default language display order
+            ///     Gets or sets the identifier of the default language for this store; 0 is set when we use the default language
+            ///     display order
             /// </summary>
             public int DefaultLanguageId { get; set; }
 
             /// <summary>
-            /// Gets or sets the company name
+            ///     Gets or sets the company name
             /// </summary>
             public string CompanyName { get; set; }
 
             /// <summary>
-            /// Gets or sets the company address
+            ///     Gets or sets the company address
             /// </summary>
             public string CompanyAddress { get; set; }
 
             /// <summary>
-            /// Gets or sets the store phone number
+            ///     Gets or sets the store phone number
             /// </summary>
             public string CompanyPhoneNumber { get; set; }
-            
+
             #region Nested classes
 
-            public partial class ThemeConfigurationModel
+            public class ThemeConfigurationModel
             {
                 public string ThemeName { get; set; }
                 public string ThemeTitle { get; set; }
@@ -124,14 +124,15 @@ namespace TinyCms.Admin.Models.Settings
             #endregion
         }
 
-        public partial class SeoSettingsModel : BaseNopModel
+        public class SeoSettingsModel : BaseNopModel
         {
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.PageTitleSeparator")]
             [AllowHtml]
             public string PageTitleSeparator { get; set; }
-            
+
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.PageTitleSeoAdjustment")]
             public int PageTitleSeoAdjustment { get; set; }
+
             public SelectList PageTitleSeoAdjustmentValues { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.DefaultTitle")]
@@ -158,6 +159,7 @@ namespace TinyCms.Admin.Models.Settings
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.WwwRequirement")]
             public int WwwRequirement { get; set; }
+
             public SelectList WwwRequirementValues { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.EnableJsBundling")]
@@ -173,7 +175,7 @@ namespace TinyCms.Admin.Models.Settings
             public bool OpenGraphMetaTags { get; set; }
         }
 
-        public partial class SecuritySettingsModel : BaseNopModel
+        public class SecuritySettingsModel : BaseNopModel
         {
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.EncryptionKey")]
             [AllowHtml]
@@ -188,12 +190,12 @@ namespace TinyCms.Admin.Models.Settings
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.EnableXSRFProtectionForAdminArea")]
             public bool EnableXsrfProtectionForAdminArea { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.EnableXSRFProtectionForPublicStore")]
             public bool EnableXsrfProtectionForPublicStore { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.HoneypotEnabled")]
             public bool HoneypotEnabled { get; set; }
-
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaEnabled")]
             public bool CaptchaEnabled { get; set; }
@@ -207,7 +209,8 @@ namespace TinyCms.Admin.Models.Settings
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnContactUsPage")]
             public bool CaptchaShowOnContactUsPage { get; set; }
 
-            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailWishlistToFriendPage")]
+            [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailWishlistToFriendPage")
+            ]
             public bool CaptchaShowOnEmailWishlistToFriendPage { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.CaptchaShowOnEmailPostToFriendPage")]
@@ -234,7 +237,7 @@ namespace TinyCms.Admin.Models.Settings
             public string ReCaptchaPrivateKey { get; set; }
         }
 
-        public partial class LocalizationSettingsModel : BaseNopModel
+        public class LocalizationSettingsModel : BaseNopModel
         {
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.UseImagesForLanguageSelection")]
             public bool UseImagesForLanguageSelection { get; set; }
@@ -255,26 +258,26 @@ namespace TinyCms.Admin.Models.Settings
             public bool LoadAllUrlRecordsOnStartup { get; set; }
         }
 
-        public partial class FullTextSettingsModel : BaseNopModel
+        public class FullTextSettingsModel : BaseNopModel
         {
             public bool Supported { get; set; }
-
             public bool Enabled { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.SearchMode")]
             public int SearchMode { get; set; }
+
             public SelectList SearchModeValues { get; set; }
         }
 
-        public partial class SocialSettingsModel : BaseNopModel
+        public class SocialSettingsModel : BaseNopModel
         {
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.FacebookAppId")]
             public string FacebookAppId { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.GeneralCommon.FacebookAppSecret")]
-            public string FacebookAppSecret { get; set; } 
+            public string FacebookAppSecret { get; set; }
         }
-        
+
         #endregion
     }
 }

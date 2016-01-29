@@ -1,12 +1,11 @@
-$(document).ready(function(){
-    $('.subnav').click(function(event){
+$(document).ready(function() {
+    $(".subnav").click(function(event) {
         event.stopPropagation();
-         $(this).find('.sub_info').slideToggle("selected");
+        $(this).find(".sub_info").slideToggle("selected");
     });
 
 });
 
-$(document).on("click", function () {
+$(document).on("click", function() {
     $(".sub_info").hide();
 });
-

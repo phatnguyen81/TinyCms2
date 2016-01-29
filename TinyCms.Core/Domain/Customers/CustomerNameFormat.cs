@@ -1,24 +1,27 @@
 namespace TinyCms.Core.Domain.Customers
 {
     /// <summary>
-    /// Represents the customer name fortatting enumeration
+    ///     Represents the customer name fortatting enumeration
     /// </summary>
     public enum CustomerNameFormat
     {
         /// <summary>
-        /// Show emails
+        ///     Show emails
         /// </summary>
         ShowEmails = 1,
+
         /// <summary>
-        /// Show usernames
+        ///     Show usernames
         /// </summary>
         ShowUsernames = 2,
+
         /// <summary>
-        /// Show full names
+        ///     Show full names
         /// </summary>
         ShowFullNames = 3,
+
         /// <summary>
-        /// Show first name
+        ///     Show first name
         /// </summary>
         ShowFirstName = 10
     }

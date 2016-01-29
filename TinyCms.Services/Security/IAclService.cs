@@ -6,25 +6,25 @@ using TinyCms.Core.Domain.Security;
 namespace TinyCms.Services.Security
 {
     /// <summary>
-    /// ACL service inerface
+    ///     ACL service inerface
     /// </summary>
-    public partial interface IAclService
+    public interface IAclService
     {
         /// <summary>
-        /// Deletes an ACL record
+        ///     Deletes an ACL record
         /// </summary>
         /// <param name="aclRecord">ACL record</param>
         void DeleteAclRecord(AclRecord aclRecord);
 
         /// <summary>
-        /// Gets an ACL record
+        ///     Gets an ACL record
         /// </summary>
         /// <param name="aclRecordId">ACL record identifier</param>
         /// <returns>ACL record</returns>
         AclRecord GetAclRecordById(int aclRecordId);
-        
+
         /// <summary>
-        /// Gets ACL records
+        ///     Gets ACL records
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Entity</param>
@@ -32,13 +32,13 @@ namespace TinyCms.Services.Security
         IList<AclRecord> GetAclRecords<T>(T entity) where T : BaseEntity, IAclSupported;
 
         /// <summary>
-        /// Inserts an ACL record
+        ///     Inserts an ACL record
         /// </summary>
         /// <param name="aclRecord">ACL record</param>
         void InsertAclRecord(AclRecord aclRecord);
-        
+
         /// <summary>
-        /// Inserts an ACL record
+        ///     Inserts an ACL record
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="customerRoleId">Customer role id</param>
@@ -46,13 +46,13 @@ namespace TinyCms.Services.Security
         void InsertAclRecord<T>(T entity, int customerRoleId) where T : BaseEntity, IAclSupported;
 
         /// <summary>
-        /// Updates the ACL record
+        ///     Updates the ACL record
         /// </summary>
         /// <param name="aclRecord">ACL record</param>
         void UpdateAclRecord(AclRecord aclRecord);
 
         /// <summary>
-        /// Find customer role identifiers with granted access
+        ///     Find customer role identifiers with granted access
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Wntity</param>
@@ -60,7 +60,7 @@ namespace TinyCms.Services.Security
         int[] GetCustomerRoleIdsWithAccess<T>(T entity) where T : BaseEntity, IAclSupported;
 
         /// <summary>
-        /// Authorize ACL permission
+        ///     Authorize ACL permission
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Wntity</param>
@@ -68,7 +68,7 @@ namespace TinyCms.Services.Security
         bool Authorize<T>(T entity) where T : BaseEntity, IAclSupported;
 
         /// <summary>
-        /// Authorize ACL permission
+        ///     Authorize ACL permission
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Wntity</param>

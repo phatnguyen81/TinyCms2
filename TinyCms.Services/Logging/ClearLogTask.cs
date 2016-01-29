@@ -3,19 +3,19 @@
 namespace TinyCms.Services.Logging
 {
     /// <summary>
-    /// Represents a task to clear [Log] table
+    ///     Represents a task to clear [Log] table
     /// </summary>
-    public partial class ClearLogTask : ITask
+    public class ClearLogTask : ITask
     {
         private readonly ILogger _logger;
 
         public ClearLogTask(ILogger logger)
         {
-            this._logger = logger;
+            _logger = logger;
         }
 
         /// <summary>
-        /// Executes a task
+        ///     Executes a task
         /// </summary>
         public virtual void Execute()
         {

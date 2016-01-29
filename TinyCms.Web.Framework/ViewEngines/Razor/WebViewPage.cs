@@ -9,7 +9,6 @@ using TinyCms.Core.Data;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Services.Localization;
 using TinyCms.Web.Framework.Localization;
-using TinyCms.Web.Framework.Themes;
 
 #endregion
 
@@ -17,13 +16,11 @@ namespace TinyCms.Web.Framework.ViewEngines.Razor
 {
     public abstract class WebViewPage<TModel> : System.Web.Mvc.WebViewPage<TModel>
     {
-
         private ILocalizationService _localizationService;
         private Localizer _localizer;
-        private IWorkContext _workContext;
 
         /// <summary>
-        /// Get a localized resources
+        ///     Get a localized resources
         /// </summary>
         public Localizer T
         {
@@ -36,64 +33,23 @@ namespace TinyCms.Web.Framework.ViewEngines.Razor
 
                     //default localizer
                     _localizer = (format, args) =>
-                                     {
-                                         var resFormat = _localizationService.GetResource(format);
-                                         if (string.IsNullOrEmpty(resFormat))
-                                         {
-                                             return new LocalizedString(format);
-                                         }
-                                         return
-                                             new LocalizedString((args == null || args.Length == 0)
-                                                                     ? resFormat
-                                                                     : string.Format(resFormat, args));
-                                     };
+                    {
+                        var resFormat = _localizationService.GetResource(format);
+                        if (string.IsNullOrEmpty(resFormat))
+                        {
+                            return new LocalizedString(format);
+                        }
+                        return
+                            new LocalizedString((args == null || args.Length == 0)
+                                ? resFormat
+                                : string.Format(resFormat, args));
+                    };
                 }
                 return _localizer;
             }
         }
 
-        public IWorkContext WorkContext
-        {
-            get
-            {
-                return _workContext;
-            }
-        }
-        
-        public override void InitHelpers()
-        {
-            base.InitHelpers();
-
-            if (DataSettingsHelper.DatabaseIsInstalled())
-            {
-                _localizationService = EngineContext.Current.Resolve<ILocalizationService>();
-                _workContext = EngineContext.Current.Resolve<IWorkContext>();
-            }
-        }
-
-        public HelperResult RenderWrappedSection(string name, object wrapperHtmlAttributes)
-        {
-            Action<TextWriter> action = delegate(TextWriter tw)
-                                {
-                                    var htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(wrapperHtmlAttributes);
-                                    var tagBuilder = new TagBuilder("div");
-                                    tagBuilder.MergeAttributes(htmlAttributes);
-
-                                    var section = RenderSection(name, false);
-                                    if (section != null)
-                                    {
-                                        tw.Write(tagBuilder.ToString(TagRenderMode.StartTag));
-                                        section.WriteTo(tw);
-                                        tw.Write(tagBuilder.ToString(TagRenderMode.EndTag));
-                                    }
-                                };
-            return new HelperResult(action);
-        }
-
-        public HelperResult RenderSection(string sectionName, Func<object, HelperResult> defaultContent)
-        {
-            return IsSectionDefined(sectionName) ? RenderSection(sectionName) : defaultContent(new object());
-        }
+        public IWorkContext WorkContext { get; private set; }
 
         public override string Layout
         {
@@ -104,7 +60,9 @@ namespace TinyCms.Web.Framework.ViewEngines.Razor
                 if (!string.IsNullOrEmpty(layout))
                 {
                     var filename = Path.GetFileNameWithoutExtension(layout);
-                    ViewEngineResult viewResult = System.Web.Mvc.ViewEngines.Engines.FindView(ViewContext.Controller.ControllerContext, filename, "");
+                    var viewResult =
+                        System.Web.Mvc.ViewEngines.Engines.FindView(ViewContext.Controller.ControllerContext, filename,
+                            "");
 
                     if (viewResult.View != null && viewResult.View is RazorView)
                     {
@@ -114,30 +72,61 @@ namespace TinyCms.Web.Framework.ViewEngines.Razor
 
                 return layout;
             }
-            set
+            set { base.Layout = value; }
+        }
+
+        public override void InitHelpers()
+        {
+            base.InitHelpers();
+
+            if (DataSettingsHelper.DatabaseIsInstalled())
             {
-                base.Layout = value;
+                _localizationService = EngineContext.Current.Resolve<ILocalizationService>();
+                WorkContext = EngineContext.Current.Resolve<IWorkContext>();
             }
         }
 
-      
+        public HelperResult RenderWrappedSection(string name, object wrapperHtmlAttributes)
+        {
+            Action<TextWriter> action = delegate(TextWriter tw)
+            {
+                var htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(wrapperHtmlAttributes);
+                var tagBuilder = new TagBuilder("div");
+                tagBuilder.MergeAttributes(htmlAttributes);
+
+                var section = RenderSection(name, false);
+                if (section != null)
+                {
+                    tw.Write(tagBuilder.ToString(TagRenderMode.StartTag));
+                    section.WriteTo(tw);
+                    tw.Write(tagBuilder.ToString(TagRenderMode.EndTag));
+                }
+            };
+            return new HelperResult(action);
+        }
+
+        public HelperResult RenderSection(string sectionName, Func<object, HelperResult> defaultContent)
+        {
+            return IsSectionDefined(sectionName) ? RenderSection(sectionName) : defaultContent(new object());
+        }
+
         /// <summary>
-        /// Gets a selected tab index (used in admin area to store selected tab index)
+        ///     Gets a selected tab index (used in admin area to store selected tab index)
         /// </summary>
         /// <returns>Index</returns>
         public int GetSelectedTabIndex()
         {
             //keep this method synchornized with
             //"SetSelectedTabIndex" method of \Administration\Controllers\BaseNopController.cs
-            int index = 0;
-            string dataKey = "nop.selected-tab-index";
+            var index = 0;
+            var dataKey = "nop.selected-tab-index";
             if (ViewData[dataKey] is int)
             {
-                index = (int)ViewData[dataKey];
+                index = (int) ViewData[dataKey];
             }
             if (TempData[dataKey] is int)
             {
-                index = (int)TempData[dataKey];
+                index = (int) TempData[dataKey];
             }
 
             //ensure it's not negative

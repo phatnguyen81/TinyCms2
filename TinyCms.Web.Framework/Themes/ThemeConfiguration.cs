@@ -24,18 +24,11 @@ namespace TinyCms.Web.Framework.Themes
         }
 
         public XmlNode ConfigurationNode { get; protected set; }
-
         public string Path { get; protected set; }
-
         public string PreviewImageUrl { get; protected set; }
-
         public string PreviewText { get; protected set; }
-
         public bool SupportRtl { get; protected set; }
-
         public string ThemeName { get; protected set; }
-
         public string ThemeTitle { get; protected set; }
-
     }
 }

@@ -6,8 +6,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Messages
 {
-    [Validator(typeof(EmailAccountValidator))]
-    public partial class EmailAccountModel : BaseNopEntityModel
+    [Validator(typeof (EmailAccountValidator))]
+    public class EmailAccountModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.Configuration.EmailAccounts.Fields.Email")]
         [AllowHtml]
@@ -41,10 +41,8 @@ namespace TinyCms.Admin.Models.Messages
         [NopResourceDisplayName("Admin.Configuration.EmailAccounts.Fields.IsDefaultEmailAccount")]
         public bool IsDefaultEmailAccount { get; set; }
 
-
         [NopResourceDisplayName("Admin.Configuration.EmailAccounts.Fields.SendTestEmailTo")]
         [AllowHtml]
         public string SendTestEmailTo { get; set; }
-
     }
 }

@@ -4,7 +4,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Web.Models.Polls
 {
-    public partial class PollModel : BaseNopEntityModel, ICloneable
+    public class PollModel : BaseNopEntityModel, ICloneable
     {
         public PollModel()
         {
@@ -12,26 +12,21 @@ namespace TinyCms.Web.Models.Polls
         }
 
         public string Name { get; set; }
-
         public bool AlreadyVoted { get; set; }
-
         public int TotalVotes { get; set; }
-        
         public IList<PollAnswerModel> Answers { get; set; }
 
         public object Clone()
         {
             //we use a shallow copy (deep clone is not required here)
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
     }
 
-    public partial class PollAnswerModel : BaseNopEntityModel
+    public class PollAnswerModel : BaseNopEntityModel
     {
         public string Name { get; set; }
-
         public int NumberOfVotes { get; set; }
-
         public double PercentOfTotalVotes { get; set; }
     }
 }

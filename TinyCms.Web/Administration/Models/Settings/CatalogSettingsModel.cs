@@ -5,7 +5,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Settings
 {
-    public partial class CatalogSettingsModel : BaseNopModel
+    public class CatalogSettingsModel : BaseNopModel
     {
         public CatalogSettingsModel()
         {
@@ -26,7 +26,6 @@ namespace TinyCms.Admin.Models.Settings
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.CategoryBreadcrumbEnabled")]
         public bool CategoryBreadcrumbEnabled { get; set; }
 
-
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.ComparePostsEnabled")]
         public bool ComparePostsEnabled { get; set; }
 
@@ -44,7 +43,7 @@ namespace TinyCms.Admin.Models.Settings
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.SearchPagePageSizeOptions")]
         public string SearchPagePageSizeOptions { get; set; }
-        
+
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostSearchAutoCompleteEnabled")]
         public bool PostSearchAutoCompleteEnabled { get; set; }
 
@@ -57,11 +56,8 @@ namespace TinyCms.Admin.Models.Settings
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.PostSearchTermMinimumLength")]
         public int PostSearchTermMinimumLength { get; set; }
 
-        
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.NumberOfPostTags")]
         public int NumberOfPostTags { get; set; }
-
-        
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Catalog.IgnoreFeaturedPosts")]
         public bool IgnoreFeaturedPosts { get; set; }

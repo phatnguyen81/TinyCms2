@@ -5,7 +5,6 @@ using System.Text;
 using System.Web.Mvc;
 using System.Xml;
 using TinyCms.Core;
-using TinyCms.Core.Domain.Catalog;
 using TinyCms.Core.Domain.Common;
 using TinyCms.Core.Domain.Security;
 using TinyCms.Services.Posts;
@@ -14,10 +13,26 @@ using TinyCms.Services.Topics;
 namespace TinyCms.Services.Seo
 {
     /// <summary>
-    /// Represents a sitemap generator
+    ///     Represents a sitemap generator
     /// </summary>
-    public partial class SitemapGenerator : ISitemapGenerator
+    public class SitemapGenerator : ISitemapGenerator
     {
+        #region Ctor
+
+        public SitemapGenerator(
+            CommonSettings commonSettings,
+            SecuritySettings securitySettings, ITopicService topicService, IPostService postService,
+            ICategoryService categoryService)
+        {
+            _commonSettings = commonSettings;
+            _securitySettings = securitySettings;
+            _topicService = topicService;
+            _postService = postService;
+            _categoryService = categoryService;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly IPostService _postService;
@@ -31,21 +46,6 @@ namespace TinyCms.Services.Seo
 
         #endregion
 
-        #region Ctor
-
-        public SitemapGenerator(
-            CommonSettings commonSettings,
-            SecuritySettings securitySettings, ITopicService topicService, IPostService postService, ICategoryService categoryService)
-        {
-            this._commonSettings = commonSettings;
-            this._securitySettings = securitySettings;
-            _topicService = topicService;
-            _postService = postService;
-            _categoryService = categoryService;
-        }
-
-        #endregion
-
         #region Utilities
 
         protected virtual string GetHttpProtocol()
@@ -53,8 +53,8 @@ namespace TinyCms.Services.Seo
             return _securitySettings.ForceSslForAllPages ? "https" : "http";
         }
 
-    /// <summary>
-        /// Writes the url location to the writer.
+        /// <summary>
+        ///     Writes the url location to the writer.
         /// </summary>
         /// <param name="url">Url of indexed location (don't put root url information in).</param>
         /// <param name="updateFrequency">Update frequency - always, hourly, daily, weekly, yearly, never.</param>
@@ -62,7 +62,7 @@ namespace TinyCms.Services.Seo
         protected virtual void WriteUrlLocation(string url, UpdateFrequency updateFrequency, DateTime lastUpdated)
         {
             _writer.WriteStartElement("url");
-            string loc = XmlHelper.XmlEncode(url);
+            var loc = XmlHelper.XmlEncode(url);
             _writer.WriteElementString("loc", loc);
             _writer.WriteElementString("changefreq", updateFrequency.ToString().ToLowerInvariant());
             _writer.WriteElementString("lastmod", lastUpdated.ToString(DateFormat));
@@ -70,8 +70,8 @@ namespace TinyCms.Services.Seo
         }
 
         /// <summary>
-        /// Method that is overridden, that handles creation of child urls.
-        /// Use the method WriteUrlLocation() within this method.
+        ///     Method that is overridden, that handles creation of child urls.
+        ///     Use the method WriteUrlLocation() within this method.
         /// </summary>
         /// <param name="urlHelper">URL helper</param>
         protected virtual void GenerateUrlNodes(UrlHelper urlHelper)
@@ -85,7 +85,7 @@ namespace TinyCms.Services.Seo
             //contact us
             //var contactUsUrl = urlHelper.RouteUrl("ContactUs", null, GetHttpProtocol());
             //WriteUrlLocation(contactUsUrl, UpdateFrequency.Weekly, DateTime.UtcNow);
-         
+
             //categories
             if (_commonSettings.SitemapIncludeCategories)
             {
@@ -93,7 +93,6 @@ namespace TinyCms.Services.Seo
             }
             //topics
             WriteTopics(urlHelper);
-        
         }
 
         protected virtual void WriteTopics(UrlHelper urlHelper)
@@ -103,7 +102,7 @@ namespace TinyCms.Services.Seo
                 .ToList();
             foreach (var topic in topics)
             {
-                var url = urlHelper.RouteUrl("Topic", new { SeName = topic.GetSeName() }, GetHttpProtocol());
+                var url = urlHelper.RouteUrl("Topic", new {SeName = topic.GetSeName()}, GetHttpProtocol());
                 WriteUrlLocation(url, UpdateFrequency.Weekly, DateTime.UtcNow);
             }
         }
@@ -113,19 +112,20 @@ namespace TinyCms.Services.Seo
             var categories = _categoryService.GetAllCategoriesByParentCategoryId(parentCategoryId);
             foreach (var category in categories)
             {
-                var url = urlHelper.RouteUrl("Category", new { SeName = category.GetSeName() }, GetHttpProtocol());
+                var url = urlHelper.RouteUrl("Category", new {SeName = category.GetSeName()}, GetHttpProtocol());
                 WriteUrlLocation(url, UpdateFrequency.Weekly, category.UpdatedOnUtc);
 
                 WriteCategories(urlHelper, category.Id);
             }
         }
+
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// This will build an xml sitemap for better index with search engines.
-        /// See http://en.wikipedia.org/wiki/Sitemaps for more information.
+        ///     This will build an xml sitemap for better index with search engines.
+        ///     See http://en.wikipedia.org/wiki/Sitemaps for more information.
         /// </summary>
         /// <param name="urlHelper">URL helper</param>
         /// <returns>Sitemap.xml as string</returns>
@@ -139,8 +139,8 @@ namespace TinyCms.Services.Seo
         }
 
         /// <summary>
-        /// This will build an xml sitemap for better index with search engines.
-        /// See http://en.wikipedia.org/wiki/Sitemaps for more information.
+        ///     This will build an xml sitemap for better index with search engines.
+        ///     See http://en.wikipedia.org/wiki/Sitemaps for more information.
         /// </summary>
         /// <param name="urlHelper">URL helper</param>
         /// <param name="stream">Stream of sitemap.</param>
@@ -152,7 +152,8 @@ namespace TinyCms.Services.Seo
             _writer.WriteStartElement("urlset");
             _writer.WriteAttributeString("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
             _writer.WriteAttributeString("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-            _writer.WriteAttributeString("xsi:schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
+            _writer.WriteAttributeString("xsi:schemaLocation",
+                "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
 
             GenerateUrlNodes(urlHelper);
 

@@ -9,7 +9,9 @@ namespace TinyCms.Admin.Validators.Posts
     {
         public PostTagValidator(ILocalizationService localizationService)
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage(localizationService.GetResource("Admin.Catalog.ProductTags.Fields.Name.Required"));
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .WithMessage(localizationService.GetResource("Admin.Catalog.ProductTags.Fields.Name.Required"));
         }
     }
 }

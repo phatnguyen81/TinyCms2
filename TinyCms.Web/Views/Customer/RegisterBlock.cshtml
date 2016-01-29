@@ -7,33 +7,32 @@
         {
             <label>
 
-                @Html.TextBoxFor(model => model.Username, new { @class = "txtinput", placeholder = "Tên tài khoản (*)" })
+                @Html.TextBoxFor(model => model.Username, new {@class = "txtinput", placeholder = "Tên tài khoản (*)"})
                 @Html.ValidationMessageFor(model => model.Username)
             </label>
-
         }
 
         <label>
-            @Html.TextBoxFor(model => model.Email, new { @class = "txtinput", placeholder = "Email (*)" })
+            @Html.TextBoxFor(model => model.Email, new {@class = "txtinput", placeholder = "Email (*)"})
             @Html.ValidationMessageFor(model => model.Email)
         </label>
         <label>
-            @Html.PasswordFor(model => model.Password, new { @class = "txtinput", placeholder = "Mật khẩu (*)" })
+            @Html.PasswordFor(model => model.Password, new {@class = "txtinput", placeholder = "Mật khẩu (*)"})
             @Html.ValidationMessageFor(model => model.Password)
         </label>
         <label>
             @Html.PasswordFor(model => model.ConfirmPassword, new {@class = "txtinput", placeholder = "Xác nhận mật khẩu (*)"})
             @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </label>
+        @if (Model.CustomerAttributes.Count > 0)
+        {
+            <label>
                 @if (Model.CustomerAttributes.Count > 0)
                 {
-                    <label>
-                        @if (Model.CustomerAttributes.Count > 0)
-                        {
-                            @Html.Partial("_CustomerAttributes", Model.CustomerAttributes)
-                        }
-                    </label>
+                    @Html.Partial("_CustomerAttributes", Model.CustomerAttributes)
                 }
+            </label>
+        }
         @if (Model.PhoneEnabled)
         {
             <div class="inputs">
@@ -49,72 +48,89 @@
         </label>
         @if (Model.AcceptPrivacyPolicyEnabled)
         {
-         
             <div class="subact">
                 <label>
                     <input id="accept-privacy-policy" type="checkbox" name="accept-privacy-policy"/>
                     <label for="accept-privacy-policy">@T("Account.Fields.AcceptPrivacyPolicy")</label>
-                    <span class="read" onclick=" javascript:OpenWindow('@Url.RouteUrl("TopicPopup", new {SystemName = "privacyinfo"})', 450, 500, true) ">@T("Account.Fields.AcceptPrivacyPolicy.Read")</span>
+                    <span class="read" onclick=" javascript:OpenWindow('@Url.RouteUrl("TopicPopup", new {SystemName = "privacyinfo"})', 450, 500, true); ">@T("Account.Fields.AcceptPrivacyPolicy.Read")</span>
                 </label>
             </div>
         }
-        <p class="actbtn"><button class="regbtn">Đăng ký</button>
+        <p class="actbtn">
+            <button class="regbtn">Đăng ký</button>
         </p>
 
     </div>
     <script type="text/javascript">
-    $('.regbtn').click(function (e) {
-        e.preventDefault();
+        $(".regbtn").click(function(e) {
+                    e.preventDefault();
 
-        if ($("#FullName").val() == "") {
-            $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập họ và tên");
-            return;
-        }
+                    if ($("#FullName").val() == "") {
+                        $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập họ và tên");
+                        return;
+                    }
 
-        @if (Model.UsernamesEnabled)
-            {
-                <text>
+                    @if (Model.UsernamesEnabled)
+                    {
+                        <text>
         if ($("#Username").val() == "") {
             $.boxy.alert("Lỗi đăng nhập", "Vui lòng nhập tên đăng nhập");
             return;
         }
         </text>
+                    }
+
+                    if ($("#Email").val() == "") {
+                        $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập email");
+                        return;
+                    }
+
+                    if ($("#Password").val() == "" || $("#ConfirmPassword").val() == "") {
+                        $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập mật khẩu");
+                        return;
+                    }
+
+                    if (!$("#accept-privacy-policy").is(":checked")) {
+                        //just show validation errors, dont post
+                        $.boxy.alert("Lỗi đăng ký", "@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Account.Fields.AcceptPrivacyPolicy.Required").Text))");
+                        return false;
+                    }
+
+
+                    $.ajax({
+                        url: "@Url.Action(\
+                                  "_AjaxRegister\", \"Customer\")",
+                                  (this).closest("form").serialize(),
+                                  "POST",
+                                  "json"
+}).
+                                  done(function(data);
+    {
+        if (data.success)
+        {
+        $.
+            boxy.alert("Thông báo", "<p class=\"scctxt\"><span class=\"successicn icn\"></span>Chúc mừng bạn đã đăng ký thành công</p>", function()
+            {
+                window.location.href = "@Url.RouteUrl(\"homepage\")"
+                ;
             }
-
-        if ($("#Email").val() == "") {
-            $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập email");
-            return;
+        )
+            ;
         }
-
-        if ($("#Password").val() == "" || $("#ConfirmPassword").val() == "") {
-            $.boxy.alert("Lỗi đăng ký", "Vui lòng nhập mật khẩu");
-            return;
+        ;
+    else
+        {
+        $.
+            boxy.alert("Lỗi đăng nhập", data.message);
         }
-
-        if (!$('#accept-privacy-policy').is(':checked')) {
-            //just show validation errors, dont post
-            $.boxy.alert("Lỗi đăng ký", "@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Account.Fields.AcceptPrivacyPolicy.Required").Text))");
-            return false;
-        }
-
-
-        $.ajax({
-            url: '@Url.Action("_AjaxRegister", "Customer")',
-                data: $(this).closest("form").serialize(),
-                type: "POST",
-                dataType: "json"
-            }).done(function (data) {
-                if (data.success) {
-                    $.boxy.alert("Thông báo", '<p class="scctxt"><span class="successicn icn"></span>Chúc mừng bạn đã đăng ký thành công</p>', function () {
-                        window.location.href = '@Url.RouteUrl("homepage")';
-                    });
-
-                } else {
-                    $.boxy.alert("Lỗi đăng nhập", data.message);
-                }
-            }).fail(function (jqXHR, textStatus) {
-                $.boxy.alert("Lỗi đăng nhập", "Request failed: " + textStatus);
-            });
+    }
+                                  ).
+                                  fail(function(jqXHR, textStatus)
+    {
+    $.
+        boxy.alert("Lỗi đăng nhập", "Request failed: " + textStatus);
+    }
+                                  );
         });
     </script>
 }

@@ -7,7 +7,7 @@ using TinyCms.Core.Infrastructure;
 
 namespace TinyCms.Web.Framework.Seo
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class WwwRequirementAttribute : FilterAttribute, IAuthorizationFilter
     {
         public virtual void OnAuthorization(AuthorizationContext filterContext)
@@ -37,11 +37,11 @@ namespace TinyCms.Web.Framework.Seo
                 case WwwRequirement.WithWww:
                 {
                     var webHelper = EngineContext.Current.Resolve<IWebHelper>();
-                    string url = webHelper.GetThisPageUrl(true);
+                    var url = webHelper.GetThisPageUrl(true);
                     var currentConnectionSecured = webHelper.IsCurrentConnectionSecured();
                     if (currentConnectionSecured)
                     {
-                        bool startsWith3W = url.StartsWith("https://www.", StringComparison.OrdinalIgnoreCase);
+                        var startsWith3W = url.StartsWith("https://www.", StringComparison.OrdinalIgnoreCase);
                         if (!startsWith3W)
                         {
                             url = url.Replace("https://", "https://www.");
@@ -52,7 +52,7 @@ namespace TinyCms.Web.Framework.Seo
                     }
                     else
                     {
-                        bool startsWith3W = url.StartsWith("http://www.", StringComparison.OrdinalIgnoreCase);
+                        var startsWith3W = url.StartsWith("http://www.", StringComparison.OrdinalIgnoreCase);
                         if (!startsWith3W)
                         {
                             url = url.Replace("http://", "http://www.");
@@ -66,11 +66,11 @@ namespace TinyCms.Web.Framework.Seo
                 case WwwRequirement.WithoutWww:
                 {
                     var webHelper = EngineContext.Current.Resolve<IWebHelper>();
-                    string url = webHelper.GetThisPageUrl(true);
+                    var url = webHelper.GetThisPageUrl(true);
                     var currentConnectionSecured = webHelper.IsCurrentConnectionSecured();
                     if (currentConnectionSecured)
                     {
-                        bool startsWith3W = url.StartsWith("https://www.", StringComparison.OrdinalIgnoreCase);
+                        var startsWith3W = url.StartsWith("https://www.", StringComparison.OrdinalIgnoreCase);
                         if (startsWith3W)
                         {
                             url = url.Replace("https://www.", "https://");
@@ -81,7 +81,7 @@ namespace TinyCms.Web.Framework.Seo
                     }
                     else
                     {
-                        bool startsWith3W = url.StartsWith("http://www.", StringComparison.OrdinalIgnoreCase);
+                        var startsWith3W = url.StartsWith("http://www.", StringComparison.OrdinalIgnoreCase);
                         if (startsWith3W)
                         {
                             url = url.Replace("http://www.", "http://");
@@ -96,7 +96,7 @@ namespace TinyCms.Web.Framework.Seo
                 {
                     //do nothing
                 }
-                break;
+                    break;
                 default:
                     throw new NopException("Not supported WwwRequirement parameter");
             }

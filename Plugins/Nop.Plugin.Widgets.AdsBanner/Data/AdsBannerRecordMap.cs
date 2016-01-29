@@ -1,20 +1,19 @@
-﻿using TinyCms.Data.Mapping;
-using Nop.Plugin.Widgets.AdsBanner.Domain;
+﻿using Nop.Plugin.Widgets.AdsBanner.Domain;
+using TinyCms.Data.Mapping;
 
 namespace Nop.Plugin.Widgets.AdsBanner.Data
 {
-    public partial class AdsBannerRecordMap : NopEntityTypeConfiguration<AdsBannerRecord>
+    public class AdsBannerRecordMap : NopEntityTypeConfiguration<AdsBannerRecord>
     {
         public AdsBannerRecordMap()
         {
-            this.ToTable("AdsBannerRecord");
-            this.HasKey(pr => pr.Id);
-            this.Property(pr => pr.Name).IsRequired();
+            ToTable("AdsBannerRecord");
+            HasKey(pr => pr.Id);
+            Property(pr => pr.Name).IsRequired();
 
-            this.HasRequired(pp => pp.Picture)
-              .WithMany()
-              .HasForeignKey(pp => pp.PictureId);
-
+            HasRequired(pp => pp.Picture)
+                .WithMany()
+                .HasForeignKey(pp => pp.PictureId);
         }
     }
 }

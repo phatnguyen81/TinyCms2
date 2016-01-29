@@ -14,7 +14,6 @@ namespace TinyCms.Core.Fakes
             _roles = roles;
         }
 
-
         public IIdentity Identity
         {
             get { return _identity; }

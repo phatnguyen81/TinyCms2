@@ -5,17 +5,17 @@
     //page title
     ViewBag.Title = T("Plugins.Widgets.AdsBanner.EditAdsBannerDetail").Text;
 }
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "adsbanner-form" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new {id = "adsbanner-form"}))
 {
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
-            @T("Plugins.Widgets.AdsBanner.EditAdsBannerDetail") - @Html.ActionLink("(" + T("Plugins.Widgets.AdsBanner.BackToList") + ")", "ConfigureWidget", "Widget", new { area = "Admin", systemName = "Widgets.AdsBanner" }, null)
+            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt=""/>
+            @T("Plugins.Widgets.AdsBanner.EditAdsBannerDetail") - @Html.ActionLink("(" + T("Plugins.Widgets.AdsBanner.BackToList") + ")", "ConfigureWidget", "Widget", new {area = "Admin", systemName = "Widgets.AdsBanner"}, null)
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
-            <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
+            <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")"/>
             <span id="adsbanner-delete" class="k-button">@T("Admin.Common.Delete")</span>
         </div>
     </div>

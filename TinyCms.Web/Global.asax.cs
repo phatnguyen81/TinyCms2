@@ -36,9 +36,9 @@ namespace TinyCms.Web
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                new[] { "TinyCms.Web.Controllers" }
-            );
+                new {controller = "Home", action = "Index", id = UrlParameter.Optional},
+                new[] {"TinyCms.Web.Controllers"}
+                );
         }
 
         protected void Application_Start()
@@ -49,7 +49,7 @@ namespace TinyCms.Web
             //initialize engine context
             EngineContext.Initialize(false);
 
-            bool databaseInstalled = DataSettingsHelper.DatabaseIsInstalled();
+            var databaseInstalled = DataSettingsHelper.DatabaseIsInstalled();
             if (databaseInstalled)
             {
                 //remove all view engines
@@ -105,21 +105,21 @@ namespace TinyCms.Web
         {
             //ignore static resources
             var webHelper = EngineContext.Current.Resolve<IWebHelper>();
-            if (webHelper.IsStaticResource(this.Request))
+            if (webHelper.IsStaticResource(Request))
                 return;
 
             //keep alive page requested (we ignore it to prevent creating a guest customer records)
-            string keepAliveUrl = string.Format("{0}keepalive/index", webHelper.GetStoreLocation());
+            var keepAliveUrl = string.Format("{0}keepalive/index", webHelper.GetStoreLocation());
             if (webHelper.GetThisPageUrl(false).StartsWith(keepAliveUrl, StringComparison.InvariantCultureIgnoreCase))
                 return;
 
             //ensure database is installed
             if (!DataSettingsHelper.DatabaseIsInstalled())
             {
-                string installUrl = string.Format("{0}install", webHelper.GetStoreLocation());
+                var installUrl = string.Format("{0}install", webHelper.GetStoreLocation());
                 if (!webHelper.GetThisPageUrl(false).StartsWith(installUrl, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    this.Response.Redirect(installUrl);
+                    Response.Redirect(installUrl);
                 }
             }
 
@@ -139,7 +139,7 @@ namespace TinyCms.Web
         {
             //miniprofiler
             var miniProfilerStarted = HttpContext.Current.Items.Contains("nop.MiniProfilerStarted") &&
-                 Convert.ToBoolean(HttpContext.Current.Items["nop.MiniProfilerStarted"]);
+                                      Convert.ToBoolean(HttpContext.Current.Items["nop.MiniProfilerStarted"]);
             if (miniProfilerStarted)
             {
                 MiniProfiler.Stop();
@@ -164,7 +164,7 @@ namespace TinyCms.Web
             if (httpException != null && httpException.GetHttpCode() == 404)
             {
                 var webHelper = EngineContext.Current.Resolve<IWebHelper>();
-                if (!webHelper.IsStaticResource(this.Request))
+                if (!webHelper.IsStaticResource(Request))
                 {
                     Response.Clear();
                     Server.ClearError();
@@ -189,11 +189,11 @@ namespace TinyCms.Web
 
             //ignore static resources
             var webHelper = EngineContext.Current.Resolve<IWebHelper>();
-            if (webHelper.IsStaticResource(this.Request))
+            if (webHelper.IsStaticResource(Request))
                 return;
 
             //keep alive page requested (we ignore it to prevent creation of guest customer records)
-            string keepAliveUrl = string.Format("{0}keepalive/index", webHelper.GetStoreLocation());
+            var keepAliveUrl = string.Format("{0}keepalive/index", webHelper.GetStoreLocation());
             if (webHelper.GetThisPageUrl(false).StartsWith(keepAliveUrl, StringComparison.InvariantCultureIgnoreCase))
                 return;
 

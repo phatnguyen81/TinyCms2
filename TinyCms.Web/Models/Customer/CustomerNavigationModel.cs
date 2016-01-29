@@ -2,12 +2,11 @@
 
 namespace TinyCms.Web.Models.Customer
 {
-    public partial class CustomerNavigationModel : BaseNopModel
+    public class CustomerNavigationModel : BaseNopModel
     {
         public bool HideInfo { get; set; }
         public bool HideChangePassword { get; set; }
         public bool HideAvatar { get; set; }
-
         public CustomerNavigationEnum SelectedTab { get; set; }
     }
 

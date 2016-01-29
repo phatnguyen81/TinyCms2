@@ -26,6 +26,5 @@ namespace TinyCms.Core.Fakes
         {
             get { return _name; }
         }
-
     }
 }

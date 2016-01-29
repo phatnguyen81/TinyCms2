@@ -6,19 +6,19 @@ using TinyCms.Web.Models.Customer;
 
 namespace TinyCms.Web.Controllers
 {
-    public partial class ExternalAuthenticationController : BasePublicController
+    public class ExternalAuthenticationController : BasePublicController
     {
-		#region Fields
+        #region Fields
 
         private readonly IOpenAuthenticationService _openAuthenticationService;
 
         #endregion
 
-		#region Constructors
+        #region Constructors
 
         public ExternalAuthenticationController(IOpenAuthenticationService openAuthenticationService)
         {
-            this._openAuthenticationService = openAuthenticationService;
+            _openAuthenticationService = openAuthenticationService;
         }
 
         #endregion

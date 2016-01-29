@@ -5,7 +5,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Logging
 {
-    public partial class LogModel : BaseNopEntityModel
+    public class LogModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.System.Log.Fields.LogLevel")]
         public string LogLevel { get; set; }
@@ -24,6 +24,7 @@ namespace TinyCms.Admin.Models.Logging
 
         [NopResourceDisplayName("Admin.System.Log.Fields.Customer")]
         public int? CustomerId { get; set; }
+
         [NopResourceDisplayName("Admin.System.Log.Fields.Customer")]
         public string CustomerEmail { get; set; }
 

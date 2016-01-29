@@ -1,45 +1,43 @@
 using System.Collections.Generic;
 using TinyCms.Core.Domain.Security;
-using TinyCms.Core;
 
 namespace TinyCms.Core.Domain.Customers
 {
     /// <summary>
-    /// Represents a customer role
+    ///     Represents a customer role
     /// </summary>
-    public partial class CustomerRole : BaseEntity
+    public class CustomerRole : BaseEntity
     {
         private ICollection<PermissionRecord> _permissionRecords;
 
         /// <summary>
-        /// Gets or sets the customer role name
+        ///     Gets or sets the customer role name
         /// </summary>
         public string Name { get; set; }
 
-
         /// <summary>
-        /// Gets or sets a value indicating whether the customer role is active
+        ///     Gets or sets a value indicating whether the customer role is active
         /// </summary>
         public bool Active { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the customer role is system
+        ///     Gets or sets a value indicating whether the customer role is system
         /// </summary>
         public bool IsSystemRole { get; set; }
 
         /// <summary>
-        /// Gets or sets the customer role system name
+        ///     Gets or sets the customer role system name
         /// </summary>
         public string SystemName { get; set; }
 
         /// <summary>
-        /// Gets or sets a product identifier that is required by this customer role. 
-        /// A customer is added to this customer role once a specified product is purchased.
+        ///     Gets or sets a product identifier that is required by this customer role.
+        ///     A customer is added to this customer role once a specified product is purchased.
         /// </summary>
         public int PurchasedWithProductId { get; set; }
-        
+
         /// <summary>
-        /// Gets or sets the permission records
+        ///     Gets or sets the permission records
         /// </summary>
         public virtual ICollection<PermissionRecord> PermissionRecords
         {
@@ -47,5 +45,4 @@ namespace TinyCms.Core.Domain.Customers
             protected set { _permissionRecords = value; }
         }
     }
-
 }

@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace TinyCms.Web.Framework.Events
+﻿namespace TinyCms.Web.Framework.Events
 {
     /// <summary>
-    /// Product search event
+    ///     Product search event
     /// </summary>
     public class PostSearchEvent
     {

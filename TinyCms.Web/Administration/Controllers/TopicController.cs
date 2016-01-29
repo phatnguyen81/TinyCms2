@@ -14,8 +14,33 @@ using TinyCms.Web.Framework.Kendoui;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class TopicController : BaseAdminController
+    public class TopicController : BaseAdminController
     {
+        #region Constructors
+
+        public TopicController(ITopicService topicService,
+            ILanguageService languageService,
+            ILocalizedEntityService localizedEntityService,
+            ILocalizationService localizationService,
+            IPermissionService permissionService,
+            IUrlRecordService urlRecordService,
+            ITopicTemplateService topicTemplateService,
+            ICustomerService customerService,
+            IAclService aclService)
+        {
+            _topicService = topicService;
+            _languageService = languageService;
+            _localizedEntityService = localizedEntityService;
+            _localizationService = localizationService;
+            _permissionService = permissionService;
+            _urlRecordService = urlRecordService;
+            _topicTemplateService = topicTemplateService;
+            _customerService = customerService;
+            _aclService = aclService;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly ITopicService _topicService;
@@ -30,31 +55,6 @@ namespace TinyCms.Admin.Controllers
 
         #endregion Fields
 
-        #region Constructors
-
-        public TopicController(ITopicService topicService,
-            ILanguageService languageService,
-            ILocalizedEntityService localizedEntityService, 
-            ILocalizationService localizationService,
-            IPermissionService permissionService, 
-            IUrlRecordService urlRecordService,
-            ITopicTemplateService topicTemplateService,
-            ICustomerService customerService,
-            IAclService aclService)
-        {
-            this._topicService = topicService;
-            this._languageService = languageService;
-            this._localizedEntityService = localizedEntityService;
-            this._localizationService = localizationService;
-            this._permissionService = permissionService;
-            this._urlRecordService = urlRecordService;
-            this._topicTemplateService = topicTemplateService;
-            this._customerService = customerService;
-            this._aclService = aclService;
-        }
-
-        #endregion
-        
         #region Utilities
 
         [NonAction]
@@ -80,29 +80,29 @@ namespace TinyCms.Admin.Controllers
             foreach (var localized in model.Locales)
             {
                 _localizedEntityService.SaveLocalizedValue(topic,
-                                                               x => x.Title,
-                                                               localized.Title,
-                                                               localized.LanguageId);
+                    x => x.Title,
+                    localized.Title,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(topic,
-                                                           x => x.Body,
-                                                           localized.Body,
-                                                           localized.LanguageId);
+                    x => x.Body,
+                    localized.Body,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(topic,
-                                                           x => x.MetaKeywords,
-                                                           localized.MetaKeywords,
-                                                           localized.LanguageId);
+                    x => x.MetaKeywords,
+                    localized.MetaKeywords,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(topic,
-                                                           x => x.MetaDescription,
-                                                           localized.MetaDescription,
-                                                           localized.LanguageId);
+                    x => x.MetaDescription,
+                    localized.MetaDescription,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(topic,
-                                                           x => x.MetaTitle,
-                                                           localized.MetaTitle,
-                                                           localized.LanguageId);
+                    x => x.MetaTitle,
+                    localized.MetaTitle,
+                    localized.LanguageId);
 
                 //search engine name
                 var seName = topic.ValidateSeName(localized.SeName, localized.Title, false);
@@ -145,16 +145,16 @@ namespace TinyCms.Admin.Controllers
                 else
                 {
                     //remove role
-                    var aclRecordToDelete = existingAclRecords.FirstOrDefault(acl => acl.CustomerRoleId == customerRole.Id);
+                    var aclRecordToDelete =
+                        existingAclRecords.FirstOrDefault(acl => acl.CustomerRoleId == customerRole.Id);
                     if (aclRecordToDelete != null)
                         _aclService.DeleteAclRecord(aclRecordToDelete);
                 }
             }
         }
 
-        
         #endregion
-        
+
         #region List
 
         public ActionResult Index()
@@ -168,7 +168,7 @@ namespace TinyCms.Admin.Controllers
                 return AccessDeniedView();
 
             var model = new TopicListModel();
-            
+
             return View(model);
         }
 
@@ -179,7 +179,7 @@ namespace TinyCms.Admin.Controllers
                 return AccessDeniedView();
 
             var topicModels = _topicService.GetAllTopics(true)
-                .Select(x =>x.ToModel())
+                .Select(x => x.ToModel())
                 .ToList();
             //little hack here:
             //we don't have paging supported for topic list page
@@ -214,7 +214,7 @@ namespace TinyCms.Admin.Controllers
             PrepareAclModel(model, null, false);
             //locales
             AddLocales(_languageService, model.Locales);
-            
+
             //default values
             model.DisplayOrder = 1;
 
@@ -245,7 +245,7 @@ namespace TinyCms.Admin.Controllers
                 UpdateLocales(topic, model);
 
                 SuccessNotification(_localizationService.GetResource("Admin.ContentManagement.Topics.Added"));
-                return continueEditing ? RedirectToAction("Edit", new { id = topic.Id }) : RedirectToAction("List");
+                return continueEditing ? RedirectToAction("Edit", new {id = topic.Id}) : RedirectToAction("List");
             }
 
             //If we got this far, something failed, redisplay form
@@ -268,7 +268,7 @@ namespace TinyCms.Admin.Controllers
                 return RedirectToAction("List");
 
             var model = topic.ToModel();
-            model.Url = Url.RouteUrl("Topic", new { SeName = topic.GetSeName() }, "http");
+            model.Url = Url.RouteUrl("Topic", new {SeName = topic.GetSeName()}, "http");
             //templates
             PrepareTemplatesModel(model);
             //ACL
@@ -314,15 +314,15 @@ namespace TinyCms.Admin.Controllers
                 SaveTopicAcl(topic, model);
                 //locales
                 UpdateLocales(topic, model);
-                
+
                 SuccessNotification(_localizationService.GetResource("Admin.ContentManagement.Topics.Updated"));
-                
+
                 if (continueEditing)
                 {
                     //selected tab
                     SaveSelectedTabIndex();
 
-                    return RedirectToAction("Edit",  new {id = topic.Id});
+                    return RedirectToAction("Edit", new {id = topic.Id});
                 }
                 return RedirectToAction("List");
             }
@@ -330,7 +330,7 @@ namespace TinyCms.Admin.Controllers
 
             //If we got this far, something failed, redisplay form
 
-            model.Url = Url.RouteUrl("Topic", new { SeName = topic.GetSeName() }, "http");
+            model.Url = Url.RouteUrl("Topic", new {SeName = topic.GetSeName()}, "http");
             //templates
             PrepareTemplatesModel(model);
             //ACL
@@ -354,7 +354,7 @@ namespace TinyCms.Admin.Controllers
             SuccessNotification(_localizationService.GetResource("Admin.ContentManagement.Topics.Deleted"));
             return RedirectToAction("List");
         }
-        
+
         #endregion
     }
 }

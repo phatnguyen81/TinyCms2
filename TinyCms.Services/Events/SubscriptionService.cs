@@ -4,12 +4,12 @@ using TinyCms.Core.Infrastructure;
 namespace TinyCms.Services.Events
 {
     /// <summary>
-    /// Event subscription service
+    ///     Event subscription service
     /// </summary>
     public class SubscriptionService : ISubscriptionService
     {
         /// <summary>
-        /// Get subscriptions
+        ///     Get subscriptions
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <returns>Event consumers</returns>

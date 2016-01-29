@@ -4,17 +4,17 @@ using System.Threading;
 namespace TinyCms.Core.ComponentModel
 {
     /// <summary>
-    /// Provides a convenience methodology for implementing locked access to resources. 
+    ///     Provides a convenience methodology for implementing locked access to resources.
     /// </summary>
     /// <remarks>
-    /// Intended as an infrastructure class.
+    ///     Intended as an infrastructure class.
     /// </remarks>
     public class WriteLockDisposable : IDisposable
     {
         private readonly ReaderWriterLockSlim _rwLock;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WriteLockDisposable"/> class.
+        ///     Initializes a new instance of the <see cref="WriteLockDisposable" /> class.
         /// </summary>
         /// <param name="rwLock">The rw lock.</param>
         public WriteLockDisposable(ReaderWriterLockSlim rwLock)

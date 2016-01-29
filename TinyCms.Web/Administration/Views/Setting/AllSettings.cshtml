@@ -1,6 +1,7 @@
-﻿@{
-    var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
-    var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+﻿@using TinyCms.Core.Domain.Common
+@{
+    var defaultGridPageSize = EngineContext.Current.Resolve<AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<AdminAreaSettings>().GridPageSizes;
 
     //page title
     ViewBag.Title = T("Admin.Configuration.Settings.AllSettings").Text;
@@ -8,7 +9,7 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
         @T("Admin.Configuration.Settings.AllSettings")
     </div>
 </div>
@@ -23,7 +24,7 @@
             <div id="settings-grid"></div>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#settings-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -43,7 +44,7 @@
                                     data: addAntiForgeryToken
                                 },
                                 update: {
-                                    url:"@Html.Raw(Url.Action("SettingUpdate", "Setting"))",
+                                    url: "@Html.Raw(Url.Action("SettingUpdate", "Setting"))",
                                     type: "POST",
                                     dataType: "json",
                                     data: addAntiForgeryToken
@@ -76,12 +77,12 @@
                                     }
                                 }
                             },
-                            requestEnd: function (e) {
+                            requestEnd: function(e) {
                                 if (e.type == "create" || e.type == "update") {
                                     this.read();
                                 }
                             },
-                            error: function (e) {
+                            error: function(e) {
                                 display_kendoui_grid_error(e);
                                 // Cancel the changes
                                 this.cancelChanges();
@@ -112,39 +113,43 @@
                             }
                         },
                         scrollable: false,
-                        columns: [{
-                            field: "Name",
-                            title: "@T("Admin.Configuration.Settings.AllSettings.Fields.Name")",
-                            width: 300,
-                            filterable: true,
-                            sortable: true
-                        }, {
-                            field: "Value",
-                            title: "@T("Admin.Configuration.Settings.AllSettings.Fields.Value")",
-                            width: 300,
-                            filterable: true,
-                            sortable: true
-                        }, {
-                            command: [{
-                                name: "edit",
-                                text: {
-                                    edit: "@T("Admin.Common.Edit")",
-                                    update: "@T("Admin.Common.Update")",
-                                    cancel: "@T("Admin.Common.Cancel")"
-                                }
+                        columns: [
+                            {
+                                field: "Name",
+                                title: "@T("Admin.Configuration.Settings.AllSettings.Fields.Name")",
+                                width: 300,
+                                filterable: true,
+                                sortable: true
                             }, {
-                                name: "destroy",
-                                text: "@T("Admin.Common.Delete")"
-                            }],
-                            width: 200,
-                            filterable: false
-                        }]
+                                field: "Value",
+                                title: "@T("Admin.Configuration.Settings.AllSettings.Fields.Value")",
+                                width: 300,
+                                filterable: true,
+                                sortable: true
+                            }, {
+                                command: [
+                                    {
+                                        name: "edit",
+                                        text: {
+                                            edit: "@T("Admin.Common.Edit")",
+                                            update: "@T("Admin.Common.Update")",
+                                            cancel: "@T("Admin.Common.Cancel")"
+                                        }
+                                    }, {
+                                        name: "destroy",
+                                        text: "@T("Admin.Common.Delete")"
+                                    }
+                                ],
+                                width: 200,
+                                filterable: false
+                            }
+                        ]
                     });
                 });
 
-              
+
                 function storeDropDownEditor(container, options) {
-                    $('<input required data-text-field="Name" data-value-field="Id" data-bind="value:StoreId"/>')
+                    $("<input required data-text-field=\"Name\" data-value-field=\"Id\" data-bind=\"value:StoreId\"/>")
                         .appendTo(container)
                         .kendoDropDownList({
                             autoBind: false,

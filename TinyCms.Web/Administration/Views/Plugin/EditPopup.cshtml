@@ -1,8 +1,8 @@
-﻿    @{
+﻿@{
     Layout = "~/Administration/Views/Shared/_AdminPopupLayout.cshtml";
 }
 @model PluginModel
-@{    
+@{
     //page title
     ViewBag.Title = T("Admin.Configuration.Plugins.EditDetails").Text;
 }
@@ -11,11 +11,11 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Plugins.EditDetails")
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
         </div>
     </div>
     @Html.Partial("_CreateOrUpdatePlugin", Model)

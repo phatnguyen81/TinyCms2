@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using Nop.Plugin.Widgets.AdsBanner.Domain;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
@@ -15,16 +11,15 @@ namespace Nop.Plugin.Widgets.AdsBanner.Services
 {
     public class AdsBannerService : IAdsBannerService
     {
-
         private const string SEARCH_ALL_ADSBANNERS_MODEL_KEY = "Cms.pres.search.adsbanners";
         private const string SEARCH_ACTIVEFROMNOW_ADSBANNERS_MODEL_KEY = "Cms.pres.search.adsbanners-{0}";
-
         private readonly IRepository<AdsBannerRecord> _adsBannerRecordRepository;
-        private readonly IRepository<WidgetZone> _widgetZoneRepository;
-        private readonly IEventPublisher _eventPublisher;
         private readonly ICacheManager _cacheManager;
+        private readonly IEventPublisher _eventPublisher;
+        private readonly IRepository<WidgetZone> _widgetZoneRepository;
 
-        public AdsBannerService(IRepository<AdsBannerRecord> adsBannerRecordRepository, IRepository<WidgetZone> widgetZoneRepository, IEventPublisher eventPublisher, ICacheManager cacheManager)
+        public AdsBannerService(IRepository<AdsBannerRecord> adsBannerRecordRepository,
+            IRepository<WidgetZone> widgetZoneRepository, IEventPublisher eventPublisher, ICacheManager cacheManager)
         {
             _adsBannerRecordRepository = adsBannerRecordRepository;
             _widgetZoneRepository = widgetZoneRepository;
@@ -35,7 +30,6 @@ namespace Nop.Plugin.Widgets.AdsBanner.Services
         public IPagedList<AdsBannerRecord> GetAllAdsBanners(string name = "", int? widgetZoneId = null,
             int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false)
         {
-
             var query = _adsBannerRecordRepository.Table;
             if (!showHidden)
             {
@@ -51,23 +45,22 @@ namespace Nop.Plugin.Widgets.AdsBanner.Services
             if (widgetZoneId != null)
             {
                 query = query.Where(q => q.WidgetZoneId == widgetZoneId.Value);
-
             }
-           
-            var results = query.OrderBy(q=>q.DisplayOrder).ToList();
+
+            var results = query.OrderBy(q => q.DisplayOrder).ToList();
 
             //paging
             return new PagedList<AdsBannerRecord>(results, pageIndex, pageSize);
         }
 
-        public IPagedList<AdsBannerRecord> GetAllAdsBannersActiveFromNow(string name = "", int? widgetZoneId = null, int pageIndex = 0,
+        public IPagedList<AdsBannerRecord> GetAllAdsBannersActiveFromNow(string name = "", int? widgetZoneId = null,
+            int pageIndex = 0,
             int pageSize = Int32.MaxValue)
         {
             var cacheKey = string.Format(SEARCH_ACTIVEFROMNOW_ADSBANNERS_MODEL_KEY, widgetZoneId);
 
             return _cacheManager.Get<IPagedList<AdsBannerRecord>>(cacheKey, () =>
             {
-
                 var query = _adsBannerRecordRepository.Table;
                 var now = DateTime.UtcNow;
                 query =
@@ -79,7 +72,6 @@ namespace Nop.Plugin.Widgets.AdsBanner.Services
                 if (widgetZoneId != null)
                 {
                     query = query.Where(q => q.WidgetZoneId == widgetZoneId.Value);
-
                 }
 
                 var results = query.OrderBy(q => q.DisplayOrder).ToList();
@@ -87,8 +79,6 @@ namespace Nop.Plugin.Widgets.AdsBanner.Services
                 //paging
                 return new PagedList<AdsBannerRecord>(results, pageIndex, pageSize);
             });
-
-
         }
 
         public AdsBannerRecord GetById(int id)

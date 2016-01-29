@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using TinyCms.Admin.Extensions;
@@ -15,34 +14,24 @@ using TinyCms.Web.Framework.Kendoui;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class CustomerRoleController : BaseAdminController
-	{
-		#region Fields
-
-		private readonly ICustomerService _customerService;
-        private readonly ILocalizationService _localizationService;
-        private readonly ICustomerActivityService _customerActivityService;
-        private readonly IPermissionService _permissionService;
-        private readonly IWorkContext _workContext;
-
-		#endregion
-
-		#region Constructors
+    public class CustomerRoleController : BaseAdminController
+    {
+        #region Constructors
 
         public CustomerRoleController(ICustomerService customerService,
-            ILocalizationService localizationService, 
+            ILocalizationService localizationService,
             ICustomerActivityService customerActivityService,
             IPermissionService permissionService,
             IWorkContext workContext)
-		{
-            this._customerService = customerService;
-            this._localizationService = localizationService;
-            this._customerActivityService = customerActivityService;
-            this._permissionService = permissionService;
-            this._workContext = workContext;
-		}
+        {
+            _customerService = customerService;
+            _localizationService = localizationService;
+            _customerActivityService = customerActivityService;
+            _permissionService = permissionService;
+            _workContext = workContext;
+        }
 
-		#endregion 
+        #endregion
 
         #region Utilities
 
@@ -55,6 +44,16 @@ namespace TinyCms.Admin.Controllers
 
         #endregion
 
+        #region Fields
+
+        private readonly ICustomerService _customerService;
+        private readonly ILocalizationService _localizationService;
+        private readonly ICustomerActivityService _customerActivityService;
+        private readonly IPermissionService _permissionService;
+        private readonly IWorkContext _workContext;
+
+        #endregion
+
         #region Customer roles
 
         public ActionResult Index()
@@ -62,37 +61,37 @@ namespace TinyCms.Admin.Controllers
             return RedirectToAction("List");
         }
 
-		public ActionResult List()
+        public ActionResult List()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
                 return AccessDeniedView();
-            
-			return View();
-		}
 
-		[HttpPost]
-		public ActionResult List(DataSourceRequest command)
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult List(DataSourceRequest command)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
                 return AccessDeniedView();
-            
+
             var customerRoles = _customerService.GetAllCustomerRoles(true);
             var gridModel = new DataSourceResult
-			{
+            {
                 Data = customerRoles.Select(PrepareCustomerRoleModel),
                 Total = customerRoles.Count()
-			};
-			return new JsonResult
-			{
-				Data = gridModel
-			};
-		}
+            };
+            return new JsonResult
+            {
+                Data = gridModel
+            };
+        }
 
         public ActionResult Create()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
                 return AccessDeniedView();
-            
+
             var model = new CustomerRoleModel();
             //default values
             model.Active = true;
@@ -104,43 +103,44 @@ namespace TinyCms.Admin.Controllers
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
                 return AccessDeniedView();
-            
+
             if (ModelState.IsValid)
             {
                 var customerRole = model.ToEntity();
                 _customerService.InsertCustomerRole(customerRole);
 
                 //activity log
-                _customerActivityService.InsertActivity("AddNewCustomerRole", _localizationService.GetResource("ActivityLog.AddNewCustomerRole"), customerRole.Name);
+                _customerActivityService.InsertActivity("AddNewCustomerRole",
+                    _localizationService.GetResource("ActivityLog.AddNewCustomerRole"), customerRole.Name);
 
                 SuccessNotification(_localizationService.GetResource("Admin.Customers.CustomerRoles.Added"));
-                return continueEditing ? RedirectToAction("Edit", new { id = customerRole.Id }) : RedirectToAction("List");
+                return continueEditing ? RedirectToAction("Edit", new {id = customerRole.Id}) : RedirectToAction("List");
             }
 
             //If we got this far, something failed, redisplay form
             return View(model);
         }
 
-		public ActionResult Edit(int id)
+        public ActionResult Edit(int id)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
                 return AccessDeniedView();
-            
+
             var customerRole = _customerService.GetCustomerRoleById(id);
             if (customerRole == null)
                 //No customer role found with the specified id
                 return RedirectToAction("List");
-		    
+
             var model = PrepareCustomerRoleModel(customerRole);
             return View(model);
-		}
+        }
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         public ActionResult Edit(CustomerRoleModel model, bool continueEditing)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
                 return AccessDeniedView();
-            
+
             var customerRole = _customerService.GetCustomerRoleById(model.Id);
             if (customerRole == null)
                 //No customer role found with the specified id
@@ -151,20 +151,28 @@ namespace TinyCms.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     if (customerRole.IsSystemRole && !model.Active)
-                        throw new NopException(_localizationService.GetResource("Admin.Customers.CustomerRoles.Fields.Active.CantEditSystem"));
+                        throw new NopException(
+                            _localizationService.GetResource(
+                                "Admin.Customers.CustomerRoles.Fields.Active.CantEditSystem"));
 
-                    if (customerRole.IsSystemRole && !customerRole.SystemName.Equals(model.SystemName, StringComparison.InvariantCultureIgnoreCase))
-                        throw new NopException(_localizationService.GetResource("Admin.Customers.CustomerRoles.Fields.SystemName.CantEditSystem"));
+                    if (customerRole.IsSystemRole &&
+                        !customerRole.SystemName.Equals(model.SystemName, StringComparison.InvariantCultureIgnoreCase))
+                        throw new NopException(
+                            _localizationService.GetResource(
+                                "Admin.Customers.CustomerRoles.Fields.SystemName.CantEditSystem"));
 
-                    
+
                     customerRole = model.ToEntity(customerRole);
                     _customerService.UpdateCustomerRole(customerRole);
 
                     //activity log
-                    _customerActivityService.InsertActivity("EditCustomerRole", _localizationService.GetResource("ActivityLog.EditCustomerRole"), customerRole.Name);
+                    _customerActivityService.InsertActivity("EditCustomerRole",
+                        _localizationService.GetResource("ActivityLog.EditCustomerRole"), customerRole.Name);
 
                     SuccessNotification(_localizationService.GetResource("Admin.Customers.CustomerRoles.Updated"));
-                    return continueEditing ? RedirectToAction("Edit", new { id = customerRole.Id}) : RedirectToAction("List");
+                    return continueEditing
+                        ? RedirectToAction("Edit", new {id = customerRole.Id})
+                        : RedirectToAction("List");
                 }
 
                 //If we got this far, something failed, redisplay form
@@ -173,7 +181,7 @@ namespace TinyCms.Admin.Controllers
             catch (Exception exc)
             {
                 ErrorNotification(exc);
-                return RedirectToAction("Edit", new { id = customerRole.Id });
+                return RedirectToAction("Edit", new {id = customerRole.Id});
             }
         }
 
@@ -182,7 +190,7 @@ namespace TinyCms.Admin.Controllers
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
                 return AccessDeniedView();
-            
+
             var customerRole = _customerService.GetCustomerRoleById(id);
             if (customerRole == null)
                 //No customer role found with the specified id
@@ -193,7 +201,8 @@ namespace TinyCms.Admin.Controllers
                 _customerService.DeleteCustomerRole(customerRole);
 
                 //activity log
-                _customerActivityService.InsertActivity("DeleteCustomerRole", _localizationService.GetResource("ActivityLog.DeleteCustomerRole"), customerRole.Name);
+                _customerActivityService.InsertActivity("DeleteCustomerRole",
+                    _localizationService.GetResource("ActivityLog.DeleteCustomerRole"), customerRole.Name);
 
                 SuccessNotification(_localizationService.GetResource("Admin.Customers.CustomerRoles.Deleted"));
                 return RedirectToAction("List");
@@ -201,12 +210,10 @@ namespace TinyCms.Admin.Controllers
             catch (Exception exc)
             {
                 ErrorNotification(exc.Message);
-                return RedirectToAction("Edit", new { id = customerRole.Id });
+                return RedirectToAction("Edit", new {id = customerRole.Id});
             }
+        }
 
-		}
-
-
-		#endregion
+        #endregion
     }
 }

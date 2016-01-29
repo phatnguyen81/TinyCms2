@@ -25,7 +25,7 @@
 @foreach (var message in successMessages)
 {
     <script type="text/javascript">
-    $(document).ready(function () {
+        $(document).ready(function() {
             $.boxy.alert("Thông báo", "@Html.Raw(HttpUtility.JavaScriptStringEncode(message))");
         });
     </script>
@@ -33,7 +33,7 @@
 @foreach (var message in errorMessages)
 {
     <script type="text/javascript">
-    $(document).ready(function () {
+        $(document).ready(function() {
             $.boxy.alert("Lỗi", "@Html.Raw(HttpUtility.JavaScriptStringEncode(message))");
         });
     </script>

@@ -7,7 +7,7 @@ namespace Nop.Plugin.Widgets.GoogleAnalytics.Models
     public class ConfigurationModel : BaseNopModel
     {
         public int ActiveStoreScopeConfiguration { get; set; }
-        
+
         [NopResourceDisplayName("Plugins.Widgets.GoogleAnalytics.GoogleId")]
         [AllowHtml]
         public string GoogleId { get; set; }
@@ -27,6 +27,5 @@ namespace Nop.Plugin.Widgets.GoogleAnalytics.Models
 
         [NopResourceDisplayName("Plugins.Widgets.GoogleAnalytics.IncludingTax")]
         public bool IncludingTax { get; set; }
-
     }
 }

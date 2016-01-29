@@ -1,13 +1,11 @@
 ﻿.facebook-btn {
-    display: inline-block;
-    width: 150px;
-    height: 23px;
     background-image: url('images/facebook-signing.png');
     background-repeat: no-repeat;
+    display: inline-block;
+    height: 23px;
+    width: 150px;
 }
-.facebook-btn:hover {
-    background-position: 0px -24px;
-}
-.facebook-btn:active {
-    background-position: 0px -48px;
-}
+
+.facebook-btn:hover { background-position: 0px -24px; }
+
+.facebook-btn:active { background-position: 0px -48px; }

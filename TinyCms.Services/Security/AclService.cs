@@ -4,7 +4,6 @@ using System.Linq;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
 using TinyCms.Core.Data;
-using TinyCms.Core.Domain.Catalog;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Core.Domain.Security;
 using TinyCms.Services.Events;
@@ -12,22 +11,46 @@ using TinyCms.Services.Events;
 namespace TinyCms.Services.Security
 {
     /// <summary>
-    /// ACL service
+    ///     ACL service
     /// </summary>
-    public partial class AclService : IAclService
+    public class AclService : IAclService
     {
-        #region Constants
-        
+        #region Ctor
+
         /// <summary>
-        /// Key for caching
+        ///     Ctor
+        /// </summary>
+        /// <param name="cacheManager">Cache manager</param>
+        /// <param name="workContext">Work context</param>
+        /// <param name="aclRecordRepository">ACL record repository</param>
+        /// <param name="catalogSettings">Catalog settings</param>
+        /// <param name="eventPublisher">Event publisher</param>
+        public AclService(ICacheManager cacheManager,
+            IWorkContext workContext,
+            IRepository<AclRecord> aclRecordRepository,
+            IEventPublisher eventPublisher)
+        {
+            _cacheManager = cacheManager;
+            _workContext = workContext;
+            _aclRecordRepository = aclRecordRepository;
+            _eventPublisher = eventPublisher;
+        }
+
+        #endregion
+
+        #region Constants
+
+        /// <summary>
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : entity ID
-        /// {1} : entity name
+        ///     {0} : entity ID
+        ///     {1} : entity name
         /// </remarks>
         private const string ACLRECORD_BY_ENTITYID_NAME_KEY = "Nop.aclrecord.entityid-name-{0}-{1}";
+
         /// <summary>
-        /// Key pattern to clear cache
+        ///     Key pattern to clear cache
         /// </summary>
         private const string ACLRECORD_PATTERN_KEY = "Nop.aclrecord.";
 
@@ -42,33 +65,10 @@ namespace TinyCms.Services.Security
 
         #endregion
 
-        #region Ctor
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="cacheManager">Cache manager</param>
-        /// <param name="workContext">Work context</param>
-        /// <param name="aclRecordRepository">ACL record repository</param>
-        /// <param name="catalogSettings">Catalog settings</param>
-        /// <param name="eventPublisher">Event publisher</param>
-        public AclService(ICacheManager cacheManager, 
-            IWorkContext workContext,
-            IRepository<AclRecord> aclRecordRepository,
-            IEventPublisher eventPublisher)
-        {
-            this._cacheManager = cacheManager;
-            this._workContext = workContext;
-            this._aclRecordRepository = aclRecordRepository;
-            this._eventPublisher = eventPublisher;
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Deletes an ACL record
+        ///     Deletes an ACL record
         /// </summary>
         /// <param name="aclRecord">ACL record</param>
         public virtual void DeleteAclRecord(AclRecord aclRecord)
@@ -86,7 +86,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Gets an ACL record
+        ///     Gets an ACL record
         /// </summary>
         /// <param name="aclRecordId">ACL record identifier</param>
         /// <returns>ACL record</returns>
@@ -99,7 +99,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Gets ACL records
+        ///     Gets ACL records
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Entity</param>
@@ -109,20 +109,20 @@ namespace TinyCms.Services.Security
             if (entity == null)
                 throw new ArgumentNullException("entity");
 
-            int entityId = entity.Id;
-            string entityName = typeof(T).Name;
+            var entityId = entity.Id;
+            var entityName = typeof (T).Name;
 
             var query = from ur in _aclRecordRepository.Table
-                        where ur.EntityId == entityId &&
-                        ur.EntityName == entityName
-                        select ur;
+                where ur.EntityId == entityId &&
+                      ur.EntityName == entityName
+                select ur;
             var aclRecords = query.ToList();
             return aclRecords;
         }
 
 
         /// <summary>
-        /// Inserts an ACL record
+        ///     Inserts an ACL record
         /// </summary>
         /// <param name="aclRecord">ACL record</param>
         public virtual void InsertAclRecord(AclRecord aclRecord)
@@ -140,7 +140,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Inserts an ACL record
+        ///     Inserts an ACL record
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="customerRoleId">Customer role id</param>
@@ -153,8 +153,8 @@ namespace TinyCms.Services.Security
             if (customerRoleId == 0)
                 throw new ArgumentOutOfRangeException("customerRoleId");
 
-            int entityId = entity.Id;
-            string entityName = typeof(T).Name;
+            var entityId = entity.Id;
+            var entityName = typeof (T).Name;
 
             var aclRecord = new AclRecord
             {
@@ -167,7 +167,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Updates the ACL record
+        ///     Updates the ACL record
         /// </summary>
         /// <param name="aclRecord">ACL record</param>
         public virtual void UpdateAclRecord(AclRecord aclRecord)
@@ -185,7 +185,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Find customer role identifiers with granted access
+        ///     Find customer role identifiers with granted access
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Wntity</param>
@@ -195,22 +195,22 @@ namespace TinyCms.Services.Security
             if (entity == null)
                 throw new ArgumentNullException("entity");
 
-            int entityId = entity.Id;
-            string entityName = typeof(T).Name;
+            var entityId = entity.Id;
+            var entityName = typeof (T).Name;
 
-            string key = string.Format(ACLRECORD_BY_ENTITYID_NAME_KEY, entityId, entityName);
+            var key = string.Format(ACLRECORD_BY_ENTITYID_NAME_KEY, entityId, entityName);
             return _cacheManager.Get(key, () =>
             {
                 var query = from ur in _aclRecordRepository.Table
-                            where ur.EntityId == entityId &&
-                            ur.EntityName == entityName 
-                            select ur.CustomerRoleId;
+                    where ur.EntityId == entityId &&
+                          ur.EntityName == entityName
+                    select ur.CustomerRoleId;
                 return query.ToArray();
             });
         }
 
         /// <summary>
-        /// Authorize ACL permission
+        ///     Authorize ACL permission
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Wntity</param>
@@ -221,7 +221,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Authorize ACL permission
+        ///     Authorize ACL permission
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Wntity</param>
@@ -249,6 +249,7 @@ namespace TinyCms.Services.Security
             //no permission found
             return false;
         }
+
         #endregion
     }
 }

@@ -1,5 +1,5 @@
 ﻿@model OfficialFeedListModel
-@{    
+@{
     //page title
     ViewBag.Title = T("Admin.Configuration.Plugins.OfficialFeed").Text;
 
@@ -9,11 +9,11 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
         @T("Admin.Configuration.Plugins.OfficialFeed")
     </div>
     <div class="options">
-            
+
     </div>
 </div>
 <p>
@@ -54,7 +54,7 @@
     </tr>
     <tr>
         <td colspan="2">
-            <input type="button" id="search-plugins" class="k-button" value="@T("Admin.Common.Search")" />
+            <input type="button" id="search-plugins" class="k-button" value="@T("Admin.Common.Search")"/>
         </td>
     </tr>
 </table>
@@ -99,92 +99,111 @@
                         },
                         scrollable: false,
                         columns: [
-                            {
-                                field: "PictureUrl",
-                                title: "@T("Admin.Configuration.Plugins.OfficialFeed.Picture")",
-                                width: 150,
-                                template: '<img src="#=PictureUrl#" width="125" />',
-                                headerAttributes: { style: "text-align:center" },
-                                attributes: { style: "text-align:center" }
-                            }, {
-                                field: "Name",
-                                title: "@T("Admin.Configuration.Plugins.OfficialFeed.Name")",
-                                width: 500
-                            }, {
-                                field: "Price",
-                                title: "@T("Admin.Configuration.Plugins.OfficialFeed.Price")",
-                                width: 70
-                            }, {
-                                field: "Url",
-                                width: 150,
-                                title: "@T("Admin.Configuration.Plugins.OfficialFeed.Download")",
-                                template: '<a href="#=Url#?utm_source=admin-panel&utm_medium=official-plugins&utm_campaign=admin-panel" class="plugin-download-link" target="_blank">@T("Admin.Configuration.Plugins.OfficialFeed.Download")</a>',
-                                headerAttributes: {style: "text-align:center" },
-                                attributes: { style: "text-align:center" }
-                            },
-                            {
-                                field: "CategoryName",
-                                title: "@T("Admin.Configuration.Plugins.OfficialFeed.Category")",
-                                width: 200
-                            },{
-                                field: "SupportedVersions",
-                                title: "@T("Admin.Configuration.Plugins.OfficialFeed.SupportedVersions")",
-                                width: 200
-                            }
-                        ]
+                        {
+                            field: "PictureUrl",
+                            title: "@T("Admin.Configuration.Plugins.OfficialFeed.Picture")",
+                            width: 150,
+                            template: "<img src=\"#=PictureUrl#\" width=\"125\" />",
+                            headerAttributes: { style: "text-align:center" },
+                            attributes: { style: "text-align:center" }
+                        }, {
+                            field: "Name",
+                            title: "@T("Admin.Configuration.Plugins.OfficialFeed.Name")",
+                            width: 500
+                        }, {
+                            field: "Price",
+                            title: "@T("Admin.Configuration.Plugins.OfficialFeed.Price")",
+                            width: 70
+                        }, {
+                            field: "Url",
+                            width: 150,
+                            title: "@T("Admin.Configuration.Plugins.OfficialFeed.Download")",
+                            template: "<a href=\"#=Url#?utm_source=admin-panel&utm_medium=official-plugins&utm_campaign=admin-panel\" class=\"plugin-download-link\" target=\"_blank\">@T(\
+                                                                                                                                                                                           "Admin.Configuration.Plugins.OfficialFeed.Download\")</a>",
+    {
+        "text-align:center"
+    }
+                                                                                                                                                                                           ,
+    {
+        "text-align:center"
+    }
+}
+
+    ,
+        {
+            "CategoryName",
+            "@T("
+            Admin.Configuration.Plugins.OfficialFeed.Category
+            ")",
+            200
+        }
+    ,
+
+{
+    private field 
+: "SupportedVersions",
+    private title 
+: "@T("
+    private Admin.Configuration.Plugins.OfficialFeed.SupportedVersions 
+")",
+    private width 
+: 200
+}
+]
+}
+);
                     });
-                });
-            </script>
+                    </script>
         </td>
     </tr>
     <tr>
         <td width="100%">
-            <input type="submit" id="btnRefresh" style="display: none" />
+            <input type="submit" id="btnRefresh" style="display: none"/>
             <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#btnRefresh').click(function () {
-                        //refresh grid
-                        var grid = $("#plugins-grid").data('kendoGrid');
-                        grid.dataSource.page(1); //new search. Set page size to 1
-                        //grid.dataSource.read(); we already loaded the grid above using "page" function
+                    $(document).ready(function() {
+                        $("#btnRefresh").click(function() {
+                            //refresh grid
+                            var grid = $("#plugins-grid").data("kendoGrid");
+                            grid.dataSource.page(1); //new search. Set page size to 1
+                            //grid.dataSource.read(); we already loaded the grid above using "page" function
 
-                        //return false to don't reload a page
-                        return false;
+                            //return false to don't reload a page
+                            return false;
+                        });
                     });
-                });
-            </script>
+                    </script>
             <script type="text/javascript">
-                $(document).ready(function () {
-                    //search button
-                    $('#search-plugins').click(function () {
-                        //search
-                        var grid = $('#plugins-grid').data('kendoGrid');
-                        grid.dataSource.page(1); //new search. Set page size to 1
-                        //grid.dataSource.read(); we already loaded the grid above using "page" function
+                    $(document).ready(function() {
+                        //search button
+                        $("#search-plugins").click(function() {
+                            //search
+                            var grid = $("#plugins-grid").data("kendoGrid");
+                            grid.dataSource.page(1); //new search. Set page size to 1
+                            //grid.dataSource.read(); we already loaded the grid above using "page" function
 
-                        return false;
+                            return false;
+                        });
                     });
-                });
-                
-                $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function (event) {
-                    if (event.keyCode == 13) {
-                        $("#search-plugins").click();
-                        return false;
+
+                    $("#@Html.FieldIdFor(model => model.SearchName)").keydown(function(event) {
+                        if (event.keyCode == 13) {
+                            $("#search-plugins").click();
+                            return false;
+                        }
+                    });
+
+                    function additionalData() {
+                        var data = {
+                            SearchName: $("#@Html.FieldIdFor(model => model.SearchName)").val(),
+                            SearchVersionId: $("#SearchVersionId").val(),
+                            SearchCategoryId: $("#SearchCategoryId").val(),
+                            SearchPriceId: $("#SearchPriceId").val()
+                        };
+                        addAntiForgeryToken(data);
+                        return data;
                     }
-                });
 
-                function additionalData() {
-                    var data = {
-                        SearchName: $('#@Html.FieldIdFor(model => model.SearchName)').val(),
-                        SearchVersionId: $('#SearchVersionId').val(),
-                        SearchCategoryId: $('#SearchCategoryId').val(),
-                        SearchPriceId: $('#SearchPriceId').val()
-                    };
-                    addAntiForgeryToken(data);
-                    return data;
-                }
-
-            </script>
+                    </script>
         </td>
     </tr>
 </table>

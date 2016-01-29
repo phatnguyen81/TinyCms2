@@ -3,8 +3,11 @@
 {
     var firstPost = Model.Posts.First();
     <div class="hotnews">
-        <a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })"><span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="470" height="260" alt="" class="newsimg" /></span></a>
-        <h1><a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })">@firstPost.Name</a></h1>
+        <a href="@Url.RouteUrl("Post", new {firstPost.SeName})">
+            <span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="470" height="260" alt="" class="newsimg" /></span></a>
+        <h1>
+            <a href="@Url.RouteUrl("Post", new {firstPost.SeName})">@firstPost.Name</a>
+        </h1>
         <p class="content">@firstPost.ShortDescription</p>
 
         <p class="recent_news">
@@ -14,8 +17,8 @@
                 foreach (var post in Model.Posts.Skip(1))
                 {
                     <em></em>
-                    <a href="@Url.RouteUrl("Post", new { SeName = post.SeName })">@post.Name</a>
-                    <br />
+                    <a href="@Url.RouteUrl("Post", new {post.SeName})">@post.Name</a>
+                    <br/>
                 }
             }
         </p>

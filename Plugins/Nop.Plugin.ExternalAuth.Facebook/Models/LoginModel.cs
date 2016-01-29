@@ -1,5 +1,4 @@
-﻿
-namespace Nop.Plugin.ExternalAuth.Facebook.Models
+﻿namespace Nop.Plugin.ExternalAuth.Facebook.Models
 {
     public class LoginModel
     {

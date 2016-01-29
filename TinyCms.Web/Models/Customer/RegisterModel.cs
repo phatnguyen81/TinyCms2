@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using FluentValidation.Attributes;
@@ -9,12 +8,12 @@ using TinyCms.Web.Validators.Customer;
 
 namespace TinyCms.Web.Models.Customer
 {
-    [Validator(typeof(RegisterValidator))]
-    public partial class RegisterModel : BaseNopModel
+    [Validator(typeof (RegisterValidator))]
+    public class RegisterModel : BaseNopModel
     {
         public RegisterModel()
         {
-            this.CustomerAttributes = new List<CustomerAttributeModel>();
+            CustomerAttributes = new List<CustomerAttributeModel>();
         }
 
         [NopResourceDisplayName("Account.Fields.Email")]
@@ -22,6 +21,7 @@ namespace TinyCms.Web.Models.Customer
         public string Email { get; set; }
 
         public bool UsernamesEnabled { get; set; }
+
         [NopResourceDisplayName("Account.Fields.Username")]
         [AllowHtml]
         public string Username { get; set; }
@@ -43,15 +43,13 @@ namespace TinyCms.Web.Models.Customer
 
         public bool PhoneEnabled { get; set; }
         public bool PhoneRequired { get; set; }
+
         [NopResourceDisplayName("Account.Fields.Phone")]
         [AllowHtml]
         public string Phone { get; set; }
 
-
         public bool AcceptPrivacyPolicyEnabled { get; set; }
-
         public bool DisplayCaptcha { get; set; }
-
         public IList<CustomerAttributeModel> CustomerAttributes { get; set; }
     }
 }

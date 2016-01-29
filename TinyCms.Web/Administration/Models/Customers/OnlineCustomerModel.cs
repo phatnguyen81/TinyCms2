@@ -4,7 +4,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Customers
 {
-    public partial class OnlineCustomerModel : BaseNopEntityModel
+    public class OnlineCustomerModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.Customers.OnlineCustomers.Fields.CustomerInfo")]
         public string CustomerInfo { get; set; }
@@ -17,7 +17,7 @@ namespace TinyCms.Admin.Models.Customers
 
         [NopResourceDisplayName("Admin.Customers.OnlineCustomers.Fields.LastActivityDate")]
         public DateTime LastActivityDate { get; set; }
-        
+
         [NopResourceDisplayName("Admin.Customers.OnlineCustomers.Fields.LastVisitedPage")]
         public string LastVisitedPage { get; set; }
     }

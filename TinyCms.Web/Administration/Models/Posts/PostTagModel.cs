@@ -8,13 +8,14 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Posts
 {
-    [Validator(typeof(PostTagValidator))]
-    public partial class PostTagModel : BaseNopEntityModel, ILocalizedModel<PostTagLocalizedModel>
+    [Validator(typeof (PostTagValidator))]
+    public class PostTagModel : BaseNopEntityModel, ILocalizedModel<PostTagLocalizedModel>
     {
         public PostTagModel()
         {
             Locales = new List<PostTagLocalizedModel>();
         }
+
         [NopResourceDisplayName("Admin.Catalog.PostTags.Fields.Name")]
         [AllowHtml]
         public string Name { get; set; }
@@ -25,12 +26,12 @@ namespace TinyCms.Admin.Models.Posts
         public IList<PostTagLocalizedModel> Locales { get; set; }
     }
 
-    public partial class PostTagLocalizedModel : ILocalizedModelLocal
+    public class PostTagLocalizedModel : ILocalizedModelLocal
     {
-        public int LanguageId { get; set; }
-
         [NopResourceDisplayName("Admin.Catalog.PostTags.Fields.Name")]
         [AllowHtml]
         public string Name { get; set; }
+
+        public int LanguageId { get; set; }
     }
 }

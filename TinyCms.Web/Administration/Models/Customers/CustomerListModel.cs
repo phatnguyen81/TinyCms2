@@ -5,7 +5,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Customers
 {
-    public partial class CustomerListModel : BaseNopModel
+    public class CustomerListModel : BaseNopModel
     {
         [NopResourceDisplayName("Admin.Customers.Customers.List.CustomerRoles")]
         [AllowHtml]
@@ -21,39 +21,43 @@ namespace TinyCms.Admin.Models.Customers
         [NopResourceDisplayName("Admin.Customers.Customers.List.SearchUsername")]
         [AllowHtml]
         public string SearchUsername { get; set; }
+
         public bool UsernamesEnabled { get; set; }
 
         [NopResourceDisplayName("Admin.Customers.Customers.List.SearchFirstName")]
         [AllowHtml]
         public string SearchFirstName { get; set; }
+
         [NopResourceDisplayName("Admin.Customers.Customers.List.SearchLastName")]
         [AllowHtml]
         public string SearchLastName { get; set; }
 
-
         [NopResourceDisplayName("Admin.Customers.Customers.List.SearchDateOfBirth")]
         [AllowHtml]
         public string SearchDayOfBirth { get; set; }
+
         [NopResourceDisplayName("Admin.Customers.Customers.List.SearchDateOfBirth")]
         [AllowHtml]
         public string SearchMonthOfBirth { get; set; }
+
         public bool DateOfBirthEnabled { get; set; }
-
-
 
         [NopResourceDisplayName("Admin.Customers.Customers.List.SearchCompany")]
         [AllowHtml]
         public string SearchCompany { get; set; }
+
         public bool CompanyEnabled { get; set; }
 
         [NopResourceDisplayName("Admin.Customers.Customers.List.SearchPhone")]
         [AllowHtml]
         public string SearchPhone { get; set; }
+
         public bool PhoneEnabled { get; set; }
 
         [NopResourceDisplayName("Admin.Customers.Customers.List.SearchZipCode")]
         [AllowHtml]
         public string SearchZipPostalCode { get; set; }
+
         public bool ZipPostalCodeEnabled { get; set; }
     }
 }

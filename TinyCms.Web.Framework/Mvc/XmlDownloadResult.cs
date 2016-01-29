@@ -12,17 +12,8 @@ namespace TinyCms.Web.Framework.Mvc
             FileDownloadName = fileDownloadName;
         }
 
-        public string FileDownloadName
-        {
-            get;
-            set;
-        }
-
-        public string Xml
-        {
-            get;
-            set;
-        }
+        public string FileDownloadName { get; set; }
+        public string Xml { get; set; }
 
         public override void ExecuteResult(ControllerContext context)
         {
@@ -35,7 +26,8 @@ namespace TinyCms.Web.Framework.Mvc
             }
             context.HttpContext.Response.Charset = "utf-8";
             context.HttpContext.Response.ContentType = "text/xml";
-            context.HttpContext.Response.AddHeader("content-disposition", string.Format("attachment; filename={0}", FileDownloadName));
+            context.HttpContext.Response.AddHeader("content-disposition",
+                string.Format("attachment; filename={0}", FileDownloadName));
             context.HttpContext.Response.BinaryWrite(Encoding.UTF8.GetBytes(document.InnerXml));
             context.HttpContext.Response.End();
         }

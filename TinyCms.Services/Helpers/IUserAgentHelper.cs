@@ -1,13 +1,12 @@
-
 namespace TinyCms.Services.Helpers
 {
     /// <summary>
-    /// User agent helper interface
+    ///     User agent helper interface
     /// </summary>
-    public partial interface IUserAgentHelper
+    public interface IUserAgentHelper
     {
         /// <summary>
-        /// Get a value indicating whether the request is made by search engine (web crawler)
+        ///     Get a value indicating whether the request is made by search engine (web crawler)
         /// </summary>
         /// <returns>Result</returns>
         bool IsSearchEngine();

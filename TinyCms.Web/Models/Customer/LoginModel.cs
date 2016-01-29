@@ -7,15 +7,17 @@ using TinyCms.Web.Validators.Customer;
 
 namespace TinyCms.Web.Models.Customer
 {
-    [Validator(typeof(LoginValidator))]
-    public partial class LoginModel : BaseNopModel
+    [Validator(typeof (LoginValidator))]
+    public class LoginModel : BaseNopModel
     {
-        
+        public string ReturnUrl;
+
         [NopResourceDisplayName("Account.Login.Fields.Email")]
         [AllowHtml]
         public string Email { get; set; }
 
         public bool UsernamesEnabled { get; set; }
+
         [NopResourceDisplayName("Account.Login.Fields.UserName")]
         [AllowHtml]
         public string Username { get; set; }
@@ -29,7 +31,5 @@ namespace TinyCms.Web.Models.Customer
         public bool RememberMe { get; set; }
 
         public bool DisplayCaptcha { get; set; }
-
-        public string ReturnUrl;
     }
 }

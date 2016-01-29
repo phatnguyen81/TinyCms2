@@ -14,8 +14,33 @@ using TinyCms.Web.Framework.Kendoui;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class MessageTemplateController : BaseAdminController
+    public class MessageTemplateController : BaseAdminController
     {
+        #region Constructors
+
+        public MessageTemplateController(IMessageTemplateService messageTemplateService,
+            IEmailAccountService emailAccountService,
+            ILanguageService languageService,
+            ILocalizedEntityService localizedEntityService,
+            ILocalizationService localizationService,
+            IMessageTokenProvider messageTokenProvider,
+            IPermissionService permissionService,
+            IWorkflowMessageService workflowMessageService,
+            EmailAccountSettings emailAccountSettings)
+        {
+            _messageTemplateService = messageTemplateService;
+            _emailAccountService = emailAccountService;
+            _languageService = languageService;
+            _localizedEntityService = localizedEntityService;
+            _localizationService = localizationService;
+            _messageTokenProvider = messageTokenProvider;
+            _permissionService = permissionService;
+            _workflowMessageService = workflowMessageService;
+            _emailAccountSettings = emailAccountSettings;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly IMessageTemplateService _messageTemplateService;
@@ -30,39 +55,14 @@ namespace TinyCms.Admin.Controllers
 
         #endregion Fields
 
-        #region Constructors
-
-        public MessageTemplateController(IMessageTemplateService messageTemplateService, 
-            IEmailAccountService emailAccountService,
-            ILanguageService languageService, 
-            ILocalizedEntityService localizedEntityService,
-            ILocalizationService localizationService, 
-            IMessageTokenProvider messageTokenProvider, 
-            IPermissionService permissionService,
-            IWorkflowMessageService workflowMessageService,
-            EmailAccountSettings emailAccountSettings)
-        {
-            this._messageTemplateService = messageTemplateService;
-            this._emailAccountService = emailAccountService;
-            this._languageService = languageService;
-            this._localizedEntityService = localizedEntityService;
-            this._localizationService = localizationService;
-            this._messageTokenProvider = messageTokenProvider;
-            this._permissionService = permissionService;
-            this._workflowMessageService = workflowMessageService;
-            this._emailAccountSettings = emailAccountSettings;
-        }
-
-        #endregion
-        
         #region Utilities
 
         private string FormatTokens(string[] tokens)
         {
             var sb = new StringBuilder();
-            for (int i = 0; i < tokens.Length; i++)
+            for (var i = 0; i < tokens.Length; i++)
             {
-                string token = tokens[i];
+                var token = tokens[i];
                 sb.Append(token);
                 if (i != tokens.Length - 1)
                     sb.Append(", ");
@@ -77,31 +77,29 @@ namespace TinyCms.Admin.Controllers
             foreach (var localized in model.Locales)
             {
                 _localizedEntityService.SaveLocalizedValue(mt,
-                                                           x => x.BccEmailAddresses,
-                                                           localized.BccEmailAddresses,
-                                                           localized.LanguageId);
+                    x => x.BccEmailAddresses,
+                    localized.BccEmailAddresses,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(mt,
-                                                           x => x.Subject,
-                                                           localized.Subject,
-                                                           localized.LanguageId);
+                    x => x.Subject,
+                    localized.Subject,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(mt,
-                                                           x => x.Body,
-                                                           localized.Body,
-                                                           localized.LanguageId);
+                    x => x.Body,
+                    localized.Body,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(mt,
-                                                           x => x.EmailAccountId,
-                                                           localized.EmailAccountId,
-                                                           localized.LanguageId);
+                    x => x.EmailAccountId,
+                    localized.EmailAccountId,
+                    localized.LanguageId);
             }
         }
 
-
-    
         #endregion
-        
+
         #region Methods
 
         public ActionResult Index()
@@ -116,7 +114,7 @@ namespace TinyCms.Admin.Controllers
 
             var model = new MessageTemplateListModel();
             //stores
-            
+
             return View(model);
         }
 
@@ -149,7 +147,7 @@ namespace TinyCms.Admin.Controllers
             if (messageTemplate == null)
                 //No message template found with the specified id
                 return RedirectToAction("List");
-            
+
             var model = messageTemplate.ToModel();
             model.HasAttachedDownload = model.AttachedDownloadId > 0;
             model.AllowedTokens = FormatTokens(_messageTokenProvider.GetListOfAllowedTokens());
@@ -159,12 +157,15 @@ namespace TinyCms.Admin.Controllers
             //locales
             AddLocales(_languageService, model.Locales, (locale, languageId) =>
             {
-                locale.BccEmailAddresses = messageTemplate.GetLocalized(x => x.BccEmailAddresses, languageId, false, false);
+                locale.BccEmailAddresses = messageTemplate.GetLocalized(x => x.BccEmailAddresses, languageId, false,
+                    false);
                 locale.Subject = messageTemplate.GetLocalized(x => x.Subject, languageId, false, false);
                 locale.Body = messageTemplate.GetLocalized(x => x.Body, languageId, false, false);
 
                 var emailAccountId = messageTemplate.GetLocalized(x => x.EmailAccountId, languageId, false, false);
-                locale.EmailAccountId = emailAccountId > 0 ? emailAccountId : _emailAccountSettings.DefaultEmailAccountId;
+                locale.EmailAccountId = emailAccountId > 0
+                    ? emailAccountId
+                    : _emailAccountSettings.DefaultEmailAccountId;
             });
 
             return View(model);
@@ -181,7 +182,7 @@ namespace TinyCms.Admin.Controllers
             if (messageTemplate == null)
                 //No message template found with the specified id
                 return RedirectToAction("List");
-            
+
             if (ModelState.IsValid)
             {
                 messageTemplate = model.ToEntity(messageTemplate);
@@ -193,13 +194,13 @@ namespace TinyCms.Admin.Controllers
                 UpdateLocales(messageTemplate, model);
 
                 SuccessNotification(_localizationService.GetResource("Admin.ContentManagement.MessageTemplates.Updated"));
-                
+
                 if (continueEditing)
                 {
                     //selected tab
                     SaveSelectedTabIndex();
 
-                    return RedirectToAction("Edit",  new {id = messageTemplate.Id});
+                    return RedirectToAction("Edit", new {id = messageTemplate.Id});
                 }
                 return RedirectToAction("List");
             }
@@ -226,7 +227,7 @@ namespace TinyCms.Admin.Controllers
                 return RedirectToAction("List");
 
             _messageTemplateService.DeleteMessageTemplate(messageTemplate);
-            
+
             SuccessNotification(_localizationService.GetResource("Admin.ContentManagement.MessageTemplates.Deleted"));
             return RedirectToAction("List");
         }
@@ -247,12 +248,12 @@ namespace TinyCms.Admin.Controllers
             {
                 var newMessageTemplate = _messageTemplateService.CopyMessageTemplate(messageTemplate);
                 SuccessNotification("The message template has been copied successfully");
-                return RedirectToAction("Edit", new { id = newMessageTemplate.Id });
+                return RedirectToAction("Edit", new {id = newMessageTemplate.Id});
             }
             catch (Exception exc)
             {
                 ErrorNotification(exc.Message);
-                return RedirectToAction("Edit", new { id = model.Id });
+                return RedirectToAction("Edit", new {id = model.Id});
             }
         }
 
@@ -309,7 +310,8 @@ namespace TinyCms.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                SuccessNotification(_localizationService.GetResource("Admin.ContentManagement.MessageTemplates.Test.Success"));
+                SuccessNotification(
+                    _localizationService.GetResource("Admin.ContentManagement.MessageTemplates.Test.Success"));
             }
 
             return RedirectToAction("Edit", new {id = messageTemplate.Id});

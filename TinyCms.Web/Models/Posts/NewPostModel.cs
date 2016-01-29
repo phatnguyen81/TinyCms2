@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace TinyCms.Web.Models.Posts
@@ -13,6 +10,7 @@ namespace TinyCms.Web.Models.Posts
         {
             AvailableCategories = new List<SelectListItem>();
         }
+
         [Required(ErrorMessage = "Vui lòng nhập tiêu đề")]
         public string Title { get; set; }
 

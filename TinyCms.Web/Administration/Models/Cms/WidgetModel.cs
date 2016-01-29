@@ -5,7 +5,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Cms
 {
-    public partial class WidgetModel : BaseNopModel
+    public class WidgetModel : BaseNopModel
     {
         [NopResourceDisplayName("Admin.ContentManagement.Widgets.Fields.FriendlyName")]
         [AllowHtml]
@@ -20,7 +20,6 @@ namespace TinyCms.Admin.Models.Cms
 
         [NopResourceDisplayName("Admin.ContentManagement.Widgets.Fields.IsActive")]
         public bool IsActive { get; set; }
-        
 
         public string ConfigurationActionName { get; set; }
         public string ConfigurationControllerName { get; set; }

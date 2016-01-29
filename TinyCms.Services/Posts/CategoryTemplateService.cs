@@ -8,37 +8,37 @@ using TinyCms.Services.Events;
 namespace TinyCms.Services.Posts
 {
     /// <summary>
-    /// Category template service
+    ///     Category template service
     /// </summary>
-    public partial class CategoryTemplateService : ICategoryTemplateService
+    public class CategoryTemplateService : ICategoryTemplateService
     {
+        #region Ctor
+
+        /// <summary>
+        ///     Ctor
+        /// </summary>
+        /// <param name="categoryTemplateRepository">Category template repository</param>
+        /// <param name="eventPublisher">Event published</param>
+        public CategoryTemplateService(IRepository<CategoryTemplate> categoryTemplateRepository,
+            IEventPublisher eventPublisher)
+        {
+            _categoryTemplateRepository = categoryTemplateRepository;
+            _eventPublisher = eventPublisher;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly IRepository<CategoryTemplate> _categoryTemplateRepository;
         private readonly IEventPublisher _eventPublisher;
 
         #endregion
-        
-        #region Ctor
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="categoryTemplateRepository">Category template repository</param>
-        /// <param name="eventPublisher">Event published</param>
-        public CategoryTemplateService(IRepository<CategoryTemplate> categoryTemplateRepository, 
-            IEventPublisher eventPublisher)
-        {
-            this._categoryTemplateRepository = categoryTemplateRepository;
-            this._eventPublisher = eventPublisher;
-        }
-
-        #endregion
 
         #region Methods
 
         /// <summary>
-        /// Delete category template
+        ///     Delete category template
         /// </summary>
         /// <param name="categoryTemplate">Category template</param>
         public virtual void DeleteCategoryTemplate(CategoryTemplate categoryTemplate)
@@ -53,21 +53,21 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Gets all category templates
+        ///     Gets all category templates
         /// </summary>
         /// <returns>Category templates</returns>
         public virtual IList<CategoryTemplate> GetAllCategoryTemplates()
         {
             var query = from pt in _categoryTemplateRepository.Table
-                        orderby pt.DisplayOrder
-                        select pt;
+                orderby pt.DisplayOrder
+                select pt;
 
             var templates = query.ToList();
             return templates;
         }
- 
+
         /// <summary>
-        /// Gets a category template
+        ///     Gets a category template
         /// </summary>
         /// <param name="categoryTemplateId">Category template identifier</param>
         /// <returns>Category template</returns>
@@ -80,7 +80,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Inserts category template
+        ///     Inserts category template
         /// </summary>
         /// <param name="categoryTemplate">Category template</param>
         public virtual void InsertCategoryTemplate(CategoryTemplate categoryTemplate)
@@ -95,7 +95,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Updates the category template
+        ///     Updates the category template
         /// </summary>
         /// <param name="categoryTemplate">Category template</param>
         public virtual void UpdateCategoryTemplate(CategoryTemplate categoryTemplate)
@@ -108,7 +108,7 @@ namespace TinyCms.Services.Posts
             //event notification
             _eventPublisher.EntityUpdated(categoryTemplate);
         }
-        
+
         #endregion
     }
 }

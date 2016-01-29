@@ -3,24 +3,24 @@
 namespace TinyCms.Core.Plugins
 {
     /// <summary>
-    /// Official feed manager (official plugins from www.nopCommerce.com site)
+    ///     Official feed manager (official plugins from www.nopCommerce.com site)
     /// </summary>
     public interface IOfficialFeedManager
     {
         /// <summary>
-        /// Get categories
+        ///     Get categories
         /// </summary>
         /// <returns>Result</returns>
         IList<OfficialFeedCategory> GetCategories();
 
         /// <summary>
-        /// Get versions
+        ///     Get versions
         /// </summary>
         /// <returns>Result</returns>
         IList<OfficialFeedVersion> GetVersions();
 
         /// <summary>
-        /// Get all plugins
+        ///     Get all plugins
         /// </summary>
         /// <param name="categoryId">Category identifier</param>
         /// <param name="versionId">Version identifier</param>

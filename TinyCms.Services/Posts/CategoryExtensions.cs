@@ -8,18 +8,22 @@ using TinyCms.Services.Security;
 namespace TinyCms.Services.Posts
 {
     /// <summary>
-    /// Extensions
+    ///     Extensions
     /// </summary>
     public static class CategoryExtensions
     {
         /// <summary>
-        /// Sort categories for tree representation
+        ///     Sort categories for tree representation
         /// </summary>
         /// <param name="source">Source</param>
         /// <param name="parentId">Parent category identifier</param>
-        /// <param name="ignoreCategoriesWithoutExistingParent">A value indicating whether categories without parent category in provided category list (source) should be ignored</param>
+        /// <param name="ignoreCategoriesWithoutExistingParent">
+        ///     A value indicating whether categories without parent category in
+        ///     provided category list (source) should be ignored
+        /// </param>
         /// <returns>Sorted categories</returns>
-        public static IList<Category> SortCategoriesForTree(this IList<Category> source, int parentId = 0, bool ignoreCategoriesWithoutExistingParent = false)
+        public static IList<Category> SortCategoriesForTree(this IList<Category> source, int parentId = 0,
+            bool ignoreCategoriesWithoutExistingParent = false)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -42,7 +46,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Returns a PostCategory that has the specified values
+        ///     Returns a PostCategory that has the specified values
         /// </summary>
         /// <param name="source">Source</param>
         /// <param name="productId">Post identifier</param>
@@ -59,8 +63,8 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Get formatted category breadcrumb 
-        /// Note: ACL and store mapping is ignored
+        ///     Get formatted category breadcrumb
+        ///     Note: ACL and store mapping is ignored
         /// </summary>
         /// <param name="category">Category</param>
         /// <param name="categoryService">Category service</param>
@@ -71,10 +75,10 @@ namespace TinyCms.Services.Posts
             ICategoryService categoryService,
             string separator = ">>", int languageId = 0)
         {
-            string result = string.Empty;
+            var result = string.Empty;
 
             var breadcrumb = GetCategoryBreadCrumb(category, categoryService, null, true);
-            for (int i = 0; i <= breadcrumb.Count - 1; i++)
+            for (var i = 0; i <= breadcrumb.Count - 1; i++)
             {
                 var categoryName = breadcrumb[i].GetLocalized(x => x.Name, languageId);
                 result = String.IsNullOrEmpty(result)
@@ -86,8 +90,8 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Get formatted category breadcrumb 
-        /// Note: ACL and store mapping is ignored
+        ///     Get formatted category breadcrumb
+        ///     Note: ACL and store mapping is ignored
         /// </summary>
         /// <param name="category">Category</param>
         /// <param name="allCategories">All categories</param>
@@ -98,10 +102,10 @@ namespace TinyCms.Services.Posts
             IList<Category> allCategories,
             string separator = ">>", int languageId = 0)
         {
-            string result = string.Empty;
+            var result = string.Empty;
 
             var breadcrumb = GetCategoryBreadCrumb(category, allCategories, null, true);
-            for (int i = 0; i <= breadcrumb.Count - 1; i++)
+            for (var i = 0; i <= breadcrumb.Count - 1; i++)
             {
                 var categoryName = breadcrumb[i].GetLocalized(x => x.Name, languageId);
                 result = String.IsNullOrEmpty(result)
@@ -113,7 +117,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Get category breadcrumb 
+        ///     Get category breadcrumb
         /// </summary>
         /// <param name="category">Category</param>
         /// <param name="categoryService">Category service</param>
@@ -135,10 +139,10 @@ namespace TinyCms.Services.Posts
             var alreadyProcessedCategoryIds = new List<int>();
 
             while (category != null && //not null
-                !category.Deleted && //not deleted
-                (showHidden || category.Published) && //published
-                (showHidden || aclService.Authorize(category)) && //ACL
-                !alreadyProcessedCategoryIds.Contains(category.Id)) //prevent circular references
+                   !category.Deleted && //not deleted
+                   (showHidden || category.Published) && //published
+                   (showHidden || aclService.Authorize(category)) && //ACL
+                   !alreadyProcessedCategoryIds.Contains(category.Id)) //prevent circular references
             {
                 result.Add(category);
 
@@ -151,7 +155,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Get category breadcrumb 
+        ///     Get category breadcrumb
         /// </summary>
         /// <param name="category">Category</param>
         /// <param name="allCategories">All categories</param>
@@ -173,18 +177,18 @@ namespace TinyCms.Services.Posts
             var alreadyProcessedCategoryIds = new List<int>();
 
             while (category != null && //not null
-                !category.Deleted && //not deleted
-                (showHidden || category.Published) && //published
-                (showHidden || aclService.Authorize(category)) && //ACL
-                !alreadyProcessedCategoryIds.Contains(category.Id)) //prevent circular references
+                   !category.Deleted && //not deleted
+                   (showHidden || category.Published) && //published
+                   (showHidden || aclService.Authorize(category)) && //ACL
+                   !alreadyProcessedCategoryIds.Contains(category.Id)) //prevent circular references
             {
                 result.Add(category);
 
                 alreadyProcessedCategoryIds.Add(category.Id);
 
                 category = (from c in allCategories
-                            where c.Id == category.ParentCategoryId
-                            select c).FirstOrDefault();
+                    where c.Id == category.ParentCategoryId
+                    select c).FirstOrDefault();
             }
             result.Reverse();
             return result;

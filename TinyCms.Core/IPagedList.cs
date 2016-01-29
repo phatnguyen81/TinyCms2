@@ -1,10 +1,9 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace TinyCms.Core
 {
     /// <summary>
-    /// Paged list interface
+    ///     Paged list interface
     /// </summary>
     public interface IPagedList<T> : IList<T>
     {

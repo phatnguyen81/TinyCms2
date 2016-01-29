@@ -19,8 +19,44 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class CategoryController : BaseAdminController
+    public class CategoryController : BaseAdminController
     {
+        #region Constructors
+
+        public CategoryController(ICategoryService categoryService,
+            IPostService postService,
+            ICustomerService customerService,
+            IUrlRecordService urlRecordService,
+            IPictureService pictureService,
+            ILanguageService languageService,
+            ILocalizationService localizationService,
+            ILocalizedEntityService localizedEntityService,
+            IPermissionService permissionService,
+            IAclService aclService,
+            IExportManager exportManager,
+            ICustomerActivityService customerActivityService,
+            CatalogSettings catalogSettings, ICategoryTemplateService categoryTemplateService,
+            ICategoryTypeService categoryTypeService)
+        {
+            _categoryService = categoryService;
+            _postService = postService;
+            _customerService = customerService;
+            _urlRecordService = urlRecordService;
+            _pictureService = pictureService;
+            _languageService = languageService;
+            _localizationService = localizationService;
+            _localizedEntityService = localizedEntityService;
+            _permissionService = permissionService;
+            _aclService = aclService;
+            _exportManager = exportManager;
+            _customerActivityService = customerActivityService;
+            _catalogSettings = catalogSettings;
+            _categoryTemplateService = categoryTemplateService;
+            _categoryTypeService = categoryTypeService;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly ICategoryService _categoryService;
@@ -40,42 +76,7 @@ namespace TinyCms.Admin.Controllers
         private readonly CatalogSettings _catalogSettings;
 
         #endregion
-        
-        #region Constructors
 
-        public CategoryController(ICategoryService categoryService, 
-            IPostService postService,
-            ICustomerService customerService,
-            IUrlRecordService urlRecordService, 
-            IPictureService pictureService, 
-            ILanguageService languageService,
-            ILocalizationService localizationService, 
-            ILocalizedEntityService localizedEntityService,
-            IPermissionService permissionService,
-            IAclService aclService, 
-            IExportManager exportManager, 
-            ICustomerActivityService customerActivityService,
-            CatalogSettings catalogSettings, ICategoryTemplateService categoryTemplateService, ICategoryTypeService categoryTypeService)
-        {
-            this._categoryService = categoryService;
-            this._postService = postService;
-            this._customerService = customerService;
-            this._urlRecordService = urlRecordService;
-            this._pictureService = pictureService;
-            this._languageService = languageService;
-            this._localizationService = localizationService;
-            this._localizedEntityService = localizedEntityService;
-            this._permissionService = permissionService;
-            this._aclService = aclService;
-            this._exportManager = exportManager;
-            this._customerActivityService = customerActivityService;
-            this._catalogSettings = catalogSettings;
-            _categoryTemplateService = categoryTemplateService;
-            _categoryTypeService = categoryTypeService;
-        }
-
-        #endregion
-        
         #region Utilities
 
         [NonAction]
@@ -84,29 +85,29 @@ namespace TinyCms.Admin.Controllers
             foreach (var localized in model.Locales)
             {
                 _localizedEntityService.SaveLocalizedValue(category,
-                                                               x => x.Name,
-                                                               localized.Name,
-                                                               localized.LanguageId);
+                    x => x.Name,
+                    localized.Name,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(category,
-                                                           x => x.Description,
-                                                           localized.Description,
-                                                           localized.LanguageId);
+                    x => x.Description,
+                    localized.Description,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(category,
-                                                           x => x.MetaKeywords,
-                                                           localized.MetaKeywords,
-                                                           localized.LanguageId);
+                    x => x.MetaKeywords,
+                    localized.MetaKeywords,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(category,
-                                                           x => x.MetaDescription,
-                                                           localized.MetaDescription,
-                                                           localized.LanguageId);
+                    x => x.MetaDescription,
+                    localized.MetaDescription,
+                    localized.LanguageId);
 
                 _localizedEntityService.SaveLocalizedValue(category,
-                                                           x => x.MetaTitle,
-                                                           localized.MetaTitle,
-                                                           localized.LanguageId);
+                    x => x.MetaTitle,
+                    localized.MetaTitle,
+                    localized.LanguageId);
 
                 //search engine name
                 var seName = category.ValidateSeName(localized.SeName, localized.Name, false);
@@ -145,7 +146,6 @@ namespace TinyCms.Admin.Controllers
         }
 
 
-
         [NonAction]
         protected virtual void PrepareAclModel(CategoryModel model, Category category, bool excludeProperties)
         {
@@ -181,7 +181,8 @@ namespace TinyCms.Admin.Controllers
                 else
                 {
                     //remove role
-                    var aclRecordToDelete = existingAclRecords.FirstOrDefault(acl => acl.CustomerRoleId == customerRole.Id);
+                    var aclRecordToDelete =
+                        existingAclRecords.FirstOrDefault(acl => acl.CustomerRoleId == customerRole.Id);
                     if (aclRecordToDelete != null)
                         _aclService.DeleteAclRecord(aclRecordToDelete);
                 }
@@ -221,8 +222,9 @@ namespace TinyCms.Admin.Controllers
                 });
             }
         }
+
         #endregion
-        
+
         #region List / tree
 
         public ActionResult Index()
@@ -238,7 +240,7 @@ namespace TinyCms.Admin.Controllers
             var model = new CategoryListModel();
             return View(model);
         }
-    
+
         [HttpPost]
         public ActionResult List(DataSourceRequest command, CategoryListModel model)
         {
@@ -259,7 +261,7 @@ namespace TinyCms.Admin.Controllers
             };
             return Json(gridModel);
         }
-        
+
         public ActionResult Tree()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCategories))
@@ -268,17 +270,17 @@ namespace TinyCms.Admin.Controllers
             return View();
         }
 
-        [HttpPost,]
+        [HttpPost]
         public ActionResult TreeLoadChildren(int id = 0)
         {
             var categories = _categoryService.GetAllCategoriesByParentCategoryId(id, true)
                 .Select(x => new
-                             {
-                                 id = x.Id,
-                                 Name = x.Name,
-                                 hasChildren = _categoryService.GetAllCategoriesByParentCategoryId(x.Id, true).Count > 0,
-                                 imageUrl = Url.Content("~/Administration/Content/images/ico-content.png")
-                             });
+                {
+                    id = x.Id,
+                    x.Name,
+                    hasChildren = _categoryService.GetAllCategoriesByParentCategoryId(x.Id, true).Count > 0,
+                    imageUrl = Url.Content("~/Administration/Content/images/ico-content.png")
+                });
 
             return Json(categories);
         }
@@ -334,10 +336,11 @@ namespace TinyCms.Admin.Controllers
                 SaveCategoryAcl(category, model);
 
                 //activity log
-                _customerActivityService.InsertActivity("AddNewCategory", _localizationService.GetResource("ActivityLog.AddNewCategory"), category.Name);
+                _customerActivityService.InsertActivity("AddNewCategory",
+                    _localizationService.GetResource("ActivityLog.AddNewCategory"), category.Name);
 
                 SuccessNotification(_localizationService.GetResource("Admin.Catalog.Categories.Added"));
-                return continueEditing ? RedirectToAction("Edit", new { id = category.Id }) : RedirectToAction("List");
+                return continueEditing ? RedirectToAction("Edit", new {id = category.Id}) : RedirectToAction("List");
             }
 
             //If we got this far, something failed, redisplay form
@@ -358,7 +361,7 @@ namespace TinyCms.Admin.Controllers
                 return AccessDeniedView();
 
             var category = _categoryService.GetCategoryById(id);
-            if (category == null || category.Deleted) 
+            if (category == null || category.Deleted)
                 //No category found with the specified id
                 return RedirectToAction("List");
 
@@ -398,7 +401,7 @@ namespace TinyCms.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                int prevPictureId = category.PictureId;
+                var prevPictureId = category.PictureId;
                 category = model.ToEntity(category);
                 category.UpdatedOnUtc = DateTime.UtcNow;
                 _categoryService.UpdateCategory(category);
@@ -420,7 +423,8 @@ namespace TinyCms.Admin.Controllers
                 SaveCategoryAcl(category, model);
 
                 //activity log
-                _customerActivityService.InsertActivity("EditCategory", _localizationService.GetResource("ActivityLog.EditCategory"), category.Name);
+                _customerActivityService.InsertActivity("EditCategory",
+                    _localizationService.GetResource("ActivityLog.EditCategory"), category.Name);
 
                 SuccessNotification(_localizationService.GetResource("Admin.Catalog.Categories.Updated"));
                 if (continueEditing)
@@ -458,12 +462,12 @@ namespace TinyCms.Admin.Controllers
             _categoryService.DeleteCategory(category);
 
             //activity log
-            _customerActivityService.InsertActivity("DeleteCategory", _localizationService.GetResource("ActivityLog.DeleteCategory"), category.Name);
+            _customerActivityService.InsertActivity("DeleteCategory",
+                _localizationService.GetResource("ActivityLog.DeleteCategory"), category.Name);
 
             SuccessNotification(_localizationService.GetResource("Admin.Catalog.Categories.Deleted"));
             return RedirectToAction("List");
         }
-        
 
         #endregion
 
@@ -529,15 +533,23 @@ namespace TinyCms.Admin.Controllers
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCategories))
                 return AccessDeniedView();
-            
+
             var model = new CategoryModel.AddCategoryPostModel();
             //categories
-            model.AvailableCategories.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
+            model.AvailableCategories.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Common.All"),
+                Value = "0"
+            });
             var categories = _categoryService.GetAllCategories(showHidden: true);
             foreach (var c in categories)
-                model.AvailableCategories.Add(new SelectListItem { Text = c.GetFormattedBreadCrumb(categories), Value = c.Id.ToString() });
+                model.AvailableCategories.Add(new SelectListItem
+                {
+                    Text = c.GetFormattedBreadCrumb(categories),
+                    Value = c.Id.ToString()
+                });
 
-       
+
             return View(model);
         }
 
@@ -549,7 +561,7 @@ namespace TinyCms.Admin.Controllers
 
             var gridModel = new DataSourceResult();
             var posts = _postService.SearchPosts(
-                categoryIds: new List<int> { model.SearchCategoryId },
+                categoryIds: new List<int> {model.SearchCategoryId},
                 keywords: model.SearchPostName,
                 pageIndex: command.Page - 1,
                 pageSize: command.PageSize,
@@ -560,7 +572,7 @@ namespace TinyCms.Admin.Controllers
 
             return Json(gridModel);
         }
-        
+
         [HttpPost]
         [FormValueRequired("save")]
         public ActionResult PostAddPopup(string btnId, string formId, CategoryModel.AddCategoryPostModel model)
@@ -570,12 +582,13 @@ namespace TinyCms.Admin.Controllers
 
             if (model.SelectedPostIds != null)
             {
-                foreach (int id in model.SelectedPostIds)
+                foreach (var id in model.SelectedPostIds)
                 {
                     var product = _postService.GetPostById(id);
                     if (product != null)
                     {
-                        var existingPostCategories = _categoryService.GetPostCategoriesByCategoryId(model.CategoryId, showHidden: true);
+                        var existingPostCategories = _categoryService.GetPostCategoriesByCategoryId(model.CategoryId,
+                            showHidden: true);
                         if (existingPostCategories.FindPostCategory(id, model.CategoryId) == null)
                         {
                             _categoryService.InsertPostCategory(

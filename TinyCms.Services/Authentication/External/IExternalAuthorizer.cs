@@ -1,14 +1,12 @@
 //Contributor:  Nicholas Mayne
 
 
-using TinyCms.Services.Authentication.External;
-
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// External authorizer
+    ///     External authorizer
     /// </summary>
-    public partial interface IExternalAuthorizer
+    public interface IExternalAuthorizer
     {
         AuthorizationResult Authorize(OpenAuthenticationParameters parameters);
     }

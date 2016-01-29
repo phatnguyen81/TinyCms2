@@ -1,4 +1,4 @@
-<Language Name="Русский" IsDefault="false" IsRightToLeft="false">
+﻿<Language Name="Русский" IsDefault="false" IsRightToLeft="false">
   <LocaleResource Name="AdminEmail">
     <Value>Email администратора</Value>
   </LocaleResource>
@@ -135,7 +135,8 @@
     <Value>Для того, что успешно установить nopCommerce, вам необходимо знать строку подключения к вашей базе данных. Если у вас нет этой информации, то вы можете узнать ее у вашего хостинг-провайдера. Если же вы устанавливаете nopCommerce на локальный компьютер, то вы можете узнать её у вашего системного администратора.</Value>
   </LocaleResource>
   <LocaleResource Name="WindowsAuthentication">
-    <Value>Проверка подлинности Windows
+    <Value>
+      Проверка подлинности Windows
     </Value>
   </LocaleResource>
 </Language>

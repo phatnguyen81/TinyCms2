@@ -11,39 +11,43 @@ using TinyCms.Services.Customers;
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// Open authentication service
+    ///     Open authentication service
     /// </summary>
-    public partial class OpenAuthenticationService : IOpenAuthenticationService
+    public class OpenAuthenticationService : IOpenAuthenticationService
     {
         private readonly ICustomerService _customerService;
-        private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
         private readonly IRepository<ExternalAuthenticationRecord> _externalAuthenticationRecordRepository;
+        private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
         private readonly IPluginFinder _pluginFinder;
 
-        public OpenAuthenticationService(IRepository<ExternalAuthenticationRecord> externalAuthenticationRecordRepository,
+        public OpenAuthenticationService(
+            IRepository<ExternalAuthenticationRecord> externalAuthenticationRecordRepository,
             ExternalAuthenticationSettings externalAuthenticationSettings,
             ICustomerService customerService, IPluginFinder pluginFinder)
         {
-            this._externalAuthenticationRecordRepository = externalAuthenticationRecordRepository;
-            this._externalAuthenticationSettings = externalAuthenticationSettings;
-            this._customerService = customerService;
+            _externalAuthenticationRecordRepository = externalAuthenticationRecordRepository;
+            _externalAuthenticationSettings = externalAuthenticationSettings;
+            _customerService = customerService;
             _pluginFinder = pluginFinder;
         }
 
         /// <summary>
-        /// Load active external authentication methods
+        ///     Load active external authentication methods
         /// </summary>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <returns>Payment methods</returns>
         public virtual IList<IExternalAuthenticationMethod> LoadActiveExternalAuthenticationMethods()
         {
             return LoadAllExternalAuthenticationMethods()
-                   .Where(provider => _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Contains(provider.PluginDescriptor.SystemName, StringComparer.InvariantCultureIgnoreCase))
-                   .ToList();
+                .Where(
+                    provider =>
+                        _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Contains(
+                            provider.PluginDescriptor.SystemName, StringComparer.InvariantCultureIgnoreCase))
+                .ToList();
         }
 
         /// <summary>
-        /// Load external authentication method by system name
+        ///     Load external authentication method by system name
         /// </summary>
         /// <param name="systemName">System name</param>
         /// <returns>Found external authentication method</returns>
@@ -56,7 +60,7 @@ namespace TinyCms.Services.Authentication.External
         }
 
         /// <summary>
-        /// Load all external authentication methods
+        ///     Load all external authentication methods
         /// </summary>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <returns>External authentication methods</returns>
@@ -66,9 +70,6 @@ namespace TinyCms.Services.Authentication.External
                 .GetPlugins<IExternalAuthenticationMethod>()
                 .ToList();
         }
-
-
-
 
         public virtual void AssociateExternalAccountWithUser(Customer customer, OpenAuthenticationParameters parameters)
         {
@@ -80,11 +81,11 @@ namespace TinyCms.Services.Authentication.External
             if (parameters.UserClaims != null)
                 foreach (var userClaim in parameters.UserClaims
                     .Where(x => x.Contact != null && !String.IsNullOrEmpty(x.Contact.Email)))
-                    {
-                        //found
-                        email = userClaim.Contact.Email;
-                        break;
-                    }
+                {
+                    //found
+                    email = userClaim.Contact.Email;
+                    break;
+                }
 
             var externalAuthenticationRecord = new ExternalAuthenticationRecord
             {
@@ -94,7 +95,7 @@ namespace TinyCms.Services.Authentication.External
                 ExternalDisplayIdentifier = parameters.ExternalDisplayIdentifier,
                 OAuthToken = parameters.OAuthToken,
                 OAuthAccessToken = parameters.OAuthAccessToken,
-                ProviderSystemName = parameters.ProviderSystemName,
+                ProviderSystemName = parameters.ProviderSystemName
             };
 
             _externalAuthenticationRecordRepository.Insert(externalAuthenticationRecord);
@@ -108,8 +109,8 @@ namespace TinyCms.Services.Authentication.External
         public virtual Customer GetUser(OpenAuthenticationParameters parameters)
         {
             var record = _externalAuthenticationRecordRepository.Table
-                .FirstOrDefault(o => o.ExternalIdentifier == parameters.ExternalIdentifier && 
-                    o.ProviderSystemName == parameters.ProviderSystemName);
+                .FirstOrDefault(o => o.ExternalIdentifier == parameters.ExternalIdentifier &&
+                                     o.ProviderSystemName == parameters.ProviderSystemName);
 
             if (record != null)
                 return _customerService.GetCustomerById(record.CustomerId);
@@ -137,7 +138,7 @@ namespace TinyCms.Services.Authentication.External
         {
             var record = _externalAuthenticationRecordRepository.Table
                 .FirstOrDefault(o => o.ExternalIdentifier == parameters.ExternalIdentifier &&
-                    o.ProviderSystemName == parameters.ProviderSystemName);
+                                     o.ProviderSystemName == parameters.ProviderSystemName);
 
             if (record != null)
                 _externalAuthenticationRecordRepository.Delete(record);

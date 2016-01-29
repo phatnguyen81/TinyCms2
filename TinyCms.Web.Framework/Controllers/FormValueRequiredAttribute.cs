@@ -7,10 +7,10 @@ namespace TinyCms.Web.Framework.Controllers
 {
     public class FormValueRequiredAttribute : ActionMethodSelectorAttribute
     {
-        private readonly string[] _submitButtonNames;
         private readonly FormValueRequirement _requirement;
+        private readonly string[] _submitButtonNames;
 
-        public FormValueRequiredAttribute(params string[] submitButtonNames):
+        public FormValueRequiredAttribute(params string[] submitButtonNames) :
             this(FormValueRequirement.Equal, submitButtonNames)
         {
         }
@@ -18,36 +18,36 @@ namespace TinyCms.Web.Framework.Controllers
         public FormValueRequiredAttribute(FormValueRequirement requirement, params string[] submitButtonNames)
         {
             //at least one submit button should be found
-            this._submitButtonNames = submitButtonNames;
-            this._requirement = requirement;
+            _submitButtonNames = submitButtonNames;
+            _requirement = requirement;
         }
 
         public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
         {
-            foreach (string buttonName in _submitButtonNames)
+            foreach (var buttonName in _submitButtonNames)
             {
                 try
                 {
-                    string value = "";
-                    switch (this._requirement)
+                    var value = "";
+                    switch (_requirement)
                     {
                         case FormValueRequirement.Equal:
-                            {
-                                //do not iterate because "Invalid request" exception can be thrown
-                                value = controllerContext.HttpContext.Request.Form[buttonName];
-                            }
+                        {
+                            //do not iterate because "Invalid request" exception can be thrown
+                            value = controllerContext.HttpContext.Request.Form[buttonName];
+                        }
                             break;
                         case FormValueRequirement.StartsWith:
+                        {
+                            foreach (var formValue in controllerContext.HttpContext.Request.Form.AllKeys)
                             {
-                                foreach (var formValue in controllerContext.HttpContext.Request.Form.AllKeys)
+                                if (formValue.StartsWith(buttonName, StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    if (formValue.StartsWith(buttonName, StringComparison.InvariantCultureIgnoreCase))
-                                    {
-                                        value = controllerContext.HttpContext.Request.Form[formValue];
-                                        break;
-                                    }
+                                    value = controllerContext.HttpContext.Request.Form[formValue];
+                                    break;
                                 }
                             }
+                        }
                             break;
                     }
                     if (!String.IsNullOrEmpty(value))

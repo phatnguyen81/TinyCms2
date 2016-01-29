@@ -1,25 +1,32 @@
 ﻿@model IEnumerable<CategoryModel>
 @if (Model.Any())
 {
-    foreach (CategoryModel category in Model)
+    foreach (var category in Model)
     {
         if (category.Posts.Any())
         {
             var firstPost = category.Posts.First();
             <div class="newsbox">
-                <h2><a href="@Url.RouteUrl("Category", new {SeName = category.SeName})">@category.Name</a></h2>
+                <h2>
+                    <a href="@Url.RouteUrl("Category", new {category.SeName})">@category.Name</a>
+                </h2>
                 <div class="contbox">
                     <div class="newscont">
-                        <a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })" class="boximg"><span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" alt="@firstPost.DefaultPictureModel.AlternateText" width="160" height="120" /></span></a>
+                        <a href="@Url.RouteUrl("Post", new {firstPost.SeName})" class="boximg">
+                            <span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" alt="@firstPost.DefaultPictureModel.AlternateText" width="160" height="120" /></span></a>
                         <div class="detail">
-                            <h3><a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })">@firstPost.Name</a> </h3>
+                            <h3>
+                                <a href="@Url.RouteUrl("Post", new {firstPost.SeName})">@firstPost.Name</a>
+                            </h3>
                             <p>@Html.Raw(firstPost.ShortDescription)</p>
                         </div>
                     </div>
                     <ul class="listrecent">
                         @foreach (var post in category.Posts.Skip(1))
                         {
-                            <li><em></em><a href="@Url.RouteUrl("Post", new { SeName = post.SeName })">@post.Name</a></li>
+                            <li>
+                                <em></em><a href="@Url.RouteUrl("Post", new {post.SeName})">@post.Name</a>
+                            </li>
                         }
                     </ul>
                 </div>

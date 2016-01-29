@@ -17,13 +17,34 @@ using TinyCms.Web.Framework.Localization;
 namespace TinyCms.Web.Framework
 {
     /// <summary>
-    /// Work context for web application
+    ///     Work context for web application
     /// </summary>
-    public partial class WebWorkContext : IWorkContext
+    public class WebWorkContext : IWorkContext
     {
         #region Const
 
         private const string CustomerCookieName = "Nop.customer";
+
+        #endregion
+
+        #region Ctor
+
+        public WebWorkContext(HttpContextBase httpContext,
+            ICustomerService customerService,
+            ILanguageService languageService,
+            IGenericAttributeService genericAttributeService,
+            LocalizationSettings localizationSettings,
+            IUserAgentHelper userAgentHelper,
+            IAuthenticationService authenticationService)
+        {
+            _httpContext = httpContext;
+            _customerService = customerService;
+            _languageService = languageService;
+            _genericAttributeService = genericAttributeService;
+            _localizationSettings = localizationSettings;
+            _userAgentHelper = userAgentHelper;
+            _authenticationService = authenticationService;
+        }
 
         #endregion
 
@@ -40,27 +61,6 @@ namespace TinyCms.Web.Framework
         private Customer _cachedCustomer;
         private Customer _originalCustomerIfImpersonated;
         private Language _cachedLanguage;
-
-        #endregion
-
-        #region Ctor
-
-        public WebWorkContext(HttpContextBase httpContext,
-            ICustomerService customerService,
-            ILanguageService languageService,
-            IGenericAttributeService genericAttributeService,
-            LocalizationSettings localizationSettings,
-            IUserAgentHelper userAgentHelper, 
-            IAuthenticationService authenticationService)
-        {
-            this._httpContext = httpContext;
-            this._customerService = customerService;
-            this._languageService = languageService;
-            this._genericAttributeService = genericAttributeService;
-            this._localizationSettings = localizationSettings;
-            _userAgentHelper = userAgentHelper;
-            _authenticationService = authenticationService;
-        }
 
         #endregion
 
@@ -87,7 +87,7 @@ namespace TinyCms.Web.Framework
                 }
                 else
                 {
-                    int cookieExpires = 24*365; //TODO make configurable
+                    var cookieExpires = 24*365; //TODO make configurable
                     cookie.Expires = DateTime.Now.AddHours(cookieExpires);
                 }
 
@@ -101,8 +101,8 @@ namespace TinyCms.Web.Framework
             if (_httpContext == null || _httpContext.Request == null)
                 return null;
 
-            string virtualPath = _httpContext.Request.AppRelativeCurrentExecutionFilePath;
-            string applicationPath = _httpContext.Request.ApplicationPath;
+            var virtualPath = _httpContext.Request.AppRelativeCurrentExecutionFilePath;
+            var applicationPath = _httpContext.Request.ApplicationPath;
             if (!virtualPath.IsLocalizedUrl(applicationPath, false))
                 return null;
 
@@ -148,7 +148,7 @@ namespace TinyCms.Web.Framework
         #region Properties
 
         /// <summary>
-        /// Gets or sets the current customer
+        ///     Gets or sets the current customer
         /// </summary>
         public virtual Customer CurrentCustomer
         {
@@ -183,7 +183,8 @@ namespace TinyCms.Web.Framework
                 //impersonate user if required (currently used for 'phone order' support)
                 if (customer != null && !customer.Deleted && customer.Active)
                 {
-                    var impersonatedCustomerId = customer.GetAttribute<int?>(SystemCustomerAttributeNames.ImpersonatedCustomerId);
+                    var impersonatedCustomerId =
+                        customer.GetAttribute<int?>(SystemCustomerAttributeNames.ImpersonatedCustomerId);
                     if (impersonatedCustomerId.HasValue && impersonatedCustomerId.Value > 0)
                     {
                         var impersonatedCustomer = _customerService.GetCustomerById(impersonatedCustomerId.Value);
@@ -238,18 +239,15 @@ namespace TinyCms.Web.Framework
         }
 
         /// <summary>
-        /// Gets or sets the original customer (in case the current one is impersonated)
+        ///     Gets or sets the original customer (in case the current one is impersonated)
         /// </summary>
         public virtual Customer OriginalCustomerIfImpersonated
         {
-            get
-            {
-                return _originalCustomerIfImpersonated;
-            }
+            get { return _originalCustomerIfImpersonated; }
         }
 
         /// <summary>
-        /// Get or set current user working language
+        ///     Get or set current user working language
         /// </summary>
         public virtual Language WorkingLanguage
         {
@@ -257,7 +255,7 @@ namespace TinyCms.Web.Framework
             {
                 if (_cachedLanguage != null)
                     return _cachedLanguage;
-                
+
                 Language detectedLanguage = null;
                 if (_localizationSettings.SeoFriendlyUrlsForLanguagesEnabled)
                 {
@@ -268,31 +266,32 @@ namespace TinyCms.Web.Framework
                 {
                     //get language from browser settings
                     //but we do it only once
-                    if (!this.CurrentCustomer.GetAttribute<bool>(SystemCustomerAttributeNames.LanguageAutomaticallyDetected, 
+                    if (!CurrentCustomer.GetAttribute<bool>(SystemCustomerAttributeNames.LanguageAutomaticallyDetected,
                         _genericAttributeService))
                     {
                         detectedLanguage = GetLanguageFromBrowserSettings();
                         if (detectedLanguage != null)
                         {
-                            _genericAttributeService.SaveAttribute(this.CurrentCustomer, SystemCustomerAttributeNames.LanguageAutomaticallyDetected,
-                                 true);
+                            _genericAttributeService.SaveAttribute(CurrentCustomer,
+                                SystemCustomerAttributeNames.LanguageAutomaticallyDetected,
+                                true);
                         }
                     }
                 }
                 if (detectedLanguage != null)
                 {
                     //the language is detected. now we need to save it
-                    if (this.CurrentCustomer.GetAttribute<int>(SystemCustomerAttributeNames.LanguageId,
+                    if (CurrentCustomer.GetAttribute<int>(SystemCustomerAttributeNames.LanguageId,
                         _genericAttributeService) != detectedLanguage.Id)
                     {
-                        _genericAttributeService.SaveAttribute(this.CurrentCustomer, SystemCustomerAttributeNames.LanguageId,
+                        _genericAttributeService.SaveAttribute(CurrentCustomer, SystemCustomerAttributeNames.LanguageId,
                             detectedLanguage.Id);
                     }
                 }
 
                 var allLanguages = _languageService.GetAllLanguages();
                 //find current customer language
-                var languageId = this.CurrentCustomer.GetAttribute<int>(SystemCustomerAttributeNames.LanguageId,
+                var languageId = CurrentCustomer.GetAttribute<int>(SystemCustomerAttributeNames.LanguageId,
                     _genericAttributeService);
                 var language = allLanguages.FirstOrDefault(x => x.Id == languageId);
                 if (language == null)
@@ -319,7 +318,7 @@ namespace TinyCms.Web.Framework
             set
             {
                 var languageId = value != null ? value.Id : 0;
-                _genericAttributeService.SaveAttribute(this.CurrentCustomer,
+                _genericAttributeService.SaveAttribute(CurrentCustomer,
                     SystemCustomerAttributeNames.LanguageId,
                     languageId);
 
@@ -330,7 +329,7 @@ namespace TinyCms.Web.Framework
 
 
         /// <summary>
-        /// Get or set value indicating whether we're in admin area
+        ///     Get or set value indicating whether we're in admin area
         /// </summary>
         public virtual bool IsAdmin { get; set; }
 

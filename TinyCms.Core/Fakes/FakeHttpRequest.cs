@@ -9,13 +9,13 @@ namespace TinyCms.Core.Fakes
     {
         private readonly HttpCookieCollection _cookies;
         private readonly NameValueCollection _formParams;
-        private readonly NameValueCollection _queryStringParams;
         private readonly NameValueCollection _headers;
-        private readonly NameValueCollection _serverVariables;
+        private readonly string _httpMethod;
+        private readonly NameValueCollection _queryStringParams;
         private readonly string _relativeUrl;
+        private readonly NameValueCollection _serverVariables;
         private readonly Uri _url;
         private readonly Uri _urlReferrer;
-        private readonly string _httpMethod;
 
         public FakeHttpRequest(string relativeUrl, string method,
             NameValueCollection formParams, NameValueCollection queryStringParams,
@@ -56,10 +56,7 @@ namespace TinyCms.Core.Fakes
 
         public override NameValueCollection ServerVariables
         {
-            get
-            {
-                return _serverVariables;
-            }
+            get { return _serverVariables; }
         }
 
         public override NameValueCollection Form
@@ -89,18 +86,12 @@ namespace TinyCms.Core.Fakes
 
         public override Uri Url
         {
-            get
-            {
-                return _url;
-            }
+            get { return _url; }
         }
 
         public override Uri UrlReferrer
         {
-            get
-            {
-                return _urlReferrer;
-            }
+            get { return _urlReferrer; }
         }
 
         public override string PathInfo
@@ -122,10 +113,7 @@ namespace TinyCms.Core.Fakes
 
         public override string HttpMethod
         {
-            get
-            {
-                return _httpMethod;
-            }
+            get { return _httpMethod; }
         }
 
         public override string UserHostAddress
@@ -145,10 +133,7 @@ namespace TinyCms.Core.Fakes
 
         public override bool IsAuthenticated
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override string[] UserLanguages

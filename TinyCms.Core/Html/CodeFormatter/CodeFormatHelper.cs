@@ -1,25 +1,50 @@
 using System;
 using System.Text.RegularExpressions;
 using System.Web;
-using TinyCms.Core.Html.CodeFormatter;
 
 namespace TinyCms.Core.Html.CodeFormatter
 {
-	/// <summary>
-	/// Represents a code format helper
-	/// </summary>
-    public partial class CodeFormatHelper
+    /// <summary>
+    ///     Represents a code format helper
+    /// </summary>
+    public class CodeFormatHelper
     {
+        #region Methods
+
+        /// <summary>
+        ///     Formats the text
+        /// </summary>
+        /// <param name="text">Text</param>
+        /// <returns>Formatted text</returns>
+        public static string FormatTextSimple(string text)
+        {
+            if (String.IsNullOrEmpty(text))
+                return string.Empty;
+
+            if (text.Contains("[/code]"))
+            {
+                text = regexCode2.Replace(text, CodeEvaluatorSimple);
+                text = regexCode2.Replace(text, "$1");
+            }
+            return text;
+        }
+
+        #endregion
+
         #region Fields
+
         //private static Regex regexCode1 = new Regex(@"(?<begin>\[code:(?<lang>.*?)(?:;ln=(?<linenumbers>(?:on|off)))?(?:;alt=(?<altlinenumbers>(?:on|off)))?(?:;(?<title>.*?))?\])(?<code>.*?)(?<end>\[/code\])", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        private readonly static Regex regexHtml = new Regex("<[^>]*>", RegexOptions.Compiled);
-        private readonly static Regex regexCode2 = new Regex(@"\[code\](?<inner>(.*?))\[/code\]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex regexHtml = new Regex("<[^>]*>", RegexOptions.Compiled);
+
+        private static readonly Regex regexCode2 = new Regex(@"\[code\](?<inner>(.*?))\[/code\]",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
         #endregion
 
         #region Utilities
 
         /// <summary>
-        /// Code evaluator method
+        ///     Code evaluator method
         /// </summary>
         /// <param name="match">Match</param>
         /// <returns>Formatted text</returns>
@@ -36,15 +61,14 @@ namespace TinyCms.Core.Html.CodeFormatter
             options.Title = match.Groups["title"].Value;
             options.AlternateLineNumbers = match.Groups["altlinenumbers"].Value == "on";
 
-            string result = match.Value.Replace(match.Groups["begin"].Value, "");
+            var result = match.Value.Replace(match.Groups["begin"].Value, "");
             result = result.Replace(match.Groups["end"].Value, "");
             result = Highlight(options, result);
             return result;
-
         }
 
         /// <summary>
-        /// Code evaluator method
+        ///     Code evaluator method
         /// </summary>
         /// <param name="match">Match</param>
         /// <returns>Formatted text</returns>
@@ -58,17 +82,16 @@ namespace TinyCms.Core.Html.CodeFormatter
             options.Language = "c#";
             options.Code = match.Groups["inner"].Value;
             options.DisplayLineNumbers = false;
-            options.Title =string.Empty;
-            options.AlternateLineNumbers =false;
+            options.Title = string.Empty;
+            options.AlternateLineNumbers = false;
 
-            string result = match.Value;
+            var result = match.Value;
             result = Highlight(options, result);
             return result;
-
         }
 
         /// <summary>
-        /// Strips HTML
+        ///     Strips HTML
         /// </summary>
         /// <param name="html">HTML</param>
         /// <returns>Formatted text</returns>
@@ -81,7 +104,7 @@ namespace TinyCms.Core.Html.CodeFormatter
         }
 
         /// <summary>
-        /// Returns the formatted text.
+        ///     Returns the formatted text.
         /// </summary>
         /// <param name="options">Whatever options were set in the regex groups.</param>
         /// <param name="text">Send the e.body so it can get formatted.</param>
@@ -113,7 +136,7 @@ namespace TinyCms.Core.Html.CodeFormatter
                     htmlf.LineNumbers = options.DisplayLineNumbers;
                     htmlf.Alternate = options.AlternateLineNumbers;
                     text = StripHtml(text).Trim();
-                    string code = htmlf.FormatCode(HttpUtility.HtmlDecode(text)).Trim();
+                    var code = htmlf.FormatCode(HttpUtility.HtmlDecode(text)).Trim();
                     return code.Replace("\r\n", "<br />").Replace("\n", "<br />");
 
                 case "xml":
@@ -122,7 +145,7 @@ namespace TinyCms.Core.Html.CodeFormatter
                     xmlf.Alternate = options.AlternateLineNumbers;
                     text = text.Replace("<br />", "\r\n");
                     text = StripHtml(text).Trim();
-                    string xml = xmlf.FormatCode(HttpUtility.HtmlDecode(text)).Trim();
+                    var xml = xmlf.FormatCode(HttpUtility.HtmlDecode(text)).Trim();
                     return xml.Replace("\r\n", "<br />").Replace("\n", "<br />");
 
                 case "tsql":
@@ -136,35 +159,11 @@ namespace TinyCms.Core.Html.CodeFormatter
                     mshf.LineNumbers = options.DisplayLineNumbers;
                     mshf.Alternate = options.AlternateLineNumbers;
                     return HttpUtility.HtmlDecode(mshf.FormatCode(text));
-
             }
 
             return string.Empty;
         }
 
         #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Formats the text
-        /// </summary>
-        /// <param name="text">Text</param>
-        /// <returns>Formatted text</returns>
-        public static string FormatTextSimple(string text)
-        {
-            if (String.IsNullOrEmpty(text))
-                return string.Empty;
-
-            if (text.Contains("[/code]"))
-            {
-                text = regexCode2.Replace(text, new MatchEvaluator(CodeEvaluatorSimple));
-                text = regexCode2.Replace(text, "$1");
-            }
-            return text;
-        }
-
-        #endregion
     }
 }
-

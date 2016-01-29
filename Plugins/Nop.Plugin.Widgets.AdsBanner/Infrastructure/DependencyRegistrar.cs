@@ -1,6 +1,5 @@
 using Autofac;
 using Autofac.Core;
-using Nop.Plugin.Widgets.AdsBanner.Controllers;
 using Nop.Plugin.Widgets.AdsBanner.Data;
 using Nop.Plugin.Widgets.AdsBanner.Domain;
 using Nop.Plugin.Widgets.AdsBanner.Services;
@@ -15,15 +14,14 @@ using TinyCms.Web.Framework.Mvc;
 namespace Nop.Plugin.Widgets.AdsBanner.Infrastructure
 {
     /// <summary>
-    /// Dependency registrar
+    ///     Dependency registrar
     /// </summary>
     public class DependencyRegistrar : IDependencyRegistrar
     {
-
         private const string CONTEXT_NAME = "cms_object_context_adsbanner";
 
         /// <summary>
-        /// Register services and interfaces
+        ///     Register services and interfaces
         /// </summary>
         /// <param name="builder">Container builder</param>
         /// <param name="typeFinder">Type finder</param>
@@ -42,12 +40,12 @@ namespace Nop.Plugin.Widgets.AdsBanner.Infrastructure
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<AdsBannerService>().As<IAdsBannerService>()
-               .WithParameter(ResolvedParameter.ForNamed<ICacheManager>("nop_cache_static"))
-               .InstancePerLifetimeScope();
+                .WithParameter(ResolvedParameter.ForNamed<ICacheManager>("nop_cache_static"))
+                .InstancePerLifetimeScope();
         }
 
         /// <summary>
-        /// Order of this dependency registrar implementation
+        ///     Order of this dependency registrar implementation
         /// </summary>
         public int Order
         {

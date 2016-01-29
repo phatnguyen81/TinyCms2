@@ -6,8 +6,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Messages
 {
-    [Validator(typeof(TestMessageTemplateValidator))]
-    public partial class TestMessageTemplateModel : BaseNopEntityModel
+    [Validator(typeof (TestMessageTemplateValidator))]
+    public class TestMessageTemplateModel : BaseNopEntityModel
     {
         public TestMessageTemplateModel()
         {

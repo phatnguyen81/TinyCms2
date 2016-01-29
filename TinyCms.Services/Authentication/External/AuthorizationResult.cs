@@ -1,50 +1,49 @@
 //Contributor:  Nicholas Mayne
 
 using System.Collections.Generic;
-using TinyCms.Services.Authentication.External;
 
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// Authorization result
+    ///     Authorization result
     /// </summary>
-    public partial class AuthorizationResult
+    public class AuthorizationResult
     {
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="status"></param>
         public AuthorizationResult(OpenAuthenticationStatus status)
         {
-            this.Errors = new List<string>();
+            Errors = new List<string>();
             Status = status;
         }
 
         /// <summary>
-        /// Add error
-        /// </summary>
-        /// <param name="error">Error</param>
-        public void AddError(string error)
-        {
-            this.Errors.Add(error);
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether request has been completed successfully
+        ///     Gets a value indicating whether request has been completed successfully
         /// </summary>
         public bool Success
         {
-            get { return this.Errors.Count == 0; }
+            get { return Errors.Count == 0; }
         }
 
         /// <summary>
-        /// Status
+        ///     Status
         /// </summary>
         public OpenAuthenticationStatus Status { get; private set; }
 
         /// <summary>
-        /// Errors
+        ///     Errors
         /// </summary>
         public IList<string> Errors { get; set; }
+
+        /// <summary>
+        ///     Add error
+        /// </summary>
+        /// <param name="error">Error</param>
+        public void AddError(string error)
+        {
+            Errors.Add(error);
+        }
     }
 }

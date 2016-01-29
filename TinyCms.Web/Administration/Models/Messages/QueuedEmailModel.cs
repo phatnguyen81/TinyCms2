@@ -7,8 +7,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Messages
 {
-    [Validator(typeof(QueuedEmailValidator))]
-    public partial class QueuedEmailModel: BaseNopEntityModel
+    [Validator(typeof (QueuedEmailValidator))]
+    public class QueuedEmailModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.System.QueuedEmails.Fields.Id")]
         public override int Id { get; set; }

@@ -13,17 +13,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class TemplateController : BaseAdminController
+    public class TemplateController : BaseAdminController
     {
-        #region Fields
-
-        private readonly ICategoryTemplateService _categoryTemplateService;
-        private readonly IPostTemplateService _postTemplateService;
-        private readonly ITopicTemplateService _topicTemplateService;
-        private readonly IPermissionService _permissionService;
-
-        #endregion
-
         #region Constructors
 
         public TemplateController(ICategoryTemplateService categoryTemplateService,
@@ -31,11 +22,20 @@ namespace TinyCms.Admin.Controllers
             ITopicTemplateService topicTemplateService,
             IPermissionService permissionService)
         {
-            this._categoryTemplateService = categoryTemplateService;
-            this._postTemplateService = postTemplateService;
-            this._topicTemplateService = topicTemplateService;
-            this._permissionService = permissionService;
+            _categoryTemplateService = categoryTemplateService;
+            _postTemplateService = postTemplateService;
+            _topicTemplateService = topicTemplateService;
+            _permissionService = permissionService;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly ICategoryTemplateService _categoryTemplateService;
+        private readonly IPostTemplateService _postTemplateService;
+        private readonly ITopicTemplateService _topicTemplateService;
+        private readonly IPermissionService _permissionService;
 
         #endregion
 
@@ -75,7 +75,7 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var template = _categoryTemplateService.GetCategoryTemplateById(model.Id);
@@ -95,7 +95,7 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var template = new CategoryTemplate();
@@ -121,8 +121,6 @@ namespace TinyCms.Admin.Controllers
         }
 
         #endregion
-
-
 
         #region Post templates
 
@@ -163,7 +161,7 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var template = _postTemplateService.GetPostTemplateById(model.Id);
@@ -183,7 +181,7 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var template = new PostTemplate();
@@ -246,7 +244,7 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var template = _topicTemplateService.GetTopicTemplateById(model.Id);
@@ -266,7 +264,7 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var template = new TopicTemplate();

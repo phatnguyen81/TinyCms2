@@ -1,32 +1,28 @@
-using TinyCms.Core;
-
 namespace TinyCms.Core.Domain.Common
 {
     /// <summary>
-    /// Represents a generic attribute
+    ///     Represents a generic attribute
     /// </summary>
-    public partial class GenericAttribute : BaseEntity
+    public class GenericAttribute : BaseEntity
     {
         /// <summary>
-        /// Gets or sets the entity identifier
+        ///     Gets or sets the entity identifier
         /// </summary>
         public int EntityId { get; set; }
-        
+
         /// <summary>
-        /// Gets or sets the key group
+        ///     Gets or sets the key group
         /// </summary>
         public string KeyGroup { get; set; }
 
         /// <summary>
-        /// Gets or sets the key
+        ///     Gets or sets the key
         /// </summary>
         public string Key { get; set; }
 
         /// <summary>
-        /// Gets or sets the value
+        ///     Gets or sets the value
         /// </summary>
         public string Value { get; set; }
-
-        
     }
 }

@@ -1,17 +1,15 @@
 //Contributor:  Nicholas Mayne
 
 
-using TinyCms.Services.Authentication.External;
-
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// External provider authorizer
+    ///     External provider authorizer
     /// </summary>
-    public partial interface IExternalProviderAuthorizer
+    public interface IExternalProviderAuthorizer
     {
         /// <summary>
-        /// Authorize response
+        ///     Authorize response
         /// </summary>
         /// <param name="returnUrl">Return URL</param>
         /// <param name="verifyResponse">true - Verify response;false - request authentication;null - determine automatically</param>

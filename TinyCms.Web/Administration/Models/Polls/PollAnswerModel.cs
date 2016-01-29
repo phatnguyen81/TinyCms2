@@ -6,8 +6,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Polls
 {
-    [Validator(typeof(PollAnswerValidator))]
-    public partial class PollAnswerModel : BaseNopEntityModel
+    [Validator(typeof (PollAnswerValidator))]
+    public class PollAnswerModel : BaseNopEntityModel
     {
         public int PollId { get; set; }
 
@@ -20,6 +20,5 @@ namespace TinyCms.Admin.Models.Polls
 
         [NopResourceDisplayName("Admin.ContentManagement.Polls.Answers.Fields.DisplayOrder")]
         public int DisplayOrder { get; set; }
-
     }
 }

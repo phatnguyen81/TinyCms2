@@ -6,8 +6,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Tasks
 {
-    [Validator(typeof(ScheduleTaskValidator))]
-    public partial class ScheduleTaskModel : BaseNopEntityModel
+    [Validator(typeof (ScheduleTaskValidator))]
+    public class ScheduleTaskModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.System.ScheduleTasks.Name")]
         [AllowHtml]

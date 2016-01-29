@@ -3,11 +3,9 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using TinyCms.Core;
-using TinyCms.Core.Caching;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Services.Localization;
 using TinyCms.Web.Framework.UI.Paging;
-using TinyCms.Web.Infrastructure.Cache;
 using TinyCms.Web.Models.Common;
 
 namespace TinyCms.Web.Extensions
@@ -15,7 +13,7 @@ namespace TinyCms.Web.Extensions
     public static class HtmlExtensions
     {
         /// <summary>
-        /// BBCode editor
+        ///     BBCode editor
         /// </summary>
         /// <typeparam name="TModel">Model</typeparam>
         /// <param name="html">HTML Helper</param>
@@ -26,9 +24,10 @@ namespace TinyCms.Web.Extensions
             var sb = new StringBuilder();
 
             var storeLocation = EngineContext.Current.Resolve<IWebHelper>().GetStoreLocation();
-            string bbEditorWebRoot = String.Format("{0}Content/", storeLocation);
+            var bbEditorWebRoot = String.Format("{0}Content/", storeLocation);
 
-            sb.AppendFormat("<script src=\"{0}Content/BBEditor/ed.js\" type=\"text/javascript\"></script>", storeLocation);
+            sb.AppendFormat("<script src=\"{0}Content/BBEditor/ed.js\" type=\"text/javascript\"></script>",
+                storeLocation);
             sb.Append(Environment.NewLine);
             sb.Append("<script language=\"javascript\" type=\"text/javascript\">");
             sb.Append(Environment.NewLine);
@@ -54,7 +53,8 @@ namespace TinyCms.Web.Extensions
             if (model.ShowTotalSummary && (model.TotalPages > 0))
             {
                 links.Append("<li class=\"total-summary\">");
-                links.Append(string.Format(model.CurrentPageText, model.PageIndex + 1, model.TotalPages, model.TotalRecords));
+                links.Append(string.Format(model.CurrentPageText, model.PageIndex + 1, model.TotalPages,
+                    model.TotalRecords));
                 links.Append("</li>");
             }
             if (model.ShowPagerItems && (model.TotalPages > 1))
@@ -69,11 +69,13 @@ namespace TinyCms.Web.Extensions
                         links.Append("<li class=\"first-page\">");
                         if (model.UseRouteLinks)
                         {
-                            links.Append(html.RouteLink(model.FirstButtonText, model.RouteActionName, model.RouteValues, new { title = localizationService.GetResource("Pager.FirstPageTitle") }));
+                            links.Append(html.RouteLink(model.FirstButtonText, model.RouteActionName, model.RouteValues,
+                                new {title = localizationService.GetResource("Pager.FirstPageTitle")}));
                         }
                         else
                         {
-                            links.Append(html.ActionLink(model.FirstButtonText, model.RouteActionName, model.RouteValues, new { title = localizationService.GetResource("Pager.FirstPageTitle") }));
+                            links.Append(html.ActionLink(model.FirstButtonText, model.RouteActionName, model.RouteValues,
+                                new {title = localizationService.GetResource("Pager.FirstPageTitle")}));
                         }
                         links.Append("</li>");
                     }
@@ -88,11 +90,15 @@ namespace TinyCms.Web.Extensions
                         links.Append("<li class=\"previous-page\">");
                         if (model.UseRouteLinks)
                         {
-                            links.Append(html.RouteLink(model.PreviousButtonText, model.RouteActionName, model.RouteValues, new { title = localizationService.GetResource("Pager.PreviousPageTitle") }));
+                            links.Append(html.RouteLink(model.PreviousButtonText, model.RouteActionName,
+                                model.RouteValues,
+                                new {title = localizationService.GetResource("Pager.PreviousPageTitle")}));
                         }
                         else
                         {
-                            links.Append(html.ActionLink(model.PreviousButtonText, model.RouteActionName, model.RouteValues, new { title = localizationService.GetResource("Pager.PreviousPageTitle") }));
+                            links.Append(html.ActionLink(model.PreviousButtonText, model.RouteActionName,
+                                model.RouteValues,
+                                new {title = localizationService.GetResource("Pager.PreviousPageTitle")}));
                         }
                         links.Append("</li>");
                     }
@@ -100,9 +106,9 @@ namespace TinyCms.Web.Extensions
                 if (model.ShowIndividualPages)
                 {
                     //individual pages
-                    int firstIndividualPageIndex = model.GetFirstIndividualPageIndex();
-                    int lastIndividualPageIndex = model.GetLastIndividualPageIndex();
-                    for (int i = firstIndividualPageIndex; i <= lastIndividualPageIndex; i++)
+                    var firstIndividualPageIndex = model.GetFirstIndividualPageIndex();
+                    var lastIndividualPageIndex = model.GetLastIndividualPageIndex();
+                    for (var i = firstIndividualPageIndex; i <= lastIndividualPageIndex; i++)
                     {
                         if (model.PageIndex == i)
                         {
@@ -115,11 +121,24 @@ namespace TinyCms.Web.Extensions
                             links.Append("<li class=\"individual-page\">");
                             if (model.UseRouteLinks)
                             {
-                                links.Append(html.RouteLink((i + 1).ToString(), model.RouteActionName, model.RouteValues, new { title = String.Format(localizationService.GetResource("Pager.PageLinkTitle"), (i + 1)) }));
+                                links.Append(html.RouteLink((i + 1).ToString(), model.RouteActionName, model.RouteValues,
+                                    new
+                                    {
+                                        title =
+                                            String.Format(localizationService.GetResource("Pager.PageLinkTitle"),
+                                                (i + 1))
+                                    }));
                             }
                             else
                             {
-                                links.Append(html.ActionLink((i + 1).ToString(), model.RouteActionName, model.RouteValues, new { title = String.Format(localizationService.GetResource("Pager.PageLinkTitle"), (i + 1)) }));
+                                links.Append(html.ActionLink((i + 1).ToString(), model.RouteActionName,
+                                    model.RouteValues,
+                                    new
+                                    {
+                                        title =
+                                            String.Format(localizationService.GetResource("Pager.PageLinkTitle"),
+                                                (i + 1))
+                                    }));
                             }
                             links.Append("</li>");
                         }
@@ -135,11 +154,13 @@ namespace TinyCms.Web.Extensions
                         links.Append("<li class=\"next-page\">");
                         if (model.UseRouteLinks)
                         {
-                            links.Append(html.RouteLink(model.NextButtonText, model.RouteActionName, model.RouteValues, new { title = localizationService.GetResource("Pager.NextPageTitle") }));
+                            links.Append(html.RouteLink(model.NextButtonText, model.RouteActionName, model.RouteValues,
+                                new {title = localizationService.GetResource("Pager.NextPageTitle")}));
                         }
                         else
                         {
-                            links.Append(html.ActionLink(model.NextButtonText, model.RouteActionName, model.RouteValues, new { title = localizationService.GetResource("Pager.NextPageTitle") }));
+                            links.Append(html.ActionLink(model.NextButtonText, model.RouteActionName, model.RouteValues,
+                                new {title = localizationService.GetResource("Pager.NextPageTitle")}));
                         }
                         links.Append("</li>");
                     }
@@ -147,18 +168,21 @@ namespace TinyCms.Web.Extensions
                 if (model.ShowLast)
                 {
                     //last page
-                    if (((model.PageIndex + 3) < model.TotalPages) && (model.TotalPages > model.IndividualPagesDisplayedCount))
+                    if (((model.PageIndex + 3) < model.TotalPages) &&
+                        (model.TotalPages > model.IndividualPagesDisplayedCount))
                     {
                         model.RouteValues.page = model.TotalPages;
 
                         links.Append("<li class=\"last-page\">");
                         if (model.UseRouteLinks)
                         {
-                            links.Append(html.RouteLink(model.LastButtonText, model.RouteActionName, model.RouteValues, new { title = localizationService.GetResource("Pager.LastPageTitle") }));
+                            links.Append(html.RouteLink(model.LastButtonText, model.RouteActionName, model.RouteValues,
+                                new {title = localizationService.GetResource("Pager.LastPageTitle")}));
                         }
                         else
                         {
-                            links.Append(html.ActionLink(model.LastButtonText, model.RouteActionName, model.RouteValues, new { title = localizationService.GetResource("Pager.LastPageTitle") }));
+                            links.Append(html.ActionLink(model.LastButtonText, model.RouteActionName, model.RouteValues,
+                                new {title = localizationService.GetResource("Pager.LastPageTitle")}));
                         }
                         links.Append("</li>");
                     }
@@ -171,13 +195,10 @@ namespace TinyCms.Web.Extensions
             }
             return MvcHtmlString.Create(result);
         }
-       
+
         public static Pager Pager(this HtmlHelper helper, IPageableModel pagination)
         {
             return new Pager(pagination, helper.ViewContext);
         }
-
-
     }
 }
-

@@ -2,12 +2,12 @@ using TinyCms.Core.Domain.Posts;
 
 namespace TinyCms.Data.Mapping.Posts
 {
-    public partial class RelatedPostMap : NopEntityTypeConfiguration<RelatedPost>
+    public class RelatedPostMap : NopEntityTypeConfiguration<RelatedPost>
     {
         public RelatedPostMap()
         {
-            this.ToTable("RelatedPost");
-            this.HasKey(c => c.Id);
+            ToTable("RelatedPost");
+            HasKey(c => c.Id);
         }
     }
 }

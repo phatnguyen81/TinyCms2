@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Xml;
 using Newtonsoft.Json;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
 using TinyCms.Core.Domain.Catalog;
 using TinyCms.Core.Domain.Common;
-using TinyCms.Core.Domain.Customers;
 using TinyCms.Core.Domain.Media;
 using TinyCms.Core.Domain.Posts;
 using TinyCms.Core.Domain.Seo;
@@ -25,60 +22,61 @@ using TinyCms.Services.Posts;
 using TinyCms.Services.Security;
 using TinyCms.Services.Seo;
 using TinyCms.Services.Topics;
+using TinyCms.Web.Extensions;
+using TinyCms.Web.Framework.Events;
 using TinyCms.Web.Framework.Security;
 using TinyCms.Web.Infrastructure.Cache;
 using TinyCms.Web.Models.Media;
 using TinyCms.Web.Models.Posts;
-using TinyCms.Web.Extensions;
-using TinyCms.Web.Framework.Events;
 
 namespace TinyCms.Web.Controllers
 {
     public class PostsController : BasePublicController
     {
-        private readonly ICategoryService _categoryService;
-        private readonly IPostService _postService;
-        private readonly IPictureService _pictureService;
-        private readonly IWorkContext _workContext;
+        private readonly IAclService _aclService;
         private readonly ICacheManager _cacheManager;
+        private readonly CatalogSettings _catalogSettings;
+        private readonly ICategoryService _categoryService;
+        private readonly ICategoryTemplateService _categoryTemplateService;
+        private readonly ICategoryTypeService _categoryTypeService;
+        private readonly ICustomerActivityService _customerActivityService;
+        private readonly IDateTimeHelper _dateTimeHelper;
+        private readonly IEventPublisher _eventPublisher;
+        private readonly ILocalizationService _localizationService;
+        private readonly MediaSettings _mediaSettings;
+        private readonly IPermissionService _permissionService;
+        private readonly IPictureService _pictureService;
+        private readonly IPostService _postService;
+        private readonly IPostTagService _postTagService;
+        private readonly IPostTemplateService _postTemplateService;
+        private readonly ISearchTermService _searchTermService;
+        private readonly SeoSettings _seoSettings;
         private readonly ITopicService _topicService;
         private readonly IUrlRecordService _urlRecordService;
-        private readonly IPostTagService _postTagService;
-        private readonly IPermissionService _permissionService;
-        private readonly ILocalizationService _localizationService;
         private readonly IWebHelper _webHelper;
-        private readonly CatalogSettings _catalogSettings;
-        private readonly MediaSettings _mediaSettings;
-        private readonly ICategoryTypeService _categoryTypeService;
-        private readonly IAclService _aclService;
-        private readonly ICustomerActivityService _customerActivityService;
-        private readonly ICategoryTemplateService _categoryTemplateService;
-        private readonly IPostTemplateService _postTemplateService;
-        private readonly SeoSettings _seoSettings;
-        private readonly ISearchTermService _searchTermService;
-        private readonly IEventPublisher _eventPublisher;
-        private readonly IDateTimeHelper _dateTimeHelper;
-        public PostsController(ICategoryService categoryService, 
-            IPostService postService, 
-            IPictureService pictureService, 
-            IWorkContext workContext, 
-            ICacheManager cacheManager, 
-            ITopicService topicService, 
-            IUrlRecordService urlRecordService, 
-            IPostTagService postTagService, 
-            IPermissionService permissionService, 
+        private readonly IWorkContext _workContext;
+
+        public PostsController(ICategoryService categoryService,
+            IPostService postService,
+            IPictureService pictureService,
+            IWorkContext workContext,
+            ICacheManager cacheManager,
+            ITopicService topicService,
+            IUrlRecordService urlRecordService,
+            IPostTagService postTagService,
+            IPermissionService permissionService,
             ILocalizationService localizationService,
-            IWebHelper webHelper, 
+            IWebHelper webHelper,
             CatalogSettings catalogSettings,
-            MediaSettings mediaSettings, 
-            ICategoryTypeService categoryTypeService, 
-            IAclService aclService, 
+            MediaSettings mediaSettings,
+            ICategoryTypeService categoryTypeService,
+            IAclService aclService,
             ICategoryTemplateService categoryTemplateService,
-            ICustomerActivityService customerActivityService, 
-            SeoSettings seoSettings, 
-            IPostTemplateService postTemplateService, 
+            ICustomerActivityService customerActivityService,
+            SeoSettings seoSettings,
+            IPostTemplateService postTemplateService,
             ISearchTermService searchTermService,
-            IEventPublisher eventPublisher, 
+            IEventPublisher eventPublisher,
             IDateTimeHelper dateTimeHelper)
         {
             _categoryService = categoryService;
@@ -105,29 +103,175 @@ namespace TinyCms.Web.Controllers
             _dateTimeHelper = dateTimeHelper;
         }
 
+        /// <summary>
+        ///     Prepare category (simple) models
+        /// </summary>
+        /// <param name="rootCategoryId">Root category identifier</param>
+        /// <param name="loadSubCategories">A value indicating whether subcategories should be loaded</param>
+        /// <param name="allCategories">All available categories; pass null to load them internally</param>
+        /// <returns>Category models</returns>
+        [NonAction]
+        protected virtual IList<CategorySimpleModel> PrepareCategorySimpleModels(int rootCategoryId,
+            bool loadSubCategories = true, IList<Category> allCategories = null)
+        {
+            var result = new List<CategorySimpleModel>();
+
+            //little hack for performance optimization.
+            //we know that this method is used to load top and left menu for categories.
+            //it'll load all categories anyway.
+            //so there's no need to invoke "GetAllCategoriesByParentCategoryId" multiple times (extra SQL commands) to load childs
+            //so we load all categories at once
+            //if you don't like this implementation if you can uncomment the line below (old behavior) and comment several next lines (before foreach)
+            //var categories = _categoryService.GetAllCategoriesByParentCategoryId(rootCategoryId);
+            if (allCategories == null)
+            {
+                //load categories if null passed
+                //we implemeneted it this way for performance optimization - recursive iterations (below)
+                //this way all categories are loaded only once
+                allCategories = _categoryService.GetAllCategories();
+            }
+            var categories = allCategories.Where(c => c.ParentCategoryId == rootCategoryId).ToList();
+            foreach (var category in categories)
+            {
+                var categoryModel = new CategorySimpleModel
+                {
+                    Id = category.Id,
+                    Name = category.GetLocalized(x => x.Name),
+                    SeName = category.GetSeName(),
+                    IncludeInTopMenu = category.IncludeInTopMenu
+                };
+
+
+                if (loadSubCategories)
+                {
+                    var subCategories = PrepareCategorySimpleModels(category.Id, loadSubCategories, allCategories);
+                    categoryModel.SubCategories.AddRange(subCategories);
+                }
+                result.Add(categoryModel);
+            }
+
+            return result;
+        }
+
+        [ChildActionOnly]
+        public ActionResult TopMenu()
+        {
+            //categories
+            var categoryCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_MENU_MODEL_KEY,
+                _workContext.WorkingLanguage.Id,
+                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
+            var cachedCategoriesModel = _cacheManager.Get(categoryCacheKey, () => PrepareCategorySimpleModels(0));
+
+            //top menu topics
+            var topicCacheKey = string.Format(ModelCacheEventConsumer.TOPIC_TOP_MENU_MODEL_KEY,
+                _workContext.WorkingLanguage.Id,
+                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
+            var cachedTopicModel = _cacheManager.Get(topicCacheKey, () =>
+                _topicService.GetAllTopics()
+                    .Where(t => t.IncludeInTopMenu)
+                    .Select(t => new TopMenuModel.TopMenuTopicModel
+                    {
+                        Id = t.Id,
+                        Name = t.GetLocalized(x => x.Title),
+                        SeName = t.GetSeName()
+                    })
+                    .ToList()
+                );
+            var model = new TopMenuModel
+            {
+                Categories = cachedCategoriesModel,
+                Topics = cachedTopicModel
+            };
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult BottomMenu()
+        {
+            //categories
+            var categoryCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_MENU_MODEL_KEY,
+                _workContext.WorkingLanguage.Id,
+                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
+            var cachedCategoriesModel = _cacheManager.Get(categoryCacheKey, () => PrepareCategorySimpleModels(0, true));
+
+            //top menu topics
+            var topicCacheKey = string.Format(ModelCacheEventConsumer.TOPIC_TOP_MENU_MODEL_KEY,
+                _workContext.WorkingLanguage.Id,
+                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
+            var cachedTopicModel = _cacheManager.Get(topicCacheKey, () =>
+                _topicService.GetAllTopics()
+                    .Where(t => t.IncludeInTopMenu)
+                    .Select(t => new TopMenuModel.TopMenuTopicModel
+                    {
+                        Id = t.Id,
+                        Name = t.GetLocalized(x => x.Title),
+                        SeName = t.GetSeName()
+                    })
+                    .ToList()
+                );
+            var model = new TopMenuModel
+            {
+                Categories = cachedCategoriesModel,
+                Topics = cachedTopicModel
+            };
+            return PartialView(model);
+        }
+
+        #region Post tag
+
+        [NopHttpsRequirement(SslRequirement.No)]
+        public ActionResult PostsByTag(int postTagId, PostsPagingFilteringModel command)
+        {
+            var postTag = _postTagService.GetPostTagById(postTagId);
+            if (postTag == null)
+                return InvokeHttp404();
+
+            var model = new PostsByTagModel
+            {
+                Id = postTag.Id,
+                TagName = postTag.GetLocalized(y => y.Name),
+                TagSeName = postTag.GetSeName()
+            };
+
+            //page size
+            PreparePageSizeOptions(model.PagingFilteringContext, command, 10);
+
+
+            //posts
+            var posts = _postService.SearchPosts(
+                postTagId: postTag.Id,
+                pageIndex: command.PageNumber - 1,
+                pageSize: command.PageSize);
+            model.Posts = PreparePostOverviewModels(posts).ToList();
+
+            model.PagingFilteringContext.LoadPagedList(posts);
+            return View(model);
+        }
+
+        #endregion
 
         #region Methods
+
         [NonAction]
         protected virtual IEnumerable<PostOverviewModel> PreparePostOverviewModels(IEnumerable<Post> posts,
             bool preparePictureModel = true,
             int? postThumbPictureSize = null)
         {
             return this.PreparePostOverviewModels(_workContext,
-                _categoryService, 
-                _postService, 
+                _categoryService,
+                _postService,
                 _permissionService,
-                _localizationService, 
-                _pictureService, 
-                _webHelper, 
+                _localizationService,
+                _pictureService,
+                _webHelper,
                 _cacheManager,
                 _dateTimeHelper,
-                _catalogSettings, 
-                _mediaSettings, 
+                _catalogSettings,
+                _mediaSettings,
                 posts,
                 preparePictureModel,
                 postThumbPictureSize);
         }
-
 
 
         public void PrepareNewPostModel(NewPostModel model)
@@ -141,16 +285,16 @@ namespace TinyCms.Web.Controllers
                     Value = category.Id.ToString()
                 });
             }
-
         }
+
         [NonAction]
         protected virtual string[] ParsePostTags(string postTags)
         {
             var result = new List<string>();
             if (!String.IsNullOrWhiteSpace(postTags))
             {
-                string[] values = postTags.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string val1 in values)
+                var values = postTags.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var val1 in values)
                     if (!String.IsNullOrEmpty(val1.Trim()))
                         result.Add(val1.Trim());
             }
@@ -168,8 +312,8 @@ namespace TinyCms.Web.Controllers
             var postTagsToRemove = new List<PostTag>();
             foreach (var existingPostTag in existingPostTags)
             {
-                bool found = false;
-                foreach (string newPostTag in postTags)
+                var found = false;
+                foreach (var newPostTag in postTags)
                 {
                     if (existingPostTag.Name.Equals(newPostTag, StringComparison.InvariantCultureIgnoreCase))
                     {
@@ -187,7 +331,7 @@ namespace TinyCms.Web.Controllers
                 post.PostTags.Remove(postTag);
                 _postService.UpdatePost(post);
             }
-            foreach (string postTagName in postTags)
+            foreach (var postTagName in postTags)
             {
                 PostTag postTag;
                 var postTag2 = _postTagService.GetPostTagByName(postTagName);
@@ -220,7 +364,7 @@ namespace TinyCms.Web.Controllers
 
             //post pictures
 
-            foreach (int pictureId in pictureIds)
+            foreach (var pictureId in pictureIds)
             {
                 var postPicture = new PostPicture
                 {
@@ -229,7 +373,6 @@ namespace TinyCms.Web.Controllers
                 };
                 _postService.InsertPostPicture(postPicture);
             }
-
         }
 
         [NonAction]
@@ -241,15 +384,12 @@ namespace TinyCms.Web.Controllers
 
         #endregion
 
-
-
         #region Searching
 
         [NopHttpsRequirement(SslRequirement.No)]
         [ValidateInput(false)]
         public ActionResult Search(SearchModel model, PostsPagingFilteringModel command)
         {
-          
             if (model == null)
                 model = new SearchModel();
 
@@ -259,13 +399,12 @@ namespace TinyCms.Web.Controllers
             searchTerms = searchTerms.Trim();
 
 
-
             //page size
             PreparePageSizeOptions(model.PagingFilteringContext, command,
                 10);
 
 
-            string cacheKey = string.Format(ModelCacheEventConsumer.SEARCH_CATEGORIES_MODEL_KEY,
+            var cacheKey = string.Format(ModelCacheEventConsumer.SEARCH_CATEGORIES_MODEL_KEY,
                 _workContext.WorkingLanguage.Id,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
             var categories = _cacheManager.Get(cacheKey, () =>
@@ -276,9 +415,9 @@ namespace TinyCms.Web.Controllers
                 foreach (var c in allCategories)
                 {
                     //generate full category name (breadcrumb)
-                    string categoryBreadcrumb = "";
+                    var categoryBreadcrumb = "";
                     var breadcrumb = c.GetCategoryBreadCrumb(allCategories, _aclService);
-                    for (int i = 0; i <= breadcrumb.Count - 1; i++)
+                    for (var i = 0; i <= breadcrumb.Count - 1; i++)
                     {
                         categoryBreadcrumb += breadcrumb[i].GetLocalized(x => x.Name);
                         if (i != breadcrumb.Count - 1)
@@ -292,18 +431,19 @@ namespace TinyCms.Web.Controllers
                 }
                 return categoriesModel;
             });
-          
+
             IPagedList<Post> posts = new PagedList<Post>(new List<Post>(), 0, 1);
             // only search if query string search keyword is set (used to avoid searching or displaying search term min length error message on /search page load)
             if (Request.Params["q"] != null)
             {
                 if (searchTerms.Length < _catalogSettings.PostSearchTermMinimumLength)
                 {
-                    model.Warning = string.Format(_localizationService.GetResource("Search.SearchTermMinimumLengthIsNCharacters"), _catalogSettings.PostSearchTermMinimumLength);
+                    model.Warning =
+                        string.Format(_localizationService.GetResource("Search.SearchTermMinimumLengthIsNCharacters"),
+                            _catalogSettings.PostSearchTermMinimumLength);
                 }
                 else
                 {
-
                     //posts
                     posts = _postService.SearchPosts(
                         keywords: searchTerms,
@@ -355,132 +495,14 @@ namespace TinyCms.Web.Controllers
         {
             return PartialView();
         }
+
         #endregion
-
-
-
-
-
-        /// <summary>
-        /// Prepare category (simple) models
-        /// </summary>
-        /// <param name="rootCategoryId">Root category identifier</param>
-        /// <param name="loadSubCategories">A value indicating whether subcategories should be loaded</param>
-        /// <param name="allCategories">All available categories; pass null to load them internally</param>
-        /// <returns>Category models</returns>
-        [NonAction]
-        protected virtual IList<CategorySimpleModel> PrepareCategorySimpleModels(int rootCategoryId,
-            bool loadSubCategories = true, IList<Category> allCategories = null)
-        {
-            var result = new List<CategorySimpleModel>();
-
-            //little hack for performance optimization.
-            //we know that this method is used to load top and left menu for categories.
-            //it'll load all categories anyway.
-            //so there's no need to invoke "GetAllCategoriesByParentCategoryId" multiple times (extra SQL commands) to load childs
-            //so we load all categories at once
-            //if you don't like this implementation if you can uncomment the line below (old behavior) and comment several next lines (before foreach)
-            //var categories = _categoryService.GetAllCategoriesByParentCategoryId(rootCategoryId);
-            if (allCategories == null)
-            {
-                //load categories if null passed
-                //we implemeneted it this way for performance optimization - recursive iterations (below)
-                //this way all categories are loaded only once
-                allCategories = _categoryService.GetAllCategories();
-            }
-            var categories = allCategories.Where(c => c.ParentCategoryId == rootCategoryId).ToList();
-            foreach (var category in categories)
-            {
-                var categoryModel = new CategorySimpleModel
-                {
-                    Id = category.Id,
-                    Name = category.GetLocalized(x => x.Name),
-                    SeName = category.GetSeName(),
-                    IncludeInTopMenu = category.IncludeInTopMenu
-                };
-
-           
-                if (loadSubCategories)
-                {
-                    var subCategories = PrepareCategorySimpleModels(category.Id, loadSubCategories, allCategories);
-                    categoryModel.SubCategories.AddRange(subCategories);
-                }
-                result.Add(categoryModel);
-            }
-
-            return result;
-        }
-
-       
-
-        [ChildActionOnly]
-        public ActionResult TopMenu()
-        {
-            //categories
-            string categoryCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_MENU_MODEL_KEY,
-                _workContext.WorkingLanguage.Id,
-                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
-            var cachedCategoriesModel = _cacheManager.Get(categoryCacheKey, () => PrepareCategorySimpleModels(0));
-
-            //top menu topics
-            string topicCacheKey = string.Format(ModelCacheEventConsumer.TOPIC_TOP_MENU_MODEL_KEY,
-                _workContext.WorkingLanguage.Id,
-                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
-            var cachedTopicModel = _cacheManager.Get(topicCacheKey, () =>
-                _topicService.GetAllTopics()
-                .Where(t => t.IncludeInTopMenu)
-                .Select(t => new TopMenuModel.TopMenuTopicModel
-                {
-                    Id = t.Id,
-                    Name = t.GetLocalized(x => x.Title),
-                    SeName = t.GetSeName()
-                })
-                .ToList()
-            );
-            var model = new TopMenuModel
-            {
-                Categories = cachedCategoriesModel,
-                Topics = cachedTopicModel,
-            };
-            return PartialView(model);
-        }
-
-        [ChildActionOnly]
-        public ActionResult BottomMenu()
-        {
-            //categories
-            string categoryCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_MENU_MODEL_KEY,
-                _workContext.WorkingLanguage.Id,
-                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
-            var cachedCategoriesModel = _cacheManager.Get(categoryCacheKey, () => PrepareCategorySimpleModels(0,loadSubCategories:true));
-
-            //top menu topics
-            string topicCacheKey = string.Format(ModelCacheEventConsumer.TOPIC_TOP_MENU_MODEL_KEY,
-                _workContext.WorkingLanguage.Id,
-                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
-            var cachedTopicModel = _cacheManager.Get(topicCacheKey, () =>
-                _topicService.GetAllTopics()
-                .Where(t => t.IncludeInTopMenu)
-                .Select(t => new TopMenuModel.TopMenuTopicModel
-                {
-                    Id = t.Id,
-                    Name = t.GetLocalized(x => x.Title),
-                    SeName = t.GetSeName()
-                })
-                .ToList()
-            );
-            var model = new TopMenuModel
-            {
-                Categories = cachedCategoriesModel,
-                Topics = cachedTopicModel,
-            };
-            return PartialView(model);
-        }
 
         #region Categories
 
         [NonAction]
-        protected virtual void PreparePageSizeOptions(PostsPagingFilteringModel pagingFilteringModel, PostsPagingFilteringModel command,
+        protected virtual void PreparePageSizeOptions(PostsPagingFilteringModel pagingFilteringModel,
+            PostsPagingFilteringModel command,
             int fixedPageSize)
         {
             if (pagingFilteringModel == null)
@@ -505,7 +527,7 @@ namespace TinyCms.Web.Controllers
         [NonAction]
         protected virtual List<int> GetChildCategoryIds(int parentCategoryId)
         {
-            string cacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_CHILD_IDENTIFIERS_MODEL_KEY,
+            var cacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_CHILD_IDENTIFIERS_MODEL_KEY,
                 parentCategoryId,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
             return _cacheManager.Get(cacheKey, () =>
@@ -520,63 +542,77 @@ namespace TinyCms.Web.Controllers
                 return categoriesIds;
             });
         }
+
         [ChildActionOnly]
         public ActionResult HomePageCategories()
         {
-            string categoriesCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_HOMEPAGE_KEY,
+            var categoriesCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_HOMEPAGE_KEY,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
                 _workContext.WorkingLanguage.Id,
                 _webHelper.IsCurrentConnectionSecured());
 
             var model = _cacheManager.Get(categoriesCacheKey, () =>
                 _categoryService.GetAllCategoriesDisplayedOnHomePage()
-                .Select(x =>
-                {
-                    var catModel = x.ToModel();
-
-                    //prepare picture model
-                    int pictureSize = _mediaSettings.CategoryThumbPictureSize;
-                    var categoryPictureCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY, x.Id, pictureSize, true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured());
-                    catModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
+                    .Select(x =>
                     {
-                        var picture = _pictureService.GetPictureById(x.PictureId);
-                        var pictureModel = new PictureModel
+                        var catModel = x.ToModel();
+
+                        //prepare picture model
+                        var pictureSize = _mediaSettings.CategoryThumbPictureSize;
+                        var categoryPictureCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY,
+                            x.Id, pictureSize, true, _workContext.WorkingLanguage.Id,
+                            _webHelper.IsCurrentConnectionSecured());
+                        catModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
                         {
-                            FullSizeImageUrl = _pictureService.GetPictureUrl(picture),
-                            ImageUrl = _pictureService.GetPictureUrl(picture, pictureSize),
-                            Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), catModel.Name),
-                            AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), catModel.Name)
-                        };
-                        return pictureModel;
-                    });
+                            var picture = _pictureService.GetPictureById(x.PictureId);
+                            var pictureModel = new PictureModel
+                            {
+                                FullSizeImageUrl = _pictureService.GetPictureUrl(picture),
+                                ImageUrl = _pictureService.GetPictureUrl(picture, pictureSize),
+                                Title =
+                                    string.Format(
+                                        _localizationService.GetResource("Media.Category.ImageLinkTitleFormat"),
+                                        catModel.Name),
+                                AlternateText =
+                                    string.Format(
+                                        _localizationService.GetResource("Media.Category.ImageAlternateTextFormat"),
+                                        catModel.Name)
+                            };
+                            return pictureModel;
+                        });
 
-                    //prepare post model
-                    catModel.Posts = PreparePostOverviewModels(_postService.SearchPosts(pageSize: 5, orderBy: PostSortingEnum.CreatedOn, categoryIds: new[] { catModel.Id }).ToList()).ToList();
+                        //prepare post model
+                        catModel.Posts =
+                            PreparePostOverviewModels(
+                                _postService.SearchPosts(pageSize: 5, orderBy: PostSortingEnum.CreatedOn,
+                                    categoryIds: new[] {catModel.Id}).ToList()).ToList();
 
-                    return catModel;
-                })
-                .ToList()
-            );
+                        return catModel;
+                    })
+                    .ToList()
+                );
 
             if (model.Count == 0)
                 return Content("");
 
             return PartialView(model);
         }
+
         [ChildActionOnly]
         public ActionResult CategoryBox(int categoryId, int numberPost, string template, int? postThumbPictureSize)
         {
-
             var category = _categoryService.GetCategoryById(categoryId);
 
             if (category == null || string.IsNullOrWhiteSpace(template))
                 return Content("");
 
 
-            var model = new CategoryBoxModel { Id = category.Id, SeName = category.GetSeName() };
+            var model = new CategoryBoxModel {Id = category.Id, SeName = category.GetSeName()};
 
-            var posts = _postService.SearchPosts(pageSize: numberPost, categoryIds: new[] { categoryId }).ToList();
-            model.Posts = PreparePostOverviewModels(posts, postThumbPictureSize != null && postThumbPictureSize > 0, postThumbPictureSize).ToList();
+            var posts = _postService.SearchPosts(pageSize: numberPost, categoryIds: new[] {categoryId}).ToList();
+            model.Posts =
+                PreparePostOverviewModels(posts, postThumbPictureSize != null && postThumbPictureSize > 0,
+                    postThumbPictureSize).ToList();
             return PartialView(template, model);
         }
 
@@ -604,7 +640,7 @@ namespace TinyCms.Web.Controllers
             if (category.ParentCategoryId > 0)
             {
                 model.ParentCategory = _categoryService.GetCategoryById(category.ParentCategoryId).ToModel();
-                string subCategoriesOfParentCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_SUBCATEGORIES_KEY,
+                var subCategoriesOfParentCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_SUBCATEGORIES_KEY,
                     model.ParentCategory.Id,
                     string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
                     _workContext.WorkingLanguage.Id,
@@ -622,7 +658,7 @@ namespace TinyCms.Web.Controllers
                             };
 
                             //prepare picture model
-                            int pictureSize = _mediaSettings.CategoryThumbPictureSize;
+                            var pictureSize = _mediaSettings.CategoryThumbPictureSize;
                             var categoryPictureCacheKey =
                                 string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY, x.Id, pictureSize,
                                     true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured());
@@ -652,43 +688,51 @@ namespace TinyCms.Web.Controllers
             }
 
             //subcategories
-            string subCategoriesCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_SUBCATEGORIES_KEY,
+            var subCategoriesCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_SUBCATEGORIES_KEY,
                 categoryId,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
                 _workContext.WorkingLanguage.Id,
                 _webHelper.IsCurrentConnectionSecured());
             model.SubCategories = _cacheManager.Get(subCategoriesCacheKey, () =>
                 _categoryService.GetAllCategoriesByParentCategoryId(categoryId)
-                .Select(x =>
-                {
-                    var subCatModel = new CategoryModel.SubCategoryModel
+                    .Select(x =>
                     {
-                        Id = x.Id,
-                        Name = x.GetLocalized(y => y.Name),
-                        SeName = x.GetSeName(),
-                        Description = x.GetLocalized(y => y.Description)
-                    };
-
-                    //prepare picture model
-                    int pictureSize = _mediaSettings.CategoryThumbPictureSize;
-                    var categoryPictureCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY, x.Id, pictureSize, true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured());
-                    subCatModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
-                    {
-                        var picture = _pictureService.GetPictureById(x.PictureId);
-                        var pictureModel = new PictureModel
+                        var subCatModel = new CategoryModel.SubCategoryModel
                         {
-                            FullSizeImageUrl = _pictureService.GetPictureUrl(picture),
-                            ImageUrl = _pictureService.GetPictureUrl(picture, pictureSize),
-                            Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), subCatModel.Name),
-                            AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), subCatModel.Name)
+                            Id = x.Id,
+                            Name = x.GetLocalized(y => y.Name),
+                            SeName = x.GetSeName(),
+                            Description = x.GetLocalized(y => y.Description)
                         };
-                        return pictureModel;
-                    });
 
-                    return subCatModel;
-                })
-                .ToList()
-            );
+                        //prepare picture model
+                        var pictureSize = _mediaSettings.CategoryThumbPictureSize;
+                        var categoryPictureCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY,
+                            x.Id, pictureSize, true, _workContext.WorkingLanguage.Id,
+                            _webHelper.IsCurrentConnectionSecured());
+                        subCatModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
+                        {
+                            var picture = _pictureService.GetPictureById(x.PictureId);
+                            var pictureModel = new PictureModel
+                            {
+                                FullSizeImageUrl = _pictureService.GetPictureUrl(picture),
+                                ImageUrl = _pictureService.GetPictureUrl(picture, pictureSize),
+                                Title =
+                                    string.Format(
+                                        _localizationService.GetResource("Media.Category.ImageLinkTitleFormat"),
+                                        subCatModel.Name),
+                                AlternateText =
+                                    string.Format(
+                                        _localizationService.GetResource("Media.Category.ImageAlternateTextFormat"),
+                                        subCatModel.Name)
+                            };
+                            return pictureModel;
+                        });
+
+                        return subCatModel;
+                    })
+                    .ToList()
+                );
 
             var categoryIds = new List<int>();
             categoryIds.Add(category.Id);
@@ -702,7 +746,7 @@ namespace TinyCms.Web.Controllers
             IList<int> filterableSpecificationAttributeOptionIds;
             var posts = _postService.SearchPosts(
                 categoryIds: categoryIds,
-                featuredPosts: _catalogSettings.IncludeFeaturedPostsInNormalLists ? null : (bool?)false,
+                featuredPosts: _catalogSettings.IncludeFeaturedPostsInNormalLists ? null : (bool?) false,
                 orderBy: PostSortingEnum.CreatedOn,
                 pageIndex: command.PageNumber - 1,
                 pageSize: command.PageSize);
@@ -711,7 +755,8 @@ namespace TinyCms.Web.Controllers
             model.PagingFilteringContext.LoadPagedList(posts);
 
             //template
-            var templateCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_TEMPLATE_MODEL_KEY, category.CategoryTemplateId);
+            var templateCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_TEMPLATE_MODEL_KEY,
+                category.CategoryTemplateId);
             var templateViewPath = _cacheManager.Get(templateCacheKey, () =>
             {
                 var template = _categoryTemplateService.GetCategoryTemplateById(category.CategoryTemplateId);
@@ -723,7 +768,8 @@ namespace TinyCms.Web.Controllers
             });
 
             //activity log
-            _customerActivityService.InsertActivity("PublicStore.ViewCategory", _localizationService.GetResource("ActivityLog.PublicStore.ViewCategory"), category.Name);
+            _customerActivityService.InsertActivity("PublicStore.ViewCategory",
+                _localizationService.GetResource("ActivityLog.PublicStore.ViewCategory"), category.Name);
 
             return View(templateViewPath, model);
         }
@@ -732,7 +778,7 @@ namespace TinyCms.Web.Controllers
         public ActionResult CategoryNavigation(int currentCategoryId, int currentPostId)
         {
             //get active category
-            int activeCategoryId = 0;
+            var activeCategoryId = 0;
             if (currentCategoryId > 0)
             {
                 //category details page
@@ -746,7 +792,7 @@ namespace TinyCms.Web.Controllers
                     activeCategoryId = postCategories[0].CategoryId;
             }
 
-            string cacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_NAVIGATION_MODEL_KEY,
+            var cacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_NAVIGATION_MODEL_KEY,
                 _workContext.WorkingLanguage.Id,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
             var cachedModel = _cacheManager.Get(cacheKey, () => PrepareCategorySimpleModels(0).ToList());
@@ -814,6 +860,7 @@ namespace TinyCms.Web.Controllers
                 success = true
             });
         }
+
         protected virtual PostDetailsModel PreparePostDetailsPageModel(Post post)
         {
             if (post == null)
@@ -842,7 +889,6 @@ namespace TinyCms.Web.Controllers
             }
 
             #endregion
-
 
             #region Breadcrumb
 
@@ -889,10 +935,11 @@ namespace TinyCms.Web.Controllers
             #region Post tags
 
             //do not prepare this model for the associated posts. anyway it's not used
-              var postTagsCacheKey = string.Format(ModelCacheEventConsumer.PRODUCTTAG_BY_PRODUCT_MODEL_KEY, post.Id, _workContext.WorkingLanguage.Id);
-                model.PostTags = _cacheManager.Get(postTagsCacheKey, () =>
-                    post.PostTags
-                        //filter by store
+            var postTagsCacheKey = string.Format(ModelCacheEventConsumer.PRODUCTTAG_BY_PRODUCT_MODEL_KEY, post.Id,
+                _workContext.WorkingLanguage.Id);
+            model.PostTags = _cacheManager.Get(postTagsCacheKey, () =>
+                post.PostTags
+                    //filter by store
                     .Where(x => _postTagService.GetPostCount(x.Id) > 0)
                     .Select(x => new PostTagModel
                     {
@@ -925,7 +972,8 @@ namespace TinyCms.Web.Controllers
             //default picture
             var defaultPictureSize = _mediaSettings.PostDetailsPictureSize;
             //prepare picture models
-            var postPicturesCacheKey = string.Format(ModelCacheEventConsumer.PRODUCT_DETAILS_PICTURES_MODEL_KEY, post.Id, defaultPictureSize, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured());
+            var postPicturesCacheKey = string.Format(ModelCacheEventConsumer.PRODUCT_DETAILS_PICTURES_MODEL_KEY, post.Id,
+                defaultPictureSize, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured());
             var cachedPictures = _cacheManager.Get(postPicturesCacheKey, () =>
             {
                 var pictures = _pictureService.GetPicturesByPostId(post.Id);
@@ -934,17 +982,25 @@ namespace TinyCms.Web.Controllers
                 {
                     ImageUrl = _pictureService.GetPictureUrl(defaultPicture, defaultPictureSize),
                     FullSizeImageUrl = _pictureService.GetPictureUrl(defaultPicture, 0),
-                    Title = string.Format(_localizationService.GetResource("Media.Post.ImageLinkTitleFormat.Details"), model.Name),
-                    AlternateText = string.Format(_localizationService.GetResource("Media.Post.ImageAlternateTextFormat.Details"), model.Name),
+                    Title =
+                        string.Format(_localizationService.GetResource("Media.Post.ImageLinkTitleFormat.Details"),
+                            model.Name),
+                    AlternateText =
+                        string.Format(_localizationService.GetResource("Media.Post.ImageAlternateTextFormat.Details"),
+                            model.Name)
                 };
                 //"title" attribute
-                defaultPictureModel.Title = (defaultPicture != null && !string.IsNullOrEmpty(defaultPicture.TitleAttribute)) ?
-                    defaultPicture.TitleAttribute :
-                    string.Format(_localizationService.GetResource("Media.Post.ImageLinkTitleFormat.Details"), model.Name);
+                defaultPictureModel.Title = (defaultPicture != null &&
+                                             !string.IsNullOrEmpty(defaultPicture.TitleAttribute))
+                    ? defaultPicture.TitleAttribute
+                    : string.Format(_localizationService.GetResource("Media.Post.ImageLinkTitleFormat.Details"),
+                        model.Name);
                 //"alt" attribute
-                defaultPictureModel.AlternateText = (defaultPicture != null && !string.IsNullOrEmpty(defaultPicture.AltAttribute)) ?
-                    defaultPicture.AltAttribute :
-                    string.Format(_localizationService.GetResource("Media.Post.ImageAlternateTextFormat.Details"), model.Name);
+                defaultPictureModel.AlternateText = (defaultPicture != null &&
+                                                     !string.IsNullOrEmpty(defaultPicture.AltAttribute))
+                    ? defaultPicture.AltAttribute
+                    : string.Format(_localizationService.GetResource("Media.Post.ImageAlternateTextFormat.Details"),
+                        model.Name);
 
                 //all pictures
                 var pictureModels = new List<PictureModel>();
@@ -952,30 +1008,37 @@ namespace TinyCms.Web.Controllers
                 {
                     var pictureModel = new PictureModel
                     {
-                        ImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.PostThumbPictureSizeOnPostDetailsPage),
+                        ImageUrl =
+                            _pictureService.GetPictureUrl(picture, _mediaSettings.PostThumbPictureSizeOnPostDetailsPage),
                         FullSizeImageUrl = _pictureService.GetPictureUrl(picture),
-                        Title = string.Format(_localizationService.GetResource("Media.Post.ImageLinkTitleFormat.Details"), model.Name),
-                        AlternateText = string.Format(_localizationService.GetResource("Media.Post.ImageAlternateTextFormat.Details"), model.Name),
+                        Title =
+                            string.Format(_localizationService.GetResource("Media.Post.ImageLinkTitleFormat.Details"),
+                                model.Name),
+                        AlternateText =
+                            string.Format(
+                                _localizationService.GetResource("Media.Post.ImageAlternateTextFormat.Details"),
+                                model.Name)
                     };
                     //"title" attribute
-                    pictureModel.Title = !string.IsNullOrEmpty(picture.TitleAttribute) ?
-                        picture.TitleAttribute :
-                        string.Format(_localizationService.GetResource("Media.Post.ImageLinkTitleFormat.Details"), model.Name);
+                    pictureModel.Title = !string.IsNullOrEmpty(picture.TitleAttribute)
+                        ? picture.TitleAttribute
+                        : string.Format(_localizationService.GetResource("Media.Post.ImageLinkTitleFormat.Details"),
+                            model.Name);
                     //"alt" attribute
-                    pictureModel.AlternateText = !string.IsNullOrEmpty(picture.AltAttribute) ?
-                        picture.AltAttribute :
-                        string.Format(_localizationService.GetResource("Media.Post.ImageAlternateTextFormat.Details"), model.Name);
+                    pictureModel.AlternateText = !string.IsNullOrEmpty(picture.AltAttribute)
+                        ? picture.AltAttribute
+                        : string.Format(_localizationService.GetResource("Media.Post.ImageAlternateTextFormat.Details"),
+                            model.Name);
 
                     pictureModels.Add(pictureModel);
                 }
 
-                return new { DefaultPictureModel = defaultPictureModel, PictureModels = pictureModels };
+                return new {DefaultPictureModel = defaultPictureModel, PictureModels = pictureModels};
             });
             model.DefaultPictureModel = cachedPictures.DefaultPictureModel;
             model.PictureModels = cachedPictures.PictureModels;
 
             #endregion
-
 
             return model;
         }
@@ -983,7 +1046,8 @@ namespace TinyCms.Web.Controllers
         [ChildActionOnly]
         public ActionResult TopViewPosts(int? categoryId, int? postThumbPictureSize)
         {
-            var posts = _postService.SearchPosts(pageSize:5,categoryIds: categoryId == null? null : new []{categoryId.Value});
+            var posts = _postService.SearchPosts(pageSize: 5,
+                categoryIds: categoryId == null ? null : new[] {categoryId.Value});
             var model = PreparePostOverviewModels(posts, true, postThumbPictureSize);
             return PartialView(model);
         }
@@ -1013,13 +1077,15 @@ namespace TinyCms.Web.Controllers
             _postService.UpdatePost(post);
 
             //save as recently viewed
-           // _recentlyViewedPostsService.AddPostToRecentlyViewedList(post.Id);
+            // _recentlyViewedPostsService.AddPostToRecentlyViewedList(post.Id);
 
             //activity log
-            _customerActivityService.InsertActivity("PublicStore.ViewPost", _localizationService.GetResource("ActivityLog.PublicStore.ViewPost"), post.Name);
+            _customerActivityService.InsertActivity("PublicStore.ViewPost",
+                _localizationService.GetResource("ActivityLog.PublicStore.ViewPost"), post.Name);
 
             return View(model.PostTemplateViewPath, model);
         }
+
         [ChildActionOnly]
         public ActionResult HomePagePosts(int? postThumbPictureSize)
         {
@@ -1034,8 +1100,8 @@ namespace TinyCms.Web.Controllers
             //load and cache report
             var postIds = _cacheManager.Get(string.Format(ModelCacheEventConsumer.PRODUCTS_RELATED_IDS_KEY, postId),
                 () =>
-                    _postService.GetRelatedPostsByPostId1(postId,3).Select(x => x.PostId2).ToArray()
-                    );
+                    _postService.GetRelatedPostsByPostId1(postId, 3).Select(x => x.PostId2).ToArray()
+                );
 
             //load posts
             var posts = _postService.GetPostsByIds(postIds);
@@ -1048,6 +1114,7 @@ namespace TinyCms.Web.Controllers
             var model = PreparePostOverviewModels(posts, true, 100).ToList();
             return PartialView(model);
         }
+
         [ChildActionOnly]
         public ActionResult OtherPosts(int postId, int? postThumbPictureSize)
         {
@@ -1062,12 +1129,13 @@ namespace TinyCms.Web.Controllers
             var post = _postService.GetPostById(postId);
             if (post == null) return Content("");
             var web = new WebClient();
-            var url = string.Format("https://api.facebook.com/method/links.getStats?format=json&urls={0}", @Url.RouteUrl("Post", new { SeName = post.GetSeName() }, this.Request.Url.Scheme));
+            var url = string.Format("https://api.facebook.com/method/links.getStats?format=json&urls={0}",
+                @Url.RouteUrl("Post", new {SeName = post.GetSeName()}, Request.Url.Scheme));
             //var url = "https://api.facebook.com/method/links.getStats?format=json&urls=http://vietnam4u.vn/mot-dieu-thuoc-la-vut-di-gia-300-euro-o-italy";
             var response = web.DownloadString(url);
             var updateDb = false;
             var result = JsonConvert.DeserializeObject<List<FacebookStats>>(response);
-            if(result != null && result.Count > 0)
+            if (result != null && result.Count > 0)
             {
                 if (result[0].commentsbox_count != post.CommentCount)
                 {
@@ -1080,53 +1148,22 @@ namespace TinyCms.Web.Controllers
                     updateDb = true;
                 }
             }
-                
-            if(updateDb) _postService.UpdatePost(post);
+
+            if (updateDb) _postService.UpdatePost(post);
 
             return Content(url);
         }
 
         [ChildActionOnly]
-        public ActionResult GetRandomPost(int postId, int numberPost, string template, bool? samePostTemplate, int? postThumbPictureSize)
+        public ActionResult GetRandomPost(int postId, int numberPost, string template, bool? samePostTemplate,
+            int? postThumbPictureSize)
         {
-
             var post = _postService.GetPostById(postId);
             var model =
-                PreparePostOverviewModels(_postService.GetRandomPosts(numberPost, templateId: (samePostTemplate != null && samePostTemplate.Value)?(post == null ? 0 : post.PostTemplateId): 0,
-                    excludePostId: post == null ? 0 : post.Id));
+                PreparePostOverviewModels(_postService.GetRandomPosts(numberPost,
+                    (samePostTemplate != null && samePostTemplate.Value) ? (post == null ? 0 : post.PostTemplateId) : 0,
+                    post == null ? 0 : post.Id));
             return PartialView(template, model);
-        }
-        #endregion
-
-        #region Post tag
-
-        [NopHttpsRequirement(SslRequirement.No)]
-        public ActionResult PostsByTag(int postTagId, PostsPagingFilteringModel command)
-        {
-            var postTag = _postTagService.GetPostTagById(postTagId);
-            if (postTag == null)
-                return InvokeHttp404();
-
-            var model = new PostsByTagModel
-            {
-                Id = postTag.Id,
-                TagName = postTag.GetLocalized(y => y.Name),
-                TagSeName = postTag.GetSeName()
-            };
-
-            //page size
-            PreparePageSizeOptions(model.PagingFilteringContext, command, 10);
-
-
-            //posts
-            var posts = _postService.SearchPosts(
-                postTagId: postTag.Id,
-                pageIndex: command.PageNumber - 1,
-                pageSize: command.PageSize);
-            model.Posts = PreparePostOverviewModels(posts).ToList();
-
-            model.PagingFilteringContext.LoadPagedList(posts);
-            return View(model);
         }
 
         #endregion

@@ -8,15 +8,15 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Settings.ShoppingCart")
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
         </div>
     </div>
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $("#@Html.FieldIdFor(model => model.MiniShoppingCartEnabled)").click(toggleMiniShoppingCartEnabled);
             $("#@Html.FieldIdFor(model => model.EmailWishlistEnabled)").click(toggleEmailWishlistEnabled);
@@ -26,25 +26,23 @@
         });
 
         function toggleMiniShoppingCartEnabled() {
-            if ($('#@Html.FieldIdFor(model => model.MiniShoppingCartEnabled)').is(':checked')) {
-                $('#pnlMiniShoppingCartProductNumber').show();
-                $('#pnlShowProductImagesInMiniShoppingCart').show();
-            }
-            else {
-                $('#pnlMiniShoppingCartProductNumber').hide();
-                $('#pnlShowProductImagesInMiniShoppingCart').hide();
+            if ($("#@Html.FieldIdFor(model => model.MiniShoppingCartEnabled)").is(":checked")) {
+                $("#pnlMiniShoppingCartProductNumber").show();
+                $("#pnlShowProductImagesInMiniShoppingCart").show();
+            } else {
+                $("#pnlMiniShoppingCartProductNumber").hide();
+                $("#pnlShowProductImagesInMiniShoppingCart").hide();
             }
         }
 
         function toggleEmailWishlistEnabled() {
-            if ($('#@Html.FieldIdFor(model => model.EmailWishlistEnabled)').is(':checked')) {
-                $('#pnlAllowAnonymousUsersToEmailWishlist').show();
-            }
-            else {
-                $('#pnlAllowAnonymousUsersToEmailWishlist').hide();
+            if ($("#@Html.FieldIdFor(model => model.EmailWishlistEnabled)").is(":checked")) {
+                $("#pnlAllowAnonymousUsersToEmailWishlist").show();
+            } else {
+                $("#pnlAllowAnonymousUsersToEmailWishlist").hide();
             }
         }
-        
+
     </script>
     @Html.Action("StoreScopeConfiguration", "Setting")
     @Html.ValidationSummary(false)
@@ -178,7 +176,7 @@
                 @Html.EditorFor(model => model.AllowAnonymousUsersToEmailWishlist)
                 @Html.ValidationMessageFor(model => model.AllowAnonymousUsersToEmailWishlist)
             </td>
-        </tr>        
+        </tr>
         <tr>
             <td class="adminTitle">
                 @Html.OverrideStoreCheckboxFor(model => model.MiniShoppingCartEnabled_OverrideForStore, model => model.MiniShoppingCartEnabled, Model.ActiveStoreScopeConfiguration)

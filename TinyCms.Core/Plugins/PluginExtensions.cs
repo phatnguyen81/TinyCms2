@@ -25,7 +25,7 @@ namespace TinyCms.Core.Plugins
                 return null;
             }
 
-            string logoUrl = string.Format("{0}plugins/{1}/logo.jpg", webHelper.GetStoreLocation(), pluginDirectory.Name);
+            var logoUrl = string.Format("{0}plugins/{1}/logo.jpg", webHelper.GetStoreLocation(), pluginDirectory.Name);
             return logoUrl;
         }
     }

@@ -5,7 +5,7 @@ using System.Linq;
 namespace TinyCms.Core.Plugins
 {
     /// <summary>
-    /// Plugin finder
+    ///     Plugin finder
     /// </summary>
     public class PluginFinder : IPluginFinder
     {
@@ -19,7 +19,7 @@ namespace TinyCms.Core.Plugins
         #region Utilities
 
         /// <summary>
-        /// Ensure plugins are loaded
+        ///     Ensure plugins are loaded
         /// </summary>
         protected virtual void EnsurePluginsAreLoaded()
         {
@@ -34,7 +34,7 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Check whether the plugin is available in a certain store
+        ///     Check whether the plugin is available in a certain store
         /// </summary>
         /// <param name="pluginDescriptor">Plugin descriptor to check</param>
         /// <param name="loadMode">Load plugins mode</param>
@@ -59,7 +59,7 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Check whether the plugin is in a certain group
+        ///     Check whether the plugin is in a certain group
         /// </summary>
         /// <param name="pluginDescriptor">Plugin descriptor to check</param>
         /// <param name="group">Group</param>
@@ -76,11 +76,11 @@ namespace TinyCms.Core.Plugins
         }
 
         #endregion
-        
+
         #region Methods
 
         /// <summary>
-        /// Check whether the plugin is available in a certain store
+        ///     Check whether the plugin is available in a certain store
         /// </summary>
         /// <param name="pluginDescriptor">Plugin descriptor to check</param>
         /// <param name="storeId">Store identifier to check</param>
@@ -94,7 +94,7 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Gets plugin groups
+        ///     Gets plugin groups
         /// </summary>
         /// <returns>Plugins groups</returns>
         public virtual IEnumerable<string> GetPluginGroups()
@@ -103,27 +103,28 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Gets plugins
+        ///     Gets plugins
         /// </summary>
         /// <typeparam name="T">The type of plugins to get.</typeparam>
         /// <param name="loadMode">Load plugins mode</param>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <param name="group">Filter by plugin group; pass null to load all records</param>
         /// <returns>Plugins</returns>
-        public virtual IEnumerable<T> GetPlugins<T>(LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly, 
+        public virtual IEnumerable<T> GetPlugins<T>(LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly,
             int storeId = 0, string group = null) where T : class, IPlugin
         {
             return GetPluginDescriptors<T>(loadMode, storeId, group).Select(p => p.Instance<T>());
         }
 
         /// <summary>
-        /// Get plugin descriptors
+        ///     Get plugin descriptors
         /// </summary>
         /// <param name="loadMode">Load plugins mode</param>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <param name="group">Filter by plugin group; pass null to load all records</param>
         /// <returns>Plugin descriptors</returns>
-        public virtual IEnumerable<PluginDescriptor> GetPluginDescriptors(LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly,
+        public virtual IEnumerable<PluginDescriptor> GetPluginDescriptors(
+            LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly,
             int storeId = 0, string group = null)
         {
             //ensure plugins are loaded
@@ -133,49 +134,52 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Get plugin descriptors
+        ///     Get plugin descriptors
         /// </summary>
         /// <typeparam name="T">The type of plugin to get.</typeparam>
         /// <param name="loadMode">Load plugins mode</param>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <param name="group">Filter by plugin group; pass null to load all records</param>
         /// <returns>Plugin descriptors</returns>
-        public virtual IEnumerable<PluginDescriptor> GetPluginDescriptors<T>(LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly,
-            int storeId = 0, string group = null) 
+        public virtual IEnumerable<PluginDescriptor> GetPluginDescriptors<T>(
+            LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly,
+            int storeId = 0, string group = null)
             where T : class, IPlugin
         {
             return GetPluginDescriptors(loadMode, storeId, group)
-                .Where(p => typeof(T).IsAssignableFrom(p.PluginType));
+                .Where(p => typeof (T).IsAssignableFrom(p.PluginType));
         }
 
         /// <summary>
-        /// Get a plugin descriptor by its system name
+        ///     Get a plugin descriptor by its system name
         /// </summary>
         /// <param name="systemName">Plugin system name</param>
         /// <param name="loadMode">Load plugins mode</param>
         /// <returns>>Plugin descriptor</returns>
-        public virtual PluginDescriptor GetPluginDescriptorBySystemName(string systemName, LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly)
+        public virtual PluginDescriptor GetPluginDescriptorBySystemName(string systemName,
+            LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly)
         {
             return GetPluginDescriptors(loadMode)
                 .SingleOrDefault(p => p.SystemName.Equals(systemName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
-        /// Get a plugin descriptor by its system name
+        ///     Get a plugin descriptor by its system name
         /// </summary>
         /// <typeparam name="T">The type of plugin to get.</typeparam>
         /// <param name="systemName">Plugin system name</param>
         /// <param name="loadMode">Load plugins mode</param>
         /// <returns>>Plugin descriptor</returns>
-        public virtual PluginDescriptor GetPluginDescriptorBySystemName<T>(string systemName, LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly)
+        public virtual PluginDescriptor GetPluginDescriptorBySystemName<T>(string systemName,
+            LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly)
             where T : class, IPlugin
         {
             return GetPluginDescriptors<T>(loadMode)
                 .SingleOrDefault(p => p.SystemName.Equals(systemName, StringComparison.InvariantCultureIgnoreCase));
         }
-        
+
         /// <summary>
-        /// Reload plugins
+        ///     Reload plugins
         /// </summary>
         public virtual void ReloadPlugins()
         {

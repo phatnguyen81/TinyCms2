@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
-using TinyCms.Core.Domain.Catalog;
-using TinyCms.Web.Framework;
 using TinyCms.Web.Framework.Mvc;
 using TinyCms.Web.Models.Media;
 
 namespace TinyCms.Web.Models.Posts
 {
-    public partial class    PostDetailsModel : BaseNopEntityModel
+    public class PostDetailsModel : BaseNopEntityModel
     {
         public PostDetailsModel()
         {
@@ -21,7 +18,6 @@ namespace TinyCms.Web.Models.Posts
         //picture(s)
         public PictureModel DefaultPictureModel { get; set; }
         public IList<PictureModel> PictureModels { get; set; }
-
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string FullDescription { get; set; }
@@ -30,17 +26,13 @@ namespace TinyCms.Web.Models.Posts
         public string MetaDescription { get; set; }
         public string MetaTitle { get; set; }
         public string SeName { get; set; }
-
         public DateTime CreatedOn { get; set; }
-
         public PostBreadcrumbModel Breadcrumb { get; set; }
-
-
         public IList<PostTagModel> PostTags { get; set; }
-        
+
         #region Nested Classes
 
-        public partial class PostBreadcrumbModel : BaseNopModel
+        public class PostBreadcrumbModel : BaseNopModel
         {
             public PostBreadcrumbModel()
             {
@@ -54,6 +46,6 @@ namespace TinyCms.Web.Models.Posts
             public IList<CategorySimpleModel> CategoryBreadcrumb { get; set; }
         }
 
-		#endregion
+        #endregion
     }
 }

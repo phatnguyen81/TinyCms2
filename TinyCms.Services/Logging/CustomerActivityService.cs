@@ -12,46 +12,21 @@ using TinyCms.Data;
 namespace TinyCms.Services.Logging
 {
     /// <summary>
-    /// Customer activity service
+    ///     Customer activity service
     /// </summary>
     public class CustomerActivityService : ICustomerActivityService
     {
-        #region Constants
-
-        /// <summary>
-        /// Key for caching
-        /// </summary>
-        private const string ACTIVITYTYPE_ALL_KEY = "Nop.activitytype.all";
-        /// <summary>
-        /// Key pattern to clear cache
-        /// </summary>
-        private const string ACTIVITYTYPE_PATTERN_KEY = "Nop.activitytype.";
-
-        #endregion
-
-        #region Fields
-
-        /// <summary>
-        /// Cache manager
-        /// </summary>
-        private readonly ICacheManager _cacheManager;
-        private readonly IRepository<ActivityLog> _activityLogRepository;
-        private readonly IRepository<ActivityLogType> _activityLogTypeRepository;
-        private readonly IWorkContext _workContext;
-        private readonly IDbContext _dbContext;
-        private readonly IDataProvider _dataProvider;
-        private readonly CommonSettings _commonSettings;
-        #endregion
-        
         #region Ctor
+
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="cacheManager">Cache manager</param>
         /// <param name="activityLogRepository">Activity log repository</param>
         /// <param name="activityLogTypeRepository">Activity log type repository</param>
         /// <param name="workContext">Work context</param>
-        /// <param name="dbContext">DB context</param>>
+        /// <param name="dbContext">DB context</param>
+        /// >
         /// <param name="dataProvider">WeData provider</param>
         /// <param name="commonSettings">Common settings</param>
         public CustomerActivityService(ICacheManager cacheManager,
@@ -60,26 +35,13 @@ namespace TinyCms.Services.Logging
             IWorkContext workContext,
             IDbContext dbContext, IDataProvider dataProvider, CommonSettings commonSettings)
         {
-            this._cacheManager = cacheManager;
-            this._activityLogRepository = activityLogRepository;
-            this._activityLogTypeRepository = activityLogTypeRepository;
-            this._workContext = workContext;
-            this._dbContext = dbContext;
-            this._dataProvider = dataProvider;
-            this._commonSettings = commonSettings;
-        }
-
-        #endregion
-
-        #region Nested classes
-
-        [Serializable]
-        public class ActivityLogTypeForCaching
-        {
-            public int Id { get; set; }
-            public string SystemKeyword { get; set; }
-            public string Name { get; set; }
-            public bool Enabled { get; set; }
+            _cacheManager = cacheManager;
+            _activityLogRepository = activityLogRepository;
+            _activityLogTypeRepository = activityLogTypeRepository;
+            _workContext = workContext;
+            _dbContext = dbContext;
+            _dataProvider = dataProvider;
+            _commonSettings = commonSettings;
         }
 
         #endregion
@@ -87,13 +49,13 @@ namespace TinyCms.Services.Logging
         #region Utitlies
 
         /// <summary>
-        /// Gets all activity log types (class for caching)
+        ///     Gets all activity log types (class for caching)
         /// </summary>
         /// <returns>Activity log types</returns>
         protected virtual IList<ActivityLogTypeForCaching> GetAllActivityTypesCached()
         {
             //cache
-            string key = string.Format(ACTIVITYTYPE_ALL_KEY);
+            var key = string.Format(ACTIVITYTYPE_ALL_KEY);
             return _cacheManager.Get(key, () =>
             {
                 var result = new List<ActivityLogTypeForCaching>();
@@ -115,10 +77,53 @@ namespace TinyCms.Services.Logging
 
         #endregion
 
+        #region Nested classes
+
+        [Serializable]
+        public class ActivityLogTypeForCaching
+        {
+            public int Id { get; set; }
+            public string SystemKeyword { get; set; }
+            public string Name { get; set; }
+            public bool Enabled { get; set; }
+        }
+
+        #endregion
+
+        #region Constants
+
+        /// <summary>
+        ///     Key for caching
+        /// </summary>
+        private const string ACTIVITYTYPE_ALL_KEY = "Nop.activitytype.all";
+
+        /// <summary>
+        ///     Key pattern to clear cache
+        /// </summary>
+        private const string ACTIVITYTYPE_PATTERN_KEY = "Nop.activitytype.";
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        ///     Cache manager
+        /// </summary>
+        private readonly ICacheManager _cacheManager;
+
+        private readonly IRepository<ActivityLog> _activityLogRepository;
+        private readonly IRepository<ActivityLogType> _activityLogTypeRepository;
+        private readonly IWorkContext _workContext;
+        private readonly IDbContext _dbContext;
+        private readonly IDataProvider _dataProvider;
+        private readonly CommonSettings _commonSettings;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
-        /// Inserts an activity log type item
+        ///     Inserts an activity log type item
         /// </summary>
         /// <param name="activityLogType">Activity log type item</param>
         public virtual void InsertActivityType(ActivityLogType activityLogType)
@@ -131,7 +136,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Updates an activity log type item
+        ///     Updates an activity log type item
         /// </summary>
         /// <param name="activityLogType">Activity log type item</param>
         public virtual void UpdateActivityType(ActivityLogType activityLogType)
@@ -142,9 +147,9 @@ namespace TinyCms.Services.Logging
             _activityLogTypeRepository.Update(activityLogType);
             _cacheManager.RemoveByPattern(ACTIVITYTYPE_PATTERN_KEY);
         }
-                
+
         /// <summary>
-        /// Deletes an activity log type item
+        ///     Deletes an activity log type item
         /// </summary>
         /// <param name="activityLogType">Activity log type</param>
         public virtual void DeleteActivityType(ActivityLogType activityLogType)
@@ -157,7 +162,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Gets all activity log type items
+        ///     Gets all activity log type items
         /// </summary>
         /// <returns>Activity log type items</returns>
         public virtual IList<ActivityLogType> GetAllActivityTypes()
@@ -170,7 +175,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Gets an activity log type item
+        ///     Gets an activity log type item
         /// </summary>
         /// <param name="activityLogTypeId">Activity log type identifier</param>
         /// <returns>Activity log type item</returns>
@@ -183,7 +188,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Inserts an activity log item
+        ///     Inserts an activity log item
         /// </summary>
         /// <param name="systemKeyword">The system keyword</param>
         /// <param name="comment">The activity comment</param>
@@ -194,17 +199,17 @@ namespace TinyCms.Services.Logging
         {
             return InsertActivity(systemKeyword, comment, _workContext.CurrentCustomer, commentParams);
         }
-        
+
 
         /// <summary>
-        /// Inserts an activity log item
+        ///     Inserts an activity log item
         /// </summary>
         /// <param name="systemKeyword">The system keyword</param>
         /// <param name="comment">The activity comment</param>
         /// <param name="customer">The customer</param>
         /// <param name="commentParams">The activity comment parameters for string.Format() function.</param>
         /// <returns>Activity log item</returns>
-        public virtual ActivityLog InsertActivity(string systemKeyword, 
+        public virtual ActivityLog InsertActivity(string systemKeyword,
             string comment, Customer customer, params object[] commentParams)
         {
             if (customer == null)
@@ -219,7 +224,6 @@ namespace TinyCms.Services.Logging
             comment = string.Format(comment, commentParams);
             comment = CommonHelper.EnsureMaximumLength(comment, 4000);
 
-            
 
             var activity = new ActivityLog();
             activity.ActivityLogTypeId = activityType.Id;
@@ -231,9 +235,9 @@ namespace TinyCms.Services.Logging
 
             return activity;
         }
-        
+
         /// <summary>
-        /// Deletes an activity log item
+        ///     Deletes an activity log item
         /// </summary>
         /// <param name="activityLog">Activity log type</param>
         public virtual void DeleteActivity(ActivityLog activityLog)
@@ -245,7 +249,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Gets all activity log items
+        ///     Gets all activity log items
         /// </summary>
         /// <param name="createdOnFrom">Log item creation from; null to load all customers</param>
         /// <param name="createdOnTo">Log item creation to; null to load all customers</param>
@@ -273,9 +277,9 @@ namespace TinyCms.Services.Logging
             var activityLog = new PagedList<ActivityLog>(query, pageIndex, pageSize);
             return activityLog;
         }
-        
+
         /// <summary>
-        /// Gets an activity log item
+        ///     Gets an activity log item
         /// </summary>
         /// <param name="activityLogId">Activity log identifier</param>
         /// <returns>Activity log item</returns>
@@ -288,7 +292,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Clears activity log
+        ///     Clears activity log
         /// </summary>
         public virtual void ClearAllActivities()
         {
@@ -299,7 +303,7 @@ namespace TinyCms.Services.Logging
 
 
                 //do all databases support "Truncate command"?
-                string activityLogTableName = _dbContext.GetTableName<ActivityLog>();
+                var activityLogTableName = _dbContext.GetTableName<ActivityLog>();
                 _dbContext.ExecuteSqlCommand(String.Format("TRUNCATE TABLE [{0}]", activityLogTableName));
             }
             else
@@ -309,7 +313,7 @@ namespace TinyCms.Services.Logging
                     _activityLogRepository.Delete(activityLogItem);
             }
         }
-        #endregion
 
+        #endregion
     }
 }

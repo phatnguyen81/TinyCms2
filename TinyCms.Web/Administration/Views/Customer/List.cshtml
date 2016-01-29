@@ -1,8 +1,9 @@
-﻿@model CustomerListModel
-@using System.Globalization;
+﻿@using System.Globalization
+@using TinyCms.Core.Domain.Common
+@model CustomerListModel
 @{
-    var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
-    var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+    var defaultGridPageSize = EngineContext.Current.Resolve<AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<AdminAreaSettings>().GridPageSizes;
 
     //page title
     ViewBag.Title = T("Admin.Customers.Customers").Text;
@@ -12,15 +13,15 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-customers.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-customers.png")" alt=""/>
             @T("Admin.Customers.Customers")
         </div>
         <div class="options">
             <a href="@Url.Action("Create")" class="k-button">@T("Admin.Common.AddNew")</a>
-            <input type="submit" name="exportxml-all" class="k-button" value="@T("Admin.Common.ExportToXml.All")" />
-            <input type="button" id="exportxml-selected" class="k-button" value="@T("Admin.Common.ExportToXml.Selected")" />
-            <input type="submit" name="exportexcel-all" class="k-button" value="@T("Admin.Common.ExportToExcel.All")" />
-            <input type="button" id="exportexcel-selected" class="k-button" value="@T("Admin.Common.ExportToExcel.Selected")" />
+            <input type="submit" name="exportxml-all" class="k-button" value="@T("Admin.Common.ExportToXml.All")"/>
+            <input type="button" id="exportxml-selected" class="k-button" value="@T("Admin.Common.ExportToXml.Selected")"/>
+            <input type="submit" name="exportexcel-all" class="k-button" value="@T("Admin.Common.ExportToExcel.All")"/>
+            <input type="button" id="exportexcel-selected" class="k-button" value="@T("Admin.Common.ExportToExcel.Selected")"/>
         </div>
     </div>
     <table width="100%">
@@ -32,12 +33,12 @@
                 @foreach (var customerRole in Model.AvailableCustomerRoles)
                 {
                     <input type="checkbox" name="SearchCustomerRoleIds" value="@customerRole.Id"
-                @if (Model.SearchCustomerRoleIds != null && Model.SearchCustomerRoleIds.Contains(customerRole.Id))
-                {
-                    <text>checked="checked"</text>
-                }
-                />@customerRole.Name
-                    <br />
+                           @if (Model.SearchCustomerRoleIds != null && Model.SearchCustomerRoleIds.Contains(customerRole.Id))
+                           {
+                               <text>checked="checked"</text>
+                           }/>
+                    @customerRole.Name
+                    <br/>
                 }
             </td>
         </tr>
@@ -84,25 +85,25 @@
                 </td>
                 <td class="adminData">
                     @{
-            var monthOfBirthValues = new List<SelectListItem>();
-            monthOfBirthValues.Add(new SelectListItem { Text = T("Admin.Customers.Customers.List.SearchDateOfBirth.Month").Text, Value = "0" });
-            for (int i = 1; i <= 12; i++)
-            {
-                monthOfBirthValues.Add(new SelectListItem { Text = i.ToString(CultureInfo.InvariantCulture), Value = i.ToString(CultureInfo.InvariantCulture) });
-            }
-            var dayOfBirthValues = new List<SelectListItem>();
-            dayOfBirthValues.Add(new SelectListItem { Text = T("Admin.Customers.Customers.List.SearchDateOfBirth.Day").Text, Value = "0" });
-            for (int i = 1; i <= 31; i++)
-            {
-                dayOfBirthValues.Add(new SelectListItem { Text = i.ToString(CultureInfo.InvariantCulture), Value = i.ToString(CultureInfo.InvariantCulture) });
-            }
+                        var monthOfBirthValues = new List<SelectListItem>();
+                        monthOfBirthValues.Add(new SelectListItem {Text = T("Admin.Customers.Customers.List.SearchDateOfBirth.Month").Text, Value = "0"});
+                        for (var i = 1; i <= 12; i++)
+                        {
+                            monthOfBirthValues.Add(new SelectListItem {Text = i.ToString(CultureInfo.InvariantCulture), Value = i.ToString(CultureInfo.InvariantCulture)});
+                        }
+                        var dayOfBirthValues = new List<SelectListItem>();
+                        dayOfBirthValues.Add(new SelectListItem {Text = T("Admin.Customers.Customers.List.SearchDateOfBirth.Day").Text, Value = "0"});
+                        for (var i = 1; i <= 31; i++)
+                        {
+                            dayOfBirthValues.Add(new SelectListItem {Text = i.ToString(CultureInfo.InvariantCulture), Value = i.ToString(CultureInfo.InvariantCulture)});
+                        }
                     }
                     @Html.DropDownListFor(model => model.SearchMonthOfBirth, monthOfBirthValues)
                     @Html.DropDownListFor(model => model.SearchDayOfBirth, dayOfBirthValues)
                 </td>
             </tr>
         }
-        
+
         @if (Model.CompanyEnabled)
         {
             <tr>
@@ -113,7 +114,7 @@
                     @Html.EditorFor(model => model.SearchCompany)
                 </td>
             </tr>
-        }        
+        }
         @if (Model.PhoneEnabled)
         {
             <tr>
@@ -135,287 +136,457 @@
                     @Html.EditorFor(model => model.SearchZipPostalCode)
                 </td>
             </tr>
-        } 
+        }
         <tr>
             <td colspan="2">
-                <input type="button" id="search-customers" class="k-button" value="@T("Admin.Common.Search")" />
+                <input type="button" id="search-customers" class="k-button" value="@T("Admin.Common.Search")"/>
             </td>
         </tr>
     </table>
     <table class="adminContent">
-        <tr>
-            <td>
-                <div id="customers-grid"></div>
+    <tr>
+    <td>
+    <div id="customers-grid"></div>
 
-                <script>
-                    $(document).ready(function () {
-                        $("#customers-grid").kendoGrid({
-                            dataSource: {
-                                type: "json",
-                                transport: {
-                                    read: {
-                                        url: "@Html.Raw(Url.Action("CustomerList", "Customer"))",
-                                        type: "POST",
-                                        dataType: "json",
-                                        data: additionalData
-                                    }
-                                },
-                                schema: {
-                                    data: "Data",
-                                    total: "Total",
-                                    errors: "Errors"
-                                },
-                                error: function(e) {
-                                    display_kendoui_grid_error(e);
-                                    // Cancel the changes
-                                    this.cancelChanges();
-                                },
-                                pageSize: @(defaultGridPageSize),
-                                serverPaging: true,
-                                serverFiltering: true,
-                                serverSorting: true
-                            },
-                            pageable: {
-                                refresh: true,
-                                pageSizes: [@(gridPageSizes)]
-                            },
-                            scrollable: false,
-                            dataBound: onDataBound,
-                            columns: [{
-                                    field: "Id",
-                                    headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
-                                    headerAttributes: { style: "text-align:center" },
-                                    attributes: { style: "text-align:center" },
-                                    template: "<input type='checkbox' value='#=Id#' class='checkboxGroups'/>",
-                                    width: 50
-                                }, {
-                                    field: "Id",
-                                    title: "ID",
-                                    width: 50
-                                }, {
-                                    field: "Email",
-                                    title: "@T("Admin.Customers.Customers.Fields.Email")",
-                                    width: 200
-                                },
-                                @if (Model.UsernamesEnabled)
-                                {
-                                    <text>{
+    <script>
+        $(document).ready(function() {
+            $("#customers-grid").kendoGrid({
+                dataSource: {
+                    type: "json",
+                    transport: {
+                        read: {
+                            url: "@Html.Raw(Url.Action("CustomerList", "Customer"))",
+                            type: "POST",
+                            dataType: "json",
+                            data: additionalData
+                        }
+                    },
+                    schema: {
+                        data: "Data",
+                        total: "Total",
+                        errors: "Errors"
+                    },
+                    error: function(e) {
+                        display_kendoui_grid_error(e);
+                        // Cancel the changes
+                        this.cancelChanges();
+                    },
+                    pageSize: @(defaultGridPageSize),
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: [@(gridPageSizes)]
+                },
+                scrollable: false,
+                dataBound: onDataBound,
+                columns: [
+                    {
+                        field: "Id",
+                        headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
+                        headerAttributes: { style: "text-align:center" },
+                        attributes: { style: "text-align:center" },
+                        template: "<input type='checkbox' value='#=Id#' class='checkboxGroups'/>",
+                        width: 50
+                    }, {
+                        field: "Id",
+                        title: "ID",
+                        width: 50
+                    }, {
+                        field: "Email",
+                        title: "@T("Admin.Customers.Customers.Fields.Email")",
+                        width: 200
+                    },
+                    @if (Model.UsernamesEnabled)
+                    {
+                        <text>{
                 field: "Username",
                 title: "@T("Admin.Customers.Customers.Fields.Username")",
                 width: 200
             },</text>
-                                }
-                                {
-                                    field: "FullName",
-                                    title: "@T("Admin.Customers.Customers.Fields.FullName")",
-                                    width: 200
-                                }, {
-                                    field: "CustomerRoleNames",
-                                    title: "@T("Admin.Customers.Customers.Fields.CustomerRoles")",
-                                    width: 200
-                                }, 
+                    }
+                    {
+                        field: "FullName",
+                        title: "@T("Admin.Customers.Customers.Fields.FullName")",
+                        width: 200
+                    }, {
+                        field: "CustomerRoleNames",
+                        title: "@T("Admin.Customers.Customers.Fields.CustomerRoles")",
+                        width: 200
+                    }, 
             
-                                @if (Model.CompanyEnabled)
-                                {
-                                    <text>{
+                    @if (Model.CompanyEnabled)
+                    {
+                        <text>{
                 field: "Company",
                                     title: "@T("Admin.Customers.Customers.Fields.Company")",
             width: 200
         },</text>
-                                }
+                    }
         
-                                @if (Model.PhoneEnabled)
-                                {
-                                    <text>{
+                    @if (Model.PhoneEnabled)
+                    {
+                        <text>{
                 field: "Phone",
                     title: "@T("Admin.Customers.Customers.Fields.Phone")",
             width: 200
         },</text>
-                                }
+                    }
         
-                                @if (Model.ZipPostalCodeEnabled)
-                                {
-                                    <text>{
+                    @if (Model.ZipPostalCodeEnabled)
+                    {
+                        <text>{
                 field: "ZipPostalCode",
                     title: "@T("Admin.Customers.Customers.Fields.ZipPostalCode")",
             width: 200
         },</text>
-                                }
-                            {
-                                field: "Active",
-                                title: "@T("Admin.Customers.Customers.Fields.Active")",
-                                width: 100,
-                                headerAttributes: { style: "text-align:center" },
-                                attributes: { style: "text-align:center" },
-                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Active#.gif" />'
-                            }, {
-                                field: "CreatedOn",
-                                title: "@T("Admin.Customers.Customers.Fields.CreatedOn")",
-                                width: 200,
-                                type: "date",
-                                format: "{0:G}"
-                            }, {
-                                field: "LastActivityDate",
-                                title: "@T("Admin.Customers.Customers.Fields.LastActivityDate")",
-                                width: 200,
-                                type: "date",
-                                format: "{0:G}"
-                            }, {
-                                field: "Id",
-                                title: "@T("Admin.Common.Edit")",
-                                width: 50,
-                                template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
-                            }]
-                        });
-                    });
-                </script>
+                    }
+                {
+                    field: "Active",
+                    title: "@T("Admin.Customers.Customers.Fields.Active")",
+                    width: 100,
+                    headerAttributes: { style: "text-align:center" },
+                    attributes: { style: "text-align:center" },
+                    template: "<img src=\"@Url.Content(\
+                                              "~/Administration/Content/images/\")active-#=Active#.gif\" />"
+},
+    {
+        "CreatedOn",
+        "@T("
+        Admin.Customers.Customers.Fields.CreatedOn
+        ")",
+        200,
+        "date",
+        "{0:G}"
+    }
+                                              ,
+    {
+        "LastActivityDate",
+        "@T("
+        Admin.Customers.Customers.Fields.LastActivityDate
+        ")",
+        200,
+        "date",
+        "{0:G}"
+    }
+                                              ,
+    {
+        "Id",
+        "@T("
+        Admin.Common.Edit
+        ")",
+        50,
+        "<a href=\"Edit/#=Id#\">@T(\"Admin.Common.Edit\")</a>"
+    }
+                                              ]
+}
 
-                <script type="text/javascript">
+    );
+            });
+            </script>
 
-                    var selectedIds = [];
+    <script type="text/javascript">
 
-                    $(document).ready(function () {
+            var selectedIds = [];
 
-                        //search button
-                        $('#search-customers').click(function () {
-                            var grid = $('#customers-grid').data('kendoGrid');
-                            grid.dataSource.page(1); //new search. Set page size to 1
-                            //grid.dataSource.read(); we already loaded the grid above using "page" function
-                            //clear selected checkboxes
-                            $('.checkboxGroups').attr('checked', false).change();
-                            selectedIds = [];
-                            return false;
-                        });
+            $(document).ready(function() {
 
-                        $("#@Html.FieldIdFor(model => model.SearchEmail)").keydown(function (event) {
-                            if (event.keyCode == 13) {
-                                $("#search-customers").click();
-                                return false;
-                            }
-                        });
-                        $("#@Html.FieldIdFor(model => model.SearchUsername)").keydown(function (event) {
-                            if (event.keyCode == 13) {
-                                $("#search-customers").click();
-                                return false;
-                            }
-                        });
-                        $("#@Html.FieldIdFor(model => model.SearchFirstName)").keydown(function (event) {
-                            if (event.keyCode == 13) {
-                                $("#search-customers").click();
-                                return false;
-                            }
-                        });
-                        $("#@Html.FieldIdFor(model => model.SearchLastName)").keydown(function (event) {
-                            if (event.keyCode == 13) {
-                                $("#search-customers").click();
-                                return false;
-                            }
-                        });
-                        $("#@Html.FieldIdFor(model => model.SearchCompany)").keydown(function (event) {
-                            if (event.keyCode == 13) {
-                                $("#search-customers").click();
-                                return false;
-                            }
-                        });
-                        $("#@Html.FieldIdFor(model => model.SearchPhone)").keydown(function (event) {
-                            if (event.keyCode == 13) {
-                                $("#search-customers").click();
-                                return false;
-                            }
-                        });
-                        $("#@Html.FieldIdFor(model => model.SearchZipPostalCode)").keydown(function (event) {
-                            if (event.keyCode == 13) {
-                                $("#search-customers").click();
-                                return false;
-                            }
-                        });
-
-                        $('#mastercheckbox').click(function () {
-                            $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
-                        });
-
-                        //wire up checkboxes.
-                        $('#customers-grid').on('change', 'input[type=checkbox][id!=mastercheckbox]', function (e) {
-                            var $check = $(this);
-                            if ($check.is(":checked") == true) {
-                                var checked = jQuery.inArray($check.val(), selectedIds);
-                                if (checked == -1) {
-                                    //add id to selectedIds.
-                                    selectedIds.push($check.val());
-                                }
-                            }
-                            else {
-                                var checked = jQuery.inArray($check.val(), selectedIds);
-                                if (checked > -1) {
-                                    //remove id from selectedIds.
-                                    selectedIds = $.grep(selectedIds, function (item, index) {
-                                        return item != $check.val();
-                                    });
-                                }
-                            }
-                            updateMasterCheckbox();
-                        });
+                    //search button
+                    $("#search-customers").click(function() {
+                        var grid = $("#customers-grid").data("kendoGrid");
+                        grid.dataSource.page(1); //new search. Set page size to 1
+                        //grid.dataSource.read(); we already loaded the grid above using "page" function
+                        //clear selected checkboxes
+                        $(".checkboxGroups").attr("checked", false).change();
+                        selectedIds = [];
+                        return false;
                     });
 
-                    function onDataBound(e) {
+                    $("#@Html.FieldIdFor (
+                    private
+                    model
+                    =>
+                    private
+                    model.SearchEmail
+            )
+            ").keydown(function(event) {
+            if (event.keyCode == 13) {
 
-                        $('#customers-grid input[type=checkbox][id!=mastercheckbox]').each(function () {
-                            var currentId = $(this).val();
-                            var checked = jQuery.inArray(currentId, selectedIds);
-                            //set checked based on if current checkbox's value is in selectedIds.
-                            $(this).attr('checked', checked > -1);
-                        });
 
-                        updateMasterCheckbox();
-                    }
+                $("#search 
+                    - customers;
+                ").click();;
+                return false;
+            }
+        });
+        $("#@Html.FieldIdFor (
+        private model 
+    =>
+        private model.SearchUsername 
+    )
+        ").keydown(function(event) {
+        if (event.keyCode == 13) {
 
-                    function updateMasterCheckbox() {
-                        var numChkBoxes = $('#customers-grid input[type=checkbox][id!=mastercheckbox]').length;
-                        var numChkBoxesChecked = $('#customers-grid input[type=checkbox][id!=mastercheckbox]:checked').length;
-                        $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
-                    }
 
-                    function additionalData() {
-                        var customerRoleIds = [];
-                        $('[name=SearchCustomerRoleIds]:checked').each(function () {
-                            customerRoleIds.push($(this).val());
-                        });
+            $("#search 
+                - customers;
+            ").click();;
+            return false;
+        }
+        });
+        $("#@Html.FieldIdFor (
+        private model 
+    =>
+        private model.SearchFirstName 
+    )").keydown(function(event) {
+        if (event.keyCode == 13) {
 
-                        var data = {
-                            SearchCustomerRoleIds: customerRoleIds.join(","),
-                            SearchEmail: $('#@Html.FieldIdFor(model => model.SearchEmail)').val(),
-                            SearchUsername: $('#@Html.FieldIdFor(model => model.SearchUsername)').val(),
-                            SearchFirstName: $('#@Html.FieldIdFor(model => model.SearchFirstName)').val(),
-                            SearchLastName: $('#@Html.FieldIdFor(model => model.SearchLastName)').val(),
-                            SearchDayOfBirth: $('#@Html.FieldIdFor(model => model.SearchDayOfBirth)').val(),
-                            SearchMonthOfBirth: $('#@Html.FieldIdFor(model => model.SearchMonthOfBirth)').val(),
-                            SearchCompany: $('#@Html.FieldIdFor(model => model.SearchCompany)').val(),
-                            SearchPhone: $('#@Html.FieldIdFor(model => model.SearchPhone)').val(),
-                            SearchZipPostalCode: $('#@Html.FieldIdFor(model => model.SearchZipPostalCode)').val()
-                        };
-                        addAntiForgeryToken(data);
-                        return data;
-                    }
-                </script>
-            </td>
-        </tr>
+
+            $("#search 
+                - customers;
+            ").click();;
+            return false;
+        }
+        });
+        $("#@Html.FieldIdFor (
+        private
+        model
+        =>
+        private
+        model.SearchLastName
+        )
+        ").keydown(function(event) {
+        if (event.keyCode == 13) {
+
+
+                        $("#search 
+                - customers;
+            ").click();;
+            return false;
+        }
+        });
+        $("#@Html.FieldIdFor (
+        private
+        model
+        =>
+        private
+        model.SearchCompany
+        )
+        ").keydown(function(event) {
+        if (event.keyCode == 13) {
+
+
+            $("#search 
+                - customers;
+                        ").click();;
+            return false;
+        }
+        });
+        $("#@Html.FieldIdFor (
+        private
+        model
+        =>
+        private
+        model.SearchPhone
+        )
+        ").keydown(function(event) {
+        if (event.keyCode == 13) {
+
+
+            $("#search 
+                - customers;
+                        ").click();;
+            return false;
+        }
+        });
+        $("#@Html.FieldIdFor (
+        private
+        model
+        =>
+        private
+        model.SearchZipPostalCode
+        )
+        ").keydown(function(event) {
+        if (event.keyCode == 13) {
+
+
+            $("#search 
+                - customers;
+            ").click();;
+            return false;
+        }
+        });
+
+        $("#mastercheckbox").click(function() {
+            $(".checkboxGroups").attr("checked", $(this).is(":checked")).change();
+        });
+
+        //wire up checkboxes.
+        $("#customers-grid").on("change", "input[type=checkbox][id!=mastercheckbox]", function(e) {
+            var $check = $(this);
+            if ($check.is(":checked") == true) {
+                var checked = jQuery.inArray($check.val(), selectedIds);
+                if (checked == -1) {
+                    //add id to selectedIds.
+                    selectedIds.push($check.val());
+                }
+            } else {
+                var checked = jQuery.inArray($check.val(), selectedIds);
+                if (checked > -1) {
+                    //remove id from selectedIds.
+                    selectedIds = $.grep(selectedIds, function(item, index) {
+                        return item != $check.val();
+                    });
+                }
+            }
+            updateMasterCheckbox();
+        });
+        });
+
+        function onDataBound(e) {
+
+            $("#customers-grid input[type=checkbox][id!=mastercheckbox]").each(function() {
+                var currentId = $(this).val();
+                var checked = jQuery.inArray(currentId, selectedIds);
+                //set checked based on if current checkbox's value is in selectedIds.
+                $(this).attr("checked", checked > -1);
+            });
+
+            updateMasterCheckbox();
+        }
+
+        function updateMasterCheckbox() {
+            var numChkBoxes = $("#customers-grid input[type=checkbox][id!=mastercheckbox]").length;
+            var numChkBoxesChecked = $("#customers-grid input[type=checkbox][id!=mastercheckbox]:checked").length;
+            $("#mastercheckbox").attr("checked", numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+        }
+
+        function additionalData() {
+            var customerRoleIds = [];
+            $("[name=SearchCustomerRoleIds]:checked").each(function() {
+                customerRoleIds.push($(this).val());
+            });
+
+            var data = {
+                SearchCustomerRoleIds: customerRoleIds.join(","),
+                SearchEmail: $("#@Html.FieldIdFor (
+            private model
+            =>
+            private model.SearchEmail
+        )
+        ").val(),
+        SearchUsername: $("#@Html.FieldIdFor (
+        private
+        model
+        =>
+        private
+        model.SearchUsername
+        )
+        ").val(),
+        SearchFirstName: $("#@Html.FieldIdFor (
+        private
+        model
+        =>
+        private
+        model.SearchFirstName
+        )
+        ").val(),
+        Se
+        a
+        rchLa
+        tN
+        me: $("#@Html.Fie  
+                    ldIdFor(model => model.SearchLastName);
+                ").val(),;
+        SearchDayOf;
+        Birth: $("#@Html.FieldIdFor (
+        private model 
+    =>
+        private model.SearchDayOfBirth 
+    )
+        ").val(),
+        SearchMon;
+        thOfBirth: $("#@Html.FieldIdFor (
+        private model 
+    =>
+        private model.SearchMonthOfBirth 
+    )
+        ").val(),
+        S;
+        earchCompany: $("#@Html.FieldIdFor (
+        private model 
+    =>
+        private model.SearchCompany 
+    )
+        ").val(),
+        SearchP;
+        hone: $("#@Html.FieldIdFor (
+        private model 
+    =>
+        private model.SearchPhone 
+    )
+        ").val(),
+        SearchZipPostalCode:;
+        $("#@Html.FieldIdFor (
+        private model 
+    =>
+        private model.SearchZipPostalCode 
+    )
+        ").val();
+        };
+
+        addAntiForgeryToken(data);
+        return d;
+        ata;
+        }
+    </script>
+    </td>
+    </tr>
     </table>
-}
+    }
 
-@*export selected (XML). We don't use GET approach because it's limited to 2K-4K chars and won't work for large number of entities*@
-@using (Html.BeginForm("ExportXmlSelected", "Customer", FormMethod.Post, new { id = "export-xml-selected-form" }))
+@*export s e
+        lecte 
+     (
+        ML). We don't use GET app 
+    roach because it's limited to 2K-4K chars and won't work for large number of entities*@
+@using (Html.BeginForm("ExportXmlSelected", "Customer", FormMethod.Post,
+new
+
 {
-    @Html.AntiForgeryToken()
-    <input type="hidden" id="selectedIds" name="selectedIds" value="" />
+    id = "export-xml-selected-form"
 }
-<script type="text/javascript">
+))
+{
+    private @Html
+.AntiForge ryToken ()
 
-    $(document).ready(function () {
-        $('#exportxml-selected').click(function (e) {
+    private <input type="hidden"     id="selectedIds" name="selectedds" value=    "" />
+ }
+        
+<script t y pe="text
+        ja 
+vascript">
+
+
+           $ 
+(document).rea
+        y(fun 
+ction()     {
+        $("#exportxml-selected").click(function(e) {
+
+
             e.preventDefault();
-            var ids = selectedIds.join(",");
-            $('#export-xml-selected-form #selectedIds').val(ids);
-            $('#export-xml-selected-form').submit();
+
+
+            va;
+            r;
+            ids = selectedIds.jo in
+            (",");
+            $("#export-xml-selected-form #selectedIds").val(ids);
+            $("#export-xml-selected-form").submit();
             return false;
         });
     });
@@ -427,15 +598,15 @@
 {
     @Html.AntiForgeryToken()
     <input type="hidden" id="selectedIds" name="selectedIds" value="" />
-}
+    }
 <script type="text/javascript">
 
-    $(document).ready(function () {
-        $('#exportexcel-selected').click(function (e) {
+    $(document).ready(function() {
+        $("#exportexcel-selected").click(function(e) {
             e.preventDefault();
             var ids = selectedIds.join(",");
-            $('#export-excel-selected-form #selectedIds').val(ids);
-            $('#export-excel-selected-form').submit();
+            $("#export-excel-selected-form #selectedIds").val(ids);
+            $("#export-excel-selected-form").submit();
             return false;
         });
     });

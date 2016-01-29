@@ -11,20 +11,10 @@ using TinyCms.Services.Events;
 namespace TinyCms.Services.Messages
 {
     /// <summary>
-    /// Newsletter subscription service
+    ///     Newsletter subscription service
     /// </summary>
     public class NewsLetterSubscriptionService : INewsLetterSubscriptionService
     {
-        #region Fields
-
-        private readonly IEventPublisher _eventPublisher;
-        private readonly IDbContext _context;
-        private readonly IRepository<NewsLetterSubscription> _subscriptionRepository;
-        private readonly IRepository<Customer> _customerRepository;
-        private readonly ICustomerService _customerService;
-
-        #endregion
-
         #region Ctor
 
         public NewsLetterSubscriptionService(IDbContext context,
@@ -33,11 +23,11 @@ namespace TinyCms.Services.Messages
             IEventPublisher eventPublisher,
             ICustomerService customerService)
         {
-            this._context = context;
-            this._subscriptionRepository = subscriptionRepository;
-            this._customerRepository = customerRepository;
-            this._eventPublisher = eventPublisher;
-            this._customerService = customerService;
+            _context = context;
+            _subscriptionRepository = subscriptionRepository;
+            _customerRepository = customerRepository;
+            _eventPublisher = eventPublisher;
+            _customerService = customerService;
         }
 
         #endregion
@@ -45,7 +35,7 @@ namespace TinyCms.Services.Messages
         #region Utilities
 
         /// <summary>
-        /// Publishes the subscription event.
+        ///     Publishes the subscription event.
         /// </summary>
         /// <param name="email">The email.</param>
         /// <param name="isSubscribe">if set to <c>true</c> [is subscribe].</param>
@@ -64,16 +54,28 @@ namespace TinyCms.Services.Messages
                 }
             }
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly IEventPublisher _eventPublisher;
+        private readonly IDbContext _context;
+        private readonly IRepository<NewsLetterSubscription> _subscriptionRepository;
+        private readonly IRepository<Customer> _customerRepository;
+        private readonly ICustomerService _customerService;
+
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Inserts a newsletter subscription
+        ///     Inserts a newsletter subscription
         /// </summary>
         /// <param name="newsLetterSubscription">NewsLetter subscription</param>
         /// <param name="publishSubscriptionEvents">if set to <c>true</c> [publish subscription events].</param>
-        public virtual void InsertNewsLetterSubscription(NewsLetterSubscription newsLetterSubscription, bool publishSubscriptionEvents = true)
+        public virtual void InsertNewsLetterSubscription(NewsLetterSubscription newsLetterSubscription,
+            bool publishSubscriptionEvents = true)
         {
             if (newsLetterSubscription == null)
             {
@@ -97,11 +99,12 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Updates a newsletter subscription
+        ///     Updates a newsletter subscription
         /// </summary>
         /// <param name="newsLetterSubscription">NewsLetter subscription</param>
         /// <param name="publishSubscriptionEvents">if set to <c>true</c> [publish subscription events].</param>
-        public virtual void UpdateNewsLetterSubscription(NewsLetterSubscription newsLetterSubscription, bool publishSubscriptionEvents = true)
+        public virtual void UpdateNewsLetterSubscription(NewsLetterSubscription newsLetterSubscription,
+            bool publishSubscriptionEvents = true)
         {
             if (newsLetterSubscription == null)
             {
@@ -124,8 +127,8 @@ namespace TinyCms.Services.Messages
                 //If the previous entry was false, but this one is true, publish a subscribe.
                 PublishSubscriptionEvent(newsLetterSubscription.Email, true, publishSubscriptionEvents);
             }
-            
-            if ((originalSubscription.Active && newsLetterSubscription.Active) && 
+
+            if ((originalSubscription.Active && newsLetterSubscription.Active) &&
                 (originalSubscription.Email != newsLetterSubscription.Email))
             {
                 //If the two emails are different publish an unsubscribe.
@@ -143,11 +146,12 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Deletes a newsletter subscription
+        ///     Deletes a newsletter subscription
         /// </summary>
         /// <param name="newsLetterSubscription">NewsLetter subscription</param>
         /// <param name="publishSubscriptionEvents">if set to <c>true</c> [publish subscription events].</param>
-        public virtual void DeleteNewsLetterSubscription(NewsLetterSubscription newsLetterSubscription, bool publishSubscriptionEvents = true)
+        public virtual void DeleteNewsLetterSubscription(NewsLetterSubscription newsLetterSubscription,
+            bool publishSubscriptionEvents = true)
         {
             if (newsLetterSubscription == null) throw new ArgumentNullException("newsLetterSubscription");
 
@@ -161,7 +165,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Gets a newsletter subscription by newsletter subscription identifier
+        ///     Gets a newsletter subscription by newsletter subscription identifier
         /// </summary>
         /// <param name="newsLetterSubscriptionId">The newsletter subscription identifier</param>
         /// <returns>NewsLetter subscription</returns>
@@ -173,7 +177,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Gets a newsletter subscription by newsletter subscription GUID
+        ///     Gets a newsletter subscription by newsletter subscription GUID
         /// </summary>
         /// <param name="newsLetterSubscriptionGuid">The newsletter subscription GUID</param>
         /// <returns>NewsLetter subscription</returns>
@@ -182,40 +186,43 @@ namespace TinyCms.Services.Messages
             if (newsLetterSubscriptionGuid == Guid.Empty) return null;
 
             var newsLetterSubscriptions = from nls in _subscriptionRepository.Table
-                                          where nls.NewsLetterSubscriptionGuid == newsLetterSubscriptionGuid
-                                          orderby nls.Id
-                                          select nls;
+                where nls.NewsLetterSubscriptionGuid == newsLetterSubscriptionGuid
+                orderby nls.Id
+                select nls;
 
             return newsLetterSubscriptions.FirstOrDefault();
         }
 
         /// <summary>
-        /// Gets a newsletter subscription by email and store ID
+        ///     Gets a newsletter subscription by email and store ID
         /// </summary>
         /// <param name="email">The newsletter subscription email</param>
         /// <param name="storeId">Store identifier</param>
         /// <returns>NewsLetter subscription</returns>
         public virtual NewsLetterSubscription GetNewsLetterSubscriptionByEmailAndStoreId(string email)
         {
-            if (!CommonHelper.IsValidEmail(email)) 
+            if (!CommonHelper.IsValidEmail(email))
                 return null;
 
             email = email.Trim();
 
             var newsLetterSubscriptions = from nls in _subscriptionRepository.Table
-                                          where nls.Email == email 
-                                          orderby nls.Id
-                                          select nls;
+                where nls.Email == email
+                orderby nls.Id
+                select nls;
 
             return newsLetterSubscriptions.FirstOrDefault();
         }
 
         /// <summary>
-        /// Gets the newsletter subscription list
+        ///     Gets the newsletter subscription list
         /// </summary>
         /// <param name="email">Email to search or string. Empty to load all records.</param>
         /// <param name="storeId">Store identifier. 0 to load all records.</param>
-        /// <param name="customerRoleId">Customer role identifier. Used to filter subscribers by customer role. 0 to load all records.</param>
+        /// <param name="customerRoleId">
+        ///     Customer role identifier. Used to filter subscribers by customer role. 0 to load all
+        ///     records.
+        /// </param>
         /// <param name="isActive">Value indicating whether subscriber record should be active or not; null to load all records</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
@@ -237,48 +244,46 @@ namespace TinyCms.Services.Messages
                 var subscriptions = new PagedList<NewsLetterSubscription>(query, pageIndex, pageSize);
                 return subscriptions;
             }
+            //filter by customer role
+            var guestRole = _customerService.GetCustomerRoleBySystemName(SystemCustomerRoleNames.Guests);
+            if (guestRole == null)
+                throw new NopException("'Guests' role could not be loaded");
+
+            if (guestRole.Id == customerRoleId)
+            {
+                //guests
+                var query = _subscriptionRepository.Table;
+                if (!String.IsNullOrEmpty(email))
+                    query = query.Where(nls => nls.Email.Contains(email));
+                if (isActive.HasValue)
+                    query = query.Where(nls => nls.Active == isActive.Value);
+                query = query.Where(nls => !_customerRepository.Table.Any(c => c.Email == nls.Email));
+                query = query.OrderBy(nls => nls.Email);
+
+                var subscriptions = new PagedList<NewsLetterSubscription>(query, pageIndex, pageSize);
+                return subscriptions;
+            }
             else
             {
-                //filter by customer role
-                var guestRole = _customerService.GetCustomerRoleBySystemName(SystemCustomerRoleNames.Guests);
-                if (guestRole == null)
-                    throw new NopException("'Guests' role could not be loaded");
+                //other customer roles (not guests)
+                var query = _subscriptionRepository.Table.Join(_customerRepository.Table,
+                    nls => nls.Email,
+                    c => c.Email,
+                    (nls, c) => new
+                    {
+                        NewsletterSubscribers = nls,
+                        Customer = c
+                    });
+                query = query.Where(x => x.Customer.CustomerRoles.Any(cr => cr.Id == customerRoleId));
+                if (!String.IsNullOrEmpty(email))
+                    query = query.Where(x => x.NewsletterSubscribers.Email.Contains(email));
+                if (isActive.HasValue)
+                    query = query.Where(x => x.NewsletterSubscribers.Active == isActive.Value);
+                query = query.OrderBy(x => x.NewsletterSubscribers.Email);
 
-                if (guestRole.Id == customerRoleId)
-                {
-                    //guests
-                    var query = _subscriptionRepository.Table;
-                    if (!String.IsNullOrEmpty(email))
-                        query = query.Where(nls => nls.Email.Contains(email));
-                    if (isActive.HasValue)
-                        query = query.Where(nls => nls.Active == isActive.Value);
-                    query = query.Where(nls => !_customerRepository.Table.Any(c => c.Email == nls.Email));
-                    query = query.OrderBy(nls => nls.Email);
-                    
-                    var subscriptions = new PagedList<NewsLetterSubscription>(query, pageIndex, pageSize);
-                    return subscriptions;
-                }
-                else
-                {
-                    //other customer roles (not guests)
-                    var query = _subscriptionRepository.Table.Join(_customerRepository.Table,
-                        nls => nls.Email,
-                        c => c.Email,
-                        (nls, c) => new
-                        {
-                            NewsletterSubscribers = nls,
-                            Customer = c
-                        });
-                    query = query.Where(x => x.Customer.CustomerRoles.Any(cr => cr.Id == customerRoleId));
-                    if (!String.IsNullOrEmpty(email))
-                        query = query.Where(x => x.NewsletterSubscribers.Email.Contains(email));
-                    if (isActive.HasValue)
-                        query = query.Where(x => x.NewsletterSubscribers.Active == isActive.Value);
-                    query = query.OrderBy(x => x.NewsletterSubscribers.Email);
-
-                    var subscriptions = new PagedList<NewsLetterSubscription>(query.Select(x=>x.NewsletterSubscribers), pageIndex, pageSize);
-                    return subscriptions;
-                }
+                var subscriptions = new PagedList<NewsLetterSubscription>(query.Select(x => x.NewsletterSubscribers),
+                    pageIndex, pageSize);
+                return subscriptions;
             }
         }
 

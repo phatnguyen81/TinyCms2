@@ -6,14 +6,12 @@ using TinyCms.Core.Domain.Posts;
 namespace TinyCms.Services.Posts
 {
     /// <summary>
-    /// Extensions
+    ///     Extensions
     /// </summary>
     public static class PostExtensions
     {
-     
-        
         /// <summary>
-        /// Indicates whether a post tag exists
+        ///     Indicates whether a post tag exists
         /// </summary>
         /// <param name="post">Post</param>
         /// <param name="postTagId">Post tag identifier</param>
@@ -24,12 +22,12 @@ namespace TinyCms.Services.Posts
             if (post == null)
                 throw new ArgumentNullException("post");
 
-            bool result = post.PostTags.ToList().Find(pt => pt.Id == postTagId) != null;
+            var result = post.PostTags.ToList().Find(pt => pt.Id == postTagId) != null;
             return result;
         }
 
         /// <summary>
-        /// Finds a related post item by specified identifiers
+        ///     Finds a related post item by specified identifiers
         /// </summary>
         /// <param name="source">Source</param>
         /// <param name="postId1">The first post identifier</param>
@@ -38,12 +36,10 @@ namespace TinyCms.Services.Posts
         public static RelatedPost FindRelatedPost(this IList<RelatedPost> source,
             int postId1, int postId2)
         {
-            foreach (RelatedPost relatedPost in source)
+            foreach (var relatedPost in source)
                 if (relatedPost.PostId1 == postId1 && relatedPost.PostId2 == postId2)
                     return relatedPost;
             return null;
         }
-
-  
     }
 }

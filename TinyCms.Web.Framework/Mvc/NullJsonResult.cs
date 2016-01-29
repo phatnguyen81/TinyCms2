@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Mime;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 
@@ -19,7 +18,7 @@ namespace TinyCms.Web.Framework.Mvc
             if (ContentEncoding != null)
                 response.ContentEncoding = ContentEncoding;
 
-            this.Data = null;
+            Data = null;
 
             //If you need special handling, you can call another form of SerializeObject below
             var serializedObject = JsonConvert.SerializeObject(Data, Formatting.Indented);

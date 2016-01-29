@@ -1,6 +1,5 @@
-﻿
-namespace TinyCms.Core.Domain.Customers 
-{ 
+﻿namespace TinyCms.Core.Domain.Customers
+{
     public enum PasswordFormat
     {
         Clear = 0,

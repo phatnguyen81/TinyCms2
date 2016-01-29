@@ -5,7 +5,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Plugins
 {
-    public partial class PluginListModel : BaseNopModel
+    public class PluginListModel : BaseNopModel
     {
         public PluginListModel()
         {
@@ -15,11 +15,13 @@ namespace TinyCms.Admin.Models.Plugins
 
         [NopResourceDisplayName("Admin.Configuration.Plugins.LoadMode")]
         public int SearchLoadModeId { get; set; }
+
         [NopResourceDisplayName("Admin.Configuration.Plugins.Group")]
         public string SearchGroup { get; set; }
 
         [NopResourceDisplayName("Admin.Configuration.Plugins.LoadMode")]
         public IList<SelectListItem> AvailableLoadModes { get; set; }
+
         [NopResourceDisplayName("Admin.Configuration.Plugins.Group")]
         public IList<SelectListItem> AvailableGroups { get; set; }
     }

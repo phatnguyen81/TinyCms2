@@ -1,45 +1,53 @@
 namespace TinyCms.Core.Domain.Catalog
 {
     /// <summary>
-    /// Represents an attribute control type
+    ///     Represents an attribute control type
     /// </summary>
     public enum AttributeControlType
     {
         /// <summary>
-        /// Dropdown list
+        ///     Dropdown list
         /// </summary>
         DropdownList = 1,
+
         /// <summary>
-        /// Radio list
+        ///     Radio list
         /// </summary>
         RadioList = 2,
+
         /// <summary>
-        /// Checkboxes
+        ///     Checkboxes
         /// </summary>
         Checkboxes = 3,
+
         /// <summary>
-        /// TextBox
+        ///     TextBox
         /// </summary>
         TextBox = 4,
+
         /// <summary>
-        /// Multiline textbox
+        ///     Multiline textbox
         /// </summary>
         MultilineTextbox = 10,
+
         /// <summary>
-        /// Datepicker
+        ///     Datepicker
         /// </summary>
         Datepicker = 20,
+
         /// <summary>
-        /// File upload control
+        ///     File upload control
         /// </summary>
         FileUpload = 30,
+
         /// <summary>
-        /// Color squares
+        ///     Color squares
         /// </summary>
         ColorSquares = 40,
+
         /// <summary>
-        /// Read-only checkboxes
+        ///     Read-only checkboxes
         /// </summary>
-        ReadonlyCheckboxes = 50,
+        ReadonlyCheckboxes = 50
     }
 }

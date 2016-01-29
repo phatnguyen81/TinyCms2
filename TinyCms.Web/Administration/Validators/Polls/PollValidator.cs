@@ -9,7 +9,9 @@ namespace TinyCms.Admin.Validators.Polls
     {
         public PollValidator(ILocalizationService localizationService)
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage(localizationService.GetResource("Admin.ContentManagement.Polls.Fields.Name.Required"));
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .WithMessage(localizationService.GetResource("Admin.ContentManagement.Polls.Fields.Name.Required"));
         }
     }
 }

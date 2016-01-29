@@ -11,26 +11,31 @@ using TinyCms.Web.Framework.Kendoui;
 namespace TinyCms.Web.Framework
 {
     /// <summary>
-    /// Extensions
+    ///     Extensions
     /// </summary>
     public static class Extensions
     {
         public static IEnumerable<T> PagedForCommand<T>(this IEnumerable<T> current, DataSourceRequest command)
         {
-            return current.Skip((command.Page - 1) * command.PageSize).Take(command.PageSize);
+            return current.Skip((command.Page - 1)*command.PageSize).Take(command.PageSize);
         }
 
-        public static SelectList ToSelectList<TEnum>(this TEnum enumObj, 
+        public static SelectList ToSelectList<TEnum>(this TEnum enumObj,
             bool markCurrentAsSelected = true, int[] valuesToExclude = null) where TEnum : struct
         {
-            if (!typeof(TEnum).IsEnum) throw new ArgumentException("An Enumeration type is required.", "enumObj");
+            if (!typeof (TEnum).IsEnum) throw new ArgumentException("An Enumeration type is required.", "enumObj");
 
             var localizationService = EngineContext.Current.Resolve<ILocalizationService>();
             var workContext = EngineContext.Current.Resolve<IWorkContext>();
 
-            var values = from TEnum enumValue in Enum.GetValues(typeof(TEnum))
-                         where valuesToExclude == null || !valuesToExclude.Contains(Convert.ToInt32(enumValue))
-                         select new { ID = Convert.ToInt32(enumValue), Name = enumValue.GetLocalizedEnum(localizationService, workContext) };
+            var values = from TEnum enumValue in Enum.GetValues(typeof (TEnum))
+                where valuesToExclude == null || !valuesToExclude.Contains(Convert.ToInt32(enumValue))
+                select
+                    new
+                    {
+                        ID = Convert.ToInt32(enumValue),
+                        Name = enumValue.GetLocalizedEnum(localizationService, workContext)
+                    };
             object selectedValue = null;
             if (markCurrentAsSelected)
                 selectedValue = Convert.ToInt32(enumObj);
@@ -38,7 +43,7 @@ namespace TinyCms.Web.Framework
         }
 
         /// <summary>
-        /// Relative formatting of DateTime (e.g. 2 hours ago, a month ago)
+        ///     Relative formatting of DateTime (e.g. 2 hours ago, a month ago)
         /// </summary>
         /// <param name="source">Source (UTC format)</param>
         /// <returns>Formatted date and time string</returns>
@@ -46,8 +51,9 @@ namespace TinyCms.Web.Framework
         {
             return RelativeFormat(source, string.Empty);
         }
+
         /// <summary>
-        /// Relative formatting of DateTime (e.g. 2 hours ago, a month ago)
+        ///     Relative formatting of DateTime (e.g. 2 hours ago, a month ago)
         /// </summary>
         /// <param name="source">Source (UTC format)</param>
         /// <param name="defaultFormat">Default format string (in case relative formatting is not applied)</param>
@@ -56,20 +62,24 @@ namespace TinyCms.Web.Framework
         {
             return RelativeFormat(source, false, defaultFormat);
         }
+
         /// <summary>
-        /// Relative formatting of DateTime (e.g. 2 hours ago, a month ago)
+        ///     Relative formatting of DateTime (e.g. 2 hours ago, a month ago)
         /// </summary>
         /// <param name="source">Source (UTC format)</param>
-        /// <param name="convertToUserTime">A value indicating whether we should convet DateTime instance to user local time (in case relative formatting is not applied)</param>
+        /// <param name="convertToUserTime">
+        ///     A value indicating whether we should convet DateTime instance to user local time (in
+        ///     case relative formatting is not applied)
+        /// </param>
         /// <param name="defaultFormat">Default format string (in case relative formatting is not applied)</param>
         /// <returns>Formatted date and time string</returns>
         public static string RelativeFormat(this DateTime source,
             bool convertToUserTime, string defaultFormat)
         {
-            string result = "";
+            var result = "";
 
             var ts = new TimeSpan(DateTime.UtcNow.Ticks - source.Ticks);
-            double delta = ts.TotalSeconds;
+            var delta = ts.TotalSeconds;
 
             if (delta > 0)
             {
@@ -91,7 +101,7 @@ namespace TinyCms.Web.Framework
                 }
                 else if (delta < 86400) // 24 (hours) * 60 (minutes) * 60 (seconds)
                 {
-                    int hours = ts.Hours;
+                    var hours = ts.Hours;
                     if (hours == 1)
                         hours = 2;
                     result = hours + " hours ago";
@@ -106,18 +116,18 @@ namespace TinyCms.Web.Framework
                 }
                 else if (delta < 31104000) // 12 (months) * 30 (days) * 24 (hours) * 60 (minutes) * 60 (seconds)
                 {
-                    int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+                    var months = Convert.ToInt32(Math.Floor((double) ts.Days/30));
                     result = months <= 1 ? "one month ago" : months + " months ago";
                 }
                 else
                 {
-                    int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+                    var years = Convert.ToInt32(Math.Floor((double) ts.Days/365));
                     result = years <= 1 ? "one year ago" : years + " years ago";
                 }
             }
             else
             {
-                DateTime tmp1 = source;
+                var tmp1 = source;
                 if (convertToUserTime)
                 {
                     tmp1 = EngineContext.Current.Resolve<IDateTimeHelper>().ConvertToUserTime(tmp1, DateTimeKind.Utc);

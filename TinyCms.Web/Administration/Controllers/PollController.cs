@@ -14,9 +14,24 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class PollController : BaseAdminController
-	{
-		#region Fields
+    public class PollController : BaseAdminController
+    {
+        #region Constructors
+
+        public PollController(IPollService pollService, ILanguageService languageService,
+            IDateTimeHelper dateTimeHelper, ILocalizationService localizationService,
+            IPermissionService permissionService)
+        {
+            _pollService = pollService;
+            _languageService = languageService;
+            _dateTimeHelper = dateTimeHelper;
+            _localizationService = localizationService;
+            _permissionService = permissionService;
+        }
+
+        #endregion
+
+        #region Fields
 
         private readonly IPollService _pollService;
         private readonly ILanguageService _languageService;
@@ -24,23 +39,8 @@ namespace TinyCms.Admin.Controllers
         private readonly ILocalizationService _localizationService;
         private readonly IPermissionService _permissionService;
 
-		#endregion
+        #endregion
 
-		#region Constructors
-
-        public PollController(IPollService pollService, ILanguageService languageService,
-            IDateTimeHelper dateTimeHelper, ILocalizationService localizationService,
-            IPermissionService permissionService)
-        {
-            this._pollService = pollService;
-            this._languageService = languageService;
-            this._dateTimeHelper = dateTimeHelper;
-            this._localizationService = localizationService;
-            this._permissionService = permissionService;
-		}
-
-		#endregion 
-        
         #region Polls
 
         public ActionResult Index()
@@ -108,7 +108,7 @@ namespace TinyCms.Admin.Controllers
                 _pollService.InsertPoll(poll);
 
                 SuccessNotification(_localizationService.GetResource("Admin.ContentManagement.Polls.Added"));
-                return continueEditing ? RedirectToAction("Edit", new { id = poll.Id }) : RedirectToAction("List");
+                return continueEditing ? RedirectToAction("Edit", new {id = poll.Id}) : RedirectToAction("List");
             }
 
             //If we got this far, something failed, redisplay form
@@ -158,7 +158,7 @@ namespace TinyCms.Admin.Controllers
                     //selected tab
                     SaveSelectedTabIndex();
 
-                    return RedirectToAction("Edit", new { id = poll.Id });
+                    return RedirectToAction("Edit", new {id = poll.Id});
                 }
                 return RedirectToAction("List");
             }
@@ -178,7 +178,7 @@ namespace TinyCms.Admin.Controllers
             if (poll == null)
                 //No poll found with the specified id
                 return RedirectToAction("List");
-            
+
             _pollService.DeletePoll(poll);
 
             SuccessNotification(_localizationService.GetResource("Admin.ContentManagement.Polls.Deleted"));
@@ -199,11 +199,11 @@ namespace TinyCms.Admin.Controllers
             if (poll == null)
                 throw new ArgumentException("No poll found with the specified id", "pollId");
 
-            var answers = poll.PollAnswers.OrderBy(x=>x.DisplayOrder).ToList();
+            var answers = poll.PollAnswers.OrderBy(x => x.DisplayOrder).ToList();
 
             var gridModel = new DataSourceResult
             {
-                Data = answers.Select(x =>  new PollAnswerModel
+                Data = answers.Select(x => new PollAnswerModel
                 {
                     Id = x.Id,
                     PollId = x.PollId,
@@ -223,10 +223,10 @@ namespace TinyCms.Admin.Controllers
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManagePolls))
                 return AccessDeniedView();
-            
+
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var pollAnswer = _pollService.GetPollAnswerById(model.Id);
@@ -245,17 +245,17 @@ namespace TinyCms.Admin.Controllers
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManagePolls))
                 return AccessDeniedView();
-           
+
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var poll = _pollService.GetPollById(pollId);
             if (poll == null)
                 throw new ArgumentException("No poll found with the specified id", "pollId");
 
-            poll.PollAnswers.Add(new PollAnswer 
+            poll.PollAnswers.Add(new PollAnswer
             {
                 Name = model.Name,
                 DisplayOrder = model.DisplayOrder

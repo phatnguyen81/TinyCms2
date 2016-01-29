@@ -6,10 +6,7 @@ namespace TinyCms.Admin
     {
         public override string AreaName
         {
-            get
-            {
-                return "Admin";
-            }
+            get { return "Admin"; }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
@@ -17,9 +14,9 @@ namespace TinyCms.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", area = "Admin", id = "" },
-                new[] { "TinyCms.Admin.Controllers" }
-            );
+                new {controller = "Home", action = "Index", area = "Admin", id = ""},
+                new[] {"TinyCms.Admin.Controllers"}
+                );
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model CategoryModel
+﻿@using TinyCms.Core.Domain.Common
+@model CategoryModel
 
 @Html.ValidationSummary(false)
 @Html.HiddenFor(model => model.Id)
@@ -6,7 +7,7 @@
 <script>
     $(document).ready(function() {
         $("#category-edit").kendoTabStrip({
-            animation:  {
+            animation: {
                 open: {
                     effects: "fadeIn"
                 }
@@ -46,7 +47,7 @@
 
 @{
     //custom tabs
-    var eventMessage = new AdminTabStripCreated(this.Html, "category-edit");
+    var eventMessage = new AdminTabStripCreated(Html, "category-edit");
     EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
     foreach (var eventBlock in eventMessage.BlocksToRender)
     {
@@ -59,56 +60,55 @@
 <input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
 
 @helper TabInfo()
-    {
-    
+{
     @(Html.LocalizedEditor<CategoryModel, CategoryLocalizedModel>("category-info-localized",
-                @<table class="adminContent">
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.Locales[item].Name):
-                        </td>
-                        <td class="adminData">
-                            @Html.EditorFor(model => model.Locales[item].Name)
-                            @Html.ValidationMessageFor(model => model.Locales[item].Name)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.Locales[item].Description):
-                        </td>
-                        <td class="adminData">
-                            @Html.EditorFor(model => model.Locales[item].Description, "RichEditor")
-                            @Html.ValidationMessageFor(model => model.Locales[item].Description)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            @Html.HiddenFor(model => model.Locales[item].LanguageId)
-                        </td>
-                    </tr>
-                </table>
-                ,
-                @<table class="adminContent">
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.Name):
-                        </td>
-                        <td class="adminData">
-                            @Html.EditorFor(model => model.Name)
-                            @Html.ValidationMessageFor(model => model.Name)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.Description):
-                        </td>
-                        <td class="adminData">
-                            @Html.EditorFor(x => x.Description, "RichEditor")
-                            @Html.ValidationMessageFor(model => model.Description)
-                        </td>
-                    </tr>
-                </table>
-            ))
+          @<table class="adminContent">
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].Name):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].Name)
+                      @Html.ValidationMessageFor(model => model.Locales[item].Name)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].Description):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].Description, "RichEditor")
+                      @Html.ValidationMessageFor(model => model.Locales[item].Description)
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      @Html.HiddenFor(model => model.Locales[item].LanguageId)
+                  </td>
+              </tr>
+          </table>
+        ,
+          @<table class="adminContent">
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Name):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Name)
+                      @Html.ValidationMessageFor(model => model.Name)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Description):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(x => x.Description, "RichEditor")
+                      @Html.ValidationMessageFor(model => model.Description)
+                  </td>
+              </tr>
+          </table>
+          ))
     <table class="adminContent">
         <tr>
             <td class="adminTitle">
@@ -146,7 +146,7 @@
                 @Html.ValidationMessageFor(model => model.ParentCategoryId)
             </td>
         </tr>
-    
+
         <tr>
             <td class="adminTitle">
                 @Html.NopLabelFor(model => model.ShowOnHomePage):
@@ -165,7 +165,7 @@
                 @Html.ValidationMessageFor(model => model.IncludeInTopMenu)
             </td>
         </tr>
-     
+
         <tr>
             <td class="adminTitle">
                 @Html.NopLabelFor(model => model.Published):
@@ -187,97 +187,97 @@
     </table>
 }
 @helper TabSeo()
-    {
+{
     @(Html.LocalizedEditor<CategoryModel, CategoryLocalizedModel>("category-seo-localized",
-               @<table class="adminContent">
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.Locales[item].MetaKeywords):
-                       </td>
-                       <td class="adminData">
-                           @Html.EditorFor(model => model.Locales[item].MetaKeywords)
-                           @Html.ValidationMessageFor(model => model.Locales[item].MetaKeywords)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.Locales[item].MetaDescription):
-                       </td>
-                       <td class="adminData">
-                           @Html.TextAreaFor(model => model.Locales[item].MetaDescription)
-                           @Html.ValidationMessageFor(model => model.Locales[item].MetaDescription)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.Locales[item].MetaTitle):
-                       </td>
-                       <td class="adminData">
-                           @Html.EditorFor(model => model.Locales[item].MetaTitle)
-                           @Html.ValidationMessageFor(model => model.Locales[item].MetaTitle)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.Locales[item].SeName):
-                       </td>
-                       <td class="adminData">
-                           @Html.EditorFor(model => model.Locales[item].SeName)
-                           @Html.ValidationMessageFor(model => model.Locales[item].SeName)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td colspan="2">
-                           @Html.HiddenFor(model => model.Locales[item].LanguageId)
-                       </td>
-                   </tr>
-               </table>
-               ,
-               @<table class="adminContent">
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.MetaKeywords):
-                       </td>
-                       <td class="adminData">
-                           @Html.EditorFor(x => x.MetaKeywords)
-                           @Html.ValidationMessageFor(model => model.MetaKeywords)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.MetaDescription):
-                       </td>
-                       <td class="adminData">
-                           @Html.TextAreaFor(x => x.MetaDescription)
-                           @Html.ValidationMessageFor(model => model.MetaDescription)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.MetaTitle):
-                       </td>
-                       <td class="adminData">
-                           @Html.EditorFor(x => x.MetaTitle)
-                           @Html.ValidationMessageFor(model => model.MetaTitle)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.SeName):
-                       </td>
-                       <td class="adminData">
-                           @Html.EditorFor(x => x.SeName)
-                           @Html.ValidationMessageFor(model => model.SeName)
-                       </td>
-                   </tr>
-               </table>))
+          @<table class="adminContent">
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].MetaKeywords):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].MetaKeywords)
+                      @Html.ValidationMessageFor(model => model.Locales[item].MetaKeywords)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].MetaDescription):
+                  </td>
+                  <td class="adminData">
+                      @Html.TextAreaFor(model => model.Locales[item].MetaDescription)
+                      @Html.ValidationMessageFor(model => model.Locales[item].MetaDescription)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].MetaTitle):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].MetaTitle)
+                      @Html.ValidationMessageFor(model => model.Locales[item].MetaTitle)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].SeName):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].SeName)
+                      @Html.ValidationMessageFor(model => model.Locales[item].SeName)
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      @Html.HiddenFor(model => model.Locales[item].LanguageId)
+                  </td>
+              </tr>
+          </table>
+        ,
+          @<table class="adminContent">
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.MetaKeywords):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(x => x.MetaKeywords)
+                      @Html.ValidationMessageFor(model => model.MetaKeywords)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.MetaDescription):
+                  </td>
+                  <td class="adminData">
+                      @Html.TextAreaFor(x => x.MetaDescription)
+                      @Html.ValidationMessageFor(model => model.MetaDescription)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.MetaTitle):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(x => x.MetaTitle)
+                      @Html.ValidationMessageFor(model => model.MetaTitle)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.SeName):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(x => x.SeName)
+                      @Html.ValidationMessageFor(model => model.SeName)
+                  </td>
+              </tr>
+          </table>))
 }
 @helper TabPosts()
-    {
-    if (Model.Id > 0)
-    {
-        var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
-        var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+{
+        if (Model.Id > 0)
+        {
+            var defaultGridPageSize = EngineContext.Current.Resolve<AdminAreaSettings>().DefaultGridPageSize;
+            var gridPageSizes = EngineContext.Current.Resolve<AdminAreaSettings>().GridPageSizes;
 
             <table class="adminContent">
                 <tr>
@@ -286,19 +286,19 @@
                         <div id="products-grid"></div>
 
                         <script>
-                            $(document).ready(function () {
+                            $(document).ready(function() {
                                 $("#products-grid").kendoGrid({
                                     dataSource: {
                                         type: "json",
                                         transport: {
                                             read: {
-                                                url: "@Html.Raw(Url.Action("PostList", "Category", new { categoryId = Model.Id }))",
+                                                url: "@Html.Raw(Url.Action("PostList", "Category", new {categoryId = Model.Id}))",
                                                 type: "POST",
                                                 dataType: "json",
                                                 data: addAntiForgeryToken
                                             },
                                             update: {
-                                                url:"@Html.Raw(Url.Action("PostUpdate", "Category"))",
+                                                url: "@Html.Raw(Url.Action("PostUpdate", "Category"))",
                                                 type: "POST",
                                                 dataType: "json",
                                                 data: addAntiForgeryToken
@@ -317,15 +317,15 @@
                                             model: {
                                                 id: "Id",
                                                 fields: {
-                                                    PostName: {editable: false, type: "string" },
-                                                    IsFeaturedPost: {editable: true, type: "boolean" },
-                                                    DisplayOrder: {editable: true, type: "number" },
-                                                    PostId: {editable: false, type: "number" }
+                                                    PostName: { editable: false, type: "string" },
+                                                    IsFeaturedPost: { editable: true, type: "boolean" },
+                                                    DisplayOrder: { editable: true, type: "number" },
+                                                    PostId: { editable: false, type: "number" }
                                                 }
                                             }
                                         },
                                         requestEnd: function(e) {
-                                            if(e.type=="update") {
+                                            if (e.type == "update") {
                                                 this.read();
                                             }
                                         },
@@ -348,7 +348,8 @@
                                         mode: "inline"
                                     },
                                     scrollable: false,
-                                    columns: [{
+                                    columns: [
+                                    {
                                         field: "PostName",
                                         title: "@T("Admin.Catalog.Categories.Posts.Fields.Post")"
                                     }, {
@@ -357,86 +358,109 @@
                                         width: 150,
                                         headerAttributes: { style: "text-align:center" },
                                         attributes: { style: "text-align:center" },
-                                        template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IsFeaturedPost#.gif" />'
-                                    }, {
-                                        field: "DisplayOrder",
-                                        title: "@T("Admin.Catalog.Categories.Posts.Fields.DisplayOrder")",
-                                        //integer format
-                                        format: "{0:0}",
-                                        width: 150
-                                    }, {
-                                        field: "PostId",
-                                        title: "@T("Admin.Common.View")",
-                                        width: 100,
-                                        template: '<a href="@Url.Content("~/Admin/Post/Edit/")#=PostId#">@T("Admin.Common.View")</a>'
-                                    }, {
-                                        command: [{
-                                            name: "edit",
-                                            text: {
-                                                edit: "@T("Admin.Common.Edit")",
-                                                update: "@T("Admin.Common.Update")",
-                                                cancel: "@T("Admin.Common.Cancel")"
-                                            }
-                                        }, {
-                                            name: "destroy",
-                                            text: "@T("Admin.Common.Delete")"
-                                        }],
-                                        width: 200
-                                    }]
+                                        template: "<img src=\"@Url.Content(\
+            "~/Administration/Content/images/\")active-#=IsFeaturedPost#.gif\" />"
+        },
+        {
+            "DisplayOrder",
+            "@T("
+            Admin.Catalog.Categories.Posts.Fields.DisplayOrder
+            ")",
+//integer format
+            "{0:0}",
+            150
+        }
+    ,
+        {
+            "PostId",
+            "@T("
+            Admin.Common.View
+            ")",
+            100,
+            "<a href=\"@Url.Content(\"~/Admin/Post/Edit/\")#=PostId#\">@T(\"Admin.Common.View\")</a>"
+        }
+    ,
+        {
+            {
+                "edit",
+                {
+                    "@T("
+                    Admin.Common.Edit
+                    ")",
+                    "@T("
+                    Admin.Common.Update
+                    ")",
+                    "@T("
+                    Admin.Common.Cancel
+                    ")"
+                }
+            }
+        ,
+            {
+                "destroy",
+                "@T("
+                Admin.Common.Delete
+                ")"
+            }
+        ],
+            200
+        }
+    ]
+    });
                                 });
-                            });
-                        </script>
+                                </script>
                     </td>
                 </tr>
                 <tr>
                     <td width="100%">
-                        <input type="submit" id="btnAddNewPost" value="@T("Admin.Catalog.Categories.Posts.AddNew")" onclick="javascript:OpenWindow('@(Url.Action("PostAddPopup", "Category", new { categoryId = Model.Id, btnId = "btnRefreshPosts", formId = "category-form" }))', 800, 800, true); return false;" class="k-button" />
-                        <input type="submit" id="btnRefreshPosts" style="display: none" />
+                        <input type="submit" id="btnAddNewPost" value="@T("Admin.Catalog.Categories.Posts.AddNew")" onclick="
+                                javascript:OpenWindow('@(Url.Action("PostAddPopup", "Category", new {categoryId = Model.Id, btnId = "btnRefreshPosts", formId = "category-form"}))', 800, 800, true); return false; " class="k-button"/>
+                        <input type="submit" id="btnRefreshPosts" style="display: none"/>
                         <script type="text/javascript">
-                            $(document).ready(function () {
-                                $('#btnRefreshPosts').click(function () {
-                                    //refresh grid
-                                    var grid = $("#products-grid").data('kendoGrid');
-                                    grid.dataSource.read();
+                                $(document).ready(function() {
+                                    $("#btnRefreshPosts").click(function() {
+                                        //refresh grid
+                                        var grid = $("#products-grid").data("kendoGrid");
+                                        grid.dataSource.read();
 
-                                    //return false to don't reload a page
-                                    return false;
+                                        //return false to don't reload a page
+                                        return false;
+                                    });
                                 });
-                            });
-                        </script>
+                                </script>
                     </td>
                 </tr>
             </table>
-    }
-    else
-    {
-            @T("Admin.Catalog.Categories.Posts.SaveBeforeEdit")
-    }
 }
+
+    else
+        {
+            @T("Admin.Catalog.Categories.Posts.SaveBeforeEdit")
+        }
+    }
 
 
 @helper TabAcl()
 {
     
     <script type="text/javascript">
-        $(document).ready(function () {
+                                $(document).ready(function() {
 
-            $("#@Html.FieldIdFor(model => model.SubjectToAcl)").click(toggleAcl);
-        
-            toggleAcl();
-        });
+                                    $("#@Html.FieldIdFor(model => model.SubjectToAcl)").click(toggleAcl);
+
+                                    toggleAcl();
+                                });
 
 
-        function toggleAcl() {
-            if ($('#@Html.FieldIdFor(model => model.SubjectToAcl)').is(':checked')) {
-                $('#pnl-acl').show();
-            }
-            else {
-                $('#pnl-acl').hide();
-            }
-        }
+                                function toggleAcl() {
+                                    if ($("#@Html.FieldIdFor(model => model.SubjectToAcl)").is(":checked")) {
+                                        $("#pnl-acl").show();
+                                    } else {
+                                        $("#pnl-acl").hide();
+                                    }
+                                }
 
-    </script>
+                                </script>
     <table class="adminContent">
         <tr>
             <td class="adminTitle">
@@ -453,20 +477,20 @@
             </td>
             <td class="adminData">
                 @if (Model.AvailableCustomerRoles != null && Model.AvailableCustomerRoles.Count > 0)
-                {
-                    @Html.Action("AclDisabledWarning", "Common")
-                    foreach (var customerRole in Model.AvailableCustomerRoles)
-                    {
-                    <div>
-                        <input type="checkbox" name="SelectedCustomerRoleIds" value="@customerRole.Id" checked="@(Model.SelectedCustomerRoleIds != null && Model.SelectedCustomerRoleIds.Contains(customerRole.Id))" />@customerRole.Name
+{
+    @Html.Action("AclDisabledWarning", "Common")
+    foreach (var customerRole in Model.AvailableCustomerRoles)
+{
+    <div>
+        <input type="checkbox" name="SelectedCustomerRoleIds" value="@customerRole.Id" checked="@(Model.SelectedCustomerRoleIds != null && Model.SelectedCustomerRoleIds.Contains(customerRole.Id))" />@customerRole.Name
                     </div>
-                    }
-                }
-                else
-                {
-                    <div>No customer roles defined</div>
-                }
+    }
+    }
+    else
+{
+    <div>No customer roles defined</div>
+    }
             </td>
         </tr>
     </table>
-}
+        }

@@ -5,7 +5,7 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
         @T("Admin.Configuration.Languages")
     </div>
     <div class="options">
@@ -18,7 +18,7 @@
             <div id="languages-grid"></div>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#languages-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -55,38 +55,73 @@
                             mode: "inline"
                         },
                         scrollable: false,
-                        columns: [{
+                        columns: [
+                        {
                             field: "Name",
                             title: "@T("Admin.Configuration.Languages.Fields.Name")"
                         }, {
                             field: "LanguageCulture",
                             title: "@T("Admin.Configuration.Languages.Fields.LanguageCulture")",
                             width: 200
-                        },{
+                        }, {
                             field: "Id",
                             title: "@T("Admin.Configuration.Languages.Resources.View")",
-                            template: '<a href="@Url.Content("~/Admin/Language/Resources")?languageId=#=Id#">@T("Admin.Configuration.Languages.Resources.View")</a>',
-                            width: 200
-                        },{
-                            field: "DisplayOrder",
-                            title: "@T("Admin.Configuration.Languages.Fields.DisplayOrder")",
-                            width: 100
-                        }, {
-                            field: "Published",
-                            title: "@T("Admin.Configuration.Languages.Fields.Published")",
-                            width: 100,
-                            headerAttributes: { style: "text-align:center" },
-                            attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Published#.gif" />'
-                        },{
-                            field: "Id",
-                            title: "@T("Admin.Common.Edit")",
-                            width: 100,
-                            template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
-                        }]
+                            template: "<a href=\"@Url.Content(\
+                                                     "~/Admin/Language/Resources\")?languageId=#=Id#\">@T(\"Admin.Configuration.Languages.Resources.View\")</a>",
+                                                     200
+}
+
+    ,
+        {
+            "DisplayOrder",
+            "@T("
+            Admin.Configuration.Languages.Fields.DisplayOrder
+            ")",
+            100
+        }
+    ,
+
+{
+    private field 
+: "Published",
+    private title 
+: "@T("
+    private Admin.Configuration.Languages.Fields.Published 
+")",
+    private width 
+: 100,
+    private headerAttributes 
+:
+    {
+        "text-align:center"
+    }
+,
+attributes:
+{
+    private style 
+: "text-align:center"
+}
+,
+template: "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=Published#.gif\" />"
+}
+,
+
+{
+    private field 
+: "Id",
+    private title 
+: "@T("
+    private Admin.Common.Edit 
+")",
+    private width 
+: 100,
+    private template 
+: "<a href=\"Edit/#=Id#\">@T(\"Admin.Common.Edit\")</a>"
+}
+]
+});
                     });
-                });
-            </script>
+                    </script>
         </td>
     </tr>
 </table>

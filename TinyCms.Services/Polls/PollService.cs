@@ -8,10 +8,25 @@ using TinyCms.Services.Events;
 namespace TinyCms.Services.Polls
 {
     /// <summary>
-    /// Poll service
+    ///     Poll service
     /// </summary>
-    public partial class PollService : IPollService
+    public class PollService : IPollService
     {
+        #region Ctor
+
+        public PollService(IRepository<Poll> pollRepository,
+            IRepository<PollAnswer> pollAnswerRepository,
+            IRepository<PollVotingRecord> pollVotingRecords,
+            IEventPublisher eventPublisher)
+        {
+            _pollRepository = pollRepository;
+            _pollAnswerRepository = pollAnswerRepository;
+            _pollVotingRecords = pollVotingRecords;
+            _eventPublisher = eventPublisher;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly IRepository<Poll> _pollRepository;
@@ -21,25 +36,10 @@ namespace TinyCms.Services.Polls
 
         #endregion
 
-        #region Ctor
-
-        public PollService(IRepository<Poll> pollRepository, 
-            IRepository<PollAnswer> pollAnswerRepository,
-            IRepository<PollVotingRecord> pollVotingRecords,
-            IEventPublisher eventPublisher)
-        {
-            this._pollRepository = pollRepository;
-            this._pollAnswerRepository = pollAnswerRepository;
-            this._pollVotingRecords = pollVotingRecords;
-            this._eventPublisher = eventPublisher;
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Gets a poll
+        ///     Gets a poll
         /// </summary>
         /// <param name="pollId">The poll identifier</param>
         /// <returns>Poll</returns>
@@ -52,7 +52,7 @@ namespace TinyCms.Services.Polls
         }
 
         /// <summary>
-        /// Gets a poll
+        ///     Gets a poll
         /// </summary>
         /// <param name="systemKeyword">The poll system keyword</param>
         /// <param name="languageId">Language identifier. 0 if you want to get all polls</param>
@@ -63,14 +63,14 @@ namespace TinyCms.Services.Polls
                 return null;
 
             var query = from p in _pollRepository.Table
-                        where p.SystemKeyword == systemKeyword && p.LanguageId == languageId
-                        select p;
+                where p.SystemKeyword == systemKeyword && p.LanguageId == languageId
+                select p;
             var poll = query.FirstOrDefault();
             return poll;
         }
-        
+
         /// <summary>
-        /// Gets polls
+        ///     Gets polls
         /// </summary>
         /// <param name="languageId">Language identifier. 0 if you want to get all polls</param>
         /// <param name="loadShownOnHomePageOnly">Retrieve only shown on home page polls</param>
@@ -104,7 +104,7 @@ namespace TinyCms.Services.Polls
         }
 
         /// <summary>
-        /// Deletes a poll
+        ///     Deletes a poll
         /// </summary>
         /// <param name="poll">The poll</param>
         public virtual void DeletePoll(Poll poll)
@@ -119,7 +119,7 @@ namespace TinyCms.Services.Polls
         }
 
         /// <summary>
-        /// Inserts a poll
+        ///     Inserts a poll
         /// </summary>
         /// <param name="poll">Poll</param>
         public virtual void InsertPoll(Poll poll)
@@ -134,7 +134,7 @@ namespace TinyCms.Services.Polls
         }
 
         /// <summary>
-        /// Updates the poll
+        ///     Updates the poll
         /// </summary>
         /// <param name="poll">Poll</param>
         public virtual void UpdatePoll(Poll poll)
@@ -147,9 +147,9 @@ namespace TinyCms.Services.Polls
             //event notification
             _eventPublisher.EntityUpdated(poll);
         }
-        
+
         /// <summary>
-        /// Gets a poll answer
+        ///     Gets a poll answer
         /// </summary>
         /// <param name="pollAnswerId">Poll answer identifier</param>
         /// <returns>Poll answer</returns>
@@ -160,9 +160,9 @@ namespace TinyCms.Services.Polls
 
             return _pollAnswerRepository.GetById(pollAnswerId);
         }
-        
+
         /// <summary>
-        /// Deletes a poll answer
+        ///     Deletes a poll answer
         /// </summary>
         /// <param name="pollAnswer">Poll answer</param>
         public virtual void DeletePollAnswer(PollAnswer pollAnswer)
@@ -177,7 +177,7 @@ namespace TinyCms.Services.Polls
         }
 
         /// <summary>
-        /// Gets a value indicating whether customer already vited for this poll
+        ///     Gets a value indicating whether customer already vited for this poll
         /// </summary>
         /// <param name="pollId">Poll identifier</param>
         /// <param name="customerId">Customer identifier</param>
@@ -188,9 +188,9 @@ namespace TinyCms.Services.Polls
                 return false;
 
             var result = (from pa in _pollAnswerRepository.Table
-                          join pvr in _pollVotingRecords.Table on pa.Id equals pvr.PollAnswerId
-                          where pa.PollId == pollId && pvr.CustomerId == customerId
-                          select pvr).Any();
+                join pvr in _pollVotingRecords.Table on pa.Id equals pvr.PollAnswerId
+                where pa.PollId == pollId && pvr.CustomerId == customerId
+                select pvr).Any();
             return result;
         }
 

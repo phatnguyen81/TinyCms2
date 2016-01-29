@@ -30,15 +30,15 @@ namespace TinyCms.Core.Fakes
             set { _sessionItems[name] = value; }
         }
 
-        public bool Exists(string key)
-        {
-            return _sessionItems[key] != null;
-        }
-
         public override object this[int index]
         {
             get { return _sessionItems[index]; }
             set { _sessionItems[index] = value; }
+        }
+
+        public bool Exists(string key)
+        {
+            return _sessionItems[key] != null;
         }
 
         public override void Add(string name, object value)

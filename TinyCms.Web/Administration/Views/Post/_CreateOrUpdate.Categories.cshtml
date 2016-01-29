@@ -8,25 +8,25 @@
         <div id="productcategories-grid"></div>
 
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $("#productcategories-grid").kendoGrid({
                     dataSource: {
                         type: "json",
                         transport: {
                             read: {
-                                url: "@Html.Raw(Url.Action("PostCategoryList", "Post", new { postId = Model.Id }))",
+                                url: "@Html.Raw(Url.Action("PostCategoryList", "Post", new {postId = Model.Id}))",
                                 type: "POST",
                                 dataType: "json",
                                 data: addAntiForgeryToken
                             },
                             create: {
-                                url: "@Html.Raw(Url.Action("PostCategoryInsert", "Post", new { postId = Model.Id }))",
+                                url: "@Html.Raw(Url.Action("PostCategoryInsert", "Post", new {postId = Model.Id}))",
                                 type: "POST",
                                 dataType: "json",
                                 data: addAntiForgeryToken
                             },
                             update: {
-                                url:"@Html.Raw(Url.Action("PostCategoryUpdate", "Post"))",
+                                url: "@Html.Raw(Url.Action("PostCategoryUpdate", "Post"))",
                                 type: "POST",
                                 dataType: "json",
                                 data: addAntiForgeryToken
@@ -54,12 +54,12 @@
                                 }
                             }
                         },
-                        requestEnd: function (e) {
+                        requestEnd: function(e) {
                             if (e.type == "create" || e.type == "update") {
                                 this.read();
                             }
                         },
-                        error: function (e) {
+                        error: function(e) {
                             display_kendoui_grid_error(e);
                             // Cancel the changes
                             this.cancelChanges();
@@ -91,41 +91,43 @@
                         mode: "inline"
                     },
                     scrollable: false,
-                    columns: [{
+                    columns: [
+                        {
                             field: "CategoryId",
                             title: "@T("Admin.Catalog.Posts.Categories.Fields.Category")",
                             width: 200,
                             editor: categoryDropDownEditor,
                             template: "#:Category#"
                         },
-                     
-
-                    {
-                        field: "DisplayOrder",
-                        title: "@T("Admin.Catalog.Posts.Categories.Fields.DisplayOrder")",
-                        width: 200,
-                        //integer format
-                        format: "{0:0}"
-                    }, {
-                        command: [{
-                            name: "edit",
-                            text: {
-                                edit: "@T("Admin.Common.Edit")",
-                                update: "@T("Admin.Common.Update")",
-                                cancel: "@T("Admin.Common.Cancel")"
-                            }
+                        {
+                            field: "DisplayOrder",
+                            title: "@T("Admin.Catalog.Posts.Categories.Fields.DisplayOrder")",
+                            width: 200,
+                            //integer format
+                            format: "{0:0}"
                         }, {
-                            name: "destroy",
-                            text: "@T("Admin.Common.Delete")"
-                        }],
-                        width: 200
-                    }]
+                            command: [
+                                {
+                                    name: "edit",
+                                    text: {
+                                        edit: "@T("Admin.Common.Edit")",
+                                        update: "@T("Admin.Common.Update")",
+                                        cancel: "@T("Admin.Common.Cancel")"
+                                    }
+                                }, {
+                                    name: "destroy",
+                                    text: "@T("Admin.Common.Delete")"
+                                }
+                            ],
+                            width: 200
+                        }
+                    ]
                 });
             });
 
             //local datasource
             var allCategories = [
-                @for (int i = 0; i < Model.AvailableCategories.Count; i++)
+                @for (var i = 0; i < Model.AvailableCategories.Count; i++)
                 {
                     var categoryItem = Model.AvailableCategories[i];
                     <text>
@@ -142,7 +144,7 @@
             ];
 
             function categoryDropDownEditor(container, options) {
-                $('<input required data-text-field="Name" data-value-field="Id" data-bind="value:CategoryId"/>')
+                $("<input required data-text-field=\"Name\" data-value-field=\"Id\" data-bind=\"value:CategoryId\"/>")
                     .appendTo(container)
                     .kendoDropDownList({
                         autoBind: false,
@@ -153,11 +155,10 @@
     }
     else
     {
-    @T("Admin.Catalog.Posts.Categories.NoCategoriesAvailable")
+        @T("Admin.Catalog.Posts.Categories.NoCategoriesAvailable")
     }
 }
 else
 {
     @T("Admin.Catalog.Posts.Categories.SaveBeforeEdit")
 }
-

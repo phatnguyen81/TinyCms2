@@ -1,5 +1,4 @@
 ﻿@model RegisterResultModel
-@using TinyCms.Web.Models.Customer;
 @{
     Layout = "~/Views/Shared/_OneColumn.cshtml";
 
@@ -7,7 +6,7 @@
     Html.AddTitleParts(T("PageTitle.Register").Text);
 
     //continue URL
-    var qs = this.Context.Request.QueryString["returnUrl"];
+    var qs = Context.Request.QueryString["returnUrl"];
     var continueUrl = "";
     if (!String.IsNullOrEmpty(qs) && Url.IsLocalUrl(qs))
     {

@@ -1,7 +1,8 @@
-﻿@model UrlRecordListModel
+﻿@using TinyCms.Core.Domain.Common
+@model UrlRecordListModel
 @{
-    var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
-    var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+    var defaultGridPageSize = EngineContext.Current.Resolve<AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<AdminAreaSettings>().GridPageSizes;
 
     //page title
     ViewBag.Title = T("Admin.System.SeNames").Text;
@@ -10,11 +11,11 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-system.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-system.png")" alt=""/>
         @T("Admin.System.SeNames")
     </div>
     <div class="options">
-        <input type="button" id="delete-selected" class="k-button" value="@T("Admin.System.SeNames.DeleteSelected")" />
+        <input type="button" id="delete-selected" class="k-button" value="@T("Admin.System.SeNames.DeleteSelected")"/>
     </div>
 </div>
 <table width="100%">
@@ -28,7 +29,7 @@
     </tr>
     <tr>
         <td colspan="2">
-            <input type="button" id="search-senames" class="k-button" value="@T("Admin.Common.Search")" />
+            <input type="button" id="search-senames" class="k-button" value="@T("Admin.Common.Search")"/>
         </td>
     </tr>
 </table>
@@ -38,7 +39,7 @@
             <div id="sename-grid"></div>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#sename-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -71,7 +72,8 @@
                         },
                         scrollable: false,
                         dataBound: onDataBound,
-                        columns: [{
+                        columns: [
+                        {
                             field: "Id",
                             headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
                             headerAttributes: { style: "text-align:center" },
@@ -100,128 +102,145 @@
                             width: 50,
                             headerAttributes: { style: "text-align:center" },
                             attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IsActive#.gif" />'
-                        }, {
-                            field: "Language",
-                            title: "@T("Admin.System.SeNames.Language")",
-                            width: 100
-                        }, {
-                            field: "DetailsUrl",
-                            title: "@T("Admin.System.SeNames.Details")",
-                            width: 100,
-                            template: '# if(DetailsUrl && DetailsUrl.length > 0) {# <a href="#=DetailsUrl#">@T("Admin.System.SeNames.Details")</a> #} #'
-                        }]
+                            template: "<img src=\"@Url.Content(\
+                                                      "~/Administration/Content/images/\")active-#=IsActive#.gif\" />"
+}
+
+    ,
+        {
+            "Language",
+            "@T("
+            Admin.System.SeNames.Language
+            ")",
+            100
+        }
+    ,
+
+{
+    private field 
+: "DetailsUrl",
+    private title 
+: "@T("
+    private Admin.System.SeNames.Details 
+")",
+    private width 
+: 100,
+    private template 
+: "# if(DetailsUrl && DetailsUrl.length > 0) {# <a href=\"#=DetailsUrl#\">@T(\"Admin.System.SeNames.Details\")</a> #} #"
+}
+]
+}
+);
                     });
-                });
-            </script>
+                    </script>
         </td>
     </tr>
 </table>
-    
+
 <script type="text/javascript">
-    var selectedIds = [];
+                    var selectedIds = [];
 
-    $(document).ready(function() {
+                    $(document).ready(function() {
 
-        //search button
-        $('#search-senames').click(function() {
-            //search
-            var grid = $('#sename-grid').data('kendoGrid');
-            grid.dataSource.page(1); //new search. Set page size to 1
-            //grid.dataSource.read(); we already loaded the grid above using "page" function
-            //clear selected checkboxes
-            $('.checkboxGroups').attr('checked', false).change();
-            selectedIds = [];
-            return false;
-        });
+                        //search button
+                        $("#search-senames").click(function() {
+                            //search
+                            var grid = $("#sename-grid").data("kendoGrid");
+                            grid.dataSource.page(1); //new search. Set page size to 1
+                            //grid.dataSource.read(); we already loaded the grid above using "page" function
+                            //clear selected checkboxes
+                            $(".checkboxGroups").attr("checked", false).change();
+                            selectedIds = [];
+                            return false;
+                        });
 
-        $("#@Html.FieldIdFor(model => model.SeName)").keydown(function(event) {
-            if (event.keyCode == 13) {
-                $("#search-senames").click();
-                return false;
-            }
-        });
+                        $("#@Html.FieldIdFor(model => model.SeName)").keydown(function(event) {
+                            if (event.keyCode == 13) {
+                                $("#search-senames").click();
+                                return false;
+                            }
+                        });
 
-        //"delete selected" button
-        $('#delete-selected').click(function(e) {
-            e.preventDefault();
+                        //"delete selected" button
+                        $("#delete-selected").click(function(e) {
+                            e.preventDefault();
 
-            var postData = {
-                selectedIds: selectedIds
-            };
-            addAntiForgeryToken(postData);
+                            var postData = {
+                                selectedIds: selectedIds
+                            };
+                            addAntiForgeryToken(postData);
 
-            $.ajax({
-                cache: false,
-                type: "POST",
-                url: "@(Url.Action("DeleteSelectedSeNames", "Common"))",
-                data: postData,
-                complete: function(data) {
-                    //reload grid
-                    var grid = $('#sename-grid').data('kendoGrid');
-                    grid.dataSource.page(1); //new search. Set page size to 1
-                    //grid.dataSource.read(); we already loaded the grid above using "page" function
-                    //clear selected checkboxes
-                    $('.checkboxGroups').attr('checked', false).change();
-                    selectedIds = [];
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    alert(thrownError);
-                },
-                traditional: true
-            });
-            return false;
-        });
+                            $.ajax({
+                                cache: false,
+                                type: "POST",
+                                url: "@(Url.Action("DeleteSelectedSeNames", "Common"))",
+                                data: postData,
+                                complete: function(data) {
+                                    //reload grid
+                                    var grid = $("#sename-grid").data("kendoGrid");
+                                    grid.dataSource.page(1); //new search. Set page size to 1
+                                    //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                    //clear selected checkboxes
+                                    $(".checkboxGroups").attr("checked", false).change();
+                                    selectedIds = [];
+                                },
+                                error: function(xhr, ajaxOptions, thrownError) {
+                                    alert(thrownError);
+                                },
+                                traditional: true
+                            });
+                            return false;
+                        });
 
-        $('#mastercheckbox').click(function() {
-            $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
-        });
+                        $("#mastercheckbox").click(function() {
+                            $(".checkboxGroups").attr("checked", $(this).is(":checked")).change();
+                        });
 
-        //wire up checkboxes. 
-        $('#sename-grid').on('change', 'input[type=checkbox][id!=mastercheckbox]', function(e) {
-            var $check = $(this);
-            if ($check.is(":checked") == true) {
-                var checked = jQuery.inArray($check.val(), selectedIds);
-                if (checked == -1) {
-                    //add id to selectedIds.  
-                    selectedIds.push($check.val());
-                }
-            } else {
-                var checked = jQuery.inArray($check.val(), selectedIds);
-                if (checked > -1) {
-                    //remove id from selectedIds.  
-                    selectedIds = $.grep(selectedIds, function(item, index) {
-                        return item != $check.val();
+                        //wire up checkboxes. 
+                        $("#sename-grid").on("change", "input[type=checkbox][id!=mastercheckbox]", function(e) {
+                            var $check = $(this);
+                            if ($check.is(":checked") == true) {
+                                var checked = jQuery.inArray($check.val(), selectedIds);
+                                if (checked == -1) {
+                                    //add id to selectedIds.  
+                                    selectedIds.push($check.val());
+                                }
+                            } else {
+                                var checked = jQuery.inArray($check.val(), selectedIds);
+                                if (checked > -1) {
+                                    //remove id from selectedIds.  
+                                    selectedIds = $.grep(selectedIds, function(item, index) {
+                                        return item != $check.val();
+                                    });
+                                }
+                            }
+                            updateMasterCheckbox();
+                        });
                     });
-                }
-            }
-            updateMasterCheckbox();
-        });
-    });
 
-    function additionalData() {
-        var data = {
-            SeName: $('#@Html.FieldIdFor(model => model.SeName)').val()
-        };
-        addAntiForgeryToken(data);
-        return data;
-    }
+                    function additionalData() {
+                        var data = {
+                            SeName: $("#@Html.FieldIdFor(model => model.SeName)").val()
+                        };
+                        addAntiForgeryToken(data);
+                        return data;
+                    }
 
-    function onDataBound(e) {
+                    function onDataBound(e) {
 
-        $('#sename-grid input[type=checkbox][id!=mastercheckbox]').each(function() {
-            var currentId = $(this).val();
-            var checked = jQuery.inArray(currentId, selectedIds);
-            //set checked based on if current checkbox's value is in selectedIds.  
-            $(this).attr('checked', checked > -1);
-        });
+                        $("#sename-grid input[type=checkbox][id!=mastercheckbox]").each(function() {
+                            var currentId = $(this).val();
+                            var checked = jQuery.inArray(currentId, selectedIds);
+                            //set checked based on if current checkbox's value is in selectedIds.  
+                            $(this).attr("checked", checked > -1);
+                        });
 
-        updateMasterCheckbox();
-    }
+                        updateMasterCheckbox();
+                    }
 
-    function updateMasterCheckbox() {
-        var numChkBoxes = $('#sename-grid input[type=checkbox][id!=mastercheckbox]').length;
-        var numChkBoxesChecked = $('#sename-grid input[type=checkbox][id!=mastercheckbox]:checked').length;
-        $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
-    }
-</script>
+                    function updateMasterCheckbox() {
+                        var numChkBoxes = $("#sename-grid input[type=checkbox][id!=mastercheckbox]").length;
+                        var numChkBoxesChecked = $("#sename-grid input[type=checkbox][id!=mastercheckbox]:checked").length;
+                        $("#mastercheckbox").attr("checked", numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                    }
+                    </script>

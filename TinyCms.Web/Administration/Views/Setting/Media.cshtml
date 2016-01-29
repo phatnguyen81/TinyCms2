@@ -8,11 +8,11 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Settings.Media")
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
         </div>
     </div>
     @Html.ValidationSummary(false)
@@ -30,8 +30,8 @@
                 {
                     @T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.FileSystem")
                 }
-                <input type="submit" name="change-picture-storage" class="k-button" onclick="return confirm('@T("Admin.Common.AreYouSure")');" value="@T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Change")" />
-                <br />
+                <input type="submit" name="change-picture-storage" class="k-button" onclick=" return confirm('@T("Admin.Common.AreYouSure")'); " value="@T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Change")"/>
+                <br/>
                 <span>@T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Note")</span>
             </td>
         </tr>
@@ -134,23 +134,23 @@
                 @Html.ValidationMessageFor(model => model.MaximumImageSize)
             </td>
         </tr>
-      <tr>
-        <td class="adminTitle">
-          @Html.NopLabelFor(model => model.MultipleThumbDirectories):
-        </td>
-        <td class="adminData">
-          @Html.EditorFor(model => model.MultipleThumbDirectories)
-          @Html.ValidationMessageFor(model => model.MultipleThumbDirectories)
-        </td>
-      </tr>
-      <tr>
-        <td class="adminTitle">
-          @Html.NopLabelFor(model => model.DefaultImageQuality):
-        </td>
-        <td class="adminData">
-          @Html.EditorFor(model => model.DefaultImageQuality)
-          @Html.ValidationMessageFor(model => model.DefaultImageQuality)
-        </td>
-      </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.MultipleThumbDirectories):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.MultipleThumbDirectories)
+                @Html.ValidationMessageFor(model => model.MultipleThumbDirectories)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.DefaultImageQuality):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.DefaultImageQuality)
+                @Html.ValidationMessageFor(model => model.DefaultImageQuality)
+            </td>
+        </tr>
     </table>
 }

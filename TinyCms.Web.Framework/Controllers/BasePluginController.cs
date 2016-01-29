@@ -3,14 +3,14 @@
 namespace TinyCms.Web.Framework.Controllers
 {
     /// <summary>
-    /// Base controller for plugins
+    ///     Base controller for plugins
     /// </summary>
     public abstract class BasePluginController : BaseController
     {
         protected ActionResult AccessDeniedView()
         {
             //return new HttpUnauthorizedResult();
-            return RedirectToAction("AccessDenied", "Security", new { pageUrl = this.Request.RawUrl });
+            return RedirectToAction("AccessDenied", "Security", new {pageUrl = Request.RawUrl});
         }
     }
 }

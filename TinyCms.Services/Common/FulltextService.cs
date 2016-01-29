@@ -7,21 +7,14 @@ using TinyCms.Data;
 namespace TinyCms.Services.Common
 {
     /// <summary>
-    /// Full-Text service
+    ///     Full-Text service
     /// </summary>
-    public partial class FulltextService : IFulltextService
+    public class FulltextService : IFulltextService
     {
-        #region Fields
-
-        private readonly IDataProvider _dataProvider;
-        private readonly IDbContext _dbContext;
-        private readonly CommonSettings _commonSettings;
-        #endregion
-
         #region Ctor
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="dataProvider">Data provider</param>
         /// <param name="dbContext">Database Context</param>
@@ -29,17 +22,25 @@ namespace TinyCms.Services.Common
         public FulltextService(IDataProvider dataProvider, IDbContext dbContext,
             CommonSettings commonSettings)
         {
-            this._dataProvider = dataProvider;
-            this._dbContext = dbContext;
-            this._commonSettings = commonSettings;
+            _dataProvider = dataProvider;
+            _dbContext = dbContext;
+            _commonSettings = commonSettings;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly IDataProvider _dataProvider;
+        private readonly IDbContext _dbContext;
+        private readonly CommonSettings _commonSettings;
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Gets value indicating whether Full-Text is supported
+        ///     Gets value indicating whether Full-Text is supported
         /// </summary>
         /// <returns>Result</returns>
         public virtual bool IsFullTextSupported()
@@ -50,13 +51,13 @@ namespace TinyCms.Services.Common
                 var result = _dbContext.SqlQuery<int>("EXEC [FullText_IsSupported]");
                 return result.FirstOrDefault() > 0;
             }
-            
+
             //stored procedures aren't supported
             return false;
         }
 
         /// <summary>
-        /// Enable Full-Text support
+        ///     Enable Full-Text support
         /// </summary>
         public virtual void EnableFullText()
         {
@@ -72,7 +73,7 @@ namespace TinyCms.Services.Common
         }
 
         /// <summary>
-        /// Disable Full-Text support
+        ///     Disable Full-Text support
         /// </summary>
         public virtual void DisableFullText()
         {

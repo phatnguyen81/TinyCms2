@@ -4,18 +4,18 @@ using TinyCms.Core.Domain.Security;
 namespace TinyCms.Services.Security
 {
     /// <summary>
-    /// Permission provider
+    ///     Permission provider
     /// </summary>
     public interface IPermissionProvider
     {
         /// <summary>
-        /// Get permissions
+        ///     Get permissions
         /// </summary>
         /// <returns>Permissions</returns>
         IEnumerable<PermissionRecord> GetPermissions();
 
         /// <summary>
-        /// Get default permissions
+        ///     Get default permissions
         /// </summary>
         /// <returns>Default permissions</returns>
         IEnumerable<DefaultPermissionRecord> GetDefaultPermissions();

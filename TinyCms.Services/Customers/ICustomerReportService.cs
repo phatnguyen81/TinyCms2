@@ -1,15 +1,12 @@
-using System;
-using TinyCms.Core;
-
 namespace TinyCms.Services.Customers
 {
     /// <summary>
-    /// Customer report service interface
+    ///     Customer report service interface
     /// </summary>
-    public partial interface ICustomerReportService
+    public interface ICustomerReportService
     {
         /// <summary>
-        /// Gets a report of customers registered in the last days
+        ///     Gets a report of customers registered in the last days
         /// </summary>
         /// <param name="days">Customers registered in the last days</param>
         /// <returns>Number of registered customers</returns>

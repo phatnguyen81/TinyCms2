@@ -3,18 +3,18 @@ using System.Web.Mvc;
 
 namespace TinyCms.Web.Framework.Controllers
 {
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)] 
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class ParameterBasedOnFormNameAndValueAttribute : FilterAttribute, IActionFilter
     {
+        private readonly string _actionParameterName;
         private readonly string _name;
         private readonly string _value;
-        private readonly string _actionParameterName;
 
         public ParameterBasedOnFormNameAndValueAttribute(string name, string value, string actionParameterName)
         {
-            this._name = name;
-            this._value = value;
-            this._actionParameterName = actionParameterName;
+            _name = name;
+            _value = value;
+            _actionParameterName = actionParameterName;
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext)

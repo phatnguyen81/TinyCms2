@@ -14,7 +14,7 @@ namespace TinyCms.Services.Localization
     public static class LocalizationExtensions
     {
         /// <summary>
-        /// Get localized property of an entity
+        ///     Get localized property of an entity
         /// </summary>
         /// <typeparam name="T">Entity type</typeparam>
         /// <param name="entity">Entity</param>
@@ -27,25 +27,31 @@ namespace TinyCms.Services.Localization
             var workContext = EngineContext.Current.Resolve<IWorkContext>();
             return GetLocalized(entity, keySelector, workContext.WorkingLanguage.Id);
         }
+
         /// <summary>
-        /// Get localized property of an entity
+        ///     Get localized property of an entity
         /// </summary>
         /// <typeparam name="T">Entity type</typeparam>
         /// <param name="entity">Entity</param>
         /// <param name="keySelector">Key selector</param>
         /// <param name="languageId">Language identifier</param>
         /// <param name="returnDefaultValue">A value indicating whether to return default value (if localized is not found)</param>
-        /// <param name="ensureTwoPublishedLanguages">A value indicating whether to ensure that we have at least two published languages; otherwise, load only default value</param>
+        /// <param name="ensureTwoPublishedLanguages">
+        ///     A value indicating whether to ensure that we have at least two published
+        ///     languages; otherwise, load only default value
+        /// </param>
         /// <returns>Localized property</returns>
         public static string GetLocalized<T>(this T entity,
             Expression<Func<T, string>> keySelector, int languageId,
             bool returnDefaultValue = true, bool ensureTwoPublishedLanguages = true)
             where T : BaseEntity, ILocalizedEntity
         {
-            return GetLocalized<T, string>(entity, keySelector, languageId, returnDefaultValue, ensureTwoPublishedLanguages);
+            return GetLocalized<T, string>(entity, keySelector, languageId, returnDefaultValue,
+                ensureTwoPublishedLanguages);
         }
+
         /// <summary>
-        /// Get localized property of an entity
+        ///     Get localized property of an entity
         /// </summary>
         /// <typeparam name="T">Entity type</typeparam>
         /// <typeparam name="TPropType">Property type</typeparam>
@@ -53,7 +59,10 @@ namespace TinyCms.Services.Localization
         /// <param name="keySelector">Key selector</param>
         /// <param name="languageId">Language identifier</param>
         /// <param name="returnDefaultValue">A value indicating whether to return default value (if localized is not found)</param>
-        /// <param name="ensureTwoPublishedLanguages">A value indicating whether to ensure that we have at least two published languages; otherwise, load only default value</param>
+        /// <param name="ensureTwoPublishedLanguages">
+        ///     A value indicating whether to ensure that we have at least two published
+        ///     languages; otherwise, load only default value
+        /// </param>
         /// <returns>Localized property</returns>
         public static TPropType GetLocalized<T, TPropType>(this T entity,
             Expression<Func<T, TPropType>> keySelector, int languageId,
@@ -75,21 +84,21 @@ namespace TinyCms.Services.Localization
             if (propInfo == null)
             {
                 throw new ArgumentException(string.Format(
-                       "Expression '{0}' refers to a field, not a property.",
-                       keySelector));
+                    "Expression '{0}' refers to a field, not a property.",
+                    keySelector));
             }
 
-            TPropType result = default(TPropType);
-            string resultStr = string.Empty;
+            var result = default(TPropType);
+            var resultStr = string.Empty;
 
             //load localized value
-            string localeKeyGroup = typeof(T).Name;
-            string localeKey = propInfo.Name;
+            var localeKeyGroup = typeof (T).Name;
+            var localeKey = propInfo.Name;
 
             if (languageId > 0)
             {
                 //ensure that we have at least two published languages
-                bool loadLocalizedValue = true;
+                var loadLocalizedValue = true;
                 if (ensureTwoPublishedLanguages)
                 {
                     var lService = EngineContext.Current.Resolve<ILanguageService>();
@@ -117,17 +126,18 @@ namespace TinyCms.Services.Localization
             return result;
         }
 
-
-
         /// <summary>
-        /// Get localized property of setting
+        ///     Get localized property of setting
         /// </summary>
         /// <typeparam name="T">Entity type</typeparam>
         /// <param name="settings">Settings</param>
         /// <param name="keySelector">Key selector</param>
         /// <param name="languageId">Language identifier</param>
         /// <param name="returnDefaultValue">A value indicating whether to return default value (if localized is not found)</param>
-        /// <param name="ensureTwoPublishedLanguages">A value indicating whether to ensure that we have at least two published languages; otherwise, load only default value</param>
+        /// <param name="ensureTwoPublishedLanguages">
+        ///     A value indicating whether to ensure that we have at least two published
+        ///     languages; otherwise, load only default value
+        /// </param>
         /// <returns>Localized property</returns>
         public static string GetLocalizedSetting<T>(this T settings,
             Expression<Func<T, string>> keySelector, int languageId,
@@ -136,7 +146,7 @@ namespace TinyCms.Services.Localization
         {
             var settingService = EngineContext.Current.Resolve<ISettingService>();
 
-            string key = settings.GetSettingKey(keySelector);
+            var key = settings.GetSettingKey(keySelector);
 
             //we do not support localized settings per store (overridden store settings)
             var setting = settingService.GetSetting(key);
@@ -145,8 +155,9 @@ namespace TinyCms.Services.Localization
 
             return setting.GetLocalized(x => x.Value, languageId, returnDefaultValue, ensureTwoPublishedLanguages);
         }
+
         /// <summary>
-        /// Save localized property of setting
+        ///     Save localized property of setting
         /// </summary>
         /// <typeparam name="T">Entity type</typeparam>
         /// <param name="settings">Settings</param>
@@ -162,7 +173,7 @@ namespace TinyCms.Services.Localization
             var settingService = EngineContext.Current.Resolve<ISettingService>();
             var localizedEntityService = EngineContext.Current.Resolve<ILocalizedEntityService>();
 
-            string key = settings.GetSettingKey(keySelector);
+            var key = settings.GetSettingKey(keySelector);
 
             //we do not support localized settings per store (overridden store settings)
             var setting = settingService.GetSetting(key);
@@ -172,16 +183,16 @@ namespace TinyCms.Services.Localization
             localizedEntityService.SaveLocalizedValue(setting, x => x.Value, value, languageId);
         }
 
-
         /// <summary>
-        /// Get localized value of enum
+        ///     Get localized value of enum
         /// </summary>
         /// <typeparam name="T">Enum</typeparam>
         /// <param name="enumValue">Enum value</param>
         /// <param name="localizationService">Localization service</param>
         /// <param name="workContext">Work context</param>
         /// <returns>Localized value</returns>
-        public static string GetLocalizedEnum<T>(this T enumValue, ILocalizationService localizationService, IWorkContext workContext)
+        public static string GetLocalizedEnum<T>(this T enumValue, ILocalizationService localizationService,
+            IWorkContext workContext)
             where T : struct
         {
             if (workContext == null)
@@ -189,28 +200,30 @@ namespace TinyCms.Services.Localization
 
             return GetLocalizedEnum(enumValue, localizationService, workContext.WorkingLanguage.Id);
         }
+
         /// <summary>
-        /// Get localized value of enum
+        ///     Get localized value of enum
         /// </summary>
         /// <typeparam name="T">Enum</typeparam>
         /// <param name="enumValue">Enum value</param>
         /// <param name="localizationService">Localization service</param>
         /// <param name="languageId">Language identifier</param>
         /// <returns>Localized value</returns>
-        public static string GetLocalizedEnum<T>(this T enumValue, ILocalizationService localizationService, int languageId)
+        public static string GetLocalizedEnum<T>(this T enumValue, ILocalizationService localizationService,
+            int languageId)
             where T : struct
         {
             if (localizationService == null)
                 throw new ArgumentNullException("localizationService");
 
-            if (!typeof(T).IsEnum) throw new ArgumentException("T must be an enumerated type");
+            if (!typeof (T).IsEnum) throw new ArgumentException("T must be an enumerated type");
 
             //localized value
-            string resourceName = string.Format("Enums.{0}.{1}",
-                typeof(T).ToString(),
+            var resourceName = string.Format("Enums.{0}.{1}",
+                typeof (T),
                 //Convert.ToInt32(enumValue)
-                enumValue.ToString());
-            string result = localizationService.GetResource(resourceName, languageId, false, "", true);
+                enumValue);
+            var result = localizationService.GetResource(resourceName, languageId, false, "", true);
 
             //set default value if required
             if (String.IsNullOrEmpty(result))
@@ -219,10 +232,9 @@ namespace TinyCms.Services.Localization
             return result;
         }
 
-
         /// <summary>
-        /// Get localized value of permission
-        /// We don't have UI to manage permission localizable name. That's why we're using this extension method
+        ///     Get localized value of permission
+        ///     We don't have UI to manage permission localizable name. That's why we're using this extension method
         /// </summary>
         /// <param name="permissionRecord">Permission record</param>
         /// <param name="localizationService">Localization service</param>
@@ -236,9 +248,10 @@ namespace TinyCms.Services.Localization
 
             return GetLocalizedPermissionName(permissionRecord, localizationService, workContext.WorkingLanguage.Id);
         }
+
         /// <summary>
-        /// Get localized value of enum
-        /// We don't have UI to manage permission localizable name. That's why we're using this extension method
+        ///     Get localized value of enum
+        ///     We don't have UI to manage permission localizable name. That's why we're using this extension method
         /// </summary>
         /// <param name="permissionRecord">Permission record</param>
         /// <param name="localizationService">Localization service</param>
@@ -254,8 +267,8 @@ namespace TinyCms.Services.Localization
                 throw new ArgumentNullException("localizationService");
 
             //localized value
-            string resourceName = string.Format("Permission.{0}", permissionRecord.SystemName);
-            string result = localizationService.GetResource(resourceName, languageId, false, "", true);
+            var resourceName = string.Format("Permission.{0}", permissionRecord.SystemName);
+            var result = localizationService.GetResource(resourceName, languageId, false, "", true);
 
             //set default value if required
             if (String.IsNullOrEmpty(result))
@@ -263,8 +276,9 @@ namespace TinyCms.Services.Localization
 
             return result;
         }
+
         /// <summary>
-        /// Save localized name of a permission
+        ///     Save localized name of a permission
         /// </summary>
         /// <param name="permissionRecord">Permission record</param>
         /// <param name="localizationService">Localization service</param>
@@ -279,8 +293,8 @@ namespace TinyCms.Services.Localization
             if (languageService == null)
                 throw new ArgumentNullException("languageService");
 
-            string resourceName = string.Format("Permission.{0}", permissionRecord.SystemName);
-            string resourceValue = permissionRecord.Name;
+            var resourceName = string.Format("Permission.{0}", permissionRecord.SystemName);
+            var resourceValue = permissionRecord.Name;
 
             foreach (var lang in languageService.GetAllLanguages(true))
             {
@@ -302,8 +316,9 @@ namespace TinyCms.Services.Localization
                 }
             }
         }
+
         /// <summary>
-        /// Delete a localized name of a permission
+        ///     Delete a localized name of a permission
         /// </summary>
         /// <param name="permissionRecord">Permission record</param>
         /// <param name="localizationService">Localization service</param>
@@ -318,7 +333,7 @@ namespace TinyCms.Services.Localization
             if (languageService == null)
                 throw new ArgumentNullException("languageService");
 
-            string resourceName = string.Format("Permission.{0}", permissionRecord.SystemName);
+            var resourceName = string.Format("Permission.{0}", permissionRecord.SystemName);
             foreach (var lang in languageService.GetAllLanguages(true))
             {
                 var lsr = localizationService.GetLocaleStringResourceByName(resourceName, lang.Id, false);
@@ -327,10 +342,8 @@ namespace TinyCms.Services.Localization
             }
         }
 
-
-
         /// <summary>
-        /// Delete a locale resource
+        ///     Delete a locale resource
         /// </summary>
         /// <param name="plugin">Plugin</param>
         /// <param name="resourceName">Resource name</param>
@@ -342,8 +355,9 @@ namespace TinyCms.Services.Localization
             DeletePluginLocaleResource(plugin, localizationService,
                 languageService, resourceName);
         }
+
         /// <summary>
-        /// Delete a locale resource
+        ///     Delete a locale resource
         /// </summary>
         /// <param name="plugin">Plugin</param>
         /// <param name="localizationService">Localization service</param>
@@ -368,8 +382,9 @@ namespace TinyCms.Services.Localization
                     localizationService.DeleteLocaleStringResource(lsr);
             }
         }
+
         /// <summary>
-        /// Add a locale resource (if new) or update an existing one
+        ///     Add a locale resource (if new) or update an existing one
         /// </summary>
         /// <param name="plugin">Plugin</param>
         /// <param name="resourceName">Resource name</param>
@@ -383,8 +398,9 @@ namespace TinyCms.Services.Localization
             AddOrUpdatePluginLocaleResource(plugin, localizationService,
                 languageService, resourceName, resourceValue, languageCulture);
         }
+
         /// <summary>
-        /// Add a locale resource (if new) or update an existing one
+        ///     Add a locale resource (if new) or update an existing one
         /// </summary>
         /// <param name="plugin">Plugin</param>
         /// <param name="localizationService">Localization service</param>
@@ -428,10 +444,8 @@ namespace TinyCms.Services.Localization
             }
         }
 
-
-
         /// <summary>
-        /// Get localized friendly name of a plugin
+        ///     Get localized friendly name of a plugin
         /// </summary>
         /// <typeparam name="T">Plugin</typeparam>
         /// <param name="plugin">Plugin</param>
@@ -452,11 +466,11 @@ namespace TinyCms.Services.Localization
             if (plugin.PluginDescriptor == null)
                 throw new ArgumentException("Plugin descriptor cannot be loaded");
 
-            string systemName = plugin.PluginDescriptor.SystemName;
+            var systemName = plugin.PluginDescriptor.SystemName;
             //localized value
-            string resourceName = string.Format("Plugins.FriendlyName.{0}",
+            var resourceName = string.Format("Plugins.FriendlyName.{0}",
                 systemName);
-            string result = localizationService.GetResource(resourceName, languageId, false, "", true);
+            var result = localizationService.GetResource(resourceName, languageId, false, "", true);
 
             //set default value if required
             if (String.IsNullOrEmpty(result) && returnDefaultValue)
@@ -464,8 +478,9 @@ namespace TinyCms.Services.Localization
 
             return result;
         }
+
         /// <summary>
-        /// Save localized friendly name of a plugin
+        ///     Save localized friendly name of a plugin
         /// </summary>
         /// <typeparam name="T">Plugin</typeparam>
         /// <param name="plugin">Plugin</param>
@@ -489,9 +504,9 @@ namespace TinyCms.Services.Localization
             if (plugin.PluginDescriptor == null)
                 throw new ArgumentException("Plugin descriptor cannot be loaded");
 
-            string systemName = plugin.PluginDescriptor.SystemName;
+            var systemName = plugin.PluginDescriptor.SystemName;
             //localized value
-            string resourceName = string.Format("Plugins.FriendlyName.{0}", systemName);
+            var resourceName = string.Format("Plugins.FriendlyName.{0}", systemName);
             var resource = localizationService.GetLocaleStringResourceByName(resourceName, languageId, false);
 
             if (resource != null)
@@ -517,7 +532,7 @@ namespace TinyCms.Services.Localization
                     {
                         LanguageId = languageId,
                         ResourceName = resourceName,
-                        ResourceValue = localizedFriendlyName,
+                        ResourceValue = localizedFriendlyName
                     };
                     localizationService.InsertLocaleStringResource(resource);
                 }

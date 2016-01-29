@@ -10,16 +10,16 @@ using TinyCms.Services.Events;
 
 namespace TinyCms.Services.Messages
 {
-    public partial class QueuedEmailService : IQueuedEmailService
+    public class QueuedEmailService : IQueuedEmailService
     {
-        private readonly IRepository<QueuedEmail> _queuedEmailRepository;
-        private readonly IDbContext _dbContext;
-        private readonly IDataProvider _dataProvider;
         private readonly CommonSettings _commonSettings;
+        private readonly IDataProvider _dataProvider;
+        private readonly IDbContext _dbContext;
         private readonly IEventPublisher _eventPublisher;
+        private readonly IRepository<QueuedEmail> _queuedEmailRepository;
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="queuedEmailRepository">Queued email repository</param>
         /// <param name="eventPublisher">Event published</param>
@@ -28,21 +28,21 @@ namespace TinyCms.Services.Messages
         /// <param name="commonSettings">Common settings</param>
         public QueuedEmailService(IRepository<QueuedEmail> queuedEmailRepository,
             IEventPublisher eventPublisher,
-            IDbContext dbContext, 
-            IDataProvider dataProvider, 
+            IDbContext dbContext,
+            IDataProvider dataProvider,
             CommonSettings commonSettings)
         {
             _queuedEmailRepository = queuedEmailRepository;
             _eventPublisher = eventPublisher;
-            this._dbContext = dbContext;
-            this._dataProvider = dataProvider;
-            this._commonSettings = commonSettings;
+            _dbContext = dbContext;
+            _dataProvider = dataProvider;
+            _commonSettings = commonSettings;
         }
 
         /// <summary>
-        /// Inserts a queued email
+        ///     Inserts a queued email
         /// </summary>
-        /// <param name="queuedEmail">Queued email</param>        
+        /// <param name="queuedEmail">Queued email</param>
         public virtual void InsertQueuedEmail(QueuedEmail queuedEmail)
         {
             if (queuedEmail == null)
@@ -55,7 +55,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Updates a queued email
+        ///     Updates a queued email
         /// </summary>
         /// <param name="queuedEmail">Queued email</param>
         public virtual void UpdateQueuedEmail(QueuedEmail queuedEmail)
@@ -70,7 +70,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Deleted a queued email
+        ///     Deleted a queued email
         /// </summary>
         /// <param name="queuedEmail">Queued email</param>
         public virtual void DeleteQueuedEmail(QueuedEmail queuedEmail)
@@ -85,7 +85,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Gets a queued email by identifier
+        ///     Gets a queued email by identifier
         /// </summary>
         /// <param name="queuedEmailId">Queued email identifier</param>
         /// <returns>Queued email</returns>
@@ -95,11 +95,10 @@ namespace TinyCms.Services.Messages
                 return null;
 
             return _queuedEmailRepository.GetById(queuedEmailId);
-
         }
 
         /// <summary>
-        /// Get queued emails by identifiers
+        ///     Get queued emails by identifiers
         /// </summary>
         /// <param name="queuedEmailIds">queued email identifiers</param>
         /// <returns>Queued emails</returns>
@@ -109,12 +108,12 @@ namespace TinyCms.Services.Messages
                 return new List<QueuedEmail>();
 
             var query = from qe in _queuedEmailRepository.Table
-                        where queuedEmailIds.Contains(qe.Id)
-                        select qe;
+                where queuedEmailIds.Contains(qe.Id)
+                select qe;
             var queuedEmails = query.ToList();
             //sort by passed identifiers
             var sortedQueuedEmails = new List<QueuedEmail>();
-            foreach (int id in queuedEmailIds)
+            foreach (var id in queuedEmailIds)
             {
                 var queuedEmail = queuedEmails.Find(x => x.Id == id);
                 if (queuedEmail != null)
@@ -124,7 +123,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Gets all queued emails
+        ///     Gets all queued emails
         /// </summary>
         /// <param name="fromEmail">From Email</param>
         /// <param name="toEmail">To Email</param>
@@ -137,13 +136,13 @@ namespace TinyCms.Services.Messages
         /// <param name="pageSize">Page size</param>
         /// <returns>Email item list</returns>
         public virtual IPagedList<QueuedEmail> SearchEmails(string fromEmail,
-            string toEmail, DateTime? createdFromUtc, DateTime? createdToUtc, 
+            string toEmail, DateTime? createdFromUtc, DateTime? createdToUtc,
             bool loadNotSentItemsOnly, int maxSendTries,
             bool loadNewest, int pageIndex = 0, int pageSize = int.MaxValue)
         {
             fromEmail = (fromEmail ?? String.Empty).Trim();
             toEmail = (toEmail ?? String.Empty).Trim();
-            
+
             var query = _queuedEmailRepository.Table;
             if (!String.IsNullOrEmpty(fromEmail))
                 query = query.Where(qe => qe.From.Contains(fromEmail));
@@ -156,9 +155,11 @@ namespace TinyCms.Services.Messages
             if (loadNotSentItemsOnly)
                 query = query.Where(qe => !qe.SentOnUtc.HasValue);
             query = query.Where(qe => qe.SentTries < maxSendTries);
-            query = loadNewest ?
+            query = loadNewest
+                ?
                 //load the newest records
-                query.OrderByDescending(qe => qe.CreatedOnUtc) :
+                query.OrderByDescending(qe => qe.CreatedOnUtc)
+                :
                 //load by priority
                 query.OrderByDescending(qe => qe.PriorityId).ThenBy(qe => qe.CreatedOnUtc);
 
@@ -167,7 +168,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Delete all queued emails
+        ///     Delete all queued emails
         /// </summary>
         public virtual void DeleteAllEmails()
         {
@@ -178,7 +179,7 @@ namespace TinyCms.Services.Messages
 
 
                 //do all databases support "Truncate command"?
-                string queuedEmailTableName = _dbContext.GetTableName<QueuedEmail>();
+                var queuedEmailTableName = _dbContext.GetTableName<QueuedEmail>();
                 _dbContext.ExecuteSqlCommand(String.Format("TRUNCATE TABLE [{0}]", queuedEmailTableName));
             }
             else

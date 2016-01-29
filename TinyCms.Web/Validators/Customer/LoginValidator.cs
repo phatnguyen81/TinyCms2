@@ -13,7 +13,9 @@ namespace TinyCms.Web.Validators.Customer
             if (!customerSettings.UsernamesEnabled)
             {
                 //login by email
-                RuleFor(x => x.Email).NotEmpty().WithMessage(localizationService.GetResource("Account.Login.Fields.Email.Required"));
+                RuleFor(x => x.Email)
+                    .NotEmpty()
+                    .WithMessage(localizationService.GetResource("Account.Login.Fields.Email.Required"));
                 RuleFor(x => x.Email).EmailAddress().WithMessage(localizationService.GetResource("Common.WrongEmail"));
             }
         }

@@ -4,7 +4,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Common
 {
-    public partial class LanguageSelectorModel : BaseNopModel
+    public class LanguageSelectorModel : BaseNopModel
     {
         public LanguageSelectorModel()
         {
@@ -12,7 +12,6 @@ namespace TinyCms.Admin.Models.Common
         }
 
         public IList<LanguageModel> AvailableLanguages { get; set; }
-
         public LanguageModel CurrentLanguage { get; set; }
     }
 }

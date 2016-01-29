@@ -1,5 +1,4 @@
-﻿
-using TinyCms.Core.Configuration;
+﻿using TinyCms.Core.Configuration;
 
 namespace Nop.Plugin.Widgets.GoogleAnalytics
 {

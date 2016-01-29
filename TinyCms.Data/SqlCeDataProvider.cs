@@ -10,18 +10,18 @@ namespace TinyCms.Data
     public class SqlCeDataProvider : IDataProvider
     {
         /// <summary>
-        /// Initialize connection factory
+        ///     Initialize connection factory
         /// </summary>
         public virtual void InitConnectionFactory()
         {
             var connectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
             //TODO fix compilation warning (below)
-            #pragma warning disable 0618
+#pragma warning disable 0618
             Database.DefaultConnectionFactory = connectionFactory;
         }
 
         /// <summary>
-        /// Initialize database
+        ///     Initialize database
         /// </summary>
         public virtual void InitDatabase()
         {
@@ -30,7 +30,7 @@ namespace TinyCms.Data
         }
 
         /// <summary>
-        /// Set database initializer
+        ///     Set database initializer
         /// </summary>
         public virtual void SetDatabaseInitializer()
         {
@@ -39,7 +39,7 @@ namespace TinyCms.Data
         }
 
         /// <summary>
-        /// A value indicating whether this data provider supports stored procedures
+        ///     A value indicating whether this data provider supports stored procedures
         /// </summary>
         public virtual bool StoredProceduredSupported
         {
@@ -47,7 +47,7 @@ namespace TinyCms.Data
         }
 
         /// <summary>
-        /// Gets a support database parameter object (used by stored procedures)
+        ///     Gets a support database parameter object (used by stored procedures)
         /// </summary>
         /// <returns>Parameter</returns>
         public virtual DbParameter GetParameter()

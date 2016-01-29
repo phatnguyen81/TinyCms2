@@ -11,7 +11,7 @@ namespace TinyCms.Admin.Validators.Messages
         {
             RuleFor(x => x.Email).NotEmpty();
             RuleFor(x => x.Email).EmailAddress().WithMessage(localizationService.GetResource("Admin.Common.WrongEmail"));
-            
+
             RuleFor(x => x.DisplayName).NotEmpty();
         }
     }

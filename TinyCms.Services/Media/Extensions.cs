@@ -1,43 +1,38 @@
-﻿using System;
-using System.IO;
-using System.Web;
-using TinyCms.Core.Domain.Media;
+﻿using System.Web;
 
 namespace TinyCms.Services.Media
 {
     /// <summary>
-    /// Extensions
+    ///     Extensions
     /// </summary>
     public static class Extensions
     {
         /// <summary>
-        /// Gets the download binary array
+        ///     Gets the download binary array
         /// </summary>
         /// <param name="postedFile">Posted file</param>
         /// <returns>Download binary array</returns>
         public static byte[] GetDownloadBits(this HttpPostedFileBase postedFile)
         {
-            Stream fs = postedFile.InputStream;
-            int size = postedFile.ContentLength;
+            var fs = postedFile.InputStream;
+            var size = postedFile.ContentLength;
             var binary = new byte[size];
             fs.Read(binary, 0, size);
             return binary;
         }
 
         /// <summary>
-        /// Gets the picture binary array
+        ///     Gets the picture binary array
         /// </summary>
         /// <param name="postedFile">Posted file</param>
         /// <returns>Picture binary array</returns>
         public static byte[] GetPictureBits(this HttpPostedFileBase postedFile)
         {
-            Stream fs = postedFile.InputStream;
-            int size = postedFile.ContentLength;
+            var fs = postedFile.InputStream;
+            var size = postedFile.ContentLength;
             var img = new byte[size];
             fs.Read(img, 0, size);
             return img;
         }
-
-      
     }
 }

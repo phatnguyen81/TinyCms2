@@ -1,13 +1,14 @@
 ﻿//Contribution: Orchard project (http://www.orchardproject.net/)
+
 namespace TinyCms.Services.Infrastructure
 {
     /// <summary>
-    /// Describes a service which the name of the machine (instance) running the application.
+    ///     Describes a service which the name of the machine (instance) running the application.
     /// </summary>
     public interface IMachineNameProvider
     {
         /// <summary>
-        /// Returns the name of the machine (instance) running the application.
+        ///     Returns the name of the machine (instance) running the application.
         /// </summary>
         string GetMachineName();
     }

@@ -8,21 +8,14 @@ using TinyCms.Data;
 namespace TinyCms.Services.Common
 {
     /// <summary>
-    ///  Maintenance service
+    ///     Maintenance service
     /// </summary>
-    public partial class MaintenanceService : IMaintenanceService
+    public class MaintenanceService : IMaintenanceService
     {
-        #region Fields
-
-        private readonly IDataProvider _dataProvider;
-        private readonly IDbContext _dbContext;
-        private readonly CommonSettings _commonSettings;
-        #endregion
-
         #region Ctor
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="dataProvider">Data provider</param>
         /// <param name="dbContext">Database Context</param>
@@ -30,21 +23,29 @@ namespace TinyCms.Services.Common
         public MaintenanceService(IDataProvider dataProvider, IDbContext dbContext,
             CommonSettings commonSettings)
         {
-            this._dataProvider = dataProvider;
-            this._dbContext = dbContext;
-            this._commonSettings = commonSettings;
+            _dataProvider = dataProvider;
+            _dbContext = dbContext;
+            _commonSettings = commonSettings;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly IDataProvider _dataProvider;
+        private readonly IDbContext _dbContext;
+        private readonly CommonSettings _commonSettings;
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Get the current ident value
+        ///     Get the current ident value
         /// </summary>
         /// <typeparam name="T">Entity</typeparam>
         /// <returns>Integer ident; null if cannot get the result</returns>
-        public virtual int? GetTableIdent<T>() where T: BaseEntity
+        public virtual int? GetTableIdent<T>() where T : BaseEntity
         {
             if (_commonSettings.UseStoredProceduresIfSupported && _dataProvider.StoredProceduredSupported)
             {
@@ -53,13 +54,13 @@ namespace TinyCms.Services.Common
                 var result = _dbContext.SqlQuery<decimal>(string.Format("SELECT IDENT_CURRENT('[{0}]')", tableName));
                 return Convert.ToInt32(result.FirstOrDefault());
             }
-            
+
             //stored procedures aren't supported
             return null;
         }
 
         /// <summary>
-        /// Set table ident (is supported)
+        ///     Set table ident (is supported)
         /// </summary>
         /// <typeparam name="T">Entity</typeparam>
         /// <param name="ident">Ident value</param>

@@ -4,7 +4,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Common
 {
-    public partial class UrlRecordModel : BaseNopEntityModel
+    public class UrlRecordModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.System.SeNames.Name")]
         [AllowHtml]

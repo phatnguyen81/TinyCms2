@@ -1,12 +1,12 @@
 ﻿namespace TinyCms.Services.Tasks
 {
     /// <summary>
-    /// Interface that should be implemented by each task
+    ///     Interface that should be implemented by each task
     /// </summary>
-    public partial interface ITask
+    public interface ITask
     {
         /// <summary>
-        /// Executes a task
+        ///     Executes a task
         /// </summary>
         void Execute();
     }

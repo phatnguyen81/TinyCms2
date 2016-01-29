@@ -6,11 +6,11 @@
 var AjaxCart = {
     loadWaiting: false,
     usepopupnotifications: false,
-    topcartselector: '',
-    topwishlistselector: '',
-    flyoutcartselector: '',
+    topcartselector: "",
+    topwishlistselector: "",
+    flyoutcartselector: "",
 
-    init: function (usepopupnotifications, topcartselector, topwishlistselector, flyoutcartselector) {
+    init: function(usepopupnotifications, topcartselector, topwishlistselector, flyoutcartselector) {
         this.loadWaiting = false;
         this.usepopupnotifications = usepopupnotifications;
         this.topcartselector = topcartselector;
@@ -18,13 +18,13 @@ var AjaxCart = {
         this.flyoutcartselector = flyoutcartselector;
     },
 
-    setLoadWaiting: function (display) {
+    setLoadWaiting: function(display) {
         displayAjaxLoading(display);
         this.loadWaiting = display;
     },
 
     //add a product to the cart/wishlist from the catalog pages
-    addproducttocart_catalog: function (urladd) {
+    addproducttocart_catalog: function(urladd) {
         if (this.loadWaiting != false) {
             return;
         }
@@ -33,7 +33,7 @@ var AjaxCart = {
         $.ajax({
             cache: false,
             url: urladd,
-            type: 'post',
+            type: "post",
             success: this.success_process,
             complete: this.resetLoadWaiting,
             error: this.ajaxFailure
@@ -41,7 +41,7 @@ var AjaxCart = {
     },
 
     //add a product to the cart/wishlist from the product details page
-    addproducttocart_details: function (urladd, formselector) {
+    addproducttocart_details: function(urladd, formselector) {
         if (this.loadWaiting != false) {
             return;
         }
@@ -51,7 +51,7 @@ var AjaxCart = {
             cache: false,
             url: urladd,
             data: $(formselector).serialize(),
-            type: 'post',
+            type: "post",
             success: this.success_process,
             complete: this.resetLoadWaiting,
             error: this.ajaxFailure
@@ -59,7 +59,7 @@ var AjaxCart = {
     },
 
     //add a product to compare list
-    addproducttocomparelist: function (urladd) {
+    addproducttocomparelist: function(urladd) {
         if (this.loadWaiting != false) {
             return;
         }
@@ -68,14 +68,14 @@ var AjaxCart = {
         $.ajax({
             cache: false,
             url: urladd,
-            type: 'post',
+            type: "post",
             success: this.success_process,
             complete: this.resetLoadWaiting,
             error: this.ajaxFailure
         });
     },
 
-    success_process: function (response) {
+    success_process: function(response) {
         if (response.updatetopcartsectionhtml) {
             $(AjaxCart.topcartselector).html(response.updatetopcartsectionhtml);
         }
@@ -90,21 +90,18 @@ var AjaxCart = {
             if (response.success == true) {
                 //success
                 if (AjaxCart.usepopupnotifications == true) {
-                    displayPopupNotification(response.message, 'success', true);
-                }
-                else {
+                    displayPopupNotification(response.message, "success", true);
+                } else {
                     //specify timeout for success messages
-                    displayBarNotification(response.message, 'success', 3500);
+                    displayBarNotification(response.message, "success", 3500);
                 }
-            }
-            else {
+            } else {
                 //error
                 if (AjaxCart.usepopupnotifications == true) {
-                    displayPopupNotification(response.message, 'error', true);
-                }
-                else {
+                    displayPopupNotification(response.message, "error", true);
+                } else {
                     //no timeout for errors
-                    displayBarNotification(response.message, 'error', 0);
+                    displayBarNotification(response.message, "error", 0);
                 }
             }
             return false;
@@ -116,11 +113,11 @@ var AjaxCart = {
         return false;
     },
 
-    resetLoadWaiting: function () {
+    resetLoadWaiting: function() {
         AjaxCart.setLoadWaiting(false);
     },
 
-    ajaxFailure: function () {
-        alert('Failed to add the product. Please refresh the page and try one more time.');
+    ajaxFailure: function() {
+        alert("Failed to add the product. Please refresh the page and try one more time.");
     }
 };

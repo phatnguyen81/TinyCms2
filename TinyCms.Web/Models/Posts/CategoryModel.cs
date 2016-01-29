@@ -4,7 +4,7 @@ using TinyCms.Web.Models.Media;
 
 namespace TinyCms.Web.Models.Posts
 {
-    public partial class CategoryModel : BaseNopEntityModel
+    public class CategoryModel : BaseNopEntityModel
     {
         public CategoryModel()
         {
@@ -23,25 +23,18 @@ namespace TinyCms.Web.Models.Posts
         public string MetaDescription { get; set; }
         public string MetaTitle { get; set; }
         public string SeName { get; set; }
-        
         public PictureModel PictureModel { get; set; }
-
         public bool DisplayCategoryBreadcrumb { get; set; }
         public IList<CategoryModel> CategoryBreadcrumb { get; set; }
-
         public CategoryModel ParentCategory { get; set; }
-
-        
         public IList<SubCategoryModel> SubCategories { get; set; }
-
         public IList<PostOverviewModel> FeaturedPosts { get; set; }
         public IList<PostOverviewModel> Posts { get; set; }
-
         public PostsPagingFilteringModel PagingFilteringContext { get; set; }
 
-		#region Nested Classes
+        #region Nested Classes
 
-        public partial class SubCategoryModel : BaseNopEntityModel
+        public class SubCategoryModel : BaseNopEntityModel
         {
             public SubCategoryModel()
             {
@@ -49,29 +42,24 @@ namespace TinyCms.Web.Models.Posts
             }
 
             public string Name { get; set; }
-
             public string SeName { get; set; }
-
             public string Description { get; set; }
-
             public PictureModel PictureModel { get; set; }
         }
 
-		#endregion
+        #endregion
     }
 
 
-    public partial class CategoryBoxModel : BaseNopEntityModel
+    public class CategoryBoxModel : BaseNopEntityModel
     {
-
         public CategoryBoxModel()
         {
             Posts = new List<PostOverviewModel>();
         }
+
         public string Name { get; set; }
-
         public string SeName { get; set; }
-
-        public List<PostOverviewModel> Posts { get; set; } 
+        public List<PostOverviewModel> Posts { get; set; }
     }
 }

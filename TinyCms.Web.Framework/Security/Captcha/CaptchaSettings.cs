@@ -3,61 +3,72 @@
 namespace TinyCms.Web.Framework.Security.Captcha
 {
     /// <summary>
-    /// CAPTCHA settings
+    ///     CAPTCHA settings
     /// </summary>
     public class CaptchaSettings : ISettings
     {
         /// <summary>
-        /// Is CAPTCHA enabled?
+        ///     Is CAPTCHA enabled?
         /// </summary>
         public bool Enabled { get; set; }
+
         /// <summary>
-        /// A value indicating whether CAPTCHA should be displayed on the login page
+        ///     A value indicating whether CAPTCHA should be displayed on the login page
         /// </summary>
         public bool ShowOnLoginPage { get; set; }
+
         /// <summary>
-        /// A value indicating whether CAPTCHA should be displayed on the registration page
+        ///     A value indicating whether CAPTCHA should be displayed on the registration page
         /// </summary>
         public bool ShowOnRegistrationPage { get; set; }
+
         /// <summary>
-        /// A value indicating whether CAPTCHA should be displayed on the contacts page
+        ///     A value indicating whether CAPTCHA should be displayed on the contacts page
         /// </summary>
         public bool ShowOnContactUsPage { get; set; }
+
         /// <summary>
-        /// A value indicating whether CAPTCHA should be displayed on the wishlist page
+        ///     A value indicating whether CAPTCHA should be displayed on the wishlist page
         /// </summary>
         public bool ShowOnEmailWishlistToFriendPage { get; set; }
+
         /// <summary>
-        /// A value indicating whether CAPTCHA should be displayed on the "email a friend" page
+        ///     A value indicating whether CAPTCHA should be displayed on the "email a friend" page
         /// </summary>
         public bool ShowOnEmailPostToFriendPage { get; set; }
+
         /// <summary>
-        /// A value indicating whether CAPTCHA should be displayed on the "comment blog" page
+        ///     A value indicating whether CAPTCHA should be displayed on the "comment blog" page
         /// </summary>
         public bool ShowOnBlogCommentPage { get; set; }
+
         /// <summary>
-        /// A value indicating whether CAPTCHA should be displayed on the "comment news" page
+        ///     A value indicating whether CAPTCHA should be displayed on the "comment news" page
         /// </summary>
         public bool ShowOnNewsCommentPage { get; set; }
+
         /// <summary>
-        /// A value indicating whether CAPTCHA should be displayed on the product reviews page
+        ///     A value indicating whether CAPTCHA should be displayed on the product reviews page
         /// </summary>
         public bool ShowOnPostReviewPage { get; set; }
+
         /// <summary>
-        /// A value indicating whether CAPTCHA should be displayed on the "Apply for vendor account" page
+        ///     A value indicating whether CAPTCHA should be displayed on the "Apply for vendor account" page
         /// </summary>
         public bool ShowOnApplyVendorPage { get; set; }
 
         /// <summary>
-        /// reCAPTCHA public key
+        ///     reCAPTCHA public key
         /// </summary>
         public string ReCaptchaPublicKey { get; set; }
+
         /// <summary>
-        /// reCAPTCHA private key
+        ///     reCAPTCHA private key
         /// </summary>
         public string ReCaptchaPrivateKey { get; set; }
+
         /// <summary>
-        /// reCAPTCHA theme
+        ///     reCAPTCHA theme
         /// </summary>
         public string ReCaptchaTheme { get; set; }
     }

@@ -1,5 +1,4 @@
 ﻿@model RewardPointsSettingsModel
-@using Nop.Core.Domain.Orders;
 @{
     //page title
     ViewBag.Title = T("Admin.Configuration.Settings.RewardPoints").Text;
@@ -9,11 +8,11 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Settings.RewardPoints")
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
         </div>
     </div>
     @Html.Action("StoreScopeConfiguration", "Setting")
@@ -58,7 +57,7 @@
         </tr>
         <tr class="adminSeparator">
             <td colspan="2">
-                <hr />
+                <hr/>
                 @T("Admin.Configuration.Settings.RewardPoints.Earning")
             </td>
         </tr>
@@ -95,7 +94,7 @@
                 @Html.NopLabelFor(model => model.PointsForPurchases_Awarded):
             </td>
             <td class="adminData">
-                @Html.DropDownListFor(model => model.PointsForPurchases_Awarded, ((OrderStatus)Model.PointsForPurchases_Awarded).ToSelectList())
+                @Html.DropDownListFor(model => model.PointsForPurchases_Awarded, ((OrderStatus) Model.PointsForPurchases_Awarded).ToSelectList())
                 @Html.ValidationMessageFor(model => model.PointsForPurchases_Awarded)
             </td>
         </tr>
@@ -105,7 +104,7 @@
                 @Html.NopLabelFor(model => model.PointsForPurchases_Canceled):
             </td>
             <td class="adminData">
-                @Html.DropDownListFor(model => model.PointsForPurchases_Canceled, ((OrderStatus)Model.PointsForPurchases_Canceled).ToSelectList())
+                @Html.DropDownListFor(model => model.PointsForPurchases_Canceled, ((OrderStatus) Model.PointsForPurchases_Canceled).ToSelectList())
                 @Html.ValidationMessageFor(model => model.PointsForPurchases_Canceled)
             </td>
         </tr>

@@ -21,9 +21,33 @@ using TinyCms.Web.Framework.Kendoui;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class PluginController : BaseAdminController
-	{
-		#region Fields
+    public class PluginController : BaseAdminController
+    {
+        #region Constructors
+
+        public PluginController(IPluginFinder pluginFinder,
+            IOfficialFeedManager officialFeedManager,
+            ILocalizationService localizationService,
+            IWebHelper webHelper,
+            IPermissionService permissionService,
+            ILanguageService languageService,
+            ISettingService settingService,
+            ExternalAuthenticationSettings externalAuthenticationSettings, WidgetSettings wigetSettings)
+        {
+            _pluginFinder = pluginFinder;
+            _officialFeedManager = officialFeedManager;
+            _localizationService = localizationService;
+            _webHelper = webHelper;
+            _permissionService = permissionService;
+            _languageService = languageService;
+            _settingService = settingService;
+            _externalAuthenticationSettings = externalAuthenticationSettings;
+            _widgetSettings = wigetSettings;
+        }
+
+        #endregion
+
+        #region Fields
 
         private readonly IPluginFinder _pluginFinder;
         private readonly IOfficialFeedManager _officialFeedManager;
@@ -31,39 +55,16 @@ namespace TinyCms.Admin.Controllers
         private readonly IWebHelper _webHelper;
         private readonly IPermissionService _permissionService;
         private readonly ILanguageService _languageService;
-	    private readonly ISettingService _settingService;
+        private readonly ISettingService _settingService;
         private readonly WidgetSettings _widgetSettings;
         private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
-	    #endregion
 
-		#region Constructors
-
-        public PluginController(IPluginFinder pluginFinder,
-            IOfficialFeedManager officialFeedManager,
-            ILocalizationService localizationService,
-            IWebHelper webHelper,
-            IPermissionService permissionService, 
-            ILanguageService languageService,
-            ISettingService settingService, 
-            ExternalAuthenticationSettings externalAuthenticationSettings, WidgetSettings wigetSettings)
-		{
-            this._pluginFinder = pluginFinder;
-            this._officialFeedManager = officialFeedManager;
-            this._localizationService = localizationService;
-            this._webHelper = webHelper;
-            this._permissionService = permissionService;
-            this._languageService = languageService;
-            this._settingService = settingService;
-            this._externalAuthenticationSettings = externalAuthenticationSettings;
-            _widgetSettings = wigetSettings;
-		}
-
-		#endregion 
+        #endregion
 
         #region Utilities
 
         [NonAction]
-        protected virtual PluginModel PreparePluginModel(PluginDescriptor pluginDescriptor, 
+        protected virtual PluginModel PreparePluginModel(PluginDescriptor pluginDescriptor,
             bool prepareLocales = true)
         {
             var pluginModel = pluginDescriptor.ToModel();
@@ -73,10 +74,12 @@ namespace TinyCms.Admin.Controllers
             if (prepareLocales)
             {
                 //locales
-                AddLocales(_languageService, pluginModel.Locales, (locale, languageId) =>
-                {
-                    locale.FriendlyName = pluginDescriptor.Instance().GetLocalizedFriendlyName(_localizationService, languageId, false);
-                });
+                AddLocales(_languageService, pluginModel.Locales,
+                    (locale, languageId) =>
+                    {
+                        locale.FriendlyName = pluginDescriptor.Instance()
+                            .GetLocalizedFriendlyName(_localizationService, languageId, false);
+                    });
             }
 
 
@@ -94,21 +97,22 @@ namespace TinyCms.Admin.Controllers
                 if (pluginInstance is IExternalAuthenticationMethod)
                 {
                     //external auth method
-                    configurationUrl = Url.Action("ConfigureMethod", "ExternalAuthentication", new { systemName = pluginDescriptor.SystemName });
+                    configurationUrl = Url.Action("ConfigureMethod", "ExternalAuthentication",
+                        new {systemName = pluginDescriptor.SystemName});
                 }
                 else if (pluginInstance is IWidgetPlugin)
                 {
                     //Misc plugins
-                    configurationUrl = Url.Action("ConfigureWidget", "Widget", new { systemName = pluginDescriptor.SystemName });
+                    configurationUrl = Url.Action("ConfigureWidget", "Widget",
+                        new {systemName = pluginDescriptor.SystemName});
                 }
                 else if (pluginInstance is IMiscPlugin)
                 {
                     //Misc plugins
-                    configurationUrl = Url.Action("ConfigureMiscPlugin", "Plugin", new { systemName = pluginDescriptor.SystemName });
+                    configurationUrl = Url.Action("ConfigureMiscPlugin", "Plugin",
+                        new {systemName = pluginDescriptor.SystemName});
                 }
                 pluginModel.ConfigurationUrl = configurationUrl;
-
-
 
 
                 //enabled/disabled (only for some plugin types)
@@ -116,15 +120,15 @@ namespace TinyCms.Admin.Controllers
                 {
                     //external auth method
                     pluginModel.CanChangeEnabled = true;
-                    pluginModel.IsEnabled = ((IExternalAuthenticationMethod)pluginInstance).IsMethodActive(_externalAuthenticationSettings);
+                    pluginModel.IsEnabled =
+                        ((IExternalAuthenticationMethod) pluginInstance).IsMethodActive(_externalAuthenticationSettings);
                 }
                 else if (pluginInstance is IWidgetPlugin)
                 {
                     //Misc plugins
                     pluginModel.CanChangeEnabled = true;
-                    pluginModel.IsEnabled = ((IWidgetPlugin)pluginInstance).IsWidgetActive(_widgetSettings);
+                    pluginModel.IsEnabled = ((IWidgetPlugin) pluginInstance).IsWidgetActive(_widgetSettings);
                 }
-
             }
             return pluginModel;
         }
@@ -145,7 +149,7 @@ namespace TinyCms.Admin.Controllers
             breadCrumb.Reverse();
 
             var result = "";
-            for (int i = 0; i <= breadCrumb.Count - 1; i++)
+            for (var i = 0; i <= breadCrumb.Count - 1; i++)
             {
                 result += breadCrumb[i].Name;
                 if (i != breadCrumb.Count - 1)
@@ -153,6 +157,7 @@ namespace TinyCms.Admin.Controllers
             }
             return result;
         }
+
         #endregion
 
         #region Methods
@@ -171,28 +176,33 @@ namespace TinyCms.Admin.Controllers
             //load modes
             model.AvailableLoadModes = LoadPluginsMode.All.ToSelectList(false).ToList();
             //groups
-            model.AvailableGroups.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "" });
+            model.AvailableGroups.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Common.All"),
+                Value = ""
+            });
             foreach (var g in _pluginFinder.GetPluginGroups())
-                model.AvailableGroups.Add(new SelectListItem { Text = g, Value = g });
+                model.AvailableGroups.Add(new SelectListItem {Text = g, Value = g});
             return View(model);
         }
-	    [HttpPost]
-        public ActionResult ListSelect(DataSourceRequest command, PluginListModel model)
-	    {
-	        if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
-	            return AccessDeniedView();
 
-	        var loadMode = (LoadPluginsMode) model.SearchLoadModeId;
+        [HttpPost]
+        public ActionResult ListSelect(DataSourceRequest command, PluginListModel model)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return AccessDeniedView();
+
+            var loadMode = (LoadPluginsMode) model.SearchLoadModeId;
             var pluginDescriptors = _pluginFinder.GetPluginDescriptors(loadMode, 0, model.SearchGroup).ToList();
-	        var gridModel = new DataSourceResult
+            var gridModel = new DataSourceResult
             {
-                Data = pluginDescriptors.Select(x => PreparePluginModel(x, false ))
-                .OrderBy(x => x.Group)
-                .ToList(),
+                Data = pluginDescriptors.Select(x => PreparePluginModel(x, false))
+                    .OrderBy(x => x.Group)
+                    .ToList(),
                 Total = pluginDescriptors.Count()
             };
-	        return Json(gridModel);
-	    }
+            return Json(gridModel);
+        }
 
         [HttpPost, ActionName("List")]
         [FormValueRequired(FormValueRequirement.StartsWith, "install-plugin-link-")]
@@ -230,9 +240,10 @@ namespace TinyCms.Admin.Controllers
             {
                 ErrorNotification(exc);
             }
-             
+
             return RedirectToAction("List");
         }
+
         [HttpPost, ActionName("List")]
         [FormValueRequired(FormValueRequirement.StartsWith, "uninstall-plugin-link-")]
         [ValidateInput(false)]
@@ -282,7 +293,7 @@ namespace TinyCms.Admin.Controllers
             _webHelper.RestartAppDomain();
             return RedirectToAction("List");
         }
-        
+
         public ActionResult ConfigureMiscPlugin(string systemName)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
@@ -293,7 +304,7 @@ namespace TinyCms.Admin.Controllers
             if (descriptor == null || !descriptor.Installed)
                 return Redirect("List");
 
-            var plugin  = descriptor.Instance<IMiscPlugin>();
+            var plugin = descriptor.Instance<IMiscPlugin>();
 
             string actionName, controllerName;
             RouteValueDictionary routeValues;
@@ -321,6 +332,7 @@ namespace TinyCms.Admin.Controllers
 
             return View(model);
         }
+
         [HttpPost]
         public ActionResult EditPopup(string btnId, string formId, PluginModel model)
         {
@@ -343,7 +355,8 @@ namespace TinyCms.Admin.Controllers
                 //locales
                 foreach (var localized in model.Locales)
                 {
-                    pluginDescriptor.Instance().SaveLocalizedFriendlyName(_localizationService, localized.LanguageId, localized.FriendlyName);
+                    pluginDescriptor.Instance()
+                        .SaveLocalizedFriendlyName(_localizationService, localized.LanguageId, localized.FriendlyName);
                 }
                 //enabled/disabled
                 if (pluginDescriptor.Installed)
@@ -352,13 +365,14 @@ namespace TinyCms.Admin.Controllers
                     if (pluginInstance is IExternalAuthenticationMethod)
                     {
                         //external auth method
-                        var eam = (IExternalAuthenticationMethod)pluginInstance;
+                        var eam = (IExternalAuthenticationMethod) pluginInstance;
                         if (eam.IsMethodActive(_externalAuthenticationSettings))
                         {
                             if (!model.IsEnabled)
                             {
                                 //mark as disabled
-                                _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Remove(eam.PluginDescriptor.SystemName);
+                                _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Remove(
+                                    eam.PluginDescriptor.SystemName);
                                 _settingService.SaveSetting(_externalAuthenticationSettings);
                             }
                         }
@@ -367,7 +381,8 @@ namespace TinyCms.Admin.Controllers
                             if (model.IsEnabled)
                             {
                                 //mark as active
-                                _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Add(eam.PluginDescriptor.SystemName);
+                                _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Add(
+                                    eam.PluginDescriptor.SystemName);
                                 _settingService.SaveSetting(_externalAuthenticationSettings);
                             }
                         }
@@ -375,7 +390,7 @@ namespace TinyCms.Admin.Controllers
                     else if (pluginInstance is IWidgetPlugin)
                     {
                         //Misc plugins
-                        var widget = (IWidgetPlugin)pluginInstance;
+                        var widget = (IWidgetPlugin) pluginInstance;
                         if (widget.IsWidgetActive(_widgetSettings))
                         {
                             if (!model.IsEnabled)
@@ -415,9 +430,13 @@ namespace TinyCms.Admin.Controllers
 
             var model = new OfficialFeedListModel();
             //versions
-            model.AvailableVersions.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
+            model.AvailableVersions.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Common.All"),
+                Value = "0"
+            });
             foreach (var version in _officialFeedManager.GetVersions())
-                model.AvailableVersions.Add(new SelectListItem{ Text = version.Name, Value = version.Id.ToString()});
+                model.AvailableVersions.Add(new SelectListItem {Text = version.Name, Value = version.Id.ToString()});
             //pre-select current version
             //current version name and named on official site do not match. that's why we use "Contains"
             var currentVersionItem = model.AvailableVersions.FirstOrDefault(x => x.Text.Contains("1.0"));
@@ -429,27 +448,44 @@ namespace TinyCms.Admin.Controllers
 
             //categories
             var categories = _officialFeedManager.GetCategories();
-            model.AvailableCategories.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
+            model.AvailableCategories.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Common.All"),
+                Value = "0"
+            });
             foreach (var category in categories)
-                model.AvailableCategories.Add(new SelectListItem { Text = GetCategoryBreadCrumbName(category, categories), Value = category.Id.ToString() });
+                model.AvailableCategories.Add(new SelectListItem
+                {
+                    Text = GetCategoryBreadCrumbName(category, categories),
+                    Value = category.Id.ToString()
+                });
             //prices
-            model.AvailablePrices.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
-            model.AvailablePrices.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Configuration.Plugins.OfficialFeed.Price.Free"), Value = "10" });
-            model.AvailablePrices.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Configuration.Plugins.OfficialFeed.Price.Commercial"), Value = "20" });
+            model.AvailablePrices.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Common.All"),
+                Value = "0"
+            });
+            model.AvailablePrices.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Configuration.Plugins.OfficialFeed.Price.Free"),
+                Value = "10"
+            });
+            model.AvailablePrices.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Configuration.Plugins.OfficialFeed.Price.Commercial"),
+                Value = "20"
+            });
             return View(model);
         }
+
         [HttpPost]
         public ActionResult OfficialFeedSelect(DataSourceRequest command, OfficialFeedListModel model)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
                 return AccessDeniedView();
 
-            var plugins = _officialFeedManager.GetAllPlugins(categoryId: model.SearchCategoryId,
-                versionId: model.SearchVersionId,
-                price : model.SearchPriceId,
-                searchTerm: model.SearchName,
-                pageIndex: command.Page - 1,
-                pageSize: command.PageSize);
+            var plugins = _officialFeedManager.GetAllPlugins(model.SearchCategoryId, model.SearchVersionId,
+                model.SearchPriceId, model.SearchName, command.Page - 1, command.PageSize);
 
             var gridModel = new DataSourceResult();
             gridModel.Data = plugins.Select(x => new OfficialFeedListModel.ItemOverview
@@ -465,6 +501,7 @@ namespace TinyCms.Admin.Controllers
 
             return Json(gridModel);
         }
+
         #endregion
     }
 }

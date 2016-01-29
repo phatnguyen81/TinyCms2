@@ -9,7 +9,9 @@ namespace TinyCms.Admin.Validators.Customers
     {
         public CustomerRoleValidator(ILocalizationService localizationService)
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage(localizationService.GetResource("Admin.Customers.CustomerRoles.Fields.Name.Required"));
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .WithMessage(localizationService.GetResource("Admin.Customers.CustomerRoles.Fields.Name.Required"));
         }
     }
 }

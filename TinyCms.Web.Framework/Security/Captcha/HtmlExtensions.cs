@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Web.Mvc;
 using System.Web.UI;
+using Recaptcha;
 using TinyCms.Core.Infrastructure;
 
 namespace TinyCms.Web.Framework.Security.Captcha
@@ -12,7 +13,7 @@ namespace TinyCms.Web.Framework.Security.Captcha
             var captchaSettings = EngineContext.Current.Resolve<CaptchaSettings>();
 
             var theme = !string.IsNullOrEmpty(captchaSettings.ReCaptchaTheme) ? captchaSettings.ReCaptchaTheme : "white";
-            var captchaControl = new Recaptcha.RecaptchaControl
+            var captchaControl = new RecaptchaControl
             {
                 ID = "recaptcha",
                 Theme = theme,

@@ -5,7 +5,6 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Models
 {
     public class ConfigurationModel : BaseNopModel
     {
-
         [NopResourceDisplayName("Plugins.ExternalAuth.Facebook.ClientKeyIdentifier")]
         public string ClientKeyIdentifier { get; set; }
 

@@ -5,18 +5,18 @@ using TinyCms.Core.Domain.Posts;
 namespace TinyCms.Services.Posts
 {
     /// <summary>
-    /// Category service interface
+    ///     Category service interface
     /// </summary>
-    public partial interface ICategoryService
+    public interface ICategoryService
     {
         /// <summary>
-        /// Delete category
+        ///     Delete category
         /// </summary>
         /// <param name="category">Category</param>
         void DeleteCategory(Category category);
 
         /// <summary>
-        /// Gets all categories
+        ///     Gets all categories
         /// </summary>
         /// <param name="categoryName">Category name</param>
         /// <param name="pageIndex">Page index</param>
@@ -27,7 +27,7 @@ namespace TinyCms.Services.Posts
             int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
 
         /// <summary>
-        /// Gets all categories filtered by parent category identifier
+        ///     Gets all categories filtered by parent category identifier
         /// </summary>
         /// <param name="parentCategoryId">Parent category identifier</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
@@ -37,41 +37,41 @@ namespace TinyCms.Services.Posts
             bool showHidden = false, bool includeAllLevels = false);
 
         /// <summary>
-        /// Gets all categories displayed on the home page
+        ///     Gets all categories displayed on the home page
         /// </summary>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>Categories</returns>
         IList<Category> GetAllCategoriesDisplayedOnHomePage(bool showHidden = false);
 
-
         IList<Category> GetCategoryByCategoryTypeSystemName(string systemName, bool showHidden = false);
+
         /// <summary>
-        /// Gets a category
+        ///     Gets a category
         /// </summary>
         /// <param name="categoryId">Category identifier</param>
         /// <returns>Category</returns>
         Category GetCategoryById(int categoryId);
 
         /// <summary>
-        /// Inserts category
+        ///     Inserts category
         /// </summary>
         /// <param name="category">Category</param>
         void InsertCategory(Category category);
 
         /// <summary>
-        /// Updates the category
+        ///     Updates the category
         /// </summary>
         /// <param name="category">Category</param>
         void UpdateCategory(Category category);
-        
+
         /// <summary>
-        /// Deletes a product category mapping
+        ///     Deletes a product category mapping
         /// </summary>
         /// <param name="productCategory">Post category</param>
         void DeletePostCategory(PostCategory productCategory);
 
         /// <summary>
-        /// Gets product category mapping collection
+        ///     Gets product category mapping collection
         /// </summary>
         /// <param name="categoryId">Category identifier</param>
         /// <param name="pageIndex">Page index</param>
@@ -82,28 +82,28 @@ namespace TinyCms.Services.Posts
             int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false);
 
         /// <summary>
-        /// Gets a product category mapping collection
+        ///     Gets a product category mapping collection
         /// </summary>
         /// <param name="productId">Post identifier</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>Post category mapping collection</returns>
         IList<PostCategory> GetPostCategoriesByPostId(int productId, bool showHidden = false);
-    
+
         /// <summary>
-        /// Gets a product category mapping 
+        ///     Gets a product category mapping
         /// </summary>
         /// <param name="productCategoryId">Post category mapping identifier</param>
         /// <returns>Post category mapping</returns>
         PostCategory GetPostCategoryById(int productCategoryId);
 
         /// <summary>
-        /// Inserts a product category mapping
+        ///     Inserts a product category mapping
         /// </summary>
         /// <param name="productCategory">>Post category mapping</param>
         void InsertPostCategory(PostCategory productCategory);
 
         /// <summary>
-        /// Updates the product category mapping 
+        ///     Updates the product category mapping
         /// </summary>
         /// <param name="productCategory">>Post category mapping</param>
         void UpdatePostCategory(PostCategory productCategory);

@@ -3,7 +3,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Web.Models.Posts
 {
-    public partial class PostsByTagModel : BaseNopEntityModel
+    public class PostsByTagModel : BaseNopEntityModel
     {
         public PostsByTagModel()
         {
@@ -13,9 +13,7 @@ namespace TinyCms.Web.Models.Posts
 
         public string TagName { get; set; }
         public string TagSeName { get; set; }
-
         public PostsPagingFilteringModel PagingFilteringContext { get; set; }
-
         public IList<PostOverviewModel> Posts { get; set; }
     }
 }

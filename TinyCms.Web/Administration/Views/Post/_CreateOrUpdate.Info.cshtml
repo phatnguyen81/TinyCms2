@@ -1,18 +1,18 @@
-﻿@model PostModel
+﻿@using System.Text
+@using TinyCms.Services.Posts
+@model PostModel
 @{
     //resources for post tags input
     Html.AppendCssFileParts("~/Content/tagit/jquery.tagit.css");
     Html.AppendScriptParts("~/Scripts/tag-it.min.js");
 }
-@using TinyCms.Services.Posts;
-@using System.Text;
 <script type="text/javascript">
-  
+
     function toggleShowOnHomePage() {
-        if ($('#@Html.FieldIdFor(model => model.ShowOnHomePage)').is(':checked')) {
-            $('#pnlDisplayOrder').show();
+        if ($("#@Html.FieldIdFor(model => model.ShowOnHomePage)").is(":checked")) {
+            $("#pnlDisplayOrder").show();
         } else {
-            $('#pnlDisplayOrder').hide();
+            $("#pnlDisplayOrder").hide();
         }
     }
 
@@ -22,7 +22,7 @@
         var postTags = EngineContext.Current.Resolve<IPostTagService>().GetAllPostTags();
         var postTagsSb = new StringBuilder();
         postTagsSb.Append("var sampleTags = [");
-        for (int i = 0; i < postTags.Count; i++)
+        for (var i = 0; i < postTags.Count; i++)
         {
             var tag = postTags[i];
             postTagsSb.Append("'");
@@ -36,8 +36,8 @@
         postTagsSb.Append("]");
     }
     //post tags
-    $(document).ready(function () {
-        @Html.Raw(postTagsSb.ToString())
+    $(document).ready(function() {
+        @Html.Raw(postTagsSb.ToString());
         $("#@Html.FieldIdFor(model => model.PostTags)").tagit({
             availableTags: sampleTags,
             allowSpaces: true
@@ -70,71 +70,71 @@
     </tr>
 </table>
 @(Html.LocalizedEditor<PostModel, PostLocalizedModel>("post-info-localized",
-                @<table class="adminContent">
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.Locales[item].Name):
-                        </td>
-                        <td class="adminData">
-                            @Html.EditorFor(model => model.Locales[item].Name)
-                            @Html.ValidationMessageFor(model => model.Locales[item].Name)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.Locales[item].ShortDescription):
-                        </td>
-                        <td class="adminData">
-                            @Html.TextAreaFor(model => model.Locales[item].ShortDescription, new { style = "Width: 250px; Height: 150px;" })
-                            @Html.ValidationMessageFor(model => model.Locales[item].ShortDescription)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.Locales[item].FullDescription):
-                        </td>
-                        <td class="adminData">
-                            @Html.EditorFor(model => model.Locales[item].FullDescription, "RichEditor")
-                            @Html.ValidationMessageFor(model => model.Locales[item].FullDescription)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            @Html.HiddenFor(model => model.Locales[item].LanguageId)
-                        </td>
-                    </tr>
-                </table>
-                ,
-                @<table class="adminContent">
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.Name):
-                        </td>
-                        <td class="adminData">
-                            @Html.EditorFor(model => model.Name)
-                            @Html.ValidationMessageFor(model => model.Name)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.ShortDescription):
-                        </td>
-                        <td class="adminData">
-                            @Html.TextAreaFor(x => x.ShortDescription, new { style = "Width: 250px; Height: 150px;" })
-                            @Html.ValidationMessageFor(model => model.ShortDescription)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.FullDescription):
-                        </td>
-                        <td class="adminData">
-                            @Html.EditorFor(x => x.FullDescription, "RichEditor")
-                            @Html.ValidationMessageFor(model => model.FullDescription)
-                        </td>
-                    </tr>
-                </table>
-            ))
+      @<table class="adminContent">
+          <tr>
+              <td class="adminTitle">
+                  @Html.NopLabelFor(model => model.Locales[item].Name):
+              </td>
+              <td class="adminData">
+                  @Html.EditorFor(model => model.Locales[item].Name)
+                  @Html.ValidationMessageFor(model => model.Locales[item].Name)
+              </td>
+          </tr>
+          <tr>
+              <td class="adminTitle">
+                  @Html.NopLabelFor(model => model.Locales[item].ShortDescription):
+              </td>
+              <td class="adminData">
+                  @Html.TextAreaFor(model => model.Locales[item].ShortDescription, new {style = "Width: 250px; Height: 150px;"})
+                  @Html.ValidationMessageFor(model => model.Locales[item].ShortDescription)
+              </td>
+          </tr>
+          <tr>
+              <td class="adminTitle">
+                  @Html.NopLabelFor(model => model.Locales[item].FullDescription):
+              </td>
+              <td class="adminData">
+                  @Html.EditorFor(model => model.Locales[item].FullDescription, "RichEditor")
+                  @Html.ValidationMessageFor(model => model.Locales[item].FullDescription)
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2">
+                  @Html.HiddenFor(model => model.Locales[item].LanguageId)
+              </td>
+          </tr>
+      </table>
+        ,
+      @<table class="adminContent">
+          <tr>
+              <td class="adminTitle">
+                  @Html.NopLabelFor(model => model.Name):
+              </td>
+              <td class="adminData">
+                  @Html.EditorFor(model => model.Name)
+                  @Html.ValidationMessageFor(model => model.Name)
+              </td>
+          </tr>
+          <tr>
+              <td class="adminTitle">
+                  @Html.NopLabelFor(model => model.ShortDescription):
+              </td>
+              <td class="adminData">
+                  @Html.TextAreaFor(x => x.ShortDescription, new {style = "Width: 250px; Height: 150px;"})
+                  @Html.ValidationMessageFor(model => model.ShortDescription)
+              </td>
+          </tr>
+          <tr>
+              <td class="adminTitle">
+                  @Html.NopLabelFor(model => model.FullDescription):
+              </td>
+              <td class="adminData">
+                  @Html.EditorFor(x => x.FullDescription, "RichEditor")
+                  @Html.ValidationMessageFor(model => model.FullDescription)
+              </td>
+          </tr>
+      </table>
+      ))
 <table class="adminContent">
     <tr>
         <td class="adminTitle">
@@ -145,7 +145,7 @@
             @Html.ValidationMessageFor(model => model.AdminComment)
         </td>
     </tr>
-   
+
     <tr>
         <td class="adminTitle">
             @Html.NopLabelFor(model => model.ShowOnHomePage):
@@ -164,7 +164,7 @@
             @Html.ValidationMessageFor(model => model.DisplayOrder)
         </td>
     </tr>
-  
+
     <tr>
         <td class="adminTitle">
             @Html.NopLabelFor(model => model.PostTags):
@@ -174,15 +174,15 @@
             @Html.ValidationMessageFor(model => model.PostTags)
         </td>
     </tr>
-  
-   
+
+
 </table>
 
 <table class="adminContent">
     <tr class="adminSeparator">
-        <td colspan="2">
-            <hr />
-        </td>
+    <td colspan="2">
+        <hr/>
+    </td>
     @*<tr>
         <td class="adminTitle">
             @Html.NopLabelFor(model => model.Published):

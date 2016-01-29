@@ -10,12 +10,11 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Posts
 {
-    [Validator(typeof(CategoryValidator))]
-    public partial class CategoryModel : BaseNopEntityModel, ILocalizedModel<CategoryLocalizedModel>
+    [Validator(typeof (CategoryValidator))]
+    public class CategoryModel : BaseNopEntityModel, ILocalizedModel<CategoryLocalizedModel>
     {
         public CategoryModel()
         {
-
             Locales = new List<CategoryLocalizedModel>();
             AvailableCategories = new List<SelectListItem>();
             AvailableCategoryTemplates = new List<SelectListItem>();
@@ -32,10 +31,12 @@ namespace TinyCms.Admin.Models.Posts
 
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.CategoryTemplate")]
         public int CategoryTemplateId { get; set; }
+
         public IList<SelectListItem> AvailableCategoryTemplates { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.CategoryType")]
         public int CategoryTypeId { get; set; }
+
         public IList<SelectListItem> AvailableCategoryTypes { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.MetaKeywords")]
@@ -75,31 +76,24 @@ namespace TinyCms.Admin.Models.Posts
 
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.DisplayOrder")]
         public int DisplayOrder { get; set; }
-        
-        public IList<CategoryLocalizedModel> Locales { get; set; }
 
         public string Breadcrumb { get; set; }
-
         //ACL
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.SubjectToAcl")]
         public bool SubjectToAcl { get; set; }
+
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.AclCustomerRoles")]
         public List<CustomerRoleModel> AvailableCustomerRoles { get; set; }
+
         public int[] SelectedCustomerRoleIds { get; set; }
-
-       
-
-
         public IList<SelectListItem> AvailableCategories { get; set; }
-
-
+        public IList<CategoryLocalizedModel> Locales { get; set; }
 
         #region Nested classes
 
-        public partial class CategoryPostModel : BaseNopEntityModel
+        public class CategoryPostModel : BaseNopEntityModel
         {
             public int CategoryId { get; set; }
-
             public int PostId { get; set; }
 
             [NopResourceDisplayName("Admin.Catalog.Categories.Posts.Fields.Post")]
@@ -112,7 +106,7 @@ namespace TinyCms.Admin.Models.Posts
             public int DisplayOrder { get; set; }
         }
 
-        public partial class AddCategoryPostModel : BaseNopModel
+        public class AddCategoryPostModel : BaseNopModel
         {
             public AddCategoryPostModel()
             {
@@ -122,29 +116,27 @@ namespace TinyCms.Admin.Models.Posts
             [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchPostName")]
             [AllowHtml]
             public string SearchPostName { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchCategory")]
             public int SearchCategoryId { get; set; }
 
             public IList<SelectListItem> AvailableCategories { get; set; }
             public int CategoryId { get; set; }
-
             public int[] SelectedPostIds { get; set; }
         }
 
         #endregion
     }
 
-    public partial class CategoryLocalizedModel : ILocalizedModelLocal
+    public class CategoryLocalizedModel : ILocalizedModelLocal
     {
-        public int LanguageId { get; set; }
-
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.Name")]
         [AllowHtml]
         public string Name { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.Description")]
         [AllowHtml]
-        public string Description {get;set;}
+        public string Description { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.MetaKeywords")]
         [AllowHtml]
@@ -161,5 +153,7 @@ namespace TinyCms.Admin.Models.Posts
         [NopResourceDisplayName("Admin.Catalog.Categories.Fields.SeName")]
         [AllowHtml]
         public string SeName { get; set; }
+
+        public int LanguageId { get; set; }
     }
 }

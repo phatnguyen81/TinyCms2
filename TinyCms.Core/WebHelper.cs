@@ -13,9 +13,9 @@ using TinyCms.Core.Infrastructure;
 namespace TinyCms.Core
 {
     /// <summary>
-    /// Represents a common helper
+    ///     Represents a common helper
     /// </summary>
-    public partial class WebHelper : IWebHelper
+    public class WebHelper : IWebHelper
     {
         #region Fields 
 
@@ -26,12 +26,12 @@ namespace TinyCms.Core
         #region Constructor
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="httpContext">HTTP context</param>
         public WebHelper(HttpContextBase httpContext)
         {
-            this._httpContext = httpContext;
+            _httpContext = httpContext;
         }
 
         #endregion
@@ -55,6 +55,7 @@ namespace TinyCms.Core
 
             return true;
         }
+
         protected virtual bool TryWriteWebConfig()
         {
             try
@@ -94,14 +95,14 @@ namespace TinyCms.Core
         #endregion
 
         #region Methods
-        
+
         /// <summary>
-        /// Get URL referrer
+        ///     Get URL referrer
         /// </summary>
         /// <returns>URL referrer</returns>
         public virtual string GetUrlReferrer()
         {
-            string referrerUrl = string.Empty;
+            var referrerUrl = string.Empty;
 
             //URL referrer is null in some case (for example, in IE 8)
             if (IsRequestAvailable(_httpContext) && _httpContext.Request.UrlReferrer != null)
@@ -111,7 +112,7 @@ namespace TinyCms.Core
         }
 
         /// <summary>
-        /// Get context IP address
+        ///     Get context IP address
         /// </summary>
         /// <returns>URL referrer</returns>
         public virtual string GetCurrentIpAddress()
@@ -133,10 +134,10 @@ namespace TinyCms.Core
                     //e.g. CF-Connecting-IP, X-FORWARDED-PROTO, etc
                     forwardedHttpHeader = ConfigurationManager.AppSettings["ForwardedHTTPheader"];
                 }
-                    
+
                 //it's used for identifying the originating IP address of a client connecting to a web server
                 //through an HTTP proxy or load balancer. 
-                string xff = _httpContext.Request.Headers.AllKeys
+                var xff = _httpContext.Request.Headers.AllKeys
                     .Where(x => forwardedHttpHeader.Equals(x, StringComparison.InvariantCultureIgnoreCase))
                     .Select(k => _httpContext.Request.Headers[k])
                     .FirstOrDefault();
@@ -144,7 +145,7 @@ namespace TinyCms.Core
                 //if you want to exclude private IP addresses, then see http://stackoverflow.com/questions/2577496/how-can-i-get-the-clients-ip-address-in-asp-net-mvc
                 if (!String.IsNullOrEmpty(xff))
                 {
-                    string lastIp = xff.Split(new [] { ',' }).FirstOrDefault();
+                    var lastIp = xff.Split(',').FirstOrDefault();
                     result = lastIp;
                 }
             }
@@ -160,40 +161,39 @@ namespace TinyCms.Core
             //remove port
             if (!String.IsNullOrEmpty(result))
             {
-                int index = result.IndexOf(":", StringComparison.InvariantCultureIgnoreCase);
+                var index = result.IndexOf(":", StringComparison.InvariantCultureIgnoreCase);
                 if (index > 0)
-                    result = result.Substring(0, index); 
+                    result = result.Substring(0, index);
             }
             return result;
-            
         }
 
         /// <summary>
-        /// Gets this page name
+        ///     Gets this page name
         /// </summary>
         /// <param name="includeQueryString">Value indicating whether to include query strings</param>
         /// <returns>Page name</returns>
         public virtual string GetThisPageUrl(bool includeQueryString)
         {
-            bool useSsl = IsCurrentConnectionSecured();
+            var useSsl = IsCurrentConnectionSecured();
             return GetThisPageUrl(includeQueryString, useSsl);
         }
 
         /// <summary>
-        /// Gets this page name
+        ///     Gets this page name
         /// </summary>
         /// <param name="includeQueryString">Value indicating whether to include query strings</param>
         /// <param name="useSsl">Value indicating whether to get SSL protected page</param>
         /// <returns>Page name</returns>
         public virtual string GetThisPageUrl(bool includeQueryString, bool useSsl)
         {
-            string url = string.Empty;
+            var url = string.Empty;
             if (!IsRequestAvailable(_httpContext))
                 return url;
 
             if (includeQueryString)
             {
-                string storeHost = GetStoreHost(useSsl);
+                var storeHost = GetStoreHost(useSsl);
                 if (storeHost.EndsWith("/"))
                     storeHost = storeHost.Substring(0, storeHost.Length - 1);
                 url = storeHost + _httpContext.Request.RawUrl;
@@ -210,27 +210,28 @@ namespace TinyCms.Core
         }
 
         /// <summary>
-        /// Gets a value indicating whether current connection is secured
+        ///     Gets a value indicating whether current connection is secured
         /// </summary>
         /// <returns>true - secured, false - not secured</returns>
         public virtual bool IsCurrentConnectionSecured()
         {
-            bool useSsl = false;
+            var useSsl = false;
             if (IsRequestAvailable(_httpContext))
             {
                 //when your hosting uses a load balancer on their server then the Request.IsSecureConnection is never got set to true
 
                 //1. use HTTP_CLUSTER_HTTPS?
                 if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["Use_HTTP_CLUSTER_HTTPS"]) &&
-                   Convert.ToBoolean(ConfigurationManager.AppSettings["Use_HTTP_CLUSTER_HTTPS"]))
+                    Convert.ToBoolean(ConfigurationManager.AppSettings["Use_HTTP_CLUSTER_HTTPS"]))
                 {
                     useSsl = ServerVariables("HTTP_CLUSTER_HTTPS") == "on";
                 }
                 //2. use HTTP_X_FORWARDED_PROTO?
                 else if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["Use_HTTP_X_FORWARDED_PROTO"]) &&
-                   Convert.ToBoolean(ConfigurationManager.AppSettings["Use_HTTP_X_FORWARDED_PROTO"]))
+                         Convert.ToBoolean(ConfigurationManager.AppSettings["Use_HTTP_X_FORWARDED_PROTO"]))
                 {
-                    useSsl = string.Equals(ServerVariables("HTTP_X_FORWARDED_PROTO"), "https", StringComparison.OrdinalIgnoreCase);
+                    useSsl = string.Equals(ServerVariables("HTTP_X_FORWARDED_PROTO"), "https",
+                        StringComparison.OrdinalIgnoreCase);
                 }
                 else
                 {
@@ -240,15 +241,15 @@ namespace TinyCms.Core
 
             return useSsl;
         }
-        
+
         /// <summary>
-        /// Gets server variable by name
+        ///     Gets server variable by name
         /// </summary>
         /// <param name="name">Name</param>
         /// <returns>Server variable</returns>
         public virtual string ServerVariables(string name)
         {
-            string result = string.Empty;
+            var result = string.Empty;
 
             try
             {
@@ -270,7 +271,7 @@ namespace TinyCms.Core
         }
 
         /// <summary>
-        /// Gets store host location
+        ///     Gets store host location
         /// </summary>
         /// <param name="useSsl">Use SSL</param>
         /// <returns>Store host location</returns>
@@ -310,18 +311,21 @@ namespace TinyCms.Core
 
                 if (useSsl)
                 {
-                    result = !String.IsNullOrWhiteSpace(storeInformationSettings.SecureUrl) ?
+                    result = !String.IsNullOrWhiteSpace(storeInformationSettings.SecureUrl)
+                        ?
                         //Secure URL specified. 
                         //So a store owner don't want it to be detected automatically.
                         //In this case let's use the specified secure URL
-                        storeInformationSettings.SecureUrl :
+                        storeInformationSettings.SecureUrl
+                        :
                         //Secure URL is not specified.
                         //So a store owner wants it to be detected automatically.
                         result.Replace("http:/", "https:/");
                 }
                 else
                 {
-                    if (storeInformationSettings.SslEnabled && !String.IsNullOrWhiteSpace(storeInformationSettings.SecureUrl))
+                    if (storeInformationSettings.SslEnabled &&
+                        !String.IsNullOrWhiteSpace(storeInformationSettings.SecureUrl))
                     {
                         //SSL is enabled in this store and secure URL is specified.
                         //So a store owner don't want it to be detected automatically.
@@ -329,17 +333,20 @@ namespace TinyCms.Core
                         result = storeInformationSettings.Url;
                     }
                 }
+
                 #endregion
             }
             else
             {
                 #region Database is not installed
+
                 if (useSsl)
                 {
                     //Secure URL is not specified.
                     //So a store owner wants it to be detected automatically.
                     result = result.Replace("http:/", "https:/");
                 }
+
                 #endregion
             }
 
@@ -348,19 +355,19 @@ namespace TinyCms.Core
                 result += "/";
             return result.ToLowerInvariant();
         }
-        
+
         /// <summary>
-        /// Gets store location
+        ///     Gets store location
         /// </summary>
         /// <returns>Store location</returns>
         public virtual string GetStoreLocation()
         {
-            bool useSsl = IsCurrentConnectionSecured();
+            var useSsl = IsCurrentConnectionSecured();
             return GetStoreLocation(useSsl);
         }
 
         /// <summary>
-        /// Gets store location
+        ///     Gets store location
         /// </summary>
         /// <param name="useSsl">Use SSL</param>
         /// <returns>Store location</returns>
@@ -368,7 +375,7 @@ namespace TinyCms.Core
         {
             //return HostingEnvironment.ApplicationVirtualPath;
 
-            string result = GetStoreHost(useSsl);
+            var result = GetStoreHost(useSsl);
             if (result.EndsWith("/"))
                 result = result.Substring(0, result.Length - 1);
             if (IsRequestAvailable(_httpContext))
@@ -378,30 +385,30 @@ namespace TinyCms.Core
 
             return result.ToLowerInvariant();
         }
-        
+
         /// <summary>
-        /// Returns true if the requested resource is one of the typical resources that needn't be processed by the cms engine.
+        ///     Returns true if the requested resource is one of the typical resources that needn't be processed by the cms engine.
         /// </summary>
         /// <param name="request">HTTP Request</param>
         /// <returns>True if the request targets a static resource file.</returns>
         /// <remarks>
-        /// These are the file extensions considered to be static resources:
-        /// .css
-        ///	.gif
-        /// .png 
-        /// .jpg
-        /// .jpeg
-        /// .js
-        /// .axd
-        /// .ashx
+        ///     These are the file extensions considered to be static resources:
+        ///     .css
+        ///     .gif
+        ///     .png
+        ///     .jpg
+        ///     .jpeg
+        ///     .js
+        ///     .axd
+        ///     .ashx
         /// </remarks>
         public virtual bool IsStaticResource(HttpRequest request)
         {
             if (request == null)
                 throw new ArgumentNullException("request");
 
-            string path = request.Path;
-            string extension = VirtualPathUtility.GetExtension(path);
+            var path = request.Path;
+            var extension = VirtualPathUtility.GetExtension(path);
 
             if (extension == null) return false;
 
@@ -428,7 +435,7 @@ namespace TinyCms.Core
         }
 
         /// <summary>
-        /// Maps a virtual path to a physical disk path.
+        ///     Maps a virtual path to a physical disk path.
         /// </summary>
         /// <param name="path">The path to map. E.g. "~/bin"</param>
         /// <returns>The physical path. E.g. "c:\inetpub\wwwroot\bin"</returns>
@@ -441,13 +448,13 @@ namespace TinyCms.Core
             }
 
             //not hosted. For example, run in unit tests
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             path = path.Replace("~/", "").TrimStart('/').Replace('/', '\\');
             return Path.Combine(baseDirectory, path);
         }
 
         /// <summary>
-        /// Modifies query string
+        ///     Modifies query string
         /// </summary>
         /// <param name="url">Url to modify</param>
         /// <param name="queryStringModification">Query string modification</param>
@@ -468,8 +475,8 @@ namespace TinyCms.Core
             anchor = anchor.ToLowerInvariant();
 
 
-            string str = string.Empty;
-            string str2 = string.Empty;
+            var str = string.Empty;
+            var str2 = string.Empty;
             if (url.Contains("#"))
             {
                 str2 = url.Substring(url.IndexOf("#") + 1);
@@ -485,11 +492,11 @@ namespace TinyCms.Core
                 if (!string.IsNullOrEmpty(str))
                 {
                     var dictionary = new Dictionary<string, string>();
-                    foreach (string str3 in str.Split(new [] { '&' }))
+                    foreach (var str3 in str.Split('&'))
                     {
                         if (!string.IsNullOrEmpty(str3))
                         {
-                            string[] strArray = str3.Split(new [] { '=' });
+                            var strArray = str3.Split('=');
                             if (strArray.Length == 2)
                             {
                                 if (!dictionary.ContainsKey(strArray[0]))
@@ -508,11 +515,11 @@ namespace TinyCms.Core
                             }
                         }
                     }
-                    foreach (string str4 in queryStringModification.Split(new [] { '&' }))
+                    foreach (var str4 in queryStringModification.Split('&'))
                     {
                         if (!string.IsNullOrEmpty(str4))
                         {
-                            string[] strArray2 = str4.Split(new [] { '=' });
+                            var strArray2 = str4.Split('=');
                             if (strArray2.Length == 2)
                             {
                                 dictionary[strArray2[0]] = strArray2[1];
@@ -524,7 +531,7 @@ namespace TinyCms.Core
                         }
                     }
                     var builder = new StringBuilder();
-                    foreach (string str5 in dictionary.Keys)
+                    foreach (var str5 in dictionary.Keys)
                     {
                         if (builder.Length > 0)
                         {
@@ -548,11 +555,13 @@ namespace TinyCms.Core
             {
                 str2 = anchor;
             }
-            return (url + (string.IsNullOrEmpty(str) ? "" : ("?" + str)) + (string.IsNullOrEmpty(str2) ? "" : ("#" + str2))).ToLowerInvariant();
+            return
+                (url + (string.IsNullOrEmpty(str) ? "" : ("?" + str)) + (string.IsNullOrEmpty(str2) ? "" : ("#" + str2)))
+                    .ToLowerInvariant();
         }
 
         /// <summary>
-        /// Remove query string from url
+        ///     Remove query string from url
         /// </summary>
         /// <param name="url">Url to modify</param>
         /// <param name="queryString">Query string to remove</param>
@@ -568,7 +577,7 @@ namespace TinyCms.Core
             queryString = queryString.ToLowerInvariant();
 
 
-            string str = string.Empty;
+            var str = string.Empty;
             if (url.Contains("?"))
             {
                 str = url.Substring(url.IndexOf("?") + 1);
@@ -579,11 +588,11 @@ namespace TinyCms.Core
                 if (!string.IsNullOrEmpty(str))
                 {
                     var dictionary = new Dictionary<string, string>();
-                    foreach (string str3 in str.Split(new [] { '&' }))
+                    foreach (var str3 in str.Split('&'))
                     {
                         if (!string.IsNullOrEmpty(str3))
                         {
-                            string[] strArray = str3.Split(new [] { '=' });
+                            var strArray = str3.Split('=');
                             if (strArray.Length == 2)
                             {
                                 dictionary[strArray[0]] = strArray[1];
@@ -597,7 +606,7 @@ namespace TinyCms.Core
                     dictionary.Remove(queryString);
 
                     var builder = new StringBuilder();
-                    foreach (string str5 in dictionary.Keys)
+                    foreach (var str5 in dictionary.Keys)
                     {
                         if (builder.Length > 0)
                         {
@@ -615,9 +624,9 @@ namespace TinyCms.Core
             }
             return (url + (string.IsNullOrEmpty(str) ? "" : ("?" + str)));
         }
-        
+
         /// <summary>
-        /// Gets query string value by name
+        ///     Gets query string value by name
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="name">Parameter name</param>
@@ -633,9 +642,9 @@ namespace TinyCms.Core
 
             return default(T);
         }
-        
+
         /// <summary>
-        /// Restart application domain
+        ///     Restart application domain
         /// </summary>
         /// <param name="makeRedirect">A value indicating whether we should made redirection after restart</param>
         /// <param name="redirectUrl">Redirect URL; empty string if you want to redirect to the current page URL</param>
@@ -651,11 +660,14 @@ namespace TinyCms.Core
             else
             {
                 //medium trust
-                bool success = TryWriteWebConfig();
+                var success = TryWriteWebConfig();
                 if (!success)
                 {
-                    throw new NopException("nopCommerce needs to be restarted due to a configuration change, but was unable to do so." + Environment.NewLine +
-                        "To prevent this issue in the future, a change to the web server configuration is required:" + Environment.NewLine + 
+                    throw new NopException(
+                        "nopCommerce needs to be restarted due to a configuration change, but was unable to do so." +
+                        Environment.NewLine +
+                        "To prevent this issue in the future, a change to the web server configuration is required:" +
+                        Environment.NewLine +
                         "- run the application in a full trust environment, or" + Environment.NewLine +
                         "- give the application write access to the 'web.config' file.");
                 }
@@ -663,8 +675,11 @@ namespace TinyCms.Core
                 success = TryWriteGlobalAsax();
                 if (!success)
                 {
-                    throw new NopException("nopCommerce needs to be restarted due to a configuration change, but was unable to do so." + Environment.NewLine +
-                        "To prevent this issue in the future, a change to the web server configuration is required:" + Environment.NewLine +
+                    throw new NopException(
+                        "nopCommerce needs to be restarted due to a configuration change, but was unable to do so." +
+                        Environment.NewLine +
+                        "To prevent this issue in the future, a change to the web server configuration is required:" +
+                        Environment.NewLine +
                         "- run the application in a full trust environment, or" + Environment.NewLine +
                         "- give the application write access to the 'Global.asax' file.");
                 }
@@ -682,19 +697,19 @@ namespace TinyCms.Core
         }
 
         /// <summary>
-        /// Gets a value that indicates whether the client is being redirected to a new location
+        ///     Gets a value that indicates whether the client is being redirected to a new location
         /// </summary>
         public virtual bool IsRequestBeingRedirected
         {
             get
             {
                 var response = _httpContext.Response;
-                return response.IsRequestBeingRedirected;   
+                return response.IsRequestBeingRedirected;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value that indicates whether the client is being redirected to a new location using POST
+        ///     Gets or sets a value that indicates whether the client is being redirected to a new location using POST
         /// </summary>
         public virtual bool IsPostBeingDone
         {
@@ -704,10 +719,7 @@ namespace TinyCms.Core
                     return false;
                 return Convert.ToBoolean(_httpContext.Items["nop.IsPOSTBeingDone"]);
             }
-            set
-            {
-                _httpContext.Items["nop.IsPOSTBeingDone"] = value;
-            }
+            set { _httpContext.Items["nop.IsPOSTBeingDone"] = value; }
         }
 
         #endregion

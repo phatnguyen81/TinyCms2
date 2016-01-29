@@ -7,7 +7,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Logging
 {
-    public partial class LogListModel : BaseNopModel
+    public class LogListModel : BaseNopModel
     {
         public LogListModel()
         {
@@ -28,7 +28,6 @@ namespace TinyCms.Admin.Models.Logging
 
         [NopResourceDisplayName("Admin.System.Log.List.LogLevel")]
         public int LogLevelId { get; set; }
-
 
         public IList<SelectListItem> AvailableLogLevels { get; set; }
     }

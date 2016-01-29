@@ -4,7 +4,7 @@
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// Registration details
+    ///     Registration details
     /// </summary>
     public struct RegistrationDetails
     {

@@ -2,41 +2,44 @@
 @helper RenderCategoryLine(CategorySimpleModel category, int level, bool responsiveMobileMenu)
 {
     <li>
-        <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">
+        <a href="@Url.RouteUrl("Category", new {category.SeName})">
             @category.Name
-        @if (category.NumberOfProducts.HasValue)
-        {
-            <text> </text>@T("Categories.TotalProducts", category.NumberOfProducts.Value)
-        }
-    </a>
-    @{
-        //subcategories
-        var subCategories = responsiveMobileMenu ?
-            //responsive (all categories)
-            category.SubCategories :
-            //standard design (only categories with "IncludeInTopMenu")
-            category.SubCategories.Where(x => x.IncludeInTopMenu).ToList();
+            @if (category.NumberOfProducts.HasValue)
+            {
+                <text> </text>
+                @T("Categories.TotalProducts", category.NumberOfProducts.Value)
+            }
+        </a>
+        @{
+            //subcategories
+            var subCategories = responsiveMobileMenu ?
+                //responsive (all categories)
+                category.SubCategories :
+                //standard design (only categories with "IncludeInTopMenu")
+                category.SubCategories.Where(x => x.IncludeInTopMenu).ToList();
 
-        var levelClass = "";
-        if (level == 0)
-        {
-            levelClass = "first-level";
+            var levelClass = "";
+            if (level == 0)
+            {
+                levelClass = "first-level";
+            }
+            if (subCategories.Count > 0)
+            {
+                <div class="sublist-toggle"></div>
+                <ul class="sublist @levelClass">
+                    @foreach (var subCategory in subCategories)
+                    {
+                        @RenderCategoryLine(subCategory, level + 1, responsiveMobileMenu)
+                    }
+                </ul>
+            }
         }
-        if (subCategories.Count > 0)
-        {
-            <div class="sublist-toggle"></div>
-            <ul class="sublist @levelClass">
-                @foreach (var subCategory in subCategories)
-                {
-                    @RenderCategoryLine(subCategory, level + 1, responsiveMobileMenu)
-                }
-            </ul>
-        }
-    }
-</li>
+    </li>
 }
 <ul>
-    <li><a href="@Url.RouteUrl("homepage")" class="active">Trang chủ</a></li>
+    <li>
+        <a href="@Url.RouteUrl("homepage")" class="active">Trang chủ</a>
+    </li>
     @Html.Widget("header_menu_before")
     @{
         var rootCategories = Model.Categories.Where(x => x.IncludeInTopMenu).ToList();
@@ -47,6 +50,8 @@
     }
     @foreach (var topic in Model.Topics)
     {
-        <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+        <li>
+            <a href="@Url.RouteUrl("Topic", new {topic.SeName})">@topic.Name</a>
+        </li>
     }
 </ul>

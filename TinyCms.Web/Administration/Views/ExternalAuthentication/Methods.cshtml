@@ -5,7 +5,7 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
         @T("Admin.Configuration.ExternalAuthenticationMethods")
     </div>
 </div>
@@ -15,7 +15,7 @@
             <div id="authenticationmethods-grid"></div>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#authenticationmethods-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -27,7 +27,7 @@
                                     data: addAntiForgeryToken
                                 },
                                 update: {
-                                    url:"@Html.Raw(Url.Action("MethodUpdate", "ExternalAuthentication"))",
+                                    url: "@Html.Raw(Url.Action("MethodUpdate", "ExternalAuthentication"))",
                                     type: "POST",
                                     dataType: "json",
                                     data: addAntiForgeryToken
@@ -47,12 +47,12 @@
                                     }
                                 }
                             },
-                            requestEnd: function (e) {
+                            requestEnd: function(e) {
                                 if (e.type == "update") {
                                     this.read();
                                 }
                             },
-                            error: function (e) {
+                            error: function(e) {
                                 display_kendoui_grid_error(e);
                                 // Cancel the changes
                                 this.cancelChanges();
@@ -72,7 +72,8 @@
                             mode: "inline"
                         },
                         scrollable: false,
-                        columns: [{
+                        columns: [
+                        {
                             field: "FriendlyName",
                             title: "@T("Admin.Configuration.ExternalAuthenticationMethods.Fields.FriendlyName")",
                             width: 250
@@ -92,27 +93,47 @@
                             width: 100,
                             headerAttributes: { style: "text-align:center" },
                             attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IsActive#.gif" />'
-                        }, {
-                            field: "SystemName",
-                            title: "@T("Admin.Configuration.ExternalAuthenticationMethods.Configure")",
-                            width: 150,
-                            template: '<a href="ConfigureMethod?systemName=#=SystemName#">@T("Admin.Configuration.ExternalAuthenticationMethods.Configure")</a>'
-                        }, {
-                            command: {
-                                name: "edit",
-                                text: {
-                                    edit: "@T("Admin.Common.Edit")",
-                                    update: "@T("Admin.Common.Update")",
-                                    cancel: "@T("Admin.Common.Cancel")"
-                                }
-                            },
-                            title: "@T("Admin.Common.Edit")",
-                            width: 150
-                        }]
+                            template: "<img src=\"@Url.Content(\
+                                                      "~/Administration/Content/images/\")active-#=IsActive#.gif\" />"
+}
+
+    ,
+        {
+            "SystemName",
+            "@T("
+            Admin.Configuration.ExternalAuthenticationMethods.Configure
+            ")",
+            150,
+            "<a href=\"ConfigureMethod?systemName=#=SystemName#\">@T(\"Admin.Configuration.ExternalAuthenticationMethods.Configure\")</a>"
+        }
+    ,
+
+{
+    private command 
+:
+    {
+        "edit",
+        {
+            "@T("
+            Admin.Common.Edit
+            ")",
+            "@T("
+            Admin.Common.Update
+            ")",
+            "@T("
+            Admin.Common.Cancel
+            ")"
+        }
+    }
+,
+title: "@T("Admin.Common.Edit")",
+    width: 150
+}
+]
+
+});
                     });
-                });
-            </script>
+                    </script>
         </td>
     </tr>
 </table>

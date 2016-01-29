@@ -13,17 +13,8 @@ using TinyCms.Web.Models.Polls;
 
 namespace TinyCms.Web.Controllers
 {
-    public partial class PollController : BasePublicController
+    public class PollController : BasePublicController
     {
-        #region Fields
-
-        private readonly ILocalizationService _localizationService;
-        private readonly IWorkContext _workContext;
-        private readonly IPollService _pollService;
-        private readonly ICacheManager _cacheManager;
-
-        #endregion
-
         #region Constructors
 
         public PollController(ILocalizationService localizationService,
@@ -31,10 +22,10 @@ namespace TinyCms.Web.Controllers
             IPollService pollService,
             ICacheManager cacheManager)
         {
-            this._localizationService = localizationService;
-            this._workContext = workContext;
-            this._pollService = pollService;
-            this._cacheManager = cacheManager;
+            _localizationService = localizationService;
+            _workContext = workContext;
+            _pollService = pollService;
+            _cacheManager = cacheManager;
         }
 
         #endregion
@@ -47,7 +38,10 @@ namespace TinyCms.Web.Controllers
             var model = new PollModel
             {
                 Id = poll.Id,
-                AlreadyVoted = setAlreadyVotedProperty == null ? _pollService.AlreadyVoted(poll.Id, _workContext.CurrentCustomer.Id) : setAlreadyVotedProperty.Value,
+                AlreadyVoted =
+                    setAlreadyVotedProperty == null
+                        ? _pollService.AlreadyVoted(poll.Id, _workContext.CurrentCustomer.Id)
+                        : setAlreadyVotedProperty.Value,
                 Name = poll.Name
             };
             var answers = poll.PollAnswers.OrderBy(x => x.DisplayOrder);
@@ -60,12 +54,25 @@ namespace TinyCms.Web.Controllers
                     Id = pa.Id,
                     Name = pa.Name,
                     NumberOfVotes = pa.NumberOfVotes,
-                    PercentOfTotalVotes = model.TotalVotes > 0 ? ((Convert.ToDouble(pa.NumberOfVotes) / Convert.ToDouble(model.TotalVotes)) * Convert.ToDouble(100)) : 0,
+                    PercentOfTotalVotes =
+                        model.TotalVotes > 0
+                            ? ((Convert.ToDouble(pa.NumberOfVotes)/Convert.ToDouble(model.TotalVotes))*
+                               Convert.ToDouble(100))
+                            : 0
                 });
             }
 
             return model;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly ILocalizationService _localizationService;
+        private readonly IWorkContext _workContext;
+        private readonly IPollService _pollService;
+        private readonly ICacheManager _cacheManager;
 
         #endregion
 
@@ -77,16 +84,17 @@ namespace TinyCms.Web.Controllers
             if (String.IsNullOrWhiteSpace(systemKeyword))
                 return Content("");
 
-            var cacheKey = string.Format(ModelCacheEventConsumer.POLL_BY_SYSTEMNAME__MODEL_KEY, systemKeyword, _workContext.WorkingLanguage.Id);
+            var cacheKey = string.Format(ModelCacheEventConsumer.POLL_BY_SYSTEMNAME__MODEL_KEY, systemKeyword,
+                _workContext.WorkingLanguage.Id);
             var cachedModel = _cacheManager.Get(cacheKey, () =>
             {
-                Poll poll = _pollService.GetPollBySystemKeyword(systemKeyword, _workContext.WorkingLanguage.Id);
+                var poll = _pollService.GetPollBySystemKeyword(systemKeyword, _workContext.WorkingLanguage.Id);
                 if (poll == null ||
                     !poll.Published ||
                     (poll.StartDateUtc.HasValue && poll.StartDateUtc.Value > DateTime.UtcNow) ||
                     (poll.EndDateUtc.HasValue && poll.EndDateUtc.Value < DateTime.UtcNow))
                     //we do not cache nulls. that's why let's return an empty record (ID = 0)
-                    return new PollModel { Id = 0};
+                    return new PollModel {Id = 0};
 
                 return PreparePollModel(poll, false);
             });
@@ -95,8 +103,10 @@ namespace TinyCms.Web.Controllers
 
             //"AlreadyVoted" property of "PollModel" object depends on the current customer. Let's update it.
             //But first we need to clone the cached model (the updated one should not be cached)
-            var model = (PollModel)cachedModel.Clone();
-            model.AlreadyVoted = showResult? true : _pollService.AlreadyVoted(model.Id, _workContext.CurrentCustomer.Id);
+            var model = (PollModel) cachedModel.Clone();
+            model.AlreadyVoted = showResult
+                ? true
+                : _pollService.AlreadyVoted(model.Id, _workContext.CurrentCustomer.Id);
 
             return PartialView(model);
         }
@@ -109,14 +119,14 @@ namespace TinyCms.Web.Controllers
             if (pollAnswer == null)
                 return Json(new
                 {
-                    error = "No poll answer found with the specified id",
+                    error = "No poll answer found with the specified id"
                 });
 
             var poll = pollAnswer.Poll;
-           
+
             return Json(new
             {
-                html = this.RenderPartialViewToString("_Poll", PreparePollModel(poll, true)),
+                html = RenderPartialViewToString("_Poll", PreparePollModel(poll, true))
             });
         }
 
@@ -128,23 +138,23 @@ namespace TinyCms.Web.Controllers
             if (pollAnswer == null)
                 return Json(new
                 {
-                    error = "No poll answer found with the specified id",
+                    error = "No poll answer found with the specified id"
                 });
 
             var poll = pollAnswer.Poll;
             if (!poll.Published)
                 return Json(new
                 {
-                    error = "Poll is not available",
+                    error = "Poll is not available"
                 });
 
             if (_workContext.CurrentCustomer.IsGuest() && !poll.AllowGuestsToVote)
                 return Json(new
                 {
-                    error = _localizationService.GetResource("Polls.OnlyRegisteredUsersVote"),
+                    error = _localizationService.GetResource("Polls.OnlyRegisteredUsersVote")
                 });
 
-            bool alreadyVoted = _pollService.AlreadyVoted(poll.Id, _workContext.CurrentCustomer.Id);
+            var alreadyVoted = _pollService.AlreadyVoted(poll.Id, _workContext.CurrentCustomer.Id);
             if (!alreadyVoted)
             {
                 //vote
@@ -161,18 +171,19 @@ namespace TinyCms.Web.Controllers
 
             return Json(new
             {
-                html = this.RenderPartialViewToString("_Poll", PreparePollModel(poll, null)),
+                html = RenderPartialViewToString("_Poll", PreparePollModel(poll, null))
             });
         }
-        
+
         [ChildActionOnly]
         public ActionResult HomePagePolls()
         {
-            var cacheKey = string.Format(ModelCacheEventConsumer.HOMEPAGE_POLLS_MODEL_KEY, _workContext.WorkingLanguage.Id);
+            var cacheKey = string.Format(ModelCacheEventConsumer.HOMEPAGE_POLLS_MODEL_KEY,
+                _workContext.WorkingLanguage.Id);
             var cachedModel = _cacheManager.Get(cacheKey, () =>
                 _pollService.GetPolls(_workContext.WorkingLanguage.Id, true)
-                .Select(x => PreparePollModel(x, false))
-                .ToList());
+                    .Select(x => PreparePollModel(x, false))
+                    .ToList());
             //"AlreadyVoted" property of "PollModel" object depends on the current customer. Let's update it.
             //But first we need to clone the cached model (the updated one should not be cached)
             var model = new List<PollModel>();
@@ -193,17 +204,18 @@ namespace TinyCms.Web.Controllers
         [ChildActionOnly]
         public ActionResult RandomPolls()
         {
-            var cacheKey = string.Format(ModelCacheEventConsumer.HOMEPAGE_POLLS_MODEL_KEY, _workContext.WorkingLanguage.Id);
+            var cacheKey = string.Format(ModelCacheEventConsumer.HOMEPAGE_POLLS_MODEL_KEY,
+                _workContext.WorkingLanguage.Id);
             var cachedModel = _cacheManager.Get(cacheKey, () =>
                 _pollService.GetPolls(_workContext.WorkingLanguage.Id, true)
-                .Select(x => PreparePollModel(x, false))
-                .ToList());
+                    .Select(x => PreparePollModel(x, false))
+                    .ToList());
             //"AlreadyVoted" property of "PollModel" object depends on the current customer. Let's update it.
             //But first we need to clone the cached model (the updated one should not be cached)
             var model = new List<PollModel>();
             foreach (var p in cachedModel)
             {
-                var pollModel = (PollModel)p.Clone();
+                var pollModel = (PollModel) p.Clone();
                 pollModel.AlreadyVoted = _pollService.AlreadyVoted(pollModel.Id, _workContext.CurrentCustomer.Id);
                 model.Add(pollModel);
             }
@@ -215,6 +227,5 @@ namespace TinyCms.Web.Controllers
         }
 
         #endregion
-
     }
 }

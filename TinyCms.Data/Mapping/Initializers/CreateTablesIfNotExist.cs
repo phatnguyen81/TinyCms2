@@ -9,19 +9,20 @@ namespace TinyCms.Data.Initializers
 {
     public class CreateTablesIfNotExist<TContext> : IDatabaseInitializer<TContext> where TContext : DbContext
     {
-        private readonly string[] _tablesToValidate;
         private readonly string[] _customCommands;
+        private readonly string[] _tablesToValidate;
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="tablesToValidate">A list of existing table names to validate; null to don't validate table names</param>
         /// <param name="customCommands">A list of custom commands to execute</param>
-        public CreateTablesIfNotExist(string[] tablesToValidate, string [] customCommands)
+        public CreateTablesIfNotExist(string[] tablesToValidate, string[] customCommands)
         {
-            this._tablesToValidate = tablesToValidate;
-            this._customCommands = customCommands;
+            _tablesToValidate = tablesToValidate;
+            _customCommands = customCommands;
         }
+
         public void InitializeDatabase(TContext context)
         {
             bool dbExists;
@@ -35,14 +36,22 @@ namespace TinyCms.Data.Initializers
                 if (_tablesToValidate != null && _tablesToValidate.Length > 0)
                 {
                     //we have some table names to validate
-                    var existingTableNames = new List<string>(context.Database.SqlQuery<string>("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE'"));
-                    createTables = !existingTableNames.Intersect(_tablesToValidate, StringComparer.InvariantCultureIgnoreCase).Any();
+                    var existingTableNames =
+                        new List<string>(
+                            context.Database.SqlQuery<string>(
+                                "SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE'"));
+                    createTables =
+                        !existingTableNames.Intersect(_tablesToValidate, StringComparer.InvariantCultureIgnoreCase)
+                            .Any();
                 }
                 else
                 {
                     //check whether tables are already created
-                    int numberOfTables = 0;
-                    foreach (var t1 in context.Database.SqlQuery<int>("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' "))
+                    var numberOfTables = 0;
+                    foreach (
+                        var t1 in
+                            context.Database.SqlQuery<int>(
+                                "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' "))
                         numberOfTables = t1;
 
                     createTables = numberOfTables == 0;
@@ -51,7 +60,7 @@ namespace TinyCms.Data.Initializers
                 if (createTables)
                 {
                     //create all tables
-                    var dbCreationScript = ((IObjectContextAdapter)context).ObjectContext.CreateDatabaseScript();
+                    var dbCreationScript = ((IObjectContextAdapter) context).ObjectContext.CreateDatabaseScript();
                     context.Database.ExecuteSqlCommand(dbCreationScript);
 
                     //Seed(context);

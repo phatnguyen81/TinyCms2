@@ -1,12 +1,12 @@
 namespace TinyCms.Core.Domain.Security
 {
     /// <summary>
-    /// Represents an entity which supports ACL
+    ///     Represents an entity which supports ACL
     /// </summary>
-    public partial interface IAclSupported
+    public interface IAclSupported
     {
         /// <summary>
-        /// Gets or sets a value indicating whether the entity is subject to ACL
+        ///     Gets or sets a value indicating whether the entity is subject to ACL
         /// </summary>
         bool SubjectToAcl { get; set; }
     }

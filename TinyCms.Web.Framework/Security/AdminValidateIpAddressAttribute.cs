@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using System.Web.Mvc;
 using TinyCms.Core;
 using TinyCms.Core.Domain.Security;
@@ -14,19 +13,19 @@ namespace TinyCms.Web.Framework.Security
             if (filterContext == null || filterContext.HttpContext == null)
                 return;
 
-            HttpRequestBase request = filterContext.HttpContext.Request;
+            var request = filterContext.HttpContext.Request;
             if (request == null)
                 return;
 
             //don't apply filter to child methods
             if (filterContext.IsChildAction)
                 return;
-            bool ok = false;
+            var ok = false;
             var ipAddresses = EngineContext.Current.Resolve<SecuritySettings>().AdminAreaAllowedIpAddresses;
             if (ipAddresses != null && ipAddresses.Count > 0)
             {
                 var webHelper = EngineContext.Current.Resolve<IWebHelper>();
-                foreach (string ip in ipAddresses)
+                foreach (var ip in ipAddresses)
                     if (ip.Equals(webHelper.GetCurrentIpAddress(), StringComparison.InvariantCultureIgnoreCase))
                     {
                         ok = true;
@@ -44,10 +43,14 @@ namespace TinyCms.Web.Framework.Security
                 //ensure that it's not 'Access denied' page
                 var webHelper = EngineContext.Current.Resolve<IWebHelper>();
                 var thisPageUrl = webHelper.GetThisPageUrl(false);
-                if (!thisPageUrl.StartsWith(string.Format("{0}admin/security/accessdenied", webHelper.GetStoreLocation()), StringComparison.InvariantCultureIgnoreCase))
+                if (
+                    !thisPageUrl.StartsWith(
+                        string.Format("{0}admin/security/accessdenied", webHelper.GetStoreLocation()),
+                        StringComparison.InvariantCultureIgnoreCase))
                 {
                     //redirect to 'Access denied' page
-                    filterContext.Result = new RedirectResult(webHelper.GetStoreLocation() + "admin/security/accessdenied");
+                    filterContext.Result =
+                        new RedirectResult(webHelper.GetStoreLocation() + "admin/security/accessdenied");
                     //filterContext.Result = RedirectToAction("AccessDenied", "Security");
                 }
             }

@@ -8,44 +8,46 @@
 }
 @*we add enctype = "multipart/form-data" because "File upload" attribute control type requires it*@
 @using (Html.BeginForm("AddAttributeCombinationPopup", "Product",
-    new RouteValueDictionary(new { productId = Model.ProductId, btnId = ViewBag.btnId, formId = ViewBag.formId }),
+    new RouteValueDictionary(new {productId = Model.ProductId, ViewBag.btnId, ViewBag.formId}),
     FormMethod.Post,
-    new Dictionary<string, Object> { { "enctype", "multipart/form-data" } }))
+    new Dictionary<string, Object> {{"enctype", "multipart/form-data"}}))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false)
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt=""/>
             @T("Admin.Catalog.Products.ProductAttributes.AttributeCombinations.AddTitle")
         </div>
         <div class="options">
-            
+
         </div>
     </div>
-    
+
 
     if (ViewBag.RefreshPage == true)
     {
         <script type="text/javascript">
-        try {window.opener.document.forms['@(ViewBag.formId)'].@(ViewBag.btnId).click();}
-        catch (e){} 
-        window.close();
+            try {
+                window.opener.document.forms["@(ViewBag.formId)"].@(ViewBag.btnId).click();
+            } catch (e) {
+            }
+            window.close();
         </script>
     }
-    
-    <div style="border: 1px dashed #2F4F4F; padding: 15px; margin: 10px 0px 10px 0px;">
+
+    <div style="border: 1px dashed #2F4F4F; margin: 10px 0px 10px 0px; padding: 15px;">
         @Html.Partial("_ProductAttributes", Model.ProductAttributes)
-        <br />
+        <br/>
         @if (Model.Warnings.Count > 0)
         {
-        <div class="message-box message-box-error">
-            @foreach (var warning in Model.Warnings)
-            {
-                @warning
-                <br />
-            }
-        </div>
+            <div class="message-box message-box-error">
+                @foreach (var warning in Model.Warnings)
+                {
+                    @warning
+                    <br/>
+                }
+            </div>
         }
     </div>
     <div>
@@ -116,10 +118,9 @@
             <tr>
                 <td colspan="2" align="left">
                     <input type="submit" id="add-attribute-combination" name="add-attribute-combination"
-                        class="k-button" value="@T("Admin.Catalog.Products.ProductAttributes.AttributeCombinations.AddNew")" />
+                           class="k-button" value="@T("Admin.Catalog.Products.ProductAttributes.AttributeCombinations.AddNew")"/>
                 </td>
             </tr>
         </table>
     </div>
-
 }

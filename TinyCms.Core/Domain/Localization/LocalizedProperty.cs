@@ -1,40 +1,37 @@
-using TinyCms.Core;
-using TinyCms.Core.Domain.Localization;
-
 namespace TinyCms.Core.Domain.Localization
 {
     /// <summary>
-    /// Represents a localized property
+    ///     Represents a localized property
     /// </summary>
-    public partial class LocalizedProperty : BaseEntity
+    public class LocalizedProperty : BaseEntity
     {
         /// <summary>
-        /// Gets or sets the entity identifier
+        ///     Gets or sets the entity identifier
         /// </summary>
         public int EntityId { get; set; }
 
         /// <summary>
-        /// Gets or sets the language identifier
+        ///     Gets or sets the language identifier
         /// </summary>
         public int LanguageId { get; set; }
 
         /// <summary>
-        /// Gets or sets the locale key group
+        ///     Gets or sets the locale key group
         /// </summary>
         public string LocaleKeyGroup { get; set; }
 
         /// <summary>
-        /// Gets or sets the locale key
+        ///     Gets or sets the locale key
         /// </summary>
         public string LocaleKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the locale value
+        ///     Gets or sets the locale value
         /// </summary>
         public string LocaleValue { get; set; }
-        
+
         /// <summary>
-        /// Gets the language
+        ///     Gets the language
         /// </summary>
         public virtual Language Language { get; set; }
     }

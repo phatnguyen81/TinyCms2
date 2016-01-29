@@ -1,13 +1,12 @@
-﻿@model String
-@using TinyCms.Core
+﻿@using TinyCms.Core
 @using TinyCms.Core.Domain.Common
 @using TinyCms.Core.Infrastructure
 @using TinyCms.Services.Security
-@using TinyCms.Web.Framework.UI
+@model String
 @{
     //we do not bundle this script file (does not work for some reasons in bundle)
     Html.AddScriptParts("~/Content/tinymce/tinymce.min.js", true);
-    
+
     var permissionService = EngineContext.Current.Resolve<IPermissionService>();
     var allowJbimages = false;
     var allowRoxyFileman = permissionService.Authorize(StandardPermissionProvider.HtmlEditorManagePictures);
@@ -15,7 +14,7 @@
     //so if you're running in a virtual directory, then uncomment the code below:
     //allowJbimages = true;
     //allowRoxyFileman =false;
-    
+
 
     var random = CommonHelper.GenerateRandomInteger();
 
@@ -23,19 +22,19 @@
     var additionalEditorSettings = EngineContext.Current.Resolve<AdminAreaSettings>().RichEditorAdditionalSettings;
     //is java-script supported?
     var allowJavaScript = EngineContext.Current.Resolve<AdminAreaSettings>().RichEditorAllowJavaScript;
-    
+
     //allow HTML body? Full page? - http://www.tinymce.com/wiki.php/Plugin:fullpage
     //false by default
     var enableFullPage = Convert.ToBoolean(ViewData["nop.RichEditor.EnableFullPage"] ?? false);
 }
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         var defaultEditorSettings@(random) = {
             selector: "#@ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)",
             fontsize_formats: "8pt 9pt 10pt 11pt 12pt 26pt 36pt",
             height: 350,
-            entity_encoding : "raw",
-            width: '100%',
+            entity_encoding: "raw",
+            width: "100%",
             plugins: [
                 "advlist autolink lists link image charmap print preview anchor",
                 "searchreplace visualblocks fullscreen",
@@ -44,7 +43,8 @@
             toolbar: "insertfile undo redo | styleselect | fontselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image@(allowJbimages ? " jbimages" : null) youtube",
             //"relative_urls" required by jbimages plugin to be set to "false"
             relative_urls: false,
-            @if (allowJavaScript){
+            @if (allowJavaScript)
+            {
                 <text>
             valid_elements: "*[*]",
                 </text>
@@ -55,7 +55,7 @@
         };
 
         function getAdditionalEditorSettings@(random)(settings) {
-            @Html.Raw(additionalEditorSettings)
+            @Html.Raw(additionalEditorSettings);
             return settings;
         }
 
@@ -64,4 +64,4 @@
 </script>
 @Html.TextArea(string.Empty, /* Name suffix */
     ViewData.TemplateInfo.FormattedModelValue /* Initial value */
-)
+    )

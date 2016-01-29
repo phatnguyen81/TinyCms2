@@ -6,8 +6,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Localization
 {
-    [Validator(typeof(LanguageResourceValidator))]
-    public partial class LanguageResourceModel : BaseNopEntityModel
+    [Validator(typeof (LanguageResourceValidator))]
+    public class LanguageResourceModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.Configuration.Languages.Resources.Fields.Name")]
         [AllowHtml]

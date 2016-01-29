@@ -10,28 +10,56 @@ using TinyCms.Services.Events;
 namespace TinyCms.Services.Localization
 {
     /// <summary>
-    /// Language service
+    ///     Language service
     /// </summary>
-    public partial class LanguageService : ILanguageService
+    public class LanguageService : ILanguageService
     {
+        #region Ctor
+
+        /// <summary>
+        ///     Ctor
+        /// </summary>
+        /// <param name="cacheManager">Cache manager</param>
+        /// <param name="languageRepository">Language repository</param>
+        /// <param name="storeMappingService">Store mapping service</param>
+        /// <param name="settingService">Setting service</param>
+        /// <param name="localizationSettings">Localization settings</param>
+        /// <param name="eventPublisher">Event published</param>
+        public LanguageService(ICacheManager cacheManager,
+            IRepository<Language> languageRepository,
+            ISettingService settingService,
+            LocalizationSettings localizationSettings,
+            IEventPublisher eventPublisher)
+        {
+            _cacheManager = cacheManager;
+            _languageRepository = languageRepository;
+            _settingService = settingService;
+            _localizationSettings = localizationSettings;
+            _eventPublisher = eventPublisher;
+        }
+
+        #endregion
+
         #region Constants
 
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : language ID
+        ///     {0} : language ID
         /// </remarks>
         private const string LANGUAGES_BY_ID_KEY = "Nop.language.id-{0}";
+
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : show hidden records?
+        ///     {0} : show hidden records?
         /// </remarks>
         private const string LANGUAGES_ALL_KEY = "Nop.language.all-{0}";
+
         /// <summary>
-        /// Key pattern to clear cache
+        ///     Key pattern to clear cache
         /// </summary>
         private const string LANGUAGES_PATTERN_KEY = "Nop.language.";
 
@@ -47,43 +75,17 @@ namespace TinyCms.Services.Localization
 
         #endregion
 
-        #region Ctor
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="cacheManager">Cache manager</param>
-        /// <param name="languageRepository">Language repository</param>
-        /// <param name="storeMappingService">Store mapping service</param>
-        /// <param name="settingService">Setting service</param>
-        /// <param name="localizationSettings">Localization settings</param>
-        /// <param name="eventPublisher">Event published</param>
-        public LanguageService(ICacheManager cacheManager,
-            IRepository<Language> languageRepository,
-            ISettingService settingService,
-            LocalizationSettings localizationSettings,
-            IEventPublisher eventPublisher)
-        {
-            this._cacheManager = cacheManager;
-            this._languageRepository = languageRepository;
-            this._settingService = settingService;
-            this._localizationSettings = localizationSettings;
-            this._eventPublisher = eventPublisher;
-        }
-
-        #endregion
-        
         #region Methods
 
         /// <summary>
-        /// Deletes a language
+        ///     Deletes a language
         /// </summary>
         /// <param name="language">Language</param>
         public virtual void DeleteLanguage(Language language)
         {
             if (language == null)
                 throw new ArgumentNullException("language");
-            
+
             //update default admin area language (if required)
             if (_localizationSettings.DefaultAdminLanguageId == language.Id)
             {
@@ -97,7 +99,7 @@ namespace TinyCms.Services.Localization
                     }
                 }
             }
-            
+
             _languageRepository.Delete(language);
 
             //cache
@@ -108,14 +110,14 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Gets all languages
+        ///     Gets all languages
         /// </summary>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>Languages</returns>
         public virtual IList<Language> GetAllLanguages(bool showHidden = false)
         {
-            string key = string.Format(LANGUAGES_ALL_KEY, showHidden);
+            var key = string.Format(LANGUAGES_ALL_KEY, showHidden);
             var languages = _cacheManager.Get(key, () =>
             {
                 var query = _languageRepository.Table;
@@ -129,7 +131,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Gets a language
+        ///     Gets a language
         /// </summary>
         /// <param name="languageId">Language identifier</param>
         /// <returns>Language</returns>
@@ -137,13 +139,13 @@ namespace TinyCms.Services.Localization
         {
             if (languageId == 0)
                 return null;
-            
-            string key = string.Format(LANGUAGES_BY_ID_KEY, languageId);
+
+            var key = string.Format(LANGUAGES_BY_ID_KEY, languageId);
             return _cacheManager.Get(key, () => _languageRepository.GetById(languageId));
         }
 
         /// <summary>
-        /// Inserts a language
+        ///     Inserts a language
         /// </summary>
         /// <param name="language">Language</param>
         public virtual void InsertLanguage(Language language)
@@ -161,14 +163,14 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Updates a language
+        ///     Updates a language
         /// </summary>
         /// <param name="language">Language</param>
         public virtual void UpdateLanguage(Language language)
         {
             if (language == null)
                 throw new ArgumentNullException("language");
-            
+
             //update language
             _languageRepository.Update(language);
 

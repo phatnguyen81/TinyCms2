@@ -16,10 +16,10 @@
 <html>
 <head>
     <title>@Html.NopTitle(true)</title>
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-    <meta name="description" content="@(Html.NopMetaDescription())" />
-    <meta name="keywords" content="@(Html.NopMetaKeywords())" />
-    <meta name="generator" content="Vietnam4u" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+    <meta name="description" content="@(Html.NopMetaDescription())"/>
+    <meta name="keywords" content="@(Html.NopMetaKeywords())"/>
+    <meta name="generator" content="Vietnam4u"/>
     <meta content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" name="viewport">
 
     @*<link href="http://css.me.zdn.vn/v4/font/Roboto/roboto_font-1.02.css" rel="stylesheet" type="text/css">*@
@@ -28,24 +28,24 @@
     @*This is used so that themes can inject content into the header*@
     @Html.Partial("Head")
     @Html.Widget("head_html_tag")
-    @Html.NopCssFiles(this.Url, ResourceLocation.Head)
-    @Html.NopScripts(this.Url, ResourceLocation.Head)
+    @Html.NopCssFiles(Url, ResourceLocation.Head)
+    @Html.NopScripts(Url, ResourceLocation.Head)
     @Html.NopCanonicalUrls()
     @*Favicon - upload favicon.ico file to the root directory*@
     @*@Html.Action("Favicon", "Common")*@
-    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")?v=1" />
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")?v=1"/>
     @if (displayMiniProfiler)
     {
         @MiniProfiler.RenderIncludes()
     }
-    
+
 </head>
 <body>
 
-    @Html.Partial("_Social")
-    <div class="indicator">Loading&#8230;</div>
-    @RenderBody()
-    @Html.NopCssFiles(this.Url, ResourceLocation.Foot)
-    @Html.NopScripts(this.Url, ResourceLocation.Foot)
+@Html.Partial("_Social")
+<div class="indicator">Loading&#8230;</div>
+@RenderBody()
+@Html.NopCssFiles(Url, ResourceLocation.Foot)
+@Html.NopScripts(Url, ResourceLocation.Foot)
 </body>
 </html>

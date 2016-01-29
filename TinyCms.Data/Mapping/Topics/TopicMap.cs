@@ -6,8 +6,8 @@ namespace TinyCms.Data.Mapping.Topics
     {
         public TopicMap()
         {
-            this.ToTable("Topic");
-            this.HasKey(t => t.Id);
+            ToTable("Topic");
+            HasKey(t => t.Id);
         }
     }
 }

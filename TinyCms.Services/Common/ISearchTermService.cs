@@ -4,25 +4,25 @@ using TinyCms.Core.Domain.Common;
 namespace TinyCms.Services.Common
 {
     /// <summary>
-    /// Search term service interafce
+    ///     Search term service interafce
     /// </summary>
-    public partial interface ISearchTermService
+    public interface ISearchTermService
     {
         /// <summary>
-        /// Deletes a search term record
+        ///     Deletes a search term record
         /// </summary>
         /// <param name="searchTerm">Search term</param>
         void DeleteAddress(SearchTerm searchTerm);
 
         /// <summary>
-        /// Gets a search term record by identifier
+        ///     Gets a search term record by identifier
         /// </summary>
         /// <param name="searchTermId">Search term identifier</param>
         /// <returns>Search term</returns>
         SearchTerm GetSearchTermById(int searchTermId);
 
         /// <summary>
-        /// Gets a search term record by keyword
+        ///     Gets a search term record by keyword
         /// </summary>
         /// <param name="keyword">Search term keyword</param>
         /// <param name="storeId">Store identifier</param>
@@ -30,7 +30,7 @@ namespace TinyCms.Services.Common
         SearchTerm GetSearchTermByKeyword(string keyword);
 
         /// <summary>
-        /// Gets a search term statistics
+        ///     Gets a search term statistics
         /// </summary>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
@@ -38,15 +38,15 @@ namespace TinyCms.Services.Common
         IPagedList<SearchTermReportLine> GetStats(int pageIndex = 0, int pageSize = int.MaxValue);
 
         /// <summary>
-        /// Inserts a search term record
+        ///     Inserts a search term record
         /// </summary>
         /// <param name="searchTerm">Search term</param>
         void InsertSearchTerm(SearchTerm searchTerm);
 
         /// <summary>
-        /// Updates the search term record
+        ///     Updates the search term record
         /// </summary>
         /// <param name="searchTerm">Search term</param>
-         void UpdateSearchTerm(SearchTerm searchTerm);
+        void UpdateSearchTerm(SearchTerm searchTerm);
     }
 }

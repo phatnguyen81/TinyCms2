@@ -1,5 +1,6 @@
 ﻿//Contributor: Umbraco (http://www.umbraco.com). Thanks a lot! 
 //SEE THIS POST for full details of what this does - http://shazwazza.com/post/Developing-a-plugin-framework-in-ASPNET-with-medium-trust.aspx
+
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,11 +15,12 @@ using System.Web.Hosting;
 using TinyCms.Core.ComponentModel;
 using TinyCms.Core.Plugins;
 
-[assembly: PreApplicationStartMethod(typeof(PluginManager), "Initialize")]
+[assembly: PreApplicationStartMethod(typeof (PluginManager), "Initialize")]
+
 namespace TinyCms.Core.Plugins
 {
     /// <summary>
-    /// Sets the application up for the plugin referencing
+    ///     Sets the application up for the plugin referencing
     /// </summary>
     public class PluginManager
     {
@@ -41,17 +43,17 @@ namespace TinyCms.Core.Plugins
         #region Methods
 
         /// <summary>
-        /// Returns a collection of all referenced plugin assemblies that have been shadow copied
+        ///     Returns a collection of all referenced plugin assemblies that have been shadow copied
         /// </summary>
         public static IEnumerable<PluginDescriptor> ReferencedPlugins { get; set; }
 
         /// <summary>
-        /// Returns a collection of all plugin which are not compatible with the current version
+        ///     Returns a collection of all plugin which are not compatible with the current version
         /// </summary>
         public static IEnumerable<string> IncompatiblePlugins { get; set; }
 
         /// <summary>
-        /// Initialize
+        ///     Initialize
         /// </summary>
         public static void Initialize()
         {
@@ -65,12 +67,14 @@ namespace TinyCms.Core.Plugins
                 var referencedPlugins = new List<PluginDescriptor>();
                 var incompatiblePlugins = new List<string>();
 
-                _clearShadowDirectoryOnStartup = !String.IsNullOrEmpty(ConfigurationManager.AppSettings["ClearPluginsShadowDirectoryOnStartup"]) &&
-                   Convert.ToBoolean(ConfigurationManager.AppSettings["ClearPluginsShadowDirectoryOnStartup"]);
+                _clearShadowDirectoryOnStartup =
+                    !String.IsNullOrEmpty(ConfigurationManager.AppSettings["ClearPluginsShadowDirectoryOnStartup"]) &&
+                    Convert.ToBoolean(ConfigurationManager.AppSettings["ClearPluginsShadowDirectoryOnStartup"]);
 
                 try
                 {
-                    var installedPluginSystemNames = PluginFileParser.ParseInstalledPluginsFile(GetInstalledPluginsFilePath());
+                    var installedPluginSystemNames =
+                        PluginFileParser.ParseInstalledPluginsFile(GetInstalledPluginsFilePath());
 
                     Debug.WriteLine("Creating shadow copy folder and querying for dlls");
                     //ensure folders are created
@@ -103,7 +107,9 @@ namespace TinyCms.Core.Plugins
                         var pluginDescriptor = dfd.Value;
 
                         //ensure that version of plugin is valid
-                        if (!pluginDescriptor.SupportedVersions.Contains(/*NopVersion.CurrentVersion*/"1.0", StringComparer.InvariantCultureIgnoreCase))
+                        if (
+                            !pluginDescriptor.SupportedVersions.Contains( /*NopVersion.CurrentVersion*/
+                                "1.0", StringComparer.InvariantCultureIgnoreCase))
                         {
                             incompatiblePlugins.Add(pluginDescriptor.SystemName);
                             continue;
@@ -111,18 +117,26 @@ namespace TinyCms.Core.Plugins
 
                         //some validation
                         if (String.IsNullOrWhiteSpace(pluginDescriptor.SystemName))
-                            throw new Exception(string.Format("A plugin '{0}' has no system name. Try assigning the plugin a unique name and recompiling.", descriptionFile.FullName));
+                            throw new Exception(
+                                string.Format(
+                                    "A plugin '{0}' has no system name. Try assigning the plugin a unique name and recompiling.",
+                                    descriptionFile.FullName));
                         if (referencedPlugins.Contains(pluginDescriptor))
-                            throw new Exception(string.Format("A plugin with '{0}' system name is already defined", pluginDescriptor.SystemName));
+                            throw new Exception(string.Format("A plugin with '{0}' system name is already defined",
+                                pluginDescriptor.SystemName));
 
                         //set 'Installed' property
                         pluginDescriptor.Installed = installedPluginSystemNames
-                            .FirstOrDefault(x => x.Equals(pluginDescriptor.SystemName, StringComparison.InvariantCultureIgnoreCase)) != null;
+                            .FirstOrDefault(
+                                x => x.Equals(pluginDescriptor.SystemName, StringComparison.InvariantCultureIgnoreCase)) !=
+                                                     null;
 
                         try
                         {
                             if (descriptionFile.Directory == null)
-                                throw new Exception(string.Format("Directory cannot be resolved for '{0}' description file", descriptionFile.Name));
+                                throw new Exception(
+                                    string.Format("Directory cannot be resolved for '{0}' description file",
+                                        descriptionFile.Name));
                             //get list of all DLLs in plugins (not in bin!)
                             var pluginFiles = descriptionFile.Directory.GetFiles("*.dll", SearchOption.AllDirectories)
                                 //just make sure we're not registering shadow copied plugins
@@ -132,7 +146,10 @@ namespace TinyCms.Core.Plugins
 
                             //other plugin description info
                             var mainPluginFile = pluginFiles
-                                .FirstOrDefault(x => x.Name.Equals(pluginDescriptor.PluginFileName, StringComparison.InvariantCultureIgnoreCase));
+                                .FirstOrDefault(
+                                    x =>
+                                        x.Name.Equals(pluginDescriptor.PluginFileName,
+                                            StringComparison.InvariantCultureIgnoreCase));
                             pluginDescriptor.OriginalAssemblyFile = mainPluginFile;
 
                             //shadow copy main plugin file
@@ -140,13 +157,15 @@ namespace TinyCms.Core.Plugins
 
                             //load all other referenced assemblies now
                             foreach (var plugin in pluginFiles
-                                .Where(x => !x.Name.Equals(mainPluginFile.Name, StringComparison.InvariantCultureIgnoreCase))
+                                .Where(
+                                    x =>
+                                        !x.Name.Equals(mainPluginFile.Name, StringComparison.InvariantCultureIgnoreCase))
                                 .Where(x => !IsAlreadyLoaded(x)))
-                                    PerformFileDeploy(plugin);
-                            
+                                PerformFileDeploy(plugin);
+
                             //init plugin type (only one plugin per assembly is allowed)
                             foreach (var t in pluginDescriptor.ReferencedAssembly.GetTypes())
-                                if (typeof(IPlugin).IsAssignableFrom(t))
+                                if (typeof (IPlugin).IsAssignableFrom(t))
                                     if (!t.IsInterface)
                                         if (t.IsClass && !t.IsAbstract)
                                         {
@@ -189,12 +208,11 @@ namespace TinyCms.Core.Plugins
 
                 ReferencedPlugins = referencedPlugins;
                 IncompatiblePlugins = incompatiblePlugins;
-
             }
         }
 
         /// <summary>
-        /// Mark plugin as installed
+        ///     Mark plugin as installed
         /// </summary>
         /// <param name="systemName">Plugin system name</param>
         public static void MarkPluginAsInstalled(string systemName)
@@ -211,15 +229,15 @@ namespace TinyCms.Core.Plugins
 
 
             var installedPluginSystemNames = PluginFileParser.ParseInstalledPluginsFile(GetInstalledPluginsFilePath());
-            bool alreadyMarkedAsInstalled = installedPluginSystemNames
-                                .FirstOrDefault(x => x.Equals(systemName, StringComparison.InvariantCultureIgnoreCase)) != null;
+            var alreadyMarkedAsInstalled = installedPluginSystemNames
+                .FirstOrDefault(x => x.Equals(systemName, StringComparison.InvariantCultureIgnoreCase)) != null;
             if (!alreadyMarkedAsInstalled)
                 installedPluginSystemNames.Add(systemName);
-            PluginFileParser.SaveInstalledPluginsFile(installedPluginSystemNames,filePath);
+            PluginFileParser.SaveInstalledPluginsFile(installedPluginSystemNames, filePath);
         }
 
         /// <summary>
-        /// Mark plugin as uninstalled
+        ///     Mark plugin as uninstalled
         /// </summary>
         /// <param name="systemName">Plugin system name</param>
         public static void MarkPluginAsUninstalled(string systemName)
@@ -236,15 +254,15 @@ namespace TinyCms.Core.Plugins
 
 
             var installedPluginSystemNames = PluginFileParser.ParseInstalledPluginsFile(GetInstalledPluginsFilePath());
-            bool alreadyMarkedAsInstalled = installedPluginSystemNames
-                                .FirstOrDefault(x => x.Equals(systemName, StringComparison.InvariantCultureIgnoreCase)) != null;
+            var alreadyMarkedAsInstalled = installedPluginSystemNames
+                .FirstOrDefault(x => x.Equals(systemName, StringComparison.InvariantCultureIgnoreCase)) != null;
             if (alreadyMarkedAsInstalled)
                 installedPluginSystemNames.Remove(systemName);
-            PluginFileParser.SaveInstalledPluginsFile(installedPluginSystemNames,filePath);
+            PluginFileParser.SaveInstalledPluginsFile(installedPluginSystemNames, filePath);
         }
 
         /// <summary>
-        /// Mark plugin as uninstalled
+        ///     Mark plugin as uninstalled
         /// </summary>
         public static void MarkAllPluginsAsUninstalled()
         {
@@ -258,11 +276,12 @@ namespace TinyCms.Core.Plugins
         #region Utilities
 
         /// <summary>
-        /// Get description files
+        ///     Get description files
         /// </summary>
         /// <param name="pluginFolder">Plugin direcotry info</param>
         /// <returns>Original and parsed description files</returns>
-        private static IEnumerable<KeyValuePair<FileInfo, PluginDescriptor>> GetDescriptionFilesAndDescriptors(DirectoryInfo pluginFolder)
+        private static IEnumerable<KeyValuePair<FileInfo, PluginDescriptor>> GetDescriptionFilesAndDescriptors(
+            DirectoryInfo pluginFolder)
         {
             if (pluginFolder == null)
                 throw new ArgumentNullException("pluginFolder");
@@ -289,7 +308,7 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Indicates whether assembly file is already loaded
+        ///     Indicates whether assembly file is already loaded
         /// </summary>
         /// <param name="fileInfo">File info</param>
         /// <returns>Result</returns>
@@ -307,12 +326,12 @@ namespace TinyCms.Core.Plugins
             //do not compare the full assembly name, just filename
             try
             {
-                string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileInfo.FullName);
+                var fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileInfo.FullName);
                 if (fileNameWithoutExt == null)
                     throw new Exception(string.Format("Cannot get file extnension for {0}", fileInfo.Name));
                 foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
                 {
-                    string assemblyName = a.FullName.Split(new[] { ',' }).FirstOrDefault();
+                    var assemblyName = a.FullName.Split(',').FirstOrDefault();
                     if (fileNameWithoutExt.Equals(assemblyName, StringComparison.InvariantCultureIgnoreCase))
                         return true;
                 }
@@ -325,7 +344,7 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Perform file deply
+        ///     Perform file deply
         /// </summary>
         /// <param name="plug">Plugin file info</param>
         /// <returns>Assembly</returns>
@@ -341,7 +360,7 @@ namespace TinyCms.Core.Plugins
             {
                 //all plugins will need to be copied to ~/Plugins/bin/
                 //this is aboslutely required because all of this relies on probingPaths being set statically in the web.config
-                
+
                 //were running in med trust, so copy to custom bin folder
                 var shadowCopyPlugFolder = Directory.CreateDirectory(_shadowCopyFolder.FullName);
                 shadowCopiedPlug = InitializeMediumTrust(plug, shadowCopyPlugFolder);
@@ -365,7 +384,7 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Used to initialize plugins when running in Full Trust
+        ///     Used to initialize plugins when running in Full Trust
         /// </summary>
         /// <param name="plug"></param>
         /// <param name="shadowCopyPlugFolder"></param>
@@ -399,7 +418,7 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Used to initialize plugins when running in Medium Trust
+        ///     Used to initialize plugins when running in Medium Trust
         /// </summary>
         /// <param name="plug"></param>
         /// <param name="shadowCopyPlugFolder"></param>
@@ -449,7 +468,8 @@ namespace TinyCms.Core.Plugins
                     }
                     catch (IOException exc)
                     {
-                        throw new IOException(shadowCopiedPlug.FullName + " rename failed, cannot initialize plugin", exc);
+                        throw new IOException(shadowCopiedPlug.FullName + " rename failed, cannot initialize plugin",
+                            exc);
                     }
                     //ok, we've made it this far, now retry the shadow copy
                     File.Copy(plug.FullName, shadowCopiedPlug.FullName, true);
@@ -458,9 +478,9 @@ namespace TinyCms.Core.Plugins
 
             return shadowCopiedPlug;
         }
-        
+
         /// <summary>
-        /// Determines if the folder is a bin plugin folder for a package
+        ///     Determines if the folder is a bin plugin folder for a package
         /// </summary>
         /// <param name="folder"></param>
         /// <returns></returns>
@@ -473,11 +493,11 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Gets the full path of InstalledPlugins.txt file
+        ///     Gets the full path of InstalledPlugins.txt file
         /// </summary>
         /// <returns></returns>
         private static string GetInstalledPluginsFilePath()
-        { 
+        {
             var filePath = HostingEnvironment.MapPath(InstalledPluginsFilePath);
             return filePath;
         }

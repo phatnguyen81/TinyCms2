@@ -1,58 +1,62 @@
 ﻿@model LoginModel
-           @using (Html.BeginForm())
-           {
-               @Html.Hidden("returnUrl", this.Context.Request.QueryString["returnUrl"]);
-               <div class="content">
-                   @if (Model.UsernamesEnabled)
-                   {
-                       <label>
-                           @Html.TextBoxFor(m => m.Username, new {@class = "txtinput username", autofocus = "autofocus", @placeholder = "Tên đăng nhập"})
-                       </label>
-                   }
-                   else
-                   {
-                       <label>
-                           @Html.TextBoxFor(m => m.Email, new {@class = "txtinput username", autofocus = "autofocus", @placeholder = "Email"})
-                       </label>
-                   }
-                   <label>
-                       @Html.PasswordFor(m => m.Password, new {@class = "txtinput password", @placeholder = "Mật khẩu"})
-                   </label>
-                   @if (Model.DisplayCaptcha)
-                   {
-                       <div class="captcha-box">
-                           @Html.Raw(Html.GenerateCaptcha())
-                       </div>
-                   }
-                   <div class="subact">
-                       @Html.RouteLink(T("Account.Login.ForgotPassword").Text, "PasswordRecovery", null,new { @class = "forgetpw" })
-                       <label>
-                           @Html.CheckBoxFor(m => m.RememberMe)
-                           Ghi nhớ
-                       </label>
-                   </div>
-                   <p class="actbtn"><button href="#" class="loginbtn">Đăng nhập</button>
-                   </p>
-                   <div class="newact">
-                       <p class="newreg">
-                           Chưa có tài khoản?
-                           <a href="@Url.Action("Register","Customer")" class="regbtn">Đăng ký</a>
-                       </p>
-                       @Html.Action("ExternalMethods", "ExternalAuthentication", new { returnUrl = Model.ReturnUrl })
-                   </div>
-               </div>
-           }
+@using (Html.BeginForm())
+{
+    @Html.Hidden("returnUrl", Context.Request.QueryString["returnUrl"])
+    ;
+    <div class="content">
+        @if (Model.UsernamesEnabled)
+        {
+            <label>
+                @Html.TextBoxFor(m => m.Username, new {@class = "txtinput username", autofocus = "autofocus", @placeholder = "Tên đăng nhập"})
+            </label>
+        }
+        else
+        {
+            <label>
+                @Html.TextBoxFor(m => m.Email, new {@class = "txtinput username", autofocus = "autofocus", @placeholder = "Email"})
+            </label>
+        }
+        <label>
+            @Html.PasswordFor(m => m.Password, new {@class = "txtinput password", @placeholder = "Mật khẩu"})
+        </label>
+        @if (Model.DisplayCaptcha)
+        {
+            <div class="captcha-box">
+                @Html.Raw(Html.GenerateCaptcha())
+            </div>
+        }
+        <div class="subact">
+            @Html.RouteLink(T("Account.Login.ForgotPassword").Text, "PasswordRecovery", null, new {@class = "forgetpw"})
+            <label>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                Ghi nhớ
+            </label>
+        </div>
+        <p class="actbtn">
+            <button href="#" class="loginbtn">Đăng nhập</button>
+        </p>
+        <div class="newact">
+            <p class="newreg">
+                Chưa có tài khoản?
+                <a href="@Url.Action("Register", "Customer")" class="regbtn">Đăng ký</a>
+            </p>
+            @Html.Action("ExternalMethods", "ExternalAuthentication", new {returnUrl = Model.ReturnUrl})
+        </div>
+    </div>
+}
 <script type="text/javascript">
-    $('.popup .regbtn').click(function (e) {
+    $(".popup .regbtn").click(function(e) {
         e.preventDefault();
         closePopup();
-        showPopup('@Url.Action("Register","Customer", new {popup = true})', 'Đăng ký tài khoản'); 
+        showPopup("@Url.Action(\
+                       "Register\",\"Customer\", new {popup = true})",
+                       "Đăng ký tài khoản"); ;
     });
-    $('.loginbtn').click(function (e) {
+    $(".loginbtn").click(function(e) {
         e.preventDefault();
         @if (Model.UsernamesEnabled)
         {
-        <text>
+            <text>
             if ($("#Username").val() == "") {
                 $.boxy.alert("Lỗi đăng nhập", "Vui lòng nhập tên đăng nhập");
                 return;
@@ -61,7 +65,7 @@
         }
         else
         {
-        <text>
+            <text>
             if ($("#Email").val() == "") {
                 $.boxy.alert("Lỗi đăng nhập", "Vui lòng nhập email");
                 return;
@@ -75,23 +79,45 @@
         }
 
         $.ajax({
-            url: '@Url.Action("_AjaxLogin", "Customer")',
-            data: $(this).closest("form").serialize(),
-            type: "POST",
-            dataType: "json"
-        }).done(function (data) {
-            if (data.success) {
+            url: "@Url.Action(\
+                      "_AjaxLogin\", \"Customer\")",
+                      (this).closest("form").serialize(),
+                      "POST",
+                      "json"
+}
+
+    ).
+
+        private done(function (data);
+        {
+            if (data.success)
+            {
                 //location.reload();
-                if (data.returnUrl) {
+                if (data.returnUrl)
+                {
                     window.location.href = data.returnUrl;
                 }
                 else
-                    window.location.href = '@Url.RouteUrl("homepage")';
-            } else {
-                $.boxy.alert("Lỗi đăng nhập", data.message);
+                    window.location.href = "@Url.RouteUrl(\"homepage\")"
+                ;
             }
-        }).fail(function (jqXHR, textStatus) {
-            $.boxy.alert("Lỗi đăng nhập", "Request failed: " + textStatus);
-        });
-    });
+            else
+            {
+            $.
+                boxy.alert("Lỗi đăng nhập", data.message);
+            }
+        }
+
+    ).;
+
+fail(function(
+    jqXHR,
+    textStatus
+    )
+{
+$.
+boxy.alert("Lỗi đăng nhập", "Request failed: " + textStatus);
+}
+);
+            });
 </script>

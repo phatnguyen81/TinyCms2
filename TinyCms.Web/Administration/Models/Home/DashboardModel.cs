@@ -2,7 +2,7 @@
 
 namespace TinyCms.Admin.Models.Home
 {
-    public partial class DashboardModel : BaseNopModel
+    public class DashboardModel : BaseNopModel
     {
         public bool IsLoggedInAsVendor { get; set; }
     }

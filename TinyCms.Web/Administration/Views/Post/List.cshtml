@@ -1,8 +1,8 @@
-﻿@using TinyCms.Core.Domain.Catalog
+﻿@using TinyCms.Core.Domain.Common
 @model PostListModel
 @{
-    var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
-    var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+    var defaultGridPageSize = EngineContext.Current.Resolve<AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<AdminAreaSettings>().GridPageSizes;
 
     //page title
     ViewBag.Title = T("Admin.Catalog.Posts.Manage").Text;
@@ -12,12 +12,12 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt=""/>
             @T("Admin.Catalog.Posts.Manage")
         </div>
         <div class="options">
             <a href="@Url.Action("Create")" class="k-button">@T("Admin.Common.AddNew")</a>
-            <input type="button" id="delete-selected" class="k-button" value="@T("Admin.Common.Delete.Selected")" />
+            <input type="button" id="delete-selected" class="k-button" value="@T("Admin.Common.Delete.Selected")"/>
         </div>
     </div>
     <table width="100%">
@@ -45,7 +45,7 @@
                 @Html.EditorFor(model => model.SearchIncludeSubCategories)
             </td>
         </tr>
-     
+
         <tr>
             <td class="adminTitle">
                 @Html.NopLabelFor(model => model.SearchPublishedId):
@@ -54,10 +54,10 @@
                 @Html.DropDownList("SearchPublishedId", Model.AvailablePublishedOptions)
             </td>
         </tr>
-      
+
         <tr>
             <td colspan="2">
-                <input type="button" id="search-posts" class="k-button" value="@T("Admin.Common.Search")" />
+                <input type="button" id="search-posts" class="k-button" value="@T("Admin.Common.Search")"/>
             </td>
         </tr>
     </table>
@@ -67,228 +67,265 @@
                 <div id="posts-grid"></div>
 
                 <script>
-    $(document).ready(function() {
-        $("#posts-grid").kendoGrid({
-            dataSource: {
-                type: "json",
-                transport: {
-                    read: {
-                        url: "@Html.Raw(Url.Action("PostList", "Post"))",
-                        type: "POST",
-                        dataType: "json",
-                        data: additionalData
-                    }
-                },
-                schema: {
-                    data: "Data",
-                    total: "Total",
-                    errors: "Errors"
-                },
-                error: function(e) {
-                    display_kendoui_grid_error(e);
-                    // Cancel the changes
-                    this.cancelChanges();
-                },
-                pageSize: @(defaultGridPageSize),
-                serverPaging: true,
-                serverFiltering: true,
-                serverSorting: true
-            },
-            pageable: {
-                refresh: true,
-                pageSizes: [@(gridPageSizes)]
-            },
-            editable: {
-                confirmation: false,
-                mode: "inline"
-            },
-            scrollable: false,
-            dataBound: onDataBound,
-            columns: [
-                {
-                    field: "Id",
-                    headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
-                    headerAttributes: { style: "text-align:center" },
-                    attributes: { style: "text-align:center" },
-                    template: "<input type='checkbox' value='#=Id#' class='checkboxGroups'/>",
-                    width: 50
-                },
-                {
-                    field: "PictureThumbnailUrl",
-                    title: "@T("Admin.Catalog.Posts.Fields.PictureThumbnailUrl")",
-                    template: '<img src="#=PictureThumbnailUrl#" />',
-                    width: 100
-                },
-                {
-                    field: "Name",
-                    title: "@T("Admin.Catalog.Posts.Fields.Name")",
-                    width: 300
-                }, {
-                    field: "ViewCount",
-                    title: "@T("Admin.Catalog.Posts.Fields.ViewCount")",
-                    attributes: { style: "text-align:right" }
-                },
-                {
-                    field: "ShareCount",
-                    title: "@T("Admin.Catalog.Posts.Fields.ShareCount")",
-                    attributes: { style: "text-align:right" }
-                }, {
-                    field: "CommentCount",
-                    title: "@T("Admin.Catalog.Posts.Fields.CommentCount")",
-                    attributes: { style: "text-align:right" }
-                }, {
-                    field: "CreatedByName",
-                    title: "@T("Admin.Catalog.Posts.Fields.CreatedBy")",
-                    attributes: { style: "text-align:center" }
+                    $(document).ready(function() {
+                        $("#posts-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("PostList", "Post"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: additionalData
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors"
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                pageSize: @(defaultGridPageSize),
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: {
+                                refresh: true,
+                                pageSizes: [@(gridPageSizes)]
+                            },
+                            editable: {
+                                confirmation: false,
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                            dataBound: onDataBound,
+                            columns: [
+                            {
+                                field: "Id",
+                                headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
+                                headerAttributes: { style: "text-align:center" },
+                                attributes: { style: "text-align:center" },
+                                template: "<input type='checkbox' value='#=Id#' class='checkboxGroups'/>",
+                                width: 50
+                            },
+                            {
+                                field: "PictureThumbnailUrl",
+                                title: "@T("Admin.Catalog.Posts.Fields.PictureThumbnailUrl")",
+                                template: "<img src=\"#=PictureThumbnailUrl#\" />",
+                                width: 100
+                            },
+                            {
+                                field: "Name",
+                                title: "@T("Admin.Catalog.Posts.Fields.Name")",
+                                width: 300
+                            }, {
+                                field: "ViewCount",
+                                title: "@T("Admin.Catalog.Posts.Fields.ViewCount")",
+                                attributes: { style: "text-align:right" }
+                            },
+                            {
+                                field: "ShareCount",
+                                title: "@T("Admin.Catalog.Posts.Fields.ShareCount")",
+                                attributes: { style: "text-align:right" }
+                            }, {
+                                field: "CommentCount",
+                                title: "@T("Admin.Catalog.Posts.Fields.CommentCount")",
+                                attributes: { style: "text-align:right" }
+                            }, {
+                                field: "CreatedByName",
+                                title: "@T("Admin.Catalog.Posts.Fields.CreatedBy")",
+                                attributes: { style: "text-align:center" }
 
-                }, {
-                    field: "CreatedOn",
-                    title: "@T("Admin.Catalog.Posts.Fields.CreatedOn")",
-                    attributes: { style: "text-align:center" },
-                    type: "date", format: "{0:dd/MM/yyyy HH:mm}"
-                }
-                , {
-                    field: "ApprovedByName",
-                    title: "@T("Admin.Catalog.Posts.Fields.ApprovedBy")",
-                    attributes: { style: "text-align:center" }
-                }, {
-                    field: "ApprovedOn",
-                    title: "@T("Admin.Catalog.Posts.Fields.ApprovedOn")",
-                    attributes: { style: "text-align:center" },
-                    type: "date", format: "{0:dd/MM/yyyy HH:mm}"
-                }
-                , {
-                    field: "Published",
-                    title: "@T("Admin.Catalog.Posts.Fields.Published")",
-                    width: 100,
-                    headerAttributes: { style: "text-align:center" },
-                    attributes: { style: "text-align:center" },
-                    template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Published#.gif" />'
-                }, {
-                    field: "Id",
-                    title: "@T("Admin.Common.Edit")",
-                    width: 100,
-                    template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
-                }
-        ]
-    });
-    });
-</script>
+                            }, {
+                                field: "CreatedOn",
+                                title: "@T("Admin.Catalog.Posts.Fields.CreatedOn")",
+                                attributes: { style: "text-align:center" },
+                                type: "date",
+                                format: "{0:dd/MM/yyyy HH:mm}"
+                            }, {
+                                field: "ApprovedByName",
+                                title: "@T("Admin.Catalog.Posts.Fields.ApprovedBy")",
+                                attributes: { style: "text-align:center" }
+                            }, {
+                                field: "ApprovedOn",
+                                title: "@T("Admin.Catalog.Posts.Fields.ApprovedOn")",
+                                attributes: { style: "text-align:center" },
+                                type: "date",
+                                format: "{0:dd/MM/yyyy HH:mm}"
+                            }, {
+                                field: "Published",
+                                title: "@T("Admin.Catalog.Posts.Fields.Published")",
+                                width: 100,
+                                headerAttributes: { style: "text-align:center" },
+                                attributes: { style: "text-align:center" },
+                                template: "<img src=\"@Url.Content(\
+                                                          "~/Administration/Content/images/\")active-#=Published#.gif\" />"
+},
+    {
+        "Id",
+        "@T("
+        Admin.Common.Edit
+        ")",
+        100,
+        "<a href=\"Edit/#=Id#\">@T(\"Admin.Common.Edit\")</a>"
+    }
+                                                          ]
+}
+
+    );
+                        });
+                        </script>
             </td>
         </tr>
     </table>
-    
-    <script type="text/javascript">
 
-        var selectedIds = [];
+        private <script type="text/javascript">
 
-        $(document).ready(function () {
+                        var selectedIds = [];
 
-            //search button
-            $('#search-posts').click(function () {
-                //search
-                var grid = $('#posts-grid').data('kendoGrid');
-                grid.dataSource.page(1); //new search. Set page size to 1
-                //grid.dataSource.read(); we already loaded the grid above using "page" function
-                //clear selected checkboxes
-                $('.checkboxGroups').attr('checked', false).change();
-                selectedIds = [];
-                return false;
-            });
+                        $(document).ready(function() {
 
-            $("#@Html.FieldIdFor(model => model.SearchPostName)").keydown(function (event) {
-                if (event.keyCode == 13) {
-                    $("#search-posts").click();
-                    return false;
-                }
-            });
-         
-            //delete selected
-            $('#delete-selected').click(function(e) {
+                            //search button
+                            $("#search-posts").click(function() {
+                                //search
+                                var grid = $("#posts-grid").data("kendoGrid");
+                                grid.dataSource.page(1); //new search. Set page size to 1
+                                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                //clear selected checkboxes
+                                $(".checkboxGroups").attr("checked", false).change();
+                                selectedIds = [];
+                                return false;
 
-                e.preventDefault();
+                            };
 
-                var postData = {
-                    selectedIds: selectedIds
-                };
-                addAntiForgeryToken(postData);
 
-                $.ajax({
-                    cache: false,
-                    type: "POST",
-                    url: "@(Url.Action("DeleteSelected", "Post"))",
-                    data: postData,
-                    complete: function(data) {
-                        //reload grid
-                        var grid = $('#posts-grid').data('kendoGrid');
-                        grid.dataSource.read();
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        alert(thrownError);
-                    },
-                    traditional: true
-                });
-                return false;
-            });
-            
-            $('#mastercheckbox').click(function () {
-                $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
-            });
-
-            //wire up checkboxes. 
-            $('#posts-grid').on('change', 'input[type=checkbox][id!=mastercheckbox]', function (e) {
-                var $check = $(this);
-                if ($check.is(":checked") == true) {
-                    var checked = jQuery.inArray($check.val(), selectedIds);
-                    if (checked == -1) {
-                        //add id to selectedIds.  
-                        selectedIds.push($check.val());
-                    }
-                }
-                else {
-                    var checked = jQuery.inArray($check.val(), selectedIds);
-                    if (checked > -1) {
-                        //remove id from selectedIds.  
-                        selectedIds = $.grep(selectedIds, function (item, index) {
-                            return item != $check.val();
+                            $("#@H ;
+        private tml.FieldIdFor 
+    (
+        private model 
+    =>;
+        private model.SearchPostName 
+    );
+                            ").keydown(function (event) {;
+                            if (event.keyCode == 13) {
+                                $("#search-posts").click();
+                                return false;
+                            }
                         });
-                    }
-                }
-                updateMasterCheckbox();
-            });
-        });
 
-        function additionalData() {
-            var data = {
-                SearchPostName: $('#@Html.FieldIdFor(model => model.SearchPostName)').val(),
-                SearchCategoryId: $('#SearchCategoryId').val(),
-                SearchIncludeSubCategories: $('#@Html.FieldIdFor(model => model.SearchIncludeSubCategories)').is(':checked'),
-                SearchManufacturerId: $('#SearchManufacturerId').val(),
-                SearchStoreId: $('#SearchStoreId').val(),
-                SearchWarehouseId: $('#SearchWarehouseId').val(),
-                SearchVendorId: $('#SearchVendorId').val(),
-                SearchPostTypeId: $('#SearchPostTypeId').val(),
-                SearchPublishedId: $('#SearchPublishedId').val()
-            };
-            addAntiForgeryToken(data);
-            return data;
-        }
+                        //delete selected
+                        $("#delete-selected").click(function(e) {
 
-        function onDataBound(e) {
-            $('#posts-grid input[type=checkbox][id!=mastercheckbox]').each(function () {
-                var currentId = $(this).val();
-                var checked = jQuery.inArray(currentId, selectedIds);
-                //set checked based on if current checkbox's value is in selectedIds.  
-                $(this).attr('checked', checked > -1);
-            });
+                            e.preventDefault();
 
-            updateMasterCheckbox();
-        }
+                            var postData = {
+                                selectedIds: selectedIds
+                            };
+                            addAntiForgeryToken(postData);
 
-        function updateMasterCheckbox() {
-            var numChkBoxes = $('#posts-grid input[type=checkbox][id!=mastercheckbox]').length;
-            var numChkBoxesChecked = $('#posts-grid input[type=checkbox][id!=mastercheckbox]:checked').length;
-            $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
-        }
-    </script>  
+                            $.ajax({
+                                cache: false,
+                                type: "POST",
+                                url: "@(Url.Action ("DeleteSelected", "Post")
+    )",
+                                data: postData,
+                                complete: function(data) {
+                                    //reload grid
+                                    var grid = $("#posts-grid").data("kendoGrid");
+                                    grid.dataSource.read();
+                                },
+                                error: function(xhr, ajaxOptions, thrownError) {
+                                    alert(thrownError);
+                                },
+                                traditional: true
+                            });
+                            return false;
+                        });
+
+                        $("#mastercheckbox").click(function() {
+                            $(".checkboxGroups").attr("checked", $(this).is(":checked")).change();
+                        });
+
+                        //wire up checkboxes. 
+                        $("#posts-grid").on("change", "input[type=checkbox][id!=mastercheckbox]", function(e) {
+                            var $check = $(this);
+                            if ($check.is(":checked") == true) {
+                                var checked = jQuery.inArray($check.val(), selectedIds);
+                                if (checked == -1) {
+                                    //add id to selectedIds.  
+                                    selectedIds.push($check.val());
+                                }
+                            } else {
+                                var checked = jQuery.inArray($check.val(), selectedIds);
+                                if (checked > -1) {
+                                    //remove id from selectedIds.  
+                                    selectedIds = $.grep(selectedIds, function(item, index) {
+                                        return item != $check.val();
+                                    });
+                                }
+                            }
+                            updateMasterCheckbox();
+                        });
+                    });
+
+function additionalData() {
+
+v;
+r;
+ata = {
+SearchPostName: $("#@Html.FieldIdFor (
+private model
+=>
+private model.SearchPostName
+)").val(),
+SearchCategoryId: $("#SearchCategoryId").v a
+l();,
+
+
+SearchIncludeSubCat;
+egories: $("#@Html.FieldIdFor (
+private model
+=>
+private model.SearchIncludeSubCategories
+)").is(":checked"),
+SearchManufacturerId:;
+$("#SearchManufacturerId").val(),
+SearchStoreId:;
+$("#SearchStoreId").val(),
+SearchWarehouseId:;
+$("#SearchWarehouseId").val(),
+SearchVendorId:;
+$("#SearchVendorId").val(),
+SearchPostTypeId:;
+$("#SearchPostTypeId").val(),
+SearchPublishedId:;
+$("#SearchPublishedId").val();
+};
+
+addAntiForgeryToken(data);
+return data;
+}
+
+function onDataBound(e) {
+$("#posts-grid input[type=checkbox][id!=mastercheckbox]").each(function() {
+var currentId = $(this).val();
+var checked = jQuery.inArray(currentId, selectedIds);
+//set checked based on if current checkbox's value is in selectedIds.
+$(this).attr("checked", checked > -1);
+});
+
+updateMasterCheckx();
+}
+
+function updateMasterCheckbox() {
+var numChkBoxes = $("#posts-grid input[type=checkbox][id!=mastercheckbox]").length;
+var numChkBoxesChecked = $("#posts-grid input[type=checkbox][id!=mastercheckbox]:checked").length;
+$("#mastercheckbox").attr("checked", numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+}
+</script>
 }

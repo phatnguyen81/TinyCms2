@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using TinyCms.Admin.Models.Logging;
 using TinyCms.Core;
+using TinyCms.Core.Domain.Logging;
 using TinyCms.Services.Helpers;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Logging;
@@ -11,27 +12,26 @@ using TinyCms.Services.Security;
 using TinyCms.Web.Framework;
 using TinyCms.Web.Framework.Controllers;
 using TinyCms.Web.Framework.Kendoui;
-using TinyCms.Core.Domain.Logging;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class LogController : BaseAdminController
+    public class LogController : BaseAdminController
     {
-        private readonly ILogger _logger;
-        private readonly IWorkContext _workContext;
-        private readonly ILocalizationService _localizationService;
         private readonly IDateTimeHelper _dateTimeHelper;
+        private readonly ILocalizationService _localizationService;
+        private readonly ILogger _logger;
         private readonly IPermissionService _permissionService;
+        private readonly IWorkContext _workContext;
 
         public LogController(ILogger logger, IWorkContext workContext,
             ILocalizationService localizationService, IDateTimeHelper dateTimeHelper,
             IPermissionService permissionService)
         {
-            this._logger = logger;
-            this._workContext = workContext;
-            this._localizationService = localizationService;
-            this._dateTimeHelper = dateTimeHelper;
-            this._permissionService = permissionService;
+            _logger = logger;
+            _workContext = workContext;
+            _localizationService = localizationService;
+            _dateTimeHelper = dateTimeHelper;
+            _permissionService = permissionService;
         }
 
         public ActionResult Index()
@@ -46,7 +46,8 @@ namespace TinyCms.Admin.Controllers
 
             var model = new LogListModel();
             model.AvailableLogLevels = LogLevel.Debug.ToSelectList(false).ToList();
-            model.AvailableLogLevels.Insert(0, new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
+            model.AvailableLogLevels.Insert(0,
+                new SelectListItem {Text = _localizationService.GetResource("Admin.Common.All"), Value = "0"});
 
             return View(model);
         }
@@ -54,17 +55,21 @@ namespace TinyCms.Admin.Controllers
         [HttpPost]
         public ActionResult LogList(DataSourceRequest command, LogListModel model)
         {
-
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageSystemLog))
                 return AccessDeniedView();
 
-            DateTime? createdOnFromValue = (model.CreatedOnFrom == null) ? null
-                            : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.CreatedOnFrom.Value, _dateTimeHelper.CurrentTimeZone);
+            var createdOnFromValue = (model.CreatedOnFrom == null)
+                ? null
+                : (DateTime?)
+                    _dateTimeHelper.ConvertToUtcTime(model.CreatedOnFrom.Value, _dateTimeHelper.CurrentTimeZone);
 
-            DateTime? createdToFromValue = (model.CreatedOnTo == null) ? null
-                            : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.CreatedOnTo.Value, _dateTimeHelper.CurrentTimeZone).AddDays(1);
+            var createdToFromValue = (model.CreatedOnTo == null)
+                ? null
+                : (DateTime?)
+                    _dateTimeHelper.ConvertToUtcTime(model.CreatedOnTo.Value, _dateTimeHelper.CurrentTimeZone)
+                        .AddDays(1);
 
-            LogLevel? logLevel = model.LogLevelId > 0 ? (LogLevel?)(model.LogLevelId) : null;
+            var logLevel = model.LogLevelId > 0 ? (LogLevel?) (model.LogLevelId) : null;
 
 
             var logItems = _logger.GetAllLogs(createdOnFromValue, createdToFromValue, model.Message,
@@ -167,7 +172,7 @@ namespace TinyCms.Admin.Controllers
                     _logger.DeleteLog(logItem);
             }
 
-            return Json(new { Result = true});
+            return Json(new {Result = true});
         }
     }
 }

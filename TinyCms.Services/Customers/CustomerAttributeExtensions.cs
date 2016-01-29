@@ -1,16 +1,15 @@
-
 using TinyCms.Core.Domain.Catalog;
 using TinyCms.Core.Domain.Customers;
 
 namespace TinyCms.Services.Customers
 {
     /// <summary>
-    /// Extensions
+    ///     Extensions
     /// </summary>
     public static class CustomerAttributeExtensions
     {
         /// <summary>
-        /// A value indicating whether this customer attribute should have values
+        ///     A value indicating whether this customer attribute should have values
         /// </summary>
         /// <param name="customerAttribute">Customer attribute</param>
         /// <returns>Result</returns>

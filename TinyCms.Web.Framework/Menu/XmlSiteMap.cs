@@ -24,28 +24,28 @@ namespace TinyCms.Web.Framework.Menu
         public virtual void LoadFrom(string physicalPath)
         {
             var webHelper = EngineContext.Current.Resolve<IWebHelper>();
-            string filePath = webHelper.MapPath(physicalPath);
-            string content = File.ReadAllText(filePath);
+            var filePath = webHelper.MapPath(physicalPath);
+            var content = File.ReadAllText(filePath);
 
             if (!string.IsNullOrEmpty(content))
             {
                 using (var sr = new StringReader(content))
                 {
                     using (var xr = XmlReader.Create(sr,
-                            new XmlReaderSettings
-                            {
-                                CloseInput = true,
-                                IgnoreWhitespace = true,
-                                IgnoreComments = true,
-                                IgnoreProcessingInstructions = true
-                            }))
+                        new XmlReaderSettings
+                        {
+                            CloseInput = true,
+                            IgnoreWhitespace = true,
+                            IgnoreComments = true,
+                            IgnoreProcessingInstructions = true
+                        }))
                     {
                         var doc = new XmlDocument();
                         doc.Load(xr);
 
                         if ((doc.DocumentElement != null) && doc.HasChildNodes)
                         {
-                            XmlNode xmlRootNode = doc.DocumentElement.FirstChild;
+                            var xmlRootNode = doc.DocumentElement.FirstChild;
                             Iterate(RootNode, xmlRootNode);
                         }
                     }
@@ -80,16 +80,16 @@ namespace TinyCms.Web.Framework.Menu
             siteMapNode.Title = localizationService.GetResource(nopResource);
 
             //routes, url
-            string controllerName = GetStringValueFromAttribute(xmlNode, "controller");
-            string actionName = GetStringValueFromAttribute(xmlNode, "action");
-            string url = GetStringValueFromAttribute(xmlNode,  "url");
+            var controllerName = GetStringValueFromAttribute(xmlNode, "controller");
+            var actionName = GetStringValueFromAttribute(xmlNode, "action");
+            var url = GetStringValueFromAttribute(xmlNode, "url");
             if (!string.IsNullOrEmpty(controllerName) && !string.IsNullOrEmpty(actionName))
             {
                 siteMapNode.ControllerName = controllerName;
                 siteMapNode.ActionName = actionName;
 
                 //apply admin area as described here - http://www.nopcommerce.com/boards/t/20478/broken-menus-in-admin-area-whilst-trying-to-make-a-plugin-admin-page.aspx
-                siteMapNode.RouteValues = new RouteValueDictionary { {"area", "Admin"} };
+                siteMapNode.RouteValues = new RouteValueDictionary {{"area", "Admin"}};
             }
             else if (!string.IsNullOrEmpty(url))
             {
@@ -104,8 +104,8 @@ namespace TinyCms.Web.Framework.Menu
             if (!string.IsNullOrEmpty(permissionNames))
             {
                 var permissionService = EngineContext.Current.Resolve<IPermissionService>();
-                siteMapNode.Visible = permissionNames.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                   .Any(permissionName => permissionService.Authorize(permissionName.Trim()));
+                siteMapNode.Visible = permissionNames.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                    .Any(permissionName => permissionService.Authorize(permissionName.Trim()));
             }
             else
             {
@@ -119,7 +119,7 @@ namespace TinyCms.Web.Framework.Menu
 
             if (node.Attributes != null && node.Attributes.Count > 0)
             {
-                XmlAttribute attribute = node.Attributes[attributeName];
+                var attribute = node.Attributes[attributeName];
 
                 if (attribute != null)
                 {

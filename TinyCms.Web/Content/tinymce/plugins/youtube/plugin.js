@@ -19,9 +19,9 @@
  #
  # -- END LICENSE BLOCK -----------------------------------
  */
-(function (tiny) {
+(function(tiny) {
     tiny.PluginManager.requireLangPack("youtube");
-    tiny.PluginManager.add("youtube", function (editor, url) {
+    tiny.PluginManager.add("youtube", function(editor, url) {
         function showDialog() {
             editor.windowManager.open({
                 title: tinymce.util.I18n.translate("YouTube Title"),
@@ -38,11 +38,11 @@
         editor.addButton("youtube", {
             icon: true,
             image: url + "/img/youtube.gif",
-            tooltip:  tinymce.util.I18n.translate("YouTube Tooltip"),
+            tooltip: tinymce.util.I18n.translate("YouTube Tooltip"),
             onclick: showDialog,
-            onPostRender: function () {
+            onPostRender: function() {
                 var self = this;
-                editor.on("NodeChange", function (e) {
+                editor.on("NodeChange", function(e) {
                     self.active(e.element.nodeName === "IMG");
                 });
             }

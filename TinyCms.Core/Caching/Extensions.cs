@@ -3,12 +3,12 @@ using System;
 namespace TinyCms.Core.Caching
 {
     /// <summary>
-    /// Extensions
+    ///     Extensions
     /// </summary>
     public static class CacheExtensions
     {
         /// <summary>
-        /// Get a cached item. If it's not in the cache yet, then load and cache it
+        ///     Get a cached item. If it's not in the cache yet, then load and cache it
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="cacheManager">Cache manager</param>
@@ -21,7 +21,7 @@ namespace TinyCms.Core.Caching
         }
 
         /// <summary>
-        /// Get a cached item. If it's not in the cache yet, then load and cache it
+        ///     Get a cached item. If it's not in the cache yet, then load and cache it
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="cacheManager">Cache manager</param>

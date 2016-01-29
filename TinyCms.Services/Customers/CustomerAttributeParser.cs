@@ -8,9 +8,9 @@ using TinyCms.Services.Localization;
 namespace TinyCms.Services.Customers
 {
     /// <summary>
-    /// Customer attribute parser
+    ///     Customer attribute parser
     /// </summary>
-    public partial class CustomerAttributeParser : ICustomerAttributeParser
+    public class CustomerAttributeParser : ICustomerAttributeParser
     {
         private readonly ICustomerAttributeService _customerAttributeService;
         private readonly ILocalizationService _localizationService;
@@ -18,48 +18,12 @@ namespace TinyCms.Services.Customers
         public CustomerAttributeParser(ICustomerAttributeService customerAttributeService,
             ILocalizationService localizationService)
         {
-            this._customerAttributeService = customerAttributeService;
-            this._localizationService = localizationService;
+            _customerAttributeService = customerAttributeService;
+            _localizationService = localizationService;
         }
 
         /// <summary>
-        /// Gets selected customer attribute identifiers
-        /// </summary>
-        /// <param name="attributesXml">Attributes in XML format</param>
-        /// <returns>Selected customer attribute identifiers</returns>
-        protected virtual IList<int> ParseCustomerAttributeIds(string attributesXml)
-        {
-            var ids = new List<int>();
-            if (String.IsNullOrEmpty(attributesXml))
-                return ids;
-
-            try
-            {
-                var xmlDoc = new XmlDocument();
-                xmlDoc.LoadXml(attributesXml);
-
-                foreach (XmlNode node in xmlDoc.SelectNodes(@"//Attributes/CustomerAttribute"))
-                {
-                    if (node.Attributes != null && node.Attributes["ID"] != null)
-                    {
-                        string str1 = node.Attributes["ID"].InnerText.Trim();
-                        int id;
-                        if (int.TryParse(str1, out id))
-                        {
-                            ids.Add(id);
-                        }
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                Debug.Write(exc.ToString());
-            }
-            return ids;
-        }
-
-        /// <summary>
-        /// Gets selected customer attributes
+        ///     Gets selected customer attributes
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <returns>Selected customer attributes</returns>
@@ -67,7 +31,7 @@ namespace TinyCms.Services.Customers
         {
             var result = new List<CustomerAttribute>();
             var ids = ParseCustomerAttributeIds(attributesXml);
-            foreach (int id in ids)
+            foreach (var id in ids)
             {
                 var attribute = _customerAttributeService.GetCustomerAttributeById(id);
                 if (attribute != null)
@@ -79,7 +43,7 @@ namespace TinyCms.Services.Customers
         }
 
         /// <summary>
-        /// Get customer attribute values
+        ///     Get customer attribute values
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <returns>Customer attribute values</returns>
@@ -93,7 +57,7 @@ namespace TinyCms.Services.Customers
                     continue;
 
                 var valuesStr = ParseValues(attributesXml, attribute.Id);
-                foreach (string valueStr in valuesStr)
+                foreach (var valueStr in valuesStr)
                 {
                     if (!String.IsNullOrEmpty(valueStr))
                     {
@@ -111,7 +75,7 @@ namespace TinyCms.Services.Customers
         }
 
         /// <summary>
-        /// Gets selected customer attribute value
+        ///     Gets selected customer attribute value
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <param name="customerAttributeId">Customer attribute identifier</param>
@@ -129,7 +93,7 @@ namespace TinyCms.Services.Customers
                 {
                     if (node1.Attributes != null && node1.Attributes["ID"] != null)
                     {
-                        string str1 = node1.Attributes["ID"].InnerText.Trim();
+                        var str1 = node1.Attributes["ID"].InnerText.Trim();
                         int id;
                         if (int.TryParse(str1, out id))
                         {
@@ -138,7 +102,7 @@ namespace TinyCms.Services.Customers
                                 var nodeList2 = node1.SelectNodes(@"CustomerAttributeValue/Value");
                                 foreach (XmlNode node2 in nodeList2)
                                 {
-                                    string value = node2.InnerText.Trim();
+                                    var value = node2.InnerText.Trim();
                                     selectedCustomerAttributeValues.Add(value);
                                 }
                             }
@@ -154,7 +118,7 @@ namespace TinyCms.Services.Customers
         }
 
         /// <summary>
-        /// Adds an attribute
+        ///     Adds an attribute
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <param name="ca">Customer attribute</param>
@@ -162,7 +126,7 @@ namespace TinyCms.Services.Customers
         /// <returns>Attributes</returns>
         public virtual string AddCustomerAttribute(string attributesXml, CustomerAttribute ca, string value)
         {
-            string result = string.Empty;
+            var result = string.Empty;
             try
             {
                 var xmlDoc = new XmlDocument();
@@ -175,7 +139,7 @@ namespace TinyCms.Services.Customers
                 {
                     xmlDoc.LoadXml(attributesXml);
                 }
-                var rootElement = (XmlElement)xmlDoc.SelectSingleNode(@"//Attributes");
+                var rootElement = (XmlElement) xmlDoc.SelectSingleNode(@"//Attributes");
 
                 XmlElement attributeElement = null;
                 //find existing
@@ -184,13 +148,13 @@ namespace TinyCms.Services.Customers
                 {
                     if (node1.Attributes != null && node1.Attributes["ID"] != null)
                     {
-                        string str1 = node1.Attributes["ID"].InnerText.Trim();
+                        var str1 = node1.Attributes["ID"].InnerText.Trim();
                         int id;
                         if (int.TryParse(str1, out id))
                         {
                             if (id == ca.Id)
                             {
-                                attributeElement = (XmlElement)node1;
+                                attributeElement = (XmlElement) node1;
                                 break;
                             }
                         }
@@ -222,7 +186,7 @@ namespace TinyCms.Services.Customers
         }
 
         /// <summary>
-        /// Validates customer attributes
+        ///     Validates customer attributes
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <returns>Warnings</returns>
@@ -239,14 +203,14 @@ namespace TinyCms.Services.Customers
             {
                 if (a2.IsRequired)
                 {
-                    bool found = false;
+                    var found = false;
                     //selected customer attributes
                     foreach (var a1 in attributes1)
                     {
                         if (a1.Id == a2.Id)
                         {
                             var valuesStr = ParseValues(attributesXml, a1.Id);
-                            foreach (string str1 in valuesStr)
+                            foreach (var str1 in valuesStr)
                             {
                                 if (!String.IsNullOrEmpty(str1.Trim()))
                                 {
@@ -260,7 +224,9 @@ namespace TinyCms.Services.Customers
                     //if not found
                     if (!found)
                     {
-                        var notFoundWarning = string.Format(_localizationService.GetResource("ShoppingCart.SelectAttribute"), a2.GetLocalized(a => a.Name));
+                        var notFoundWarning =
+                            string.Format(_localizationService.GetResource("ShoppingCart.SelectAttribute"),
+                                a2.GetLocalized(a => a.Name));
 
                         warnings.Add(notFoundWarning);
                     }
@@ -270,5 +236,40 @@ namespace TinyCms.Services.Customers
             return warnings;
         }
 
+        /// <summary>
+        ///     Gets selected customer attribute identifiers
+        /// </summary>
+        /// <param name="attributesXml">Attributes in XML format</param>
+        /// <returns>Selected customer attribute identifiers</returns>
+        protected virtual IList<int> ParseCustomerAttributeIds(string attributesXml)
+        {
+            var ids = new List<int>();
+            if (String.IsNullOrEmpty(attributesXml))
+                return ids;
+
+            try
+            {
+                var xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(attributesXml);
+
+                foreach (XmlNode node in xmlDoc.SelectNodes(@"//Attributes/CustomerAttribute"))
+                {
+                    if (node.Attributes != null && node.Attributes["ID"] != null)
+                    {
+                        var str1 = node.Attributes["ID"].InnerText.Trim();
+                        int id;
+                        if (int.TryParse(str1, out id))
+                        {
+                            ids.Add(id);
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Debug.Write(exc.ToString());
+            }
+            return ids;
+        }
     }
 }

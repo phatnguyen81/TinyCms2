@@ -7,12 +7,12 @@ using System.Xml;
 namespace TinyCms.Core.Plugins
 {
     /// <summary>
-    /// Official feed manager (official plugins from www.nopCommerce.com site)
+    ///     Official feed manager (official plugins from www.nopCommerce.com site)
     /// </summary>
-    public partial class OfficialFeedManager : IOfficialFeedManager
+    public class OfficialFeedManager : IOfficialFeedManager
     {
         /// <summary>
-        /// Get categories
+        ///     Get categories
         /// </summary>
         /// <returns>Result</returns>
         public virtual IList<OfficialFeedCategory> GetCategories()
@@ -28,7 +28,7 @@ namespace TinyCms.Core.Plugins
             {
                 var dataStream = response.GetResponseStream();
                 var reader = new StreamReader(dataStream);
-                string responseFromServer = reader.ReadToEnd();
+                var responseFromServer = reader.ReadToEnd();
 
                 var xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(responseFromServer);
@@ -42,7 +42,7 @@ namespace TinyCms.Core.Plugins
                     {
                         Id = int.Parse(id),
                         ParentCategoryId = int.Parse(parentCategoryId),
-                        Name = name,
+                        Name = name
                     });
                 }
             }
@@ -50,7 +50,7 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Get versions
+        ///     Get versions
         /// </summary>
         /// <returns>Result</returns>
         public virtual IList<OfficialFeedVersion> GetVersions()
@@ -66,7 +66,7 @@ namespace TinyCms.Core.Plugins
             {
                 var dataStream = response.GetResponseStream();
                 var reader = new StreamReader(dataStream);
-                string responseFromServer = reader.ReadToEnd();
+                var responseFromServer = reader.ReadToEnd();
 
                 var xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(responseFromServer);
@@ -78,7 +78,7 @@ namespace TinyCms.Core.Plugins
                     result.Add(new OfficialFeedVersion
                     {
                         Id = int.Parse(id),
-                        Name = name,
+                        Name = name
                     });
                 }
             }
@@ -86,7 +86,7 @@ namespace TinyCms.Core.Plugins
         }
 
         /// <summary>
-        /// Get all plugins
+        ///     Get all plugins
         /// </summary>
         /// <param name="categoryId">Category identifier</param>
         /// <param name="versionId">Version identifier</param>
@@ -100,22 +100,23 @@ namespace TinyCms.Core.Plugins
             string searchTerm = "",
             int pageIndex = 0, int pageSize = int.MaxValue)
         {
-
             var list = new List<OfficialFeedPlugin>();
 
             //pageSize parameter is currently ignored by official site (set to 15)
-            var feedUrl = string.Format("http://www.nopcommerce.com/extensionsxml.aspx?category={0}&version={1}&price={2}&pageIndex={3}&pageSize={4}&searchTerm={5}",
-                categoryId, versionId, price, pageIndex, pageSize, HttpUtility.UrlEncode(searchTerm));
+            var feedUrl =
+                string.Format(
+                    "http://www.nopcommerce.com/extensionsxml.aspx?category={0}&version={1}&price={2}&pageIndex={3}&pageSize={4}&searchTerm={5}",
+                    categoryId, versionId, price, pageIndex, pageSize, HttpUtility.UrlEncode(searchTerm));
 
             //specify timeout (5 secs)
             var request = WebRequest.Create(feedUrl);
             request.Timeout = 5000;
-            int totalRecords = 0;
+            var totalRecords = 0;
             using (var response = request.GetResponse())
             {
                 var dataStream = response.GetResponseStream();
                 var reader = new StreamReader(dataStream);
-                string responseFromServer = reader.ReadToEnd();
+                var responseFromServer = reader.ReadToEnd();
 
                 var xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(responseFromServer);
@@ -134,15 +135,15 @@ namespace TinyCms.Core.Plugins
                         Url = url,
                         PictureUrl = pictureUrl,
                         Category = category,
-                        SupportedVersions= versions,
-                        Price = priceValue,
+                        SupportedVersions = versions,
+                        Price = priceValue
                     });
                 }
 
                 //total records
                 foreach (XmlNode node in xmlDoc.SelectNodes(@"//totalRecords"))
                 {
-                   totalRecords = int.Parse(node.SelectNodes(@"value")[0].InnerText);
+                    totalRecords = int.Parse(node.SelectNodes(@"value")[0].InnerText);
                 }
             }
 

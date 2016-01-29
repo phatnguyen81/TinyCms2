@@ -3,7 +3,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Web.Models.Posts
 {
-    public partial class TopMenuModel : BaseNopModel
+    public class TopMenuModel : BaseNopModel
     {
         public TopMenuModel()
         {
@@ -13,7 +13,6 @@ namespace TinyCms.Web.Models.Posts
 
         public IList<CategorySimpleModel> Categories { get; set; }
         public IList<TopMenuTopicModel> Topics { get; set; }
-
 
         #region Nested classes
 

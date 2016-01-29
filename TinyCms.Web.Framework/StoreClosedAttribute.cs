@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using TinyCms.Core;
 using TinyCms.Core.Data;
 using TinyCms.Core.Domain;
 using TinyCms.Core.Infrastructure;
@@ -11,19 +8,19 @@ using TinyCms.Services.Security;
 namespace TinyCms.Web.Framework
 {
     /// <summary>
-    /// Store closed attribute
+    ///     Store closed attribute
     /// </summary>
     public class StoreClosedAttribute : ActionFilterAttribute
     {
         private readonly bool _ignore;
 
         /// <summary>
-        /// Contructor
+        ///     Contructor
         /// </summary>
         /// <param name="ignore">Pass false in order to ignore this functionality for a certain action method</param>
         public StoreClosedAttribute(bool ignore = false)
         {
-            this._ignore = ignore;
+            _ignore = ignore;
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -36,15 +33,15 @@ namespace TinyCms.Web.Framework
             if (_ignore)
                 return;
 
-            HttpRequestBase request = filterContext.HttpContext.Request;
+            var request = filterContext.HttpContext.Request;
             if (request == null)
                 return;
 
-            string actionName = filterContext.ActionDescriptor.ActionName;
+            var actionName = filterContext.ActionDescriptor.ActionName;
             if (String.IsNullOrEmpty(actionName))
                 return;
 
-            string controllerName = filterContext.Controller.ToString();
+            var controllerName = filterContext.Controller.ToString();
             if (String.IsNullOrEmpty(controllerName))
                 return;
 
@@ -59,7 +56,7 @@ namespace TinyCms.Web.Framework
             if (!storeInformationSettings.StoreClosed)
                 return;
 
-        
+
             //access to a closed store?
             var permissionService = EngineContext.Current.Resolve<IPermissionService>();
             if (permissionService.Authorize(StandardPermissionProvider.AccessClosedStore))

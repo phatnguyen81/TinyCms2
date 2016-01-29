@@ -10,7 +10,7 @@
 }
 @Html.AntiForgeryToken()
 <div class="section-title">
-    <img src="@Url.Content("~/Administration/Content/images/ico-dashboard.png")" alt="" />
+    <img src="@Url.Content("~/Administration/Content/images/ico-dashboard.png")" alt=""/>
     @T("Admin.Dashboard")
 </div>
 <table class="dashboard">
@@ -18,7 +18,7 @@
         <td class="maincol">
             <div class="section-header">
                 <div class="title">
-                    <img src="@Url.Content("~/Administration/Content/images/ico-stat1.gif")" alt="" />
+                    <img src="@Url.Content("~/Administration/Content/images/ico-stat1.gif")" alt=""/>
                     @T("Admin.Dashboard.StoreStatistics")
                 </div>
             </div>
@@ -26,26 +26,26 @@
             {
                 <table class="stats">
                     <tbody>
-                        <tr>
-                            @if (canManageCustomers)
-                            {
-                                <td class="customerstatistics">
-                                    <div class="statisticsTitle">
-                                        @T("Admin.Customers.Reports.RegisteredCustomers")
-                                    </div>
-                                    @Html.Action("ReportRegisteredCustomers", "Customer")
-                                </td>
-                            }
-                            @if (canManagePosts)
-                            {
-                                <td class="search-term-statistics">
-                                    <div class="statisticsTitle">
-                                        @T("Admin.SearchTermReport")
-                                    </div>
-                                    @Html.Action("PopularSearchTermsReport", "Common")
-                                </td>
-                            }
-                        </tr>
+                    <tr>
+                        @if (canManageCustomers)
+                        {
+                            <td class="customerstatistics">
+                                <div class="statisticsTitle">
+                                    @T("Admin.Customers.Reports.RegisteredCustomers")
+                                </div>
+                                @Html.Action("ReportRegisteredCustomers", "Customer")
+                            </td>
+                        }
+                        @if (canManagePosts)
+                        {
+                            <td class="search-term-statistics">
+                                <div class="statisticsTitle">
+                                    @T("Admin.SearchTermReport")
+                                </div>
+                                @Html.Action("PopularSearchTermsReport", "Common")
+                            </td>
+                        }
+                    </tr>
                     </tbody>
                 </table>
             }

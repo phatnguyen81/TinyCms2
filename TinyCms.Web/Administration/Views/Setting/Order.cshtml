@@ -8,11 +8,11 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Settings.Order")
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
         </div>
     </div>
     @Html.Action("StoreScopeConfiguration", "Setting")
@@ -21,7 +21,7 @@
     <script>
         $(document).ready(function() {
             $("#ordersettings-edit").kendoTabStrip({
-                animation:  {
+                animation: {
                     open: {
                         effects: "fadeIn"
                     }
@@ -49,23 +49,22 @@
 
     {
         //custom tabs
-        var eventMessage = new AdminTabStripCreated(this.Html, "ordersettings-edit");
+        var eventMessage = new AdminTabStripCreated(Html, "ordersettings-edit");
         EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
         foreach (var eventBlock in eventMessage.BlocksToRender)
         {
             @eventBlock
         }
     }
-     
+
 
      @*save selected tab index*@
-	<input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
+    <input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
 }
 @helper TabOrderSettings()
 {
-    
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $("#@Html.FieldIdFor(model => model.OnePageCheckoutEnabled)").click(toggleOnePageCheckoutEnabled);
 
@@ -73,14 +72,13 @@
         });
 
         function toggleOnePageCheckoutEnabled() {
-            if ($('#@Html.FieldIdFor(model => model.OnePageCheckoutEnabled)').is(':checked')) {
-                $('#pnlOnePageCheckoutDisplayOrderTotalsOnPaymentInfoTab').show();
-            }
-            else {
-                $('#pnlOnePageCheckoutDisplayOrderTotalsOnPaymentInfoTab').hide();
+            if ($("#@Html.FieldIdFor(model => model.OnePageCheckoutEnabled)").is(":checked")) {
+                $("#pnlOnePageCheckoutDisplayOrderTotalsOnPaymentInfoTab").show();
+            } else {
+                $("#pnlOnePageCheckoutDisplayOrderTotalsOnPaymentInfoTab").hide();
             }
         }
-        
+
     </script>
     <table class="adminContent">
         <tr>

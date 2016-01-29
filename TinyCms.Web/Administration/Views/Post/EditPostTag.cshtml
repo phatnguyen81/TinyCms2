@@ -11,11 +11,11 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt=""/>
             @T("Admin.Catalog.PostTags.EditTagDetails")- @Model.Name
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
         </div>
     </div>
     @Html.Partial("_CreateOrUpdatePostTag", Model)

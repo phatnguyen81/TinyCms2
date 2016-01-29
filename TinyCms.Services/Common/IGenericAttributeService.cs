@@ -5,45 +5,45 @@ using TinyCms.Core.Domain.Common;
 namespace TinyCms.Services.Common
 {
     /// <summary>
-    /// Generic attribute service interface
+    ///     Generic attribute service interface
     /// </summary>
-    public partial interface IGenericAttributeService
+    public interface IGenericAttributeService
     {
         /// <summary>
-        /// Deletes an attribute
+        ///     Deletes an attribute
         /// </summary>
         /// <param name="attribute">Attribute</param>
         void DeleteAttribute(GenericAttribute attribute);
 
         /// <summary>
-        /// Gets an attribute
+        ///     Gets an attribute
         /// </summary>
         /// <param name="attributeId">Attribute identifier</param>
         /// <returns>An attribute</returns>
         GenericAttribute GetAttributeById(int attributeId);
 
         /// <summary>
-        /// Inserts an attribute
+        ///     Inserts an attribute
         /// </summary>
         /// <param name="attribute">attribute</param>
         void InsertAttribute(GenericAttribute attribute);
 
         /// <summary>
-        /// Updates the attribute
+        ///     Updates the attribute
         /// </summary>
         /// <param name="attribute">Attribute</param>
         void UpdateAttribute(GenericAttribute attribute);
 
         /// <summary>
-        /// Get attributes
+        ///     Get attributes
         /// </summary>
         /// <param name="entityId">Entity identifier</param>
         /// <param name="keyGroup">Key group</param>
         /// <returns>Get attributes</returns>
         IList<GenericAttribute> GetAttributesForEntity(int entityId, string keyGroup);
-        
+
         /// <summary>
-        /// Save attribute value
+        ///     Save attribute value
         /// </summary>
         /// <typeparam name="TPropType">Property type</typeparam>
         /// <param name="entity">Entity</param>

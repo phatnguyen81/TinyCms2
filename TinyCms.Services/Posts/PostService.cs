@@ -20,50 +20,14 @@ using TinyCms.Services.Security;
 namespace TinyCms.Services.Posts
 {
     /// <summary>
-    /// Post service
+    ///     Post service
     /// </summary>
-    public partial class PostService : IPostService
+    public class PostService : IPostService
     {
-        #region Constants
-        /// <summary>
-        /// Key for caching
-        /// </summary>
-        /// <remarks>
-        /// {0} : post ID
-        /// </remarks>
-        private const string PRODUCTS_BY_ID_KEY = "Nop.post.id-{0}";
-        /// <summary>
-        /// Key pattern to clear cache
-        /// </summary>
-        private const string PRODUCTS_PATTERN_KEY = "Nop.post.";
-        #endregion
-
-        #region Fields
-
-        private readonly IRepository<Post> _postRepository;
-        private readonly IRepository<LocalizedProperty> _localizedPropertyRepository;
-        private readonly IRepository<AclRecord> _aclRepository;
-        private readonly IRepository<PostPicture> _postPictureRepository;
-        private readonly ILanguageService _languageService;
-        private readonly IWorkflowMessageService _workflowMessageService;
-        private readonly IDataProvider _dataProvider;
-        private readonly IDbContext _dbContext;
-        private readonly ICacheManager _cacheManager;
-        private readonly IWorkContext _workContext;
-        private readonly LocalizationSettings _localizationSettings;
-        private readonly CommonSettings _commonSettings;
-        private readonly CatalogSettings _catalogSettings;
-        private readonly IEventPublisher _eventPublisher;
-        private readonly IAclService _aclService;
-        private readonly IRepository<Category> _categoryRepository;
-        private readonly IRepository<CategoryType> _categoryTypeRepository;
-        private readonly IRepository<RelatedPost> _relatedPostRepository;
-        #endregion
-
         #region Ctor
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="cacheManager">Cache manager</param>
         /// <param name="postRepository">Post repository</param>
@@ -97,45 +61,85 @@ namespace TinyCms.Services.Posts
             IRepository<AclRecord> aclRepository,
             ILanguageService languageService,
             IWorkflowMessageService workflowMessageService,
-            IDataProvider dataProvider, 
+            IDataProvider dataProvider,
             IDbContext dbContext,
             IWorkContext workContext,
-            LocalizationSettings localizationSettings, 
+            LocalizationSettings localizationSettings,
             CommonSettings commonSettings,
             CatalogSettings catalogSettings,
             IEventPublisher eventPublisher,
-            IAclService aclService, IRepository<Category> categoryRepository, 
+            IAclService aclService, IRepository<Category> categoryRepository,
             IRepository<CategoryType> categoryTypeRepository,
             IRepository<RelatedPost> relatedPostRepository)
         {
-            this._cacheManager = cacheManager;
-            this._postRepository = postRepository;
-            this._postPictureRepository = postPictureRepository;
-            this._localizedPropertyRepository = localizedPropertyRepository;
-            this._aclRepository = aclRepository;
-            this._languageService = languageService;
-            this._workflowMessageService = workflowMessageService;
-            this._dataProvider = dataProvider;
-            this._dbContext = dbContext;
-            this._workContext = workContext;
-            this._localizationSettings = localizationSettings;
-            this._commonSettings = commonSettings;
-            this._catalogSettings = catalogSettings;
-            this._eventPublisher = eventPublisher;
-            this._aclService = aclService;
+            _cacheManager = cacheManager;
+            _postRepository = postRepository;
+            _postPictureRepository = postPictureRepository;
+            _localizedPropertyRepository = localizedPropertyRepository;
+            _aclRepository = aclRepository;
+            _languageService = languageService;
+            _workflowMessageService = workflowMessageService;
+            _dataProvider = dataProvider;
+            _dbContext = dbContext;
+            _workContext = workContext;
+            _localizationSettings = localizationSettings;
+            _commonSettings = commonSettings;
+            _catalogSettings = catalogSettings;
+            _eventPublisher = eventPublisher;
+            _aclService = aclService;
             _categoryRepository = categoryRepository;
             _categoryTypeRepository = categoryTypeRepository;
             _relatedPostRepository = relatedPostRepository;
         }
 
         #endregion
-        
+
+        #region Constants
+
+        /// <summary>
+        ///     Key for caching
+        /// </summary>
+        /// <remarks>
+        ///     {0} : post ID
+        /// </remarks>
+        private const string PRODUCTS_BY_ID_KEY = "Nop.post.id-{0}";
+
+        /// <summary>
+        ///     Key pattern to clear cache
+        /// </summary>
+        private const string PRODUCTS_PATTERN_KEY = "Nop.post.";
+
+        #endregion
+
+        #region Fields
+
+        private readonly IRepository<Post> _postRepository;
+        private readonly IRepository<LocalizedProperty> _localizedPropertyRepository;
+        private readonly IRepository<AclRecord> _aclRepository;
+        private readonly IRepository<PostPicture> _postPictureRepository;
+        private readonly ILanguageService _languageService;
+        private readonly IWorkflowMessageService _workflowMessageService;
+        private readonly IDataProvider _dataProvider;
+        private readonly IDbContext _dbContext;
+        private readonly ICacheManager _cacheManager;
+        private readonly IWorkContext _workContext;
+        private readonly LocalizationSettings _localizationSettings;
+        private readonly CommonSettings _commonSettings;
+        private readonly CatalogSettings _catalogSettings;
+        private readonly IEventPublisher _eventPublisher;
+        private readonly IAclService _aclService;
+        private readonly IRepository<Category> _categoryRepository;
+        private readonly IRepository<CategoryType> _categoryTypeRepository;
+        private readonly IRepository<RelatedPost> _relatedPostRepository;
+
+        #endregion
+
         #region Methods
 
         #region Posts
 
         /// <summary>
-        /// Delete a post
+        ///     Delete a post
         /// </summary>
         /// <param name="post">Post</param>
         public virtual void DeletePost(Post post)
@@ -149,24 +153,24 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Gets all posts displayed on the home page
+        ///     Gets all posts displayed on the home page
         /// </summary>
         /// <returns>Posts</returns>
         public virtual IList<Post> GetAllPostsDisplayedOnHomePage(int top = 0)
         {
             var query = from p in _postRepository.Table
-                        orderby p.DisplayOrder, p.Name
-                        where p.Published &&
-                        !p.Deleted &&
-                        p.ShowOnHomePage
-                        select p;
+                orderby p.DisplayOrder, p.Name
+                where p.Published &&
+                      !p.Deleted &&
+                      p.ShowOnHomePage
+                select p;
             query = query.OrderByDescending(p => p.CreatedOnUtc);
             if (top > 0)
             {
                 query = query.Take(top);
             }
             var posts = query.ToList();
-            
+
             return posts;
         }
 
@@ -199,7 +203,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Gets post
+        ///     Gets post
         /// </summary>
         /// <param name="postId">Post identifier</param>
         /// <returns>Post</returns>
@@ -207,13 +211,13 @@ namespace TinyCms.Services.Posts
         {
             if (postId == 0)
                 return null;
-            
-            string key = string.Format(PRODUCTS_BY_ID_KEY, postId);
+
+            var key = string.Format(PRODUCTS_BY_ID_KEY, postId);
             return _cacheManager.Get(key, () => _postRepository.GetById(postId));
         }
 
         /// <summary>
-        /// Get posts by identifiers
+        ///     Get posts by identifiers
         /// </summary>
         /// <param name="postIds">Post identifiers</param>
         /// <returns>Posts</returns>
@@ -223,12 +227,12 @@ namespace TinyCms.Services.Posts
                 return new List<Post>();
 
             var query = from p in _postRepository.Table
-                        where postIds.Contains(p.Id)
-                        select p;
+                where postIds.Contains(p.Id)
+                select p;
             var posts = query.ToList();
             //sort by passed identifiers
             var sortedPosts = new List<Post>();
-            foreach (int id in postIds)
+            foreach (var id in postIds)
             {
                 var post = posts.Find(x => x.Id == id);
                 if (post != null)
@@ -238,7 +242,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Inserts a post
+        ///     Inserts a post
         /// </summary>
         /// <param name="post">Post</param>
         public virtual void InsertPost(Post post)
@@ -251,13 +255,13 @@ namespace TinyCms.Services.Posts
 
             //clear cache
             _cacheManager.RemoveByPattern(PRODUCTS_PATTERN_KEY);
-            
+
             //event notification
             _eventPublisher.EntityInserted(post);
         }
 
         /// <summary>
-        /// Updates the post
+        ///     Updates the post
         /// </summary>
         /// <param name="post">Post</param>
         public virtual void UpdatePost(Post post)
@@ -276,7 +280,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Get (visible) post number in certain category
+        ///     Get (visible) post number in certain category
         /// </summary>
         /// <param name="categoryIds">Category identifiers</param>
         /// <param name="storeId">Store identifier; 0 to load all records</param>
@@ -294,8 +298,8 @@ namespace TinyCms.Services.Posts
             if (categoryIds != null && categoryIds.Count > 0)
             {
                 query = from p in query
-                        from pc in p.PostCategories.Where(pc => categoryIds.Contains(pc.CategoryId))
-                        select p;
+                    from pc in p.PostCategories.Where(pc => categoryIds.Contains(pc.CategoryId))
+                    select p;
             }
 
             if (!_catalogSettings.IgnoreAcl)
@@ -304,11 +308,11 @@ namespace TinyCms.Services.Posts
                 var allowedCustomerRolesIds = _workContext.CurrentCustomer.GetCustomerRoleIds();
 
                 query = from p in query
-                        join acl in _aclRepository.Table
-                        on new { c1 = p.Id, c2 = "Post" } equals new { c1 = acl.EntityId, c2 = acl.EntityName } into p_acl
-                        from acl in p_acl.DefaultIfEmpty()
-                        where !p.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
-                        select p;
+                    join acl in _aclRepository.Table
+                        on new {c1 = p.Id, c2 = "Post"} equals new {c1 = acl.EntityId, c2 = acl.EntityName} into p_acl
+                    from acl in p_acl.DefaultIfEmpty()
+                    where !p.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
+                    select p;
             }
 
             //only distinct posts
@@ -316,13 +320,18 @@ namespace TinyCms.Services.Posts
             return result;
         }
 
-     
 
         /// <summary>
-        /// Search posts
+        ///     Search posts
         /// </summary>
-        /// <param name="filterableSpecificationAttributeOptionIds">The specification attribute option identifiers applied to loaded posts (all pages)</param>
-        /// <param name="loadFilterableSpecificationAttributeOptionIds">A value indicating whether we should load the specification attribute option identifiers applied to loaded posts (all pages)</param>
+        /// <param name="filterableSpecificationAttributeOptionIds">
+        ///     The specification attribute option identifiers applied to
+        ///     loaded posts (all pages)
+        /// </param>
+        /// <param name="loadFilterableSpecificationAttributeOptionIds">
+        ///     A value indicating whether we should load the specification
+        ///     attribute option identifiers applied to loaded posts (all pages)
+        /// </param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="categoryIds">Category identifiers</param>
@@ -331,9 +340,18 @@ namespace TinyCms.Services.Posts
         /// <param name="vendorId">Vendor identifier; 0 to load all records</param>
         /// <param name="warehouseId">Warehouse identifier; 0 to load all records</param>
         /// <param name="postType">Post type; 0 to load all records</param>
-        /// <param name="visibleIndividuallyOnly">A values indicating whether to load only posts marked as "visible individually"; "false" to load all records; "true" to load "visible individually" only</param>
-        /// <param name="markedAsNewOnly">A values indicating whether to load only posts marked as "new"; "false" to load all records; "true" to load "marked as new" only</param>
-        /// <param name="featuredPosts">A value indicating whether loaded posts are marked as featured (relates only to categories and manufacturers). 0 to load featured posts only, 1 to load not featured posts only, null to load all posts</param>
+        /// <param name="visibleIndividuallyOnly">
+        ///     A values indicating whether to load only posts marked as "visible individually";
+        ///     "false" to load all records; "true" to load "visible individually" only
+        /// </param>
+        /// <param name="markedAsNewOnly">
+        ///     A values indicating whether to load only posts marked as "new"; "false" to load all
+        ///     records; "true" to load "marked as new" only
+        /// </param>
+        /// <param name="featuredPosts">
+        ///     A value indicating whether loaded posts are marked as featured (relates only to categories
+        ///     and manufacturers). 0 to load featured posts only, 1 to load not featured posts only, null to load all posts
+        /// </param>
         /// <param name="priceMin">Minimum price; null to load all records</param>
         /// <param name="priceMax">Maximum price; null to load all records</param>
         /// <param name="postTagId">Post tag identifier; 0 to load all records</param>
@@ -346,9 +364,9 @@ namespace TinyCms.Services.Posts
         /// <param name="orderBy">Order by</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <param name="overridePublished">
-        /// null - process "Published" property according to "showHidden" parameter
-        /// true - load only "Published" posts
-        /// false - load only "Unpublished" posts
+        ///     null - process "Published" property according to "showHidden" parameter
+        ///     true - load only "Published" posts
+        ///     false - load only "Unpublished" posts
         /// </param>
         /// <returns>Posts</returns>
         public virtual IPagedList<Post> SearchPosts(
@@ -367,9 +385,8 @@ namespace TinyCms.Services.Posts
             bool showHidden = false,
             bool? overridePublished = null)
         {
-
             //search by keyword
-            bool searchLocalizedValue = false;
+            var searchLocalizedValue = false;
             if (languageId > 0)
             {
                 if (showHidden)
@@ -385,7 +402,7 @@ namespace TinyCms.Services.Posts
             }
 
             //validate "categoryIds" parameter
-            if (categoryIds !=null && categoryIds.Contains(0))
+            if (categoryIds != null && categoryIds.Contains(0))
                 categoryIds.Remove(0);
 
             //Access control list. Allowed customer roles
@@ -397,20 +414,19 @@ namespace TinyCms.Services.Posts
                 //It's much faster than the LINQ implementation below 
 
                 #region Use stored procedure
-                
+
                 //pass category identifiers as comma-delimited string
-                string commaSeparatedCategoryIds = categoryIds == null ? "" : string.Join(",", categoryIds);
+                var commaSeparatedCategoryIds = categoryIds == null ? "" : string.Join(",", categoryIds);
 
 
                 //pass customer role identifiers as comma-delimited string
-                string commaSeparatedAllowedCustomerRoleIds = string.Join(",", allowedCustomerRolesIds);
+                var commaSeparatedAllowedCustomerRoleIds = string.Join(",", allowedCustomerRolesIds);
 
 
-                
                 //some databases don't support int.MaxValue
                 if (pageSize == int.MaxValue)
                     pageSize = int.MaxValue - 1;
-                
+
                 //prepare parameters
                 var pCreatedBy = _dataProvider.GetParameter();
                 pCreatedBy.ParameterName = "CreatedBy";
@@ -419,14 +435,16 @@ namespace TinyCms.Services.Posts
 
                 var pCategoryIds = _dataProvider.GetParameter();
                 pCategoryIds.ParameterName = "CategoryIds";
-                pCategoryIds.Value = commaSeparatedCategoryIds != null ? (object)commaSeparatedCategoryIds : DBNull.Value;
+                pCategoryIds.Value = commaSeparatedCategoryIds != null
+                    ? (object) commaSeparatedCategoryIds
+                    : DBNull.Value;
                 pCategoryIds.DbType = DbType.String;
 
                 var pPostTemplateId = _dataProvider.GetParameter();
                 pPostTemplateId.ParameterName = "PostTemplateId";
                 pPostTemplateId.Value = postTemplateId;
                 pPostTemplateId.DbType = DbType.Int32;
-                
+
                 var pPostTagId = _dataProvider.GetParameter();
                 pPostTagId.ParameterName = "PostTagId";
                 pPostTagId.Value = postTagId;
@@ -434,12 +452,12 @@ namespace TinyCms.Services.Posts
 
                 var pFeaturedPosts = _dataProvider.GetParameter();
                 pFeaturedPosts.ParameterName = "FeaturedPosts";
-                pFeaturedPosts.Value = featuredPosts.HasValue ? (object)featuredPosts.Value : DBNull.Value;
+                pFeaturedPosts.Value = featuredPosts.HasValue ? (object) featuredPosts.Value : DBNull.Value;
                 pFeaturedPosts.DbType = DbType.Boolean;
 
                 var pKeywords = _dataProvider.GetParameter();
                 pKeywords.ParameterName = "Keywords";
-                pKeywords.Value = keywords != null ? (object)keywords : DBNull.Value;
+                pKeywords.Value = keywords != null ? (object) keywords : DBNull.Value;
                 pKeywords.DbType = DbType.String;
 
                 var pSearchDescriptions = _dataProvider.GetParameter();
@@ -459,7 +477,7 @@ namespace TinyCms.Services.Posts
 
                 var pFullTextMode = _dataProvider.GetParameter();
                 pFullTextMode.ParameterName = "FullTextMode";
-                pFullTextMode.Value = (int)_commonSettings.FullTextMode;
+                pFullTextMode.Value = (int) _commonSettings.FullTextMode;
                 pFullTextMode.DbType = DbType.Int32;
 
                 var pLanguageId = _dataProvider.GetParameter();
@@ -469,7 +487,7 @@ namespace TinyCms.Services.Posts
 
                 var pOrderBy = _dataProvider.GetParameter();
                 pOrderBy.ParameterName = "OrderBy";
-                pOrderBy.Value = (int)orderBy;
+                pOrderBy.Value = (int) orderBy;
                 pOrderBy.DbType = DbType.Int32;
 
                 var pAllowedCustomerRoleIds = _dataProvider.GetParameter();
@@ -494,7 +512,7 @@ namespace TinyCms.Services.Posts
 
                 var pOverridePublished = _dataProvider.GetParameter();
                 pOverridePublished.ParameterName = "OverridePublished";
-                pOverridePublished.Value = overridePublished != null ? (object)overridePublished.Value : DBNull.Value;
+                pOverridePublished.Value = overridePublished != null ? (object) overridePublished.Value : DBNull.Value;
                 pOverridePublished.DbType = DbType.Boolean;
 
                 var pFilterableSpecificationAttributeOptionIds = _dataProvider.GetParameter();
@@ -531,7 +549,7 @@ namespace TinyCms.Services.Posts
                     pTotalRecords);
                 //get filterable specification attribute option identifier
                 //return posts
-                int totalRecords = (pTotalRecords.Value != DBNull.Value) ? Convert.ToInt32(pTotalRecords.Value) : 0;
+                var totalRecords = (pTotalRecords.Value != DBNull.Value) ? Convert.ToInt32(pTotalRecords.Value) : 0;
                 return new PagedList<Post>(posts, pageIndex, pageSize, totalRecords);
 
                 #endregion
@@ -565,60 +583,65 @@ namespace TinyCms.Services.Posts
                 }
 
 
-          
                 //The function 'CurrentUtcDateTime' is not supported by SQL Server Compact. 
                 //That's why we pass the date value
                 var nowUtc = DateTime.UtcNow;
-       
-            
+
+
                 //searching by keyword
                 if (!String.IsNullOrWhiteSpace(keywords))
                 {
                     query = from p in query
-                            join lp in _localizedPropertyRepository.Table on p.Id equals lp.EntityId into p_lp
-                            from lp in p_lp.DefaultIfEmpty()
-                            from pt in p.PostTags.DefaultIfEmpty()
-                            where (p.Name.Contains(keywords)) ||
-                                  (searchDescriptions && p.ShortDescription.Contains(keywords)) ||
-                                  (searchDescriptions && p.FullDescription.Contains(keywords)) ||
-                                  (searchPostTags && pt.Name.Contains(keywords)) ||
-                                  //localized values
-                                  (searchLocalizedValue && lp.LanguageId == languageId && lp.LocaleKeyGroup == "Post" && lp.LocaleKey == "Name" && lp.LocaleValue.Contains(keywords)) ||
-                                  (searchDescriptions && searchLocalizedValue && lp.LanguageId == languageId && lp.LocaleKeyGroup == "Post" && lp.LocaleKey == "ShortDescription" && lp.LocaleValue.Contains(keywords)) ||
-                                  (searchDescriptions && searchLocalizedValue && lp.LanguageId == languageId && lp.LocaleKeyGroup == "Post" && lp.LocaleKey == "FullDescription" && lp.LocaleValue.Contains(keywords))
-                            select p;
+                        join lp in _localizedPropertyRepository.Table on p.Id equals lp.EntityId into p_lp
+                        from lp in p_lp.DefaultIfEmpty()
+                        from pt in p.PostTags.DefaultIfEmpty()
+                        where (p.Name.Contains(keywords)) ||
+                              (searchDescriptions && p.ShortDescription.Contains(keywords)) ||
+                              (searchDescriptions && p.FullDescription.Contains(keywords)) ||
+                              (searchPostTags && pt.Name.Contains(keywords)) ||
+                              //localized values
+                              (searchLocalizedValue && lp.LanguageId == languageId && lp.LocaleKeyGroup == "Post" &&
+                               lp.LocaleKey == "Name" && lp.LocaleValue.Contains(keywords)) ||
+                              (searchDescriptions && searchLocalizedValue && lp.LanguageId == languageId &&
+                               lp.LocaleKeyGroup == "Post" && lp.LocaleKey == "ShortDescription" &&
+                               lp.LocaleValue.Contains(keywords)) ||
+                              (searchDescriptions && searchLocalizedValue && lp.LanguageId == languageId &&
+                               lp.LocaleKeyGroup == "Post" && lp.LocaleKey == "FullDescription" &&
+                               lp.LocaleValue.Contains(keywords))
+                        select p;
                 }
 
                 if (!showHidden && !_catalogSettings.IgnoreAcl)
                 {
                     //ACL (access control list)
                     query = from p in query
-                            join acl in _aclRepository.Table
-                            on new { c1 = p.Id, c2 = "Post" } equals new { c1 = acl.EntityId, c2 = acl.EntityName } into p_acl
-                            from acl in p_acl.DefaultIfEmpty()
-                            where !p.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
-                            select p;
+                        join acl in _aclRepository.Table
+                            on new {c1 = p.Id, c2 = "Post"} equals new {c1 = acl.EntityId, c2 = acl.EntityName} into
+                            p_acl
+                        from acl in p_acl.DefaultIfEmpty()
+                        where !p.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
+                        select p;
                 }
 
                 if (createdBy > 0)
                 {
                     query = query.Where(q => q.CreatedBy == createdBy);
                 }
-             
+
                 //category filtering
                 if (categoryIds != null && categoryIds.Count > 0)
                 {
                     query = from p in query
-                            from pc in p.PostCategories.Where(pc => categoryIds.Contains(pc.CategoryId))
-                            where (!featuredPosts.HasValue || featuredPosts.Value == pc.IsFeaturedPost)
-                            select p;
+                        from pc in p.PostCategories.Where(pc => categoryIds.Contains(pc.CategoryId))
+                        where (!featuredPosts.HasValue || featuredPosts.Value == pc.IsFeaturedPost)
+                        select p;
                 }
 
                 if (postTemplateId >= 0)
                 {
                     query = query.Where(p => p.PostTemplateId == postTemplateId);
                 }
-         
+
                 //related posts filtering
                 //if (relatedToPostId > 0)
                 //{
@@ -632,27 +655,29 @@ namespace TinyCms.Services.Posts
                 if (postTagId > 0)
                 {
                     query = from p in query
-                            from pt in p.PostTags.Where(pt => pt.Id == postTagId)
-                            select p;
+                        from pt in p.PostTags.Where(pt => pt.Id == postTagId)
+                        select p;
                 }
 
                 //only distinct posts (group by ID)
                 //if we use standard Distinct() method, then all fields will be compared (low performance)
                 //it'll not work in SQL Server Compact when searching posts by a keyword)
                 query = from p in query
-                        group p by p.Id
-                        into pGroup
-                        orderby pGroup.Key
-                        select pGroup.FirstOrDefault();
+                    group p by p.Id
+                    into pGroup
+                    orderby pGroup.Key
+                    select pGroup.FirstOrDefault();
 
                 //sort posts
                 if (orderBy == PostSortingEnum.Position && categoryIds != null && categoryIds.Count > 0)
                 {
                     //category position
                     var firstCategoryId = categoryIds[0];
-                    query = query.OrderBy(p => p.PostCategories.FirstOrDefault(pc => pc.CategoryId == firstCategoryId).DisplayOrder);
+                    query =
+                        query.OrderBy(
+                            p => p.PostCategories.FirstOrDefault(pc => pc.CategoryId == firstCategoryId).DisplayOrder);
                 }
- 
+
                 else if (orderBy == PostSortingEnum.Position)
                 {
                     //otherwise sort by name
@@ -686,7 +711,6 @@ namespace TinyCms.Services.Posts
 
                 var posts = new PagedList<Post>(query, pageIndex, pageSize);
 
-            
 
                 //return posts
                 return posts;
@@ -696,7 +720,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Update post review totals
+        ///     Update post review totals
         /// </summary>
         /// <param name="post">Post</param>
         public virtual void UpdatePostReviewTotals(Post post)
@@ -746,12 +770,13 @@ namespace TinyCms.Services.Posts
 
             return query.OrderBy(x => Guid.NewGuid()).Take(numPost).OrderByDescending(q => q.CreatedOnUtc).ToList();
         }
+
         #endregion
 
         #region Post pictures
 
         /// <summary>
-        /// Deletes a post picture
+        ///     Deletes a post picture
         /// </summary>
         /// <param name="postPicture">Post picture</param>
         public virtual void DeletePostPicture(PostPicture postPicture)
@@ -766,22 +791,22 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Gets a post pictures by post identifier
+        ///     Gets a post pictures by post identifier
         /// </summary>
         /// <param name="postId">The post identifier</param>
         /// <returns>Post pictures</returns>
         public virtual IList<PostPicture> GetPostPicturesByPostId(int postId)
         {
             var query = from pp in _postPictureRepository.Table
-                        where pp.PostId == postId
-                        orderby pp.DisplayOrder
-                        select pp;
+                where pp.PostId == postId
+                orderby pp.DisplayOrder
+                select pp;
             var postPictures = query.ToList();
             return postPictures;
         }
 
         /// <summary>
-        /// Gets a post picture
+        ///     Gets a post picture
         /// </summary>
         /// <param name="postPictureId">Post picture identifier</param>
         /// <returns>Post picture</returns>
@@ -794,7 +819,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Inserts a post picture
+        ///     Inserts a post picture
         /// </summary>
         /// <param name="postPicture">Post picture</param>
         public virtual void InsertPostPicture(PostPicture postPicture)
@@ -809,7 +834,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Updates a post picture
+        ///     Updates a post picture
         /// </summary>
         /// <param name="postPicture">Post picture</param>
         public virtual void UpdatePostPicture(PostPicture postPicture)
@@ -825,11 +850,10 @@ namespace TinyCms.Services.Posts
 
         #endregion
 
-
         #region Related posts
 
         /// <summary>
-        /// Deletes a related post
+        ///     Deletes a related post
         /// </summary>
         /// <param name="relatedPost">Related post</param>
         public virtual void DeleteRelatedPost(RelatedPost relatedPost)
@@ -844,7 +868,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Gets related posts by post identifier
+        ///     Gets related posts by post identifier
         /// </summary>
         /// <param name="postId1">The first post identifier</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
@@ -852,12 +876,12 @@ namespace TinyCms.Services.Posts
         public virtual IList<RelatedPost> GetRelatedPostsByPostId1(int postId1, int top = 0, bool showHidden = false)
         {
             var query = from rp in _relatedPostRepository.Table
-                        join p in _postRepository.Table on rp.PostId2 equals p.Id
-                        where rp.PostId1 == postId1 &&
-                        !p.Deleted &&
-                        (showHidden || p.Published)
-                        orderby rp.DisplayOrder
-                        select rp;
+                join p in _postRepository.Table on rp.PostId2 equals p.Id
+                where rp.PostId1 == postId1 &&
+                      !p.Deleted &&
+                      (showHidden || p.Published)
+                orderby rp.DisplayOrder
+                select rp;
             if (top > 0)
             {
                 query = query.Take(top);
@@ -868,7 +892,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Gets a related post
+        ///     Gets a related post
         /// </summary>
         /// <param name="relatedPostId">Related post identifier</param>
         /// <returns>Related post</returns>
@@ -881,7 +905,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Inserts a related post
+        ///     Inserts a related post
         /// </summary>
         /// <param name="relatedPost">Related post</param>
         public virtual void InsertRelatedPost(RelatedPost relatedPost)
@@ -896,7 +920,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Updates a related post
+        ///     Updates a related post
         /// </summary>
         /// <param name="relatedPost">Related post</param>
         public virtual void UpdateRelatedPost(RelatedPost relatedPost)

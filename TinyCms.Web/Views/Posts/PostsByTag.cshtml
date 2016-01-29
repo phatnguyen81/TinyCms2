@@ -8,10 +8,9 @@
     var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
     if (canonicalUrlsEnabled)
     {
-        var categoryUrl = Url.RouteUrl("PostsByTag", new {postTagId = Model.Id, SeName = Model.TagSeName}, this.Request.Url.Scheme);
+        var categoryUrl = Url.RouteUrl("PostsByTag", new {postTagId = Model.Id, SeName = Model.TagSeName}, Request.Url.Scheme);
         Html.AddCanonicalUrlParts(categoryUrl);
     }
-
 }
 
 <div class="search_detail">
@@ -34,7 +33,6 @@
                 </div>
             </div>
         }
-
     }
     <div class="clr"></div>
     @{
@@ -48,4 +46,3 @@
     }
 
 </div>
-

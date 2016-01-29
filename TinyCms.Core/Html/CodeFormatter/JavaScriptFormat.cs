@@ -1,4 +1,5 @@
 #region Copyright © 2001-2003 Jean-Claude Manoli [jc@manoli.net]
+
 /*
  * This software is provided 'as-is', without any express or implied warranty.
  * In no event will the author(s) be held liable for any damages arising from
@@ -17,46 +18,41 @@
  *      be misrepresented as being the original software.
  * 
  *   3. This notice may not be removed or altered from any source distribution.
- */ 
-#endregion
+ */
 
-using TinyCms.Core.Html.CodeFormatter;
+#endregion
 
 namespace TinyCms.Core.Html.CodeFormatter
 {
     /// <summary>
-	/// Generates color-coded HTML 4.01 from JavaSctript source code.
-	/// </summary>
-    public partial class JavaScriptFormat : CLikeFormat
-	{
-		/// <summary>
-		/// The list of JavaScript keywords.
-		/// </summary>
-		protected override string Keywords 
-		{
-			get 
-			{ 
-				return "var function abstract as base bool break byte case catch char "
-				+ "checked class const continue decimal default delegate do double else "
-				+ "enum event explicit extern false finally fixed float for foreach goto "
-				+ "if implicit in int interface internal is lock long namespace new null "
-				+ "object operator out override params private protected public readonly "
-				+ "ref return sbyte sealed short sizeof stackalloc static string struct "
-				+ "switch this throw true try typeof uint ulong unchecked unsafe ushort "
-				+ "using virtual void while";
-			}
-		}
+    ///     Generates color-coded HTML 4.01 from JavaSctript source code.
+    /// </summary>
+    public class JavaScriptFormat : CLikeFormat
+    {
+        /// <summary>
+        ///     The list of JavaScript keywords.
+        /// </summary>
+        protected override string Keywords
+        {
+            get
+            {
+                return "var function abstract as base bool break byte case catch char "
+                       + "checked class const continue decimal default delegate do double else "
+                       + "enum event explicit extern false finally fixed float for foreach goto "
+                       + "if implicit in int interface internal is lock long namespace new null "
+                       + "object operator out override params private protected public readonly "
+                       + "ref return sbyte sealed short sizeof stackalloc static string struct "
+                       + "switch this throw true try typeof uint ulong unchecked unsafe ushort "
+                       + "using virtual void while";
+            }
+        }
 
-		/// <summary>
-		/// Use the pre-processor color to mark directives that start with @.
-		/// </summary>
-		protected override string Preprocessors
-		{
-			get 
-			{ 
-				return @"@\w*";
-			}
-		}
-	}
+        /// <summary>
+        ///     Use the pre-processor color to mark directives that start with @.
+        /// </summary>
+        protected override string Preprocessors
+        {
+            get { return @"@\w*"; }
+        }
+    }
 }
-

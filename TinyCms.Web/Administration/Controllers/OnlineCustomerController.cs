@@ -13,8 +13,25 @@ using TinyCms.Web.Framework.Kendoui;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class OnlineCustomerController : BaseAdminController
+    public class OnlineCustomerController : BaseAdminController
     {
+        #region Constructors
+
+        public OnlineCustomerController(ICustomerService customerService,
+            IGeoLookupService geoLookupService, IDateTimeHelper dateTimeHelper,
+            CustomerSettings customerSettings,
+            IPermissionService permissionService, ILocalizationService localizationService)
+        {
+            _customerService = customerService;
+            _geoLookupService = geoLookupService;
+            _dateTimeHelper = dateTimeHelper;
+            _customerSettings = customerSettings;
+            _permissionService = permissionService;
+            _localizationService = localizationService;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly ICustomerService _customerService;
@@ -26,23 +43,6 @@ namespace TinyCms.Admin.Controllers
 
         #endregion
 
-        #region Constructors
-
-        public OnlineCustomerController(ICustomerService customerService,
-            IGeoLookupService geoLookupService, IDateTimeHelper dateTimeHelper,
-            CustomerSettings customerSettings,
-            IPermissionService permissionService, ILocalizationService localizationService)
-        {
-            this._customerService = customerService;
-            this._geoLookupService = geoLookupService;
-            this._dateTimeHelper = dateTimeHelper;
-            this._customerSettings = customerSettings;
-            this._permissionService = permissionService;
-            this._localizationService = localizationService;
-        }
-
-        #endregion
-        
         #region Methods
 
         public ActionResult List()
@@ -59,20 +59,24 @@ namespace TinyCms.Admin.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
                 return AccessDeniedView();
 
-            var customers = _customerService.GetOnlineCustomers(DateTime.UtcNow.AddMinutes(-_customerSettings.OnlineCustomerMinutes),
-                null, command.Page - 1, command.PageSize);
+            var customers =
+                _customerService.GetOnlineCustomers(
+                    DateTime.UtcNow.AddMinutes(-_customerSettings.OnlineCustomerMinutes),
+                    null, command.Page - 1, command.PageSize);
             var gridModel = new DataSourceResult
             {
                 Data = customers.Select(x => new OnlineCustomerModel
                 {
                     Id = x.Id,
-                    CustomerInfo = x.IsRegistered() ? x.Email : _localizationService.GetResource("Admin.Customers.Guest"),
+                    CustomerInfo =
+                        x.IsRegistered() ? x.Email : _localizationService.GetResource("Admin.Customers.Guest"),
                     LastIpAddress = x.LastIpAddress,
                     Location = _geoLookupService.LookupCountryName(x.LastIpAddress),
                     LastActivityDate = _dateTimeHelper.ConvertToUserTime(x.LastActivityDateUtc, DateTimeKind.Utc),
-                    LastVisitedPage = _customerSettings.StoreLastVisitedPage ?
-                        x.GetAttribute<string>(SystemCustomerAttributeNames.LastVisitedPage) :
-                        _localizationService.GetResource("Admin.Customers.OnlineCustomers.Fields.LastVisitedPage.Disabled")
+                    LastVisitedPage = _customerSettings.StoreLastVisitedPage
+                        ? x.GetAttribute<string>(SystemCustomerAttributeNames.LastVisitedPage)
+                        : _localizationService.GetResource(
+                            "Admin.Customers.OnlineCustomers.Fields.LastVisitedPage.Disabled")
                 }),
                 Total = customers.TotalCount
             };

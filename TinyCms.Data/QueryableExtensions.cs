@@ -3,15 +3,15 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace TinyCms.Data 
+namespace TinyCms.Data
 {
     /// <summary>
-    /// Queryable extensions
+    ///     Queryable extensions
     /// </summary>
     public static class QueryableExtensions
     {
         /// <summary>
-        /// Include
+        ///     Include
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="queryable">Queryable</param>
@@ -23,11 +23,10 @@ namespace TinyCms.Data
             if (queryable == null)
                 throw new ArgumentNullException("queryable");
 
-            foreach (Expression<Func<T, object>> includeProperty in includeProperties)
+            foreach (var includeProperty in includeProperties)
                 queryable = queryable.Include(includeProperty);
 
             return queryable;
         }
-
     }
 }

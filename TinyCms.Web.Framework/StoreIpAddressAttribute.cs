@@ -28,7 +28,7 @@ namespace TinyCms.Web.Framework
             var webHelper = EngineContext.Current.Resolve<IWebHelper>();
 
             //update IP address
-            string currentIpAddress = webHelper.GetCurrentIpAddress();
+            var currentIpAddress = webHelper.GetCurrentIpAddress();
             if (!String.IsNullOrEmpty(currentIpAddress))
             {
                 var workContext = EngineContext.Current.Resolve<IWorkContext>();

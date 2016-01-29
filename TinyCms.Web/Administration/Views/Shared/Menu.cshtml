@@ -1,11 +1,11 @@
-﻿@using TinyCms.Services.Security
-@using TinyCms.Web.Framework.Menu;
+﻿@using TinyCms.Web.Framework.Menu
+@using SiteMapNode = TinyCms.Web.Framework.Menu.SiteMapNode
 @{
     //load sitemap
-    var siteMap = new TinyCms.Web.Framework.Menu.XmlSiteMap();
+    var siteMap = new XmlSiteMap();
     siteMap.LoadFrom("~/Administration/sitemap.config");
 }
-@helper RenderMenuItem(TinyCms.Web.Framework.Menu.SiteMapNode item)
+@helper RenderMenuItem(SiteMapNode item)
 {
     string url = null;
     if (!string.IsNullOrEmpty(item.ControllerName) && !string.IsNullOrEmpty(item.ActionName))
@@ -23,7 +23,7 @@
                 @if (!String.IsNullOrEmpty(item.ImageUrl))
                 {
                     <text>
-                        <img alt="" src="@Url.Content(item.ImageUrl)" />
+                        <img alt="" src="@Url.Content(item.ImageUrl)"/>
                     </text>
                 }
                 @item.Title
@@ -34,7 +34,7 @@
             if (!String.IsNullOrEmpty(item.ImageUrl))
             {
                 <text>
-                    <img alt="" src="@Url.Content(item.ImageUrl)" />
+                    <img alt="" src="@Url.Content(item.ImageUrl)"/>
                 </text>
             }
             @item.Title
@@ -58,8 +58,6 @@
     @{
         //standard (default) items
         var rootNode = siteMap.RootNode;
-
-    
     }
     @foreach (var item in rootNode.ChildNodes.Where(x => x.Visible))
     {

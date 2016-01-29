@@ -5,10 +5,10 @@ namespace TinyCms.Web.Framework.Localization
 {
     public class LocalizedString : MarshalByRefObject, IHtmlString
     {
+        private readonly object[] _args;
         private readonly string _localized;
         private readonly string _scope;
         private readonly string _textHint;
-        private readonly object[] _args;
 
         public LocalizedString(string localized)
         {
@@ -21,13 +21,6 @@ namespace TinyCms.Web.Framework.Localization
             _scope = scope;
             _textHint = textHint;
             _args = args;
-        }
-
-        public static LocalizedString TextOrDefault(string text, LocalizedString defaultValue)
-        {
-            if (string.IsNullOrEmpty(text))
-                return defaultValue;
-            return new LocalizedString(text);
         }
 
         public string Scope
@@ -50,12 +43,19 @@ namespace TinyCms.Web.Framework.Localization
             get { return _localized; }
         }
 
-        public override string ToString()
+        public string ToHtmlString()
         {
             return _localized;
         }
 
-        public string ToHtmlString()
+        public static LocalizedString TextOrDefault(string text, LocalizedString defaultValue)
+        {
+            if (string.IsNullOrEmpty(text))
+                return defaultValue;
+            return new LocalizedString(text);
+        }
+
+        public override string ToString()
         {
             return _localized;
         }
@@ -73,9 +73,8 @@ namespace TinyCms.Web.Framework.Localization
             if (obj == null || obj.GetType() != GetType())
                 return false;
 
-            var that = (LocalizedString)obj;
+            var that = (LocalizedString) obj;
             return string.Equals(_localized, that._localized);
         }
-
     }
 }

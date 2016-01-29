@@ -4,14 +4,13 @@
 @{
     Layout = "~/Views/Shared/_TwoColumn.cshtml";
     Html.AddTitleParts("Tìm kiếm từ khóa: " + Model.q);
-    
+
     var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
     if (canonicalUrlsEnabled)
     {
-        var categoryUrl = Url.RouteUrl("Postsearch", new { q = Model.q }, this.Request.Url.Scheme);
+        var categoryUrl = Url.RouteUrl("Postsearch", new {Model.q}, Request.Url.Scheme);
         Html.AddCanonicalUrlParts(categoryUrl);
     }
-
 }
 
 <div class="searchpage">
@@ -22,14 +21,14 @@
             <input type="submit" href="#" class="btn01" value="Tìm kiếm" style="height: 36px;"/>
         </p>
         <span class="searchicn icn"></span>
-      
     }
-    <p class="keysearch">Bài viết về <b>"@Model.q"</b></p>
+    <p class="keysearch">
+        Bài viết về <b>"@Model.q"</b>
+    </p>
     @if (Model.Posts.Any())
     {
         foreach (var post in Model.Posts)
         {
-
             <div class="catebox">
                 <div class="newscont">
                     <a href="@Url.RouteUrl("Post", new {post.SeName})" class="boximg">
@@ -40,7 +39,7 @@
                     <div class="detail">
                         <h3>
                             <a href="@Url.RouteUrl("Post", new {post.SeName})">
-                               @post.Name
+                                @post.Name
                             </a>
                         </h3>
                         <p class="time_post">@post.CreatedOn.ToString("HH:mm dd/MM/yyyy")</p>
@@ -48,9 +47,7 @@
                     </div>
                 </div>
             </div>
-
         }
-
     }
     <div class="clr"></div>
     @{
@@ -64,7 +61,7 @@
     }
 
 </div>
-@Html.Action("GetRandomPost", "Posts", new { postId = 0, numberPost = 4, template = "GetRandomPost.Search", postThumbPictureSize = 200 })
+@Html.Action("GetRandomPost", "Posts", new {postId = 0, numberPost = 4, template = "GetRandomPost.Search", postThumbPictureSize = 200})
 
 @*<script type="text/javascript">
     $(document).ready(function () {

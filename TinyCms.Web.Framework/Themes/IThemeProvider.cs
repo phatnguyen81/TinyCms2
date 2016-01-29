@@ -2,12 +2,10 @@
 
 namespace TinyCms.Web.Framework.Themes
 {
-    public partial interface IThemeProvider
+    public interface IThemeProvider
     {
         ThemeConfiguration GetThemeConfiguration(string themeName);
-
         IList<ThemeConfiguration> GetThemeConfigurations();
-
         bool ThemeConfigurationExists(string themeName);
     }
 }

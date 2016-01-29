@@ -11,41 +11,31 @@ using TinyCms.Data;
 namespace TinyCms.Services.Logging
 {
     /// <summary>
-    /// Default logger
+    ///     Default logger
     /// </summary>
-    public partial class DefaultLogger : ILogger
+    public class DefaultLogger : ILogger
     {
-        #region Fields
-
-        private readonly IRepository<Log> _logRepository;
-        private readonly IWebHelper _webHelper;
-        private readonly IDbContext _dbContext;
-        private readonly IDataProvider _dataProvider;
-        private readonly CommonSettings _commonSettings;
-        
-        #endregion
-        
         #region Ctor
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="logRepository">Log repository</param>
         /// <param name="webHelper">Web helper</param>
         /// <param name="dbContext">DB context</param>
         /// <param name="dataProvider">WeData provider</param>
         /// <param name="commonSettings">Common settings</param>
-        public DefaultLogger(IRepository<Log> logRepository, 
+        public DefaultLogger(IRepository<Log> logRepository,
             IWebHelper webHelper,
-            IDbContext dbContext, 
-            IDataProvider dataProvider, 
+            IDbContext dbContext,
+            IDataProvider dataProvider,
             CommonSettings commonSettings)
         {
-            this._logRepository = logRepository;
-            this._webHelper = webHelper;
-            this._dbContext = dbContext;
-            this._dataProvider = dataProvider;
-            this._commonSettings = commonSettings;
+            _logRepository = logRepository;
+            _webHelper = webHelper;
+            _dbContext = dbContext;
+            _dataProvider = dataProvider;
+            _commonSettings = commonSettings;
         }
 
         #endregion
@@ -53,7 +43,7 @@ namespace TinyCms.Services.Logging
         #region Utitilities
 
         /// <summary>
-        /// Gets a value indicating whether this message should not be logged
+        ///     Gets a value indicating whether this message should not be logged
         /// </summary>
         /// <param name="message">Message</param>
         /// <returns>Result</returns>
@@ -72,16 +62,26 @@ namespace TinyCms.Services.Logging
 
         #endregion
 
+        #region Fields
+
+        private readonly IRepository<Log> _logRepository;
+        private readonly IWebHelper _webHelper;
+        private readonly IDbContext _dbContext;
+        private readonly IDataProvider _dataProvider;
+        private readonly CommonSettings _commonSettings;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
-        /// Determines whether a log level is enabled
+        ///     Determines whether a log level is enabled
         /// </summary>
         /// <param name="level">Log level</param>
         /// <returns>Result</returns>
         public virtual bool IsEnabled(LogLevel level)
         {
-            switch(level)
+            switch (level)
             {
                 case LogLevel.Debug:
                     return false;
@@ -91,7 +91,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Deletes a log item
+        ///     Deletes a log item
         /// </summary>
         /// <param name="log">Log item</param>
         public virtual void DeleteLog(Log log)
@@ -103,7 +103,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Clears a log
+        ///     Clears a log
         /// </summary>
         public virtual void ClearLog()
         {
@@ -114,7 +114,7 @@ namespace TinyCms.Services.Logging
 
 
                 //do all databases support "Truncate command"?
-                string logTableName = _dbContext.GetTableName<Log>();
+                var logTableName = _dbContext.GetTableName<Log>();
                 _dbContext.ExecuteSqlCommand(String.Format("TRUNCATE TABLE [{0}]", logTableName));
             }
             else
@@ -126,7 +126,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Gets all log items
+        ///     Gets all log items
         /// </summary>
         /// <param name="fromUtc">Log item creation from; null to load all records</param>
         /// <param name="toUtc">Log item creation to; null to load all records</param>
@@ -136,7 +136,7 @@ namespace TinyCms.Services.Logging
         /// <param name="pageSize">Page size</param>
         /// <returns>Log item items</returns>
         public virtual IPagedList<Log> GetAllLogs(DateTime? fromUtc = null, DateTime? toUtc = null,
-            string message = "", LogLevel? logLevel = null, 
+            string message = "", LogLevel? logLevel = null,
             int pageIndex = 0, int pageSize = int.MaxValue)
         {
             var query = _logRepository.Table;
@@ -146,10 +146,10 @@ namespace TinyCms.Services.Logging
                 query = query.Where(l => toUtc.Value >= l.CreatedOnUtc);
             if (logLevel.HasValue)
             {
-                var logLevelId = (int)logLevel.Value;
+                var logLevelId = (int) logLevel.Value;
                 query = query.Where(l => logLevelId == l.LogLevelId);
             }
-             if (!String.IsNullOrEmpty(message))
+            if (!String.IsNullOrEmpty(message))
                 query = query.Where(l => l.ShortMessage.Contains(message) || l.FullMessage.Contains(message));
             query = query.OrderByDescending(l => l.CreatedOnUtc);
 
@@ -158,7 +158,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Gets a log item
+        ///     Gets a log item
         /// </summary>
         /// <param name="logId">Log item identifier</param>
         /// <returns>Log item</returns>
@@ -171,7 +171,7 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Get log items by identifiers
+        ///     Get log items by identifiers
         /// </summary>
         /// <param name="logIds">Log item identifiers</param>
         /// <returns>Log items</returns>
@@ -181,12 +181,12 @@ namespace TinyCms.Services.Logging
                 return new List<Log>();
 
             var query = from l in _logRepository.Table
-                        where logIds.Contains(l.Id)
-                        select l;
+                where logIds.Contains(l.Id)
+                select l;
             var logItems = query.ToList();
             //sort by passed identifiers
             var sortedLogItems = new List<Log>();
-            foreach (int id in logIds)
+            foreach (var id in logIds)
             {
                 var log = logItems.Find(x => x.Id == id);
                 if (log != null)
@@ -196,14 +196,15 @@ namespace TinyCms.Services.Logging
         }
 
         /// <summary>
-        /// Inserts a log item
+        ///     Inserts a log item
         /// </summary>
         /// <param name="logLevel">Log level</param>
         /// <param name="shortMessage">The short message</param>
         /// <param name="fullMessage">The full message</param>
         /// <param name="customer">The customer to associate log record with</param>
         /// <returns>A log item</returns>
-        public virtual Log InsertLog(LogLevel logLevel, string shortMessage, string fullMessage = "", Customer customer = null)
+        public virtual Log InsertLog(LogLevel logLevel, string shortMessage, string fullMessage = "",
+            Customer customer = null)
         {
             //check ignore word/phrase list?
             if (IgnoreLog(shortMessage) || IgnoreLog(fullMessage))

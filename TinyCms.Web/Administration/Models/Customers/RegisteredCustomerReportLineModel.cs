@@ -3,7 +3,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Customers
 {
-    public partial class RegisteredCustomerReportLineModel : BaseNopModel
+    public class RegisteredCustomerReportLineModel : BaseNopModel
     {
         [NopResourceDisplayName("Admin.Customers.Reports.RegisteredCustomers.Fields.Period")]
         public string Period { get; set; }

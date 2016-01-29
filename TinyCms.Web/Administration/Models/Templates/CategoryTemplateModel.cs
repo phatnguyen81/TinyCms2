@@ -6,8 +6,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Templates
 {
-    [Validator(typeof(CategoryTemplateValidator))]
-    public partial class CategoryTemplateModel : BaseNopEntityModel
+    [Validator(typeof (CategoryTemplateValidator))]
+    public class CategoryTemplateModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.System.Templates.Category.Name")]
         [AllowHtml]

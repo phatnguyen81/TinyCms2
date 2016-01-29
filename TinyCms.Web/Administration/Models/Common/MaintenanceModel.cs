@@ -5,7 +5,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Common
 {
-    public partial class MaintenanceModel : BaseNopModel
+    public class MaintenanceModel : BaseNopModel
     {
         public MaintenanceModel()
         {
@@ -20,7 +20,7 @@ namespace TinyCms.Admin.Models.Common
 
         #region Nested classes
 
-        public partial class DeleteGuestsModel : BaseNopModel
+        public class DeleteGuestsModel : BaseNopModel
         {
             [NopResourceDisplayName("Admin.System.Maintenance.DeleteGuests.StartDate")]
             [UIHint("DateNullable")]
@@ -33,7 +33,7 @@ namespace TinyCms.Admin.Models.Common
             public int? NumberOfDeletedCustomers { get; set; }
         }
 
-        public partial class DeleteAbandonedCartsModel : BaseNopModel
+        public class DeleteAbandonedCartsModel : BaseNopModel
         {
             [NopResourceDisplayName("Admin.System.Maintenance.DeleteAbandonedCarts.OlderThan")]
             [UIHint("Date")]
@@ -42,7 +42,7 @@ namespace TinyCms.Admin.Models.Common
             public int? NumberOfDeletedItems { get; set; }
         }
 
-        public partial class DeleteExportedFilesModel : BaseNopModel
+        public class DeleteExportedFilesModel : BaseNopModel
         {
             [NopResourceDisplayName("Admin.System.Maintenance.DeleteExportedFiles.StartDate")]
             [UIHint("DateNullable")]

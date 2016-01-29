@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using TinyCms.Admin.Models.Cms;
 using TinyCms.Admin.Models.Customers;
 using TinyCms.Admin.Models.ExternalAuthentication;
@@ -37,6 +36,33 @@ namespace TinyCms.Admin.Extensions
         {
             return Mapper.Map(source, destination);
         }
+
+        #region External authentication methods
+
+        public static AuthenticationMethodModel ToModel(this IExternalAuthenticationMethod entity)
+        {
+            return entity.MapTo<IExternalAuthenticationMethod, AuthenticationMethodModel>();
+        }
+
+        #endregion
+
+        #region Widgets
+
+        public static WidgetModel ToModel(this IWidgetPlugin entity)
+        {
+            return entity.MapTo<IWidgetPlugin, WidgetModel>();
+        }
+
+        #endregion
+
+        #region Plugins
+
+        public static PluginModel ToModel(this PluginDescriptor entity)
+        {
+            return entity.MapTo<PluginDescriptor, PluginModel>();
+        }
+
+        #endregion
 
         #region Category
 
@@ -112,7 +138,7 @@ namespace TinyCms.Admin.Extensions
         {
             return model.MapTo(destination);
         }
-        
+
         #endregion
 
         #region Email account
@@ -190,7 +216,7 @@ namespace TinyCms.Admin.Extensions
         }
 
         #endregion
-       
+
         #region Log
 
         public static LogModel ToModel(this Log entity)
@@ -220,24 +246,6 @@ namespace TinyCms.Admin.Extensions
 
         #endregion
 
-        #region External authentication methods
-
-        public static AuthenticationMethodModel ToModel(this IExternalAuthenticationMethod entity)
-        {
-            return entity.MapTo<IExternalAuthenticationMethod, AuthenticationMethodModel>();
-        }
-
-        #endregion
-
-        #region Widgets
-
-        public static WidgetModel ToModel(this IWidgetPlugin entity)
-        {
-            return entity.MapTo<IWidgetPlugin, WidgetModel>();
-        }
-
-        #endregion
-     
         #region NewsLetter subscriptions
 
         public static NewsLetterSubscriptionModel ToModel(this NewsLetterSubscription entity)
@@ -250,7 +258,8 @@ namespace TinyCms.Admin.Extensions
             return model.MapTo<NewsLetterSubscriptionModel, NewsLetterSubscription>();
         }
 
-        public static NewsLetterSubscription ToEntity(this NewsLetterSubscriptionModel model, NewsLetterSubscription destination)
+        public static NewsLetterSubscription ToEntity(this NewsLetterSubscriptionModel model,
+            NewsLetterSubscription destination)
         {
             return model.MapTo(destination);
         }
@@ -303,7 +312,9 @@ namespace TinyCms.Admin.Extensions
         {
             return entity.MapTo<CustomerSettings, CustomerUserSettingsModel.CustomerSettingsModel>();
         }
-        public static CustomerSettings ToEntity(this CustomerUserSettingsModel.CustomerSettingsModel model, CustomerSettings destination)
+
+        public static CustomerSettings ToEntity(this CustomerUserSettingsModel.CustomerSettingsModel model,
+            CustomerSettings destination)
         {
             return model.MapTo(destination);
         }
@@ -312,6 +323,7 @@ namespace TinyCms.Admin.Extensions
         {
             return entity.MapTo<CatalogSettings, CatalogSettingsModel>();
         }
+
         public static CatalogSettings ToEntity(this CatalogSettingsModel model, CatalogSettings destination)
         {
             return model.MapTo(destination);
@@ -321,18 +333,10 @@ namespace TinyCms.Admin.Extensions
         {
             return entity.MapTo<MediaSettings, MediaSettingsModel>();
         }
+
         public static MediaSettings ToEntity(this MediaSettingsModel model, MediaSettings destination)
         {
             return model.MapTo(destination);
-        }
-
-        #endregion
-
-        #region Plugins
-
-        public static PluginModel ToModel(this PluginDescriptor entity)
-        {
-            return entity.MapTo<PluginDescriptor, PluginModel>();
         }
 
         #endregion
@@ -384,7 +388,6 @@ namespace TinyCms.Admin.Extensions
         {
             return model.MapTo(destination);
         }
-
 
         #endregion
     }

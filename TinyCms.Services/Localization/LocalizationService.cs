@@ -17,29 +17,70 @@ using TinyCms.Services.Logging;
 namespace TinyCms.Services.Localization
 {
     /// <summary>
-    /// Provides information about localization
+    ///     Provides information about localization
     /// </summary>
-    public partial class LocalizationService : ILocalizationService
+    public class LocalizationService : ILocalizationService
     {
+        #region Ctor
+
+        /// <summary>
+        ///     Ctor
+        /// </summary>
+        /// <param name="cacheManager">Cache manager</param>
+        /// <param name="logger">Logger</param>
+        /// <param name="workContext">Work context</param>
+        /// <param name="lsrRepository">Locale string resource repository</param>
+        /// <param name="languageService">Language service</param>
+        /// <param name="dataProvider">Data provider</param>
+        /// <param name="dbContext">Database Context</param>
+        /// <param name="commonSettings">Common settings</param>
+        /// <param name="localizationSettings">Localization settings</param>
+        /// <param name="eventPublisher">Event published</param>
+        public LocalizationService(ICacheManager cacheManager,
+            ILogger logger, IWorkContext workContext,
+            IRepository<LocaleStringResource> lsrRepository,
+            ILanguageService languageService,
+            IDataProvider dataProvider, IDbContext dbContext, CommonSettings commonSettings,
+            LocalizationSettings localizationSettings, IEventPublisher eventPublisher)
+        {
+            _cacheManager = cacheManager;
+            _logger = logger;
+            _workContext = workContext;
+            _lsrRepository = lsrRepository;
+            _languageService = languageService;
+            _dataProvider = dataProvider;
+            _dbContext = dbContext;
+            _commonSettings = commonSettings;
+            _dataProvider = dataProvider;
+            _dbContext = dbContext;
+            _commonSettings = commonSettings;
+            _localizationSettings = localizationSettings;
+            _eventPublisher = eventPublisher;
+        }
+
+        #endregion
+
         #region Constants
 
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : language ID
+        ///     {0} : language ID
         /// </remarks>
         private const string LOCALSTRINGRESOURCES_ALL_KEY = "Nop.lsr.all-{0}";
+
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : language ID
-        /// {1} : resource key
+        ///     {0} : language ID
+        ///     {1} : resource key
         /// </remarks>
         private const string LOCALSTRINGRESOURCES_BY_RESOURCENAME_KEY = "Nop.lsr.{0}-{1}";
+
         /// <summary>
-        /// Key pattern to clear cache
+        ///     Key pattern to clear cache
         /// </summary>
         private const string LOCALSTRINGRESOURCES_PATTERN_KEY = "Nop.lsr.";
 
@@ -60,49 +101,10 @@ namespace TinyCms.Services.Localization
 
         #endregion
 
-        #region Ctor
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="cacheManager">Cache manager</param>
-        /// <param name="logger">Logger</param>
-        /// <param name="workContext">Work context</param>
-        /// <param name="lsrRepository">Locale string resource repository</param>
-        /// <param name="languageService">Language service</param>
-        /// <param name="dataProvider">Data provider</param>
-        /// <param name="dbContext">Database Context</param>
-        /// <param name="commonSettings">Common settings</param>
-        /// <param name="localizationSettings">Localization settings</param>
-        /// <param name="eventPublisher">Event published</param>
-        public LocalizationService(ICacheManager cacheManager,
-            ILogger logger, IWorkContext workContext,
-            IRepository<LocaleStringResource> lsrRepository, 
-            ILanguageService languageService,
-            IDataProvider dataProvider, IDbContext dbContext, CommonSettings commonSettings,
-            LocalizationSettings localizationSettings, IEventPublisher eventPublisher)
-        {
-            this._cacheManager = cacheManager;
-            this._logger = logger;
-            this._workContext = workContext;
-            this._lsrRepository = lsrRepository;
-            this._languageService = languageService;
-            this._dataProvider = dataProvider;
-            this._dbContext = dbContext;
-            this._commonSettings = commonSettings;
-            this._dataProvider = dataProvider;
-            this._dbContext = dbContext;
-            this._commonSettings = commonSettings;
-            this._localizationSettings = localizationSettings;
-            this._eventPublisher = eventPublisher;
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Deletes a locale string resource
+        ///     Deletes a locale string resource
         /// </summary>
         /// <param name="localeStringResource">Locale string resource</param>
         public virtual void DeleteLocaleStringResource(LocaleStringResource localeStringResource)
@@ -120,7 +122,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Gets a locale string resource
+        ///     Gets a locale string resource
         /// </summary>
         /// <param name="localeStringResourceId">Locale string resource identifier</param>
         /// <returns>Locale string resource</returns>
@@ -133,7 +135,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Gets a locale string resource
+        ///     Gets a locale string resource
         /// </summary>
         /// <param name="resourceName">A string representing a resource name</param>
         /// <returns>Locale string resource</returns>
@@ -146,7 +148,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Gets a locale string resource
+        ///     Gets a locale string resource
         /// </summary>
         /// <param name="resourceName">A string representing a resource name</param>
         /// <param name="languageId">Language identifier</param>
@@ -156,40 +158,41 @@ namespace TinyCms.Services.Localization
             bool logIfNotFound = true)
         {
             var query = from lsr in _lsrRepository.Table
-                        orderby lsr.ResourceName
-                        where lsr.LanguageId == languageId && lsr.ResourceName == resourceName
-                        select lsr;
+                orderby lsr.ResourceName
+                where lsr.LanguageId == languageId && lsr.ResourceName == resourceName
+                select lsr;
             var localeStringResource = query.FirstOrDefault();
 
             if (localeStringResource == null && logIfNotFound)
-                _logger.Warning(string.Format("Resource string ({0}) not found. Language ID = {1}", resourceName, languageId));
+                _logger.Warning(string.Format("Resource string ({0}) not found. Language ID = {1}", resourceName,
+                    languageId));
             return localeStringResource;
         }
 
         /// <summary>
-        /// Gets all locale string resources by language identifier
+        ///     Gets all locale string resources by language identifier
         /// </summary>
         /// <param name="languageId">Language identifier</param>
         /// <returns>Locale string resources</returns>
         public virtual IList<LocaleStringResource> GetAllResources(int languageId)
         {
             var query = from l in _lsrRepository.Table
-                        orderby l.ResourceName
-                        where l.LanguageId == languageId
-                        select l;
+                orderby l.ResourceName
+                where l.LanguageId == languageId
+                select l;
             var locales = query.ToList();
             return locales;
         }
 
         /// <summary>
-        /// Inserts a locale string resource
+        ///     Inserts a locale string resource
         /// </summary>
         /// <param name="localeStringResource">Locale string resource</param>
         public virtual void InsertLocaleStringResource(LocaleStringResource localeStringResource)
         {
             if (localeStringResource == null)
                 throw new ArgumentNullException("localeStringResource");
-            
+
             _lsrRepository.Insert(localeStringResource);
 
             //cache
@@ -200,7 +203,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Updates the locale string resource
+        ///     Updates the locale string resource
         /// </summary>
         /// <param name="localeStringResource">Locale string resource</param>
         public virtual void UpdateLocaleStringResource(LocaleStringResource localeStringResource)
@@ -218,21 +221,21 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Gets all locale string resources by language identifier
+        ///     Gets all locale string resources by language identifier
         /// </summary>
         /// <param name="languageId">Language identifier</param>
         /// <returns>Locale string resources</returns>
-        public virtual Dictionary<string, KeyValuePair<int,string>> GetAllResourceValues(int languageId)
+        public virtual Dictionary<string, KeyValuePair<int, string>> GetAllResourceValues(int languageId)
         {
-            string key = string.Format(LOCALSTRINGRESOURCES_ALL_KEY, languageId);
+            var key = string.Format(LOCALSTRINGRESOURCES_ALL_KEY, languageId);
             return _cacheManager.Get(key, () =>
             {
                 //we use no tracking here for performance optimization
                 //anyway records are loaded only for read-only operations
                 var query = from l in _lsrRepository.TableNoTracking
-                            orderby l.ResourceName
-                            where l.LanguageId == languageId
-                            select l;
+                    orderby l.ResourceName
+                    where l.LanguageId == languageId
+                    select l;
                 var locales = query.ToList();
                 //format: <name, <id, value>>
                 var dictionary = new Dictionary<string, KeyValuePair<int, string>>();
@@ -247,7 +250,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Gets a resource string based on the specified ResourceKey property.
+        ///     Gets a resource string based on the specified ResourceKey property.
         /// </summary>
         /// <param name="resourceKey">A string representing a ResourceKey.</param>
         /// <returns>A string representing the requested resource string.</returns>
@@ -255,23 +258,26 @@ namespace TinyCms.Services.Localization
         {
             if (_workContext.WorkingLanguage != null)
                 return GetResource(resourceKey, _workContext.WorkingLanguage.Id);
-            
+
             return "";
         }
-        
+
         /// <summary>
-        /// Gets a resource string based on the specified ResourceKey property.
+        ///     Gets a resource string based on the specified ResourceKey property.
         /// </summary>
         /// <param name="resourceKey">A string representing a ResourceKey.</param>
         /// <param name="languageId">Language identifier</param>
         /// <param name="logIfNotFound">A value indicating whether to log error if locale string resource is not found</param>
         /// <param name="defaultValue">Default value</param>
-        /// <param name="returnEmptyIfNotFound">A value indicating whether an empty string will be returned if a resource is not found and default value is set to empty string</param>
+        /// <param name="returnEmptyIfNotFound">
+        ///     A value indicating whether an empty string will be returned if a resource is not
+        ///     found and default value is set to empty string
+        /// </param>
         /// <returns>A string representing the requested resource string.</returns>
         public virtual string GetResource(string resourceKey, int languageId,
             bool logIfNotFound = true, string defaultValue = "", bool returnEmptyIfNotFound = false)
         {
-            string result = string.Empty;
+            var result = string.Empty;
             if (resourceKey == null)
                 resourceKey = string.Empty;
             resourceKey = resourceKey.Trim().ToLowerInvariant();
@@ -287,24 +293,25 @@ namespace TinyCms.Services.Localization
             else
             {
                 //gradual loading
-                string key = string.Format(LOCALSTRINGRESOURCES_BY_RESOURCENAME_KEY, languageId, resourceKey);
-                string lsr = _cacheManager.Get(key, () =>
+                var key = string.Format(LOCALSTRINGRESOURCES_BY_RESOURCENAME_KEY, languageId, resourceKey);
+                var lsr = _cacheManager.Get(key, () =>
                 {
                     var query = from l in _lsrRepository.Table
-                                where l.ResourceName == resourceKey
-                                && l.LanguageId == languageId
-                                select l.ResourceValue;
+                        where l.ResourceName == resourceKey
+                              && l.LanguageId == languageId
+                        select l.ResourceValue;
                     return query.FirstOrDefault();
                 });
 
-                if (lsr != null) 
+                if (lsr != null)
                     result = lsr;
             }
             if (String.IsNullOrEmpty(result))
             {
                 if (logIfNotFound)
-                    _logger.Warning(string.Format("Resource string ({0}) is not found. Language ID = {1}", resourceKey, languageId));
-                
+                    _logger.Warning(string.Format("Resource string ({0}) is not found. Language ID = {1}", resourceKey,
+                        languageId));
+
                 if (!String.IsNullOrEmpty(defaultValue))
                 {
                     result = defaultValue;
@@ -319,7 +326,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Export language resources to xml
+        ///     Export language resources to xml
         /// </summary>
         /// <param name="language">Language</param>
         /// <returns>Result in XML format</returns>
@@ -351,7 +358,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Import language resources from XML file
+        ///     Import language resources from XML file
         /// </summary>
         /// <param name="language">Language</param>
         /// <param name="xml">XML</param>
@@ -370,7 +377,7 @@ namespace TinyCms.Services.Localization
                 var inDoc = new XmlDocument();
                 inDoc.LoadXml(xml);
                 var sb = new StringBuilder();
-                using (var xWriter = XmlWriter.Create(sb, new XmlWriterSettings { OmitXmlDeclaration = true }))
+                using (var xWriter = XmlWriter.Create(sb, new XmlWriterSettings {OmitXmlDeclaration = true}))
                 {
                     inDoc.Save(xWriter);
                     xWriter.Close();
@@ -391,7 +398,8 @@ namespace TinyCms.Services.Localization
                 pXmlPackage.DbType = DbType.Xml;
 
                 //long-running query. specify timeout (600 seconds)
-                _dbContext.ExecuteSqlCommand("EXEC [LanguagePackImport] @LanguageId, @XmlPackage", false, 600, pLanguageId, pXmlPackage);
+                _dbContext.ExecuteSqlCommand("EXEC [LanguagePackImport] @LanguageId, @XmlPackage", false, 600,
+                    pLanguageId, pXmlPackage);
             }
             else
             {
@@ -402,8 +410,8 @@ namespace TinyCms.Services.Localization
                 var nodes = xmlDoc.SelectNodes(@"//Language/LocaleResource");
                 foreach (XmlNode node in nodes)
                 {
-                    string name = node.Attributes["Name"].InnerText.Trim();
-                    string value = "";
+                    var name = node.Attributes["Name"].InnerText.Trim();
+                    var value = "";
                     var valueNode = node.SelectSingleNode("Value");
                     if (valueNode != null)
                         value = valueNode.InnerText;
@@ -413,7 +421,9 @@ namespace TinyCms.Services.Localization
 
                     //do not use "Insert"/"Update" methods because they clear cache
                     //let's bulk insert
-                    var resource = language.LocaleStringResources.FirstOrDefault(x => x.ResourceName.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+                    var resource =
+                        language.LocaleStringResources.FirstOrDefault(
+                            x => x.ResourceName.Equals(name, StringComparison.InvariantCultureIgnoreCase));
                     if (resource != null)
                         resource.ResourceValue = value;
                     else

@@ -6,14 +6,14 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-customers.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-customers.png")" alt=""/>
         @T("Admin.Customers.Reports")
     </div>
     <div class="options">
     </div>
 </div>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#customer-reports").kendoTabStrip({
             animation: {
                 open: {
@@ -49,7 +49,7 @@
 
 @{
     //custom tabs
-    var eventMessage = new AdminTabStripCreated(this.Html, "customer-reports");
+    var eventMessage = new AdminTabStripCreated(Html, "customer-reports");
     EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
     foreach (var eventBlock in eventMessage.BlocksToRender)
     {
@@ -59,18 +59,16 @@
 
 
 @helper TabBestByOrderTotal()
-    {
-        var dataDictAttributes = new ViewDataDictionary();
-        dataDictAttributes.TemplateInfo.HtmlFieldPrefix = "bestbyordertotal";
+{
+    var dataDictAttributes = new ViewDataDictionary();
+    dataDictAttributes.TemplateInfo.HtmlFieldPrefix = "bestbyordertotal";
     @Html.Partial("_ReportBestCustomersByOrderTotal", Model.BestCustomersByOrderTotal, dataDictAttributes)
 }
 @helper TabBestByNumberOfOrders()
-    {
-        var dataDictAttributes = new ViewDataDictionary();
-        dataDictAttributes.TemplateInfo.HtmlFieldPrefix = "bestbynumberoforders";
+{
+    var dataDictAttributes = new ViewDataDictionary();
+    dataDictAttributes.TemplateInfo.HtmlFieldPrefix = "bestbynumberoforders";
     @Html.Partial("_ReportBestCustomersByNumberOfOrders", Model.BestCustomersByOrderTotal, dataDictAttributes)
 }
 @helper TabRegisteredCustomers()
-    {
-    @Html.Action("ReportRegisteredCustomers")
-}
+{ @Html.Action("ReportRegisteredCustomers") }

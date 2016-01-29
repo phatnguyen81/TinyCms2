@@ -8,13 +8,14 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Plugins
 {
-    [Validator(typeof(PluginValidator))]
-    public partial class PluginModel : BaseNopModel, ILocalizedModel<PluginLocalizedModel>
+    [Validator(typeof (PluginValidator))]
+    public class PluginModel : BaseNopModel, ILocalizedModel<PluginLocalizedModel>
     {
         public PluginModel()
         {
             Locales = new List<PluginLocalizedModel>();
         }
+
         [NopResourceDisplayName("Admin.Configuration.Plugins.Fields.Group")]
         [AllowHtml]
         public string Group { get; set; }
@@ -45,6 +46,7 @@ namespace TinyCms.Admin.Models.Plugins
         public bool Installed { get; set; }
 
         public bool CanChangeEnabled { get; set; }
+
         [NopResourceDisplayName("Admin.Configuration.Plugins.Fields.IsEnabled")]
         public bool IsEnabled { get; set; }
 
@@ -52,16 +54,14 @@ namespace TinyCms.Admin.Models.Plugins
         public string LogoUrl { get; set; }
 
         public IList<PluginLocalizedModel> Locales { get; set; }
-
-
-
     }
-    public partial class PluginLocalizedModel : ILocalizedModelLocal
-    {
-        public int LanguageId { get; set; }
 
+    public class PluginLocalizedModel : ILocalizedModelLocal
+    {
         [NopResourceDisplayName("Admin.Configuration.Plugins.Fields.FriendlyName")]
         [AllowHtml]
         public string FriendlyName { get; set; }
+
+        public int LanguageId { get; set; }
     }
 }

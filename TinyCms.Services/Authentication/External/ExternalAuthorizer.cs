@@ -14,33 +14,17 @@ using TinyCms.Services.Messages;
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// External authorizer
+    ///     External authorizer
     /// </summary>
-    public partial class ExternalAuthorizer : IExternalAuthorizer
+    public class ExternalAuthorizer : IExternalAuthorizer
     {
-        #region Fields
-
-        private readonly IAuthenticationService _authenticationService;
-        private readonly IOpenAuthenticationService _openAuthenticationService;
-        private readonly IGenericAttributeService _genericAttributeService;
-        private readonly ICustomerRegistrationService _customerRegistrationService;
-        private readonly ICustomerActivityService _customerActivityService;
-        private readonly ILocalizationService _localizationService;
-        private readonly IWorkContext _workContext;
-        private readonly CustomerSettings _customerSettings;
-        private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
-        private readonly IEventPublisher _eventPublisher;
-        private readonly LocalizationSettings _localizationSettings;
-        private readonly IWorkflowMessageService _workflowMessageService;
-        #endregion
-
         #region Ctor
 
         public ExternalAuthorizer(IAuthenticationService authenticationService,
             IOpenAuthenticationService openAuthenticationService,
             IGenericAttributeService genericAttributeService,
-            ICustomerRegistrationService customerRegistrationService, 
-            ICustomerActivityService customerActivityService, 
+            ICustomerRegistrationService customerRegistrationService,
+            ICustomerActivityService customerActivityService,
             ILocalizationService localizationService,
             IWorkContext workContext,
             CustomerSettings customerSettings,
@@ -48,47 +32,18 @@ namespace TinyCms.Services.Authentication.External
             IEventPublisher eventPublisher,
             LocalizationSettings localizationSettings, IWorkflowMessageService workflowMessageService)
         {
-            this._authenticationService = authenticationService;
-            this._openAuthenticationService = openAuthenticationService;
-            this._genericAttributeService = genericAttributeService;
-            this._customerRegistrationService = customerRegistrationService;
-            this._customerActivityService = customerActivityService;
-            this._localizationService = localizationService;
-            this._workContext = workContext;
-            this._customerSettings = customerSettings;
-            this._externalAuthenticationSettings = externalAuthenticationSettings;
-            this._eventPublisher = eventPublisher;
-            this._localizationSettings = localizationSettings;
+            _authenticationService = authenticationService;
+            _openAuthenticationService = openAuthenticationService;
+            _genericAttributeService = genericAttributeService;
+            _customerRegistrationService = customerRegistrationService;
+            _customerActivityService = customerActivityService;
+            _localizationService = localizationService;
+            _workContext = workContext;
+            _customerSettings = customerSettings;
+            _externalAuthenticationSettings = externalAuthenticationSettings;
+            _eventPublisher = eventPublisher;
+            _localizationSettings = localizationSettings;
             _workflowMessageService = workflowMessageService;
-        }
-        
-        #endregion
-
-        #region Utilities
-
-        private bool RegistrationIsEnabled()
-        {
-            return _customerSettings.UserRegistrationType != UserRegistrationType.Disabled && !_externalAuthenticationSettings.AutoRegisterEnabled;
-        }
-
-        private bool AutoRegistrationIsEnabled()
-        {
-            return _customerSettings.UserRegistrationType != UserRegistrationType.Disabled && _externalAuthenticationSettings.AutoRegisterEnabled;
-        }
-
-        private bool AccountDoesNotExistAndUserIsNotLoggedOn(Customer userFound, Customer userLoggedIn)
-        {
-            return userFound == null && userLoggedIn == null;
-        }
-
-        private bool AccountIsAssignedToLoggedOnAccount(Customer userFound, Customer userLoggedIn)
-        {
-            return userFound.Id.Equals(userLoggedIn.Id);
-        }
-
-        private bool AccountAlreadyExists(Customer userFound, Customer userLoggedIn)
-        {
-            return userFound != null && userLoggedIn != null;
         }
 
         #endregion
@@ -126,16 +81,16 @@ namespace TinyCms.Services.Authentication.External
                     var randomPassword = CommonHelper.GenerateRandomDigitCode(20);
 
 
-                    bool isApproved =
+                    var isApproved =
                         //standard registration
                         (_customerSettings.UserRegistrationType == UserRegistrationType.Standard) ||
                         //skip email validation?
                         (_customerSettings.UserRegistrationType == UserRegistrationType.EmailValidation &&
                          !_externalAuthenticationSettings.RequireEmailValidation);
 
-                    var registrationRequest = new CustomerRegistrationRequest(currentCustomer, 
+                    var registrationRequest = new CustomerRegistrationRequest(currentCustomer,
                         details.EmailAddress,
-                        _customerSettings.UsernamesEnabled ? details.UserName : details.EmailAddress, 
+                        _customerSettings.UsernamesEnabled ? details.UserName : details.EmailAddress,
                         randomPassword,
                         PasswordFormat.Clear,
                         isApproved);
@@ -144,10 +99,12 @@ namespace TinyCms.Services.Authentication.External
                     {
                         //store other parameters (form fields)
                         if (!String.IsNullOrEmpty(details.FirstName))
-                            _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.FirstName, details.FirstName);
+                            _genericAttributeService.SaveAttribute(currentCustomer,
+                                SystemCustomerAttributeNames.FirstName, details.FirstName);
                         if (!String.IsNullOrEmpty(details.LastName))
-                            _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.LastName, details.LastName);
-                    
+                            _genericAttributeService.SaveAttribute(currentCustomer,
+                                SystemCustomerAttributeNames.LastName, details.LastName);
+
 
                         userFound = currentCustomer;
                         _openAuthenticationService.AssociateExternalAccountWithUser(currentCustomer, parameters);
@@ -161,7 +118,8 @@ namespace TinyCms.Services.Authentication.External
 
                         //notifications
                         if (_customerSettings.NotifyNewCustomerRegistration)
-                            _workflowMessageService.SendCustomerRegisteredNotificationMessage(currentCustomer, _localizationSettings.DefaultAdminLanguageId);
+                            _workflowMessageService.SendCustomerRegisteredNotificationMessage(currentCustomer,
+                                _localizationSettings.DefaultAdminLanguageId);
 
                         //raise event       
                         _eventPublisher.Publish(new CustomerRegisteredEvent(currentCustomer));
@@ -173,21 +131,24 @@ namespace TinyCms.Services.Authentication.External
                             //skip email validation
 
                             //send customer welcome message
-                            _workflowMessageService.SendCustomerWelcomeMessage(currentCustomer, _workContext.WorkingLanguage.Id);
+                            _workflowMessageService.SendCustomerWelcomeMessage(currentCustomer,
+                                _workContext.WorkingLanguage.Id);
 
                             //result
                             return new AuthorizationResult(OpenAuthenticationStatus.AutoRegisteredStandard);
                         }
-                        else if (_customerSettings.UserRegistrationType == UserRegistrationType.EmailValidation)
+                        if (_customerSettings.UserRegistrationType == UserRegistrationType.EmailValidation)
                         {
                             //email validation message
-                            _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.AccountActivationToken, Guid.NewGuid().ToString());
-                            _workflowMessageService.SendCustomerEmailValidationMessage(currentCustomer, _workContext.WorkingLanguage.Id);
+                            _genericAttributeService.SaveAttribute(currentCustomer,
+                                SystemCustomerAttributeNames.AccountActivationToken, Guid.NewGuid().ToString());
+                            _workflowMessageService.SendCustomerEmailValidationMessage(currentCustomer,
+                                _workContext.WorkingLanguage.Id);
 
                             //result
                             return new AuthorizationResult(OpenAuthenticationStatus.AutoRegisteredEmailValidation);
                         }
-                        else if (_customerSettings.UserRegistrationType == UserRegistrationType.AdminApproval)
+                        if (_customerSettings.UserRegistrationType == UserRegistrationType.AdminApproval)
                         {
                             //result
                             return new AuthorizationResult(OpenAuthenticationStatus.AutoRegisteredAdminApproval);
@@ -228,10 +189,59 @@ namespace TinyCms.Services.Authentication.External
             //raise event       
             _eventPublisher.Publish(new CustomerLoggedinEvent(userFound ?? userLoggedIn));
             //activity log
-            _customerActivityService.InsertActivity("PublicStore.Login", _localizationService.GetResource("ActivityLog.PublicStore.Login"), 
+            _customerActivityService.InsertActivity("PublicStore.Login",
+                _localizationService.GetResource("ActivityLog.PublicStore.Login"),
                 userFound ?? userLoggedIn);
-            
+
             return new AuthorizationResult(OpenAuthenticationStatus.Authenticated);
+        }
+
+        #endregion
+
+        #region Fields
+
+        private readonly IAuthenticationService _authenticationService;
+        private readonly IOpenAuthenticationService _openAuthenticationService;
+        private readonly IGenericAttributeService _genericAttributeService;
+        private readonly ICustomerRegistrationService _customerRegistrationService;
+        private readonly ICustomerActivityService _customerActivityService;
+        private readonly ILocalizationService _localizationService;
+        private readonly IWorkContext _workContext;
+        private readonly CustomerSettings _customerSettings;
+        private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
+        private readonly IEventPublisher _eventPublisher;
+        private readonly LocalizationSettings _localizationSettings;
+        private readonly IWorkflowMessageService _workflowMessageService;
+
+        #endregion
+
+        #region Utilities
+
+        private bool RegistrationIsEnabled()
+        {
+            return _customerSettings.UserRegistrationType != UserRegistrationType.Disabled &&
+                   !_externalAuthenticationSettings.AutoRegisterEnabled;
+        }
+
+        private bool AutoRegistrationIsEnabled()
+        {
+            return _customerSettings.UserRegistrationType != UserRegistrationType.Disabled &&
+                   _externalAuthenticationSettings.AutoRegisterEnabled;
+        }
+
+        private bool AccountDoesNotExistAndUserIsNotLoggedOn(Customer userFound, Customer userLoggedIn)
+        {
+            return userFound == null && userLoggedIn == null;
+        }
+
+        private bool AccountIsAssignedToLoggedOnAccount(Customer userFound, Customer userLoggedIn)
+        {
+            return userFound.Id.Equals(userLoggedIn.Id);
+        }
+
+        private bool AccountAlreadyExists(Customer userFound, Customer userLoggedIn)
+        {
+            return userFound != null && userLoggedIn != null;
         }
 
         #endregion

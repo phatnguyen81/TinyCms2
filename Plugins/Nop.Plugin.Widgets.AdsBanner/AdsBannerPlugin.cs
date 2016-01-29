@@ -13,38 +13,52 @@ using TinyCms.Services.Events;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Media;
 
-
 namespace Nop.Plugin.Widgets.AdsBanner
 {
     /// <summary>
-    /// PLugin
+    ///     PLugin
     /// </summary>
-    public class AdsBannerPlugin : BasePlugin, IWidgetPlugin, IConsumer<EntityUpdated<AdsBannerRecord>>, IConsumer<EntityInserted<AdsBannerRecord>>, IConsumer<EntityDeleted<AdsBannerRecord>>
+    public class AdsBannerPlugin : BasePlugin, IWidgetPlugin, IConsumer<EntityUpdated<AdsBannerRecord>>,
+        IConsumer<EntityInserted<AdsBannerRecord>>, IConsumer<EntityDeleted<AdsBannerRecord>>
     {
         public const string SEARCH_ALL_ADSBANNERS_MODEL_KEY = "Cms.pres.search.adsbanners";
         public const string SEARCH_ACTIVEFROMNOW_ADSBANNERS_MODEL_KEY = "Cms.pres.search.adsbanners-{0}";
-
-
+        private readonly ICacheManager _cacheManager;
+        private readonly AdsBannerObjectContext _context;
         private readonly IPictureService _pictureService;
         private readonly ISettingService _settingService;
         private readonly IWebHelper _webHelper;
         private readonly IWidgetService _widgetService;
-        private readonly ICacheManager _cacheManager;
-        private readonly AdsBannerObjectContext _context;
 
-        public AdsBannerPlugin(IPictureService pictureService, 
-            ISettingService settingService, IWebHelper webHelper, AdsBannerObjectContext context, IWidgetService widgetService, ICacheManager cacheManager)
+        public AdsBannerPlugin(IPictureService pictureService,
+            ISettingService settingService, IWebHelper webHelper, AdsBannerObjectContext context,
+            IWidgetService widgetService, ICacheManager cacheManager)
         {
-            this._pictureService = pictureService;
-            this._settingService = settingService;
-            this._webHelper = webHelper;
+            _pictureService = pictureService;
+            _settingService = settingService;
+            _webHelper = webHelper;
             _context = context;
             _widgetService = widgetService;
             _cacheManager = cacheManager;
         }
 
+        public void HandleEvent(EntityDeleted<AdsBannerRecord> eventMessage)
+        {
+            _cacheManager.RemoveByPattern(SEARCH_ALL_ADSBANNERS_MODEL_KEY);
+        }
+
+        public void HandleEvent(EntityInserted<AdsBannerRecord> eventMessage)
+        {
+            _cacheManager.RemoveByPattern(SEARCH_ALL_ADSBANNERS_MODEL_KEY);
+        }
+
+        public void HandleEvent(EntityUpdated<AdsBannerRecord> eventMessage)
+        {
+            _cacheManager.RemoveByPattern(SEARCH_ALL_ADSBANNERS_MODEL_KEY);
+        }
+
         /// <summary>
-        /// Gets widget zones where this widget should be rendered
+        ///     Gets widget zones where this widget should be rendered
         /// </summary>
         /// <returns>Widget zones</returns>
         public IList<string> GetWidgetZones()
@@ -53,26 +67,32 @@ namespace Nop.Plugin.Widgets.AdsBanner
         }
 
         /// <summary>
-        /// Gets a route for provider configuration
+        ///     Gets a route for provider configuration
         /// </summary>
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller name</param>
         /// <param name="routeValues">Route values</param>
-        public void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
+        public void GetConfigurationRoute(out string actionName, out string controllerName,
+            out RouteValueDictionary routeValues)
         {
             actionName = "Configure";
             controllerName = "WidgetsAdsBanner";
-            routeValues = new RouteValueDictionary { { "Namespaces", "Nop.Plugin.Widgets.AdsBanner.Controllers" }, { "area", null } };
+            routeValues = new RouteValueDictionary
+            {
+                {"Namespaces", "Nop.Plugin.Widgets.AdsBanner.Controllers"},
+                {"area", null}
+            };
         }
 
         /// <summary>
-        /// Gets a route for displaying widget
+        ///     Gets a route for displaying widget
         /// </summary>
         /// <param name="widgetZone">Widget zone where it's displayed</param>
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller name</param>
         /// <param name="routeValues">Route values</param>
-        public void GetDisplayWidgetRoute(string widgetZone, out string actionName, out string controllerName, out RouteValueDictionary routeValues)
+        public void GetDisplayWidgetRoute(string widgetZone, out string actionName, out string controllerName,
+            out RouteValueDictionary routeValues)
         {
             actionName = "PublicInfo";
             controllerName = "WidgetsAdsBanner";
@@ -83,9 +103,9 @@ namespace Nop.Plugin.Widgets.AdsBanner
                 {"widgetZone", widgetZone}
             };
         }
-        
+
         /// <summary>
-        /// Install plugin
+        ///     Install plugin
         /// </summary>
         public override void Install()
         {
@@ -98,17 +118,21 @@ namespace Nop.Plugin.Widgets.AdsBanner
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.WidgetZone", "Widget Zone");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.WidgetZone.Hint", "Zone to show banner");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Url", "Url");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Url.Hint", "Redirect to link when click to banner");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Url.Hint",
+                "Redirect to link when click to banner");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.FromDate", "From date");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.FromDate.Hint", "Show banner after from date");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.FromDate.Hint",
+                "Show banner after from date");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.ToDate", "To date");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.ToDate.Hint", "Show banner before from date");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Published", "Published");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Published.Hint", "Published");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.DisplayOrder", "Display order");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.DisplayOrder.Hint", "Display order");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.List.SearchAdsBannerName", "Search banner name");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.List.SearchAdsBannerName.Hint", "Search banner name");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.List.SearchAdsBannerName",
+                "Search banner name");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.List.SearchAdsBannerName.Hint",
+                "Search banner name");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.Manage", "Banner management");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.AddNew", "Add new Ads banner");
             this.AddOrUpdatePluginLocaleResource("Plugins.Widgets.AdsBanner.EditAdsBannerDetail", "Edit Ads banner");
@@ -120,7 +144,7 @@ namespace Nop.Plugin.Widgets.AdsBanner
         }
 
         /// <summary>
-        /// Uninstall plugin
+        ///     Uninstall plugin
         /// </summary>
         public override void Uninstall()
         {
@@ -153,21 +177,6 @@ namespace Nop.Plugin.Widgets.AdsBanner
             this.DeletePluginLocaleResource("Plugins.Widgets.AdsBanner.BackToList");
 
             base.Uninstall();
-        }
-
-        public void HandleEvent(EntityUpdated<AdsBannerRecord> eventMessage)
-        {
-            _cacheManager.RemoveByPattern(SEARCH_ALL_ADSBANNERS_MODEL_KEY);
-        }
-
-        public void HandleEvent(EntityInserted<AdsBannerRecord> eventMessage)
-        {
-            _cacheManager.RemoveByPattern(SEARCH_ALL_ADSBANNERS_MODEL_KEY);
-        }
-
-        public void HandleEvent(EntityDeleted<AdsBannerRecord> eventMessage)
-        {
-            _cacheManager.RemoveByPattern(SEARCH_ALL_ADSBANNERS_MODEL_KEY);
         }
     }
 }

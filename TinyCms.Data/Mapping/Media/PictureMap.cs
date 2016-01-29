@@ -2,15 +2,15 @@ using TinyCms.Core.Domain.Media;
 
 namespace TinyCms.Data.Mapping.Media
 {
-    public partial class PictureMap : NopEntityTypeConfiguration<Picture>
+    public class PictureMap : NopEntityTypeConfiguration<Picture>
     {
         public PictureMap()
         {
-            this.ToTable("Picture");
-            this.HasKey(p => p.Id);
-            this.Property(p => p.PictureBinary).IsMaxLength();
-            this.Property(p => p.MimeType).IsRequired().HasMaxLength(40);
-            this.Property(p => p.SeoFilename).HasMaxLength(300);
+            ToTable("Picture");
+            HasKey(p => p.Id);
+            Property(p => p.PictureBinary).IsMaxLength();
+            Property(p => p.MimeType).IsRequired().HasMaxLength(40);
+            Property(p => p.SeoFilename).HasMaxLength(300);
         }
     }
 }

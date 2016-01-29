@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Routing;
 using TinyCms.Core;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Web.Framework.Controllers;
@@ -10,13 +11,13 @@ namespace TinyCms.Admin.Controllers
     [AdminValidateIpAddress]
     [AdminAuthorize]
     [AdminAntiForgery]
-    public abstract partial class BaseAdminController : BaseController
+    public abstract class BaseAdminController : BaseController
     {
         /// <summary>
-        /// Initialize controller
+        ///     Initialize controller
         /// </summary>
         /// <param name="requestContext">Request context</param>
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        protected override void Initialize(RequestContext requestContext)
         {
             //set work context to admin mode
             EngineContext.Current.Resolve<IWorkContext>().IsAdmin = true;
@@ -25,7 +26,7 @@ namespace TinyCms.Admin.Controllers
         }
 
         /// <summary>
-        /// On exception
+        ///     On exception
         /// </summary>
         /// <param name="filterContext">Filter context</param>
         protected override void OnException(ExceptionContext filterContext)
@@ -34,19 +35,19 @@ namespace TinyCms.Admin.Controllers
                 LogException(filterContext.Exception);
             base.OnException(filterContext);
         }
-        
+
         /// <summary>
-        /// Access denied view
+        ///     Access denied view
         /// </summary>
         /// <returns>Access denied view</returns>
         protected ActionResult AccessDeniedView()
         {
             //return new HttpUnauthorizedResult();
-            return RedirectToAction("AccessDenied", "Security", new { pageUrl = this.Request.RawUrl });
+            return RedirectToAction("AccessDenied", "Security", new {pageUrl = Request.RawUrl});
         }
 
         /// <summary>
-        /// Save selected TAB index
+        ///     Save selected TAB index
         /// </summary>
         /// <param name="index">Idnex to save; null to automatically detect it</param>
         /// <param name="persistForTheNextRequest">A value indicating whether a message should be persisted for the next request</param>
@@ -57,14 +58,14 @@ namespace TinyCms.Admin.Controllers
             if (!index.HasValue)
             {
                 int tmp;
-                if (int.TryParse(this.Request.Form["selected-tab-index"], out tmp))
+                if (int.TryParse(Request.Form["selected-tab-index"], out tmp))
                 {
                     index = tmp;
                 }
             }
             if (index.HasValue)
             {
-                string dataKey = "nop.selected-tab-index";
+                var dataKey = "nop.selected-tab-index";
                 if (persistForTheNextRequest)
                 {
                     TempData[dataKey] = index;

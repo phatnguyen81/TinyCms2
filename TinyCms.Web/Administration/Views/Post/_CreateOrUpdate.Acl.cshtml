@@ -1,22 +1,21 @@
 ﻿@model ProductModel
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         $("#@Html.FieldIdFor(model => model.SubjectToAcl)").click(toggleAcl);
 
-            toggleAcl();
-        });
+        toggleAcl();
+    });
 
 
-        function toggleAcl() {
-            if ($('#@Html.FieldIdFor(model => model.SubjectToAcl)').is(':checked')) {
-                $('#pnl-acl').show();
-            }
-            else {
-                $('#pnl-acl').hide();
-            }
+    function toggleAcl() {
+        if ($("#@Html.FieldIdFor(model => model.SubjectToAcl)").is(":checked")) {
+            $("#pnl-acl").show();
+        } else {
+            $("#pnl-acl").hide();
         }
+    }
 
 </script>
 <table class="adminContent">
@@ -39,9 +38,9 @@
                 @Html.Action("AclDisabledWarning", "Common")
                 foreach (var customerRole in Model.AvailableCustomerRoles)
                 {
-                <div>
-                    <input type="checkbox" name="SelectedCustomerRoleIds" value="@customerRole.Id" checked="@(Model.SelectedCustomerRoleIds != null && Model.SelectedCustomerRoleIds.Contains(customerRole.Id))" />@customerRole.Name
-                </div>
+                    <div>
+                        <input type="checkbox" name="SelectedCustomerRoleIds" value="@customerRole.Id" checked="@(Model.SelectedCustomerRoleIds != null && Model.SelectedCustomerRoleIds.Contains(customerRole.Id))"/>@customerRole.Name
+                    </div>
                 }
             }
             else

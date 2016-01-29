@@ -8,11 +8,11 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-content.png")" alt="" />
-            @T("Admin.ContentManagement.MessageTemplates.TestDetails") @Html.ActionLink("(" + T("Admin.ContentManagement.MessageTemplates.Test.BackToTemplate") + ")", "Edit", new { id = Model.Id })
+            <img src="@Url.Content("~/Administration/Content/images/ico-content.png")" alt=""/>
+            @T("Admin.ContentManagement.MessageTemplates.TestDetails") @Html.ActionLink("(" + T("Admin.ContentManagement.MessageTemplates.Test.BackToTemplate") + ")", "Edit", new {id = Model.Id})
         </div>
         <div class="options">
-            <input type="submit" name="send-test" class="k-button" value="@T("Admin.ContentManagement.MessageTemplates.Test.Send")" />
+            <input type="submit" name="send-test" class="k-button" value="@T("Admin.ContentManagement.MessageTemplates.Test.Send")"/>
         </div>
     </div>
     @Html.HiddenFor(model => model.Id)
@@ -38,7 +38,7 @@
                     @token
                 </td>
                 <td class="adminData">
-                    <input type="text" name="token_@(token)" class="text-box single-line" />
+                    <input type="text" name="token_@(token)" class="text-box single-line"/>
                 </td>
             </tr>
         }

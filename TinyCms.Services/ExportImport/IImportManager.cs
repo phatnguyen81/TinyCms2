@@ -1,13 +1,9 @@
-﻿
-using System.IO;
-
-namespace TinyCms.Services.ExportImport
+﻿namespace TinyCms.Services.ExportImport
 {
     /// <summary>
-    /// Import manager interface
+    ///     Import manager interface
     /// </summary>
-    public partial interface IImportManager
+    public interface IImportManager
     {
-   
     }
 }

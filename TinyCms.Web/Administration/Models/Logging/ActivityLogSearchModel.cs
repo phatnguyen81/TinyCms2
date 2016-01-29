@@ -7,12 +7,13 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Logging
 {
-    public partial class ActivityLogSearchModel : BaseNopModel
+    public class ActivityLogSearchModel : BaseNopModel
     {
         public ActivityLogSearchModel()
         {
             ActivityLogType = new List<SelectListItem>();
         }
+
         [NopResourceDisplayName("Admin.Configuration.ActivityLog.ActivityLog.Fields.CreatedOnFrom")]
         [UIHint("DateNullable")]
         public DateTime? CreatedOnFrom { get; set; }

@@ -1,7 +1,7 @@
 namespace TinyCms.Services.Media
 {
     /// <summary>
-    /// Resize types
+    ///     Resize types
     /// </summary>
     public enum ResizeType
     {

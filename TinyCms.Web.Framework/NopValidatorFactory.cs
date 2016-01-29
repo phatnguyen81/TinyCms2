@@ -12,7 +12,7 @@ namespace TinyCms.Web.Framework
         {
             if (type != null)
             {
-                var attribute = (ValidatorAttribute)Attribute.GetCustomAttribute(type, typeof(ValidatorAttribute));
+                var attribute = (ValidatorAttribute) Attribute.GetCustomAttribute(type, typeof (ValidatorAttribute));
                 if ((attribute != null) && (attribute.ValidatorType != null))
                 {
                     //validators can depend on some customer specific settings (such as working language)
@@ -24,7 +24,6 @@ namespace TinyCms.Web.Framework
                 }
             }
             return null;
-
         }
     }
 }

@@ -14,8 +14,27 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class CustomerAttributeController : BaseAdminController
+    public class CustomerAttributeController : BaseAdminController
     {
+        #region Constructors
+
+        public CustomerAttributeController(ICustomerAttributeService customerAttributeService,
+            ILanguageService languageService,
+            ILocalizedEntityService localizedEntityService,
+            ILocalizationService localizationService,
+            IWorkContext workContext,
+            IPermissionService permissionService)
+        {
+            _customerAttributeService = customerAttributeService;
+            _languageService = languageService;
+            _localizedEntityService = localizedEntityService;
+            _localizationService = localizationService;
+            _workContext = workContext;
+            _permissionService = permissionService;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly ICustomerAttributeService _customerAttributeService;
@@ -27,25 +46,6 @@ namespace TinyCms.Admin.Controllers
 
         #endregion
 
-        #region Constructors
-
-        public CustomerAttributeController(ICustomerAttributeService customerAttributeService,
-            ILanguageService languageService, 
-            ILocalizedEntityService localizedEntityService,
-            ILocalizationService localizationService,
-            IWorkContext workContext,
-            IPermissionService permissionService)
-        {
-            this._customerAttributeService = customerAttributeService;
-            this._languageService = languageService;
-            this._localizedEntityService = localizedEntityService;
-            this._localizationService = localizationService;
-            this._workContext = workContext;
-            this._permissionService = permissionService;
-        }
-
-        #endregion
-        
         #region Utilities
 
         [NonAction]
@@ -54,26 +54,27 @@ namespace TinyCms.Admin.Controllers
             foreach (var localized in model.Locales)
             {
                 _localizedEntityService.SaveLocalizedValue(customerAttribute,
-                                                               x => x.Name,
-                                                               localized.Name,
-                                                               localized.LanguageId);
+                    x => x.Name,
+                    localized.Name,
+                    localized.LanguageId);
             }
         }
 
         [NonAction]
-        protected  virtual void UpdateValueLocales(CustomerAttributeValue customerAttributeValue, CustomerAttributeValueModel model)
+        protected virtual void UpdateValueLocales(CustomerAttributeValue customerAttributeValue,
+            CustomerAttributeValueModel model)
         {
             foreach (var localized in model.Locales)
             {
                 _localizedEntityService.SaveLocalizedValue(customerAttributeValue,
-                                                               x => x.Name,
-                                                               localized.Name,
-                                                               localized.LanguageId);
+                    x => x.Name,
+                    localized.Name,
+                    localized.LanguageId);
             }
         }
 
         #endregion
-        
+
         #region Customer attributes
 
         public ActionResult Index()
@@ -92,7 +93,7 @@ namespace TinyCms.Admin.Controllers
                 return AccessDeniedView();
 
             //we just redirect a user to the customer settings page
-            
+
             //select second tab
             const int customerFormFieldIndex = 1;
             SaveSelectedTabIndex(customerFormFieldIndex);
@@ -111,14 +112,15 @@ namespace TinyCms.Admin.Controllers
                 Data = customerAttributes.Select(x =>
                 {
                     var attributeModel = x.ToModel();
-                    attributeModel.AttributeControlTypeName = x.AttributeControlType.GetLocalizedEnum(_localizationService, _workContext);
+                    attributeModel.AttributeControlTypeName =
+                        x.AttributeControlType.GetLocalizedEnum(_localizationService, _workContext);
                     return attributeModel;
                 }),
                 Total = customerAttributes.Count()
             };
             return Json(gridModel);
         }
-        
+
         //create
         public ActionResult Create()
         {
@@ -145,7 +147,9 @@ namespace TinyCms.Admin.Controllers
                 UpdateAttributeLocales(customerAttribute, model);
 
                 SuccessNotification(_localizationService.GetResource("Admin.Customers.CustomerAttributes.Added"));
-                return continueEditing ? RedirectToAction("Edit", new { id = customerAttribute.Id }) : RedirectToAction("List");
+                return continueEditing
+                    ? RedirectToAction("Edit", new {id = customerAttribute.Id})
+                    : RedirectToAction("List");
             }
 
             //If we got this far, something failed, redisplay form
@@ -165,10 +169,11 @@ namespace TinyCms.Admin.Controllers
 
             var model = customerAttribute.ToModel();
             //locales
-            AddLocales(_languageService, model.Locales, (locale, languageId) =>
-            {
-                locale.Name = customerAttribute.GetLocalized(x => x.Name, languageId, false, false);
-            });
+            AddLocales(_languageService, model.Locales,
+                (locale, languageId) =>
+                {
+                    locale.Name = customerAttribute.GetLocalized(x => x.Name, languageId, false, false);
+                });
             return View(model);
         }
 
@@ -239,7 +244,7 @@ namespace TinyCms.Admin.Controllers
                     CustomerAttributeId = x.CustomerAttributeId,
                     Name = x.Name,
                     IsPreSelected = x.IsPreSelected,
-                    DisplayOrder = x.DisplayOrder,
+                    DisplayOrder = x.DisplayOrder
                 }),
                 Total = values.Count()
             };
@@ -274,7 +279,7 @@ namespace TinyCms.Admin.Controllers
             if (customerAttribute == null)
                 //No customer attribute found with the specified id
                 return RedirectToAction("List");
-            
+
             if (ModelState.IsValid)
             {
                 var cav = new CustomerAttributeValue
@@ -318,10 +323,8 @@ namespace TinyCms.Admin.Controllers
             };
 
             //locales
-            AddLocales(_languageService, model.Locales, (locale, languageId) =>
-            {
-                locale.Name = cav.GetLocalized(x => x.Name, languageId, false, false);
-            });
+            AddLocales(_languageService, model.Locales,
+                (locale, languageId) => { locale.Name = cav.GetLocalized(x => x.Name, languageId, false, false); });
 
             return View(model);
         }
@@ -370,7 +373,6 @@ namespace TinyCms.Admin.Controllers
 
             return new NullJsonResult();
         }
-
 
         #endregion
     }

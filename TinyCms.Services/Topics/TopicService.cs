@@ -13,34 +13,55 @@ using TinyCms.Services.Events;
 namespace TinyCms.Services.Topics
 {
     /// <summary>
-    /// Topic service
+    ///     Topic service
     /// </summary>
-    public partial class TopicService : ITopicService
+    public class TopicService : ITopicService
     {
+        #region Ctor
+
+        public TopicService(IRepository<Topic> topicRepository,
+            IWorkContext workContext,
+            IRepository<AclRecord> aclRepository,
+            CatalogSettings catalogSettings,
+            IEventPublisher eventPublisher,
+            ICacheManager cacheManager)
+        {
+            _topicRepository = topicRepository;
+            _workContext = workContext;
+            _aclRepository = aclRepository;
+            _catalogSettings = catalogSettings;
+            _eventPublisher = eventPublisher;
+            _cacheManager = cacheManager;
+        }
+
+        #endregion
+
         #region Constants
 
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : store ID
-        /// {1} : ignore ACL?
+        ///     {0} : store ID
+        ///     {1} : ignore ACL?
         /// </remarks>
         private const string TOPICS_ALL_KEY = "Nop.topics.all-{0}";
+
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : topic ID
+        ///     {0} : topic ID
         /// </remarks>
         private const string TOPICS_BY_ID_KEY = "Nop.topics.id-{0}";
+
         /// <summary>
-        /// Key pattern to clear cache
+        ///     Key pattern to clear cache
         /// </summary>
         private const string TOPICS_PATTERN_KEY = "Nop.topics.";
 
         #endregion
-        
+
         #region Fields
 
         private readonly IRepository<Topic> _topicRepository;
@@ -52,29 +73,10 @@ namespace TinyCms.Services.Topics
 
         #endregion
 
-        #region Ctor
-
-        public TopicService(IRepository<Topic> topicRepository, 
-            IWorkContext workContext,
-            IRepository<AclRecord> aclRepository,
-            CatalogSettings catalogSettings,
-            IEventPublisher eventPublisher,
-            ICacheManager cacheManager)
-        {
-            this._topicRepository = topicRepository;
-            this._workContext = workContext;
-            this._aclRepository = aclRepository;
-            this._catalogSettings = catalogSettings;
-            this._eventPublisher = eventPublisher;
-            this._cacheManager = cacheManager;
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Deletes a topic
+        ///     Deletes a topic
         /// </summary>
         /// <param name="topic">Topic</param>
         public virtual void DeleteTopic(Topic topic)
@@ -92,7 +94,7 @@ namespace TinyCms.Services.Topics
         }
 
         /// <summary>
-        /// Gets a topic
+        ///     Gets a topic
         /// </summary>
         /// <param name="topicId">The topic identifier</param>
         /// <returns>Topic</returns>
@@ -101,12 +103,12 @@ namespace TinyCms.Services.Topics
             if (topicId == 0)
                 return null;
 
-            string key = string.Format(TOPICS_BY_ID_KEY, topicId);
+            var key = string.Format(TOPICS_BY_ID_KEY, topicId);
             return _cacheManager.Get(key, () => _topicRepository.GetById(topicId));
         }
 
         /// <summary>
-        /// Gets a topic
+        ///     Gets a topic
         /// </summary>
         /// <param name="systemName">The topic system name</param>
         /// <param name="storeId">Store identifier; pass 0 to ignore filtering by store and load the first one</param>
@@ -124,14 +126,14 @@ namespace TinyCms.Services.Topics
         }
 
         /// <summary>
-        /// Gets all topics
+        ///     Gets all topics
         /// </summary>
         /// <param name="storeId">Store identifier; pass 0 to load all records</param>
         /// <param name="ignorAcl">A value indicating whether to ignore ACL rules</param>
         /// <returns>Topics</returns>
         public virtual IList<Topic> GetAllTopics(bool ignorAcl = false)
         {
-            string key = string.Format(TOPICS_ALL_KEY, ignorAcl);
+            var key = string.Format(TOPICS_ALL_KEY, ignorAcl);
             return _cacheManager.Get(key, () =>
             {
                 var query = _topicRepository.Table;
@@ -145,29 +147,30 @@ namespace TinyCms.Services.Topics
                         //ACL (access control list)
                         var allowedCustomerRolesIds = _workContext.CurrentCustomer.GetCustomerRoleIds();
                         query = from c in query
-                                join acl in _aclRepository.Table
-                                on new { c1 = c.Id, c2 = "Topic" } equals new { c1 = acl.EntityId, c2 = acl.EntityName } into c_acl
-                                from acl in c_acl.DefaultIfEmpty()
-                                where !c.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
-                                select c;
+                            join acl in _aclRepository.Table
+                                on new {c1 = c.Id, c2 = "Topic"} equals new {c1 = acl.EntityId, c2 = acl.EntityName}
+                                into c_acl
+                            from acl in c_acl.DefaultIfEmpty()
+                            where !c.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
+                            select c;
                     }
 
 
                     //only distinct topics (group by ID)
                     query = from t in query
-                            group t by t.Id
-                            into tGroup
-                            orderby tGroup.Key
-                            select tGroup.FirstOrDefault();
+                        group t by t.Id
+                        into tGroup
+                        orderby tGroup.Key
+                        select tGroup.FirstOrDefault();
                     query = query.OrderBy(t => t.DisplayOrder).ThenBy(t => t.SystemName);
                 }
 
-                return query.ToList();                            
+                return query.ToList();
             });
         }
 
         /// <summary>
-        /// Inserts a topic
+        ///     Inserts a topic
         /// </summary>
         /// <param name="topic">Topic</param>
         public virtual void InsertTopic(Topic topic)
@@ -185,7 +188,7 @@ namespace TinyCms.Services.Topics
         }
 
         /// <summary>
-        /// Updates the topic
+        ///     Updates the topic
         /// </summary>
         /// <param name="topic">Topic</param>
         public virtual void UpdateTopic(Topic topic)

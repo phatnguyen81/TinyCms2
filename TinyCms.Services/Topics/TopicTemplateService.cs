@@ -8,37 +8,37 @@ using TinyCms.Services.Events;
 namespace TinyCms.Services.Topics
 {
     /// <summary>
-    /// Topic template service
+    ///     Topic template service
     /// </summary>
-    public partial class TopicTemplateService : ITopicTemplateService
+    public class TopicTemplateService : ITopicTemplateService
     {
+        #region Ctor
+
+        /// <summary>
+        ///     Ctor
+        /// </summary>
+        /// <param name="topicTemplateRepository">Topic template repository</param>
+        /// <param name="eventPublisher">Event published</param>
+        public TopicTemplateService(IRepository<TopicTemplate> topicTemplateRepository,
+            IEventPublisher eventPublisher)
+        {
+            _topicTemplateRepository = topicTemplateRepository;
+            _eventPublisher = eventPublisher;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly IRepository<TopicTemplate> _topicTemplateRepository;
         private readonly IEventPublisher _eventPublisher;
 
         #endregion
-        
-        #region Ctor
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="topicTemplateRepository">Topic template repository</param>
-        /// <param name="eventPublisher">Event published</param>
-        public TopicTemplateService(IRepository<TopicTemplate> topicTemplateRepository, 
-            IEventPublisher eventPublisher)
-        {
-            this._topicTemplateRepository = topicTemplateRepository;
-            this._eventPublisher = eventPublisher;
-        }
-
-        #endregion
 
         #region Methods
 
         /// <summary>
-        /// Delete topic template
+        ///     Delete topic template
         /// </summary>
         /// <param name="topicTemplate">Topic template</param>
         public virtual void DeleteTopicTemplate(TopicTemplate topicTemplate)
@@ -53,21 +53,21 @@ namespace TinyCms.Services.Topics
         }
 
         /// <summary>
-        /// Gets all topic templates
+        ///     Gets all topic templates
         /// </summary>
         /// <returns>Topic templates</returns>
         public virtual IList<TopicTemplate> GetAllTopicTemplates()
         {
             var query = from pt in _topicTemplateRepository.Table
-                        orderby pt.DisplayOrder
-                        select pt;
+                orderby pt.DisplayOrder
+                select pt;
 
             var templates = query.ToList();
             return templates;
         }
- 
+
         /// <summary>
-        /// Gets a topic template
+        ///     Gets a topic template
         /// </summary>
         /// <param name="topicTemplateId">Topic template identifier</param>
         /// <returns>Topic template</returns>
@@ -80,7 +80,7 @@ namespace TinyCms.Services.Topics
         }
 
         /// <summary>
-        /// Inserts topic template
+        ///     Inserts topic template
         /// </summary>
         /// <param name="topicTemplate">Topic template</param>
         public virtual void InsertTopicTemplate(TopicTemplate topicTemplate)
@@ -95,7 +95,7 @@ namespace TinyCms.Services.Topics
         }
 
         /// <summary>
-        /// Updates the topic template
+        ///     Updates the topic template
         /// </summary>
         /// <param name="topicTemplate">Topic template</param>
         public virtual void UpdateTopicTemplate(TopicTemplate topicTemplate)
@@ -108,7 +108,7 @@ namespace TinyCms.Services.Topics
             //event notification
             _eventPublisher.EntityUpdated(topicTemplate);
         }
-        
+
         #endregion
     }
 }

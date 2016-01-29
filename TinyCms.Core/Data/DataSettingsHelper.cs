@@ -3,14 +3,14 @@
 namespace TinyCms.Core.Data
 {
     /// <summary>
-    /// Data settings helper
+    ///     Data settings helper
     /// </summary>
-    public partial class DataSettingsHelper
+    public class DataSettingsHelper
     {
         private static bool? _databaseIsInstalled;
 
         /// <summary>
-        /// Returns a value indicating whether database is already installed
+        ///     Returns a value indicating whether database is already installed
         /// </summary>
         /// <returns></returns>
         public static bool DatabaseIsInstalled()

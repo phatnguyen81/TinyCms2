@@ -5,7 +5,7 @@
 @Html.HiddenFor(model => model.Id)
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#customerattribute-edit").kendoTabStrip({
             animation: {
                 open: {
@@ -35,7 +35,7 @@
 
 @{
     //custom tabs
-    var eventMessage = new AdminTabStripCreated(this.Html, "customerattribute-edit");
+    var eventMessage = new AdminTabStripCreated(Html, "customerattribute-edit");
     EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
     foreach (var eventBlock in eventMessage.BlocksToRender)
     {
@@ -47,37 +47,37 @@
 <input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
 
 @helper TabInfo()
-    {
+{
     @(Html.LocalizedEditor<CustomerAttributeModel, CustomerAttributeLocalizedModel>("customerattribute-localized",
-    @<table class="adminContent">
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.Locales[item].Name):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.Locales[item].Name)
-                @Html.ValidationMessageFor(model => model.Locales[item].Name)
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                @Html.HiddenFor(model => model.Locales[item].LanguageId)
-            </td>
-        </tr>
-    </table>
-    ,
-    @<table class="adminContent">
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.Name):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </td>
-        </tr>
-    </table>
-    ))
+          @<table class="adminContent">
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].Name):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].Name)
+                      @Html.ValidationMessageFor(model => model.Locales[item].Name)
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      @Html.HiddenFor(model => model.Locales[item].LanguageId)
+                  </td>
+              </tr>
+          </table>
+        ,
+          @<table class="adminContent">
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Name):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Name)
+                      @Html.ValidationMessageFor(model => model.Name)
+                  </td>
+              </tr>
+          </table>
+          ))
     <table class="adminContent">
         <tr>
             <td class="adminTitle">
@@ -96,8 +96,8 @@
                 @{
                     var attributeControlTypes = ((AttributeControlType) Model.AttributeControlTypeId)
                         .ToSelectList(valuesToExclude:
-                        //custom customer attributes don't support some attribute control types
-                        new [] { (int)AttributeControlType.FileUpload, (int)AttributeControlType.Datepicker, (int)AttributeControlType.ColorSquares });
+                            //custom customer attributes don't support some attribute control types
+                            new[] {(int) AttributeControlType.FileUpload, (int) AttributeControlType.Datepicker, (int) AttributeControlType.ColorSquares});
                 }
                 @Html.DropDownListFor(model => model.AttributeControlTypeId, attributeControlTypes)
                 @Html.ValidationMessageFor(model => model.AttributeControlTypeId)
@@ -113,13 +113,12 @@
             </td>
         </tr>
     </table>
-        
-    }
+}
 @helper TabValues()
-    { 
+{
         if (Model.Id > 0)
         {
-            /*TODO display the following warning if values are not supported by selected attribute control type
+/*TODO display the following warning if values are not supported by selected attribute control type
              'Values are not required for this attribute control type'
              */
             <table class="adminContent">
@@ -128,13 +127,13 @@
                         <div id="customerattributevalues-grid"></div>
 
                         <script>
-                            $(document).ready(function () {
+                            $(document).ready(function() {
                                 $("#customerattributevalues-grid").kendoGrid({
                                     dataSource: {
                                         type: "json",
                                         transport: {
                                             read: {
-                                                url: "@Html.Raw(Url.Action("ValueList", "CustomerAttribute", new { customerAttributeId = Model.Id }))",
+                                                url: "@Html.Raw(Url.Action("ValueList", "CustomerAttribute", new {customerAttributeId = Model.Id}))",
                                                 type: "POST",
                                                 dataType: "json",
                                                 data: addAntiForgeryToken
@@ -174,7 +173,8 @@
                                         mode: "inline"
                                     },
                                     scrollable: false,
-                                    columns: [{
+                                    columns: [
+                                    {
                                         field: "Name",
                                         title: "@T("Admin.Customers.CustomerAttributes.Values.Fields.Name")"
                                     }, {
@@ -183,47 +183,72 @@
                                         width: 100,
                                         headerAttributes: { style: "text-align:center" },
                                         attributes: { style: "text-align:center" },
-                                        template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IsPreSelected#.gif" />'
-                                    }, {
-                                        field: "DisplayOrder",
-                                        title: "@T("Admin.Customers.CustomerAttributes.Values.Fields.DisplayOrder")",
-                                        width: 100
-                                    },{
-                                        field: "Id",
-                                        title: "@T("Admin.Common.Edit")",
-                                        width: 100,
-                                        template: "<input type='submit' value='@T("Admin.Common.Edit")' onclick=\"javascript:OpenWindow('@Url.Content("~/Admin/CustomerAttribute/ValueEditPopup/")#=Id#?btnId=btnRefresh&formId=customerattribute-form', 800, 350, true); return false;\" class='k-button' />"
-                                    }, {
-                                        command: {name: "destroy", text: "@T("Admin.Common.Delete")"},
-                                        title: "@T("Admin.Common.Delete")",
-                                        width: 100
-                                    }]
+                                        template: "<img src=\"@Url.Content(\
+            "~/Administration/Content/images/\")active-#=IsPreSelected#.gif\" />"
+        },
+        {
+            "DisplayOrder",
+            "@T("
+            Admin.Customers.CustomerAttributes.Values.Fields.DisplayOrder
+            ")",
+            100
+        }
+    ,
+        {
+            "Id",
+            "@T("
+            Admin.Common.Edit
+            ")",
+            100,
+            "<input type='submit' value='@T("
+            Admin.Common.Edit
+            ")' onclick=\"javascript:OpenWindow('@Url.Content("
+            ~/
+            Admin/CustomerAttribute/ValueEditPopup/")#=Id#?btnId=btnRefresh&formId=customerattribute-form', 800, 350, true); return false;\" class='k-button' />"
+        }
+    ,
+        {
+            {
+                "destroy",
+                "@T("
+                Admin.Common.Delete
+                ")"
+            }
+        ,
+            "@T("
+            Admin.Common.Delete
+            ")",
+            100
+        }
+    ]
+    });
                                 });
-                            });
-                        </script>
+                                </script>
                     </td>
                 </tr>
                 <tr>
                     <td width="100%">
-                        <input type="submit" id="btnAddNewValue" value="@T("Admin.Customers.CustomerAttributes.Values.AddNew")" onclick="javascript:OpenWindow('@(Url.Action("ValueCreatePopup", "CustomerAttribute", new { customerAttributeId = Model.Id, btnId = "btnRefresh", formId = "customerattribute-form" }))', 800, 350, true); return false;" class="k-button" />
-                        <input type="submit" id="btnRefresh" style="display: none" />
+                        <input type="submit" id="btnAddNewValue" value="@T("Admin.Customers.CustomerAttributes.Values.AddNew")" onclick="
+                                javascript:OpenWindow('@(Url.Action("ValueCreatePopup", "CustomerAttribute", new {customerAttributeId = Model.Id, btnId = "btnRefresh", formId = "customerattribute-form"}))', 800, 350, true); return false; " class="k-button"/>
+                        <input type="submit" id="btnRefresh" style="display: none"/>
                         <script type="text/javascript">
-                            $(document).ready(function () {
-                                $('#btnRefresh').click(function () {
-                                    //refresh grid
-                                    var grid = $("#customerattributevalues-grid").data('kendoGrid');
-                                    grid.dataSource.read();
+                                $(document).ready(function() {
+                                    $("#btnRefresh").click(function() {
+                                        //refresh grid
+                                        var grid = $("#customerattributevalues-grid").data("kendoGrid");
+                                        grid.dataSource.read();
 
-                                    //return false to don't reload a page
-                                    return false;
-                                });                                
-                            });
-                        </script>
+                                        //return false to don't reload a page
+                                        return false;
+                                    });
+                                });
+                                </script>
                     </td>
                 </tr>
             </table>
-        }
-        else
+}
+
+    else
         {
             @T("Admin.Customers.CustomerAttributes.Values.SaveBeforeEdit")
         }

@@ -15,34 +15,35 @@ using TinyCms.Web.Framework.Controllers;
 using TinyCms.Web.Framework.Kendoui;
 using TinyCms.Web.Framework.Mvc;
 using TinyCms.Web.Framework.Security;
+using Filter = TinyCms.Web.Framework.Kendoui.Filter;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class LanguageController : BaseAdminController
-	{
-		#region Fields
+    public class LanguageController : BaseAdminController
+    {
+        #region Constructors
+
+        public LanguageController(ILanguageService languageService,
+            ILocalizationService localizationService,
+            IPermissionService permissionService,
+            IWebHelper webHelper)
+        {
+            _localizationService = localizationService;
+            _languageService = languageService;
+            _permissionService = permissionService;
+            _webHelper = webHelper;
+        }
+
+        #endregion
+
+        #region Fields
 
         private readonly ILanguageService _languageService;
         private readonly ILocalizationService _localizationService;
         private readonly IPermissionService _permissionService;
         private readonly IWebHelper _webHelper;
 
-		#endregion
-
-		#region Constructors
-
-		public LanguageController(ILanguageService languageService,
-            ILocalizationService localizationService,
-            IPermissionService permissionService,
-            IWebHelper webHelper)
-		{
-			this._localizationService = localizationService;
-            this._languageService = languageService;
-            this._permissionService = permissionService;
-            this._webHelper= webHelper;
-		}
-
-		#endregion 
+        #endregion
 
         #region Utilities
 
@@ -51,7 +52,7 @@ namespace TinyCms.Admin.Controllers
         {
             if (model == null)
                 throw new ArgumentNullException("model");
-            
+
             model.FlagFileNames = Directory
                 .EnumerateFiles(_webHelper.MapPath("~/Content/Images/flags/"), "*.png", SearchOption.TopDirectoryOnly)
                 .Select(Path.GetFileName)
@@ -63,10 +64,8 @@ namespace TinyCms.Admin.Controllers
         {
             if (model == null)
                 throw new ArgumentNullException("model");
-
-       
         }
-    
+
         #endregion
 
         #region Languages
@@ -76,32 +75,32 @@ namespace TinyCms.Admin.Controllers
             return RedirectToAction("List");
         }
 
-		public ActionResult List()
+        public ActionResult List()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageLanguages))
                 return AccessDeniedView();
 
-			return View();
-		}
+            return View();
+        }
 
-		[HttpPost]
+        [HttpPost]
         public ActionResult List(DataSourceRequest command)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageLanguages))
                 return AccessDeniedView();
 
-			var languages = _languageService.GetAllLanguages(true);
-			var gridModel = new DataSourceResult
-			{
-				Data = languages.Select(x => x.ToModel()),
-				Total = languages.Count()
-			};
-			return new JsonResult
-			{
-				Data = gridModel
-			};
-		}
-        
+            var languages = _languageService.GetAllLanguages(true);
+            var gridModel = new DataSourceResult
+            {
+                Data = languages.Select(x => x.ToModel()),
+                Total = languages.Count()
+            };
+            return new JsonResult
+            {
+                Data = gridModel
+            };
+        }
+
         public ActionResult Create()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageLanguages))
@@ -128,9 +127,9 @@ namespace TinyCms.Admin.Controllers
                 var language = model.ToEntity();
                 _languageService.InsertLanguage(language);
 
-             
+
                 SuccessNotification(_localizationService.GetResource("Admin.Configuration.Languages.Added"));
-                return continueEditing ? RedirectToAction("Edit", new { id = language.Id }) : RedirectToAction("List");
+                return continueEditing ? RedirectToAction("Edit", new {id = language.Id}) : RedirectToAction("List");
             }
 
             //If we got this far, something failed, redisplay form
@@ -143,30 +142,30 @@ namespace TinyCms.Admin.Controllers
             return View(model);
         }
 
-		public ActionResult Edit(int id)
+        public ActionResult Edit(int id)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageLanguages))
                 return AccessDeniedView();
 
-			var language = _languageService.GetLanguageById(id);
+            var language = _languageService.GetLanguageById(id);
             if (language == null)
                 //No language found with the specified id
                 return RedirectToAction("List");
 
             //set page timeout to 5 minutes
-            this.Server.ScriptTimeout = 300;
+            Server.ScriptTimeout = 300;
 
-		    var model = language.ToModel();
+            var model = language.ToModel();
             //Stores
             PrepareStoresMappingModel(model, language, false);
             //flags
             PrepareFlagsModel(model);
 
             return View(model);
-		}
+        }
 
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
-		public ActionResult Edit(LanguageModel model, bool continueEditing)
+        public ActionResult Edit(LanguageModel model, bool continueEditing)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageLanguages))
                 return AccessDeniedView();
@@ -184,7 +183,7 @@ namespace TinyCms.Admin.Controllers
                     !model.Published)
                 {
                     ErrorNotification("At least one published language is required.");
-                    return RedirectToAction("Edit", new { id = language.Id });
+                    return RedirectToAction("Edit", new {id = language.Id});
                 }
 
                 //update
@@ -211,7 +210,7 @@ namespace TinyCms.Admin.Controllers
             PrepareFlagsModel(model);
 
             return View(model);
-		}
+        }
 
         [HttpPost]
         public ActionResult Delete(int id)
@@ -229,9 +228,9 @@ namespace TinyCms.Admin.Controllers
             if (allLanguages.Count == 1 && allLanguages[0].Id == language.Id)
             {
                 ErrorNotification("At least one published language is required.");
-                return RedirectToAction("Edit", new { id = language.Id });
+                return RedirectToAction("Edit", new {id = language.Id});
             }
-            
+
             //delete
             _languageService.DeleteLanguage(language);
 
@@ -240,57 +239,57 @@ namespace TinyCms.Admin.Controllers
             return RedirectToAction("List");
         }
 
-		#endregion
+        #endregion
 
-		#region Resources
+        #region Resources
 
-		public ActionResult Resources(int languageId)
+        public ActionResult Resources(int languageId)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageLanguages))
                 return AccessDeniedView();
 
             //TODO do not use ViewBag, create a model
-			ViewBag.AllLanguages = _languageService.GetAllLanguages(true)
+            ViewBag.AllLanguages = _languageService.GetAllLanguages(true)
                 .Select(x => new SelectListItem
                 {
                     Selected = (x.Id.Equals(languageId)),
                     Text = x.Name,
                     Value = x.Id.ToString()
                 }).ToList();
-		    var language = _languageService.GetLanguageById(languageId);
-		    ViewBag.LanguageId = languageId;
-		    ViewBag.LanguageName = language.Name;
+            var language = _languageService.GetLanguageById(languageId);
+            ViewBag.LanguageId = languageId;
+            ViewBag.LanguageName = language.Name;
 
-			return View();
-		}
+            return View();
+        }
 
         [HttpPost]
         //do not validate request token (XSRF)
         //for some reasons it does not work with "filtering" support
-        [AdminAntiForgery(true)] 
-		public ActionResult Resources(int languageId, DataSourceRequest command,
-            TinyCms.Web.Framework.Kendoui.Filter filter = null, IEnumerable<Sort> sort = null)
+        [AdminAntiForgery(true)]
+        public ActionResult Resources(int languageId, DataSourceRequest command,
+            Filter filter = null, IEnumerable<Sort> sort = null)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageLanguages))
                 return AccessDeniedView();
-            
-		    var language = _languageService.GetLanguageById(languageId);
+
+            var language = _languageService.GetLanguageById(languageId);
 
             var resources = _localizationService
                 .GetAllResourceValues(languageId)
                 .OrderBy(x => x.Key)
                 .Select(x => new LanguageResourceModel
-                    {
-                        LanguageId = languageId,
-                        LanguageName = language.Name,
-                        Id = x.Value.Key,
-                        Name = x.Key,
-                        Value = x.Value.Value,
-                    })
-                    .AsQueryable()
-                    .Filter(filter)
-                    .Sort(sort);
-            
+                {
+                    LanguageId = languageId,
+                    LanguageName = language.Name,
+                    Id = x.Value.Key,
+                    Name = x.Key,
+                    Value = x.Value.Value
+                })
+                .AsQueryable()
+                .Filter(filter)
+                .Sort(sort);
+
             var gridModel = new DataSourceResult
             {
                 Data = resources.PagedForCommand(command),
@@ -298,7 +297,7 @@ namespace TinyCms.Admin.Controllers
             };
 
             return Json(gridModel);
-		}
+        }
 
         [HttpPost]
         public ActionResult ResourceUpdate(LanguageResourceModel model)
@@ -313,7 +312,7 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var resource = _localizationService.GetLocaleStringResourceById(model.Id);
@@ -323,7 +322,14 @@ namespace TinyCms.Admin.Controllers
                 var res = _localizationService.GetLocaleStringResourceByName(model.Name, model.LanguageId, false);
                 if (res != null && res.Id != resource.Id)
                 {
-                    return Json(new DataSourceResult { Errors = string.Format(_localizationService.GetResource("Admin.Configuration.Languages.Resources.NameAlreadyExists"), res.ResourceName) });
+                    return
+                        Json(new DataSourceResult
+                        {
+                            Errors =
+                                string.Format(
+                                    _localizationService.GetResource(
+                                        "Admin.Configuration.Languages.Resources.NameAlreadyExists"), res.ResourceName)
+                        });
                 }
             }
 
@@ -347,25 +353,32 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var res = _localizationService.GetLocaleStringResourceByName(model.Name, model.LanguageId, false);
             if (res == null)
             {
-                var resource = new LocaleStringResource { LanguageId = languageId };
+                var resource = new LocaleStringResource {LanguageId = languageId};
                 resource.ResourceName = model.Name;
                 resource.ResourceValue = model.Value;
                 _localizationService.InsertLocaleStringResource(resource);
             }
             else
             {
-                return Json(new DataSourceResult { Errors = string.Format(_localizationService.GetResource("Admin.Configuration.Languages.Resources.NameAlreadyExists"), model.Name) });
+                return
+                    Json(new DataSourceResult
+                    {
+                        Errors =
+                            string.Format(
+                                _localizationService.GetResource(
+                                    "Admin.Configuration.Languages.Resources.NameAlreadyExists"), model.Name)
+                    });
             }
 
             return new NullJsonResult();
         }
-        
+
         [HttpPost]
         public ActionResult ResourceDelete(int id)
         {
@@ -381,7 +394,7 @@ namespace TinyCms.Admin.Controllers
         }
 
         #endregion
-        
+
         #region Export / Import
 
         public ActionResult ExportXml(int id)
@@ -418,7 +431,7 @@ namespace TinyCms.Admin.Controllers
                 return RedirectToAction("List");
 
             //set page timeout to 5 minutes
-            this.Server.ScriptTimeout = 300;
+            Server.ScriptTimeout = 300;
 
             try
             {
@@ -427,26 +440,24 @@ namespace TinyCms.Admin.Controllers
                 {
                     using (var sr = new StreamReader(file.InputStream, Encoding.UTF8))
                     {
-                        string content = sr.ReadToEnd();
+                        var content = sr.ReadToEnd();
                         _localizationService.ImportResourcesFromXml(language, content);
                     }
-
                 }
                 else
                 {
                     ErrorNotification(_localizationService.GetResource("Admin.Common.UploadFile"));
-                    return RedirectToAction("Edit", new { id = language.Id });
+                    return RedirectToAction("Edit", new {id = language.Id});
                 }
 
                 SuccessNotification(_localizationService.GetResource("Admin.Configuration.Languages.Imported"));
-                return RedirectToAction("Edit", new { id = language.Id });
+                return RedirectToAction("Edit", new {id = language.Id});
             }
             catch (Exception exc)
             {
                 ErrorNotification(exc);
-                return RedirectToAction("Edit", new { id = language.Id });
+                return RedirectToAction("Edit", new {id = language.Id});
             }
-
         }
 
         #endregion

@@ -1,13 +1,12 @@
-﻿
-namespace TinyCms.Services.Events
+﻿namespace TinyCms.Services.Events
 {
     /// <summary>
-    /// Evnt publisher
+    ///     Evnt publisher
     /// </summary>
     public interface IEventPublisher
     {
         /// <summary>
-        /// Publish event
+        ///     Publish event
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="eventMessage">Event message</param>

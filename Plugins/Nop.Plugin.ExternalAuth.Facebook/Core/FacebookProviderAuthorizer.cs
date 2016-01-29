@@ -17,6 +17,44 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
 {
     public class FacebookProviderAuthorizer : IOAuthProviderFacebookAuthorizer
     {
+        #region Ctor
+
+        public FacebookProviderAuthorizer(IExternalAuthorizer authorizer,
+            ExternalAuthenticationSettings externalAuthenticationSettings,
+            FacebookExternalAuthSettings facebookExternalAuthSettings,
+            HttpContextBase httpContext,
+            IWebHelper webHelper)
+        {
+            _authorizer = authorizer;
+            _externalAuthenticationSettings = externalAuthenticationSettings;
+            _facebookExternalAuthSettings = facebookExternalAuthSettings;
+            _httpContext = httpContext;
+            _webHelper = webHelper;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Authorize response
+        /// </summary>
+        /// <param name="returnUrl">Return URL</param>
+        /// <param name="verifyResponse">true - Verify response;false - request authentication;null - determine automatically</param>
+        /// <returns>Authorize state</returns>
+        public AuthorizeState Authorize(string returnUrl, bool? verifyResponse = null)
+        {
+            if (!verifyResponse.HasValue)
+                throw new ArgumentException("Facebook plugin cannot automatically determine verifyResponse property");
+
+            if (verifyResponse.Value)
+                return VerifyAuthentication(returnUrl);
+
+            return RequestAuthentication();
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly IExternalAuthorizer _authorizer;
@@ -28,28 +66,13 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
 
         #endregion
 
-        #region Ctor
-
-        public FacebookProviderAuthorizer(IExternalAuthorizer authorizer,
-            ExternalAuthenticationSettings externalAuthenticationSettings,
-            FacebookExternalAuthSettings facebookExternalAuthSettings,
-            HttpContextBase httpContext,
-            IWebHelper webHelper)
-        {
-            this._authorizer = authorizer;
-            this._externalAuthenticationSettings = externalAuthenticationSettings;
-            this._facebookExternalAuthSettings = facebookExternalAuthSettings;
-            this._httpContext = httpContext;
-            this._webHelper = webHelper;
-        }
-
-        #endregion
-
         #region Utilities
 
         private string RequestEmailFromFacebook(string accessToken)
         {
-            var request = WebRequest.Create("https://graph.facebook.com/me?fields=email&access_token=" + EscapeUriDataStringRfc3986(accessToken));
+            var request =
+                WebRequest.Create("https://graph.facebook.com/me?fields=email&access_token=" +
+                                  EscapeUriDataStringRfc3986(accessToken));
             using (var response = request.GetResponse())
             {
                 using (var responseStream = response.GetResponseStream())
@@ -66,14 +89,21 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
 
             return string.Empty;
         }
+
         private FacebookClient FacebookApplication
         {
-            get { return _facebookApplication ?? (_facebookApplication = new FacebookClient(_facebookExternalAuthSettings.ClientKeyIdentifier, _facebookExternalAuthSettings.ClientSecret)); }
+            get
+            {
+                return _facebookApplication ??
+                       (_facebookApplication =
+                           new FacebookClient(_facebookExternalAuthSettings.ClientKeyIdentifier,
+                               _facebookExternalAuthSettings.ClientSecret));
+            }
         }
 
         private AuthorizeState VerifyAuthentication(string returnUrl)
         {
-            var authResult = this.FacebookApplication.VerifyAuthentication(_httpContext, GenerateLocalCallbackUri());
+            var authResult = FacebookApplication.VerifyAuthentication(_httpContext, GenerateLocalCallbackUri());
 
             if (authResult.IsSuccessful)
             {
@@ -87,7 +117,7 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
                 {
                     ExternalIdentifier = authResult.ProviderUserId,
                     OAuthToken = authResult.ExtraData["accesstoken"],
-                    OAuthAccessToken = authResult.ProviderUserId,
+                    OAuthAccessToken = authResult.ProviderUserId
                 };
 
                 if (_externalAuthenticationSettings.AutoRegisterEnabled)
@@ -123,7 +153,7 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
                 var name = authenticationResult.ExtraData["name"];
                 if (!String.IsNullOrEmpty(name))
                 {
-                    var nameSplit = name.Split(new [] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    var nameSplit = name.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
                     if (nameSplit.Length >= 2)
                     {
                         claims.Name.First = nameSplit[0];
@@ -142,12 +172,15 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
         private AuthorizeState RequestAuthentication()
         {
             var authUrl = GenerateServiceLoginUrl().AbsoluteUri;
-            return new AuthorizeState("", OpenAuthenticationStatus.RequiresRedirect) { Result = new RedirectResult(authUrl) };
+            return new AuthorizeState("", OpenAuthenticationStatus.RequiresRedirect)
+            {
+                Result = new RedirectResult(authUrl)
+            };
         }
 
         private Uri GenerateLocalCallbackUri()
         {
-            string url = string.Format("{0}plugins/externalauthFacebook/logincallback/", _webHelper.GetStoreLocation());
+            var url = string.Format("{0}plugins/externalauthFacebook/logincallback/", _webHelper.GetStoreLocation());
             return new Uri(url);
             //var builder = new UriBuilder(_httpContext.Request.Url.GetLeftPart(UriPartial.Authority));
             //var path = _httpContext.Request.ApplicationPath + "/Plugins/ExternalAuthFacebook/LoginCallback/";
@@ -186,6 +219,7 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
                 builder.Query = builder2.ToString();
             }
         }
+
         private string CreateQueryString(IEnumerable<KeyValuePair<string, string>> args)
         {
             if (!args.Any())
@@ -193,7 +227,7 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
                 return string.Empty;
             }
             var builder = new StringBuilder();
-            foreach (KeyValuePair<string, string> pair in args)
+            foreach (var pair in args)
             {
                 builder.Append(EscapeUriDataStringRfc3986(pair.Key));
                 builder.Append('=');
@@ -203,36 +237,17 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Core
             builder.Length--;
             return builder.ToString();
         }
-        private readonly string[] UriRfc3986CharsToEscape = new string[] { "!", "*", "'", "(", ")" };
+
+        private readonly string[] UriRfc3986CharsToEscape = {"!", "*", "'", "(", ")"};
+
         private string EscapeUriDataStringRfc3986(string value)
         {
             var builder = new StringBuilder(Uri.EscapeDataString(value));
-            for (int i = 0; i < UriRfc3986CharsToEscape.Length; i++)
+            for (var i = 0; i < UriRfc3986CharsToEscape.Length; i++)
             {
                 builder.Replace(UriRfc3986CharsToEscape[i], Uri.HexEscape(UriRfc3986CharsToEscape[i][0]));
             }
             return builder.ToString();
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Authorize response
-        /// </summary>
-        /// <param name="returnUrl">Return URL</param>
-        /// <param name="verifyResponse">true - Verify response;false - request authentication;null - determine automatically</param>
-        /// <returns>Authorize state</returns>
-        public AuthorizeState Authorize(string returnUrl, bool? verifyResponse = null)
-        {
-            if (!verifyResponse.HasValue)
-                throw new ArgumentException("Facebook plugin cannot automatically determine verifyResponse property");
-
-            if (verifyResponse.Value)
-                return VerifyAuthentication(returnUrl);
-            
-            return RequestAuthentication();
         }
 
         #endregion

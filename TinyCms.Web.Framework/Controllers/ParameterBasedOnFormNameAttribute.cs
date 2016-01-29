@@ -4,18 +4,18 @@ using System.Web.Mvc;
 namespace TinyCms.Web.Framework.Controllers
 {
     /// <summary>
-    /// If form name exists, then specified "actionParameterName" will be set to "true"
+    ///     If form name exists, then specified "actionParameterName" will be set to "true"
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)] 
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class ParameterBasedOnFormNameAttribute : FilterAttribute, IActionFilter
     {
-        private readonly string _name;
         private readonly string _actionParameterName;
+        private readonly string _name;
 
         public ParameterBasedOnFormNameAttribute(string name, string actionParameterName)
         {
-            this._name = name;
-            this._actionParameterName = actionParameterName;
+            _name = name;
+            _actionParameterName = actionParameterName;
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext)

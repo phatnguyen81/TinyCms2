@@ -1,5 +1,4 @@
-﻿
-namespace TinyCms.Services.Events
+﻿namespace TinyCms.Services.Events
 {
     public interface IConsumer<T>
     {

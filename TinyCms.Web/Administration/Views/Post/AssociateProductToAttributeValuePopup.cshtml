@@ -14,21 +14,21 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt=""/>
             @T("Admin.Catalog.Products.ProductAttributes.Attributes.Values.Fields.AssociatedProduct.AddNew")
         </div>
-    </div>    
-    
+    </div>
+
     if (ViewBag.RefreshPage == true)
     {
-    <script type="text/javascript">
+        <script type="text/javascript">
             try {
-                window.opener.document.getElementById('@(ViewBag.productIdInput)').value = '@(ViewBag.productId)';
-                window.opener.document.getElementById('@(ViewBag.productNameInput)').innerHTML = '@(ViewBag.productName)';
+                window.opener.document.getElementById("@(ViewBag.productIdInput)").value = "@(ViewBag.productId)";
+                window.opener.document.getElementById("@(ViewBag.productNameInput)").innerHTML = "@(ViewBag.productName)";
+            } catch (e) {
             }
-            catch (e){} 
             window.close();
-    </script>
+        </script>
     }
 
     @Html.HiddenFor(model => model.AssociatedToProductId)
@@ -83,17 +83,17 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="button" id="search-products" class="k-button" value="@T("Admin.Common.Search")" />
+                <input type="button" id="search-products" class="k-button" value="@T("Admin.Common.Search")"/>
             </td>
         </tr>
     </table>
     <table class="adminContent">
-        <tr>
-            <td>
-                <div id="products-grid"></div>
+    <tr>
+        <td>
+            <div id="products-grid"></div>
 
-                <script>
-                    $(document).ready(function () {
+            <script>
+                $(document).ready(function() {
                         $("#products-grid").kendoGrid({
                             dataSource: {
                                 type: "json",
@@ -129,67 +129,109 @@
                                 mode: "inline"
                             },
                             scrollable: false,
-                            columns: [{
+                            columns: [
+                            {
                                 field: "Name",
                                 title: "@T("Admin.Common.Select")",
                                 width: 50,
-                                template: '<input type="button" value="@T("Admin.Common.Select")" onclick="selectAssociatedProduct(#=Id#)" class="k-button" />'
-                            },{
-                                field: "Name",
-                                title: "@T("Admin.Catalog.Products.Fields.Name")"
-                            }, {
-                                field: "Published",
-                                title: "@T("Admin.Catalog.Products.Fields.Published")",
-                                width: 100,
-                                headerAttributes: { style: "text-align:center" },
-                                attributes: { style: "text-align:center" },
-                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Published#.gif" />'
-                            }]
-                        });
-                    });
-                </script>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" id="save" name="save" class="k-button" value="@T("Admin.Common.Save")" style="display: none" />
-            </td>
-        </tr>
-    </table>
-    
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#search-products').click(function () {
-                var grid = $('#products-grid').data('kendoGrid');
-                grid.dataSource.page(1); //new search. Set page size to 1
-                //grid.dataSource.read(); we already loaded the grid above using "page" function
-                return false;
-            });
-        });
-        
-        $("#@Html.FieldIdFor(model => model.SearchProductName)").keydown(function (event) {
-            if (event.keyCode == 13) {
-                $("#search-products").click();
-                return false;
-            }
-        });
+                                template: "<input type=\"button\" value=\"@T(\
+                                                                              "Admin.Common.Select\")\" onclick=\"selectAssociatedProduct(#=Id#)\" class=\"k-button\" />"
+},
+    {
+        "Name",
+        "@T("
+        Admin.Catalog.Products.Fields.Name
+        ")"
+    }
+                                                                              ,
+    {
+        "Published",
+        "@T("
+        Admin.Catalog.Products.Fields.Published
+        ")",
+        100,
+        {
+            "text-align:center"
+        }
+    ,
+        {
+            "text-align:center"
+        }
+    ,
+        "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=Published#.gif\" />"
+    }
+                                                                              ]
+}
 
-        function additionalData() {
-            var data = {
-                SearchProductName: $('#@Html.FieldIdFor(model => model.SearchProductName)').val(),
-                SearchCategoryId: $('#SearchCategoryId').val(),
-                SearchManufacturerId: $('#SearchManufacturerId').val(),
-                SearchStoreId: $('#SearchStoreId').val(),
-                SearchVendorId: $('#SearchVendorId').val(),
-                SearchProductTypeId: $('#SearchProductTypeId').val()
-            };
-            addAntiForgeryToken(data);
-            return data;
-        }
-        
-        function selectAssociatedProduct(productid) {
-            $("#@Html.FieldIdFor(model => model.AssociatedToProductId)").val(productid);
-            $('#save').click();
-        }
-    </script>
+    );
+                        });
+                        </script>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" id="save" name="save" class="k-button" value="@T ("Admin.Common.Save")
+                   " style="display: none"/>
+        </td>
+    </tr>
+    able>
+
+
+    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#search-products").click(function() {
+                                var grid = $("#products-grid").data("kendoGrid");
+                                grid.dataSource.page(1); //new search. Set page size to 1
+                                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                return false;
+                            });
+                        });
+
+                        $("#@Html.FieldIdFor (;
+                        private model ;
+    =>
+        private model.SearchProductName ;
+    );
+                    ").keydown(function (event) {;
+                if (event.keyCode == 13) {
+                    $("#search-products").click();
+                    return false;
+                }
+                });
+
+                function additionalData() {
+                    var data = {
+                        SearchProductName: $("#@Htm l
+                            .
+        private Fiel
+            Id 
+
+        private or(               hProductName)
+
+    ;
+                        ").val(),;
+                        SearchCategoryI     d: $("#SearchCategoryId").val(),
+                            SearchManufacturerId:;
+                        $("#SearchManufacturerId").val(),
+                            SearchStoreId:;
+                        $("#SearchStoreId").val(),
+                            SearchVendorId:;
+                        $("#SearchVendorId").val(),
+                            SearchProductTypeId:;
+                        $("#SearchProductTypeId").val();
+                    };
+
+                    addAntiForgeryToken(data);
+                    return data;
+                    }
+
+                    function selectAssociatedProduct(productid) {
+                        $("#@Html.FieldIdFor (
+                        private model 
+    =>
+        private model.AssociatedToProductId 
+    )").val(productid);
+                        $("#save").click();
+                    }
+                </script>
 }

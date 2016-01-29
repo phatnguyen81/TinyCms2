@@ -4,37 +4,37 @@ using TinyCms.Core.Domain.Posts;
 namespace TinyCms.Services.Posts
 {
     /// <summary>
-    /// Post template interface
+    ///     Post template interface
     /// </summary>
-    public partial interface IPostTemplateService
+    public interface IPostTemplateService
     {
         /// <summary>
-        /// Delete post template
+        ///     Delete post template
         /// </summary>
         /// <param name="postTemplate">Post template</param>
         void DeletePostTemplate(PostTemplate postTemplate);
 
         /// <summary>
-        /// Gets all post templates
+        ///     Gets all post templates
         /// </summary>
         /// <returns>Post templates</returns>
         IList<PostTemplate> GetAllPostTemplates();
 
         /// <summary>
-        /// Gets a post template
+        ///     Gets a post template
         /// </summary>
         /// <param name="postTemplateId">Post template identifier</param>
         /// <returns>Post template</returns>
         PostTemplate GetPostTemplateById(int postTemplateId);
 
         /// <summary>
-        /// Inserts post template
+        ///     Inserts post template
         /// </summary>
         /// <param name="postTemplate">Post template</param>
         void InsertPostTemplate(PostTemplate postTemplate);
 
         /// <summary>
-        /// Updates the post template
+        ///     Updates the post template
         /// </summary>
         /// <param name="postTemplate">Post template</param>
         void UpdatePostTemplate(PostTemplate postTemplate);

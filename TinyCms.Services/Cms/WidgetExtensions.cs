@@ -16,8 +16,9 @@ namespace TinyCms.Services.Cms
 
             if (widgetSettings.ActiveWidgetSystemNames == null)
                 return false;
-            foreach (string activeMethodSystemName in widgetSettings.ActiveWidgetSystemNames)
-                if (widget.PluginDescriptor.SystemName.Equals(activeMethodSystemName, StringComparison.InvariantCultureIgnoreCase))
+            foreach (var activeMethodSystemName in widgetSettings.ActiveWidgetSystemNames)
+                if (widget.PluginDescriptor.SystemName.Equals(activeMethodSystemName,
+                    StringComparison.InvariantCultureIgnoreCase))
                     return true;
             return false;
         }

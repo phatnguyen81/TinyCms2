@@ -1,10 +1,11 @@
 ﻿@{
     Layout = "~/Administration/Views/Shared/_AdminPopupLayout.cshtml";
 }
+@using TinyCms.Core.Domain.Common
 @model PostModel.AddRelatedPostModel
 @{
-    var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
-    var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+    var defaultGridPageSize = EngineContext.Current.Resolve<AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<AdminAreaSettings>().GridPageSizes;
 
     //page title
     ViewBag.Title = T("Admin.Catalog.Posts.RelatedPosts.AddNew").Text;
@@ -14,21 +15,23 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt=""/>
             @T("Admin.Catalog.Posts.RelatedPosts.AddNew")
         </div>
-    </div>    
-    
+    </div>
+
     if (ViewBag.RefreshPage == true)
     {
-    <script type="text/javascript">
-            try {window.opener.document.forms['@(ViewBag.formId)'].@(ViewBag.btnId).click();}
-            catch (e){} 
+        <script type="text/javascript">
+            try {
+                window.opener.document.forms["@(ViewBag.formId)"].@(ViewBag.btnId).click();
+            } catch (e) {
+            }
             window.close();
-    </script>
+        </script>
     }
 
-    
+
     <table width="100%">
         <tr>
             <td class="adminTitle">
@@ -48,123 +51,141 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="button" id="search-posts" class="k-button" value="@T("Admin.Common.Search")" />
+                <input type="button" id="search-posts" class="k-button" value="@T("Admin.Common.Search")"/>
             </td>
         </tr>
     </table>
     <table class="adminContent">
-        <tr>
-            <td>
-                <div id="posts-grid"></div>
+    <tr>
+        <td>
+            <div id="posts-grid"></div>
 
-                <script>
-                    $(document).ready(function () {
-                        $("#posts-grid").kendoGrid({
-                            dataSource: {
-                                type: "json",
-                                transport: {
-                                    read: {
-                                        url: "@Html.Raw(Url.Action("RelatedPostAddPopupList", "Post"))",
-                                        type: "POST",
-                                        dataType: "json",
-                                        data: additionalData
-                                    }
-                                },
-                                schema: {
-                                    data: "Data",
-                                    total: "Total",
-                                    errors: "Errors"
-                                },
-                                error: function(e) {
-                                    display_kendoui_grid_error(e);
-                                    // Cancel the changes
-                                    this.cancelChanges();
-                                },
-                                pageSize: @(defaultGridPageSize),
-                                serverPaging: true,
-                                serverFiltering: true,
-                                serverSorting: true
+            <script>
+                $(document).ready(function() {
+                    $("#posts-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("RelatedPostAddPopupList", "Post"))",
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: additionalData
+                                }
                             },
-                            pageable: {
-                                refresh: true,
-                                pageSizes: [@(gridPageSizes)]
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors"
                             },
-                            editable: {
-                                confirmation: false,
-                                mode: "inline"
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
                             },
-                            scrollable: false,
-                            columns: [{
-                                field: "Id",
-                                headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
-                                headerAttributes: { style: "text-align:center" },
-                                template: "<input type='checkbox' name='SelectedPostIds' value='#=Id#' class='checkboxGroups' />",
-                                attributes: { style: "text-align:center" },
-                                width: 50
-                            }, {
-                                field: "Name",
-                                title: "@T("Admin.Catalog.Posts.Fields.Name")"
-                            }, {
-                                field: "Published",
-                                title: "@T("Admin.Catalog.Posts.Fields.Published")",
-                                width: 100,
-                                headerAttributes: { style: "text-align:center" },
-                                attributes: { style: "text-align:center" },
-                                template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Published#.gif" />'
-                            }]
-                        });
+                            pageSize: @(defaultGridPageSize),
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            pageSizes: [@(gridPageSizes)]
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                        columns: [
+                        {
+                            field: "Id",
+                            headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
+                            headerAttributes: { style: "text-align:center" },
+                            template: "<input type='checkbox' name='SelectedPostIds' value='#=Id#' class='checkboxGroups' />",
+                            attributes: { style: "text-align:center" },
+                            width: 50
+                        }, {
+                            field: "Name",
+                            title: "@T("Admin.Catalog.Posts.Fields.Name")"
+                        }, {
+                            field: "Published",
+                            title: "@T("Admin.Catalog.Posts.Fields.Published")",
+                            width: 100,
+                            headerAttributes: { style: "text-align:center" },
+                            attributes: { style: "text-align:center" },
+                            template: "<img src=\"@Url.Content(\
+                                                      "~/Administration/Content/images/\")active-#=Published#.gif\" />"
+}]
+}
+
+    );
                     });
-                </script>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
-            </td>
-        </tr>
-    </table>
-    
+                    </script>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" name="save" class="k-button" value="@T ("Admin.Common.Save")
+                   "/>
+        </td>
+    </tr>
+    able>
+
+
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#search-posts').click(function () {
-                var grid = $('#posts-grid').data('kendoGrid');
-                grid.dataSource.page(1); //new search. Set page size to 1
-                //grid.dataSource.read(); we already loaded the grid above using "page" function
-                //clear selected checkboxes
-                $('.checkboxGroups').attr('checked', false).change();
-                return false;
-            });
-        
-            $("#@Html.FieldIdFor(model => model.SearchPostName)").keydown(function (event) {
-                if (event.keyCode == 13) {
-                    $("#search-posts").click();
-                    return false;
-                }
-            });
-                        
-            //wire up checkboxes
-            $('#mastercheckbox').click(function() {
-                $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
-            });
+                    $(document).ready(function() {
+                            $("#search-posts").click(function() {
+                                var grid = $("#posts-grid").data("kendoGrid");
+                                grid.dataSource.page(1); //new search. Set page size to 1
+                                //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                //clear selected checkboxes
+                                $(".checkboxGroups").attr("checked", false).change();
+                                return false;
+                            });
 
-            $('#posts-grid').on('change', 'input[type=checkbox][id!=mastercheckbox]', function(e) {
-                updateMasterCheckbox();
-            });
-        });
+                            $("#@Html.FieldIdFor (
+        private model 
+    =>
+        private model.SearchPostName 
+    )
+                    ").keydown(function(event) {
+                    if (event.keyCode == 13) {
+                        $("#search-posts").click();
+                        return false;
+                    }
+                });
 
-        function additionalData() {
-            var data = {
-                SearchPostName: $('#@Html.FieldIdFor(model => model.SearchPostName)').val(),
-                SearchCategoryId: $('#SearchCategoryId').val()
-            };
-            addAntiForgeryToken(data);
-            return data;
-        }
+                //wire up checkboxes
+                $("#mastercheckbox").click(function() {
+                    $(".checkboxGroups").attr("checked", $(this).is(":checked")).change();
+                });
 
-        function updateMasterCheckbox() {
-            var numChkBoxes = $('#posts-grid input[type=checkbox][id!=mastercheckbox]').length;
-            var numChkBoxesChecked = $('#posts-grid input[type=checkbox][id!=mastercheckbox]:checked').length;
-            $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
-        }
-    </script>
+                $("#posts-grid").on("change", "input[type=checkbox][id!=mastercheckbox]", function(e) {
+                    updateMasterCheckbox();
+
+
+                });
+                });
+
+                function additionalData() {
+                    var data = {
+                        SearchPostName: $("#@Html.FieldIdFor (
+                    private model
+                    =>
+                    private model.SearchPostName
+                )
+                ").val(),
+                SearchCategoryId: $("#SearchCategoryId").val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+
+                        function updateMasterCheckbox() {
+                            var numChkBoxes = $("#posts-grid input[type=checkbox][id!=mastercheckbox]").length;
+                            var numChkBoxesChecked = $("#posts-grid input[type=checkbox][id!=mastercheckbox]:checked").length;
+                            $("#mastercheckbox").attr("checked", numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                        }
+                        </script>
 }

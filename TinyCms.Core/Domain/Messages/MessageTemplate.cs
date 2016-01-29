@@ -3,44 +3,43 @@
 namespace TinyCms.Core.Domain.Messages
 {
     /// <summary>
-    /// Represents a message template
+    ///     Represents a message template
     /// </summary>
-    public partial class MessageTemplate : BaseEntity, ILocalizedEntity
+    public class MessageTemplate : BaseEntity, ILocalizedEntity
     {
         /// <summary>
-        /// Gets or sets the name
+        ///     Gets or sets the name
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the BCC Email addresses
+        ///     Gets or sets the BCC Email addresses
         /// </summary>
         public string BccEmailAddresses { get; set; }
 
         /// <summary>
-        /// Gets or sets the subject
+        ///     Gets or sets the subject
         /// </summary>
         public string Subject { get; set; }
 
         /// <summary>
-        /// Gets or sets the body
+        ///     Gets or sets the body
         /// </summary>
         public string Body { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the template is active
+        ///     Gets or sets a value indicating whether the template is active
         /// </summary>
         public bool IsActive { get; set; }
 
         /// <summary>
-        /// Gets or sets the download identifier of attached file
+        ///     Gets or sets the download identifier of attached file
         /// </summary>
         public int AttachedDownloadId { get; set; }
 
         /// <summary>
-        /// Gets or sets the used email account identifier
+        ///     Gets or sets the used email account identifier
         /// </summary>
         public int EmailAccountId { get; set; }
-
     }
 }

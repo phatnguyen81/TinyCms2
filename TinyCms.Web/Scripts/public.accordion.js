@@ -9,32 +9,32 @@ var Accordion = {
     currentSection: false,
     headers: new Array(),
 
-    init: function (elem, clickableEntity, checkAllow) {
+    init: function(elem, clickableEntity, checkAllow) {
         this.checkAllow = checkAllow || false;
         this.disallowAccessToNextSections = false;
-        this.sections = $('#' + elem + ' .tab-section');
+        this.sections = $("#" + elem + " .tab-section");
         this.currentSectionId = false;
-        var headers = $('#' + elem + ' .tab-section ' + clickableEntity);
-        headers.click(function () {
+        var headers = $("#" + elem + " .tab-section " + clickableEntity);
+        headers.click(function() {
             Accordion.headerClicked($(this));
         });
     },
 
-    headerClicked: function (section) {
-        Accordion.openSection(section.parent('.tab-section'));
+    headerClicked: function(section) {
+        Accordion.openSection(section.parent(".tab-section"));
     },
 
-    openSection: function (section) {
+    openSection: function(section) {
         var section = $(section);
 
-        if (this.checkAllow && !section.hasClass('allow')) {
+        if (this.checkAllow && !section.hasClass("allow")) {
             return;
         }
-        if (section.attr('id') != this.currentSectionId) {
+        if (section.attr("id") != this.currentSectionId) {
             this.closeExistingSection();
-            this.currentSectionId = section.attr('id');
-            $('#' + this.currentSectionId).addClass('active');
-            var contents = section.children('.a-item');
+            this.currentSectionId = section.attr("id");
+            $("#" + this.currentSectionId).addClass("active");
+            var contents = section.children(".a-item");
             $(contents[0]).show();
 
 
@@ -42,9 +42,9 @@ var Accordion = {
                 var pastCurrentSection = false;
                 for (var i = 0; i < this.sections.length; i++) {
                     if (pastCurrentSection) {
-                        $(this.sections[i]).removeClass('allow');
+                        $(this.sections[i]).removeClass("allow");
                     }
-                    if ($(this.sections[i]).attr('id') == section.attr('id')) {
+                    if ($(this.sections[i]).attr("id") == section.attr("id")) {
                         pastCurrentSection = true;
                     }
                 }
@@ -52,29 +52,29 @@ var Accordion = {
         }
     },
 
-    closeSection: function (section) {
+    closeSection: function(section) {
         var section = $(section);
-        section.removeClass('active');
-        var contents = section.children('.a-item');
+        section.removeClass("active");
+        var contents = section.children(".a-item");
         $(contents[0]).hide();
     },
 
-    hideSection: function (section) {
+    hideSection: function(section) {
         var section = $(section);
         section.hide();
     },
 
-    showSection: function (section) {
+    showSection: function(section) {
         var section = $(section);
         section.show();
     },
 
-    openNextSection: function (setAllow) {
+    openNextSection: function(setAllow) {
         for (section in this.sections) {
             var nextIndex = parseInt(section) + 1;
             if (this.sections[section].id == this.currentSectionId && this.sections[nextIndex]) {
                 if (setAllow) {
-                    $(this.sections[nextIndex]).addClass('allow');
+                    $(this.sections[nextIndex]).addClass("allow");
                 }
                 this.openSection(this.sections[nextIndex]);
                 return;
@@ -82,13 +82,13 @@ var Accordion = {
         }
     },
 
-    openPrevSection: function (setAllow, onlyAllowed) {
+    openPrevSection: function(setAllow, onlyAllowed) {
         var prevIndex = 0;
         for (section in this.sections) {
             if (onlyAllowed) {
                 //ensure that the section is allowed
                 var tmp = parseInt(section) - 1;
-                if (!isNaN(tmp) && $(this.sections[tmp]).hasClass('allow')) {
+                if (!isNaN(tmp) && $(this.sections[tmp]).hasClass("allow")) {
                     prevIndex = tmp;
                 }
             } else {
@@ -96,7 +96,7 @@ var Accordion = {
             }
             if (this.sections[section].id == this.currentSectionId && this.sections[prevIndex]) {
                 if (setAllow) {
-                    $(this.sections[prevIndex]).addClass('allow');
+                    $(this.sections[prevIndex]).addClass("allow");
                 }
                 this.openSection(this.sections[prevIndex]);
                 return;
@@ -104,9 +104,9 @@ var Accordion = {
         }
     },
 
-    closeExistingSection: function () {
+    closeExistingSection: function() {
         if (this.currentSectionId) {
-            this.closeSection($('#' + this.currentSectionId));
+            this.closeSection($("#" + this.currentSectionId));
         }
     }
 };

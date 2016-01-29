@@ -1,20 +1,17 @@
-﻿using TinyCms.Core;
-
-namespace TinyCms.Core.Domain.Common
+﻿namespace TinyCms.Core.Domain.Common
 {
     /// <summary>
-    /// Search term record (for statistics)
+    ///     Search term record (for statistics)
     /// </summary>
-    public partial class SearchTerm : BaseEntity
+    public class SearchTerm : BaseEntity
     {
         /// <summary>
-        /// Gets or sets the keyword
+        ///     Gets or sets the keyword
         /// </summary>
         public string Keyword { get; set; }
 
-
         /// <summary>
-        /// Gets or sets search count
+        ///     Gets or sets search count
         /// </summary>
         public int Count { get; set; }
     }

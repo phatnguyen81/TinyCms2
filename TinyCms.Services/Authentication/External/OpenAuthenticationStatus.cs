@@ -4,7 +4,7 @@
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// Open authentication status
+    ///     Open authentication status
     /// </summary>
     public enum OpenAuthenticationStatus
     {
@@ -15,6 +15,6 @@ namespace TinyCms.Services.Authentication.External
         AssociateOnLogon,
         AutoRegisteredEmailValidation,
         AutoRegisteredAdminApproval,
-        AutoRegisteredStandard,
+        AutoRegisteredStandard
     }
 }

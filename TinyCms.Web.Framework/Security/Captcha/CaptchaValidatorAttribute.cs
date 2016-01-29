@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Recaptcha;
 using TinyCms.Core.Infrastructure;
 
 namespace TinyCms.Web.Framework.Security.Captcha
@@ -10,7 +11,7 @@ namespace TinyCms.Web.Framework.Security.Captcha
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            bool valid = false;
+            var valid = false;
             var captchaChallengeValue = filterContext.HttpContext.Request.Form[CHALLENGE_FIELD_KEY];
             var captchaResponseValue = filterContext.HttpContext.Request.Form[RESPONSE_FIELD_KEY];
             if (!string.IsNullOrEmpty(captchaChallengeValue) && !string.IsNullOrEmpty(captchaResponseValue))
@@ -19,7 +20,7 @@ namespace TinyCms.Web.Framework.Security.Captcha
                 if (captchaSettings.Enabled)
                 {
                     //validate captcha
-                    var captchaValidtor = new Recaptcha.RecaptchaValidator
+                    var captchaValidtor = new RecaptchaValidator
                     {
                         PrivateKey = captchaSettings.ReCaptchaPrivateKey,
                         RemoteIP = filterContext.HttpContext.Request.UserHostAddress,

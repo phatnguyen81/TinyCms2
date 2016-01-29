@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
 using TinyCms.Admin.Extensions;
-using TinyCms.Admin.Models.Customers;
 using TinyCms.Admin.Models.Settings;
 using TinyCms.Core;
 using TinyCms.Core.Domain;
@@ -31,12 +31,51 @@ using TinyCms.Web.Framework.Mvc;
 using TinyCms.Web.Framework.Security;
 using TinyCms.Web.Framework.Security.Captcha;
 using TinyCms.Web.Framework.Themes;
+using Filter = TinyCms.Web.Framework.Kendoui.Filter;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class SettingController : BaseAdminController
-	{
-		#region Fields
+    public class SettingController : BaseAdminController
+    {
+        #region Constructors
+
+        public SettingController(ISettingService settingService,
+            IPictureService pictureService,
+            ILocalizationService localizationService,
+            IDateTimeHelper dateTimeHelper,
+            IEncryptionService encryptionService,
+            IThemeProvider themeProvider,
+            ICustomerService customerService,
+            ICustomerActivityService customerActivityService,
+            IPermissionService permissionService,
+            IFulltextService fulltextService,
+            IMaintenanceService maintenanceService,
+            IWorkContext workContext,
+            IGenericAttributeService genericAttributeService,
+            ILanguageService languageService,
+            ILocalizedEntityService localizedEntityService, ICategoryService categoryService)
+        {
+            _settingService = settingService;
+            _pictureService = pictureService;
+            _localizationService = localizationService;
+            _dateTimeHelper = dateTimeHelper;
+            _encryptionService = encryptionService;
+            _themeProvider = themeProvider;
+            _customerService = customerService;
+            _customerActivityService = customerActivityService;
+            _permissionService = permissionService;
+            _fulltextService = fulltextService;
+            _maintenanceService = maintenanceService;
+            _workContext = workContext;
+            _genericAttributeService = genericAttributeService;
+            _languageService = languageService;
+            _localizedEntityService = localizedEntityService;
+            _categoryService = categoryService;
+        }
+
+        #endregion
+
+        #region Fields
 
         private readonly ISettingService _settingService;
         private readonly IPictureService _pictureService;
@@ -57,47 +96,7 @@ namespace TinyCms.Admin.Controllers
 
         #endregion
 
-        #region Constructors
-
-        public SettingController(ISettingService settingService,
-            IPictureService pictureService, 
-            ILocalizationService localizationService, 
-            IDateTimeHelper dateTimeHelper,
-            IEncryptionService encryptionService,
-            IThemeProvider themeProvider,
-            ICustomerService customerService, 
-            ICustomerActivityService customerActivityService,
-            IPermissionService permissionService,
-            IFulltextService fulltextService, 
-            IMaintenanceService maintenanceService,
-            IWorkContext workContext, 
-            IGenericAttributeService genericAttributeService,
-            ILanguageService languageService,
-            ILocalizedEntityService localizedEntityService, ICategoryService categoryService)
-        {
-            this._settingService = settingService;
-            this._pictureService = pictureService;
-            this._localizationService = localizationService;
-            this._dateTimeHelper = dateTimeHelper;
-            this._encryptionService = encryptionService;
-            this._themeProvider = themeProvider;
-            this._customerService = customerService;
-            this._customerActivityService = customerActivityService;
-            this._permissionService = permissionService;
-            this._fulltextService = fulltextService;
-            this._maintenanceService = maintenanceService;
-            this._workContext = workContext;
-            this._genericAttributeService = genericAttributeService;
-            this._languageService = languageService;
-            this._localizedEntityService = localizedEntityService;
-            _categoryService = categoryService;
-        }
-
-        #endregion
-
         #region Utilities
-
-      
 
         #endregion
 
@@ -118,20 +117,24 @@ namespace TinyCms.Admin.Controllers
 
             model.DateTimeSettings.AllowCustomersToSetTimeZone = dateTimeSettings.AllowCustomersToSetTimeZone;
             model.DateTimeSettings.DefaultStoreTimeZoneId = _dateTimeHelper.DefaultStoreTimeZone.Id;
-            foreach (TimeZoneInfo timeZone in _dateTimeHelper.GetSystemTimeZones())
+            foreach (var timeZone in _dateTimeHelper.GetSystemTimeZones())
             {
                 model.DateTimeSettings.AvailableTimeZones.Add(new SelectListItem
                 {
                     Text = timeZone.DisplayName,
                     Value = timeZone.Id,
-                    Selected = timeZone.Id.Equals(_dateTimeHelper.DefaultStoreTimeZone.Id, StringComparison.InvariantCultureIgnoreCase)
+                    Selected =
+                        timeZone.Id.Equals(_dateTimeHelper.DefaultStoreTimeZone.Id,
+                            StringComparison.InvariantCultureIgnoreCase)
                 });
             }
 
-            model.ExternalAuthenticationSettings.AutoRegisterEnabled = externalAuthenticationSettings.AutoRegisterEnabled;
+            model.ExternalAuthenticationSettings.AutoRegisterEnabled =
+                externalAuthenticationSettings.AutoRegisterEnabled;
 
             return View(model);
         }
+
         [HttpPost]
         public ActionResult CustomerUser(CustomerUserSettingsModel model)
         {
@@ -151,11 +154,13 @@ namespace TinyCms.Admin.Controllers
             dateTimeSettings.AllowCustomersToSetTimeZone = model.DateTimeSettings.AllowCustomersToSetTimeZone;
             _settingService.SaveSetting(dateTimeSettings);
 
-            externalAuthenticationSettings.AutoRegisterEnabled = model.ExternalAuthenticationSettings.AutoRegisterEnabled;
+            externalAuthenticationSettings.AutoRegisterEnabled =
+                model.ExternalAuthenticationSettings.AutoRegisterEnabled;
             _settingService.SaveSetting(externalAuthenticationSettings);
 
             //activity log
-            _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
+            _customerActivityService.InsertActivity("EditSettings",
+                _localizationService.GetResource("ActivityLog.EditSettings"));
 
             SuccessNotification(_localizationService.GetResource("Admin.Configuration.Updated"));
 
@@ -166,14 +171,13 @@ namespace TinyCms.Admin.Controllers
         }
 
 
-
         public ActionResult GeneralCommon()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
                 return AccessDeniedView();
 
             //set page timeout to 5 minutes
-            this.Server.ScriptTimeout = 300;
+            Server.ScriptTimeout = 300;
 
             var model = new GeneralCommonSettingsModel();
             //store information
@@ -184,12 +188,12 @@ namespace TinyCms.Admin.Controllers
             model.StoreInformationSettings.Url = storeInformationSettings.Url;
             model.StoreInformationSettings.Hosts = storeInformationSettings.Hosts;
             model.StoreInformationSettings.DefaultLanguageId = storeInformationSettings.DefaultLanguageId;
-           
+
             //social setting
             var socialSettings = _settingService.LoadSetting<SocialSettings>();
             model.SocialSettings.FacebookAppId = socialSettings.FacebookAppId;
             model.SocialSettings.FacebookAppSecret = socialSettings.FacebookAppSecret;
-            
+
             //themes
             model.StoreInformationSettings.DefaultStoreTheme = storeInformationSettings.DefaultStoreTheme;
             model.StoreInformationSettings.AvailableStoreThemes = _themeProvider
@@ -201,12 +205,16 @@ namespace TinyCms.Admin.Controllers
                     PreviewImageUrl = x.PreviewImageUrl,
                     PreviewText = x.PreviewText,
                     SupportRtl = x.SupportRtl,
-                    Selected = x.ThemeName.Equals(storeInformationSettings.DefaultStoreTheme, StringComparison.InvariantCultureIgnoreCase)
+                    Selected =
+                        x.ThemeName.Equals(storeInformationSettings.DefaultStoreTheme,
+                            StringComparison.InvariantCultureIgnoreCase)
                 })
                 .ToList();
-            model.StoreInformationSettings.AllowCustomerToSelectTheme = storeInformationSettings.AllowCustomerToSelectTheme;
+            model.StoreInformationSettings.AllowCustomerToSelectTheme =
+                storeInformationSettings.AllowCustomerToSelectTheme;
             //EU Cookie law
-            model.StoreInformationSettings.DisplayEuCookieLawWarning = storeInformationSettings.DisplayEuCookieLawWarning;
+            model.StoreInformationSettings.DisplayEuCookieLawWarning =
+                storeInformationSettings.DisplayEuCookieLawWarning;
             //social pages
             model.StoreInformationSettings.FacebookLink = storeInformationSettings.FacebookLink;
             model.StoreInformationSettings.TwitterLink = storeInformationSettings.TwitterLink;
@@ -214,13 +222,14 @@ namespace TinyCms.Admin.Controllers
             model.StoreInformationSettings.GooglePlusLink = storeInformationSettings.GooglePlusLink;
             //contact us
             model.StoreInformationSettings.SubjectFieldOnContactUsForm = commonSettings.SubjectFieldOnContactUsForm;
-            model.StoreInformationSettings.UseSystemEmailForContactUsForm = commonSettings.UseSystemEmailForContactUsForm;
-       
+            model.StoreInformationSettings.UseSystemEmailForContactUsForm =
+                commonSettings.UseSystemEmailForContactUsForm;
+
 
             //seo settings
             var seoSettings = _settingService.LoadSetting<SeoSettings>();
             model.SeoSettings.PageTitleSeparator = seoSettings.PageTitleSeparator;
-            model.SeoSettings.PageTitleSeoAdjustment = (int)seoSettings.PageTitleSeoAdjustment;
+            model.SeoSettings.PageTitleSeoAdjustment = (int) seoSettings.PageTitleSeoAdjustment;
             model.SeoSettings.PageTitleSeoAdjustmentValues = seoSettings.PageTitleSeoAdjustment.ToSelectList();
             model.SeoSettings.DefaultTitle = seoSettings.DefaultTitle;
             model.SeoSettings.DefaultMetaKeywords = seoSettings.DefaultMetaKeywords;
@@ -228,34 +237,37 @@ namespace TinyCms.Admin.Controllers
             model.SeoSettings.GeneratePostMetaDescription = seoSettings.GeneratePostMetaDescription;
             model.SeoSettings.ConvertNonWesternChars = seoSettings.ConvertNonWesternChars;
             model.SeoSettings.CanonicalUrlsEnabled = seoSettings.CanonicalUrlsEnabled;
-            model.SeoSettings.WwwRequirement = (int)seoSettings.WwwRequirement;
+            model.SeoSettings.WwwRequirement = (int) seoSettings.WwwRequirement;
             model.SeoSettings.WwwRequirementValues = seoSettings.WwwRequirement.ToSelectList();
             model.SeoSettings.EnableJsBundling = seoSettings.EnableJsBundling;
             model.SeoSettings.EnableCssBundling = seoSettings.EnableCssBundling;
             model.SeoSettings.TwitterMetaTags = seoSettings.TwitterMetaTags;
             model.SeoSettings.OpenGraphMetaTags = seoSettings.OpenGraphMetaTags;
-          
+
 
             //security settings
             var securitySettings = _settingService.LoadSetting<SecuritySettings>();
             var captchaSettings = _settingService.LoadSetting<CaptchaSettings>();
             model.SecuritySettings.EncryptionKey = securitySettings.EncryptionKey;
             if (securitySettings.AdminAreaAllowedIpAddresses != null)
-                for (int i = 0; i < securitySettings.AdminAreaAllowedIpAddresses.Count; i++)
+                for (var i = 0; i < securitySettings.AdminAreaAllowedIpAddresses.Count; i++)
                 {
-                    model.SecuritySettings.AdminAreaAllowedIpAddresses += securitySettings.AdminAreaAllowedIpAddresses[i];
+                    model.SecuritySettings.AdminAreaAllowedIpAddresses +=
+                        securitySettings.AdminAreaAllowedIpAddresses[i];
                     if (i != securitySettings.AdminAreaAllowedIpAddresses.Count - 1)
                         model.SecuritySettings.AdminAreaAllowedIpAddresses += ",";
                 }
             model.SecuritySettings.ForceSslForAllPages = securitySettings.ForceSslForAllPages;
             model.SecuritySettings.EnableXsrfProtectionForAdminArea = securitySettings.EnableXsrfProtectionForAdminArea;
-            model.SecuritySettings.EnableXsrfProtectionForPublicStore = securitySettings.EnableXsrfProtectionForPublicStore;
+            model.SecuritySettings.EnableXsrfProtectionForPublicStore =
+                securitySettings.EnableXsrfProtectionForPublicStore;
             model.SecuritySettings.HoneypotEnabled = securitySettings.HoneypotEnabled;
             model.SecuritySettings.CaptchaEnabled = captchaSettings.Enabled;
             model.SecuritySettings.CaptchaShowOnLoginPage = captchaSettings.ShowOnLoginPage;
             model.SecuritySettings.CaptchaShowOnRegistrationPage = captchaSettings.ShowOnRegistrationPage;
             model.SecuritySettings.CaptchaShowOnContactUsPage = captchaSettings.ShowOnContactUsPage;
-            model.SecuritySettings.CaptchaShowOnEmailWishlistToFriendPage = captchaSettings.ShowOnEmailWishlistToFriendPage;
+            model.SecuritySettings.CaptchaShowOnEmailWishlistToFriendPage =
+                captchaSettings.ShowOnEmailWishlistToFriendPage;
             model.SecuritySettings.CaptchaShowOnEmailPostToFriendPage = captchaSettings.ShowOnEmailPostToFriendPage;
             model.SecuritySettings.CaptchaShowOnBlogCommentPage = captchaSettings.ShowOnBlogCommentPage;
             model.SecuritySettings.CaptchaShowOnNewsCommentPage = captchaSettings.ShowOnNewsCommentPage;
@@ -264,26 +276,30 @@ namespace TinyCms.Admin.Controllers
             model.SecuritySettings.ReCaptchaPublicKey = captchaSettings.ReCaptchaPublicKey;
             model.SecuritySettings.ReCaptchaPrivateKey = captchaSettings.ReCaptchaPrivateKey;
 
-       
 
             //localization
             var localizationSettings = _settingService.LoadSetting<LocalizationSettings>();
-            model.LocalizationSettings.UseImagesForLanguageSelection = localizationSettings.UseImagesForLanguageSelection;
-            model.LocalizationSettings.SeoFriendlyUrlsForLanguagesEnabled = localizationSettings.SeoFriendlyUrlsForLanguagesEnabled;
+            model.LocalizationSettings.UseImagesForLanguageSelection =
+                localizationSettings.UseImagesForLanguageSelection;
+            model.LocalizationSettings.SeoFriendlyUrlsForLanguagesEnabled =
+                localizationSettings.SeoFriendlyUrlsForLanguagesEnabled;
             model.LocalizationSettings.AutomaticallyDetectLanguage = localizationSettings.AutomaticallyDetectLanguage;
-            model.LocalizationSettings.LoadAllLocaleRecordsOnStartup = localizationSettings.LoadAllLocaleRecordsOnStartup;
-            model.LocalizationSettings.LoadAllLocalizedPropertiesOnStartup = localizationSettings.LoadAllLocalizedPropertiesOnStartup;
+            model.LocalizationSettings.LoadAllLocaleRecordsOnStartup =
+                localizationSettings.LoadAllLocaleRecordsOnStartup;
+            model.LocalizationSettings.LoadAllLocalizedPropertiesOnStartup =
+                localizationSettings.LoadAllLocalizedPropertiesOnStartup;
             model.LocalizationSettings.LoadAllUrlRecordsOnStartup = localizationSettings.LoadAllUrlRecordsOnStartup;
 
             //full-text support
             model.FullTextSettings.Supported = _fulltextService.IsFullTextSupported();
             model.FullTextSettings.Enabled = commonSettings.UseFullTextSearch;
-            model.FullTextSettings.SearchMode = (int)commonSettings.FullTextMode;
+            model.FullTextSettings.SearchMode = (int) commonSettings.FullTextMode;
             model.FullTextSettings.SearchModeValues = commonSettings.FullTextMode.ToSelectList();
 
 
             return View(model);
         }
+
         [HttpPost]
         [FormValueRequired("save")]
         public ActionResult GeneralCommon(GeneralCommonSettingsModel model)
@@ -292,14 +308,13 @@ namespace TinyCms.Admin.Controllers
                 return AccessDeniedView();
 
 
-       
-
             //store information settings
             var storeInformationSettings = _settingService.LoadSetting<StoreInformationSettings>();
             var commonSettings = _settingService.LoadSetting<CommonSettings>();
             storeInformationSettings.StoreClosed = model.StoreInformationSettings.StoreClosed;
             storeInformationSettings.DefaultStoreTheme = model.StoreInformationSettings.DefaultStoreTheme;
-            storeInformationSettings.AllowCustomerToSelectTheme = model.StoreInformationSettings.AllowCustomerToSelectTheme;
+            storeInformationSettings.AllowCustomerToSelectTheme =
+                model.StoreInformationSettings.AllowCustomerToSelectTheme;
             storeInformationSettings.Name = model.StoreInformationSettings.Name;
             storeInformationSettings.Url = model.StoreInformationSettings.Url;
             if (!string.IsNullOrWhiteSpace(storeInformationSettings.Url) && !storeInformationSettings.Url.EndsWith("/"))
@@ -312,7 +327,8 @@ namespace TinyCms.Admin.Controllers
             socialSettings.FacebookAppSecret = model.SocialSettings.FacebookAppSecret;
             _settingService.SaveSetting(socialSettings);
             //EU Cookie law
-            storeInformationSettings.DisplayEuCookieLawWarning = model.StoreInformationSettings.DisplayEuCookieLawWarning;
+            storeInformationSettings.DisplayEuCookieLawWarning =
+                model.StoreInformationSettings.DisplayEuCookieLawWarning;
             //social pages
             storeInformationSettings.FacebookLink = model.StoreInformationSettings.FacebookLink;
             storeInformationSettings.TwitterLink = model.StoreInformationSettings.TwitterLink;
@@ -320,7 +336,8 @@ namespace TinyCms.Admin.Controllers
             storeInformationSettings.GooglePlusLink = model.StoreInformationSettings.GooglePlusLink;
             //contact us
             commonSettings.SubjectFieldOnContactUsForm = model.StoreInformationSettings.SubjectFieldOnContactUsForm;
-            commonSettings.UseSystemEmailForContactUsForm = model.StoreInformationSettings.UseSystemEmailForContactUsForm;
+            commonSettings.UseSystemEmailForContactUsForm =
+                model.StoreInformationSettings.UseSystemEmailForContactUsForm;
 
 
             _settingService.SaveSetting(storeInformationSettings, x => x.StoreClosed, false);
@@ -340,14 +357,14 @@ namespace TinyCms.Admin.Controllers
             //seo settings
             var seoSettings = _settingService.LoadSetting<SeoSettings>();
             seoSettings.PageTitleSeparator = model.SeoSettings.PageTitleSeparator;
-            seoSettings.PageTitleSeoAdjustment = (PageTitleSeoAdjustment)model.SeoSettings.PageTitleSeoAdjustment;
+            seoSettings.PageTitleSeoAdjustment = (PageTitleSeoAdjustment) model.SeoSettings.PageTitleSeoAdjustment;
             seoSettings.DefaultTitle = model.SeoSettings.DefaultTitle;
             seoSettings.DefaultMetaKeywords = model.SeoSettings.DefaultMetaKeywords;
             seoSettings.DefaultMetaDescription = model.SeoSettings.DefaultMetaDescription;
             seoSettings.GeneratePostMetaDescription = model.SeoSettings.GeneratePostMetaDescription;
             seoSettings.ConvertNonWesternChars = model.SeoSettings.ConvertNonWesternChars;
             seoSettings.CanonicalUrlsEnabled = model.SeoSettings.CanonicalUrlsEnabled;
-            seoSettings.WwwRequirement = (WwwRequirement)model.SeoSettings.WwwRequirement;
+            seoSettings.WwwRequirement = (WwwRequirement) model.SeoSettings.WwwRequirement;
             seoSettings.EnableJsBundling = model.SeoSettings.EnableJsBundling;
             seoSettings.EnableCssBundling = model.SeoSettings.EnableCssBundling;
             seoSettings.TwitterMetaTags = model.SeoSettings.TwitterMetaTags;
@@ -374,19 +391,24 @@ namespace TinyCms.Admin.Controllers
                 securitySettings.AdminAreaAllowedIpAddresses = new List<string>();
             securitySettings.AdminAreaAllowedIpAddresses.Clear();
             if (!String.IsNullOrEmpty(model.SecuritySettings.AdminAreaAllowedIpAddresses))
-                foreach (string s in model.SecuritySettings.AdminAreaAllowedIpAddresses.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (
+                    var s in
+                        model.SecuritySettings.AdminAreaAllowedIpAddresses.Split(new[] {','},
+                            StringSplitOptions.RemoveEmptyEntries))
                     if (!String.IsNullOrWhiteSpace(s))
                         securitySettings.AdminAreaAllowedIpAddresses.Add(s.Trim());
             securitySettings.ForceSslForAllPages = model.SecuritySettings.ForceSslForAllPages;
             securitySettings.EnableXsrfProtectionForAdminArea = model.SecuritySettings.EnableXsrfProtectionForAdminArea;
-            securitySettings.EnableXsrfProtectionForPublicStore = model.SecuritySettings.EnableXsrfProtectionForPublicStore;
+            securitySettings.EnableXsrfProtectionForPublicStore =
+                model.SecuritySettings.EnableXsrfProtectionForPublicStore;
             securitySettings.HoneypotEnabled = model.SecuritySettings.HoneypotEnabled;
             _settingService.SaveSetting(securitySettings);
             captchaSettings.Enabled = model.SecuritySettings.CaptchaEnabled;
             captchaSettings.ShowOnLoginPage = model.SecuritySettings.CaptchaShowOnLoginPage;
             captchaSettings.ShowOnRegistrationPage = model.SecuritySettings.CaptchaShowOnRegistrationPage;
             captchaSettings.ShowOnContactUsPage = model.SecuritySettings.CaptchaShowOnContactUsPage;
-            captchaSettings.ShowOnEmailWishlistToFriendPage = model.SecuritySettings.CaptchaShowOnEmailWishlistToFriendPage;
+            captchaSettings.ShowOnEmailWishlistToFriendPage =
+                model.SecuritySettings.CaptchaShowOnEmailWishlistToFriendPage;
             captchaSettings.ShowOnEmailPostToFriendPage = model.SecuritySettings.CaptchaShowOnEmailPostToFriendPage;
             captchaSettings.ShowOnBlogCommentPage = model.SecuritySettings.CaptchaShowOnBlogCommentPage;
             captchaSettings.ShowOnNewsCommentPage = model.SecuritySettings.CaptchaShowOnNewsCommentPage;
@@ -396,35 +418,41 @@ namespace TinyCms.Admin.Controllers
             captchaSettings.ReCaptchaPrivateKey = model.SecuritySettings.ReCaptchaPrivateKey;
             _settingService.SaveSetting(captchaSettings);
             if (captchaSettings.Enabled &&
-                (String.IsNullOrWhiteSpace(captchaSettings.ReCaptchaPublicKey) || String.IsNullOrWhiteSpace(captchaSettings.ReCaptchaPrivateKey)))
+                (String.IsNullOrWhiteSpace(captchaSettings.ReCaptchaPublicKey) ||
+                 String.IsNullOrWhiteSpace(captchaSettings.ReCaptchaPrivateKey)))
             {
                 //captcha is enabled but the keys are not entered
                 ErrorNotification("Captcha is enabled but the appropriate keys are not entered");
             }
 
-        
 
             //localization settings
             var localizationSettings = _settingService.LoadSetting<LocalizationSettings>();
-            localizationSettings.UseImagesForLanguageSelection = model.LocalizationSettings.UseImagesForLanguageSelection;
-            if (localizationSettings.SeoFriendlyUrlsForLanguagesEnabled != model.LocalizationSettings.SeoFriendlyUrlsForLanguagesEnabled)
+            localizationSettings.UseImagesForLanguageSelection =
+                model.LocalizationSettings.UseImagesForLanguageSelection;
+            if (localizationSettings.SeoFriendlyUrlsForLanguagesEnabled !=
+                model.LocalizationSettings.SeoFriendlyUrlsForLanguagesEnabled)
             {
-                localizationSettings.SeoFriendlyUrlsForLanguagesEnabled = model.LocalizationSettings.SeoFriendlyUrlsForLanguagesEnabled;
+                localizationSettings.SeoFriendlyUrlsForLanguagesEnabled =
+                    model.LocalizationSettings.SeoFriendlyUrlsForLanguagesEnabled;
                 //clear cached values of routes
-                System.Web.Routing.RouteTable.Routes.ClearSeoFriendlyUrlsCachedValueForRoutes();
+                RouteTable.Routes.ClearSeoFriendlyUrlsCachedValueForRoutes();
             }
             localizationSettings.AutomaticallyDetectLanguage = model.LocalizationSettings.AutomaticallyDetectLanguage;
-            localizationSettings.LoadAllLocaleRecordsOnStartup = model.LocalizationSettings.LoadAllLocaleRecordsOnStartup;
-            localizationSettings.LoadAllLocalizedPropertiesOnStartup = model.LocalizationSettings.LoadAllLocalizedPropertiesOnStartup;
+            localizationSettings.LoadAllLocaleRecordsOnStartup =
+                model.LocalizationSettings.LoadAllLocaleRecordsOnStartup;
+            localizationSettings.LoadAllLocalizedPropertiesOnStartup =
+                model.LocalizationSettings.LoadAllLocalizedPropertiesOnStartup;
             localizationSettings.LoadAllUrlRecordsOnStartup = model.LocalizationSettings.LoadAllUrlRecordsOnStartup;
             _settingService.SaveSetting(localizationSettings);
 
             //full-text
-            commonSettings.FullTextMode = (FulltextSearchMode)model.FullTextSettings.SearchMode;
+            commonSettings.FullTextMode = (FulltextSearchMode) model.FullTextSettings.SearchMode;
             _settingService.SaveSetting(commonSettings);
             _settingService.ClearCache();
             //activity log
-            _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
+            _customerActivityService.InsertActivity("EditSettings",
+                _localizationService.GetResource("ActivityLog.EditSettings"));
 
             SuccessNotification(_localizationService.GetResource("Admin.Configuration.Updated"));
 
@@ -433,6 +461,7 @@ namespace TinyCms.Admin.Controllers
 
             return RedirectToAction("GeneralCommon");
         }
+
         [NonAction]
         protected virtual void PrepareAllCategoriesModel(CatalogSettingsModel model)
         {
@@ -454,6 +483,7 @@ namespace TinyCms.Admin.Controllers
                 });
             }
         }
+
         public ActionResult Catalog()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
@@ -466,6 +496,7 @@ namespace TinyCms.Admin.Controllers
             PrepareAllCategoriesModel(model);
             return View(model);
         }
+
         [HttpPost]
         public ActionResult Catalog(CatalogSettingsModel model)
         {
@@ -487,7 +518,8 @@ namespace TinyCms.Admin.Controllers
             _settingService.ClearCache();
 
             //activity log
-            _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
+            _customerActivityService.InsertActivity("EditSettings",
+                _localizationService.GetResource("ActivityLog.EditSettings"));
 
             SuccessNotification(_localizationService.GetResource("Admin.Configuration.Updated"));
 
@@ -508,7 +540,9 @@ namespace TinyCms.Admin.Controllers
             try
             {
                 if (!_fulltextService.IsFullTextSupported())
-                    throw new NopException(_localizationService.GetResource("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.NotSupported"));
+                    throw new NopException(
+                        _localizationService.GetResource(
+                            "Admin.Configuration.Settings.GeneralCommon.FullTextSettings.NotSupported"));
 
                 if (commonSettings.UseFullTextSearch)
                 {
@@ -517,7 +551,9 @@ namespace TinyCms.Admin.Controllers
                     commonSettings.UseFullTextSearch = false;
                     _settingService.SaveSetting(commonSettings);
 
-                    SuccessNotification(_localizationService.GetResource("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Disabled"));
+                    SuccessNotification(
+                        _localizationService.GetResource(
+                            "Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Disabled"));
                 }
                 else
                 {
@@ -526,7 +562,9 @@ namespace TinyCms.Admin.Controllers
                     commonSettings.UseFullTextSearch = true;
                     _settingService.SaveSetting(commonSettings);
 
-                    SuccessNotification(_localizationService.GetResource("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Enabled"));
+                    SuccessNotification(
+                        _localizationService.GetResource(
+                            "Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Enabled"));
                 }
             }
             catch (Exception exc)
@@ -548,12 +586,13 @@ namespace TinyCms.Admin.Controllers
 
             return View();
         }
+
         [HttpPost]
         //do not validate request token (XSRF)
         //for some reasons it does not work with "filtering" support
         [AdminAntiForgery(true)]
         public ActionResult AllSettings(DataSourceRequest command,
-            TinyCms.Web.Framework.Kendoui.Filter filter = null, IEnumerable<Sort> sort = null)
+            Filter filter = null, IEnumerable<Sort> sort = null)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
                 return AccessDeniedView();
@@ -565,7 +604,7 @@ namespace TinyCms.Admin.Controllers
                     {
                         Id = x.Id,
                         Name = x.Name,
-                        Value = x.Value,
+                        Value = x.Value
                     })
                 .AsQueryable()
                 .Filter(filter)
@@ -579,6 +618,7 @@ namespace TinyCms.Admin.Controllers
 
             return Json(gridModel);
         }
+
         [HttpPost]
         public ActionResult SettingUpdate(SettingModel model)
         {
@@ -592,7 +632,7 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var setting = _settingService.GetSettingById(model.Id);
@@ -609,10 +649,12 @@ namespace TinyCms.Admin.Controllers
             _settingService.SetSetting(model.Name, model.Value);
 
             //activity log
-            _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
+            _customerActivityService.InsertActivity("EditSettings",
+                _localizationService.GetResource("ActivityLog.EditSettings"));
 
             return new NullJsonResult();
         }
+
         [HttpPost]
         public ActionResult SettingAdd([Bind(Exclude = "Id")] SettingModel model)
         {
@@ -626,15 +668,17 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
             _settingService.SetSetting(model.Name, model.Value);
 
             //activity log
-            _customerActivityService.InsertActivity("AddNewSetting", _localizationService.GetResource("ActivityLog.AddNewSetting"), model.Name);
+            _customerActivityService.InsertActivity("AddNewSetting",
+                _localizationService.GetResource("ActivityLog.AddNewSetting"), model.Name);
 
             return new NullJsonResult();
         }
+
         [HttpPost]
         public ActionResult SettingDelete(int id)
         {
@@ -647,7 +691,8 @@ namespace TinyCms.Admin.Controllers
             _settingService.DeleteSetting(setting);
 
             //activity log
-            _customerActivityService.InsertActivity("DeleteSetting", _localizationService.GetResource("ActivityLog.DeleteSetting"), setting.Name);
+            _customerActivityService.InsertActivity("DeleteSetting",
+                _localizationService.GetResource("ActivityLog.DeleteSetting"), setting.Name);
 
             return new NullJsonResult();
         }
@@ -663,6 +708,7 @@ namespace TinyCms.Admin.Controllers
             model.PicturesStoredIntoDatabase = _pictureService.StoreInDb;
             return View(model);
         }
+
         [HttpPost]
         [FormValueRequired("save")]
         public ActionResult Media(MediaSettingsModel model)
@@ -680,11 +726,13 @@ namespace TinyCms.Admin.Controllers
             _settingService.ClearCache();
 
             //activity log
-            _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
+            _customerActivityService.InsertActivity("EditSettings",
+                _localizationService.GetResource("ActivityLog.EditSettings"));
 
             SuccessNotification(_localizationService.GetResource("Admin.Configuration.Updated"));
             return RedirectToAction("Media");
         }
+
         [HttpPost, ActionName("Media")]
         [FormValueRequired("change-picture-storage")]
         public ActionResult ChangePictureStorage()
@@ -695,7 +743,8 @@ namespace TinyCms.Admin.Controllers
             _pictureService.StoreInDb = !_pictureService.StoreInDb;
 
             //activity log
-            _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
+            _customerActivityService.InsertActivity("EditSettings",
+                _localizationService.GetResource("ActivityLog.EditSettings"));
 
             SuccessNotification(_localizationService.GetResource("Admin.Configuration.Updated"));
             return RedirectToAction("Media");

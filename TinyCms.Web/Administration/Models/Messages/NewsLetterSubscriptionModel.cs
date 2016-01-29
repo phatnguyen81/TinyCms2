@@ -7,8 +7,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Messages
 {
-    [Validator(typeof(NewsLetterSubscriptionValidator))]
-    public partial class NewsLetterSubscriptionModel : BaseNopEntityModel
+    [Validator(typeof (NewsLetterSubscriptionValidator))]
+    public class NewsLetterSubscriptionModel : BaseNopEntityModel
     {
         [NopResourceDisplayName("Admin.Promotions.NewsLetterSubscriptions.Fields.Email")]
         [AllowHtml]

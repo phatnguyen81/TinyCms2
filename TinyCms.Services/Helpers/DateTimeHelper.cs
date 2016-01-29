@@ -9,17 +9,17 @@ using TinyCms.Services.Configuration;
 namespace TinyCms.Services.Helpers
 {
     /// <summary>
-    /// Represents a datetime helper
+    ///     Represents a datetime helper
     /// </summary>
-    public partial class DateTimeHelper : IDateTimeHelper
+    public class DateTimeHelper : IDateTimeHelper
     {
-        private readonly IWorkContext _workContext;
+        private readonly DateTimeSettings _dateTimeSettings;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly ISettingService _settingService;
-        private readonly DateTimeSettings _dateTimeSettings;
+        private readonly IWorkContext _workContext;
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="workContext">Work context</param>
         /// <param name="genericAttributeService">Generic attribute service</param>
@@ -27,17 +27,17 @@ namespace TinyCms.Services.Helpers
         /// <param name="dateTimeSettings">Datetime settings</param>
         public DateTimeHelper(IWorkContext workContext,
             IGenericAttributeService genericAttributeService,
-            ISettingService settingService, 
+            ISettingService settingService,
             DateTimeSettings dateTimeSettings)
         {
-            this._workContext = workContext;
-            this._genericAttributeService = genericAttributeService;
-            this._settingService = settingService;
-            this._dateTimeSettings = dateTimeSettings;
+            _workContext = workContext;
+            _genericAttributeService = genericAttributeService;
+            _settingService = settingService;
+            _dateTimeSettings = dateTimeSettings;
         }
 
         /// <summary>
-        /// Retrieves a System.TimeZoneInfo object from the registry based on its identifier.
+        ///     Retrieves a System.TimeZoneInfo object from the registry based on its identifier.
         /// </summary>
         /// <param name="id">The time zone identifier, which corresponds to the System.TimeZoneInfo.Id property.</param>
         /// <returns>A System.TimeZoneInfo object whose identifier is the value of the id parameter.</returns>
@@ -47,7 +47,7 @@ namespace TinyCms.Services.Helpers
         }
 
         /// <summary>
-        /// Returns a sorted collection of all the time zones
+        ///     Returns a sorted collection of all the time zones
         /// </summary>
         /// <returns>A read-only collection of System.TimeZoneInfo objects.</returns>
         public virtual ReadOnlyCollection<TimeZoneInfo> GetSystemTimeZones()
@@ -56,7 +56,7 @@ namespace TinyCms.Services.Helpers
         }
 
         /// <summary>
-        /// Converts the date and time to current user date and time
+        ///     Converts the date and time to current user date and time
         /// </summary>
         /// <param name="dt">The date and time (respesents local system time or UTC time) to convert.</param>
         /// <returns>A DateTime value that represents time that corresponds to the dateTime parameter in customer time zone.</returns>
@@ -66,7 +66,7 @@ namespace TinyCms.Services.Helpers
         }
 
         /// <summary>
-        /// Converts the date and time to current user date and time
+        ///     Converts the date and time to current user date and time
         /// </summary>
         /// <param name="dt">The date and time (respesents local system time or UTC time) to convert.</param>
         /// <param name="sourceDateTimeKind">The source datetimekind</param>
@@ -74,50 +74,57 @@ namespace TinyCms.Services.Helpers
         public virtual DateTime ConvertToUserTime(DateTime dt, DateTimeKind sourceDateTimeKind)
         {
             dt = DateTime.SpecifyKind(dt, sourceDateTimeKind);
-            var currentUserTimeZoneInfo = this.CurrentTimeZone;
+            var currentUserTimeZoneInfo = CurrentTimeZone;
             return TimeZoneInfo.ConvertTime(dt, currentUserTimeZoneInfo);
         }
 
         /// <summary>
-        /// Converts the date and time to current user date and time
+        ///     Converts the date and time to current user date and time
         /// </summary>
         /// <param name="dt">The date and time to convert.</param>
         /// <param name="sourceTimeZone">The time zone of dateTime.</param>
         /// <returns>A DateTime value that represents time that corresponds to the dateTime parameter in customer time zone.</returns>
         public virtual DateTime ConvertToUserTime(DateTime dt, TimeZoneInfo sourceTimeZone)
         {
-            var currentUserTimeZoneInfo = this.CurrentTimeZone;
+            var currentUserTimeZoneInfo = CurrentTimeZone;
             return ConvertToUserTime(dt, sourceTimeZone, currentUserTimeZoneInfo);
         }
 
         /// <summary>
-        /// Converts the date and time to current user date and time
+        ///     Converts the date and time to current user date and time
         /// </summary>
         /// <param name="dt">The date and time to convert.</param>
         /// <param name="sourceTimeZone">The time zone of dateTime.</param>
         /// <param name="destinationTimeZone">The time zone to convert dateTime to.</param>
         /// <returns>A DateTime value that represents time that corresponds to the dateTime parameter in customer time zone.</returns>
-        public virtual DateTime ConvertToUserTime(DateTime dt, TimeZoneInfo sourceTimeZone, TimeZoneInfo destinationTimeZone)
+        public virtual DateTime ConvertToUserTime(DateTime dt, TimeZoneInfo sourceTimeZone,
+            TimeZoneInfo destinationTimeZone)
         {
             return TimeZoneInfo.ConvertTime(dt, sourceTimeZone, destinationTimeZone);
         }
 
         /// <summary>
-        /// Converts the date and time to Coordinated Universal Time (UTC)
+        ///     Converts the date and time to Coordinated Universal Time (UTC)
         /// </summary>
         /// <param name="dt">The date and time (respesents local system time or UTC time) to convert.</param>
-        /// <returns>A DateTime value that represents the Coordinated Universal Time (UTC) that corresponds to the dateTime parameter. The DateTime value's Kind property is always set to DateTimeKind.Utc.</returns>
+        /// <returns>
+        ///     A DateTime value that represents the Coordinated Universal Time (UTC) that corresponds to the dateTime
+        ///     parameter. The DateTime value's Kind property is always set to DateTimeKind.Utc.
+        /// </returns>
         public virtual DateTime ConvertToUtcTime(DateTime dt)
         {
             return ConvertToUtcTime(dt, dt.Kind);
         }
 
         /// <summary>
-        /// Converts the date and time to Coordinated Universal Time (UTC)
+        ///     Converts the date and time to Coordinated Universal Time (UTC)
         /// </summary>
         /// <param name="dt">The date and time (respesents local system time or UTC time) to convert.</param>
         /// <param name="sourceDateTimeKind">The source datetimekind</param>
-        /// <returns>A DateTime value that represents the Coordinated Universal Time (UTC) that corresponds to the dateTime parameter. The DateTime value's Kind property is always set to DateTimeKind.Utc.</returns>
+        /// <returns>
+        ///     A DateTime value that represents the Coordinated Universal Time (UTC) that corresponds to the dateTime
+        ///     parameter. The DateTime value's Kind property is always set to DateTimeKind.Utc.
+        /// </returns>
         public virtual DateTime ConvertToUtcTime(DateTime dt, DateTimeKind sourceDateTimeKind)
         {
             dt = DateTime.SpecifyKind(dt, sourceDateTimeKind);
@@ -125,11 +132,14 @@ namespace TinyCms.Services.Helpers
         }
 
         /// <summary>
-        /// Converts the date and time to Coordinated Universal Time (UTC)
+        ///     Converts the date and time to Coordinated Universal Time (UTC)
         /// </summary>
         /// <param name="dt">The date and time to convert.</param>
         /// <param name="sourceTimeZone">The time zone of dateTime.</param>
-        /// <returns>A DateTime value that represents the Coordinated Universal Time (UTC) that corresponds to the dateTime parameter. The DateTime value's Kind property is always set to DateTimeKind.Utc.</returns>
+        /// <returns>
+        ///     A DateTime value that represents the Coordinated Universal Time (UTC) that corresponds to the dateTime
+        ///     parameter. The DateTime value's Kind property is always set to DateTimeKind.Utc.
+        /// </returns>
         public virtual DateTime ConvertToUtcTime(DateTime dt, TimeZoneInfo sourceTimeZone)
         {
             if (sourceTimeZone.IsInvalidTime(dt))
@@ -137,12 +147,12 @@ namespace TinyCms.Services.Helpers
                 //could not convert
                 return dt;
             }
-            
+
             return TimeZoneInfo.ConvertTimeToUtc(dt, sourceTimeZone);
         }
 
         /// <summary>
-        /// Gets a customer time zone
+        ///     Gets a customer time zone
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <returns>Customer time zone; if customer is null, then default store time zone</returns>
@@ -152,9 +162,10 @@ namespace TinyCms.Services.Helpers
             TimeZoneInfo timeZoneInfo = null;
             if (_dateTimeSettings.AllowCustomersToSetTimeZone)
             {
-                string timeZoneId = string.Empty;
+                var timeZoneId = string.Empty;
                 if (customer != null)
-                    timeZoneId = customer.GetAttribute<string>(SystemCustomerAttributeNames.TimeZoneId, _genericAttributeService);
+                    timeZoneId = customer.GetAttribute<string>(SystemCustomerAttributeNames.TimeZoneId,
+                        _genericAttributeService);
 
                 try
                 {
@@ -169,13 +180,13 @@ namespace TinyCms.Services.Helpers
 
             //default timezone
             if (timeZoneInfo == null)
-                timeZoneInfo = this.DefaultStoreTimeZone;
+                timeZoneInfo = DefaultStoreTimeZone;
 
             return timeZoneInfo;
         }
 
         /// <summary>
-        /// Gets or sets a default store time zone
+        ///     Gets or sets a default store time zone
         /// </summary>
         public virtual TimeZoneInfo DefaultStoreTimeZone
         {
@@ -199,7 +210,7 @@ namespace TinyCms.Services.Helpers
             }
             set
             {
-                string defaultTimeZoneId = string.Empty;
+                var defaultTimeZoneId = string.Empty;
                 if (value != null)
                 {
                     defaultTimeZoneId = value.Id;
@@ -211,20 +222,17 @@ namespace TinyCms.Services.Helpers
         }
 
         /// <summary>
-        /// Gets or sets the current user time zone
+        ///     Gets or sets the current user time zone
         /// </summary>
         public virtual TimeZoneInfo CurrentTimeZone
         {
-            get
-            {
-                return GetCustomerTimeZone(_workContext.CurrentCustomer);
-            }
+            get { return GetCustomerTimeZone(_workContext.CurrentCustomer); }
             set
             {
                 if (!_dateTimeSettings.AllowCustomersToSetTimeZone)
                     return;
 
-                string timeZoneId = string.Empty;
+                var timeZoneId = string.Empty;
                 if (value != null)
                 {
                     timeZoneId = value.Id;

@@ -15,34 +15,23 @@ using TinyCms.Web.Models.Topics;
 
 namespace TinyCms.Web.Controllers
 {
-    public partial class TopicController : BasePublicController
+    public class TopicController : BasePublicController
     {
-        #region Fields
-
-        private readonly ITopicService _topicService;
-        private readonly IWorkContext _workContext;
-        private readonly ILocalizationService _localizationService;
-        private readonly ICacheManager _cacheManager;
-        private readonly IAclService _aclService;
-        private readonly ITopicTemplateService _topicTemplateService;
-
-        #endregion
-
         #region Constructors
 
         public TopicController(ITopicService topicService,
             ILocalizationService localizationService,
-            IWorkContext workContext, 
+            IWorkContext workContext,
             ICacheManager cacheManager,
             IAclService aclService,
             ITopicTemplateService topicTemplateService)
         {
-            this._topicService = topicService;
-            this._workContext = workContext;
-            this._localizationService = localizationService;
-            this._cacheManager = cacheManager;
-            this._aclService = aclService;
-            this._topicTemplateService = topicTemplateService;
+            _topicService = topicService;
+            _workContext = workContext;
+            _localizationService = localizationService;
+            _cacheManager = cacheManager;
+            _aclService = aclService;
+            _topicTemplateService = topicTemplateService;
         }
 
         #endregion
@@ -74,13 +63,24 @@ namespace TinyCms.Web.Controllers
 
         #endregion
 
+        #region Fields
+
+        private readonly ITopicService _topicService;
+        private readonly IWorkContext _workContext;
+        private readonly ILocalizationService _localizationService;
+        private readonly ICacheManager _cacheManager;
+        private readonly IAclService _aclService;
+        private readonly ITopicTemplateService _topicTemplateService;
+
+        #endregion
+
         #region Methods
 
         [NopHttpsRequirement(SslRequirement.No)]
         public ActionResult TopicDetails(int topicId)
         {
-            var cacheKey = string.Format(ModelCacheEventConsumer.TOPIC_MODEL_BY_ID_KEY, 
-                topicId, 
+            var cacheKey = string.Format(ModelCacheEventConsumer.TOPIC_MODEL_BY_ID_KEY,
+                topicId,
                 _workContext.WorkingLanguage.Id,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
             var cacheModel = _cacheManager.Get(cacheKey, () =>
@@ -93,13 +93,14 @@ namespace TinyCms.Web.Controllers
                     return null;
                 return PrepareTopicModel(topic);
             }
-            );
+                );
 
             if (cacheModel == null)
                 return RedirectToRoute("HomePage");
 
             //template
-            var templateCacheKey = string.Format(ModelCacheEventConsumer.TOPIC_TEMPLATE_MODEL_KEY, cacheModel.TopicTemplateId);
+            var templateCacheKey = string.Format(ModelCacheEventConsumer.TOPIC_TEMPLATE_MODEL_KEY,
+                cacheModel.TopicTemplateId);
             var templateViewPath = _cacheManager.Get(templateCacheKey, () =>
             {
                 var template = _topicTemplateService.GetTopicTemplateById(cacheModel.TopicTemplateId);
@@ -135,7 +136,8 @@ namespace TinyCms.Web.Controllers
                 return RedirectToRoute("HomePage");
 
             //template
-            var templateCacheKey = string.Format(ModelCacheEventConsumer.TOPIC_TEMPLATE_MODEL_KEY, cacheModel.TopicTemplateId);
+            var templateCacheKey = string.Format(ModelCacheEventConsumer.TOPIC_TEMPLATE_MODEL_KEY,
+                cacheModel.TopicTemplateId);
             var templateViewPath = _cacheManager.Get(templateCacheKey, () =>
             {
                 var template = _topicTemplateService.GetTopicTemplateById(cacheModel.TopicTemplateId);
@@ -155,7 +157,7 @@ namespace TinyCms.Web.Controllers
         {
             var cacheKey = string.Format(ModelCacheEventConsumer.TOPIC_MODEL_BY_SYSTEMNAME_KEY,
                 systemName,
-                _workContext.WorkingLanguage.Id, 
+                _workContext.WorkingLanguage.Id,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
             var cacheModel = _cacheManager.Get(cacheKey, () =>
             {
@@ -201,7 +203,7 @@ namespace TinyCms.Web.Controllers
                     error = _localizationService.GetResource("Topic.WrongPassword");
                 }
             }
-            return Json(new { Authenticated = authResult, Title = title, Body = body, Error = error });
+            return Json(new {Authenticated = authResult, Title = title, Body = body, Error = error});
         }
 
         #endregion

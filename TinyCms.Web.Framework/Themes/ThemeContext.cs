@@ -8,31 +8,30 @@ using TinyCms.Services.Common;
 namespace TinyCms.Web.Framework.Themes
 {
     /// <summary>
-    /// Theme context
+    ///     Theme context
     /// </summary>
-    public partial class ThemeContext : IThemeContext
+    public class ThemeContext : IThemeContext
     {
-        private readonly IWorkContext _workContext;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly StoreInformationSettings _storeInformationSettings;
         private readonly IThemeProvider _themeProvider;
-
-        private bool _themeIsCached;
+        private readonly IWorkContext _workContext;
         private string _cachedThemeName;
+        private bool _themeIsCached;
 
         public ThemeContext(IWorkContext workContext,
-            IGenericAttributeService genericAttributeService, 
-            StoreInformationSettings storeInformationSettings, 
+            IGenericAttributeService genericAttributeService,
+            StoreInformationSettings storeInformationSettings,
             IThemeProvider themeProvider)
         {
-            this._workContext = workContext;
-            this._genericAttributeService = genericAttributeService;
-            this._storeInformationSettings = storeInformationSettings;
-            this._themeProvider = themeProvider;
+            _workContext = workContext;
+            _genericAttributeService = genericAttributeService;
+            _storeInformationSettings = storeInformationSettings;
+            _themeProvider = themeProvider;
         }
 
         /// <summary>
-        /// Get or set current theme system name
+        ///     Get or set current theme system name
         /// </summary>
         public string WorkingThemeName
         {
@@ -41,11 +40,13 @@ namespace TinyCms.Web.Framework.Themes
                 if (_themeIsCached)
                     return _cachedThemeName;
 
-                string theme = "";
+                var theme = "";
                 if (_storeInformationSettings.AllowCustomerToSelectTheme)
                 {
                     if (_workContext.CurrentCustomer != null)
-                        theme = _workContext.CurrentCustomer.GetAttribute<string>(SystemCustomerAttributeNames.WorkingThemeName, _genericAttributeService);
+                        theme =
+                            _workContext.CurrentCustomer.GetAttribute<string>(
+                                SystemCustomerAttributeNames.WorkingThemeName, _genericAttributeService);
                 }
 
                 //default store theme
@@ -61,10 +62,10 @@ namespace TinyCms.Web.Framework.Themes
                         throw new Exception("No theme could be loaded");
                     theme = themeInstance.ThemeName;
                 }
-                
+
                 //cache theme
-                this._cachedThemeName = theme;
-                this._themeIsCached = true;
+                _cachedThemeName = theme;
+                _themeIsCached = true;
                 return theme;
             }
             set
@@ -75,10 +76,11 @@ namespace TinyCms.Web.Framework.Themes
                 if (_workContext.CurrentCustomer == null)
                     return;
 
-                _genericAttributeService.SaveAttribute(_workContext.CurrentCustomer, SystemCustomerAttributeNames.WorkingThemeName, value);
+                _genericAttributeService.SaveAttribute(_workContext.CurrentCustomer,
+                    SystemCustomerAttributeNames.WorkingThemeName, value);
 
                 //clear cache
-                this._themeIsCached = false;
+                _themeIsCached = false;
             }
         }
     }

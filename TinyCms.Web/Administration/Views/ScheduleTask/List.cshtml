@@ -10,12 +10,13 @@
     </div>
 </div>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#schedule-tasks-grid").on("click", ".run-now", function (e) {
-                showThrobber('@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Admin.System.ScheduleTasks.RunNow.Progress").Text))');
-            });
-        });
-    </script>    
+        $(document).ready(function() {
+            $("#schedule-tasks-grid").on("click", ".run-now", function(e) {
+                showThrobber("@Html.Raw(HttpUtility.JavaScriptStringEncode(T(\"Admin.System.ScheduleTasks.RunNow.Progress\").Text))");
+            }
+
+    );
+    });; </script>    
 <table class="adminContent">
     <tr>
         <td>
@@ -27,7 +28,7 @@
             <div id="schedule-tasks-grid"></div>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#schedule-tasks-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -39,7 +40,7 @@
                                     data: addAntiForgeryToken
                                 },
                                 update: {
-                                    url:"@Html.Raw(Url.Action("TaskUpdate", "ScheduleTask"))",
+                                    url: "@Html.Raw(Url.Action("TaskUpdate", "ScheduleTask"))",
                                     type: "POST",
                                     dataType: "json",
                                     data: addAntiForgeryToken
@@ -63,7 +64,7 @@
                                     }
                                 }
                             },
-                            error: function (e) {
+                            error: function(e) {
                                 display_kendoui_grid_error(e);
                                 // Cancel the changes
                                 this.cancelChanges();
@@ -83,7 +84,8 @@
                             mode: "inline"
                         },
                         scrollable: false,
-                        columns: [{
+                        columns: [
+                        {
                             field: "Name",
                             title: "@T("Admin.System.ScheduleTasks.Name")",
                             width: 300
@@ -97,14 +99,15 @@
                             width: 100,
                             headerAttributes: { style: "text-align:center" },
                             attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Enabled#.gif" />'
+                            template: "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=Enabled#.gif\" />"
                         }, {
                             field: "StopOnError",
                             title: "@T("Admin.System.ScheduleTasks.StopOnError")",
                             width: 100,
-                            headerAttributes: { style: "text-align:center" },
+                            headerAttributes: {
+                                "text-align:center" },
                             attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=StopOnError#.gif" />'
+                            template: "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=StopOnError#.gif\" />"
                         }, {
                             field: "LastStartUtc",
                             title: "@T("Admin.System.ScheduleTasks.LastStart")",
@@ -127,7 +130,7 @@
                             field: "Id",
                             title: "@T("Admin.System.ScheduleTasks.RunNow")",
                             width: 100,
-                            template: '<a href="@Url.Content("~/Admin/ScheduleTask/RunNow/")#=Id#" class="k-button run-now">@T("Admin.System.ScheduleTasks.RunNow")</a>'
+                            template: "<a href=\"@Url.Content(\"~/Admin/ScheduleTask/RunNow/\")#=Id#\" class=\"k-button run-now\">@T(\"Admin.System.ScheduleTasks.RunNow\")</a>"
                         }, {
                             command: {
                                 name: "edit",
@@ -141,8 +144,8 @@
                             width: 100
                         }]
                     });
-                });
-            </script>
+                        });
+                    </script>
         </td>
     </tr>
 </table>

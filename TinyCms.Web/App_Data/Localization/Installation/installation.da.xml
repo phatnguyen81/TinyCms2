@@ -15,7 +15,7 @@
     <Value>Kontoen'{0}' er ikke tildelt rettigheder for at ændre i mappen '{1}'. Venligst konfigurer tilladelser.</Value>
   </LocaleResource>
   <LocaleResource Name="ConfigureFilePermissions">
-     <Value>Kontoen'{0}' er ikke tildelt rettigheder for at ændre i filen '{1}'. Venligst konfigurer tilladelser.</Value>
+    <Value>Kontoen'{0}' er ikke tildelt rettigheder for at ændre i filen '{1}'. Venligst konfigurer tilladelser.</Value>
   </LocaleResource>
   <LocaleResource Name="ConfirmPassword">
     <Value>Bekræft password</Value>

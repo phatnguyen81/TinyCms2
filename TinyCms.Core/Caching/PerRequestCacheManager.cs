@@ -7,34 +7,23 @@ using System.Web;
 namespace TinyCms.Core.Caching
 {
     /// <summary>
-    /// Represents a manager for caching during an HTTP request (short term caching)
+    ///     Represents a manager for caching during an HTTP request (short term caching)
     /// </summary>
-    public partial class PerRequestCacheManager : ICacheManager
+    public class PerRequestCacheManager : ICacheManager
     {
         private readonly HttpContextBase _context;
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="context">Context</param>
         public PerRequestCacheManager(HttpContextBase context)
         {
-            this._context = context;
-        }
-        
-        /// <summary>
-        /// Creates a new instance of the NopRequestCache class
-        /// </summary>
-        protected virtual IDictionary GetItems()
-        {
-            if (_context != null)
-                return _context.Items;
-
-            return null;
+            _context = context;
         }
 
         /// <summary>
-        /// Gets or sets the value associated with the specified key.
+        ///     Gets or sets the value associated with the specified key.
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="key">The key of the value to get.</param>
@@ -45,11 +34,11 @@ namespace TinyCms.Core.Caching
             if (items == null)
                 return default(T);
 
-            return (T)items[key];
+            return (T) items[key];
         }
 
         /// <summary>
-        /// Adds the specified key and object to the cache.
+        ///     Adds the specified key and object to the cache.
         /// </summary>
         /// <param name="key">key</param>
         /// <param name="data">Data</param>
@@ -70,7 +59,7 @@ namespace TinyCms.Core.Caching
         }
 
         /// <summary>
-        /// Gets a value indicating whether the value associated with the specified key is cached
+        ///     Gets a value indicating whether the value associated with the specified key is cached
         /// </summary>
         /// <param name="key">key</param>
         /// <returns>Result</returns>
@@ -79,12 +68,12 @@ namespace TinyCms.Core.Caching
             var items = GetItems();
             if (items == null)
                 return false;
-            
+
             return (items[key] != null);
         }
 
         /// <summary>
-        /// Removes the value with the specified key from the cache
+        ///     Removes the value with the specified key from the cache
         /// </summary>
         /// <param name="key">/key</param>
         public virtual void Remove(string key)
@@ -97,7 +86,7 @@ namespace TinyCms.Core.Caching
         }
 
         /// <summary>
-        /// Removes items by pattern
+        ///     Removes items by pattern
         /// </summary>
         /// <param name="pattern">pattern</param>
         public virtual void RemoveByPattern(string pattern)
@@ -117,14 +106,14 @@ namespace TinyCms.Core.Caching
                 }
             }
 
-            foreach (string key in keysToRemove)
+            foreach (var key in keysToRemove)
             {
                 items.Remove(key);
             }
         }
 
         /// <summary>
-        /// Clear all cache data
+        ///     Clear all cache data
         /// </summary>
         public virtual void Clear()
         {
@@ -139,17 +128,28 @@ namespace TinyCms.Core.Caching
                 keysToRemove.Add(enumerator.Key.ToString());
             }
 
-            foreach (string key in keysToRemove)
+            foreach (var key in keysToRemove)
             {
                 items.Remove(key);
             }
         }
 
         /// <summary>
-        /// Dispose
+        ///     Dispose
         /// </summary>
         public virtual void Dispose()
         {
+        }
+
+        /// <summary>
+        ///     Creates a new instance of the NopRequestCache class
+        /// </summary>
+        protected virtual IDictionary GetItems()
+        {
+            if (_context != null)
+                return _context.Items;
+
+            return null;
         }
     }
 }

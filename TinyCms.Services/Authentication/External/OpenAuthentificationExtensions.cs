@@ -4,7 +4,7 @@ using TinyCms.Core.Domain.Customers;
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// Open authentication extensions
+    ///     Open authentication extensions
     /// </summary>
     public static class OpenAuthenticationExtensions
     {
@@ -19,8 +19,9 @@ namespace TinyCms.Services.Authentication.External
 
             if (settings.ActiveAuthenticationMethodSystemNames == null)
                 return false;
-            foreach (string activeMethodSystemName in settings.ActiveAuthenticationMethodSystemNames)
-                if (method.PluginDescriptor.SystemName.Equals(activeMethodSystemName, StringComparison.InvariantCultureIgnoreCase))
+            foreach (var activeMethodSystemName in settings.ActiveAuthenticationMethodSystemNames)
+                if (method.PluginDescriptor.SystemName.Equals(activeMethodSystemName,
+                    StringComparison.InvariantCultureIgnoreCase))
                     return true;
             return false;
         }

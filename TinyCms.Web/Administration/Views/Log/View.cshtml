@@ -8,14 +8,14 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-system.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-system.png")" alt=""/>
             @T("Admin.System.Log.ViewLogDetails") @Html.ActionLink("(" + T("Admin.System.Log.BackToList") + ")", "List")
         </div>
         <div class="options">
             <span id="log-delete" class="k-button">@T("Admin.Common.Delete")</span>
         </div>
     </div>
-    
+
     @Html.ValidationSummary(true)
     <table class="adminContent">
         <tr>
@@ -57,7 +57,7 @@
             <td class="adminData">
                 @if (Model.CustomerId.HasValue)
                 {
-                    @Html.ActionLink(!String.IsNullOrEmpty(Model.CustomerEmail) ? Model.CustomerEmail : T("Admin.Customers.Guest").Text, "Edit", "Customer", new { id = Model.CustomerId }, new { })
+                    @Html.ActionLink(!String.IsNullOrEmpty(Model.CustomerEmail) ? Model.CustomerEmail : T("Admin.Customers.Guest").Text, "Edit", "Customer", new {id = Model.CustomerId}, new {})
                 }
             </td>
         </tr>

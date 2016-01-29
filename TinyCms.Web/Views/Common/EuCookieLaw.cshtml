@@ -1,31 +1,43 @@
-﻿
+﻿<script type="text/javascript">
+    $(document).ready(function() {
+        $("#eu-cookie-bar-notification").show();
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#eu-cookie-bar-notification').show();
-
-        $('#eu-cookie-ok').click(function () {
+        $("#eu-cookie-ok").click(function() {
             $.ajax({
                 cache: false,
-                type: 'POST',
-                url: '@Url.RouteUrl("EuCookieLawAccept")',
-                dataType: 'json',
-                success: function (data) {
-                    $('#eu-cookie-bar-notification').hide();
-                },
-                failure: function () {
-                    alert('Cannot store value');
-                }
+                type: "POST",
+                url: "@Url.RouteUrl(\
+                          "EuCookieLawAccept\")",
+                          "json",
+                          function(data)
+    {
+    $
+        ("#eu-cookie-bar-notification").hide();
+    }
+                          ,
+                          function()
+    {
+        alert("Cannot store value");
+    }
+}
+
+    );
             });
-    });
-    });
-</script>
+        });
+        </script>
 <div id="eu-cookie-bar-notification" class="eu-cookie-bar-notification">
-    <div class="content">
-        <div class="text">@T("EUCookieLaw.Description2")</div>
+<div class="content">
+<div class="text">@T("EUCook
+    ieLaw.Description2")</div>
         <div class="buttons-more">
-            <button type="button" class="ok-button button-1" id="eu-cookie-ok">@T("Common.OK")</button>
-            <a class="learn-more" href="@Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("privacyinfo") })">@T("EUCookieLaw.LearnMore")</a>
+            <button type="button" class="ok-button button-1"  id="eu-cookie
+    -ok">@T("Common.OK")</button>
+            <a class="learn-more"  href="@U 
+        private 
+        u
+            eUrl("Topic", new { SeName = Html.GetTopicS
+        N ame(" priva  cyinfo") })">@T("EUC
+    ookieLaw.LearnMore")</a>
         </div>
     </div>
 </div>

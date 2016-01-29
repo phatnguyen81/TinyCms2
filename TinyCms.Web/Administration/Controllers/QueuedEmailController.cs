@@ -15,64 +15,70 @@ using TinyCms.Web.Framework.Kendoui;
 
 namespace TinyCms.Admin.Controllers
 {
-	public partial class QueuedEmailController : BaseAdminController
-	{
-		private readonly IQueuedEmailService _queuedEmailService;
+    public class QueuedEmailController : BaseAdminController
+    {
         private readonly IDateTimeHelper _dateTimeHelper;
         private readonly ILocalizationService _localizationService;
         private readonly IPermissionService _permissionService;
+        private readonly IQueuedEmailService _queuedEmailService;
         private readonly IWorkContext _workContext;
 
-		public QueuedEmailController(IQueuedEmailService queuedEmailService,
-            IDateTimeHelper dateTimeHelper, 
+        public QueuedEmailController(IQueuedEmailService queuedEmailService,
+            IDateTimeHelper dateTimeHelper,
             ILocalizationService localizationService,
             IPermissionService permissionService,
             IWorkContext workContext)
-		{
-            this._queuedEmailService = queuedEmailService;
-            this._dateTimeHelper = dateTimeHelper;
-            this._localizationService = localizationService;
-            this._permissionService = permissionService;
-            this._workContext = workContext;
-		}
+        {
+            _queuedEmailService = queuedEmailService;
+            _dateTimeHelper = dateTimeHelper;
+            _localizationService = localizationService;
+            _permissionService = permissionService;
+            _workContext = workContext;
+        }
 
         public ActionResult Index()
         {
             return RedirectToAction("List");
         }
 
-		public ActionResult List()
+        public ActionResult List()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageMessageQueue))
                 return AccessDeniedView();
 
-		    var model = new QueuedEmailListModel
-		    {
+            var model = new QueuedEmailListModel
+            {
                 //default value
-		        SearchMaxSentTries = 10
-		    };
+                SearchMaxSentTries = 10
+            };
             return View(model);
-		}
+        }
 
-		[HttpPost]
-		public ActionResult QueuedEmailList(DataSourceRequest command, QueuedEmailListModel model)
+        [HttpPost]
+        public ActionResult QueuedEmailList(DataSourceRequest command, QueuedEmailListModel model)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageMessageQueue))
                 return AccessDeniedView();
 
-            DateTime? startDateValue = (model.SearchStartDate == null) ? null
-                            : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.SearchStartDate.Value, _dateTimeHelper.CurrentTimeZone);
+            var startDateValue = (model.SearchStartDate == null)
+                ? null
+                : (DateTime?)
+                    _dateTimeHelper.ConvertToUtcTime(model.SearchStartDate.Value, _dateTimeHelper.CurrentTimeZone);
 
-            DateTime? endDateValue = (model.SearchEndDate == null) ? null 
-                            :(DateTime?)_dateTimeHelper.ConvertToUtcTime(model.SearchEndDate.Value, _dateTimeHelper.CurrentTimeZone).AddDays(1);
+            var endDateValue = (model.SearchEndDate == null)
+                ? null
+                : (DateTime?)
+                    _dateTimeHelper.ConvertToUtcTime(model.SearchEndDate.Value, _dateTimeHelper.CurrentTimeZone)
+                        .AddDays(1);
 
-            var queuedEmails = _queuedEmailService.SearchEmails(model.SearchFromEmail, model.SearchToEmail, 
-                startDateValue, endDateValue, 
+            var queuedEmails = _queuedEmailService.SearchEmails(model.SearchFromEmail, model.SearchToEmail,
+                startDateValue, endDateValue,
                 model.SearchLoadNotSent, model.SearchMaxSentTries, true,
                 command.Page - 1, command.PageSize);
             var gridModel = new DataSourceResult
             {
-                Data = queuedEmails.Select(x => {
+                Data = queuedEmails.Select(x =>
+                {
                     var m = x.ToModel();
                     m.PriorityName = x.Priority.GetLocalizedEnum(_localizationService, _workContext);
                     m.CreatedOn = _dateTimeHelper.ConvertToUserTime(x.CreatedOnUtc, DateTimeKind.Utc);
@@ -90,11 +96,11 @@ namespace TinyCms.Admin.Controllers
                 }),
                 Total = queuedEmails.TotalCount
             };
-			return new JsonResult
-			{
-				Data = gridModel
-			};
-		}
+            return new JsonResult
+            {
+                Data = gridModel
+            };
+        }
 
         [HttpPost, ActionName("List")]
         [FormValueRequired("go-to-email-by-number")]
@@ -103,16 +109,16 @@ namespace TinyCms.Admin.Controllers
             var queuedEmail = _queuedEmailService.GetQueuedEmailById(model.GoDirectlyToNumber);
             if (queuedEmail == null)
                 return List();
-            
-            return RedirectToAction("Edit", "QueuedEmail", new { id = queuedEmail.Id });
+
+            return RedirectToAction("Edit", "QueuedEmail", new {id = queuedEmail.Id});
         }
 
-		public ActionResult Edit(int id)
+        public ActionResult Edit(int id)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageMessageQueue))
                 return AccessDeniedView();
 
-			var email = _queuedEmailService.GetQueuedEmailById(id);
+            var email = _queuedEmailService.GetQueuedEmailById(id);
             if (email == null)
                 //No email found with the specified id
                 return RedirectToAction("List");
@@ -123,7 +129,7 @@ namespace TinyCms.Admin.Controllers
             if (email.SentOnUtc.HasValue)
                 model.SentOn = _dateTimeHelper.ConvertToUserTime(email.SentOnUtc.Value, DateTimeKind.Utc);
             return View(model);
-		}
+        }
 
         [HttpPost, ActionName("Edit")]
         [ParameterBasedOnFormName("save-continue", "continueEditing")]
@@ -144,7 +150,7 @@ namespace TinyCms.Admin.Controllers
                 _queuedEmailService.UpdateQueuedEmail(email);
 
                 SuccessNotification(_localizationService.GetResource("Admin.System.QueuedEmails.Updated"));
-                return continueEditing ? RedirectToAction("Edit", new { id = email.Id }) : RedirectToAction("List");
+                return continueEditing ? RedirectToAction("Edit", new {id = email.Id}) : RedirectToAction("List");
             }
 
             //If we got this far, something failed, redisplay form
@@ -153,7 +159,7 @@ namespace TinyCms.Admin.Controllers
             if (email.SentOnUtc.HasValue)
                 model.SentOn = _dateTimeHelper.ConvertToUserTime(email.SentOnUtc.Value, DateTimeKind.Utc);
             return View(model);
-		}
+        }
 
         [HttpPost, ActionName("Edit"), FormValueRequired("requeue")]
         public ActionResult Requeue(QueuedEmailModel queuedEmailModel)
@@ -188,16 +194,16 @@ namespace TinyCms.Admin.Controllers
             _queuedEmailService.InsertQueuedEmail(requeuedEmail);
 
             SuccessNotification(_localizationService.GetResource("Admin.System.QueuedEmails.Requeued"));
-            return RedirectToAction("Edit", new { id = requeuedEmail.Id });
+            return RedirectToAction("Edit", new {id = requeuedEmail.Id});
         }
 
-	    [HttpPost]
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageMessageQueue))
                 return AccessDeniedView();
 
-			var email = _queuedEmailService.GetQueuedEmailById(id);
+            var email = _queuedEmailService.GetQueuedEmailById(id);
             if (email == null)
                 //No email found with the specified id
                 return RedirectToAction("List");
@@ -205,8 +211,8 @@ namespace TinyCms.Admin.Controllers
             _queuedEmailService.DeleteQueuedEmail(email);
 
             SuccessNotification(_localizationService.GetResource("Admin.System.QueuedEmails.Deleted"));
-			return RedirectToAction("List");
-		}
+            return RedirectToAction("List");
+        }
 
         [HttpPost]
         public ActionResult DeleteSelected(ICollection<int> selectedIds)
@@ -221,7 +227,7 @@ namespace TinyCms.Admin.Controllers
                     _queuedEmailService.DeleteQueuedEmail(queuedEmail);
             }
 
-            return Json(new { Result = true });
+            return Json(new {Result = true});
         }
 
         [HttpPost, ActionName("List")]
@@ -236,6 +242,5 @@ namespace TinyCms.Admin.Controllers
             SuccessNotification(_localizationService.GetResource("Admin.System.QueuedEmails.DeletedAll"));
             return RedirectToAction("List");
         }
-
-	}
+    }
 }

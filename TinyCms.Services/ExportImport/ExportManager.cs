@@ -15,28 +15,26 @@ using TinyCms.Services.Messages;
 namespace TinyCms.Services.ExportImport
 {
     /// <summary>
-    /// Export manager
+    ///     Export manager
     /// </summary>
-    public partial class ExportManager : IExportManager
+    public class ExportManager : IExportManager
     {
-        #region Fields
-
-        private readonly IPictureService _pictureService;
-        private readonly INewsLetterSubscriptionService _newsLetterSubscriptionService;
-
-        #endregion
-
         #region Ctor
 
         public ExportManager(
             IPictureService pictureService,
             INewsLetterSubscriptionService newsLetterSubscriptionService)
         {
-         
-            this._pictureService = pictureService;
-            this._newsLetterSubscriptionService = newsLetterSubscriptionService;
-
+            _pictureService = pictureService;
+            _newsLetterSubscriptionService = newsLetterSubscriptionService;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly IPictureService _pictureService;
+        private readonly INewsLetterSubscriptionService _newsLetterSubscriptionService;
 
         #endregion
 
@@ -46,10 +44,8 @@ namespace TinyCms.Services.ExportImport
 
         #region Methods
 
-      
-
         /// <summary>
-        /// Export customer list to XLSX
+        ///     Export customer list to XLSX
         /// </summary>
         /// <param name="stream">Stream</param>
         /// <param name="customers">Customers</param>
@@ -67,43 +63,43 @@ namespace TinyCms.Services.ExportImport
                 // get handle to the existing worksheet
                 var worksheet = xlPackage.Workbook.Worksheets.Add("Customers");
                 //Create Headers and format them
-                var properties = new []
-                    {
-                        "CustomerId",
-                        "CustomerGuid",
-                        "Email",
-                        "Username",
-                        "PasswordStr",//why can't we use 'Password' name?
-                        "PasswordFormatId",
-                        "PasswordSalt",
-                        "IsTaxExempt",
-                        "AffiliateId",
-                        "VendorId",
-                        "Active",
-                        "IsGuest",
-                        "IsRegistered",
-                        "IsAdministrator",
-                        "IsForumModerator",
-                        "FirstName",
-                        "LastName",
-                        "Gender",
-                        "Company",
-                        "StreetAddress",
-                        "StreetAddress2",
-                        "ZipPostalCode",
-                        "City",
-                        "CountryId",
-                        "StateProvinceId",
-                        "Phone",
-                        "Fax",
-                        "VatNumber",
-                        "VatNumberStatusId",
-                        "TimeZoneId",
-                        "AvatarPictureId",
-                        "ForumPostCount",
-                        "Signature"
-                    };
-                for (int i = 0; i < properties.Length; i++)
+                var properties = new[]
+                {
+                    "CustomerId",
+                    "CustomerGuid",
+                    "Email",
+                    "Username",
+                    "PasswordStr", //why can't we use 'Password' name?
+                    "PasswordFormatId",
+                    "PasswordSalt",
+                    "IsTaxExempt",
+                    "AffiliateId",
+                    "VendorId",
+                    "Active",
+                    "IsGuest",
+                    "IsRegistered",
+                    "IsAdministrator",
+                    "IsForumModerator",
+                    "FirstName",
+                    "LastName",
+                    "Gender",
+                    "Company",
+                    "StreetAddress",
+                    "StreetAddress2",
+                    "ZipPostalCode",
+                    "City",
+                    "CountryId",
+                    "StateProvinceId",
+                    "Phone",
+                    "Fax",
+                    "VatNumber",
+                    "VatNumberStatusId",
+                    "TimeZoneId",
+                    "AvatarPictureId",
+                    "ForumPostCount",
+                    "Signature"
+                };
+                for (var i = 0; i < properties.Length; i++)
                 {
                     worksheet.Cells[1, i + 1].Value = properties[i];
                     worksheet.Cells[1, i + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
@@ -112,10 +108,10 @@ namespace TinyCms.Services.ExportImport
                 }
 
 
-                int row = 2;
+                var row = 2;
                 foreach (var customer in customers)
                 {
-                    int col = 1;
+                    var col = 1;
 
                     worksheet.Cells[row, col].Value = customer.Id;
                     col++;
@@ -153,7 +149,7 @@ namespace TinyCms.Services.ExportImport
 
                     worksheet.Cells[row, col].Value = customer.IsForumModerator();
                     col++;
-                    
+
                     //attributes
                     var firstName = customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName);
                     var lastName = customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName);
@@ -216,7 +212,7 @@ namespace TinyCms.Services.ExportImport
 
                     worksheet.Cells[row, col].Value = vatNumberStatusId;
                     col++;
-                    
+
                     worksheet.Cells[row, col].Value = timeZoneId;
                     col++;
 
@@ -255,7 +251,7 @@ namespace TinyCms.Services.ExportImport
         }
 
         /// <summary>
-        /// Export customer list to xml
+        ///     Export customer list to xml
         /// </summary>
         /// <param name="customers">Customers</param>
         /// <returns>Result in XML format</returns>
@@ -286,32 +282,52 @@ namespace TinyCms.Services.ExportImport
                 xmlWriter.WriteElementString("IsAdministrator", null, customer.IsAdmin().ToString());
                 xmlWriter.WriteElementString("IsForumModerator", null, customer.IsForumModerator().ToString());
 
-                xmlWriter.WriteElementString("FirstName", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName));
-                xmlWriter.WriteElementString("LastName", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName));
-                xmlWriter.WriteElementString("Gender", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.Gender));
-                xmlWriter.WriteElementString("Company", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.Company));
+                xmlWriter.WriteElementString("FirstName", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName));
+                xmlWriter.WriteElementString("LastName", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName));
+                xmlWriter.WriteElementString("Gender", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.Gender));
+                xmlWriter.WriteElementString("Company", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.Company));
 
-                xmlWriter.WriteElementString("CountryId", null, customer.GetAttribute<int>(SystemCustomerAttributeNames.CountryId).ToString());
-                xmlWriter.WriteElementString("StreetAddress", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.StreetAddress));
-                xmlWriter.WriteElementString("StreetAddress2", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.StreetAddress2));
-                xmlWriter.WriteElementString("ZipPostalCode", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.ZipPostalCode));
-                xmlWriter.WriteElementString("City", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.City));
-                xmlWriter.WriteElementString("CountryId", null, customer.GetAttribute<int>(SystemCustomerAttributeNames.CountryId).ToString());
-                xmlWriter.WriteElementString("StateProvinceId", null, customer.GetAttribute<int>(SystemCustomerAttributeNames.StateProvinceId).ToString());
-                xmlWriter.WriteElementString("Phone", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.Phone));
-                xmlWriter.WriteElementString("Fax", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.Fax));
-                xmlWriter.WriteElementString("VatNumber", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.VatNumber));
-                xmlWriter.WriteElementString("VatNumberStatusId", null, customer.GetAttribute<int>(SystemCustomerAttributeNames.VatNumberStatusId).ToString());
-                xmlWriter.WriteElementString("TimeZoneId", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.TimeZoneId));
+                xmlWriter.WriteElementString("CountryId", null,
+                    customer.GetAttribute<int>(SystemCustomerAttributeNames.CountryId).ToString());
+                xmlWriter.WriteElementString("StreetAddress", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.StreetAddress));
+                xmlWriter.WriteElementString("StreetAddress2", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.StreetAddress2));
+                xmlWriter.WriteElementString("ZipPostalCode", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.ZipPostalCode));
+                xmlWriter.WriteElementString("City", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.City));
+                xmlWriter.WriteElementString("CountryId", null,
+                    customer.GetAttribute<int>(SystemCustomerAttributeNames.CountryId).ToString());
+                xmlWriter.WriteElementString("StateProvinceId", null,
+                    customer.GetAttribute<int>(SystemCustomerAttributeNames.StateProvinceId).ToString());
+                xmlWriter.WriteElementString("Phone", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.Phone));
+                xmlWriter.WriteElementString("Fax", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.Fax));
+                xmlWriter.WriteElementString("VatNumber", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.VatNumber));
+                xmlWriter.WriteElementString("VatNumberStatusId", null,
+                    customer.GetAttribute<int>(SystemCustomerAttributeNames.VatNumberStatusId).ToString());
+                xmlWriter.WriteElementString("TimeZoneId", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.TimeZoneId));
 
-                var newsletter = _newsLetterSubscriptionService.GetNewsLetterSubscriptionByEmailAndStoreId(customer.Email);
-                bool subscribedToNewsletters = newsletter != null && newsletter.Active;
+                var newsletter =
+                    _newsLetterSubscriptionService.GetNewsLetterSubscriptionByEmailAndStoreId(customer.Email);
+                var subscribedToNewsletters = newsletter != null && newsletter.Active;
                 xmlWriter.WriteElementString("Newsletter-in-store", null, subscribedToNewsletters.ToString());
 
-                xmlWriter.WriteElementString("AvatarPictureId", null, customer.GetAttribute<int>(SystemCustomerAttributeNames.AvatarPictureId).ToString());
-                xmlWriter.WriteElementString("ForumPostCount", null, customer.GetAttribute<int>(SystemCustomerAttributeNames.ForumPostCount).ToString());
-                xmlWriter.WriteElementString("Signature", null, customer.GetAttribute<string>(SystemCustomerAttributeNames.Signature));
-                
+                xmlWriter.WriteElementString("AvatarPictureId", null,
+                    customer.GetAttribute<int>(SystemCustomerAttributeNames.AvatarPictureId).ToString());
+                xmlWriter.WriteElementString("ForumPostCount", null,
+                    customer.GetAttribute<int>(SystemCustomerAttributeNames.ForumPostCount).ToString());
+                xmlWriter.WriteElementString("Signature", null,
+                    customer.GetAttribute<string>(SystemCustomerAttributeNames.Signature));
+
                 xmlWriter.WriteEndElement();
             }
 
@@ -320,9 +336,9 @@ namespace TinyCms.Services.ExportImport
             xmlWriter.Close();
             return stringWriter.ToString();
         }
-        
+
         /// <summary>
-        /// Export newsletter subscribers to TXT
+        ///     Export newsletter subscribers to TXT
         /// </summary>
         /// <param name="subscriptions">Subscriptions</param>
         /// <returns>Result in TXT (string) format</returns>
@@ -339,11 +355,10 @@ namespace TinyCms.Services.ExportImport
                 sb.Append(separator);
                 sb.Append(subscription.Active);
                 sb.Append(separator);
-                sb.Append(Environment.NewLine);  //new line
+                sb.Append(Environment.NewLine); //new line
             }
             return sb.ToString();
         }
-
 
         #endregion
     }

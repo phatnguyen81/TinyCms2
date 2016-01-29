@@ -4,7 +4,7 @@
 <div class="copyright">
     <a href="@Url.RouteUrl("homepage")" class="logo"></a>
     <div class="leftcol">
-        @Html.Action("TopicBlock", "Topic", new { systemName = "FooterInfo" })
+        @Html.Action("TopicBlock", "Topic", new {systemName = "FooterInfo"})
     </div>
 </div>
 <div class="tool_rightbar">
@@ -13,8 +13,8 @@
     <a href="#top" class="gotopbtn icn"></a>
 </div>
 <script type="text/javascript">
-    $('a[href=#top]').click(function (e) {
+    $("a[href=#top]").click(function(e) {
         e.preventDefault();
-        $('html, body').animate({ scrollTop: 0 }, 'slow');
+        $("html, body").animate({ scrollTop: 0 }, "slow");
     });
 </script>

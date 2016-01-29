@@ -5,42 +5,42 @@ using TinyCms.Core.Domain.Messages;
 
 namespace TinyCms.Services.Messages
 {
-    public partial interface IQueuedEmailService
+    public interface IQueuedEmailService
     {
         /// <summary>
-        /// Inserts a queued email
+        ///     Inserts a queued email
         /// </summary>
         /// <param name="queuedEmail">Queued email</param>
         void InsertQueuedEmail(QueuedEmail queuedEmail);
 
         /// <summary>
-        /// Updates a queued email
+        ///     Updates a queued email
         /// </summary>
         /// <param name="queuedEmail">Queued email</param>
         void UpdateQueuedEmail(QueuedEmail queuedEmail);
 
         /// <summary>
-        /// Deleted a queued email
+        ///     Deleted a queued email
         /// </summary>
         /// <param name="queuedEmail">Queued email</param>
         void DeleteQueuedEmail(QueuedEmail queuedEmail);
 
         /// <summary>
-        /// Gets a queued email by identifier
+        ///     Gets a queued email by identifier
         /// </summary>
         /// <param name="queuedEmailId">Queued email identifier</param>
         /// <returns>Queued email</returns>
         QueuedEmail GetQueuedEmailById(int queuedEmailId);
 
         /// <summary>
-        /// Get queued emails by identifiers
+        ///     Get queued emails by identifiers
         /// </summary>
         /// <param name="queuedEmailIds">queued email identifiers</param>
         /// <returns>Queued emails</returns>
         IList<QueuedEmail> GetQueuedEmailsByIds(int[] queuedEmailIds);
 
         /// <summary>
-        /// Search queued emails
+        ///     Search queued emails
         /// </summary>
         /// <param name="fromEmail">From Email</param>
         /// <param name="toEmail">To Email</param>
@@ -53,12 +53,12 @@ namespace TinyCms.Services.Messages
         /// <param name="pageSize">Page size</param>
         /// <returns>Queued emails</returns>
         IPagedList<QueuedEmail> SearchEmails(string fromEmail,
-            string toEmail, DateTime? createdFromUtc, DateTime? createdToUtc, 
+            string toEmail, DateTime? createdFromUtc, DateTime? createdToUtc,
             bool loadNotSentItemsOnly, int maxSendTries,
             bool loadNewest, int pageIndex = 0, int pageSize = int.MaxValue);
 
         /// <summary>
-        /// Delete all queued emails
+        ///     Delete all queued emails
         /// </summary>
         void DeleteAllEmails();
     }

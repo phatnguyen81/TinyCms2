@@ -9,8 +9,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Topics
 {
-    [Validator(typeof(TopicValidator))]
-    public partial class TopicModel : BaseNopEntityModel, ILocalizedModel<TopicLocalizedModel>
+    [Validator(typeof (TopicValidator))]
+    public class TopicModel : BaseNopEntityModel, ILocalizedModel<TopicLocalizedModel>
     {
         public TopicModel()
         {
@@ -30,10 +30,13 @@ namespace TinyCms.Admin.Models.Topics
 
         [NopResourceDisplayName("Admin.ContentManagement.Topics.Fields.IncludeInFooterColumn1")]
         public bool IncludeInFooterColumn1 { get; set; }
+
         [NopResourceDisplayName("Admin.ContentManagement.Topics.Fields.IncludeInFooterColumn2")]
         public bool IncludeInFooterColumn2 { get; set; }
+
         [NopResourceDisplayName("Admin.ContentManagement.Topics.Fields.IncludeInFooterColumn3")]
         public bool IncludeInFooterColumn3 { get; set; }
+
         [NopResourceDisplayName("Admin.ContentManagement.Topics.Fields.DisplayOrder")]
         public int DisplayOrder { get; set; }
 
@@ -60,6 +63,7 @@ namespace TinyCms.Admin.Models.Topics
 
         [NopResourceDisplayName("Admin.ContentManagement.Topics.Fields.TopicTemplate")]
         public int TopicTemplateId { get; set; }
+
         public IList<SelectListItem> AvailableTopicTemplates { get; set; }
 
         [NopResourceDisplayName("Admin.ContentManagement.Topics.Fields.MetaKeywords")]
@@ -78,22 +82,19 @@ namespace TinyCms.Admin.Models.Topics
         [AllowHtml]
         public string SeName { get; set; }
 
-        public IList<TopicLocalizedModel> Locales { get; set; }
-
-      
         //ACL
         [NopResourceDisplayName("Admin.ContentManagement.Topics.Fields.SubjectToAcl")]
         public bool SubjectToAcl { get; set; }
+
         [NopResourceDisplayName("Admin.ContentManagement.Topics.Fields.AclCustomerRoles")]
         public List<CustomerRoleModel> AvailableCustomerRoles { get; set; }
-        public int[] SelectedCustomerRoleIds { get; set; }
 
+        public int[] SelectedCustomerRoleIds { get; set; }
+        public IList<TopicLocalizedModel> Locales { get; set; }
     }
 
-    public partial class TopicLocalizedModel : ILocalizedModelLocal
+    public class TopicLocalizedModel : ILocalizedModelLocal
     {
-        public int LanguageId { get; set; }
-
         [NopResourceDisplayName("Admin.ContentManagement.Topics.Fields.Title")]
         [AllowHtml]
         public string Title { get; set; }
@@ -117,5 +118,7 @@ namespace TinyCms.Admin.Models.Topics
         [NopResourceDisplayName("Admin.ContentManagement.Topics.Fields.SeName")]
         [AllowHtml]
         public string SeName { get; set; }
+
+        public int LanguageId { get; set; }
     }
 }

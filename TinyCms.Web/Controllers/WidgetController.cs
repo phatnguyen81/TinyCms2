@@ -9,25 +9,17 @@ using TinyCms.Web.Models.Cms;
 
 namespace TinyCms.Web.Controllers
 {
-    public partial class WidgetController : BasePublicController
+    public class WidgetController : BasePublicController
     {
-		#region Fields
+        #region Constructors
 
-        private readonly IWidgetService _widgetService;
-        private readonly IThemeContext _themeContext;
-        private readonly ICacheManager _cacheManager;
-
-        #endregion
-
-		#region Constructors
-
-        public WidgetController(IWidgetService widgetService, 
+        public WidgetController(IWidgetService widgetService,
             IThemeContext themeContext,
             ICacheManager cacheManager)
         {
-            this._widgetService = widgetService;
-            this._themeContext = themeContext;
-            this._cacheManager = cacheManager;
+            _widgetService = widgetService;
+            _themeContext = themeContext;
+            _cacheManager = cacheManager;
         }
 
         #endregion
@@ -37,7 +29,8 @@ namespace TinyCms.Web.Controllers
         [ChildActionOnly]
         public ActionResult WidgetsByZone(string widgetZone, object additionalData = null)
         {
-            var cacheKey = string.Format(ModelCacheEventConsumer.WIDGET_MODEL_KEY,  widgetZone, _themeContext.WorkingThemeName);
+            var cacheKey = string.Format(ModelCacheEventConsumer.WIDGET_MODEL_KEY, widgetZone,
+                _themeContext.WorkingThemeName);
             var cacheModel = _cacheManager.Get(cacheKey, () =>
             {
                 //model
@@ -88,6 +81,14 @@ namespace TinyCms.Web.Controllers
 
             return PartialView(clonedModel);
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly IWidgetService _widgetService;
+        private readonly IThemeContext _themeContext;
+        private readonly ICacheManager _cacheManager;
 
         #endregion
     }

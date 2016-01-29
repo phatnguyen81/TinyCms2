@@ -4,7 +4,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Posts
 {
-    public partial class CategoryListModel : BaseNopModel
+    public class CategoryListModel : BaseNopModel
     {
         [NopResourceDisplayName("Admin.Catalog.Categories.List.SearchCategoryName")]
         [AllowHtml]

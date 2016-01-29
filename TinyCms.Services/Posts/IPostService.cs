@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TinyCms.Core;
 using TinyCms.Core.Domain.Catalog;
@@ -7,58 +6,58 @@ using TinyCms.Core.Domain.Posts;
 namespace TinyCms.Services.Posts
 {
     /// <summary>
-    /// Post service
+    ///     Post service
     /// </summary>
-    public partial interface IPostService
+    public interface IPostService
     {
         #region Posts
 
         /// <summary>
-        /// Delete a post
+        ///     Delete a post
         /// </summary>
         /// <param name="post">Post</param>
         void DeletePost(Post post);
 
         /// <summary>
-        /// Gets all posts displayed on the home page
+        ///     Gets all posts displayed on the home page
         /// </summary>
         /// <returns>Posts</returns>
         IList<Post> GetAllPostsDisplayedOnHomePage(int top = 0);
 
         /// <summary>
-        /// Gets all posts displayed on the home page
+        ///     Gets all posts displayed on the home page
         /// </summary>
         /// <returns>Posts</returns>
         IList<Post> GetOrtherPosts(int postId, int beforeAfterNumPost, bool showHidden = false);
-        
+
         /// <summary>
-        /// Gets post
+        ///     Gets post
         /// </summary>
         /// <param name="postId">Post identifier</param>
         /// <returns>Post</returns>
         Post GetPostById(int postId);
-        
+
         /// <summary>
-        /// Gets posts by identifier
+        ///     Gets posts by identifier
         /// </summary>
         /// <param name="postIds">Post identifiers</param>
         /// <returns>Posts</returns>
         IList<Post> GetPostsByIds(int[] postIds);
 
         /// <summary>
-        /// Inserts a post
+        ///     Inserts a post
         /// </summary>
         /// <param name="post">Post</param>
         void InsertPost(Post post);
 
         /// <summary>
-        /// Updates the post
+        ///     Updates the post
         /// </summary>
         /// <param name="post">Post</param>
         void UpdatePost(Post post);
 
         /// <summary>
-        /// Get (visible) post number in certain category
+        ///     Get (visible) post number in certain category
         /// </summary>
         /// <param name="categoryIds">Category identifiers</param>
         /// <param name="storeId">Store identifier; 0 to load all records</param>
@@ -66,7 +65,7 @@ namespace TinyCms.Services.Posts
         int GetCategoryPostNumber(IList<int> categoryIds = null);
 
         /// <summary>
-        /// Search posts
+        ///     Search posts
         /// </summary>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
@@ -76,9 +75,18 @@ namespace TinyCms.Services.Posts
         /// <param name="vendorId">Vendor identifier; 0 to load all records</param>
         /// <param name="warehouseId">Warehouse identifier; 0 to load all records</param>
         /// <param name="postType">Post type; 0 to load all records</param>
-        /// <param name="visibleIndividuallyOnly">A values indicating whether to load only posts marked as "visible individually"; "false" to load all records; "true" to load "visible individually" only</param>
-        /// <param name="markedAsNewOnly">A values indicating whether to load only posts marked as "new"; "false" to load all records; "true" to load "marked as new" only</param>
-        /// <param name="featuredPosts">A value indicating whether loaded posts are marked as featured (relates only to categories and manufacturers). 0 to load featured posts only, 1 to load not featured posts only, null to load all posts</param>
+        /// <param name="visibleIndividuallyOnly">
+        ///     A values indicating whether to load only posts marked as "visible individually";
+        ///     "false" to load all records; "true" to load "visible individually" only
+        /// </param>
+        /// <param name="markedAsNewOnly">
+        ///     A values indicating whether to load only posts marked as "new"; "false" to load all
+        ///     records; "true" to load "marked as new" only
+        /// </param>
+        /// <param name="featuredPosts">
+        ///     A value indicating whether loaded posts are marked as featured (relates only to categories
+        ///     and manufacturers). 0 to load featured posts only, 1 to load not featured posts only, null to load all posts
+        /// </param>
         /// <param name="priceMin">Minimum price; null to load all records</param>
         /// <param name="priceMax">Maximum price; null to load all records</param>
         /// <param name="postTagId">Post tag identifier; 0 to load all records</param>
@@ -91,9 +99,9 @@ namespace TinyCms.Services.Posts
         /// <param name="orderBy">Order by</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <param name="overridePublished">
-        /// null - process "Published" property according to "showHidden" parameter
-        /// true - load only "Published" posts
-        /// false - load only "Unpublished" posts
+        ///     null - process "Published" property according to "showHidden" parameter
+        ///     true - load only "Published" posts
+        ///     false - load only "Unpublished" posts
         /// </param>
         /// <returns>Posts</returns>
         IPagedList<Post> SearchPosts(
@@ -112,50 +120,47 @@ namespace TinyCms.Services.Posts
             bool showHidden = false,
             bool? overridePublished = null);
 
-       
 
-      /// <summary>
-        /// Update post review totals
+        /// <summary>
+        ///     Update post review totals
         /// </summary>
         /// <param name="post">Post</param>
         void UpdatePostReviewTotals(Post post);
 
         IList<Post> GetRandomPosts(int numPost, int templateId = 0, int excludePostId = 0);
-       
-      
-        #endregion
 
+        #endregion
 
         #region Post pictures
 
         /// <summary>
-        /// Deletes a post picture
+        ///     Deletes a post picture
         /// </summary>
         /// <param name="postPicture">Post picture</param>
         void DeletePostPicture(PostPicture postPicture);
 
         /// <summary>
-        /// Gets a post pictures by post identifier
+        ///     Gets a post pictures by post identifier
         /// </summary>
         /// <param name="postId">The post identifier</param>
         /// <returns>Post pictures</returns>
         IList<PostPicture> GetPostPicturesByPostId(int postId);
 
         /// <summary>
-        /// Gets a post picture
+        ///     Gets a post picture
         /// </summary>
         /// <param name="postPictureId">Post picture identifier</param>
         /// <returns>Post picture</returns>
         PostPicture GetPostPictureById(int postPictureId);
 
         /// <summary>
-        /// Inserts a post picture
+        ///     Inserts a post picture
         /// </summary>
         /// <param name="postPicture">Post picture</param>
         void InsertPostPicture(PostPicture postPicture);
 
         /// <summary>
-        /// Updates a post picture
+        ///     Updates a post picture
         /// </summary>
         /// <param name="postPicture">Post picture</param>
         void UpdatePostPicture(PostPicture postPicture);
@@ -165,13 +170,13 @@ namespace TinyCms.Services.Posts
         #region Related posts
 
         /// <summary>
-        /// Deletes a related post
+        ///     Deletes a related post
         /// </summary>
         /// <param name="relatedPost">Related post</param>
         void DeleteRelatedPost(RelatedPost relatedPost);
 
         /// <summary>
-        /// Gets related posts by post identifier
+        ///     Gets related posts by post identifier
         /// </summary>
         /// <param name="postId1">The first post identifier</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
@@ -179,25 +184,24 @@ namespace TinyCms.Services.Posts
         IList<RelatedPost> GetRelatedPostsByPostId1(int postId1, int top = 0, bool showHidden = false);
 
         /// <summary>
-        /// Gets a related post
+        ///     Gets a related post
         /// </summary>
         /// <param name="relatedPostId">Related post identifier</param>
         /// <returns>Related post</returns>
         RelatedPost GetRelatedPostById(int relatedPostId);
 
         /// <summary>
-        /// Inserts a related post
+        ///     Inserts a related post
         /// </summary>
         /// <param name="relatedPost">Related post</param>
         void InsertRelatedPost(RelatedPost relatedPost);
 
         /// <summary>
-        /// Updates a related post
+        ///     Updates a related post
         /// </summary>
         /// <param name="relatedPost">Related post</param>
         void UpdateRelatedPost(RelatedPost relatedPost);
 
         #endregion
-
     }
 }

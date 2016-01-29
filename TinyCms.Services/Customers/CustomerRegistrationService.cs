@@ -3,29 +3,19 @@ using System.Linq;
 using TinyCms.Core;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Services.Localization;
-using TinyCms.Services.Messages;
 using TinyCms.Services.Security;
 
 namespace TinyCms.Services.Customers
 {
     /// <summary>
-    /// Customer registration service
+    ///     Customer registration service
     /// </summary>
-    public partial class CustomerRegistrationService : ICustomerRegistrationService
+    public class CustomerRegistrationService : ICustomerRegistrationService
     {
-        #region Fields
-
-        private readonly ICustomerService _customerService;
-        private readonly IEncryptionService _encryptionService;
-        private readonly ILocalizationService _localizationService;
-        private readonly CustomerSettings _customerSettings;
-
-        #endregion
-
         #region Ctor
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="customerService">Customer service</param>
         /// <param name="encryptionService">Encryption service</param>
@@ -35,32 +25,41 @@ namespace TinyCms.Services.Customers
         /// <param name="rewardPointService">Reward points service</param>
         /// <param name="rewardPointsSettings">Reward points settings</param>
         /// <param name="customerSettings">Customer settings</param>
-        public CustomerRegistrationService(ICustomerService customerService, 
-            IEncryptionService encryptionService, 
+        public CustomerRegistrationService(ICustomerService customerService,
+            IEncryptionService encryptionService,
             ILocalizationService localizationService,
             CustomerSettings customerSettings)
         {
-            this._customerService = customerService;
-            this._encryptionService = encryptionService;
-            this._localizationService = localizationService;
-            this._customerSettings = customerSettings;
+            _customerService = customerService;
+            _encryptionService = encryptionService;
+            _localizationService = localizationService;
+            _customerSettings = customerSettings;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly ICustomerService _customerService;
+        private readonly IEncryptionService _encryptionService;
+        private readonly ILocalizationService _localizationService;
+        private readonly CustomerSettings _customerSettings;
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Validate customer
+        ///     Validate customer
         /// </summary>
         /// <param name="usernameOrEmail">Username or email</param>
         /// <param name="password">Password</param>
         /// <returns>Result</returns>
         public virtual CustomerLoginResults ValidateCustomer(string usernameOrEmail, string password)
         {
-            var customer = _customerSettings.UsernamesEnabled ? 
-                _customerService.GetCustomerByUsername(usernameOrEmail) :
-                _customerService.GetCustomerByEmail(usernameOrEmail);
+            var customer = _customerSettings.UsernamesEnabled
+                ? _customerService.GetCustomerByUsername(usernameOrEmail)
+                : _customerService.GetCustomerByEmail(usernameOrEmail);
 
             if (customer == null)
                 return CustomerLoginResults.CustomerNotExist;
@@ -79,14 +78,15 @@ namespace TinyCms.Services.Customers
                     pwd = _encryptionService.EncryptText(password);
                     break;
                 case PasswordFormat.Hashed:
-                    pwd = _encryptionService.CreatePasswordHash(password, customer.PasswordSalt, _customerSettings.HashedPasswordFormat);
+                    pwd = _encryptionService.CreatePasswordHash(password, customer.PasswordSalt,
+                        _customerSettings.HashedPasswordFormat);
                     break;
                 default:
                     pwd = password;
                     break;
             }
 
-            bool isValid = pwd == customer.Password;
+            var isValid = pwd == customer.Password;
             if (!isValid)
                 return CustomerLoginResults.WrongPassword;
 
@@ -97,7 +97,7 @@ namespace TinyCms.Services.Customers
         }
 
         /// <summary>
-        /// Register customer
+        ///     Register customer
         /// </summary>
         /// <param name="request">Request</param>
         /// <returns>Result</returns>
@@ -172,44 +172,46 @@ namespace TinyCms.Services.Customers
             switch (request.PasswordFormat)
             {
                 case PasswordFormat.Clear:
-                    {
-                        request.Customer.Password = request.Password;
-                    }
+                {
+                    request.Customer.Password = request.Password;
+                }
                     break;
                 case PasswordFormat.Encrypted:
-                    {
-                        request.Customer.Password = _encryptionService.EncryptText(request.Password);
-                    }
+                {
+                    request.Customer.Password = _encryptionService.EncryptText(request.Password);
+                }
                     break;
                 case PasswordFormat.Hashed:
-                    {
-                        string saltKey = _encryptionService.CreateSaltKey(5);
-                        request.Customer.PasswordSalt = saltKey;
-                        request.Customer.Password = _encryptionService.CreatePasswordHash(request.Password, saltKey, _customerSettings.HashedPasswordFormat);
-                    }
+                {
+                    var saltKey = _encryptionService.CreateSaltKey(5);
+                    request.Customer.PasswordSalt = saltKey;
+                    request.Customer.Password = _encryptionService.CreatePasswordHash(request.Password, saltKey,
+                        _customerSettings.HashedPasswordFormat);
+                }
                     break;
                 default:
                     break;
             }
 
             request.Customer.Active = request.IsApproved;
-            
+
             //add to 'Registered' role
             var registeredRole = _customerService.GetCustomerRoleBySystemName(SystemCustomerRoleNames.Registered);
             if (registeredRole == null)
                 throw new NopException("'Registered' role could not be loaded");
             request.Customer.CustomerRoles.Add(registeredRole);
             //remove from 'Guests' role
-            var guestRole = request.Customer.CustomerRoles.FirstOrDefault(cr => cr.SystemName == SystemCustomerRoleNames.Guests);
+            var guestRole =
+                request.Customer.CustomerRoles.FirstOrDefault(cr => cr.SystemName == SystemCustomerRoleNames.Guests);
             if (guestRole != null)
                 request.Customer.CustomerRoles.Remove(guestRole);
 
             _customerService.UpdateCustomer(request.Customer);
             return result;
         }
-        
+
         /// <summary>
-        /// Change password
+        ///     Change password
         /// </summary>
         /// <param name="request">Request</param>
         /// <returns>Result</returns>
@@ -249,16 +251,18 @@ namespace TinyCms.Services.Customers
                         oldPwd = _encryptionService.EncryptText(request.OldPassword);
                         break;
                     case PasswordFormat.Hashed:
-                        oldPwd = _encryptionService.CreatePasswordHash(request.OldPassword, customer.PasswordSalt, _customerSettings.HashedPasswordFormat);
+                        oldPwd = _encryptionService.CreatePasswordHash(request.OldPassword, customer.PasswordSalt,
+                            _customerSettings.HashedPasswordFormat);
                         break;
                     default:
                         oldPwd = request.OldPassword;
                         break;
                 }
 
-                bool oldPasswordIsValid = oldPwd == customer.Password;
+                var oldPasswordIsValid = oldPwd == customer.Password;
                 if (!oldPasswordIsValid)
-                    result.AddError(_localizationService.GetResource("Account.ChangePassword.Errors.OldPasswordDoesntMatch"));
+                    result.AddError(
+                        _localizationService.GetResource("Account.ChangePassword.Errors.OldPasswordDoesntMatch"));
 
                 if (oldPasswordIsValid)
                     requestIsValid = true;
@@ -273,21 +277,22 @@ namespace TinyCms.Services.Customers
                 switch (request.NewPasswordFormat)
                 {
                     case PasswordFormat.Clear:
-                        {
-                            customer.Password = request.NewPassword;
-                        }
+                    {
+                        customer.Password = request.NewPassword;
+                    }
                         break;
                     case PasswordFormat.Encrypted:
-                        {
-                            customer.Password = _encryptionService.EncryptText(request.NewPassword);
-                        }
+                    {
+                        customer.Password = _encryptionService.EncryptText(request.NewPassword);
+                    }
                         break;
                     case PasswordFormat.Hashed:
-                        {
-                            string saltKey = _encryptionService.CreateSaltKey(5);
-                            customer.PasswordSalt = saltKey;
-                            customer.Password = _encryptionService.CreatePasswordHash(request.NewPassword, saltKey, _customerSettings.HashedPasswordFormat);
-                        }
+                    {
+                        var saltKey = _encryptionService.CreateSaltKey(5);
+                        customer.PasswordSalt = saltKey;
+                        customer.Password = _encryptionService.CreatePasswordHash(request.NewPassword, saltKey,
+                            _customerSettings.HashedPasswordFormat);
+                    }
                         break;
                     default:
                         break;
@@ -300,7 +305,7 @@ namespace TinyCms.Services.Customers
         }
 
         /// <summary>
-        /// Sets a customer username
+        ///     Sets a customer username
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="newUsername">New Username</param>
@@ -322,17 +327,17 @@ namespace TinyCms.Services.Customers
 
             var user2 = _customerService.GetCustomerByUsername(newUsername);
             if (user2 != null && customer.Id != user2.Id)
-                throw new NopException(_localizationService.GetResource("Account.EmailUsernameErrors.UsernameAlreadyExists"));
+                throw new NopException(
+                    _localizationService.GetResource("Account.EmailUsernameErrors.UsernameAlreadyExists"));
 
             customer.Username = newUsername;
             _customerService.UpdateCustomer(customer);
         }
 
         /// <summary>
-        /// Sets a user email
-        //</summary>
-        /// <param name="customer">Customer</param>
-        /// <param name="newEmail">New email</param>
+        ///     Sets a user email
+        ///     <param name="customer">Customer</param>
+        ///     <param name="newEmail">New email</param>
         public virtual void SetEmail(Customer customer, string newEmail)
         {
             if (customer == null)
@@ -342,7 +347,7 @@ namespace TinyCms.Services.Customers
                 throw new NopException("Email cannot be null");
 
             newEmail = newEmail.Trim();
-            string oldEmail = customer.Email;
+            var oldEmail = customer.Email;
 
             if (!CommonHelper.IsValidEmail(newEmail))
                 throw new NopException(_localizationService.GetResource("Account.EmailUsernameErrors.NewEmailIsNotValid"));
@@ -356,10 +361,7 @@ namespace TinyCms.Services.Customers
 
             customer.Email = newEmail;
             _customerService.UpdateCustomer(customer);
-
-          
         }
-
 
         #endregion
     }

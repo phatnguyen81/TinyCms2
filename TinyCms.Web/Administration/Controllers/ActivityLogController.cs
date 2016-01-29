@@ -13,8 +13,22 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class ActivityLogController : BaseAdminController
+    public class ActivityLogController : BaseAdminController
     {
+        #region Constructors
+
+        public ActivityLogController(ICustomerActivityService customerActivityService,
+            IDateTimeHelper dateTimeHelper, ILocalizationService localizationService,
+            IPermissionService permissionService)
+        {
+            _customerActivityService = customerActivityService;
+            _dateTimeHelper = dateTimeHelper;
+            _localizationService = localizationService;
+            _permissionService = permissionService;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly ICustomerActivityService _customerActivityService;
@@ -23,20 +37,6 @@ namespace TinyCms.Admin.Controllers
         private readonly IPermissionService _permissionService;
 
         #endregion Fields
-
-        #region Constructors
-
-        public ActivityLogController(ICustomerActivityService customerActivityService,
-            IDateTimeHelper dateTimeHelper, ILocalizationService localizationService,
-            IPermissionService permissionService)
-		{
-            this._customerActivityService = customerActivityService;
-            this._dateTimeHelper = dateTimeHelper;
-            this._localizationService = localizationService;
-            this._permissionService = permissionService;
-		}
-
-		#endregion 
 
         #region Activity log types
 
@@ -58,23 +58,28 @@ namespace TinyCms.Admin.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageActivityLog))
                 return AccessDeniedView();
 
-            string formKey = "checkbox_activity_types";
-            var checkedActivityTypes = form[formKey] != null ? form[formKey].Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(x => Convert.ToInt32(x)).ToList() : new List<int>();
-            
+            var formKey = "checkbox_activity_types";
+            var checkedActivityTypes = form[formKey] != null
+                ? form[formKey].Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => Convert.ToInt32(x))
+                    .ToList()
+                : new List<int>();
+
             var activityTypes = _customerActivityService.GetAllActivityTypes();
             foreach (var activityType in activityTypes)
             {
                 activityType.Enabled = checkedActivityTypes.Contains(activityType.Id);
                 _customerActivityService.UpdateActivityType(activityType);
             }
-            SuccessNotification(_localizationService.GetResource("Admin.Configuration.ActivityLog.ActivityLogType.Updated"));
+            SuccessNotification(
+                _localizationService.GetResource("Admin.Configuration.ActivityLog.ActivityLogType.Updated"));
             return RedirectToAction("ListTypes");
         }
 
         #endregion
-        
+
         #region Activity log
-        
+
         public ActionResult ListLogs()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageActivityLog))
@@ -105,13 +110,19 @@ namespace TinyCms.Admin.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageActivityLog))
                 return AccessDeniedView();
 
-            DateTime? startDateValue = (model.CreatedOnFrom == null) ? null
-                : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.CreatedOnFrom.Value, _dateTimeHelper.CurrentTimeZone);
+            var startDateValue = (model.CreatedOnFrom == null)
+                ? null
+                : (DateTime?)
+                    _dateTimeHelper.ConvertToUtcTime(model.CreatedOnFrom.Value, _dateTimeHelper.CurrentTimeZone);
 
-            DateTime? endDateValue = (model.CreatedOnTo == null) ? null
-                            : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.CreatedOnTo.Value, _dateTimeHelper.CurrentTimeZone).AddDays(1);
+            var endDateValue = (model.CreatedOnTo == null)
+                ? null
+                : (DateTime?)
+                    _dateTimeHelper.ConvertToUtcTime(model.CreatedOnTo.Value, _dateTimeHelper.CurrentTimeZone)
+                        .AddDays(1);
 
-            var activityLog = _customerActivityService.GetAllActivities(startDateValue, endDateValue,null, model.ActivityLogTypeId, command.Page - 1, command.PageSize);
+            var activityLog = _customerActivityService.GetAllActivities(startDateValue, endDateValue, null,
+                model.ActivityLogTypeId, command.Page - 1, command.PageSize);
             var gridModel = new DataSourceResult
             {
                 Data = activityLog.Select(x =>
@@ -119,7 +130,6 @@ namespace TinyCms.Admin.Controllers
                     var m = x.ToModel();
                     m.CreatedOn = _dateTimeHelper.ConvertToUserTime(x.CreatedOnUtc, DateTimeKind.Utc);
                     return m;
-                    
                 }),
                 Total = activityLog.TotalCount
             };
@@ -151,6 +161,5 @@ namespace TinyCms.Admin.Controllers
         }
 
         #endregion
-
     }
 }

@@ -37,10 +37,12 @@ namespace TinyCms.Web.Framework
                 var workContext = EngineContext.Current.Resolve<IWorkContext>();
                 var genericAttributeService = EngineContext.Current.Resolve<IGenericAttributeService>();
 
-                var previousPageUrl = workContext.CurrentCustomer.GetAttribute<string>(SystemCustomerAttributeNames.LastVisitedPage);
+                var previousPageUrl =
+                    workContext.CurrentCustomer.GetAttribute<string>(SystemCustomerAttributeNames.LastVisitedPage);
                 if (!pageUrl.Equals(previousPageUrl))
                 {
-                    genericAttributeService.SaveAttribute(workContext.CurrentCustomer, SystemCustomerAttributeNames.LastVisitedPage, pageUrl);
+                    genericAttributeService.SaveAttribute(workContext.CurrentCustomer,
+                        SystemCustomerAttributeNames.LastVisitedPage, pageUrl);
                 }
             }
         }

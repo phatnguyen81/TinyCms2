@@ -7,11 +7,26 @@ using System.Web.Hosting;
 namespace TinyCms.Core.Infrastructure
 {
     /// <summary>
-    /// Provides information about types in the current web application. 
-    /// Optionally this class can look at all assemblies in the bin folder.
+    ///     Provides information about types in the current web application.
+    ///     Optionally this class can look at all assemblies in the bin folder.
     /// </summary>
     public class WebAppTypeFinder : AppDomainTypeFinder
     {
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets wether assemblies in the bin folder of the web application should be specificly checked for beeing
+        ///     loaded on application load. This is need in situations where plugins need to be loaded in the AppDomain after the
+        ///     application been reloaded.
+        /// </summary>
+        public bool EnsureBinFolderAssembliesLoaded
+        {
+            get { return _ensureBinFolderAssembliesLoaded; }
+            set { _ensureBinFolderAssembliesLoaded = value; }
+        }
+
+        #endregion
+
         #region Fields
 
         private bool _ensureBinFolderAssembliesLoaded = true;
@@ -19,23 +34,10 @@ namespace TinyCms.Core.Infrastructure
 
         #endregion
 
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets wether assemblies in the bin folder of the web application should be specificly checked for beeing loaded on application load. This is need in situations where plugins need to be loaded in the AppDomain after the application been reloaded.
-        /// </summary>
-        public bool EnsureBinFolderAssembliesLoaded
-        {
-            get { return _ensureBinFolderAssembliesLoaded; }
-            set { _ensureBinFolderAssembliesLoaded = value; }
-        }
-        
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Gets a physical disk path of \Bin directory
+        ///     Gets a physical disk path of \Bin directory
         /// </summary>
         /// <returns>The physical path. E.g. "c:\inetpub\wwwroot\bin"</returns>
         public virtual string GetBinDirectory()
@@ -52,10 +54,10 @@ namespace TinyCms.Core.Infrastructure
 
         public override IList<Assembly> GetAssemblies()
         {
-            if (this.EnsureBinFolderAssembliesLoaded && !_binFolderAssembliesLoaded)
+            if (EnsureBinFolderAssembliesLoaded && !_binFolderAssembliesLoaded)
             {
                 _binFolderAssembliesLoaded = true;
-                string binPath = GetBinDirectory();
+                var binPath = GetBinDirectory();
                 //binPath = _webHelper.MapPath("~/bin");
                 LoadMatchingAssemblies(binPath);
             }

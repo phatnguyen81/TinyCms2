@@ -10,23 +10,16 @@ using TinyCms.Services.Logging;
 namespace TinyCms.Services.Directory
 {
     /// <summary>
-    /// GEO lookup service
+    ///     GEO lookup service
     /// </summary>
-    public partial class GeoLookupService : IGeoLookupService
+    public class GeoLookupService : IGeoLookupService
     {
-        #region Fields
-
-        private readonly ILogger _logger;
-        private readonly IWebHelper _webHelper;
-
-        #endregion
-
         #region Ctor
 
         public GeoLookupService(ILogger logger, IWebHelper webHelper)
         {
-            this._logger = logger;
-            this._webHelper = webHelper;
+            _logger = logger;
+            _webHelper = webHelper;
         }
 
         #endregion
@@ -58,7 +51,7 @@ namespace TinyCms.Services.Directory
                 //Console.WriteLine(omni.Location.Latitude); // 44.9733
                 //Console.WriteLine(omni.Location.Longitude); // -93.2323
             }
-            //catch (AddressNotFoundException exc)
+                //catch (AddressNotFoundException exc)
             catch (GeoIP2Exception)
             {
                 //address is not found
@@ -75,9 +68,17 @@ namespace TinyCms.Services.Directory
 
         #endregion
 
+        #region Fields
+
+        private readonly ILogger _logger;
+        private readonly IWebHelper _webHelper;
+
+        #endregion
+
         #region Methods
+
         /// <summary>
-        /// Get country name
+        ///     Get country name
         /// </summary>
         /// <param name="ipAddress">IP address</param>
         /// <returns>Country name</returns>
@@ -91,7 +92,7 @@ namespace TinyCms.Services.Directory
         }
 
         /// <summary>
-        /// Get country name
+        ///     Get country name
         /// </summary>
         /// <param name="ipAddress">IP address</param>
         /// <returns>Country name</returns>

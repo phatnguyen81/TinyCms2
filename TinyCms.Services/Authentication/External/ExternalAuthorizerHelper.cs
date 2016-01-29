@@ -7,9 +7,9 @@ using TinyCms.Core.Infrastructure;
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// External authorizer helper
+    ///     External authorizer helper
     /// </summary>
-    public static partial class ExternalAuthorizerHelper
+    public static class ExternalAuthorizerHelper
     {
         private static HttpSessionStateBase GetSession()
         {
@@ -22,6 +22,7 @@ namespace TinyCms.Services.Authentication.External
             var session = GetSession();
             session["nop.externalauth.parameters"] = parameters;
         }
+
         public static OpenAuthenticationParameters RetrieveParametersFromRoundTrip(bool removeOnRetrieval)
         {
             var session = GetSession();

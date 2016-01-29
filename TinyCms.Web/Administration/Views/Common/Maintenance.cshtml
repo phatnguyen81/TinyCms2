@@ -5,7 +5,7 @@
 }
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-system.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-system.png")" alt=""/>
         @T("Admin.System.Maintenance")
     </div>
     <div class="options">
@@ -36,10 +36,10 @@
                 @Html.EditorFor(model => model.DeleteGuests.EndDate)
             </td>
         </tr>
-       
+
         <tr>
             <td colspan="2">
-                <input type="submit" name="delete-guests" class="k-button" value="@T("Admin.Common.Delete")" />
+                <input type="submit" name="delete-guests" class="k-button" value="@T("Admin.Common.Delete")"/>
             </td>
         </tr>
         @if (Model.DeleteGuests.NumberOfDeletedCustomers.HasValue)
@@ -51,9 +51,9 @@
             </tr>
         }
     </table>
-   
+
     <p>
-        <hr />
+        <hr/>
     </p>
     <table width="100%">
         <tr>
@@ -79,7 +79,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" name="delete-exported-files" class="k-button" value="@T("Admin.Common.Delete")" />
+                <input type="submit" name="delete-exported-files" class="k-button" value="@T("Admin.Common.Delete")"/>
             </td>
         </tr>
         @if (Model.DeleteExportedFiles.NumberOfDeletedFiles.HasValue)

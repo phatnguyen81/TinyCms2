@@ -10,34 +10,72 @@ using TinyCms.Core.Domain.Seo;
 namespace TinyCms.Services.Seo
 {
     /// <summary>
-    /// Provides information about URL records
+    ///     Provides information about URL records
     /// </summary>
-    public partial class UrlRecordService : IUrlRecordService
+    public class UrlRecordService : IUrlRecordService
     {
+        #region Ctor
+
+        /// <summary>
+        ///     Ctor
+        /// </summary>
+        /// <param name="cacheManager">Cache manager</param>
+        /// <param name="urlRecordRepository">URL record repository</param>
+        /// <param name="localizationSettings">Localization settings</param>
+        public UrlRecordService(ICacheManager cacheManager,
+            IRepository<UrlRecord> urlRecordRepository,
+            LocalizationSettings localizationSettings)
+        {
+            _cacheManager = cacheManager;
+            _urlRecordRepository = urlRecordRepository;
+            _localizationSettings = localizationSettings;
+        }
+
+        #endregion
+
+        #region Nested classes
+
+        [Serializable]
+        public class UrlRecordForCaching
+        {
+            public int Id { get; set; }
+            public int EntityId { get; set; }
+            public string EntityName { get; set; }
+            public string Slug { get; set; }
+            public bool IsActive { get; set; }
+            public int LanguageId { get; set; }
+        }
+
+        #endregion
+
         #region Constants
 
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : entity ID
-        /// {1} : entity name
-        /// {2} : language ID
+        ///     {0} : entity ID
+        ///     {1} : entity name
+        ///     {2} : language ID
         /// </remarks>
-        private const string URLRECORD_ACTIVE_BY_ID_NAME_LANGUAGE_KEY = "Nop.urlrecord.active.id-name-language-{0}-{1}-{2}";
+        private const string URLRECORD_ACTIVE_BY_ID_NAME_LANGUAGE_KEY =
+            "Nop.urlrecord.active.id-name-language-{0}-{1}-{2}";
+
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         private const string URLRECORD_ALL_KEY = "Nop.urlrecord.all";
+
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : slug
+        ///     {0} : slug
         /// </remarks>
         private const string URLRECORD_BY_SLUG_KEY = "Nop.urlrecord.active.slug-{0}";
+
         /// <summary>
-        /// Key pattern to clear cache
+        ///     Key pattern to clear cache
         /// </summary>
         private const string URLRECORD_PATTERN_KEY = "Nop.urlrecord.";
 
@@ -48,25 +86,6 @@ namespace TinyCms.Services.Seo
         private readonly IRepository<UrlRecord> _urlRecordRepository;
         private readonly ICacheManager _cacheManager;
         private readonly LocalizationSettings _localizationSettings;
-
-        #endregion
-
-        #region Ctor
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="cacheManager">Cache manager</param>
-        /// <param name="urlRecordRepository">URL record repository</param>
-        /// <param name="localizationSettings">Localization settings</param>
-        public UrlRecordService(ICacheManager cacheManager,
-            IRepository<UrlRecord> urlRecordRepository,
-            LocalizationSettings localizationSettings)
-        {
-            this._cacheManager = cacheManager;
-            this._urlRecordRepository = urlRecordRepository;
-            this._localizationSettings = localizationSettings;
-        }
 
         #endregion
 
@@ -90,17 +109,17 @@ namespace TinyCms.Services.Seo
         }
 
         /// <summary>
-        /// Gets all cached URL records
+        ///     Gets all cached URL records
         /// </summary>
         /// <returns>cached URL records</returns>
         protected virtual IList<UrlRecordForCaching> GetAllUrlRecordsCached()
         {
             //cache
-            string key = string.Format(URLRECORD_ALL_KEY);
+            var key = string.Format(URLRECORD_ALL_KEY);
             return _cacheManager.Get(key, () =>
             {
                 var query = from ur in _urlRecordRepository.Table
-                            select ur;
+                    select ur;
                 var urlRecords = query.ToList();
                 var list = new List<UrlRecordForCaching>();
                 foreach (var ur in urlRecords)
@@ -114,25 +133,10 @@ namespace TinyCms.Services.Seo
 
         #endregion
 
-        #region Nested classes
-
-        [Serializable]
-        public class UrlRecordForCaching
-        {
-            public int Id { get; set; }
-            public int EntityId { get; set; }
-            public string EntityName { get; set; }
-            public string Slug { get; set; }
-            public bool IsActive { get; set; }
-            public int LanguageId { get; set; }
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Deletes an URL record
+        ///     Deletes an URL record
         /// </summary>
         /// <param name="urlRecord">URL record</param>
         public virtual void DeleteUrlRecord(UrlRecord urlRecord)
@@ -147,7 +151,7 @@ namespace TinyCms.Services.Seo
         }
 
         /// <summary>
-        /// Gets an URL record
+        ///     Gets an URL record
         /// </summary>
         /// <param name="urlRecordId">URL record identifier</param>
         /// <returns>URL record</returns>
@@ -160,7 +164,7 @@ namespace TinyCms.Services.Seo
         }
 
         /// <summary>
-        /// Inserts an URL record
+        ///     Inserts an URL record
         /// </summary>
         /// <param name="urlRecord">URL record</param>
         public virtual void InsertUrlRecord(UrlRecord urlRecord)
@@ -175,7 +179,7 @@ namespace TinyCms.Services.Seo
         }
 
         /// <summary>
-        /// Updates the URL record
+        ///     Updates the URL record
         /// </summary>
         /// <param name="urlRecord">URL record</param>
         public virtual void UpdateUrlRecord(UrlRecord urlRecord)
@@ -190,7 +194,7 @@ namespace TinyCms.Services.Seo
         }
 
         /// <summary>
-        /// Find URL record
+        ///     Find URL record
         /// </summary>
         /// <param name="slug">Slug</param>
         /// <returns>Found URL record</returns>
@@ -200,16 +204,16 @@ namespace TinyCms.Services.Seo
                 return null;
 
             var query = from ur in _urlRecordRepository.Table
-                        where ur.Slug == slug
-                        select ur;
+                where ur.Slug == slug
+                select ur;
             var urlRecord = query.FirstOrDefault();
             return urlRecord;
         }
 
         /// <summary>
-        /// Find URL record (cached version).
-        /// This method works absolutely the same way as "GetBySlug" one but caches the results.
-        /// Hence, it's used only for performance optimization in public store
+        ///     Find URL record (cached version).
+        ///     This method works absolutely the same way as "GetBySlug" one but caches the results.
+        ///     Hence, it's used only for performance optimization in public store
         /// </summary>
         /// <param name="slug">Slug</param>
         /// <returns>Found URL record</returns>
@@ -223,14 +227,14 @@ namespace TinyCms.Services.Seo
                 //load all records (we know they are cached)
                 var source = GetAllUrlRecordsCached();
                 var query = from ur in source
-                            where ur.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase)
-                            select ur;
+                    where ur.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase)
+                    select ur;
                 var urlRecordForCaching = query.FirstOrDefault();
                 return urlRecordForCaching;
             }
 
             //gradual loading
-            string key = string.Format(URLRECORD_BY_SLUG_KEY, slug);
+            var key = string.Format(URLRECORD_BY_SLUG_KEY, slug);
             return _cacheManager.Get(key, () =>
             {
                 var urlRecord = GetBySlug(slug);
@@ -243,13 +247,14 @@ namespace TinyCms.Services.Seo
         }
 
         /// <summary>
-        /// Gets all URL records
+        ///     Gets all URL records
         /// </summary>
         /// <param name="slug">Slug</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
         /// <returns>URL records</returns>
-        public virtual IPagedList<UrlRecord> GetAllUrlRecords(string slug = "", int pageIndex = 0, int pageSize = int.MaxValue)
+        public virtual IPagedList<UrlRecord> GetAllUrlRecords(string slug = "", int pageIndex = 0,
+            int pageSize = int.MaxValue)
         {
             var query = _urlRecordRepository.Table;
             if (!String.IsNullOrWhiteSpace(slug))
@@ -261,7 +266,7 @@ namespace TinyCms.Services.Seo
         }
 
         /// <summary>
-        /// Find slug
+        ///     Find slug
         /// </summary>
         /// <param name="entityId">Entity identifier</param>
         /// <param name="entityName">Entity name</param>
@@ -271,18 +276,18 @@ namespace TinyCms.Services.Seo
         {
             if (_localizationSettings.LoadAllUrlRecordsOnStartup)
             {
-                string key = string.Format(URLRECORD_ACTIVE_BY_ID_NAME_LANGUAGE_KEY, entityId, entityName, languageId);
+                var key = string.Format(URLRECORD_ACTIVE_BY_ID_NAME_LANGUAGE_KEY, entityId, entityName, languageId);
                 return _cacheManager.Get(key, () =>
                 {
                     //load all records (we know they are cached)
                     var source = GetAllUrlRecordsCached();
                     var query = from ur in source
-                                where ur.EntityId == entityId &&
-                                ur.EntityName == entityName &&
-                                ur.LanguageId == languageId &&
-                                ur.IsActive
-                                orderby ur.Id descending
-                                select ur.Slug;
+                        where ur.EntityId == entityId &&
+                              ur.EntityName == entityName &&
+                              ur.LanguageId == languageId &&
+                              ur.IsActive
+                        orderby ur.Id descending
+                        select ur.Slug;
                     var slug = query.FirstOrDefault();
                     //little hack here. nulls aren't cacheable so set it to ""
                     if (slug == null)
@@ -293,17 +298,17 @@ namespace TinyCms.Services.Seo
             else
             {
                 //gradual loading
-                string key = string.Format(URLRECORD_ACTIVE_BY_ID_NAME_LANGUAGE_KEY, entityId, entityName, languageId);
+                var key = string.Format(URLRECORD_ACTIVE_BY_ID_NAME_LANGUAGE_KEY, entityId, entityName, languageId);
                 return _cacheManager.Get(key, () =>
                 {
                     var source = _urlRecordRepository.Table;
                     var query = from ur in source
-                                where ur.EntityId == entityId &&
-                                ur.EntityName == entityName &&
-                                ur.LanguageId == languageId &&
-                                ur.IsActive
-                                orderby ur.Id descending
-                                select ur.Slug;
+                        where ur.EntityId == entityId &&
+                              ur.EntityName == entityName &&
+                              ur.LanguageId == languageId &&
+                              ur.IsActive
+                        orderby ur.Id descending
+                        select ur.Slug;
                     var slug = query.FirstOrDefault();
                     //little hack here. nulls aren't cacheable so set it to ""
                     if (slug == null)
@@ -314,7 +319,7 @@ namespace TinyCms.Services.Seo
         }
 
         /// <summary>
-        /// Save slug
+        ///     Save slug
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Entity</param>
@@ -325,15 +330,15 @@ namespace TinyCms.Services.Seo
             if (entity == null)
                 throw new ArgumentNullException("entity");
 
-            int entityId = entity.Id;
-            string entityName = typeof(T).Name;
+            var entityId = entity.Id;
+            var entityName = typeof (T).Name;
 
             var query = from ur in _urlRecordRepository.Table
-                        where ur.EntityId == entityId &&
-                        ur.EntityName == entityName &&
-                        ur.LanguageId == languageId
-                        orderby ur.Id descending 
-                        select ur;
+                where ur.EntityId == entityId &&
+                      ur.EntityName == entityName &&
+                      ur.LanguageId == languageId
+                orderby ur.Id descending
+                select ur;
             var allUrlRecords = query.ToList();
             var activeUrlRecord = allUrlRecords.FirstOrDefault(x => x.IsActive);
 
@@ -357,7 +362,7 @@ namespace TinyCms.Services.Seo
                         EntityName = entityName,
                         Slug = slug,
                         LanguageId = languageId,
-                        IsActive = true,
+                        IsActive = true
                     };
                     InsertUrlRecord(urlRecord);
                 }
@@ -377,7 +382,8 @@ namespace TinyCms.Services.Seo
                 {
                     //find in non-active records with the specified slug
                     var nonActiveRecordWithSpecifiedSlug = allUrlRecords
-                        .FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase) && !x.IsActive);
+                        .FirstOrDefault(
+                            x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase) && !x.IsActive);
                     if (nonActiveRecordWithSpecifiedSlug != null)
                     {
                         //mark non-active record as active
@@ -399,7 +405,7 @@ namespace TinyCms.Services.Seo
                             EntityName = entityName,
                             Slug = slug,
                             LanguageId = languageId,
-                            IsActive = true,
+                            IsActive = true
                         };
                         InsertUrlRecord(urlRecord);
 
@@ -407,7 +413,6 @@ namespace TinyCms.Services.Seo
                         activeUrlRecord.IsActive = false;
                         UpdateUrlRecord(activeUrlRecord);
                     }
-
                 }
             }
         }

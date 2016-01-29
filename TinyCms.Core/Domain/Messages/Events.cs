@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using TinyCms.Core;
-using TinyCms.Core.Domain.Messages;
 
 namespace TinyCms.Core.Domain.Messages
 {
@@ -29,8 +27,8 @@ namespace TinyCms.Core.Domain.Messages
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(EmailSubscribedEvent)) return false;
-            return Equals((EmailSubscribedEvent)obj);
+            if (obj.GetType() != typeof (EmailSubscribedEvent)) return false;
+            return Equals((EmailSubscribedEvent) obj);
         }
 
         public override int GetHashCode()
@@ -64,8 +62,8 @@ namespace TinyCms.Core.Domain.Messages
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(EmailUnsubscribedEvent)) return false;
-            return Equals((EmailUnsubscribedEvent)obj);
+            if (obj.GetType() != typeof (EmailUnsubscribedEvent)) return false;
+            return Equals((EmailUnsubscribedEvent) obj);
         }
 
         public override int GetHashCode()
@@ -75,7 +73,7 @@ namespace TinyCms.Core.Domain.Messages
     }
 
     /// <summary>
-    /// A container for tokens that are added.
+    ///     A container for tokens that are added.
     /// </summary>
     /// <typeparam name="T">Entity type</typeparam>
     /// <typeparam name="U"></typeparam>
@@ -90,12 +88,19 @@ namespace TinyCms.Core.Domain.Messages
             _tokens = tokens;
         }
 
-        public T Entity { get { return _entity; } }
-        public IList<U> Tokens { get { return _tokens; } }
+        public T Entity
+        {
+            get { return _entity; }
+        }
+
+        public IList<U> Tokens
+        {
+            get { return _tokens; }
+        }
     }
 
     /// <summary>
-    /// A container for tokens that are added.
+    ///     A container for tokens that are added.
     /// </summary>
     /// <typeparam name="U"></typeparam>
     public class MessageTokensAddedEvent<U>
@@ -109,7 +114,14 @@ namespace TinyCms.Core.Domain.Messages
             _tokens = tokens;
         }
 
-        public MessageTemplate Message { get { return _message; } }
-        public IList<U> Tokens { get { return _tokens; } }
+        public MessageTemplate Message
+        {
+            get { return _message; }
+        }
+
+        public IList<U> Tokens
+        {
+            get { return _tokens; }
+        }
     }
 }

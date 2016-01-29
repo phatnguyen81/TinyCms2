@@ -12,8 +12,8 @@
 </div>
 
 <p class="txthead">Viết bài</p>
-@using (Html.BeginForm(null,null,FormMethod.Post,new {id = "frmPost"}))
-{   
+@using (Html.BeginForm(null, null, FormMethod.Post, new {id = "frmPost"}))
+{
     <div class="writeblog_box">
         <div class="inner_writeblog">
             <label>
@@ -22,7 +22,7 @@
             </label>
             <label>
                 <b>Nội dung ngắn</b>
-                @Html.TextAreaFor(model => model.Short,new {rows = 5, style="width:100%;"})
+                @Html.TextAreaFor(model => model.Short, new {rows = 5, style = "width:100%;"})
             </label>
             <label>
                 <b>Nội dung</b>
@@ -41,7 +41,7 @@
                     <a href="#" id="browse" class="btn01">Chọn hình</a>
                 </p>
             </label>
-          
+
             <label>
                 <div class="AttachmentEditor">
                     <ol class="AttachmentList New">
@@ -50,16 +50,18 @@
                                 <span class="genericAttachment"></span>
                             </div>
                             <div class="AttachmentText">
-                                <div class="Filename"><a href="#" target="_blank"></a></div>
+                                <div class="Filename">
+                                    <a href="#" target="_blank"></a>
+                                </div>
                                 <input type="button" value="Hủy" class="button smallButton AttachmentCanceller">
                                 <span class="ProgressMeter"><span class="ProgressGraphic"><span class="ProgressCounter">0%</span></span></span>
                                 <div class="controls JsOnly" styles="display:none">
-                                    <input type="button" value="Xóa" class="button smallButton AttachmentDeleter" style="display: block;" onclick="deletePicture(this)">
-                                    <input type="button" name="image" value="Chèn" class="button smallButton AttachmentInserter" onclick="insertImage(this)">
+                                    <input type="button" value="Xóa" class="button smallButton AttachmentDeleter" style="display: block;" onclick=" deletePicture(this) ">
+                                    <input type="button" name="image" value="Chèn" class="button smallButton AttachmentInserter" onclick=" insertImage(this) ">
                                 </div>
                             </div>
                         </li>
-                     </ol>
+                    </ol>
                 </div>
             </label>
             <p class="writeblogact">
@@ -76,7 +78,7 @@
 
     //product tags
     $(document).ready(function() {
-        var sampleTags = ['e-commerce', 'nopCommerce', 'sample tag', 'money', 'blog', 'moey'];
+        var sampleTags = ["e-commerce", "nopCommerce", "sample tag", "money", "blog", "moey"];
         $("#PostTags").tagit({
             availableTags: sampleTags,
             allowSpaces: true,
@@ -84,25 +86,25 @@
         });
         $("#btnPreview").click(function() {
             tinyMCE.triggerSave();
-            $('.previewBox').html($("#Body").val());
-            $('.previewBox').show();
+            $(".previewBox").html($("#Body").val());
+            $(".previewBox").show();
         });
 
         function validateForm() {
             if ($("#Title").val() == "") {
-                $.boxy.alert('Lỗi', "Chưa nhập tiêu đề");
+                $.boxy.alert("Lỗi", "Chưa nhập tiêu đề");
                 return false;
             }
             if ($("#Short").val() == "") {
-                $.boxy.alert('Lỗi', "Chưa nhập nội dung ngắn");
+                $.boxy.alert("Lỗi", "Chưa nhập nội dung ngắn");
                 return false;
             }
             if ($("#Body").val() == "") {
-                $.boxy.alert('Lỗi', "Chưa nhập nội dung");
+                $.boxy.alert("Lỗi", "Chưa nhập nội dung");
                 return false;
             }
             if ($("#CategoryId").val() == "") {
-                $.boxy.alert('Lỗi', "Chưa chọn chủ đề");
+                $.boxy.alert("Lỗi", "Chưa chọn chủ đề");
                 return false;
             }
             return true;
@@ -117,146 +119,209 @@
             form.append("CategoryId", $("#CategoryId").val());
             var ids = [];
 
-            $.each($(".AttachmentList li"), function (index, value) {
+            $.each($(".AttachmentList li"), function(index, value) {
                 var pictureId = $(this).data("pictureId");
-                if (pictureId && pictureId != '')
+                if (pictureId && pictureId != "")
                     ids.push(pictureId);
             });
 
             form.append("PictureIds", ids.join());
             showLoading();
             $.ajax({
-                url: '@(Url.Action("Write", "Posts"))',
-                data: form,
-                type: "POST",
-                dataType: "json",
-                processData: false,
-                contentType: false
-            })
-            .done(function (result) {
-                if (result.success) {
-                    alert("Đăng bài thành công");
-                    location.reload();
-                } else {
-                    alert("Có lỗi xảy ra: " + result.message);
-                }
-            })
-            .fail(function () {
-                alert("Có lỗi xảy ra");
-            }).always(function () {
-                hideLoading();
-            });;
+                url: "@(Url.Action(\
+                          "Write\", \"Posts\"))",
+                          form,
+                          "POST",
+                          "json",
+                          false,
+                          false
+}
+
+    )
+        .
+    )
+        .
+    ).
+    );;
+    }
+    $(
+
+document).submit(function (e)
+{
+    private e.preventDefault 
+();
+    if (
+    private validateForm()
+)
+    {
+        if (confirm("Bạn có muốn gửi bài viết này?"))
+        {
+            sendPost();
         }
+    }
+}
+)
+;
+}
+);
 
-        $(document).submit(function (e) {
+                var uploader = new plupload.Uploader({
+                runtimes: "html5,flash,silverlight,html4",
+                browse_button: "browse", // you can pass an id...
+                container: document.getElementById("container"), // ... or DOM Element itself
+                url: "@(Url.Action(\"AsyncUpload\", \"Picture\"))",
+    filters:
+{
+    max_file_size 
+: "5    private 00kb",
+    m me    _types 
+:
 
-            e.preventDefault();
-            if (validateForm()) {
-                if (confirm("Bạn có muốn gửi bài viết này?")) {
-                    sendPost();
-                }
+      private   [
+             
+    {    
+    
+    
+        "Image fiprivate
+    les",
+        "jpg,gif,png,jpeg,bmp"
+    }
+    ],
+
+    prevent_duplicates     private 
+: true
+}
+,
+
+i it    :
+{
+        F    ilesAdded 
+:
+
+  private   function up , files private )
+    {
+        i  (up.les.lengt> 5)
+        {
+            alert("Chỉ được uplo    ad tối đa 5 file");
+            plupload.each(files,     function(file)
+            {
+                u    ploader.removeFile(    file);
             }
-            
-
-        });
-    });
-   
-    var uploader = new plupload.Uploader({
-        runtimes: 'html5,flash,silverlight,html4',
-        browse_button: 'browse', // you can pass an id...
-        container: document.getElementById('container'), // ... or DOM Element itself
-        url: '@(Url.Action("AsyncUpload", "Picture"))',
-        filters: {
-            max_file_size: '500kb',
-            mime_types: [
-                { title: "Image files", extensions: "jpg,gif,png,jpeg,bmp" }
-            ],
-            prevent_duplicates: true
-        },
-
-        init: {
-            FilesAdded: function (up, files) {
-                if (up.files.length > 5) {
-                    alert("Chỉ được upload tối đa 5 file");
-                    plupload.each(files, function (file) {
-                        uploader.removeFile(file);
-                    });
-                    return;
-                }
-                plupload.each(files, function (file) {
-                    var elm = $("#AttachedFileTemplate").clone();
-                    $(elm).attr("id", file.id).addClass("AttachedImage");
-                    $(elm).find(".AttachmentText .Filename a").text(file.name);
-                    $(elm).appendTo(".AttachmentList");
-                });
-                uploader.start();
-            },
-
-            UploadProgress: function (up, file) {
-                var elm = $("#" + file.id);
-                $(elm).find(".ProgressGraphic").width(file.percent + "%");
-                $(elm).find(".ProgressCounter").text(file.percent + "%");
-
-            },
-
-            Error: function (up, err) {
-                alert(err.code + ": " + err.message); 
-                up.splice();
-            },
-
-            FileUploaded: function (up, file, response) {
-                var resObj = $.parseJSON(response.response);
-                var elm = $("#" + file.id);
-                $(elm).data("pictureId", resObj.pictureId);
-                $(elm).find(".ProgressMeter").hide();
-                $(elm).find(".controls").show();
-                $(elm).find(".label").show();
-                $(elm).find(".Thumbnail").html($("<a target='_blank'></a>").attr("href", resObj.imageUrl).append($("<img/>").attr("src", resObj.imageUrl)));
-                $(elm).find(".AttachmentText .Filename a").attr("href", resObj.imageUrl);
-                var deleteButton = $(elm).find(".AttachmentDeleter")[0];
-
-                $(deleteButton).data("id", resObj.pictureId);
-                $(deleteButton).data("fileid", file.id);
-
-                var insertImageButton = $(elm).find(".AttachmentInserter")[0];
-
-                $(insertImageButton).data("href", resObj.imageUrl);
-
-            }
+        )
+                ;
+                retur    n;
         }
-    });
-    function getStats(id) {
-        var body = tinymce.get(id).getBody(), text = tinymce.trim(body.innerText || body.textContent);
+            plupload.    each(file function(file)
+        {
+            var e    lm = $
+                ("#AttachedFileTempl    ate").clone();
+            $
+            (elm)    .attr("id", fil    e.id).addClass("AttachedImage");
+            $
+            (elm).find(".Attachm    entText .Filename a").text(file.name);
+            $
+            (elm).appendTo(".Att    achmentList");
+        }
+    )
+        ;    
+            uploadestart();   }
 
-        return {
-            chars: text.length,
-            words: text.split(/[\w\u2019\'-]+/).length
-        };
+,
+
+    Upload    Progress 
+:
+private 
+    function up , file )private 
+    {
+        v r elm = $
+        ("#" + file.id);
+        $
+        (eld(".ProgressGraphic").width(file.percent + "%");
+        $
+        (elm).find(".ProgressCounter").text(file.percent + "%");
+    }
+
+,
+
+    Error     
+:
+
+    funprivate ction up , err )private 
+    {
+        a ert.code +" + err.message);
+        up.splice();
+  
+
+,
+
+    FileUp    loaded 
+:
+
+private     function up , file ,private  response ) 
+    { 
+        v r rj = $.     parseJSON(responesponse);
+        var elm = $
+    ("#" + file.id);      $
+        (elm)a("pictd", resObj.pictureId);
+        $
+        (elm).find(".ProsMeter").hide();
+        $
+        (elm).find(".cons").show();
+        $
+        (elm).find(".lab.show();
+        $
+        (elm).find(".Thuil").html($("<a target='_blank'></a>").attr("href", resObj.imageUrl).append($("<img/>").attr("src", resObj.imageUrl)))
+        ;
+    $
+      lm).fin    d(".AttentText .Filename a").attr("href", resObj.imageUrl);
+        var deleteButton
+        (elm).find(".AttentDeleter")[0];
+
+        $
+        (deleteButton).d"id", resObj.pictureId);
+        $
+        (deleteButton).d"fileid", file.id);
+
+        var insertImageBn = $
+        (elm).find(".AttentInserter")[0];
+
+        $
+        (insertImageButtdata("href", resObj.imageUrl);
+    }
+}
+});
+    funct    ion getStats(id) {
+    var body = tinymce.get(id).getBody(), text = tinymce.trim(body.innerText || body.textContent);
+
+    return {
+    chars: text.length,
+    words: text.split(/[\w\u2019\'-]+/).length
+    };
     }
     function insertImage(obj) {
-        var href = $(obj).data("href");
-        tinyMCE.execCommand('mceInsertContent', false, '<img height="100%" width="100%" src="' + href + '"/>');
+    var href = $(obj).data("href");
+    tinyMCE.execCommand("mceInsertContent", false, "<img height=\"100%\" width=\"100%\" src=\"" + href + "\"/>");
     }
     function deletePicture(obj) {
-        var id = $(obj).data("id");
-        var fileid = $(obj).data("fileid");
-        $.ajax({
-                url: '@(Url.Action("Delete", "Picture"))',
-                data: { id: id },
-                type: "POST",
-                dataType: "json"
-            })
-            .done(function (result) {
-                if (result.success){
-                    var elm = $("#" + fileid);
-                    $(elm).remove();
-                    uploader.removeFile(uploader.getFile(fileid));
-                }
-            })
-            .fail(function() {
-                alert("error");
-            });
+    var id = $(obj).data("id");
+    var fileid = $(obj).data("fileid");
+    $.ajax({
+    url: "@(Url.Action(\"Delete\", \"Picture\"))",
+    data: { id: id },
+    type: "POST",
+    dataType: "json"
+    })
+    .done(function (result) {
+    if (result.success){
+    var elm = $("#" + fileid);
+    $(elm).remove();
+    uploader.removeFile(uploader.getFile(fileid));
+    }
+    })
+    .fail(function() {
+    alert("error");
+    });
     }
     
     uploader.init();
-</script>
+    </script> 

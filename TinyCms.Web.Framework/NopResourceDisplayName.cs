@@ -1,11 +1,12 @@
-﻿using TinyCms.Core;
+﻿using System.ComponentModel;
+using TinyCms.Core;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Services.Localization;
 using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Web.Framework
 {
-    public class NopResourceDisplayName : System.ComponentModel.DisplayNameAttribute, IModelAttribute
+    public class NopResourceDisplayName : DisplayNameAttribute, IModelAttribute
     {
         private string _resourceValue = string.Empty;
         //private bool _resourceValueRetrived;
@@ -26,9 +27,9 @@ namespace TinyCms.Web.Framework
                 //if (!_resourceValueRetrived)
                 //{
                 var langId = EngineContext.Current.Resolve<IWorkContext>().WorkingLanguage.Id;
-                    _resourceValue = EngineContext.Current
-                        .Resolve<ILocalizationService>()
-                        .GetResource(ResourceKey, langId, true, ResourceKey);
+                _resourceValue = EngineContext.Current
+                    .Resolve<ILocalizationService>()
+                    .GetResource(ResourceKey, langId, true, ResourceKey);
                 //    _resourceValueRetrived = true;
                 //}
                 return _resourceValue;

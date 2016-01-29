@@ -1,11 +1,9 @@
-﻿@using TinyCms.Core.Domain.Customers
-@using TinyCms.Core.Domain.Localization
-@using TinyCms.Web.Framework.UI;
-@using TinyCms.Core;
-@using TinyCms.Core.Domain.Common;
-@using TinyCms.Services.Security;
+﻿@using TinyCms.Core
+@using TinyCms.Core.Domain.Common
+@using TinyCms.Core.Domain.Customers
+@using TinyCms.Services.Security
 @{
-    var currentCustomer = this.WorkContext.CurrentCustomer;
+    var currentCustomer = WorkContext.CurrentCustomer;
     var usernamesEnabled = EngineContext.Current.Resolve<CustomerSettings>().UsernamesEnabled;
     var kendoVersion = "2014.1.318";
 
@@ -25,7 +23,7 @@
     Html.AppendScriptParts("~/Scripts/jquery-1.10.2.min.js");
 
     //page title
-    string adminPageTitle = "";
+    var adminPageTitle = "";
     if (!String.IsNullOrWhiteSpace(ViewBag.Title))
     {
         adminPageTitle = ViewBag.Title + " / ";
@@ -49,83 +47,107 @@
 }
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>@adminPageTitle</title>
-        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-        @Html.NopHeadCustom()
-        @Html.NopCssFiles(this.Url, ResourceLocation.Head)
-        @Html.NopScripts(this.Url, ResourceLocation.Head)
-    </head>
-    <body>
-        <div id="ajaxBusy">
-            <span>&nbsp;</span>
-        </div>
-        <div class="master-wrapper-page k-content">
-            <div class="master-wrapper-content">
-                @if (IsSectionDefined("header"))
-                {
-                    @RenderSection("header")
-                }
-                else
-                {
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $("#restart-application").click(function (e) {
-                                showThrobber('@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Admin.Header.RestartApplication.Progress").Text))');
-                            });
-                        });
-                    </script>
-                    <div class="header">
-                        <div class="logo">
-                        </div>
-                        
-                        <div class="languageselector">
-                            @Html.Action("LanguageSelector", "Common", new { area = "Admin" })
-                        </div>
-                        <div class="links">
-                            @Html.ActionLink(T("Admin.Header.PublicStore").Text, "Index", "Home", new { area = "" }, null)
-                            @if (canManageMaintenance)
-                            {
+<head>
+    <title>@adminPageTitle</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+    @Html.NopHeadCustom()
+    @Html.NopCssFiles(Url, ResourceLocation.Head)
+    @Html.NopScripts(Url, ResourceLocation.Head)
+</head>
+<body>
+<div id="ajaxBusy">
+    <span>&nbsp;</span>
+</div>
+<div class="master-wrapper-page k-content">
+    <div class="master-wrapper-content">
+        @if (IsSectionDefined("header"))
+        {
+            @RenderSection("header")
+        }
+        else
+        {
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#restart-application").click(function(e) {
+                        showThrobber("@Html.Raw(HttpUtility.JavaScriptStringEncode(T(\
+                                          "Admin.Header.RestartApplication.Progress\").Text))")
+                                          ;
+        })
+                                          ;
+}
+
+    );; </script>
+        <div class="header">
+            <div class="logo">
+            </div>
+
+            <div class="languageselector">
+                @Html.Action("LanguageSelector", "Common",
+         { area = "Admin" })
+                         </div>
+               
+         
+                   <div cl
+        s s="links">
+                       @Html.ActionLink(T("Admin.Header.PublicStore").Text, "Index", "Home",
+         { area =  "
+        " }, null)
+                 
+     
+             
+          @if (canManage
+        
+        c
+            )
+      
+                              {
+                   
+                     <span c 
+    lass="separ           ="@webHelper.ModifyQueryString(Url.Action(new RouteValueDictionary {{ "area", "Admin" }}), "returnurl=" + HttpUtility.UrlEncode(HttpContext.Curent.Request.RaUrl), null)">@T("Admin.Header.ClearCache")</a>
                                 <span class="separator">|</span>
-                                <a href="@webHelper.ModifyQueryString(Url.Action("ClearCache", "Common", new RouteValueDictionary {{ "area", "Admin" }}), "returnurl=" + HttpUtility.UrlEncode(HttpContext.Current.Request.RawUrl), null)">@T("Admin.Header.ClearCache")</a>
-                                <span class="separator">|</span>
-                                <a href="@webHelper.ModifyQueryString(Url.Action("RestartApplication", "Common", new RouteValueDictionary {{ "area", "Admin" }}), "returnurl=" + HttpUtility.UrlEncode(HttpContext.Current.Request.RawUrl), null)" id="restart-application">@T("Admin.Header.RestartApplication")</a>
+               ="@webHelper.ModifyQueryString(Url.Action(ommon", new RouteValueDictionary {{ "area", "Admin" }}), "returnurl=" + HttpUtility.UrlEncode(HttpContext.Curent.Request.RaUrl), null)" id="restart-application">@T("Admin.Header.RestartApplication")</a>
                             }
                         </div>
-                        <div class="login-info">
+              gin-info">
                             @if (currentCustomer != null && currentCustomer.IsRegistered())
                             {
-                                @String.Format(T("Admin.Header.LoggedInAs").Text, usernamesEnabled ? currentCustomer.Username : currentCustomer.Email)
-                                <text>, </text> <a href="@Url.Action("Logout", "Customer", new { area = "" }, null)">@T("Admin.Header.Logout")</a>
-                            }
-                        </div>
-                        @*<div class="version">
+                                @String.FonAs").Text, usernamesEnabled ? curr    entCustomer.Us e
+                                                   
+  
+ 
+                                                                <text>, </text 
+ 
+                                    a href="@Url.Action(" 
+Logout", "Customer", new { area = "    " }, null)">@T(
+                                    Admin.Header.Logout" )</a>
+                
+                                        
+                                     
+                                              }
+
+                                                             </div>
+    
+                    @*<div class="    version">
                             <span>nopCommerce @currentVersion</span>
                         </div>*@
                     </div>
                 }
                 @if (IsSectionDefined("headermenu"))
-                {
+    {
                     @RenderSection("headermenu")
-                }
-                else
-                {
-                    <div class="header-menu">
-                        @Html.Partial("Menu")
+                         {
+                 s="head       @Html.
                     </div>
                 }
                 @if (IsSectionDefined("statusbar"))
-                {
+     
                     @RenderSection("statusbar")
-                }
-                else
-                {
-                    <div class="status-bar">
-                        @(EngineContext.Current.Resolve<TinyCms.Services.Helpers.IDateTimeHelper>().ConvertToUserTime(DateTime.Now).ToString("f"))
+                         {
+                 s="stat      @(Engin.Resolve<TinyCms.Services.Helpers.IDateTimeHelper>().ConvertToUserTime(DateTime.Now).ToString("f"))
                     </div>
                 }
                 <div class="content">
-                    @Html.Partial("Notifications")
+                   al("Notifications")
                     <div class="cph">
                         @RenderBody()
                     </div>
@@ -148,4 +170,3 @@
         @Html.NopScripts(this.Url, ResourceLocation.Foot)
     </body>
 </html>
-

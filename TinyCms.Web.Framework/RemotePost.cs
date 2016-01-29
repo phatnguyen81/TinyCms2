@@ -6,49 +6,16 @@ using TinyCms.Core.Infrastructure;
 namespace TinyCms.Web.Framework
 {
     /// <summary>
-    /// Represents a RemotePost helper class
+    ///     Represents a RemotePost helper class
     /// </summary>
-    public partial class RemotePost
+    public class RemotePost
     {
         private readonly HttpContextBase _httpContext;
-        private readonly IWebHelper _webHelper;
         private readonly NameValueCollection _inputValues;
+        private readonly IWebHelper _webHelper;
 
         /// <summary>
-        /// Gets or sets a remote URL
-        /// </summary>
-        public string Url { get; set; }
-
-        /// <summary>
-        /// Gets or sets a method
-        /// </summary>
-        public string Method { get; set; }
-
-        /// <summary>
-        /// Gets or sets a form name
-        /// </summary>
-        public string FormName { get; set; }
-
-        /// <summary>
-        /// Gets or sets a form character-sets the server can handle for form-data.
-        /// </summary>
-        public string AcceptCharset { get; set; }
-
-        /// <summary>
-        /// A value indicating whether we should create a new "input" HTML element for each value (in case if there are more than one) for the same "name" attributes.
-        /// </summary>
-        public bool NewInputForEachValue { get; set; }
-
-        public NameValueCollection Params
-        {
-            get
-            {
-                return _inputValues;
-            }
-        }
-
-        /// <summary>
-        /// Creates a new instance of the RemotePost class
+        ///     Creates a new instance of the RemotePost class
         /// </summary>
         public RemotePost()
             : this(EngineContext.Current.Resolve<HttpContextBase>(), EngineContext.Current.Resolve<IWebHelper>())
@@ -56,23 +23,54 @@ namespace TinyCms.Web.Framework
         }
 
         /// <summary>
-        /// Creates a new instance of the RemotePost class
+        ///     Creates a new instance of the RemotePost class
         /// </summary>
         /// <param name="httpContext">HTTP Context</param>
         /// <param name="webHelper">Web helper</param>
         public RemotePost(HttpContextBase httpContext, IWebHelper webHelper)
         {
-            this._inputValues = new NameValueCollection();
-            this.Url = "http://www.someurl.com";
-            this.Method = "post";
-            this.FormName = "formName";
+            _inputValues = new NameValueCollection();
+            Url = "http://www.someurl.com";
+            Method = "post";
+            FormName = "formName";
 
-            this._httpContext = httpContext;
-            this._webHelper = webHelper;
+            _httpContext = httpContext;
+            _webHelper = webHelper;
         }
 
         /// <summary>
-        /// Adds the specified key and value to the dictionary (to be posted).
+        ///     Gets or sets a remote URL
+        /// </summary>
+        public string Url { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a method
+        /// </summary>
+        public string Method { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a form name
+        /// </summary>
+        public string FormName { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a form character-sets the server can handle for form-data.
+        /// </summary>
+        public string AcceptCharset { get; set; }
+
+        /// <summary>
+        ///     A value indicating whether we should create a new "input" HTML element for each value (in case if there are more
+        ///     than one) for the same "name" attributes.
+        /// </summary>
+        public bool NewInputForEachValue { get; set; }
+
+        public NameValueCollection Params
+        {
+            get { return _inputValues; }
+        }
+
+        /// <summary>
+        ///     Adds the specified key and value to the dictionary (to be posted).
         /// </summary>
         /// <param name="name">The key of the element to add</param>
         /// <param name="value">The value of the element to add.</param>
@@ -80,9 +78,9 @@ namespace TinyCms.Web.Framework
         {
             _inputValues.Add(name, value);
         }
-        
+
         /// <summary>
-        /// Post
+        ///     Post
         /// </summary>
         public void Post()
         {
@@ -92,31 +90,38 @@ namespace TinyCms.Web.Framework
             if (!string.IsNullOrEmpty(AcceptCharset))
             {
                 //AcceptCharset specified
-                _httpContext.Response.Write(string.Format("<form name=\"{0}\" method=\"{1}\" action=\"{2}\" accept-charset=\"{3}\">", FormName, Method, Url, AcceptCharset));
+                _httpContext.Response.Write(
+                    string.Format("<form name=\"{0}\" method=\"{1}\" action=\"{2}\" accept-charset=\"{3}\">", FormName,
+                        Method, Url, AcceptCharset));
             }
             else
             {
                 //no AcceptCharset specified
-                _httpContext.Response.Write(string.Format("<form name=\"{0}\" method=\"{1}\" action=\"{2}\" >", FormName, Method, Url));
+                _httpContext.Response.Write(string.Format("<form name=\"{0}\" method=\"{1}\" action=\"{2}\" >", FormName,
+                    Method, Url));
             }
             if (NewInputForEachValue)
             {
                 foreach (string key in _inputValues.Keys)
                 {
-                    string[] values = _inputValues.GetValues(key);
+                    var values = _inputValues.GetValues(key);
                     if (values != null)
                     {
-                        foreach (string value in values)
+                        foreach (var value in values)
                         {
-                            _httpContext.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode(key), HttpUtility.HtmlEncode(value)));
+                            _httpContext.Response.Write(
+                                string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">",
+                                    HttpUtility.HtmlEncode(key), HttpUtility.HtmlEncode(value)));
                         }
                     }
                 }
             }
             else
             {
-                for (int i = 0; i < _inputValues.Keys.Count; i++)
-                    _httpContext.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">", HttpUtility.HtmlEncode(_inputValues.Keys[i]), HttpUtility.HtmlEncode(_inputValues[_inputValues.Keys[i]])));
+                for (var i = 0; i < _inputValues.Keys.Count; i++)
+                    _httpContext.Response.Write(string.Format("<input name=\"{0}\" type=\"hidden\" value=\"{1}\">",
+                        HttpUtility.HtmlEncode(_inputValues.Keys[i]),
+                        HttpUtility.HtmlEncode(_inputValues[_inputValues.Keys[i]])));
             }
             _httpContext.Response.Write("</form>");
             _httpContext.Response.Write("</body></html>");

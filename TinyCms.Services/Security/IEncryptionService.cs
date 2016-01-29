@@ -1,17 +1,16 @@
-﻿
-namespace TinyCms.Services.Security 
+﻿namespace TinyCms.Services.Security
 {
-    public interface IEncryptionService 
+    public interface IEncryptionService
     {
         /// <summary>
-        /// Create salt key
+        ///     Create salt key
         /// </summary>
         /// <param name="size">Key size</param>
         /// <returns>Salt key</returns>
         string CreateSaltKey(int size);
 
         /// <summary>
-        /// Create a password hash
+        ///     Create a password hash
         /// </summary>
         /// <param name="password">{assword</param>
         /// <param name="saltkey">Salk key</param>
@@ -20,7 +19,7 @@ namespace TinyCms.Services.Security
         string CreatePasswordHash(string password, string saltkey, string passwordFormat = "SHA1");
 
         /// <summary>
-        /// Encrypt text
+        ///     Encrypt text
         /// </summary>
         /// <param name="plainText">Text to encrypt</param>
         /// <param name="encryptionPrivateKey">Encryption private key</param>
@@ -28,7 +27,7 @@ namespace TinyCms.Services.Security
         string EncryptText(string plainText, string encryptionPrivateKey = "");
 
         /// <summary>
-        /// Decrypt text
+        ///     Decrypt text
         /// </summary>
         /// <param name="cipherText">Text to decrypt</param>
         /// <param name="encryptionPrivateKey">Encryption private key</param>

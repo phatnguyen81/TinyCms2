@@ -9,7 +9,7 @@ namespace TinyCms.Services.Common
     public static class GenericAttributeExtensions
     {
         /// <summary>
-        /// Get an attribute of an entity
+        ///     Get an attribute of an entity
         /// </summary>
         /// <typeparam name="TPropType">Property type</typeparam>
         /// <param name="entity">Entity</param>
@@ -23,7 +23,7 @@ namespace TinyCms.Services.Common
         }
 
         /// <summary>
-        /// Get an attribute of an entity
+        ///     Get an attribute of an entity
         /// </summary>
         /// <typeparam name="TPropType">Property type</typeparam>
         /// <param name="entity">Entity</param>
@@ -37,13 +37,13 @@ namespace TinyCms.Services.Common
             if (entity == null)
                 throw new ArgumentNullException("entity");
 
-            string keyGroup = entity.GetUnproxiedEntityType().Name;
+            var keyGroup = entity.GetUnproxiedEntityType().Name;
 
             var props = genericAttributeService.GetAttributesForEntity(entity.Id, keyGroup);
             //little hack here (only for unit testing). we should write ecpect-return rules in unit tests for such cases
             if (props == null)
                 return default(TPropType);
-            
+
             if (props.Count == 0)
                 return default(TPropType);
 

@@ -28,8 +28,39 @@ using TinyCms.Web.Framework.Security;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class CommonController : BaseAdminController
+    public class CommonController : BaseAdminController
     {
+        #region Constructors
+
+        public CommonController(
+            ICustomerService customerService,
+            IUrlRecordService urlRecordService,
+            IWebHelper webHelper,
+            IDateTimeHelper dateTimeHelper,
+            ILanguageService languageService,
+            IWorkContext workContext,
+            IPermissionService permissionService,
+            ILocalizationService localizationService,
+            ISearchTermService searchTermService,
+            ISettingService settingService,
+            HttpContextBase httpContext, CatalogSettings catalogSettings)
+        {
+            _customerService = customerService;
+            _urlRecordService = urlRecordService;
+            _webHelper = webHelper;
+            _dateTimeHelper = dateTimeHelper;
+            _languageService = languageService;
+            _workContext = workContext;
+            _permissionService = permissionService;
+            _localizationService = localizationService;
+            _searchTermService = searchTermService;
+            _settingService = settingService;
+            _httpContext = httpContext;
+            _catalogSettings = catalogSettings;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly ICustomerService _customerService;
@@ -45,38 +76,6 @@ namespace TinyCms.Admin.Controllers
         private readonly CatalogSettings _catalogSettings;
         private readonly HttpContextBase _httpContext;
 
-
-        #endregion
-
-        #region Constructors
-
-        public CommonController(
-            ICustomerService customerService, 
-            IUrlRecordService urlRecordService, 
-            IWebHelper webHelper, 
-            IDateTimeHelper dateTimeHelper,
-            ILanguageService languageService, 
-            IWorkContext workContext,
-            IPermissionService permissionService, 
-            ILocalizationService localizationService,
-            ISearchTermService searchTermService,
-            ISettingService settingService,
-            HttpContextBase httpContext, CatalogSettings catalogSettings)
-        {
-            this._customerService = customerService;
-            this._urlRecordService = urlRecordService;
-            this._webHelper = webHelper;
-            this._dateTimeHelper = dateTimeHelper;
-            this._languageService = languageService;
-            this._workContext = workContext;
-            this._permissionService = permissionService;
-            this._localizationService = localizationService;
-            this._searchTermService = searchTermService;
-            this._settingService = settingService;
-            this._httpContext = httpContext;
-            _catalogSettings = catalogSettings;
-        }
-
         #endregion
 
         #region Methods
@@ -91,17 +90,23 @@ namespace TinyCms.Admin.Controllers
             {
                 model.OperatingSystem = Environment.OSVersion.VersionString;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 model.AspNetInfo = RuntimeEnvironment.GetSystemVersion();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             try
             {
                 model.IsFullTrust = AppDomain.CurrentDomain.IsFullyTrusted.ToString();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
             model.ServerTimeZone = TimeZone.CurrentTimeZone.StandardName;
             model.ServerLocalTime = DateTime.Now;
             model.UtcTime = DateTime.UtcNow;
@@ -119,7 +124,7 @@ namespace TinyCms.Admin.Controllers
             {
                 model.LoadedAssemblies.Add(new SystemInfoModel.LoadedAssembly
                 {
-                    FullName =  assembly.FullName,
+                    FullName = assembly.FullName
                     //we cannot use Location property in medium trust
                     //Location = assembly.Location
                 });
@@ -139,34 +144,37 @@ namespace TinyCms.Admin.Controllers
             var currentStoreUrl = _settingService.GetSettingByKey<string>("StoreInformationSettings.Url");
             if (!String.IsNullOrEmpty(currentStoreUrl) &&
                 (currentStoreUrl.Equals(_webHelper.GetStoreLocation(false), StringComparison.InvariantCultureIgnoreCase)
-                ||
-                currentStoreUrl.Equals(_webHelper.GetStoreLocation(true), StringComparison.InvariantCultureIgnoreCase)
-                ))
+                 ||
+                 currentStoreUrl.Equals(_webHelper.GetStoreLocation(true), StringComparison.InvariantCultureIgnoreCase)
+                    ))
                 model.Add(new SystemWarningModel
-                    {
-                        Level = SystemWarningLevel.Pass,
-                        Text = _localizationService.GetResource("Admin.System.Warnings.URL.Match")
-                    });
+                {
+                    Level = SystemWarningLevel.Pass,
+                    Text = _localizationService.GetResource("Admin.System.Warnings.URL.Match")
+                });
             else
                 model.Add(new SystemWarningModel
                 {
                     Level = SystemWarningLevel.Warning,
-                    Text = string.Format(_localizationService.GetResource("Admin.System.Warnings.URL.NoMatch"), currentStoreUrl, _webHelper.GetStoreLocation(false))
+                    Text =
+                        string.Format(_localizationService.GetResource("Admin.System.Warnings.URL.NoMatch"),
+                            currentStoreUrl, _webHelper.GetStoreLocation(false))
                 });
-
-
 
 
             //validate write permissions (the same procedure like during installation)
             var dirPermissionsOk = true;
             var dirsToCheck = FilePermissionHelper.GetDirectoriesWrite(_webHelper);
-            foreach (string dir in dirsToCheck)
+            foreach (var dir in dirsToCheck)
                 if (!FilePermissionHelper.CheckPermissions(dir, false, true, true, false))
                 {
                     model.Add(new SystemWarningModel
                     {
                         Level = SystemWarningLevel.Warning,
-                        Text = string.Format(_localizationService.GetResource("Admin.System.Warnings.DirectoryPermission.Wrong"), WindowsIdentity.GetCurrent().Name, dir)
+                        Text =
+                            string.Format(
+                                _localizationService.GetResource("Admin.System.Warnings.DirectoryPermission.Wrong"),
+                                WindowsIdentity.GetCurrent().Name, dir)
                     });
                     dirPermissionsOk = false;
                 }
@@ -179,13 +187,16 @@ namespace TinyCms.Admin.Controllers
 
             var filePermissionsOk = true;
             var filesToCheck = FilePermissionHelper.GetFilesWrite(_webHelper);
-            foreach (string file in filesToCheck)
+            foreach (var file in filesToCheck)
                 if (!FilePermissionHelper.CheckPermissions(file, false, true, true, true))
                 {
                     model.Add(new SystemWarningModel
                     {
                         Level = SystemWarningLevel.Warning,
-                        Text = string.Format(_localizationService.GetResource("Admin.System.Warnings.FilePermission.Wrong"), WindowsIdentity.GetCurrent().Name, file)
+                        Text =
+                            string.Format(
+                                _localizationService.GetResource("Admin.System.Warnings.FilePermission.Wrong"),
+                                WindowsIdentity.GetCurrent().Name, file)
                     });
                     filePermissionsOk = false;
                 }
@@ -201,8 +212,9 @@ namespace TinyCms.Admin.Controllers
             {
                 var machineKeySection = ConfigurationManager.GetSection("system.web/machineKey") as MachineKeySection;
                 var machineKeySpecified = machineKeySection != null &&
-                    !String.IsNullOrEmpty(machineKeySection.DecryptionKey) &&
-                    !machineKeySection.DecryptionKey.StartsWith("AutoGenerate",StringComparison.InvariantCultureIgnoreCase);
+                                          !String.IsNullOrEmpty(machineKeySection.DecryptionKey) &&
+                                          !machineKeySection.DecryptionKey.StartsWith("AutoGenerate",
+                                              StringComparison.InvariantCultureIgnoreCase);
 
                 if (!machineKeySpecified)
                 {
@@ -225,7 +237,7 @@ namespace TinyCms.Admin.Controllers
             {
                 LogException(exc);
             }
-            
+
             return View(model);
         }
 
@@ -248,17 +260,23 @@ namespace TinyCms.Admin.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
                 return AccessDeniedView();
 
-            DateTime? startDateValue = (model.DeleteGuests.StartDate == null) ? null
-                            : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.DeleteGuests.StartDate.Value, _dateTimeHelper.CurrentTimeZone);
+            var startDateValue = (model.DeleteGuests.StartDate == null)
+                ? null
+                : (DateTime?)
+                    _dateTimeHelper.ConvertToUtcTime(model.DeleteGuests.StartDate.Value, _dateTimeHelper.CurrentTimeZone);
 
-            DateTime? endDateValue = (model.DeleteGuests.EndDate == null) ? null
-                            : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.DeleteGuests.EndDate.Value, _dateTimeHelper.CurrentTimeZone).AddDays(1);
+            var endDateValue = (model.DeleteGuests.EndDate == null)
+                ? null
+                : (DateTime?)
+                    _dateTimeHelper.ConvertToUtcTime(model.DeleteGuests.EndDate.Value, _dateTimeHelper.CurrentTimeZone)
+                        .AddDays(1);
 
-            model.DeleteGuests.NumberOfDeletedCustomers = _customerService.DeleteGuestCustomers(startDateValue, endDateValue);
+            model.DeleteGuests.NumberOfDeletedCustomers = _customerService.DeleteGuestCustomers(startDateValue,
+                endDateValue);
 
             return View(model);
         }
-      
+
         [HttpPost, ActionName("Maintenance")]
         [FormValueRequired("delete-exported-files")]
         public ActionResult MaintenanceDeleteFiles(MaintenanceModel model)
@@ -266,15 +284,21 @@ namespace TinyCms.Admin.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageMaintenance))
                 return AccessDeniedView();
 
-            DateTime? startDateValue = (model.DeleteExportedFiles.StartDate == null) ? null
-                            : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.DeleteExportedFiles.StartDate.Value, _dateTimeHelper.CurrentTimeZone);
+            var startDateValue = (model.DeleteExportedFiles.StartDate == null)
+                ? null
+                : (DateTime?)
+                    _dateTimeHelper.ConvertToUtcTime(model.DeleteExportedFiles.StartDate.Value,
+                        _dateTimeHelper.CurrentTimeZone);
 
-            DateTime? endDateValue = (model.DeleteExportedFiles.EndDate == null) ? null
-                            : (DateTime?)_dateTimeHelper.ConvertToUtcTime(model.DeleteExportedFiles.EndDate.Value, _dateTimeHelper.CurrentTimeZone).AddDays(1);
+            var endDateValue = (model.DeleteExportedFiles.EndDate == null)
+                ? null
+                : (DateTime?)
+                    _dateTimeHelper.ConvertToUtcTime(model.DeleteExportedFiles.EndDate.Value,
+                        _dateTimeHelper.CurrentTimeZone).AddDays(1);
 
 
             model.DeleteExportedFiles.NumberOfDeletedFiles = 0;
-            string path = Path.Combine(this.Request.PhysicalApplicationPath, "content\\files\\exportimport");
+            var path = Path.Combine(Request.PhysicalApplicationPath, "content\\files\\exportimport");
             foreach (var fullPath in Directory.GetFiles(path))
             {
                 try
@@ -284,7 +308,7 @@ namespace TinyCms.Admin.Controllers
                         continue;
 
                     var info = new FileInfo(fullPath);
-                    if ((!startDateValue.HasValue || startDateValue.Value < info.CreationTimeUtc)&&
+                    if ((!startDateValue.HasValue || startDateValue.Value < info.CreationTimeUtc) &&
                         (!endDateValue.HasValue || info.CreationTimeUtc < endDateValue.Value))
                     {
                         System.IO.File.Delete(fullPath);
@@ -312,6 +336,7 @@ namespace TinyCms.Admin.Controllers
                 .ToList();
             return PartialView(model);
         }
+
         public ActionResult SetLanguage(int langid, string returnUrl = "")
         {
             var language = _languageService.GetLanguageById(langid);
@@ -322,10 +347,10 @@ namespace TinyCms.Admin.Controllers
 
             //home page
             if (String.IsNullOrEmpty(returnUrl))
-                returnUrl = Url.Action("Index", "Home", new { area = "Admin" });
+                returnUrl = Url.Action("Index", "Home", new {area = "Admin"});
             //prevent open redirection attack
             if (!Url.IsLocalUrl(returnUrl))
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
+                return RedirectToAction("Index", "Home", new {area = "Admin"});
             return Redirect(returnUrl);
         }
 
@@ -340,10 +365,10 @@ namespace TinyCms.Admin.Controllers
 
             //home page
             if (String.IsNullOrEmpty(returnUrl))
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
+                return RedirectToAction("Index", "Home", new {area = "Admin"});
             //prevent open redirection attack
             if (!Url.IsLocalUrl(returnUrl))
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
+                return RedirectToAction("Index", "Home", new {area = "Admin"});
             return Redirect(returnUrl);
         }
 
@@ -358,10 +383,10 @@ namespace TinyCms.Admin.Controllers
 
             //home page
             if (String.IsNullOrEmpty(returnUrl))
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
+                return RedirectToAction("Index", "Home", new {area = "Admin"});
             //prevent open redirection attack
             if (!Url.IsLocalUrl(returnUrl))
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
+                return RedirectToAction("Index", "Home", new {area = "Admin"});
             return Redirect(returnUrl);
         }
 
@@ -374,6 +399,7 @@ namespace TinyCms.Admin.Controllers
             var model = new UrlRecordListModel();
             return View(model);
         }
+
         [HttpPost]
         public ActionResult SeNames(DataSourceRequest command, UrlRecordListModel model)
         {
@@ -398,18 +424,18 @@ namespace TinyCms.Admin.Controllers
                     }
 
                     //details URL
-                    string detailsUrl = "";
+                    var detailsUrl = "";
                     var entityName = x.EntityName != null ? x.EntityName.ToLowerInvariant() : "";
                     switch (entityName)
                     {
                         case "category":
-                            detailsUrl = Url.Action("Edit", "Category", new { id = x.EntityId });
+                            detailsUrl = Url.Action("Edit", "Category", new {id = x.EntityId});
                             break;
                         case "post":
-                            detailsUrl = Url.Action("Edit", "Post", new { id = x.EntityId });
+                            detailsUrl = Url.Action("Edit", "Post", new {id = x.EntityId});
                             break;
                         case "topic":
-                            detailsUrl = Url.Action("Edit", "Topic", new { id = x.EntityId });
+                            detailsUrl = Url.Action("Edit", "Topic", new {id = x.EntityId});
                             break;
                         default:
                             break;
@@ -430,6 +456,7 @@ namespace TinyCms.Admin.Controllers
             };
             return Json(gridModel);
         }
+
         [HttpPost]
         public ActionResult DeleteSelectedSeNames(ICollection<int> selectedIds)
         {
@@ -449,7 +476,7 @@ namespace TinyCms.Admin.Controllers
                     _urlRecordService.DeleteUrlRecord(urlRecord);
             }
 
-            return Json(new { Result = true });
+            return Json(new {Result = true});
         }
 
 
@@ -461,6 +488,7 @@ namespace TinyCms.Admin.Controllers
 
             return PartialView();
         }
+
         [HttpPost]
         public ActionResult PopularSearchTermsReport(DataSourceRequest command)
         {
@@ -473,7 +501,7 @@ namespace TinyCms.Admin.Controllers
                 Data = searchTermRecordLines.Select(x => new SearchTermReportLineModel
                 {
                     Keyword = x.Keyword,
-                    Count = x.Count,
+                    Count = x.Count
                 }),
                 Total = searchTermRecordLines.TotalCount
             };
@@ -485,7 +513,7 @@ namespace TinyCms.Admin.Controllers
         public ActionResult AclDisabledWarning()
         {
             //default setting
-            bool enabled = _catalogSettings.IgnoreAcl;
+            var enabled = _catalogSettings.IgnoreAcl;
 
             //This setting is disabled. No warnings.
             if (!enabled)

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using System.Web.Mvc;
 using TinyCms.Core.Data;
 using TinyCms.Core.Infrastructure;
@@ -12,14 +11,14 @@ namespace TinyCms.Web.Framework
         private readonly bool _ignore;
 
         /// <summary>
-        /// Contructor
+        ///     Contructor
         /// </summary>
         /// <param name="ignore">Pass false in order to ignore this functionality for a certain action method</param>
         public PublicStoreAllowNavigationAttribute(bool ignore = false)
         {
-            this._ignore = ignore;
+            _ignore = ignore;
         }
-        
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (filterContext == null || filterContext.HttpContext == null)
@@ -30,15 +29,15 @@ namespace TinyCms.Web.Framework
             if (_ignore)
                 return;
 
-            HttpRequestBase request = filterContext.HttpContext.Request;
+            var request = filterContext.HttpContext.Request;
             if (request == null)
                 return;
 
-            string actionName = filterContext.ActionDescriptor.ActionName;
+            var actionName = filterContext.ActionDescriptor.ActionName;
             if (String.IsNullOrEmpty(actionName))
                 return;
 
-            string controllerName = filterContext.Controller.ToString();
+            var controllerName = filterContext.Controller.ToString();
             if (String.IsNullOrEmpty(controllerName))
                 return;
 
@@ -48,9 +47,10 @@ namespace TinyCms.Web.Framework
 
             if (!DataSettingsHelper.DatabaseIsInstalled())
                 return;
-            
+
             var permissionService = EngineContext.Current.Resolve<IPermissionService>();
-            var publicStoreAllowNavigation = permissionService.Authorize(StandardPermissionProvider.PublicStoreAllowNavigation);
+            var publicStoreAllowNavigation =
+                permissionService.Authorize(StandardPermissionProvider.PublicStoreAllowNavigation);
             if (publicStoreAllowNavigation)
                 return;
 

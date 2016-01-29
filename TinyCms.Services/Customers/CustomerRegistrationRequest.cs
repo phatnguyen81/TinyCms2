@@ -3,13 +3,12 @@
 namespace TinyCms.Services.Customers
 {
     /// <summary>
-    /// Customer registration request
+    ///     Customer registration request
     /// </summary>
     public class CustomerRegistrationRequest
     {
-
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="email">Email</param>
@@ -23,40 +22,46 @@ namespace TinyCms.Services.Customers
             PasswordFormat passwordFormat,
             bool isApproved = true)
         {
-            this.Customer = customer;
-            this.Email = email;
-            this.Username = username;
-            this.Password = password;
-            this.PasswordFormat = passwordFormat;
-            this.IsApproved = isApproved;
+            Customer = customer;
+            Email = email;
+            Username = username;
+            Password = password;
+            PasswordFormat = passwordFormat;
+            IsApproved = isApproved;
         }
 
         /// <summary>
-        /// Customer
+        ///     Customer
         /// </summary>
         public Customer Customer { get; set; }
+
         /// <summary>
-        /// Email
+        ///     Email
         /// </summary>
         public string Email { get; set; }
+
         /// <summary>
-        /// Username
+        ///     Username
         /// </summary>
         public string Username { get; set; }
+
         /// <summary>
-        /// Password
+        ///     Password
         /// </summary>
         public string Password { get; set; }
+
         /// <summary>
-        /// Password format
+        ///     Password format
         /// </summary>
         public PasswordFormat PasswordFormat { get; set; }
+
         /// <summary>
-        /// Store identifier
+        ///     Store identifier
         /// </summary>
         public int StoreId { get; set; }
+
         /// <summary>
-        /// Is approved
+        ///     Is approved
         /// </summary>
         public bool IsApproved { get; set; }
     }

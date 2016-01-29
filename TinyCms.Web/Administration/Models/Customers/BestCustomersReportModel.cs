@@ -7,7 +7,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Customers
 {
-    public partial class BestCustomersReportModel : BaseNopModel
+    public class BestCustomersReportModel : BaseNopModel
     {
         public BestCustomersReportModel()
         {
@@ -26,8 +26,10 @@ namespace TinyCms.Admin.Models.Customers
 
         [NopResourceDisplayName("Admin.Customers.Reports.BestBy.OrderStatus")]
         public int OrderStatusId { get; set; }
+
         [NopResourceDisplayName("Admin.Customers.Reports.BestBy.PaymentStatus")]
         public int PaymentStatusId { get; set; }
+
         [NopResourceDisplayName("Admin.Customers.Reports.BestBy.ShippingStatus")]
         public int ShippingStatusId { get; set; }
 

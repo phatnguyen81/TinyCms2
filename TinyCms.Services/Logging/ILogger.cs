@@ -7,30 +7,30 @@ using TinyCms.Core.Domain.Logging;
 namespace TinyCms.Services.Logging
 {
     /// <summary>
-    /// Logger interface
+    ///     Logger interface
     /// </summary>
-    public partial interface ILogger
+    public interface ILogger
     {
         /// <summary>
-        /// Determines whether a log level is enabled
+        ///     Determines whether a log level is enabled
         /// </summary>
         /// <param name="level">Log level</param>
         /// <returns>Result</returns>
         bool IsEnabled(LogLevel level);
 
         /// <summary>
-        /// Deletes a log item
+        ///     Deletes a log item
         /// </summary>
         /// <param name="log">Log item</param>
         void DeleteLog(Log log);
 
         /// <summary>
-        /// Clears a log
+        ///     Clears a log
         /// </summary>
         void ClearLog();
 
         /// <summary>
-        /// Gets all log items
+        ///     Gets all log items
         /// </summary>
         /// <param name="fromUtc">Log item creation from; null to load all records</param>
         /// <param name="toUtc">Log item creation to; null to load all records</param>
@@ -44,21 +44,21 @@ namespace TinyCms.Services.Logging
             int pageIndex = 0, int pageSize = int.MaxValue);
 
         /// <summary>
-        /// Gets a log item
+        ///     Gets a log item
         /// </summary>
         /// <param name="logId">Log item identifier</param>
         /// <returns>Log item</returns>
         Log GetLogById(int logId);
 
         /// <summary>
-        /// Get log items by identifiers
+        ///     Get log items by identifiers
         /// </summary>
         /// <param name="logIds">Log item identifiers</param>
         /// <returns>Log items</returns>
         IList<Log> GetLogByIds(int[] logIds);
 
         /// <summary>
-        /// Inserts a log item
+        ///     Inserts a log item
         /// </summary>
         /// <param name="logLevel">Log level</param>
         /// <param name="shortMessage">The short message</param>

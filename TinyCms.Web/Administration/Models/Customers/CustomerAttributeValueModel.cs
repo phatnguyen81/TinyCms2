@@ -8,8 +8,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Customers
 {
-    [Validator(typeof(CustomerAttributeValueValidator))]
-    public partial class CustomerAttributeValueModel : BaseNopEntityModel, ILocalizedModel<CustomerAttributeValueLocalizedModel>
+    [Validator(typeof (CustomerAttributeValueValidator))]
+    public class CustomerAttributeValueModel : BaseNopEntityModel, ILocalizedModel<CustomerAttributeValueLocalizedModel>
     {
         public CustomerAttributeValueModel()
         {
@@ -26,18 +26,17 @@ namespace TinyCms.Admin.Models.Customers
         public bool IsPreSelected { get; set; }
 
         [NopResourceDisplayName("Admin.Customers.CustomerAttributes.Values.Fields.DisplayOrder")]
-        public int DisplayOrder {get;set;}
+        public int DisplayOrder { get; set; }
 
         public IList<CustomerAttributeValueLocalizedModel> Locales { get; set; }
-
     }
 
-    public partial class CustomerAttributeValueLocalizedModel : ILocalizedModelLocal
+    public class CustomerAttributeValueLocalizedModel : ILocalizedModelLocal
     {
-        public int LanguageId { get; set; }
-
         [NopResourceDisplayName("Admin.Customers.CustomerAttributes.Values.Fields.Name")]
         [AllowHtml]
         public string Name { get; set; }
+
+        public int LanguageId { get; set; }
     }
 }

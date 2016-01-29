@@ -1,8 +1,7 @@
-﻿
-namespace TinyCms.Core.Configuration
+﻿namespace TinyCms.Core.Configuration
 {
     /// <summary>
-    /// Setting interface
+    ///     Setting interface
     /// </summary>
     public interface ISettings
     {

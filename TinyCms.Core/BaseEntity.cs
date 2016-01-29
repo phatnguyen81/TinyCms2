@@ -3,12 +3,12 @@ using System;
 namespace TinyCms.Core
 {
     /// <summary>
-    /// Base class for entities
+    ///     Base class for entities
     /// </summary>
-    public abstract partial class BaseEntity
+    public abstract class BaseEntity
     {
         /// <summary>
-        /// Gets or sets the entity identifier
+        ///     Gets or sets the entity identifier
         /// </summary>
         public int Id { get; set; }
 
@@ -42,7 +42,7 @@ namespace TinyCms.Core
                 var otherType = other.GetUnproxiedType();
                 var thisType = GetUnproxiedType();
                 return thisType.IsAssignableFrom(otherType) ||
-                        otherType.IsAssignableFrom(thisType);
+                       otherType.IsAssignableFrom(thisType);
             }
 
             return false;

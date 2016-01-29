@@ -6,25 +6,25 @@ using TinyCms.Core.Domain.Localization;
 namespace TinyCms.Services.Localization
 {
     /// <summary>
-    /// Localized entity service interface
+    ///     Localized entity service interface
     /// </summary>
-    public partial interface ILocalizedEntityService
+    public interface ILocalizedEntityService
     {
         /// <summary>
-        /// Deletes a localized property
+        ///     Deletes a localized property
         /// </summary>
         /// <param name="localizedProperty">Localized property</param>
         void DeleteLocalizedProperty(LocalizedProperty localizedProperty);
 
         /// <summary>
-        /// Gets a localized property
+        ///     Gets a localized property
         /// </summary>
         /// <param name="localizedPropertyId">Localized property identifier</param>
         /// <returns>Localized property</returns>
         LocalizedProperty GetLocalizedPropertyById(int localizedPropertyId);
 
         /// <summary>
-        /// Find localized value
+        ///     Find localized value
         /// </summary>
         /// <param name="languageId">Language identifier</param>
         /// <param name="entityId">Entity identifier</param>
@@ -34,19 +34,19 @@ namespace TinyCms.Services.Localization
         string GetLocalizedValue(int languageId, int entityId, string localeKeyGroup, string localeKey);
 
         /// <summary>
-        /// Inserts a localized property
+        ///     Inserts a localized property
         /// </summary>
         /// <param name="localizedProperty">Localized property</param>
         void InsertLocalizedProperty(LocalizedProperty localizedProperty);
 
         /// <summary>
-        /// Updates the localized property
+        ///     Updates the localized property
         /// </summary>
         /// <param name="localizedProperty">Localized property</param>
         void UpdateLocalizedProperty(LocalizedProperty localizedProperty);
 
         /// <summary>
-        /// Save localized value
+        ///     Save localized value
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Entity</param>
@@ -59,8 +59,8 @@ namespace TinyCms.Services.Localization
             int languageId) where T : BaseEntity, ILocalizedEntity;
 
         void SaveLocalizedValue<T, TPropType>(T entity,
-           Expression<Func<T, TPropType>> keySelector,
-           TPropType localeValue,
-           int languageId) where T : BaseEntity, ILocalizedEntity;
+            Expression<Func<T, TPropType>> keySelector,
+            TPropType localeValue,
+            int languageId) where T : BaseEntity, ILocalizedEntity;
     }
 }

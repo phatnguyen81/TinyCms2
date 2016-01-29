@@ -1,4 +1,5 @@
 #region Copyright © 2001-2003 Jean-Claude Manoli [jc@manoli.net]
+
 /*
  * This software is provided 'as-is', without any express or implied warranty.
  * In no event will the author(s) be held liable for any damages arising from
@@ -17,34 +18,32 @@
  *      be misrepresented as being the original software.
  * 
  *   3. This notice may not be removed or altered from any source distribution.
- */ 
-#endregion
+ */
 
-using TinyCms.Core.Html.CodeFormatter;
+#endregion
 
 namespace TinyCms.Core.Html.CodeFormatter
 {
-	/// <summary>
-	/// Provides a base class for formatting languages similar to C.
-	/// </summary>
-    public abstract partial class CLikeFormat : CodeFormat
-	{
-		/// <summary>
-		/// Regular expression string to match single line and multi-line 
-		/// comments (// and /* */). 
-		/// </summary>
-		protected override string CommentRegex
-		{
-			get { return @"/\*.*?\*/|//.*?(?=\r|\n)"; }
-		}
+    /// <summary>
+    ///     Provides a base class for formatting languages similar to C.
+    /// </summary>
+    public abstract class CLikeFormat : CodeFormat
+    {
+        /// <summary>
+        ///     Regular expression string to match single line and multi-line
+        ///     comments (// and /* */).
+        /// </summary>
+        protected override string CommentRegex
+        {
+            get { return @"/\*.*?\*/|//.*?(?=\r|\n)"; }
+        }
 
-		/// <summary>
-		/// Regular expression string to match string and character literals. 
-		/// </summary>
-		protected override string StringRegex
-		{
-			get { return @"@?""""|@?"".*?(?!\\).""|''|'.*?(?!\\).'"; }
-		}
-	}
+        /// <summary>
+        ///     Regular expression string to match string and character literals.
+        /// </summary>
+        protected override string StringRegex
+        {
+            get { return @"@?""""|@?"".*?(?!\\).""|''|'.*?(?!\\).'"; }
+        }
+    }
 }
-

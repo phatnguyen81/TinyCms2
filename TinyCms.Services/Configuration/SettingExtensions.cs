@@ -8,7 +8,7 @@ namespace TinyCms.Services.Configuration
     public static class SettingExtensions
     {
         /// <summary>
-        /// Get setting key (stored into database)
+        ///     Get setting key (stored into database)
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <typeparam name="TPropType">Property type</typeparam>
@@ -31,11 +31,11 @@ namespace TinyCms.Services.Configuration
             if (propInfo == null)
             {
                 throw new ArgumentException(string.Format(
-                       "Expression '{0}' refers to a field, not a property.",
-                       keySelector));
+                    "Expression '{0}' refers to a field, not a property.",
+                    keySelector));
             }
 
-            var key = typeof(T).Name + "." + propInfo.Name;
+            var key = typeof (T).Name + "." + propInfo.Name;
             return key;
         }
     }

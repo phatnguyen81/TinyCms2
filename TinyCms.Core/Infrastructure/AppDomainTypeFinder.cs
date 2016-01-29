@@ -4,23 +4,25 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using TinyCms.Core.Infrastructure;
 
 namespace TinyCms.Core.Infrastructure
 {
     /// <summary>
-    /// A class that finds types needed by Nop by looping assemblies in the 
-    /// currently executing AppDomain. Only assemblies whose names matches
-    /// certain patterns are investigated and an optional list of assemblies
-    /// referenced by <see cref="AssemblyNames"/> are always investigated.
+    ///     A class that finds types needed by Nop by looping assemblies in the
+    ///     currently executing AppDomain. Only assemblies whose names matches
+    ///     certain patterns are investigated and an optional list of assemblies
+    ///     referenced by <see cref="AssemblyNames" /> are always investigated.
     /// </summary>
     public class AppDomainTypeFinder : ITypeFinder
     {
         #region Fields
 
-        private bool ignoreReflectionErrors = true;
+        private readonly bool ignoreReflectionErrors = true;
         private bool loadAppDomainAssemblies = true;
-        private string assemblySkipLoadingPattern = "^System|^mscorlib|^Microsoft|^AjaxControlToolkit|^Antlr3|^Autofac|^AutoMapper|^Castle|^ComponentArt|^CppCodeProvider|^DotNetOpenAuth|^EntityFramework|^EPPlus|^FluentValidation|^ImageResizer|^itextsharp|^log4net|^MaxMind|^MbUnit|^MiniProfiler|^Mono.Math|^MvcContrib|^Newtonsoft|^NHibernate|^nunit|^Org.Mentalis|^PerlRegex|^QuickGraph|^Recaptcha|^Remotion|^RestSharp|^Rhino|^Telerik|^Iesi|^TestDriven|^TestFu|^UserAgentStringLibrary|^VJSharpCodeProvider|^WebActivator|^WebDev|^WebGrease";
+
+        private string assemblySkipLoadingPattern =
+            "^System|^mscorlib|^Microsoft|^AjaxControlToolkit|^Antlr3|^Autofac|^AutoMapper|^Castle|^ComponentArt|^CppCodeProvider|^DotNetOpenAuth|^EntityFramework|^EPPlus|^FluentValidation|^ImageResizer|^itextsharp|^log4net|^MaxMind|^MbUnit|^MiniProfiler|^Mono.Math|^MvcContrib|^Newtonsoft|^NHibernate|^nunit|^Org.Mentalis|^PerlRegex|^QuickGraph|^Recaptcha|^Remotion|^RestSharp|^Rhino|^Telerik|^Iesi|^TestDriven|^TestFu|^UserAgentStringLibrary|^VJSharpCodeProvider|^WebActivator|^WebDev|^WebGrease";
+
         private string assemblyRestrictToLoadingPattern = ".*";
         private IList<string> assemblyNames = new List<string>();
 
@@ -34,7 +36,10 @@ namespace TinyCms.Core.Infrastructure
             get { return AppDomain.CurrentDomain; }
         }
 
-        /// <summary>Gets or sets wether Nop should iterate assemblies in the app domain when loading Nop types. Loading patterns are applied when loading these assemblies.</summary>
+        /// <summary>
+        ///     Gets or sets wether Nop should iterate assemblies in the app domain when loading Nop types. Loading patterns
+        ///     are applied when loading these assemblies.
+        /// </summary>
         public bool LoadAppDomainAssemblies
         {
             get { return loadAppDomainAssemblies; }
@@ -55,8 +60,14 @@ namespace TinyCms.Core.Infrastructure
             set { assemblySkipLoadingPattern = value; }
         }
 
-        /// <summary>Gets or sets the pattern for dll that will be investigated. For ease of use this defaults to match all but to increase performance you might want to configure a pattern that includes assemblies and your own.</summary>
-        /// <remarks>If you change this so that Nop assemblies arn't investigated (e.g. by not including something like "^Nop|..." you may break core functionality.</remarks>
+        /// <summary>
+        ///     Gets or sets the pattern for dll that will be investigated. For ease of use this defaults to match all but to
+        ///     increase performance you might want to configure a pattern that includes assemblies and your own.
+        /// </summary>
+        /// <remarks>
+        ///     If you change this so that Nop assemblies arn't investigated (e.g. by not including something like "^Nop|..."
+        ///     you may break core functionality.
+        /// </remarks>
         public string AssemblyRestrictToLoadingPattern
         {
             get { return assemblyRestrictToLoadingPattern; }
@@ -69,7 +80,7 @@ namespace TinyCms.Core.Infrastructure
 
         public IEnumerable<Type> FindClassesOfType<T>(bool onlyConcreteClasses = true)
         {
-            return FindClassesOfType(typeof(T), onlyConcreteClasses);
+            return FindClassesOfType(typeof (T), onlyConcreteClasses);
         }
 
         public IEnumerable<Type> FindClassesOfType(Type assignTypeFrom, bool onlyConcreteClasses = true)
@@ -82,7 +93,8 @@ namespace TinyCms.Core.Infrastructure
             return FindClassesOfType(typeof (T), assemblies, onlyConcreteClasses);
         }
 
-        public IEnumerable<Type> FindClassesOfType(Type assignTypeFrom, IEnumerable<Assembly> assemblies, bool onlyConcreteClasses = true)
+        public IEnumerable<Type> FindClassesOfType(Type assignTypeFrom, IEnumerable<Assembly> assemblies,
+            bool onlyConcreteClasses = true)
         {
             var result = new List<Type>();
             try
@@ -106,7 +118,9 @@ namespace TinyCms.Core.Infrastructure
                     {
                         foreach (var t in types)
                         {
-                            if (assignTypeFrom.IsAssignableFrom(t) || (assignTypeFrom.IsGenericTypeDefinition && DoesTypeImplementOpenGeneric(t, assignTypeFrom)))
+                            if (assignTypeFrom.IsAssignableFrom(t) ||
+                                (assignTypeFrom.IsGenericTypeDefinition &&
+                                 DoesTypeImplementOpenGeneric(t, assignTypeFrom)))
                             {
                                 if (!t.IsInterface)
                                 {
@@ -160,13 +174,13 @@ namespace TinyCms.Core.Infrastructure
         #region Utilities
 
         /// <summary>
-        /// Iterates all assemblies in the AppDomain and if it's name matches the configured patterns add it to our list.
+        ///     Iterates all assemblies in the AppDomain and if it's name matches the configured patterns add it to our list.
         /// </summary>
         /// <param name="addedAssemblyNames"></param>
         /// <param name="assemblies"></param>
         private void AddAssembliesInAppDomain(List<string> addedAssemblyNames, List<Assembly> assemblies)
         {
-            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 if (Matches(assembly.FullName))
                 {
@@ -180,15 +194,15 @@ namespace TinyCms.Core.Infrastructure
         }
 
         /// <summary>
-        /// Adds specificly configured assemblies.
+        ///     Adds specificly configured assemblies.
         /// </summary>
         /// <param name="addedAssemblyNames"></param>
         /// <param name="assemblies"></param>
         protected virtual void AddConfiguredAssemblies(List<string> addedAssemblyNames, List<Assembly> assemblies)
         {
-            foreach (string assemblyName in AssemblyNames)
+            foreach (var assemblyName in AssemblyNames)
             {
-                Assembly assembly = Assembly.Load(assemblyName);
+                var assembly = Assembly.Load(assemblyName);
                 if (!addedAssemblyNames.Contains(assembly.FullName))
                 {
                     assemblies.Add(assembly);
@@ -198,13 +212,13 @@ namespace TinyCms.Core.Infrastructure
         }
 
         /// <summary>
-        /// Check if a dll is one of the shipped dlls that we know don't need to be investigated.
+        ///     Check if a dll is one of the shipped dlls that we know don't need to be investigated.
         /// </summary>
         /// <param name="assemblyFullName">
-        /// The name of the assembly to check.
+        ///     The name of the assembly to check.
         /// </param>
         /// <returns>
-        /// True if the assembly should be loaded into Nop.
+        ///     True if the assembly should be loaded into Nop.
         /// </returns>
         public virtual bool Matches(string assemblyFullName)
         {
@@ -213,16 +227,16 @@ namespace TinyCms.Core.Infrastructure
         }
 
         /// <summary>
-        /// Check if a dll is one of the shipped dlls that we know don't need to be investigated.
+        ///     Check if a dll is one of the shipped dlls that we know don't need to be investigated.
         /// </summary>
         /// <param name="assemblyFullName">
-        /// The assembly name to match.
+        ///     The assembly name to match.
         /// </param>
         /// <param name="pattern">
-        /// The regular expression pattern to match against the assembly name.
+        ///     The regular expression pattern to match against the assembly name.
         /// </param>
         /// <returns>
-        /// True if the pattern matches the assembly name.
+        ///     True if the pattern matches the assembly name.
         /// </returns>
         protected virtual bool Matches(string assemblyFullName, string pattern)
         {
@@ -230,15 +244,15 @@ namespace TinyCms.Core.Infrastructure
         }
 
         /// <summary>
-        /// Makes sure matching assemblies in the supplied folder are loaded in the app domain.
+        ///     Makes sure matching assemblies in the supplied folder are loaded in the app domain.
         /// </summary>
         /// <param name="directoryPath">
-        /// The physical path to a directory containing dlls to load in the app domain.
+        ///     The physical path to a directory containing dlls to load in the app domain.
         /// </param>
         protected virtual void LoadMatchingAssemblies(string directoryPath)
         {
             var loadedAssemblyNames = new List<string>();
-            foreach (Assembly a in GetAssemblies())
+            foreach (var a in GetAssemblies())
             {
                 loadedAssemblyNames.Add(a.FullName);
             }
@@ -248,7 +262,7 @@ namespace TinyCms.Core.Infrastructure
                 return;
             }
 
-            foreach (string dllPath in Directory.GetFiles(directoryPath, "*.dll"))
+            foreach (var dllPath in Directory.GetFiles(directoryPath, "*.dll"))
             {
                 try
                 {
@@ -273,7 +287,7 @@ namespace TinyCms.Core.Infrastructure
         }
 
         /// <summary>
-        /// Does type implement generic?
+        ///     Does type implement generic?
         /// </summary>
         /// <param name="type"></param>
         /// <param name="openGeneric"></param>
@@ -292,7 +306,8 @@ namespace TinyCms.Core.Infrastructure
                     return isMatch;
                 }
                 return false;
-            }catch
+            }
+            catch
             {
                 return false;
             }

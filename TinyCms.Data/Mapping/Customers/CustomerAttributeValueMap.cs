@@ -2,15 +2,15 @@ using TinyCms.Core.Domain.Customers;
 
 namespace TinyCms.Data.Mapping.Customers
 {
-    public partial class CustomerAttributeValueMap : NopEntityTypeConfiguration<CustomerAttributeValue>
+    public class CustomerAttributeValueMap : NopEntityTypeConfiguration<CustomerAttributeValue>
     {
         public CustomerAttributeValueMap()
         {
-            this.ToTable("CustomerAttributeValue");
-            this.HasKey(cav => cav.Id);
-            this.Property(cav => cav.Name).IsRequired().HasMaxLength(400);
+            ToTable("CustomerAttributeValue");
+            HasKey(cav => cav.Id);
+            Property(cav => cav.Name).IsRequired().HasMaxLength(400);
 
-            this.HasRequired(cav => cav.CustomerAttribute)
+            HasRequired(cav => cav.CustomerAttribute)
                 .WithMany(ca => ca.CustomerAttributeValues)
                 .HasForeignKey(cav => cav.CustomerAttributeId);
         }

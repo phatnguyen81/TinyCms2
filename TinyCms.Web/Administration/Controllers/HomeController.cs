@@ -1,8 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Web.Mvc;
-using System.Xml;
-using TinyCms.Admin.Infrastructure.Cache;
+﻿using System.Web.Mvc;
 using TinyCms.Admin.Models.Home;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
@@ -11,29 +7,30 @@ using TinyCms.Services.Configuration;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class HomeController : BaseAdminController
+    public class HomeController : BaseAdminController
     {
-        #region Fields
-        private readonly CommonSettings _commonSettings;
-        private readonly ISettingService _settingService;
-        private readonly IWorkContext _workContext;
-        private readonly ICacheManager _cacheManager;
-
-        #endregion
-
         #region Ctor
 
         public HomeController(
-            CommonSettings commonSettings, 
+            CommonSettings commonSettings,
             ISettingService settingService,
             IWorkContext workContext,
             ICacheManager cacheManager)
         {
-            this._commonSettings = commonSettings;
-            this._settingService = settingService;
-            this._workContext = workContext;
-            this._cacheManager= cacheManager;
+            _commonSettings = commonSettings;
+            _settingService = settingService;
+            _workContext = workContext;
+            _cacheManager = cacheManager;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly CommonSettings _commonSettings;
+        private readonly ISettingService _settingService;
+        private readonly IWorkContext _workContext;
+        private readonly ICacheManager _cacheManager;
 
         #endregion
 

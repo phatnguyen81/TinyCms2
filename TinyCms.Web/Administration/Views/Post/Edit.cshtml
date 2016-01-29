@@ -3,22 +3,22 @@
     //page title
     ViewBag.Title = T("Admin.Catalog.Posts.EditPostDetails").Text;
 }
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "post-form" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new {id = "post-form"}))
 {
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt=""/>
             @T("Admin.Catalog.Posts.EditPostDetails") - @Model.Name @Html.ActionLink("(" + T("Admin.Catalog.Posts.BackToList") + ")", "List")
         </div>
         <div class="options">
-            <input type="submit" value="@T("Admin.Common.Preview")" onclick="javascript:OpenWindow('@Url.RouteUrl("Post", new { SeName = Model.SeName })', 800, 600, true); return false;" class="k-button" />
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
-            <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")" />
+            <input type="submit" value="@T("Admin.Common.Preview")" onclick=" javascript:OpenWindow('@Url.RouteUrl("Post", new {Model.SeName})', 800, 600, true); return false; " class="k-button"/>
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
+            <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")"/>
             @if (!Model.Published)
             {
-                <a name="approve" href="@Url.Action("Approve", new { id = Model.Id, continueEditing = false})" class="k-button" >@T("Admin.Common.Approve")</a>
-                <a name="approve-continue" href="@Url.Action("Approve", new { id = Model.Id, continueEditing = true })" class="k-button">@T("Admin.Common.ApproveContinue")</a>
+                <a name="approve" href="@Url.Action("Approve", new {id = Model.Id, continueEditing = false})" class="k-button">@T("Admin.Common.Approve")</a>
+                <a name="approve-continue" href="@Url.Action("Approve", new {id = Model.Id, continueEditing = true})" class="k-button">@T("Admin.Common.ApproveContinue")</a>
             }
             <span id="post-delete" class="k-button">@T("Admin.Common.Delete")</span>
         </div>

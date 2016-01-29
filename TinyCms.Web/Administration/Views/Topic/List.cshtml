@@ -1,12 +1,12 @@
 ﻿@model TopicListModel
-@{    
+@{
     //page title
     ViewBag.Title = T("Admin.ContentManagement.Topics").Text;
 }
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-content.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-content.png")" alt=""/>
         @T("Admin.ContentManagement.Topics")
     </div>
     <div class="options">
@@ -20,7 +20,7 @@
             <div id="topics-grid"></div>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#topics-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -57,7 +57,8 @@
                             mode: "inline"
                         },
                         scrollable: false,
-                        columns: [{
+                        columns: [
+                        {
                             field: "SystemName",
                             title: "@T("Admin.ContentManagement.Topics.Fields.SystemName")"
                         }, {
@@ -66,76 +67,124 @@
                             width: 100,
                             headerAttributes: { style: "text-align:center" },
                             attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IsPasswordProtected#.gif" />'
-                        }, {
-                            field: "IncludeInSitemap",
-                            title: "@T("Admin.ContentManagement.Topics.Fields.IncludeInSitemap")",
-                            width: 100,
-                            headerAttributes: { style: "text-align:center" },
-                            attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IncludeInSitemap#.gif" />'
-                        }, {
-                            field: "IncludeInTopMenu",
-                            title: "@T("Admin.ContentManagement.Topics.Fields.IncludeInTopMenu")",
-                            width: 100,
-                            headerAttributes: { style: "text-align:center" },
-                            attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IncludeInTopMenu#.gif" />'
-                        }, {
-                            field: "IncludeInFooterColumn1",
-                            title: "@T("Admin.ContentManagement.Topics.Fields.IncludeInFooterColumn1")",
-                            width: 100,
-                            headerAttributes: { style: "text-align:center" },
-                            attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IncludeInFooterColumn1#.gif" />'
-                        }, {
-                            field: "IncludeInFooterColumn2",
-                            title: "@T("Admin.ContentManagement.Topics.Fields.IncludeInFooterColumn2")",
-                            width: 100,
-                            headerAttributes: { style: "text-align:center" },
-                            attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IncludeInFooterColumn2#.gif" />'
-                        }, {
-                            field: "IncludeInFooterColumn3",
-                            title: "@T("Admin.ContentManagement.Topics.Fields.IncludeInFooterColumn3")",
-                            width: 100,
-                            headerAttributes: { style: "text-align:center" },
-                            attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IncludeInFooterColumn3#.gif" />'
-                        }, {
-                            field: "DisplayOrder",
-                            title: "@T("Admin.ContentManagement.Topics.Fields.DisplayOrder")",
-                            width: 100
-                        }, {
-                            field: "Id",
-                            title: "@T("Admin.Common.Edit")",
-                            width: 100,
-                            template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
-                        }]
+                            template: "<img src=\"@Url.Content(\
+                                                      "~/Administration/Content/images/\")active-#=IsPasswordProtected#.gif\" />"
+}
+
+    ,
+        {
+            "IncludeInSitemap",
+            "@T("
+            Admin.ContentManagement.Topics.Fields.IncludeInSitemap
+            ")",
+            100,
+            {
+                "text-align:center"
+            }
+        ,
+            {
+                "text-align:center"
+            }
+        ,
+            "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=IncludeInSitemap#.gif\" />"
+        }
+    ,
+
+{
+    private field 
+: "IncludeInTopMenu",
+    private title 
+: "@T("
+    private Admin.ContentManagement.Topics.Fields.IncludeInTopMenu 
+")",
+    private width 
+: 100,
+    private headerAttributes 
+:
+    {
+        "text-align:center"
+    }
+,
+attributes:
+{
+    private style 
+: "text-align:center"
+}
+,
+template: "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=IncludeInTopMenu#.gif\" />"
+}
+,
+
+{
+    private field 
+: "IncludeInFooterColumn1",
+    private title 
+: "@T("
+    private Admin.ContentManagement.Topics.Fields.IncludeInFooterColumn1 
+")",
+    private width 
+: 100,
+    private headerAttributes 
+:
+    {
+        "text-align:center"
+    }
+,
+attributes:
+{
+    private style 
+: "text-align:center"
+}
+,
+template: "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=IncludeInFooterColumn1#.gif\" />"
+}, {
+    field: "IncludeInFooterColumn2",
+    title: "@T("Admin.ContentManagement.Topics.Fields.IncludeInFooterColumn2")",
+    width: 100,
+    headerAttributes: { style: "text-align:center" },
+    attributes: { style: "text-align:center" },
+    template: "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=IncludeInFooterColumn2#.gif\" />"
+    }, {
+    field: "IncludeInFooterColumn3",
+    title: "@T("Admin.ContentManagement.Topics.Fields.IncludeInFooterColumn3")",
+    width: 100,
+    headerAttributes: { style: "text-align:center" },
+    attributes: { style: "text-align:center" },
+    template: "<img src=\"@Url.Content(\"~/Administration/Content/images/\")active-#=IncludeInFooterColumn3#.gif\" />"
+    }, {
+    field: "DisplayOrder",
+    title: "@T("Admin.ContentManagement.Topics.Fields.DisplayOrder")",
+    width: 100
+    }, {
+    field: "Id",
+    title: "@T("Admin.Common.Edit")",
+    width: 100,
+    template: "<a href=\"Edit/#=Id#\">@T(\"Admin.Common.Edit\")</a>"
+    }]
+    });
                     });
-                });
-            </script>
+                    </script>
 
             <script type="text/javascript">
 
-                $(document).ready(function () {
-                    //search button
-                    $('#search-topics').click(function () {
-                        //search
-                        var grid = $('#topics-grid').data('kendoGrid');
-                        grid.dataSource.read();
-                        return false;
+                    $(document).ready(function() {
+                        //search button
+                        $("#search-topics").click(function() {
+                            //search
+                            var grid = $("#topics-grid").data("kendoGrid");
+                            grid.dataSource.read();
+                            return false;
+                        });
                     });
-                });
 
-                function additionalData() {
-                    var data = {
-                        SearchStoreId: $('#SearchStoreId').val()
-                    };
-                    addAntiForgeryToken(data);
-                    return data;
-                }
-            </script>
+                    function additionalData() {
+                        var data = {
+                            SearchStoreId: $("#SearchStoreId").val()
+                        };
+                        addAntiForgeryToken(data);
+                        return data;
+                    }
+                    </script>
         </td>
     </tr>
 </table>

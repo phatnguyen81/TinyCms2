@@ -2,10 +2,9 @@
 
 namespace TinyCms.Admin.Models.Common
 {
-    public partial class SystemWarningModel : BaseNopModel
+    public class SystemWarningModel : BaseNopModel
     {
         public SystemWarningLevel Level { get; set; }
-
         public string Text { get; set; }
     }
 

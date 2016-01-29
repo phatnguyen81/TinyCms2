@@ -9,12 +9,12 @@ using TinyCms.Core.Infrastructure.DependencyManagement;
 namespace TinyCms.Admin.Infrastructure
 {
     /// <summary>
-    /// Dependency registrar
+    ///     Dependency registrar
     /// </summary>
     public class DependencyRegistrar : IDependencyRegistrar
     {
         /// <summary>
-        /// Register services and interfaces
+        ///     Register services and interfaces
         /// </summary>
         /// <param name="builder">Container builder</param>
         /// <param name="typeFinder">Type finder</param>
@@ -27,7 +27,7 @@ namespace TinyCms.Admin.Infrastructure
         }
 
         /// <summary>
-        /// Order of this dependency registrar implementation
+        ///     Order of this dependency registrar implementation
         /// </summary>
         public int Order
         {

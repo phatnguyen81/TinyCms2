@@ -9,34 +9,31 @@ using Autofac.Integration.Mvc;
 namespace TinyCms.Core.Infrastructure.DependencyManagement
 {
     /// <summary>
-    /// Container manager
+    ///     Container manager
     /// </summary>
     public class ContainerManager
     {
         private readonly IContainer _container;
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="container">Conainer</param>
         public ContainerManager(IContainer container)
         {
-            this._container = container;
+            _container = container;
         }
 
         /// <summary>
-        /// Gets a container
+        ///     Gets a container
         /// </summary>
         public virtual IContainer Container
         {
-            get
-            {
-                return _container;
-            }
+            get { return _container; }
         }
 
         /// <summary>
-        /// Resolve
+        ///     Resolve
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="key">key</param>
@@ -57,7 +54,7 @@ namespace TinyCms.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// Resolve
+        ///     Resolve
         /// </summary>
         /// <param name="type">Type</param>
         /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
@@ -73,7 +70,7 @@ namespace TinyCms.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// Resolve all
+        ///     Resolve all
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="key">key</param>
@@ -94,18 +91,18 @@ namespace TinyCms.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// Resolve unregistered service
+        ///     Resolve unregistered service
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
         /// <returns>Resolved service</returns>
-        public virtual T ResolveUnregistered<T>(ILifetimeScope scope = null) where T:class
+        public virtual T ResolveUnregistered<T>(ILifetimeScope scope = null) where T : class
         {
-            return ResolveUnregistered(typeof(T), scope) as T;
+            return ResolveUnregistered(typeof (T), scope) as T;
         }
 
         /// <summary>
-        /// Resolve unregistered service
+        ///     Resolve unregistered service
         /// </summary>
         /// <param name="type">Type</param>
         /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
@@ -134,14 +131,13 @@ namespace TinyCms.Core.Infrastructure.DependencyManagement
                 }
                 catch (NopException)
                 {
-
                 }
             }
             throw new NopException("No contructor was found that had all the dependencies satisfied.");
         }
-        
+
         /// <summary>
-        /// Try to resolve srevice
+        ///     Try to resolve srevice
         /// </summary>
         /// <param name="serviceType">Type</param>
         /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
@@ -158,7 +154,7 @@ namespace TinyCms.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// Check whether some service is registered (can be resolved)
+        ///     Check whether some service is registered (can be resolved)
         /// </summary>
         /// <param name="serviceType">Type</param>
         /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
@@ -174,7 +170,7 @@ namespace TinyCms.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// Resolve optional
+        ///     Resolve optional
         /// </summary>
         /// <param name="serviceType">Type</param>
         /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
@@ -188,9 +184,9 @@ namespace TinyCms.Core.Infrastructure.DependencyManagement
             }
             return scope.ResolveOptional(serviceType);
         }
-        
+
         /// <summary>
-        /// Get current scope
+        ///     Get current scope
         /// </summary>
         /// <returns>Scope</returns>
         public virtual ILifetimeScope Scope()

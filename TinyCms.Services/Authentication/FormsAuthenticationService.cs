@@ -1,32 +1,20 @@
 using System;
 using System.Web;
 using System.Web.Security;
-using TinyCms.Services.Authentication;
 using TinyCms.Core.Domain.Customers;
 using TinyCms.Services.Customers;
 
 namespace TinyCms.Services.Authentication
 {
     /// <summary>
-    /// Authentication service
+    ///     Authentication service
     /// </summary>
-    public partial class FormsAuthenticationService : IAuthenticationService
+    public class FormsAuthenticationService : IAuthenticationService
     {
-        #region Fields
-
-        private readonly HttpContextBase _httpContext;
-        private readonly ICustomerService _customerService;
-        private readonly CustomerSettings _customerSettings;
-        private readonly TimeSpan _expirationTimeSpan;
-
-        private Customer _cachedCustomer;
-
-        #endregion
-
         #region Ctor
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="httpContext">HTTP context</param>
         /// <param name="customerService">Customer service</param>
@@ -34,10 +22,10 @@ namespace TinyCms.Services.Authentication
         public FormsAuthenticationService(HttpContextBase httpContext,
             ICustomerService customerService, CustomerSettings customerSettings)
         {
-            this._httpContext = httpContext;
-            this._customerService = customerService;
-            this._customerSettings = customerSettings;
-            this._expirationTimeSpan = FormsAuthentication.Timeout;
+            _httpContext = httpContext;
+            _customerService = customerService;
+            _customerSettings = customerSettings;
+            _expirationTimeSpan = FormsAuthentication.Timeout;
         }
 
         #endregion
@@ -45,7 +33,7 @@ namespace TinyCms.Services.Authentication
         #region Utilities
 
         /// <summary>
-        /// Get authenticated customer
+        ///     Get authenticated customer
         /// </summary>
         /// <param name="ticket">Ticket</param>
         /// <returns>Customer</returns>
@@ -66,10 +54,21 @@ namespace TinyCms.Services.Authentication
 
         #endregion
 
+        #region Fields
+
+        private readonly HttpContextBase _httpContext;
+        private readonly ICustomerService _customerService;
+        private readonly CustomerSettings _customerSettings;
+        private readonly TimeSpan _expirationTimeSpan;
+
+        private Customer _cachedCustomer;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
-        /// Sign in
+        ///     Sign in
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="createPersistentCookie">A value indicating whether to create a persistent cookie</param>
@@ -106,7 +105,7 @@ namespace TinyCms.Services.Authentication
         }
 
         /// <summary>
-        /// Sign out
+        ///     Sign out
         /// </summary>
         public virtual void SignOut()
         {
@@ -115,7 +114,7 @@ namespace TinyCms.Services.Authentication
         }
 
         /// <summary>
-        /// Get authenticated customer
+        ///     Get authenticated customer
         /// </summary>
         /// <returns>Customer</returns>
         public virtual Customer GetAuthenticatedCustomer()
@@ -131,7 +130,7 @@ namespace TinyCms.Services.Authentication
                 return null;
             }
 
-            var formsIdentity = (FormsIdentity)_httpContext.User.Identity;
+            var formsIdentity = (FormsIdentity) _httpContext.User.Identity;
             var customer = GetAuthenticatedCustomerFromTicket(formsIdentity.Ticket);
             if (customer != null && customer.Active && !customer.Deleted && customer.IsRegistered())
                 _cachedCustomer = customer;
@@ -139,6 +138,5 @@ namespace TinyCms.Services.Authentication
         }
 
         #endregion
-
     }
 }

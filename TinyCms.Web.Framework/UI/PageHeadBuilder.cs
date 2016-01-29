@@ -11,8 +11,34 @@ using TinyCms.Services.Seo;
 
 namespace TinyCms.Web.Framework.UI
 {
-    public partial class PageHeadBuilder : IPageHeadBuilder
+    public class PageHeadBuilder : IPageHeadBuilder
     {
+        #region Ctor
+
+        public PageHeadBuilder(SeoSettings seoSettings)
+        {
+            _seoSettings = seoSettings;
+            _titleParts = new List<string>();
+            _metaDescriptionParts = new List<string>();
+            _metaKeywordParts = new List<string>();
+            _scriptParts = new Dictionary<ResourceLocation, List<ScriptReferenceMeta>>();
+            _cssParts = new Dictionary<ResourceLocation, List<string>>();
+            _canonicalUrlParts = new List<string>();
+            _headCustomParts = new List<string>();
+        }
+
+        #endregion
+
+        #region Nested classes
+
+        private class ScriptReferenceMeta
+        {
+            public bool ExcludeFromBundle { get; set; }
+            public string Part { get; set; }
+        }
+
+        #endregion
+
         #region Fields
 
         private static readonly object s_lock = new object();
@@ -25,21 +51,6 @@ namespace TinyCms.Web.Framework.UI
         private readonly Dictionary<ResourceLocation, List<string>> _cssParts;
         private readonly List<string> _canonicalUrlParts;
         private readonly List<string> _headCustomParts;
-        #endregion
-
-        #region Ctor
-
-        public PageHeadBuilder(SeoSettings seoSettings)
-        {
-            this._seoSettings = seoSettings;
-            this._titleParts = new List<string>();
-            this._metaDescriptionParts = new List<string>();
-            this._metaKeywordParts = new List<string>();
-            this._scriptParts = new Dictionary<ResourceLocation, List<ScriptReferenceMeta>>();
-            this._cssParts = new Dictionary<ResourceLocation, List<string>>();
-            this._canonicalUrlParts = new List<string>();
-            this._headCustomParts = new List<string>();
-        }
 
         #endregion
 
@@ -62,7 +73,7 @@ namespace TinyCms.Web.Framework.UI
                     hashInput += ",";
                 }
 
-                byte[] input = sha.ComputeHash(Encoding.Unicode.GetBytes(hashInput));
+                var input = sha.ComputeHash(Encoding.Unicode.GetBytes(hashInput));
                 hash = HttpServerUtility.UrlTokenEncode(input);
             }
             //ensure only valid chars
@@ -92,17 +103,20 @@ namespace TinyCms.Web.Framework.UI
 
             _titleParts.Add(part);
         }
+
         public virtual void AppendTitleParts(string part)
         {
             if (string.IsNullOrEmpty(part))
                 return;
-            
+
             _titleParts.Insert(0, part);
         }
+
         public virtual string GenerateTitle(bool addDefaultTitle)
         {
-            string result = "";
-            var specificTitle = string.Join(_seoSettings.PageTitleSeparator, _titleParts.AsEnumerable().Reverse().ToArray());
+            var result = "";
+            var specificTitle = string.Join(_seoSettings.PageTitleSeparator,
+                _titleParts.AsEnumerable().Reverse().ToArray());
             if (!String.IsNullOrEmpty(specificTitle))
             {
                 if (addDefaultTitle)
@@ -111,17 +125,18 @@ namespace TinyCms.Web.Framework.UI
                     switch (_seoSettings.PageTitleSeoAdjustment)
                     {
                         case PageTitleSeoAdjustment.PagenameAfterStorename:
-                            {
-                                result = string.Join(_seoSettings.PageTitleSeparator, _seoSettings.DefaultTitle, specificTitle);
-                            }
+                        {
+                            result = string.Join(_seoSettings.PageTitleSeparator, _seoSettings.DefaultTitle,
+                                specificTitle);
+                        }
                             break;
                         case PageTitleSeoAdjustment.StorenameAfterPagename:
                         default:
-                            {
-                                result = string.Join(_seoSettings.PageTitleSeparator, specificTitle, _seoSettings.DefaultTitle);
-                            }
+                        {
+                            result = string.Join(_seoSettings.PageTitleSeparator, specificTitle,
+                                _seoSettings.DefaultTitle);
+                        }
                             break;
-                            
                     }
                 }
                 else
@@ -143,16 +158,18 @@ namespace TinyCms.Web.Framework.UI
         {
             if (string.IsNullOrEmpty(part))
                 return;
-            
+
             _metaDescriptionParts.Add(part);
         }
+
         public virtual void AppendMetaDescriptionParts(string part)
         {
             if (string.IsNullOrEmpty(part))
                 return;
-            
+
             _metaDescriptionParts.Insert(0, part);
         }
+
         public virtual string GenerateMetaDescription()
         {
             var metaDescription = string.Join(", ", _metaDescriptionParts.AsEnumerable().Reverse().ToArray());
@@ -165,9 +182,10 @@ namespace TinyCms.Web.Framework.UI
         {
             if (string.IsNullOrEmpty(part))
                 return;
-            
+
             _metaKeywordParts.Add(part);
         }
+
         public virtual void AppendMetaKeywordParts(string part)
         {
             if (string.IsNullOrEmpty(part))
@@ -175,6 +193,7 @@ namespace TinyCms.Web.Framework.UI
 
             _metaKeywordParts.Insert(0, part);
         }
+
         public virtual string GenerateMetaKeywords()
         {
             var metaKeyword = string.Join(", ", _metaKeywordParts.AsEnumerable().Reverse().ToArray());
@@ -197,6 +216,7 @@ namespace TinyCms.Web.Framework.UI
                 Part = part
             });
         }
+
         public virtual void AppendScriptParts(ResourceLocation location, string part, bool excludeFromBundle)
         {
             if (!_scriptParts.ContainsKey(location))
@@ -211,6 +231,7 @@ namespace TinyCms.Web.Framework.UI
                 Part = part
             });
         }
+
         public virtual string GenerateScripts(UrlHelper urlHelper, ResourceLocation location, bool? bundleFiles = null)
         {
             if (!_scriptParts.ContainsKey(location) || _scriptParts[location] == null)
@@ -218,7 +239,7 @@ namespace TinyCms.Web.Framework.UI
 
             if (_scriptParts.Count == 0)
                 return "";
-            
+
             if (!bundleFiles.HasValue)
             {
                 //use setting if no value is specified
@@ -242,7 +263,7 @@ namespace TinyCms.Web.Framework.UI
 
                 if (partsToBundle.Length > 0)
                 {
-                    string bundleVirtualPath = GetBundleVirtualPath("~/bundles/scripts/", ".js", partsToBundle);
+                    var bundleVirtualPath = GetBundleVirtualPath("~/bundles/scripts/", ".js", partsToBundle);
                     //create bundle
                     lock (s_lock)
                     {
@@ -268,7 +289,8 @@ namespace TinyCms.Web.Framework.UI
                 //parts to do not bundle
                 foreach (var path in partsToDontBundle)
                 {
-                    result.AppendFormat("<script src=\"{0}\" type=\"text/javascript\"></script>", urlHelper.Content(path));
+                    result.AppendFormat("<script src=\"{0}\" type=\"text/javascript\"></script>",
+                        urlHelper.Content(path));
                     result.Append(Environment.NewLine);
                 }
                 return result.ToString();
@@ -279,7 +301,8 @@ namespace TinyCms.Web.Framework.UI
                 var result = new StringBuilder();
                 foreach (var path in _scriptParts[location].Select(x => x.Part).Distinct())
                 {
-                    result.AppendFormat("<script src=\"{0}\" type=\"text/javascript\"></script>", urlHelper.Content(path));
+                    result.AppendFormat("<script src=\"{0}\" type=\"text/javascript\"></script>",
+                        urlHelper.Content(path));
                     result.Append(Environment.NewLine);
                 }
                 return result.ToString();
@@ -297,6 +320,7 @@ namespace TinyCms.Web.Framework.UI
 
             _cssParts[location].Add(part);
         }
+
         public virtual void AppendCssFileParts(ResourceLocation location, string part)
         {
             if (!_cssParts.ContainsKey(location))
@@ -304,9 +328,10 @@ namespace TinyCms.Web.Framework.UI
 
             if (string.IsNullOrEmpty(part))
                 return;
-            
+
             _cssParts[location].Insert(0, part);
         }
+
         public virtual string GenerateCssFiles(UrlHelper urlHelper, ResourceLocation location, bool? bundleFiles = null)
         {
             if (!_cssParts.ContainsKey(location) || _cssParts[location] == null)
@@ -330,7 +355,7 @@ namespace TinyCms.Web.Framework.UI
                 if (partsToBundle.Length > 0)
                 {
                     //IMPORTANT: Do not use CSS bundling in virtual categories
-                    string bundleVirtualPath = GetBundleVirtualPath("~/bundles/styles/", ".css", partsToBundle);
+                    var bundleVirtualPath = GetBundleVirtualPath("~/bundles/styles/", ".css", partsToBundle);
 
                     //create bundle
                     lock (s_lock)
@@ -365,7 +390,8 @@ namespace TinyCms.Web.Framework.UI
                 var result = new StringBuilder();
                 foreach (var path in distinctParts)
                 {
-                    result.AppendFormat("<link href=\"{0}\" rel=\"stylesheet\" type=\"text/css\" />", urlHelper.Content(path));
+                    result.AppendFormat("<link href=\"{0}\" rel=\"stylesheet\" type=\"text/css\" />",
+                        urlHelper.Content(path));
                     result.Append(Environment.NewLine);
                 }
                 return result.ToString();
@@ -377,16 +403,18 @@ namespace TinyCms.Web.Framework.UI
         {
             if (string.IsNullOrEmpty(part))
                 return;
-                       
+
             _canonicalUrlParts.Add(part);
         }
+
         public virtual void AppendCanonicalUrlParts(string part)
         {
             if (string.IsNullOrEmpty(part))
                 return;
-                       
+
             _canonicalUrlParts.Insert(0, part);
         }
+
         public virtual string GenerateCanonicalUrls()
         {
             var result = new StringBuilder();
@@ -405,6 +433,7 @@ namespace TinyCms.Web.Framework.UI
 
             _headCustomParts.Add(part);
         }
+
         public virtual void AppendHeadCustomParts(string part)
         {
             if (string.IsNullOrEmpty(part))
@@ -412,6 +441,7 @@ namespace TinyCms.Web.Framework.UI
 
             _headCustomParts.Insert(0, part);
         }
+
         public virtual string GenerateHeadCustom()
         {
             //use only distinct rows
@@ -426,18 +456,6 @@ namespace TinyCms.Web.Framework.UI
                 result.Append(Environment.NewLine);
             }
             return result.ToString();
-        }
-
-
-        #endregion
-
-        #region Nested classes
-
-        private class ScriptReferenceMeta
-        {
-            public bool ExcludeFromBundle { get; set; }
-
-            public string Part { get; set; }
         }
 
         #endregion

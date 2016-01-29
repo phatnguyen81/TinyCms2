@@ -4,9 +4,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Posts
 {
-    public partial class CopyPostModel : BaseNopEntityModel
+    public class CopyPostModel : BaseNopEntityModel
     {
-
         [NopResourceDisplayName("Admin.Catalog.Posts.Copy.Name")]
         [AllowHtml]
         public string Name { get; set; }
@@ -16,6 +15,5 @@ namespace TinyCms.Admin.Models.Posts
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Copy.Published")]
         public bool Published { get; set; }
-
     }
 }

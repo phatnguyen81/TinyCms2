@@ -11,24 +11,45 @@ using TinyCms.Services.Events;
 namespace TinyCms.Services.Common
 {
     /// <summary>
-    /// Generic attribute service
+    ///     Generic attribute service
     /// </summary>
-    public partial class GenericAttributeService : IGenericAttributeService
+    public class GenericAttributeService : IGenericAttributeService
     {
+        #region Ctor
+
+        /// <summary>
+        ///     Ctor
+        /// </summary>
+        /// <param name="cacheManager">Cache manager</param>
+        /// <param name="genericAttributeRepository">Generic attribute repository</param>
+        /// <param name="eventPublisher">Event published</param>
+        public GenericAttributeService(ICacheManager cacheManager,
+            IRepository<GenericAttribute> genericAttributeRepository,
+            IEventPublisher eventPublisher)
+        {
+            _cacheManager = cacheManager;
+            _genericAttributeRepository = genericAttributeRepository;
+            _eventPublisher = eventPublisher;
+        }
+
+        #endregion
+
         #region Constants
 
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : entity ID
-        /// {1} : key group
+        ///     {0} : entity ID
+        ///     {1} : key group
         /// </remarks>
         private const string GENERICATTRIBUTE_KEY = "Nop.genericattribute.{0}-{1}";
+
         /// <summary>
-        /// Key pattern to clear cache
+        ///     Key pattern to clear cache
         /// </summary>
         private const string GENERICATTRIBUTE_PATTERN_KEY = "Nop.genericattribute.";
+
         #endregion
 
         #region Fields
@@ -39,29 +60,10 @@ namespace TinyCms.Services.Common
 
         #endregion
 
-        #region Ctor
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="cacheManager">Cache manager</param>
-        /// <param name="genericAttributeRepository">Generic attribute repository</param>
-        /// <param name="eventPublisher">Event published</param>
-        public GenericAttributeService(ICacheManager cacheManager,
-            IRepository<GenericAttribute> genericAttributeRepository,
-            IEventPublisher eventPublisher)
-        {
-            this._cacheManager = cacheManager;
-            this._genericAttributeRepository = genericAttributeRepository;
-            this._eventPublisher = eventPublisher;
-        }
-
-        #endregion
-        
         #region Methods
 
         /// <summary>
-        /// Deletes an attribute
+        ///     Deletes an attribute
         /// </summary>
         /// <param name="attribute">Attribute</param>
         public virtual void DeleteAttribute(GenericAttribute attribute)
@@ -79,7 +81,7 @@ namespace TinyCms.Services.Common
         }
 
         /// <summary>
-        /// Gets an attribute
+        ///     Gets an attribute
         /// </summary>
         /// <param name="attributeId">Attribute identifier</param>
         /// <returns>An attribute</returns>
@@ -92,7 +94,7 @@ namespace TinyCms.Services.Common
         }
 
         /// <summary>
-        /// Inserts an attribute
+        ///     Inserts an attribute
         /// </summary>
         /// <param name="attribute">attribute</param>
         public virtual void InsertAttribute(GenericAttribute attribute)
@@ -101,7 +103,7 @@ namespace TinyCms.Services.Common
                 throw new ArgumentNullException("attribute");
 
             _genericAttributeRepository.Insert(attribute);
-            
+
             //cache
             _cacheManager.RemoveByPattern(GENERICATTRIBUTE_PATTERN_KEY);
 
@@ -110,7 +112,7 @@ namespace TinyCms.Services.Common
         }
 
         /// <summary>
-        /// Updates the attribute
+        ///     Updates the attribute
         /// </summary>
         /// <param name="attribute">Attribute</param>
         public virtual void UpdateAttribute(GenericAttribute attribute)
@@ -128,27 +130,27 @@ namespace TinyCms.Services.Common
         }
 
         /// <summary>
-        /// Get attributes
+        ///     Get attributes
         /// </summary>
         /// <param name="entityId">Entity identifier</param>
         /// <param name="keyGroup">Key group</param>
         /// <returns>Get attributes</returns>
         public virtual IList<GenericAttribute> GetAttributesForEntity(int entityId, string keyGroup)
         {
-            string key = string.Format(GENERICATTRIBUTE_KEY, entityId, keyGroup);
+            var key = string.Format(GENERICATTRIBUTE_KEY, entityId, keyGroup);
             return _cacheManager.Get(key, () =>
             {
                 var query = from ga in _genericAttributeRepository.Table
-                            where ga.EntityId == entityId &&
-                            ga.KeyGroup == keyGroup
-                            select ga;
+                    where ga.EntityId == entityId &&
+                          ga.KeyGroup == keyGroup
+                    select ga;
                 var attributes = query.ToList();
                 return attributes;
             });
         }
 
         /// <summary>
-        /// Save attribute value
+        ///     Save attribute value
         /// </summary>
         /// <typeparam name="TPropType">Property type</typeparam>
         /// <param name="entity">Entity</param>
@@ -163,7 +165,7 @@ namespace TinyCms.Services.Common
             if (key == null)
                 throw new ArgumentNullException("key");
 
-            string keyGroup = entity.GetUnproxiedEntityType().Name;
+            var keyGroup = entity.GetUnproxiedEntityType().Name;
 
             var props = GetAttributesForEntity(entity.Id, keyGroup)
                 .ToList();
@@ -197,7 +199,6 @@ namespace TinyCms.Services.Common
                         Key = key,
                         KeyGroup = keyGroup,
                         Value = valueStr
-                        
                     };
                     InsertAttribute(prop);
                 }

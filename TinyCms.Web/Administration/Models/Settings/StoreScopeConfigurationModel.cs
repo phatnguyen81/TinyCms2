@@ -2,10 +2,7 @@
 
 namespace TinyCms.Admin.Models.Settings
 {
-    public partial class StoreScopeConfigurationModel : BaseNopModel
+    public class StoreScopeConfigurationModel : BaseNopModel
     {
-        public StoreScopeConfigurationModel()
-        {
-        }
     }
 }

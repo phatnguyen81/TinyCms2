@@ -12,23 +12,81 @@ using TinyCms.Services.Localization;
 namespace TinyCms.Services.Security
 {
     /// <summary>
-    /// Permission service
+    ///     Permission service
     /// </summary>
-    public partial class PermissionService : IPermissionService
+    public class PermissionService : IPermissionService
     {
-        #region Constants
+        #region Ctor
+
         /// <summary>
-        /// Key for caching
+        ///     Ctor
+        /// </summary>
+        /// <param name="permissionRecordRepository">Permission repository</param>
+        /// <param name="customerService">Customer service</param>
+        /// <param name="workContext">Work context</param>
+        /// <param name="localizationService">Localization service</param>
+        /// <param name="languageService">Language service</param>
+        /// <param name="cacheManager">Cache manager</param>
+        public PermissionService(IRepository<PermissionRecord> permissionRecordRepository,
+            ICustomerService customerService,
+            IWorkContext workContext,
+            ILocalizationService localizationService,
+            ILanguageService languageService,
+            ICacheManager cacheManager)
+        {
+            _permissionRecordRepository = permissionRecordRepository;
+            _customerService = customerService;
+            _workContext = workContext;
+            _localizationService = localizationService;
+            _languageService = languageService;
+            _cacheManager = cacheManager;
+        }
+
+        #endregion
+
+        #region Utilities
+
+        /// <summary>
+        ///     Authorize permission
+        /// </summary>
+        /// <param name="permissionRecordSystemName">Permission record system name</param>
+        /// <param name="customerRole">Customer role</param>
+        /// <returns>true - authorized; otherwise, false</returns>
+        protected virtual bool Authorize(string permissionRecordSystemName, CustomerRole customerRole)
+        {
+            if (String.IsNullOrEmpty(permissionRecordSystemName))
+                return false;
+
+            var key = string.Format(PERMISSIONS_ALLOWED_KEY, customerRole.Id, permissionRecordSystemName);
+            return _cacheManager.Get(key, () =>
+            {
+                foreach (var permission1 in customerRole.PermissionRecords)
+                    if (permission1.SystemName.Equals(permissionRecordSystemName,
+                        StringComparison.InvariantCultureIgnoreCase))
+                        return true;
+
+                return false;
+            });
+        }
+
+        #endregion
+
+        #region Constants
+
+        /// <summary>
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : customer role ID
-        /// {1} : permission system name
+        ///     {0} : customer role ID
+        ///     {1} : permission system name
         /// </remarks>
         private const string PERMISSIONS_ALLOWED_KEY = "Nop.permission.allowed-{0}-{1}";
+
         /// <summary>
-        /// Key pattern to clear cache
+        ///     Key pattern to clear cache
         /// </summary>
         private const string PERMISSIONS_PATTERN_KEY = "Nop.permission.";
+
         #endregion
 
         #region Fields
@@ -42,64 +100,10 @@ namespace TinyCms.Services.Security
 
         #endregion
 
-        #region Ctor
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="permissionRecordRepository">Permission repository</param>
-        /// <param name="customerService">Customer service</param>
-        /// <param name="workContext">Work context</param>
-        /// <param name="localizationService">Localization service</param>
-        /// <param name="languageService">Language service</param>
-        /// <param name="cacheManager">Cache manager</param>
-        public PermissionService(IRepository<PermissionRecord> permissionRecordRepository,
-            ICustomerService customerService,
-            IWorkContext workContext,
-             ILocalizationService localizationService,
-            ILanguageService languageService,
-            ICacheManager cacheManager)
-        {
-            this._permissionRecordRepository = permissionRecordRepository;
-            this._customerService = customerService;
-            this._workContext = workContext;
-            this._localizationService = localizationService;
-            this._languageService = languageService;
-            this._cacheManager = cacheManager;
-        }
-
-        #endregion
-
-        #region Utilities
-
-        /// <summary>
-        /// Authorize permission
-        /// </summary>
-        /// <param name="permissionRecordSystemName">Permission record system name</param>
-        /// <param name="customerRole">Customer role</param>
-        /// <returns>true - authorized; otherwise, false</returns>
-        protected virtual bool Authorize(string permissionRecordSystemName, CustomerRole customerRole)
-        {
-            if (String.IsNullOrEmpty(permissionRecordSystemName))
-                return false;
-            
-            string key = string.Format(PERMISSIONS_ALLOWED_KEY, customerRole.Id, permissionRecordSystemName);
-            return _cacheManager.Get(key, () =>
-            {
-                foreach (var permission1 in customerRole.PermissionRecords)
-                    if (permission1.SystemName.Equals(permissionRecordSystemName, StringComparison.InvariantCultureIgnoreCase))
-                        return true;
-
-                return false;
-            });
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Delete a permission
+        ///     Delete a permission
         /// </summary>
         /// <param name="permission">Permission</param>
         public virtual void DeletePermissionRecord(PermissionRecord permission)
@@ -113,7 +117,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Gets a permission
+        ///     Gets a permission
         /// </summary>
         /// <param name="permissionId">Permission identifier</param>
         /// <returns>Permission</returns>
@@ -126,7 +130,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Gets a permission
+        ///     Gets a permission
         /// </summary>
         /// <param name="systemName">Permission system name</param>
         /// <returns>Permission</returns>
@@ -136,29 +140,29 @@ namespace TinyCms.Services.Security
                 return null;
 
             var query = from pr in _permissionRecordRepository.Table
-                        where  pr.SystemName == systemName
-                        orderby pr.Id
-                        select pr;
+                where pr.SystemName == systemName
+                orderby pr.Id
+                select pr;
 
             var permissionRecord = query.FirstOrDefault();
             return permissionRecord;
         }
 
         /// <summary>
-        /// Gets all permissions
+        ///     Gets all permissions
         /// </summary>
         /// <returns>Permissions</returns>
         public virtual IList<PermissionRecord> GetAllPermissionRecords()
         {
             var query = from pr in _permissionRecordRepository.Table
-                        orderby pr.Name
-                        select pr;
+                orderby pr.Name
+                select pr;
             var permissions = query.ToList();
             return permissions;
         }
 
         /// <summary>
-        /// Inserts a permission
+        ///     Inserts a permission
         /// </summary>
         /// <param name="permission">Permission</param>
         public virtual void InsertPermissionRecord(PermissionRecord permission)
@@ -172,7 +176,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Updates the permission
+        ///     Updates the permission
         /// </summary>
         /// <param name="permission">Permission</param>
         public virtual void UpdatePermissionRecord(PermissionRecord permission)
@@ -186,7 +190,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Install permissions
+        ///     Install permissions
         /// </summary>
         /// <param name="permissionProvider">Permission provider</param>
         public virtual void InstallPermissions(IPermissionProvider permissionProvider)
@@ -203,7 +207,7 @@ namespace TinyCms.Services.Security
                     {
                         Name = permission.Name,
                         SystemName = permission.SystemName,
-                        Category = permission.Category,
+                        Category = permission.Category
                     };
 
 
@@ -211,7 +215,8 @@ namespace TinyCms.Services.Security
                     var defaultPermissions = permissionProvider.GetDefaultPermissions();
                     foreach (var defaultPermission in defaultPermissions)
                     {
-                        var customerRole = _customerService.GetCustomerRoleBySystemName(defaultPermission.CustomerRoleSystemName);
+                        var customerRole =
+                            _customerService.GetCustomerRoleBySystemName(defaultPermission.CustomerRoleSystemName);
                         if (customerRole == null)
                         {
                             //new role (save it)
@@ -226,11 +231,11 @@ namespace TinyCms.Services.Security
 
 
                         var defaultMappingProvided = (from p in defaultPermission.PermissionRecords
-                                                      where p.SystemName == permission1.SystemName
-                                                      select p).Any();
+                            where p.SystemName == permission1.SystemName
+                            select p).Any();
                         var mappingExists = (from p in customerRole.PermissionRecords
-                                             where p.SystemName == permission1.SystemName
-                                             select p).Any();
+                            where p.SystemName == permission1.SystemName
+                            select p).Any();
                         if (defaultMappingProvided && !mappingExists)
                         {
                             permission1.CustomerRoles.Add(customerRole);
@@ -247,7 +252,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Uninstall permissions
+        ///     Uninstall permissions
         /// </summary>
         /// <param name="permissionProvider">Permission provider</param>
         public virtual void UninstallPermissions(IPermissionProvider permissionProvider)
@@ -264,11 +269,10 @@ namespace TinyCms.Services.Security
                     permission1.DeleteLocalizedPermissionName(_localizationService, _languageService);
                 }
             }
-
         }
-        
+
         /// <summary>
-        /// Authorize permission
+        ///     Authorize permission
         /// </summary>
         /// <param name="permission">Permission record</param>
         /// <returns>true - authorized; otherwise, false</returns>
@@ -278,7 +282,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Authorize permission
+        ///     Authorize permission
         /// </summary>
         /// <param name="permission">Permission record</param>
         /// <param name="customer">Customer</param>
@@ -304,7 +308,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Authorize permission
+        ///     Authorize permission
         /// </summary>
         /// <param name="permissionRecordSystemName">Permission record system name</param>
         /// <returns>true - authorized; otherwise, false</returns>
@@ -314,7 +318,7 @@ namespace TinyCms.Services.Security
         }
 
         /// <summary>
-        /// Authorize permission
+        ///     Authorize permission
         /// </summary>
         /// <param name="permissionRecordSystemName">Permission record system name</param>
         /// <param name="customer">Customer</param>
@@ -329,7 +333,7 @@ namespace TinyCms.Services.Security
                 if (Authorize(permissionRecordSystemName, role))
                     //yes, we have such permission
                     return true;
-            
+
             //no permission found
             return false;
         }

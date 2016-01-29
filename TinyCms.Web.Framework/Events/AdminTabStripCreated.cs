@@ -4,15 +4,15 @@ using System.Web.Mvc;
 namespace TinyCms.Web.Framework.Events
 {
     /// <summary>
-    /// Admin tabstrip created event
+    ///     Admin tabstrip created event
     /// </summary>
     public class AdminTabStripCreated
     {
         public AdminTabStripCreated(HtmlHelper helper, string tabStripName)
         {
-            this.Helper = helper;
-            this.TabStripName = tabStripName;
-            this.BlocksToRender = new List<MvcHtmlString>();
+            Helper = helper;
+            TabStripName = tabStripName;
+            BlocksToRender = new List<MvcHtmlString>();
         }
 
         public HtmlHelper Helper { get; private set; }

@@ -40,7 +40,7 @@
   </LocaleResource>
   <LocaleResource Name="CreateSampleData">
     <Value>Tạo dữ liệu mẫu</Value>
-  </LocaleResource>  
+  </LocaleResource>
   <LocaleResource Name="CustomCollation">
     <Value>Chỉ định SQL Server collation tùy chỉnh</Value>
   </LocaleResource>
@@ -128,7 +128,7 @@
   <LocaleResource Name="Title">
     <Value>Cài đặt website</Value>
   </LocaleResource>
-    <LocaleResource Name="Tooltip1">
+  <LocaleResource Name="Tooltip1">
     <Value>nopCommerce là giải pháp thương mại điện tử hàng đầu cho cửa hàng trực tuyến bằng ASP.NET. Trình cài đặt này sẽ hướng dẫn bạn từng bước cấu hình nopCommerce</Value>
   </LocaleResource>
   <LocaleResource Name="Tooltip2">

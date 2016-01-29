@@ -1,38 +1,36 @@
-﻿
-
-using System;
+﻿using System;
 using System.Web.Mvc;
 using System.Web.UI;
 using Nop.Plugin.Widgets.GoogleAnalytics.Models;
 using TinyCms.Core;
+using TinyCms.Core.Domain.Logging;
 using TinyCms.Services.Configuration;
 using TinyCms.Services.Localization;
 using TinyCms.Services.Logging;
 using TinyCms.Services.Posts;
 using TinyCms.Web.Framework.Controllers;
-using TinyCms.Core.Domain.Logging;
 
 namespace Nop.Plugin.Widgets.GoogleAnalytics.Controllers
 {
     public class WidgetsGoogleAnalyticsController : BasePluginController
     {
-        private readonly IWorkContext _workContext;
-        private readonly ISettingService _settingService;
-        private readonly ILogger _logger;
         private readonly ICategoryService _categoryService;
         private readonly ILocalizationService _localizationService;
+        private readonly ILogger _logger;
+        private readonly ISettingService _settingService;
+        private readonly IWorkContext _workContext;
 
         public WidgetsGoogleAnalyticsController(IWorkContext workContext,
-            ISettingService settingService, 
-            ILogger logger, 
+            ISettingService settingService,
+            ILogger logger,
             ICategoryService categoryService,
             ILocalizationService localizationService)
         {
-            this._workContext = workContext;
-            this._settingService = settingService;
-            this._logger = logger;
-            this._categoryService = categoryService;
-            this._localizationService = localizationService;
+            _workContext = workContext;
+            _settingService = settingService;
+            _logger = logger;
+            _categoryService = categoryService;
+            _localizationService = localizationService;
         }
 
         [AdminAuthorize]
@@ -65,7 +63,7 @@ namespace Nop.Plugin.Widgets.GoogleAnalytics.Controllers
             googleAnalyticsSettings.IncludingTax = model.IncludingTax;
 
             _settingService.SaveSetting(googleAnalyticsSettings);
-            
+
             //now clear settings cache
             _settingService.ClearCache();
 
@@ -77,8 +75,8 @@ namespace Nop.Plugin.Widgets.GoogleAnalytics.Controllers
         [ChildActionOnly]
         public ActionResult PublicInfo(string widgetZone, object additionalData = null)
         {
-            string globalScript = "";
-            var routeData = ((Page)this.HttpContext.CurrentHandler).RouteData;
+            var globalScript = "";
+            var routeData = ((Page) HttpContext.CurrentHandler).RouteData;
 
             try
             {
@@ -118,8 +116,6 @@ namespace Nop.Plugin.Widgets.GoogleAnalytics.Controllers
             analyticsTrackingScript = analyticsTrackingScript.Replace("{ECOMMERCE}", "");
             return analyticsTrackingScript;
         }
-        
-     
 
         private string FixIllegalJavaScriptChars(string text)
         {

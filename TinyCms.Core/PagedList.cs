@@ -5,34 +5,34 @@ using System.Linq;
 namespace TinyCms.Core
 {
     /// <summary>
-    /// Paged list
+    ///     Paged list
     /// </summary>
     /// <typeparam name="T">T</typeparam>
     [Serializable]
-    public class PagedList<T> : List<T>, IPagedList<T> 
+    public class PagedList<T> : List<T>, IPagedList<T>
     {
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="source">source</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
         public PagedList(IQueryable<T> source, int pageIndex, int pageSize)
         {
-            int total = source.Count();
-            this.TotalCount = total;
-            this.TotalPages = total / pageSize;
+            var total = source.Count();
+            TotalCount = total;
+            TotalPages = total/pageSize;
 
-            if (total % pageSize > 0)
+            if (total%pageSize > 0)
                 TotalPages++;
 
-            this.PageSize = pageSize;
-            this.PageIndex = pageIndex;
-            this.AddRange(source.Skip(pageIndex * pageSize).Take(pageSize).ToList());
+            PageSize = pageSize;
+            PageIndex = pageIndex;
+            AddRange(source.Skip(pageIndex*pageSize).Take(pageSize).ToList());
         }
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="source">source</param>
         /// <param name="pageIndex">Page index</param>
@@ -40,18 +40,18 @@ namespace TinyCms.Core
         public PagedList(IList<T> source, int pageIndex, int pageSize)
         {
             TotalCount = source.Count();
-            TotalPages = TotalCount / pageSize;
+            TotalPages = TotalCount/pageSize;
 
-            if (TotalCount % pageSize > 0)
+            if (TotalCount%pageSize > 0)
                 TotalPages++;
 
-            this.PageSize = pageSize;
-            this.PageIndex = pageIndex;
-            this.AddRange(source.Skip(pageIndex * pageSize).Take(pageSize).ToList());
+            PageSize = pageSize;
+            PageIndex = pageIndex;
+            AddRange(source.Skip(pageIndex*pageSize).Take(pageSize).ToList());
         }
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="source">source</param>
         /// <param name="pageIndex">Page index</param>
@@ -60,14 +60,14 @@ namespace TinyCms.Core
         public PagedList(IEnumerable<T> source, int pageIndex, int pageSize, int totalCount)
         {
             TotalCount = totalCount;
-            TotalPages = TotalCount / pageSize;
+            TotalPages = TotalCount/pageSize;
 
-            if (TotalCount % pageSize > 0)
+            if (TotalCount%pageSize > 0)
                 TotalPages++;
 
-            this.PageSize = pageSize;
-            this.PageIndex = pageIndex;
-            this.AddRange(source);
+            PageSize = pageSize;
+            PageIndex = pageIndex;
+            AddRange(source);
         }
 
         public int PageIndex { get; private set; }
@@ -79,6 +79,7 @@ namespace TinyCms.Core
         {
             get { return (PageIndex > 0); }
         }
+
         public bool HasNextPage
         {
             get { return (PageIndex + 1 < TotalPages); }

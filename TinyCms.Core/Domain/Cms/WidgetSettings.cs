@@ -11,7 +11,7 @@ namespace TinyCms.Core.Domain.Cms
         }
 
         /// <summary>
-        /// Gets or sets a system names of active widgets
+        ///     Gets or sets a system names of active widgets
         /// </summary>
         public List<string> ActiveWidgetSystemNames { get; set; }
     }

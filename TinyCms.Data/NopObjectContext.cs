@@ -12,20 +12,25 @@ using TinyCms.Data.Mapping;
 namespace TinyCms.Data
 {
     /// <summary>
-    /// Object context
+    ///     Object context
     /// </summary>
     public class NopObjectContext : DbContext, IDbContext
     {
         #region Ctor
 
-        public NopObjectContext():this("Data Source=.\\SQLEXPRESS2K8;Initial Catalog=TinyCms;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Admin@123")
-        { }
+        public NopObjectContext()
+            : this(
+                "Data Source=.\\SQLEXPRESS2K8;Initial Catalog=TinyCms;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Admin@123"
+                )
+        {
+        }
+
         public NopObjectContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
             //((IObjectContextAdapter) this).ObjectContext.ContextOptions.LazyLoadingEnabled = true;
         }
-        
+
         #endregion
 
         #region Utilities
@@ -37,9 +42,9 @@ namespace TinyCms.Data
             //var typesToRegister = Assembly.GetAssembly(configType).GetTypes()
 
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
-            .Where(type => !String.IsNullOrEmpty(type.Namespace))
-            .Where(type => type.BaseType != null && type.BaseType.IsGenericType &&
-                type.BaseType.GetGenericTypeDefinition() == typeof(NopEntityTypeConfiguration<>));
+                .Where(type => !String.IsNullOrEmpty(type.Namespace))
+                .Where(type => type.BaseType != null && type.BaseType.IsGenericType &&
+                               type.BaseType.GetGenericTypeDefinition() == typeof (NopEntityTypeConfiguration<>));
             foreach (var type in typesToRegister)
             {
                 dynamic configurationInstance = Activator.CreateInstance(type);
@@ -49,12 +54,11 @@ namespace TinyCms.Data
             //modelBuilder.Configurations.Add(new LanguageMap());
 
 
-
             base.OnModelCreating(modelBuilder);
         }
 
         /// <summary>
-        /// Attach an entity to the context or return an already attached entity (if it was already attached)
+        ///     Attach an entity to the context or return an already attached entity (if it was already attached)
         /// </summary>
         /// <typeparam name="TEntity">TEntity</typeparam>
         /// <param name="entity">Entity</param>
@@ -80,16 +84,16 @@ namespace TinyCms.Data
         #region Methods
 
         /// <summary>
-        /// Create database script
+        ///     Create database script
         /// </summary>
         /// <returns>SQL to generate database</returns>
         public string CreateDatabaseScript()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.CreateDatabaseScript();
+            return ((IObjectContextAdapter) this).ObjectContext.CreateDatabaseScript();
         }
 
         /// <summary>
-        /// Get DbSet
+        ///     Get DbSet
         /// </summary>
         /// <typeparam name="TEntity">Entity type</typeparam>
         /// <returns>DbSet</returns>
@@ -97,20 +101,21 @@ namespace TinyCms.Data
         {
             return base.Set<TEntity>();
         }
-        
+
         /// <summary>
-        /// Execute stores procedure and load a list of entities at the end
+        ///     Execute stores procedure and load a list of entities at the end
         /// </summary>
         /// <typeparam name="TEntity">Entity type</typeparam>
         /// <param name="commandText">Command text</param>
         /// <param name="parameters">Parameters</param>
         /// <returns>Entities</returns>
-        public IList<TEntity> ExecuteStoredProcedureList<TEntity>(string commandText, params object[] parameters) where TEntity : BaseEntity, new()
+        public IList<TEntity> ExecuteStoredProcedureList<TEntity>(string commandText, params object[] parameters)
+            where TEntity : BaseEntity, new()
         {
             //add parameters to command
             if (parameters != null && parameters.Length > 0)
             {
-                for (int i = 0; i <= parameters.Length - 1; i++)
+                for (var i = 0; i <= parameters.Length - 1; i++)
                 {
                     var p = parameters[i] as DbParameter;
                     if (p == null)
@@ -127,27 +132,30 @@ namespace TinyCms.Data
                 }
             }
 
-            var result = this.Database.SqlQuery<TEntity>(commandText, parameters).ToList();
+            var result = Database.SqlQuery<TEntity>(commandText, parameters).ToList();
 
             //performance hack applied as described here - http://www.nopcommerce.com/boards/t/25483/fix-very-important-speed-improvement.aspx
-            bool acd = this.Configuration.AutoDetectChangesEnabled;
+            var acd = Configuration.AutoDetectChangesEnabled;
             try
             {
-                this.Configuration.AutoDetectChangesEnabled = false;
+                Configuration.AutoDetectChangesEnabled = false;
 
-                for (int i = 0; i < result.Count; i++)
+                for (var i = 0; i < result.Count; i++)
                     result[i] = AttachEntityToContext(result[i]);
             }
             finally
             {
-                this.Configuration.AutoDetectChangesEnabled = acd;
+                Configuration.AutoDetectChangesEnabled = acd;
             }
 
             return result;
         }
 
         /// <summary>
-        /// Creates a raw SQL query that will return elements of the given generic type.  The type can be any type that has properties that match the names of the columns returned from the query, or can be a simple primitive type. The type does not have to be an entity type. The results of this query are never tracked by the context even if the type of object returned is an entity type.
+        ///     Creates a raw SQL query that will return elements of the given generic type.  The type can be any type that has
+        ///     properties that match the names of the columns returned from the query, or can be a simple primitive type. The type
+        ///     does not have to be an entity type. The results of this query are never tracked by the context even if the type of
+        ///     object returned is an entity type.
         /// </summary>
         /// <typeparam name="TElement">The type of object returned by the query.</typeparam>
         /// <param name="sql">The SQL query string.</param>
@@ -155,18 +163,25 @@ namespace TinyCms.Data
         /// <returns>Result</returns>
         public IEnumerable<TElement> SqlQuery<TElement>(string sql, params object[] parameters)
         {
-            return this.Database.SqlQuery<TElement>(sql, parameters);
+            return Database.SqlQuery<TElement>(sql, parameters);
         }
-    
+
         /// <summary>
-        /// Executes the given DDL/DML command against the database.
+        ///     Executes the given DDL/DML command against the database.
         /// </summary>
         /// <param name="sql">The command string</param>
-        /// <param name="doNotEnsureTransaction">false - the transaction creation is not ensured; true - the transaction creation is ensured.</param>
-        /// <param name="timeout">Timeout value, in seconds. A null value indicates that the default value of the underlying provider will be used</param>
+        /// <param name="doNotEnsureTransaction">
+        ///     false - the transaction creation is not ensured; true - the transaction creation
+        ///     is ensured.
+        /// </param>
+        /// <param name="timeout">
+        ///     Timeout value, in seconds. A null value indicates that the default value of the underlying
+        ///     provider will be used
+        /// </param>
         /// <param name="parameters">The parameters to apply to the command string.</param>
         /// <returns>The result returned by the database after executing the command.</returns>
-        public int ExecuteSqlCommand(string sql, bool doNotEnsureTransaction = false, int? timeout = null, params object[] parameters)
+        public int ExecuteSqlCommand(string sql, bool doNotEnsureTransaction = false, int? timeout = null,
+            params object[] parameters)
         {
             int? previousTimeout = null;
             if (timeout.HasValue)
@@ -179,7 +194,7 @@ namespace TinyCms.Data
             var transactionalBehavior = doNotEnsureTransaction
                 ? TransactionalBehavior.DoNotEnsureTransaction
                 : TransactionalBehavior.EnsureTransaction;
-            var result = this.Database.ExecuteSqlCommand(transactionalBehavior, sql, parameters);
+            var result = Database.ExecuteSqlCommand(transactionalBehavior, sql, parameters);
 
             if (timeout.HasValue)
             {
@@ -192,7 +207,7 @@ namespace TinyCms.Data
         }
 
         /// <summary>
-        /// Detach an entity
+        ///     Detach an entity
         /// </summary>
         /// <param name="entity">Entity</param>
         public void Detach(object entity)
@@ -200,7 +215,7 @@ namespace TinyCms.Data
             if (entity == null)
                 throw new ArgumentNullException("entity");
 
-            ((IObjectContextAdapter)this).ObjectContext.Detach(entity);
+            ((IObjectContextAdapter) this).ObjectContext.Detach(entity);
         }
 
         #endregion
@@ -208,33 +223,21 @@ namespace TinyCms.Data
         #region Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether proxy creation setting is enabled (used in EF)
+        ///     Gets or sets a value indicating whether proxy creation setting is enabled (used in EF)
         /// </summary>
         public virtual bool ProxyCreationEnabled
         {
-            get
-            {
-                return this.Configuration.ProxyCreationEnabled;
-            }
-            set
-            {
-                this.Configuration.ProxyCreationEnabled = value;
-            }
+            get { return Configuration.ProxyCreationEnabled; }
+            set { Configuration.ProxyCreationEnabled = value; }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether auto detect changes setting is enabled (used in EF)
+        ///     Gets or sets a value indicating whether auto detect changes setting is enabled (used in EF)
         /// </summary>
         public virtual bool AutoDetectChangesEnabled
         {
-            get
-            {
-                return this.Configuration.AutoDetectChangesEnabled;
-            }
-            set
-            {
-                this.Configuration.AutoDetectChangesEnabled = value;
-            }
+            get { return Configuration.AutoDetectChangesEnabled; }
+            set { Configuration.AutoDetectChangesEnabled = value; }
         }
 
         #endregion

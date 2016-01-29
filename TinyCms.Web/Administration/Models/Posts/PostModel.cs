@@ -12,7 +12,7 @@ using TinyCms.Web.Framework.Mvc;
 namespace TinyCms.Admin.Models.Posts
 {
     [Validator(typeof (PostValidator))]
-    public partial class PostModel : BaseNopEntityModel, ILocalizedModel<PostLocalizedModel>
+    public class PostModel : BaseNopEntityModel, ILocalizedModel<PostLocalizedModel>
     {
         public PostModel()
         {
@@ -33,8 +33,9 @@ namespace TinyCms.Admin.Models.Posts
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.PostTemplate")]
         public int PostTemplateId { get; set; }
+
         public IList<SelectListItem> AvailablePostTemplates { get; set; }
-        
+
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.Name")]
         [AllowHtml]
         public string Name { get; set; }
@@ -73,7 +74,6 @@ namespace TinyCms.Admin.Models.Posts
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.PostTags")]
         public string PostTags { get; set; }
 
-     
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.DisplayOrder")]
         public int DisplayOrder { get; set; }
 
@@ -82,10 +82,12 @@ namespace TinyCms.Admin.Models.Posts
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.CreatedBy")]
         public string CreatedByName { get; set; }
+
         public int CreatedBy { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.ApprovedBy")]
         public string ApprovedByName { get; set; }
+
         public int ApprovedBy { get; set; }
 
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.CreatedOn")]
@@ -97,9 +99,6 @@ namespace TinyCms.Admin.Models.Posts
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.ApprovedOn")]
         public DateTime? ApprovedOn { get; set; }
 
-
-        public IList<PostLocalizedModel> Locales { get; set; }
-        
         //ACL (customer roles)
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.SubjectToAcl")]
         public bool SubjectToAcl { get; set; }
@@ -108,26 +107,21 @@ namespace TinyCms.Admin.Models.Posts
         public List<CustomerRoleModel> AvailableCustomerRoles { get; set; }
 
         public int[] SelectedCustomerRoleIds { get; set; }
-
         public int ViewCount { get; set; }
-
         public int ShareCount { get; set; }
-
         public int CommentCount { get; set; }
-
         //categories
         public IList<SelectListItem> AvailableCategories { get; set; }
-        
         //pictures
         public PostPictureModel AddPictureModel { get; set; }
         public IList<PostPictureModel> PostPictureModels { get; set; }
-        
         //copy post
         public CopyPostModel CopyPostModel { get; set; }
+        public IList<PostLocalizedModel> Locales { get; set; }
 
         #region Nested classes
 
-        public partial class RelatedPostModel : BaseNopEntityModel
+        public class RelatedPostModel : BaseNopEntityModel
         {
             public int PostId2 { get; set; }
 
@@ -137,7 +131,8 @@ namespace TinyCms.Admin.Models.Posts
             [NopResourceDisplayName("Admin.Catalog.Posts.RelatedPosts.Fields.DisplayOrder")]
             public int DisplayOrder { get; set; }
         }
-        public partial class AddRelatedPostModel : BaseNopModel
+
+        public class AddRelatedPostModel : BaseNopModel
         {
             public AddRelatedPostModel()
             {
@@ -147,27 +142,29 @@ namespace TinyCms.Admin.Models.Posts
             [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchPostName")]
             [AllowHtml]
             public string SearchPostName { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchCategory")]
             public int SearchCategoryId { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchManufacturer")]
             public int SearchManufacturerId { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchStore")]
             public int SearchStoreId { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchVendor")]
             public int SearchVendorId { get; set; }
+
             [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchPostType")]
             public int SearchPostTypeId { get; set; }
 
             public IList<SelectListItem> AvailableCategories { get; set; }
-
             public int PostId { get; set; }
-
             public int[] SelectedPostIds { get; set; }
-
         }
 
-       
-        public partial class PostPictureModel : BaseNopEntityModel
+
+        public class PostPictureModel : BaseNopEntityModel
         {
             public int PostId { get; set; }
 
@@ -190,13 +187,12 @@ namespace TinyCms.Admin.Models.Posts
             public string OverrideTitleAttribute { get; set; }
         }
 
-        public partial class PostCategoryModel : BaseNopEntityModel
+        public class PostCategoryModel : BaseNopEntityModel
         {
             [NopResourceDisplayName("Admin.Catalog.Posts.Categories.Fields.Category")]
             public string Category { get; set; }
 
             public int PostId { get; set; }
-
             public int CategoryId { get; set; }
 
             [NopResourceDisplayName("Admin.Catalog.Posts.Categories.Fields.IsFeaturedPost")]
@@ -205,14 +201,13 @@ namespace TinyCms.Admin.Models.Posts
             [NopResourceDisplayName("Admin.Catalog.Posts.Categories.Fields.DisplayOrder")]
             public int DisplayOrder { get; set; }
         }
+
         #endregion
     }
 
 
-    public partial class PostLocalizedModel : ILocalizedModelLocal
+    public class PostLocalizedModel : ILocalizedModelLocal
     {
-        public int LanguageId { get; set; }
-
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.Name")]
         [AllowHtml]
         public string Name { get; set; }
@@ -240,6 +235,7 @@ namespace TinyCms.Admin.Models.Posts
         [NopResourceDisplayName("Admin.Catalog.Posts.Fields.SeName")]
         [AllowHtml]
         public string SeName { get; set; }
+
+        public int LanguageId { get; set; }
     }
-   
 }

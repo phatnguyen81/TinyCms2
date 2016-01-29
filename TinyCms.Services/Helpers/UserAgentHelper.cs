@@ -10,45 +10,29 @@ using UserAgentStringLibrary;
 namespace TinyCms.Services.Helpers
 {
     /// <summary>
-    /// User agent helper
+    ///     User agent helper
     /// </summary>
-    public partial class UserAgentHelper : IUserAgentHelper
+    public class UserAgentHelper : IUserAgentHelper
     {
         private readonly NopConfig _config;
-        private readonly IWebHelper _webHelper;
         private readonly HttpContextBase _httpContext;
+        private readonly IWebHelper _webHelper;
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="config">Config</param>
         /// <param name="webHelper">Web helper</param>
         /// <param name="httpContext">HTTP context</param>
         public UserAgentHelper(NopConfig config, IWebHelper webHelper, HttpContextBase httpContext)
         {
-            this._config = config;
-            this._webHelper = webHelper;
-            this._httpContext = httpContext;
-        }
-
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        protected virtual UasParser GetUasParser()
-        {
-            if (Singleton<UasParser>.Instance == null)
-            {
-                //no database created
-                if (String.IsNullOrEmpty(_config.UserAgentStringsPath))
-                    return null;
-
-                var filePath = _webHelper.MapPath(_config.UserAgentStringsPath);
-                var uasParser = new UasParser(filePath);
-                Singleton<UasParser>.Instance = uasParser;
-            }
-            return Singleton<UasParser>.Instance;
+            _config = config;
+            _webHelper = webHelper;
+            _httpContext = httpContext;
         }
 
         /// <summary>
-        /// Get a value indicating whether the request is made by search engine (web crawler)
+        ///     Get a value indicating whether the request is made by search engine (web crawler)
         /// </summary>
         /// <returns>Result</returns>
         public virtual bool IsSearchEngine()
@@ -58,7 +42,7 @@ namespace TinyCms.Services.Helpers
 
             //we put required logic in try-catch block
             //more info: http://www.nopcommerce.com/boards/t/17711/unhandled-exception-request-is-not-available-in-this-context.aspx
-            bool result = false;
+            var result = false;
             try
             {
                 var uasParser = GetUasParser();
@@ -78,5 +62,20 @@ namespace TinyCms.Services.Helpers
             return result;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        protected virtual UasParser GetUasParser()
+        {
+            if (Singleton<UasParser>.Instance == null)
+            {
+                //no database created
+                if (String.IsNullOrEmpty(_config.UserAgentStringsPath))
+                    return null;
+
+                var filePath = _webHelper.MapPath(_config.UserAgentStringsPath);
+                var uasParser = new UasParser(filePath);
+                Singleton<UasParser>.Instance = uasParser;
+            }
+            return Singleton<UasParser>.Instance;
+        }
     }
 }

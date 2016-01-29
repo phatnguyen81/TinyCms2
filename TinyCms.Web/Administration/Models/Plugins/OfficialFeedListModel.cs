@@ -5,7 +5,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Plugins
 {
-    public partial class OfficialFeedListModel : BaseNopModel
+    public class OfficialFeedListModel : BaseNopModel
     {
         public OfficialFeedListModel()
         {
@@ -17,24 +17,28 @@ namespace TinyCms.Admin.Models.Plugins
         [NopResourceDisplayName("Admin.Configuration.Plugins.OfficialFeed.Name")]
         [AllowHtml]
         public string SearchName { get; set; }
+
         [NopResourceDisplayName("Admin.Configuration.Plugins.OfficialFeed.Version")]
         public int SearchVersionId { get; set; }
+
         [NopResourceDisplayName("Admin.Configuration.Plugins.OfficialFeed.Category")]
         public int SearchCategoryId { get; set; }
+
         [NopResourceDisplayName("Admin.Configuration.Plugins.OfficialFeed.Price")]
         public int SearchPriceId { get; set; }
 
-
         [NopResourceDisplayName("Admin.Configuration.Plugins.OfficialFeed.Version")]
         public IList<SelectListItem> AvailableVersions { get; set; }
+
         [NopResourceDisplayName("Admin.Configuration.Plugins.OfficialFeed.Category")]
         public IList<SelectListItem> AvailableCategories { get; set; }
+
         [NopResourceDisplayName("Admin.Configuration.Plugins.OfficialFeed.Price")]
         public IList<SelectListItem> AvailablePrices { get; set; }
 
         #region Nested classes
 
-        public partial class ItemOverview
+        public class ItemOverview
         {
             public string Url { get; set; }
             public string Name { get; set; }

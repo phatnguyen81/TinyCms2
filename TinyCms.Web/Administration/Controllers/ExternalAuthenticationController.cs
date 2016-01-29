@@ -14,9 +14,24 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class ExternalAuthenticationController : BaseAdminController
-	{
-		#region Fields
+    public class ExternalAuthenticationController : BaseAdminController
+    {
+        #region Constructors
+
+        public ExternalAuthenticationController(IOpenAuthenticationService openAuthenticationService,
+            ExternalAuthenticationSettings externalAuthenticationSettings,
+            ISettingService settingService, IPermissionService permissionService, IPluginFinder pluginFinder)
+        {
+            _openAuthenticationService = openAuthenticationService;
+            _externalAuthenticationSettings = externalAuthenticationSettings;
+            _settingService = settingService;
+            _permissionService = permissionService;
+            _pluginFinder = pluginFinder;
+        }
+
+        #endregion
+
+        #region Fields
 
         private readonly IOpenAuthenticationService _openAuthenticationService;
         private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
@@ -24,22 +39,7 @@ namespace TinyCms.Admin.Controllers
         private readonly IPermissionService _permissionService;
         private readonly IPluginFinder _pluginFinder;
 
-		#endregion
-
-		#region Constructors
-
-        public ExternalAuthenticationController(IOpenAuthenticationService openAuthenticationService, 
-            ExternalAuthenticationSettings externalAuthenticationSettings,
-            ISettingService settingService, IPermissionService permissionService, IPluginFinder pluginFinder)
-		{
-            this._openAuthenticationService = openAuthenticationService;
-            this._externalAuthenticationSettings = externalAuthenticationSettings;
-            this._settingService = settingService;
-            this._permissionService = permissionService;
-            _pluginFinder = pluginFinder;
-		}
-
-		#endregion 
+        #endregion
 
         #region Methods
 
@@ -87,7 +87,8 @@ namespace TinyCms.Admin.Controllers
                 if (!model.IsActive)
                 {
                     //mark as disabled
-                    _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Remove(eam.PluginDescriptor.SystemName);
+                    _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Remove(
+                        eam.PluginDescriptor.SystemName);
                     _settingService.SaveSetting(_externalAuthenticationSettings);
                 }
             }
@@ -96,7 +97,8 @@ namespace TinyCms.Admin.Controllers
                 if (model.IsActive)
                 {
                     //mark as active
-                    _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Add(eam.PluginDescriptor.SystemName);
+                    _externalAuthenticationSettings.ActiveAuthenticationMethodSystemNames.Add(
+                        eam.PluginDescriptor.SystemName);
                     _settingService.SaveSetting(_externalAuthenticationSettings);
                 }
             }

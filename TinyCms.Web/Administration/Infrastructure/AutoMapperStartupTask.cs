@@ -32,7 +32,7 @@ namespace TinyCms.Admin.Infrastructure
         public void Execute()
         {
             //TODO remove 'CreatedOnUtc' ignore mappings because now presentation layer models have 'CreatedOn' property and core entities have 'CreatedOnUtc' property (distinct names)
-            
+
             //language
             Mapper.CreateMap<Language, LanguageModel>()
                 .ForMember(dest => dest.FlagFileNames, mo => mo.Ignore())
@@ -41,8 +41,8 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.LocaleStringResources, mo => mo.Ignore());
             //email account
             Mapper.CreateMap<EmailAccount, EmailAccountModel>()
-                .ForMember(dest => dest.Password, mo => mo.Ignore()) 
-                .ForMember(dest => dest.IsDefaultEmailAccount, mo => mo.Ignore()) 
+                .ForMember(dest => dest.Password, mo => mo.Ignore())
+                .ForMember(dest => dest.IsDefaultEmailAccount, mo => mo.Ignore())
                 .ForMember(dest => dest.SendTestEmailTo, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<EmailAccountModel, EmailAccount>()
@@ -57,7 +57,8 @@ namespace TinyCms.Admin.Infrastructure
             Mapper.CreateMap<MessageTemplateModel, MessageTemplate>();
             //queued email
             Mapper.CreateMap<QueuedEmail, QueuedEmailModel>()
-                .ForMember(dest => dest.EmailAccountName, mo => mo.MapFrom(src => src.EmailAccount != null ? src.EmailAccount.FriendlyName : string.Empty))
+                .ForMember(dest => dest.EmailAccountName,
+                    mo => mo.MapFrom(src => src.EmailAccount != null ? src.EmailAccount.FriendlyName : string.Empty))
                 .ForMember(dest => dest.CreatedOn, mo => mo.Ignore())
                 .ForMember(dest => dest.PriorityName, mo => mo.Ignore())
                 .ForMember(dest => dest.SentOn, mo => mo.Ignore())
@@ -65,7 +66,7 @@ namespace TinyCms.Admin.Infrastructure
             Mapper.CreateMap<QueuedEmailModel, QueuedEmail>()
                 .ForMember(dest => dest.Priority, dt => dt.Ignore())
                 .ForMember(dest => dest.PriorityId, dt => dt.Ignore())
-                .ForMember(dest => dest.CreatedOnUtc, dt=> dt.Ignore())
+                .ForMember(dest => dest.CreatedOnUtc, dt => dt.Ignore())
                 .ForMember(dest => dest.SentOnUtc, mo => mo.Ignore())
                 .ForMember(dest => dest.EmailAccount, mo => mo.Ignore())
                 .ForMember(dest => dest.EmailAccountId, mo => mo.Ignore())
@@ -146,7 +147,7 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.CustomerEmail, mo => mo.MapFrom(src => src.Customer.Email))
                 .ForMember(dest => dest.CreatedOn, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
-          
+
             //external authentication methods
             Mapper.CreateMap<IExternalAuthenticationMethod, AuthenticationMethodModel>()
                 .ForMember(dest => dest.FriendlyName, mo => mo.MapFrom(src => src.PluginDescriptor.FriendlyName))
@@ -193,7 +194,7 @@ namespace TinyCms.Admin.Infrastructure
             Mapper.CreateMap<CustomerRoleModel, CustomerRole>()
                 .ForMember(dest => dest.PermissionRecords, mo => mo.Ignore());
 
-          
+
             //customer attributes
             Mapper.CreateMap<CustomerAttribute, CustomerAttributeModel>()
                 .ForMember(dest => dest.AttributeControlTypeName, mo => mo.Ignore())
@@ -202,7 +203,7 @@ namespace TinyCms.Admin.Infrastructure
             Mapper.CreateMap<CustomerAttributeModel, CustomerAttribute>()
                 .ForMember(dest => dest.AttributeControlType, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomerAttributeValues, mo => mo.Ignore());
-          
+
 
             Mapper.CreateMap<MediaSettings, MediaSettingsModel>()
                 .ForMember(dest => dest.PicturesStoredIntoDatabase, mo => mo.Ignore())
@@ -221,12 +222,12 @@ namespace TinyCms.Admin.Infrastructure
             //Settings
 
             Mapper.CreateMap<MediaSettings, MediaSettingsModel>()
-              .ForMember(dest => dest.PicturesStoredIntoDatabase, mo => mo.Ignore())
-              .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
+                .ForMember(dest => dest.PicturesStoredIntoDatabase, mo => mo.Ignore())
+                .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<MediaSettingsModel, MediaSettings>()
                 .ForMember(dest => dest.DefaultPictureZoomEnabled, mo => mo.Ignore())
                 .ForMember(dest => dest.AutoCompleteSearchThumbPictureSize, mo => mo.Ignore());
-           
+
             Mapper.CreateMap<CatalogSettings, CatalogSettingsModel>()
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<CatalogSettingsModel, CatalogSettings>()
@@ -242,7 +243,7 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.DefaultCategoryPageSize, mo => mo.Ignore())
                 .ForMember(dest => dest.DefaultManufacturerPageSizeOptions, mo => mo.Ignore())
                 .ForMember(dest => dest.DefaultManufacturerPageSize, mo => mo.Ignore());
-           
+
             Mapper.CreateMap<MediaSettings, MediaSettingsModel>()
                 .ForMember(dest => dest.PicturesStoredIntoDatabase, mo => mo.Ignore())
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
@@ -277,7 +278,7 @@ namespace TinyCms.Admin.Infrastructure
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore());
             Mapper.CreateMap<TopicTemplateModel, TopicTemplate>();
         }
-        
+
         public int Order
         {
             get { return 0; }

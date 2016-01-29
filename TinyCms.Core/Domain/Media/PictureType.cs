@@ -1,17 +1,18 @@
 namespace TinyCms.Core.Domain.Media
 {
     /// <summary>
-    /// Represents a picture item type
+    ///     Represents a picture item type
     /// </summary>
     public enum PictureType
     {
         /// <summary>
-        /// Entities (products, categories, manufacturers)
+        ///     Entities (products, categories, manufacturers)
         /// </summary>
         Entity = 1,
+
         /// <summary>
-        /// Avatar
+        ///     Avatar
         /// </summary>
-        Avatar = 10,
+        Avatar = 10
     }
 }

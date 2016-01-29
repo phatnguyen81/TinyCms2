@@ -18,7 +18,7 @@ namespace TinyCms.Web.Framework.Security.Honeypot
 
             var securitySettings = EngineContext.Current.Resolve<SecuritySettings>();
             var hpInput = helper.TextBox(securitySettings.HoneypotInputName);
-            sb.Append(hpInput.ToString());
+            sb.Append(hpInput);
 
             sb.Append(Environment.NewLine);
             sb.Append("</div>");

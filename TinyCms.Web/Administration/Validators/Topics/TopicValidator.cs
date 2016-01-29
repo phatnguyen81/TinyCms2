@@ -9,7 +9,9 @@ namespace TinyCms.Admin.Validators.Topics
     {
         public TopicValidator(ILocalizationService localizationService)
         {
-            RuleFor(x => x.SystemName).NotEmpty().WithMessage(localizationService.GetResource("Admin.ContentManagement.Topics.Fields.SystemName.Required"));
+            RuleFor(x => x.SystemName)
+                .NotEmpty()
+                .WithMessage(localizationService.GetResource("Admin.ContentManagement.Topics.Fields.SystemName.Required"));
         }
     }
 }

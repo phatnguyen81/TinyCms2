@@ -1,4 +1,4 @@
-<Language Name="Հայերեն" IsDefault="false" IsRightToLeft="false">
+﻿<Language Name="Հայերեն" IsDefault="false" IsRightToLeft="false">
   <LocaleResource Name="AdminEmail">
     <Value>Ադմինիստրատորի էլ. փոստ</Value>
   </LocaleResource>
@@ -135,7 +135,8 @@
     <Value>nopCommerce համակարգը հաջողությամբ տեղադրելու համար Դուք պետք է իմանաք տվյալների բազային միանալու կարգավորումների տողը: Եթե Դուք չունեք այդ ինֆորմացիան, ապա կարող եք հարցնել Ձեր հոսթինգ պրովայդերից: Եթե տեղադրում եք լոկալ համակարգչի վրա, ապա կարող եք իմանալ Ձեր ադմինիստրատորից:</Value>
   </LocaleResource>
   <LocaleResource Name="WindowsAuthentication">
-    <Value>Windows համակարգի ստուգում
+    <Value>
+      Windows համակարգի ստուգում
     </Value>
   </LocaleResource>
 </Language>

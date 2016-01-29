@@ -1,5 +1,5 @@
-﻿@model CustomerUserSettingsModel
-@using TinyCms.Core.Domain.Customers;
+﻿@using TinyCms.Core.Domain.Customers
+@model CustomerUserSettingsModel
 @{
     //page title
     ViewBag.Title = T("Admin.Configuration.Settings.CustomerUser").Text;
@@ -9,20 +9,20 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Settings.CustomerUser")
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
         </div>
     </div>
-    
+
     @Html.ValidationSummary(false)
 
     <script>
         $(document).ready(function() {
             $("#customersettings-edit").kendoTabStrip({
-                animation:  {
+                animation: {
                     open: {
                         effects: "fadeIn"
                     }
@@ -62,7 +62,7 @@
 
     {
         //custom tabs
-        var eventMessage = new AdminTabStripCreated(this.Html, "customersettings-edit");
+        var eventMessage = new AdminTabStripCreated(Html, "customersettings-edit");
         EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
         foreach (var eventBlock in eventMessage.BlocksToRender)
         {
@@ -71,13 +71,12 @@
     }
 
     @*save selected tab index*@
-	<input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
-    
+    <input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
 }
 @helper TabCustomerSettings()
 {
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $("#@Html.FieldIdFor(model => model.CustomerSettings.AllowCustomersToUploadAvatars)").click(toggleAvatar);
             $("#@Html.FieldIdFor(model => model.CustomerSettings.UsernamesEnabled)").click(toggleUsername);
@@ -88,25 +87,23 @@
         });
 
         function toggleAvatar() {
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.AllowCustomersToUploadAvatars)').is(':checked')) {
-                $('#pnlDefaultAvatarEnabled').show();
-            }
-            else {
-                $('#pnlDefaultAvatarEnabled').hide();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.AllowCustomersToUploadAvatars)").is(":checked")) {
+                $("#pnlDefaultAvatarEnabled").show();
+            } else {
+                $("#pnlDefaultAvatarEnabled").hide();
             }
         }
 
         function toggleUsername() {
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.UsernamesEnabled)').is(':checked')) {
-                $('#pnlAllowUsersToChangeUsernames').show();
-                $('#pnlCheckUsernameAvailability').show();
-            }
-            else {
-                $('#pnlAllowUsersToChangeUsernames').hide();
-                $('#pnlCheckUsernameAvailability').hide();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.UsernamesEnabled)").is(":checked")) {
+                $("#pnlAllowUsersToChangeUsernames").show();
+                $("#pnlCheckUsernameAvailability").show();
+            } else {
+                $("#pnlAllowUsersToChangeUsernames").hide();
+                $("#pnlCheckUsernameAvailability").hide();
             }
         }
-        
+
     </script>
     <table class="adminContent">
         <tr>
@@ -141,7 +138,7 @@
                 @Html.NopLabelFor(model => model.CustomerSettings.UserRegistrationType):
             </td>
             <td class="adminData">
-                @Html.DropDownListFor(model => model.CustomerSettings.UserRegistrationType, ((UserRegistrationType)Model.CustomerSettings.UserRegistrationType).ToSelectList())
+                @Html.DropDownListFor(model => model.CustomerSettings.UserRegistrationType, ((UserRegistrationType) Model.CustomerSettings.UserRegistrationType).ToSelectList())
                 @Html.ValidationMessageFor(model => model.CustomerSettings.UserRegistrationType)
             </td>
         </tr>
@@ -199,13 +196,13 @@
                 @Html.ValidationMessageFor(model => model.CustomerSettings.NotifyNewCustomerRegistration)
             </td>
         </tr>
-  
+
         <tr>
             <td class="adminTitle">
                 @Html.NopLabelFor(model => model.CustomerSettings.CustomerNameFormat):
             </td>
             <td class="adminData">
-                @Html.DropDownListFor(model => model.CustomerSettings.CustomerNameFormat, ((CustomerNameFormat)Model.CustomerSettings.CustomerNameFormat).ToSelectList())
+                @Html.DropDownListFor(model => model.CustomerSettings.CustomerNameFormat, ((CustomerNameFormat) Model.CustomerSettings.CustomerNameFormat).ToSelectList())
                 @Html.ValidationMessageFor(model => model.CustomerSettings.CustomerNameFormat)
             </td>
         </tr>
@@ -214,7 +211,7 @@
                 @Html.NopLabelFor(model => model.CustomerSettings.DefaultPasswordFormat):
             </td>
             <td class="adminData">
-                @Html.DropDownListFor(model => model.CustomerSettings.DefaultPasswordFormat, ((PasswordFormat)Model.CustomerSettings.DefaultPasswordFormat).ToSelectList())
+                @Html.DropDownListFor(model => model.CustomerSettings.DefaultPasswordFormat, ((PasswordFormat) Model.CustomerSettings.DefaultPasswordFormat).ToSelectList())
                 @Html.ValidationMessageFor(model => model.CustomerSettings.DefaultPasswordFormat)
             </td>
         </tr>
@@ -268,7 +265,7 @@
 @helper TabCustomerFormFields()
 {
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $("#@Html.FieldIdFor(model => model.CustomerSettings.DateOfBirthEnabled)").click(toggleCustomerRequiredFormField);
             $("#@Html.FieldIdFor(model => model.CustomerSettings.DateOfBirthRequired)").click(toggleCustomerRequiredFormField);
@@ -293,332 +290,331 @@
         });
 
         function toggleCustomerCountryFormField() {
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.CountryEnabled)').is(':checked')) {
-                $('#pnlCustomerCountryRequired').show();
-                $('#pnlCustomerStateProvinceEnabled').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.CountryEnabled)").is(":checked")) {
+                $("#pnlCustomerCountryRequired").show();
+                $("#pnlCustomerStateProvinceEnabled").show();
                 toggleCustomerStateProvinceFormField();
             } else {
-                $('#pnlCustomerCountryRequired').hide();
-                $('#pnlCustomerStateProvinceEnabled').hide();
+                $("#pnlCustomerCountryRequired").hide();
+                $("#pnlCustomerStateProvinceEnabled").hide();
                 toggleCustomerStateProvinceFormField();
             }
         }
 
         function toggleCustomerStateProvinceFormField() {
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.CountryEnabled)').is(':checked') &&
-                $('#@Html.FieldIdFor(model => model.CustomerSettings.StateProvinceEnabled)').is(':checked')) {
-                $('#pnlCustomerStateProvinceRequired').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.CountryEnabled)").is(":checked") &&
+                $("#@Html.FieldIdFor(model => model.CustomerSettings.StateProvinceEnabled)").is(":checked")) {
+                $("#pnlCustomerStateProvinceRequired").show();
             } else {
-                $('#pnlCustomerStateProvinceRequired').hide();
+                $("#pnlCustomerStateProvinceRequired").hide();
             }
         }
 
         function toggleCustomerRequiredFormField() {
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.DateOfBirthEnabled)').is(':checked')) {
-                $('#pnlCustomerDateOfBirthRequired').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.DateOfBirthEnabled)").is(":checked")) {
+                $("#pnlCustomerDateOfBirthRequired").show();
             } else {
-                $('#pnlCustomerDateOfBirthRequired').hide();
+                $("#pnlCustomerDateOfBirthRequired").hide();
             }
 
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.DateOfBirthEnabled)').is(':checked') &&
-                $('#@Html.FieldIdFor(model => model.CustomerSettings.DateOfBirthRequired)').is(':checked')) {
-                $('#pnlDateOfBirthMinimumAge').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.DateOfBirthEnabled)").is(":checked") &&
+                $("#@Html.FieldIdFor(model => model.CustomerSettings.DateOfBirthRequired)").is(":checked")) {
+                $("#pnlDateOfBirthMinimumAge").show();
             } else {
-                $('#pnlDateOfBirthMinimumAge').hide();
+                $("#pnlDateOfBirthMinimumAge").hide();
             }
 
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.CompanyEnabled)').is(':checked')) {
-                $('#pnlCustomerCompanyRequired').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.CompanyEnabled)").is(":checked")) {
+                $("#pnlCustomerCompanyRequired").show();
             } else {
-                $('#pnlCustomerCompanyRequired').hide();
+                $("#pnlCustomerCompanyRequired").hide();
             }
 
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.StreetAddressEnabled)').is(':checked')) {
-                $('#pnlCustomerStreetAddressRequired').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.StreetAddressEnabled)").is(":checked")) {
+                $("#pnlCustomerStreetAddressRequired").show();
             } else {
-                $('#pnlCustomerStreetAddressRequired').hide();
+                $("#pnlCustomerStreetAddressRequired").hide();
             }
 
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.StreetAddress2Enabled)').is(':checked')) {
-                $('#pnlCustomerStreetAddress2Required').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.StreetAddress2Enabled)").is(":checked")) {
+                $("#pnlCustomerStreetAddress2Required").show();
             } else {
-                $('#pnlCustomerStreetAddress2Required').hide();
+                $("#pnlCustomerStreetAddress2Required").hide();
             }
 
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.ZipPostalCodeEnabled)').is(':checked')) {
-                $('#pnlCustomerZipPostalCodeRequired').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.ZipPostalCodeEnabled)").is(":checked")) {
+                $("#pnlCustomerZipPostalCodeRequired").show();
             } else {
-                $('#pnlCustomerZipPostalCodeRequired').hide();
+                $("#pnlCustomerZipPostalCodeRequired").hide();
             }
 
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.CityEnabled)').is(':checked')) {
-                $('#pnlCustomerCityRequired').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.CityEnabled)").is(":checked")) {
+                $("#pnlCustomerCityRequired").show();
             } else {
-                $('#pnlCustomerCityRequired').hide();
+                $("#pnlCustomerCityRequired").hide();
             }
 
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.PhoneEnabled)').is(':checked')) {
-                $('#pnlCustomerPhoneRequired').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.PhoneEnabled)").is(":checked")) {
+                $("#pnlCustomerPhoneRequired").show();
             } else {
-                $('#pnlCustomerPhoneRequired').hide();
+                $("#pnlCustomerPhoneRequired").hide();
             }
 
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.FaxEnabled)').is(':checked')) {
-                $('#pnlCustomerFaxRequired').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.FaxEnabled)").is(":checked")) {
+                $("#pnlCustomerFaxRequired").show();
             } else {
-                $('#pnlCustomerFaxRequired').hide();
+                $("#pnlCustomerFaxRequired").hide();
             }
         }
 
         function toggleNewsletterEnabledField() {
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.NewsletterEnabled)').is(':checked')) {
-                $('#pnlCustomerNewsletterTickedByDefault').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.NewsletterEnabled)").is(":checked")) {
+                $("#pnlCustomerNewsletterTickedByDefault").show();
             } else {
-                $('#pnlCustomerNewsletterTickedByDefault').hide();
+                $("#pnlCustomerNewsletterTickedByDefault").hide();
             }
         }
 
         function toggleHideNewsletterBlock() {
-            if ($('#@Html.FieldIdFor(model => model.CustomerSettings.HideNewsletterBlock)').is(':checked')) {
-                $('#pnlNewsletterBlockAllowToUnsubscribe').hide();
-            }
-            else {
-                $('#pnlNewsletterBlockAllowToUnsubscribe').show();
+            if ($("#@Html.FieldIdFor(model => model.CustomerSettings.HideNewsletterBlock)").is(":checked")) {
+                $("#pnlNewsletterBlockAllowToUnsubscribe").hide();
+            } else {
+                $("#pnlNewsletterBlockAllowToUnsubscribe").show();
             }
         }
-        
+
     </script>
     <table class="adminContent">
-        <tr>
-            <td colspan="2">
-                <em>@T("Admin.Configuration.Settings.CustomerUser.CustomerFormFields.Description")</em>
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.GenderEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.GenderEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.GenderEnabled)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.DateOfBirthEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.DateOfBirthEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.DateOfBirthEnabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerDateOfBirthRequired">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.DateOfBirthRequired):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.DateOfBirthRequired)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.DateOfBirthRequired)
-            </td>
-        </tr>
-        <tr id="pnlDateOfBirthMinimumAge">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.DateOfBirthMinimumAge):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.DateOfBirthMinimumAge)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.DateOfBirthMinimumAge)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.CompanyEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.CompanyEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.CompanyEnabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerCompanyRequired">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.CompanyRequired):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.CompanyRequired)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.CompanyRequired)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.StreetAddressEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.StreetAddressEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.StreetAddressEnabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerStreetAddressRequired">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.StreetAddressRequired):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.StreetAddressRequired)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.StreetAddressRequired)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.StreetAddress2Enabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.StreetAddress2Enabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.StreetAddress2Enabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerStreetAddress2Required">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.StreetAddress2Required):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.StreetAddress2Required)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.StreetAddress2Required)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.ZipPostalCodeEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.ZipPostalCodeEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.ZipPostalCodeEnabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerZipPostalCodeRequired">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.ZipPostalCodeRequired):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.ZipPostalCodeRequired)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.ZipPostalCodeRequired)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.CityEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.CityEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.CityEnabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerCityRequired">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.CityRequired):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.CityRequired)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.CityRequired)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.CountryEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.CountryEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.CountryEnabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerCountryRequired">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.CountryRequired):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.CountryRequired)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.CountryRequired)
-            </td>
-        </tr>
-        <tr id="pnlCustomerStateProvinceEnabled">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.StateProvinceEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.StateProvinceEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.StateProvinceEnabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerStateProvinceRequired">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.StateProvinceRequired):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.StateProvinceRequired)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.StateProvinceRequired)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.PhoneEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.PhoneEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.PhoneEnabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerPhoneRequired">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.PhoneRequired):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.PhoneRequired)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.PhoneRequired)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.FaxEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.FaxEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.FaxEnabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerFaxRequired">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.FaxRequired):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.FaxRequired)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.FaxRequired)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.AcceptPrivacyPolicyEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.AcceptPrivacyPolicyEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.AcceptPrivacyPolicyEnabled)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.NewsletterEnabled):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.NewsletterEnabled)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.NewsletterEnabled)
-            </td>
-        </tr>
-        <tr id="pnlCustomerNewsletterTickedByDefault">
-            <td class="adminTitle">
-                @Html.NopLabelFor(model => model.CustomerSettings.NewsletterTickedByDefault):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.CustomerSettings.NewsletterTickedByDefault)
-                @Html.ValidationMessageFor(model => model.CustomerSettings.NewsletterTickedByDefault)
-            </td>
-        </tr>
+    <tr>
+        <td colspan="2">
+            <em>@T("Admin.Configuration.Settings.CustomerUser.CustomerFormFields.Description")</em>
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.GenderEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.GenderEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.GenderEnabled)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.DateOfBirthEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.DateOfBirthEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.DateOfBirthEnabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerDateOfBirthRequired">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.DateOfBirthRequired):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.DateOfBirthRequired)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.DateOfBirthRequired)
+        </td>
+    </tr>
+    <tr id="pnlDateOfBirthMinimumAge">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.DateOfBirthMinimumAge):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.DateOfBirthMinimumAge)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.DateOfBirthMinimumAge)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.CompanyEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.CompanyEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.CompanyEnabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerCompanyRequired">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.CompanyRequired):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.CompanyRequired)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.CompanyRequired)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.StreetAddressEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.StreetAddressEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.StreetAddressEnabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerStreetAddressRequired">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.StreetAddressRequired):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.StreetAddressRequired)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.StreetAddressRequired)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.StreetAddress2Enabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.StreetAddress2Enabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.StreetAddress2Enabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerStreetAddress2Required">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.StreetAddress2Required):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.StreetAddress2Required)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.StreetAddress2Required)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.ZipPostalCodeEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.ZipPostalCodeEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.ZipPostalCodeEnabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerZipPostalCodeRequired">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.ZipPostalCodeRequired):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.ZipPostalCodeRequired)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.ZipPostalCodeRequired)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.CityEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.CityEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.CityEnabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerCityRequired">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.CityRequired):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.CityRequired)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.CityRequired)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.CountryEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.CountryEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.CountryEnabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerCountryRequired">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.CountryRequired):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.CountryRequired)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.CountryRequired)
+        </td>
+    </tr>
+    <tr id="pnlCustomerStateProvinceEnabled">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.StateProvinceEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.StateProvinceEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.StateProvinceEnabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerStateProvinceRequired">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.StateProvinceRequired):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.StateProvinceRequired)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.StateProvinceRequired)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.PhoneEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.PhoneEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.PhoneEnabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerPhoneRequired">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.PhoneRequired):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.PhoneRequired)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.PhoneRequired)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.FaxEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.FaxEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.FaxEnabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerFaxRequired">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.FaxRequired):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.FaxRequired)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.FaxRequired)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.AcceptPrivacyPolicyEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.AcceptPrivacyPolicyEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.AcceptPrivacyPolicyEnabled)
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.NewsletterEnabled):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.NewsletterEnabled)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.NewsletterEnabled)
+        </td>
+    </tr>
+    <tr id="pnlCustomerNewsletterTickedByDefault">
+        <td class="adminTitle">
+            @Html.NopLabelFor(model => model.CustomerSettings.NewsletterTickedByDefault):
+        </td>
+        <td class="adminData">
+            @Html.EditorFor(model => model.CustomerSettings.NewsletterTickedByDefault)
+            @Html.ValidationMessageFor(model => model.CustomerSettings.NewsletterTickedByDefault)
+        </td>
+    </tr>
     </table>
     //render custom customer attributes
     @Html.Action("ListBlock", "CustomerAttribute")

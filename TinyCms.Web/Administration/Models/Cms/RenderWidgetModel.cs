@@ -3,7 +3,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Cms
 {
-    public partial class RenderWidgetModel : BaseNopModel
+    public class RenderWidgetModel : BaseNopModel
     {
         public string ActionName { get; set; }
         public string ControllerName { get; set; }

@@ -3,7 +3,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Common
 {
-    public partial class SearchTermReportLineModel : BaseNopModel
+    public class SearchTermReportLineModel : BaseNopModel
     {
         [NopResourceDisplayName("Admin.SearchTermReport.Keyword")]
         public string Keyword { get; set; }

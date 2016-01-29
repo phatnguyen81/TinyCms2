@@ -8,7 +8,7 @@ namespace TinyCms.Core.Domain.Customers
         #region Customer role
 
         /// <summary>
-        /// Gets a value indicating whether customer is in a certain customer role
+        ///     Gets a value indicating whether customer is in a certain customer role
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="customerRoleSystemName">Customer role system name</param>
@@ -24,12 +24,13 @@ namespace TinyCms.Core.Domain.Customers
                 throw new ArgumentNullException("customerRoleSystemName");
 
             var result = customer.CustomerRoles
-                .FirstOrDefault(cr => (!onlyActiveCustomerRoles || cr.Active) && (cr.SystemName == customerRoleSystemName)) != null;
+                .FirstOrDefault(
+                    cr => (!onlyActiveCustomerRoles || cr.Active) && (cr.SystemName == customerRoleSystemName)) != null;
             return result;
         }
 
         /// <summary>
-        /// Gets a value indicating whether customer a search engine
+        ///     Gets a value indicating whether customer a search engine
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <returns>Result</returns>
@@ -41,12 +42,13 @@ namespace TinyCms.Core.Domain.Customers
             if (!customer.IsSystemAccount || String.IsNullOrEmpty(customer.SystemName))
                 return false;
 
-            var result = customer.SystemName.Equals(SystemCustomerNames.SearchEngine, StringComparison.InvariantCultureIgnoreCase);
+            var result = customer.SystemName.Equals(SystemCustomerNames.SearchEngine,
+                StringComparison.InvariantCultureIgnoreCase);
             return result;
         }
 
         /// <summary>
-        /// Gets a value indicating whether the customer is a built-in record for background tasks
+        ///     Gets a value indicating whether the customer is a built-in record for background tasks
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <returns>Result</returns>
@@ -58,12 +60,13 @@ namespace TinyCms.Core.Domain.Customers
             if (!customer.IsSystemAccount || String.IsNullOrEmpty(customer.SystemName))
                 return false;
 
-            var result = customer.SystemName.Equals(SystemCustomerNames.BackgroundTask, StringComparison.InvariantCultureIgnoreCase);
+            var result = customer.SystemName.Equals(SystemCustomerNames.BackgroundTask,
+                StringComparison.InvariantCultureIgnoreCase);
             return result;
         }
 
         /// <summary>
-        /// Gets a value indicating whether customer is administrator
+        ///     Gets a value indicating whether customer is administrator
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="onlyActiveCustomerRoles">A value indicating whether we should look only in active customer roles</param>
@@ -74,7 +77,7 @@ namespace TinyCms.Core.Domain.Customers
         }
 
         /// <summary>
-        /// Gets a value indicating whether customer is a forum moderator
+        ///     Gets a value indicating whether customer is a forum moderator
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="onlyActiveCustomerRoles">A value indicating whether we should look only in active customer roles</param>
@@ -85,7 +88,7 @@ namespace TinyCms.Core.Domain.Customers
         }
 
         /// <summary>
-        /// Gets a value indicating whether customer is registered
+        ///     Gets a value indicating whether customer is registered
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="onlyActiveCustomerRoles">A value indicating whether we should look only in active customer roles</param>
@@ -96,7 +99,7 @@ namespace TinyCms.Core.Domain.Customers
         }
 
         /// <summary>
-        /// Gets a value indicating whether customer is guest
+        ///     Gets a value indicating whether customer is guest
         /// </summary>
         /// <param name="customer">Customer</param>
         /// <param name="onlyActiveCustomerRoles">A value indicating whether we should look only in active customer roles</param>
@@ -106,7 +109,6 @@ namespace TinyCms.Core.Domain.Customers
             return IsInCustomerRole(customer, SystemCustomerRoleNames.Guests, onlyActiveCustomerRoles);
         }
 
-      #endregion
-
+        #endregion
     }
 }

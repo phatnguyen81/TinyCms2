@@ -2,14 +2,14 @@ using TinyCms.Core.Domain.Customers;
 
 namespace TinyCms.Data.Mapping.Customers
 {
-    public partial class CustomerRoleMap : NopEntityTypeConfiguration<CustomerRole>
+    public class CustomerRoleMap : NopEntityTypeConfiguration<CustomerRole>
     {
         public CustomerRoleMap()
         {
-            this.ToTable("CustomerRole");
-            this.HasKey(cr => cr.Id);
-            this.Property(cr => cr.Name).IsRequired().HasMaxLength(255);
-            this.Property(cr => cr.SystemName).HasMaxLength(255);
+            ToTable("CustomerRole");
+            HasKey(cr => cr.Id);
+            Property(cr => cr.Name).IsRequired().HasMaxLength(255);
+            Property(cr => cr.SystemName).HasMaxLength(255);
         }
     }
 }

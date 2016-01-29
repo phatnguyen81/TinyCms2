@@ -2,17 +2,16 @@ using TinyCms.Core.Domain.Localization;
 
 namespace TinyCms.Data.Mapping.Localization
 {
-    public partial class LanguageMap : NopEntityTypeConfiguration<Language>
+    public class LanguageMap : NopEntityTypeConfiguration<Language>
     {
         public LanguageMap()
         {
-            this.ToTable("Language");
-            this.HasKey(l => l.Id);
-            this.Property(l => l.Name).IsRequired().HasMaxLength(100);
-            this.Property(l => l.LanguageCulture).IsRequired().HasMaxLength(20);
-            this.Property(l => l.UniqueSeoCode).HasMaxLength(2);
-            this.Property(l => l.FlagImageFileName).HasMaxLength(50);
-        
+            ToTable("Language");
+            HasKey(l => l.Id);
+            Property(l => l.Name).IsRequired().HasMaxLength(100);
+            Property(l => l.LanguageCulture).IsRequired().HasMaxLength(20);
+            Property(l => l.UniqueSeoCode).HasMaxLength(2);
+            Property(l => l.FlagImageFileName).HasMaxLength(50);
         }
     }
 }

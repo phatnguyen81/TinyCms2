@@ -1,12 +1,12 @@
 ﻿namespace TinyCms.Web.Framework.Themes
 {
     /// <summary>
-    /// Work context
+    ///     Work context
     /// </summary>
     public interface IThemeContext
     {
         /// <summary>
-        /// Get or set current theme system name
+        ///     Get or set current theme system name
         /// </summary>
         string WorkingThemeName { get; set; }
     }

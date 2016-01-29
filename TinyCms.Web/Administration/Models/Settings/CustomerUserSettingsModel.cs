@@ -6,7 +6,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Settings
 {
-    public partial class CustomerUserSettingsModel : BaseNopModel
+    public class CustomerUserSettingsModel : BaseNopModel
     {
         public CustomerUserSettingsModel()
         {
@@ -14,13 +14,14 @@ namespace TinyCms.Admin.Models.Settings
             DateTimeSettings = new DateTimeSettingsModel();
             ExternalAuthenticationSettings = new ExternalAuthenticationSettingsModel();
         }
+
         public CustomerSettingsModel CustomerSettings { get; set; }
         public DateTimeSettingsModel DateTimeSettings { get; set; }
         public ExternalAuthenticationSettingsModel ExternalAuthenticationSettings { get; set; }
 
         #region Nested classes
 
-        public partial class CustomerSettingsModel : BaseNopModel
+        public class CustomerSettingsModel : BaseNopModel
         {
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.UsernamesEnabled")]
             public bool UsernamesEnabled { get; set; }
@@ -85,62 +86,70 @@ namespace TinyCms.Admin.Models.Settings
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.StoreLastVisitedPage")]
             public bool StoreLastVisitedPage { get; set; }
 
-
-
-
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.GenderEnabled")]
             public bool GenderEnabled { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.DateOfBirthEnabled")]
             public bool DateOfBirthEnabled { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.DateOfBirthRequired")]
             public bool DateOfBirthRequired { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.DateOfBirthMinimumAge")]
             [UIHint("Int32Nullable")]
             public int? DateOfBirthMinimumAge { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.CompanyEnabled")]
             public bool CompanyEnabled { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.CompanyRequired")]
             public bool CompanyRequired { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.StreetAddressEnabled")]
             public bool StreetAddressEnabled { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.StreetAddressRequired")]
             public bool StreetAddressRequired { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.StreetAddress2Enabled")]
             public bool StreetAddress2Enabled { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.StreetAddress2Required")]
             public bool StreetAddress2Required { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.ZipPostalCodeEnabled")]
             public bool ZipPostalCodeEnabled { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.ZipPostalCodeRequired")]
             public bool ZipPostalCodeRequired { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.CityEnabled")]
             public bool CityEnabled { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.CityRequired")]
             public bool CityRequired { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.CountryEnabled")]
             public bool CountryEnabled { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.CountryRequired")]
             public bool CountryRequired { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.StateProvinceEnabled")]
             public bool StateProvinceEnabled { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.StateProvinceRequired")]
             public bool StateProvinceRequired { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.PhoneEnabled")]
             public bool PhoneEnabled { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.PhoneRequired")]
             public bool PhoneRequired { get; set; }
 
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.FaxEnabled")]
             public bool FaxEnabled { get; set; }
+
             [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.FaxRequired")]
             public bool FaxRequired { get; set; }
 
@@ -148,7 +157,7 @@ namespace TinyCms.Admin.Models.Settings
             public bool AcceptPrivacyPolicyEnabled { get; set; }
         }
 
-        public partial class DateTimeSettingsModel : BaseNopModel
+        public class DateTimeSettingsModel : BaseNopModel
         {
             public DateTimeSettingsModel()
             {
@@ -165,11 +174,13 @@ namespace TinyCms.Admin.Models.Settings
             public IList<SelectListItem> AvailableTimeZones { get; set; }
         }
 
-        public partial class ExternalAuthenticationSettingsModel : BaseNopModel
+        public class ExternalAuthenticationSettingsModel : BaseNopModel
         {
-            [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.ExternalAuthenticationAutoRegisterEnabled")]
+            [NopResourceDisplayName(
+                "Admin.Configuration.Settings.CustomerUser.ExternalAuthenticationAutoRegisterEnabled")]
             public bool AutoRegisterEnabled { get; set; }
         }
+
         #endregion
     }
 }

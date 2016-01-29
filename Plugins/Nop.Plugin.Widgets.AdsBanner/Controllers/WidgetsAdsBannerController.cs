@@ -22,16 +22,15 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
 {
     public class WidgetsAdsBannerController : BasePluginController
     {
-
-        private readonly IWorkContext _workContext;
+        private readonly IAdsBannerService _adsBannerService;
+        private readonly ICacheManager _cacheManager;
+        private readonly IDateTimeHelper _dateTimeHelper;
+        private readonly ILocalizationService _localizationService;
+        private readonly IPermissionService _permissionService;
         private readonly IPictureService _pictureService;
         private readonly ISettingService _settingService;
-        private readonly ICacheManager _cacheManager;
-        private readonly ILocalizationService _localizationService;
-        private readonly IAdsBannerService _adsBannerService;
         private readonly IWidgetService _widgetService;
-        private readonly IDateTimeHelper _dateTimeHelper;
-        private readonly IPermissionService _permissionService;
+        private readonly IWorkContext _workContext;
 
         public WidgetsAdsBannerController(IWorkContext workContext,
             IPictureService pictureService,
@@ -43,11 +42,11 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
             IDateTimeHelper dateTimeHelper,
             IPermissionService permissionService)
         {
-            this._workContext = workContext;
-            this._pictureService = pictureService;
-            this._settingService = settingService;
-            this._cacheManager = cacheManager;
-            this._localizationService = localizationService;
+            _workContext = workContext;
+            _pictureService = pictureService;
+            _settingService = settingService;
+            _cacheManager = cacheManager;
+            _localizationService = localizationService;
             _adsBannerService = adsBannerService;
             _widgetService = widgetService;
             _dateTimeHelper = dateTimeHelper;
@@ -56,7 +55,7 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
 
         protected string GetPictureUrl(int pictureId)
         {
-            string cacheKey = string.Format(ModelCacheEventConsumer.PICTURE_URL_MODEL_KEY, pictureId);
+            var cacheKey = string.Format(ModelCacheEventConsumer.PICTURE_URL_MODEL_KEY, pictureId);
             return _cacheManager.Get(cacheKey, () =>
             {
                 var url = _pictureService.GetPictureUrl(pictureId, showDefaultPicture: false);
@@ -81,7 +80,7 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageWidgets))
                 return AccessDeniedView();
-            var adsbanners = _adsBannerService.GetAllAdsBanners(model.SearchAdsBannerName,null,
+            var adsbanners = _adsBannerService.GetAllAdsBanners(model.SearchAdsBannerName, null,
                 command.Page - 1, command.PageSize, true);
             var gridModel = new DataSourceResult
             {
@@ -99,15 +98,15 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
             return Json(gridModel);
         }
 
-
         public void PrepareAdsBannerModel(AdsBannerModel model)
         {
-            model.AvailableWidgetZones = _widgetService.LoaddAllWidgetZones().Select(q=>new SelectListItem
+            model.AvailableWidgetZones = _widgetService.LoaddAllWidgetZones().Select(q => new SelectListItem
             {
                 Text = q.Name,
                 Value = q.Id.ToString()
             }).ToList();
         }
+
         [NonAction]
         protected virtual void UpdatePictureSeoNames(AdsBannerModel adsBanner)
         {
@@ -115,6 +114,7 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
             if (picture != null)
                 _pictureService.SetSeoFilename(picture.Id, _pictureService.GetPictureSeName(adsBanner.Name));
         }
+
         public ActionResult Create()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageWidgets))
@@ -142,7 +142,10 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
                 UpdatePictureSeoNames(model);
 
                 SuccessNotification(_localizationService.GetResource("Plugins.Widgets.AdsBanner.Added"));
-                return continueEditing ? RedirectToAction("Edit", new { id = adsbanner.Id }) : RedirectToAction("ConfigureWidget", "Widget", new { area = "Admin", systemName = "Widgets.AdsBanner" });
+                return continueEditing
+                    ? RedirectToAction("Edit", new {id = adsbanner.Id})
+                    : RedirectToAction("ConfigureWidget", "Widget",
+                        new {area = "Admin", systemName = "Widgets.AdsBanner"});
             }
 
 
@@ -160,8 +163,10 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
                     new {area = "Admin", systemName = "Widgets.AdsBanner"});
 
             var model = ads.ToModel();
-            if (ads.FromDateUtc != null) model.FromDate = _dateTimeHelper.ConvertToUserTime(ads.FromDateUtc.Value, DateTimeKind.Utc);
-            if (ads.ToDateUtc != null) model.ToDate = _dateTimeHelper.ConvertToUserTime(ads.ToDateUtc.Value, DateTimeKind.Utc);
+            if (ads.FromDateUtc != null)
+                model.FromDate = _dateTimeHelper.ConvertToUserTime(ads.FromDateUtc.Value, DateTimeKind.Utc);
+            if (ads.ToDateUtc != null)
+                model.ToDate = _dateTimeHelper.ConvertToUserTime(ads.ToDateUtc.Value, DateTimeKind.Utc);
             PrepareAdsBannerModel(model);
 
             return View("~/Plugins/Widgets.AdsBanner/Views/WidgetsAdsBanner/Edit.cshtml", model);
@@ -175,13 +180,12 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
             var adsbanner = _adsBannerService.GetById(model.Id);
             if (adsbanner == null)
                 return RedirectToAction("ConfigureWidget", "Widget",
-                    new { area = "Admin", systemName = "Widgets.AdsBanner" });
+                    new {area = "Admin", systemName = "Widgets.AdsBanner"});
             if (ModelState.IsValid)
             {
-
                 adsbanner = model.ToEntity(adsbanner);
 
-                int prevPictureId = adsbanner.PictureId;
+                var prevPictureId = adsbanner.PictureId;
 
                 _adsBannerService.UpdateAdsBanner(adsbanner);
                 //delete an old picture (if deleted or updated)
@@ -192,7 +196,10 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
                         _pictureService.DeletePicture(prevPicture);
                 }
                 SuccessNotification(_localizationService.GetResource("Plugins.Widgets.AdsBanner.Updated"));
-                return continueEditing ? RedirectToAction("Edit", new { id = adsbanner.Id }) : RedirectToAction("ConfigureWidget", "Widget", new { area = "Admin", systemName = "Widgets.AdsBanner" });
+                return continueEditing
+                    ? RedirectToAction("Edit", new {id = adsbanner.Id})
+                    : RedirectToAction("ConfigureWidget", "Widget",
+                        new {area = "Admin", systemName = "Widgets.AdsBanner"});
             }
 
             PrepareAdsBannerModel(model);
@@ -208,19 +215,19 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
             var adsbanner = _adsBannerService.GetById(id);
             if (adsbanner == null)
                 return RedirectToAction("ConfigureWidget", "Widget",
-                    new { area = "Admin", systemName = "Widgets.AdsBanner" });
+                    new {area = "Admin", systemName = "Widgets.AdsBanner"});
 
-            int pictureId = adsbanner.PictureId;
+            var pictureId = adsbanner.PictureId;
 
             _adsBannerService.DeleteAdsBanner(adsbanner);
 
             _pictureService.DeletePicture(_pictureService.GetPictureById(pictureId));
 
             SuccessNotification(_localizationService.GetResource("Plugins.Widgets.AdsBanner.Deleted"));
-            return RedirectToAction("ConfigureWidget", "Widget", new { area = "Admin", systemName = "Widgets.AdsBanner" });
+            return RedirectToAction("ConfigureWidget", "Widget", new {area = "Admin", systemName = "Widgets.AdsBanner"});
         }
 
-        public List<ShowAdsBannerModel> PrepareShowAdsBannerModel(IList<AdsBannerRecord> adsBanners )
+        public List<ShowAdsBannerModel> PrepareShowAdsBannerModel(IList<AdsBannerRecord> adsBanners)
         {
             return adsBanners.Select(q =>
             {
@@ -237,11 +244,15 @@ namespace Nop.Plugin.Widgets.AdsBanner.Controllers
         [ChildActionOnly]
         public ActionResult PublicInfo(string widgetZone, object additionalData = null)
         {
-
             var wz = _widgetService.GetAllWidgetZones().FirstOrDefault(q => q.SystemName == widgetZone);
             var adsbanner = _adsBannerService.GetAllAdsBannersActiveFromNow(widgetZoneId: wz.Id).ToList();
             var now = DateTime.UtcNow;
-            var model = new PublicInfoModel { AdsBanners = PrepareShowAdsBannerModel(adsbanner.Where(q => q.FromDateUtc == null || q.FromDateUtc <= now).ToList()) };
+            var model = new PublicInfoModel
+            {
+                AdsBanners =
+                    PrepareShowAdsBannerModel(
+                        adsbanner.Where(q => q.FromDateUtc == null || q.FromDateUtc <= now).ToList())
+            };
 
 
             return View("~/Plugins/Widgets.AdsBanner/Views/WidgetsAdsBanner/PublicInfo.cshtml", model);

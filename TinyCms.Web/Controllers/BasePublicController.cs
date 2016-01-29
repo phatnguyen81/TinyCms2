@@ -13,7 +13,7 @@ namespace TinyCms.Web.Controllers
     [LanguageSeoCode]
     [NopHttpsRequirement(SslRequirement.NoMatter)]
     [WwwRequirement]
-    public abstract partial class BasePublicController : BaseController
+    public abstract class BasePublicController : BaseController
     {
         protected virtual ActionResult InvokeHttp404()
         {
@@ -24,10 +24,9 @@ namespace TinyCms.Web.Controllers
             routeData.Values.Add("controller", "Common");
             routeData.Values.Add("action", "PageNotFound");
 
-            errorController.Execute(new RequestContext(this.HttpContext, routeData));
+            errorController.Execute(new RequestContext(HttpContext, routeData));
 
             return new EmptyResult();
         }
-
     }
 }

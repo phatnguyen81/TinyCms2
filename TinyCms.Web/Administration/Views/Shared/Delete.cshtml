@@ -1,5 +1,5 @@
 ﻿@model TinyCms.Web.Framework.Mvc.DeleteConfirmationModel
-@using (Html.BeginForm(Model.ActionName, Model.ControllerName, new { id = Model.Id }))
+@using (Html.BeginForm(Model.ActionName, Model.ControllerName, new {id = Model.Id}))
 {
     @Html.AntiForgeryToken()
     <div>
@@ -7,8 +7,8 @@
             @T("Admin.Common.DeleteConfirmation")
         </p>
         <div class="form-actions">
-            <span id="" class="k-button" onclick="$('#@Model.WindowId').data('kendoWindow').close();">@T("Admin.Common.NoCancel")</span>
-            <input type="submit" class="k-button" value="@T("Admin.Common.Delete")" />
+            <span id="" class="k-button" onclick=" $('#@Model.WindowId').data('kendoWindow').close(); ">@T("Admin.Common.NoCancel")</span>
+            <input type="submit" class="k-button" value="@T("Admin.Common.Delete")"/>
         </div>
     </div>
 }

@@ -22,7 +22,7 @@ namespace TinyCms.Data
             {
                 if (throwExceptionIfNonExists)
                     throw new ArgumentException(string.Format("Specified file doesn't exist - {0}", filePath));
-                
+
                 return new string[0];
             }
 
@@ -52,7 +52,7 @@ namespace TinyCms.Data
                 {
                     if (sb.Length > 0)
                         return sb.ToString();
-                    
+
                     return null;
                 }
 
@@ -70,18 +70,18 @@ namespace TinyCms.Data
         #region Methods
 
         /// <summary>
-        /// Initialize connection factory
+        ///     Initialize connection factory
         /// </summary>
         public virtual void InitConnectionFactory()
         {
             var connectionFactory = new SqlConnectionFactory();
             //TODO fix compilation warning (below)
-            #pragma warning disable 0618
+#pragma warning disable 0618
             Database.DefaultConnectionFactory = connectionFactory;
         }
 
         /// <summary>
-        /// Initialize database
+        ///     Initialize database
         /// </summary>
         public virtual void InitDatabase()
         {
@@ -90,27 +90,29 @@ namespace TinyCms.Data
         }
 
         /// <summary>
-        /// Set database initializer
+        ///     Set database initializer
         /// </summary>
         public virtual void SetDatabaseInitializer()
         {
             //pass some table names to ensure that we have nopCommerce 2.X installed
-            var tablesToValidate = new[] { "Customer", "Discount", "Order", "Product", "ShoppingCartItem" };
+            var tablesToValidate = new[] {"Customer", "Discount", "Order", "Product", "ShoppingCartItem"};
 
             //custom commands (stored proedures, indexes)
 
             var customCommands = new List<string>();
             //use webHelper.MapPath instead of HostingEnvironment.MapPath which is not available in unit tests
-            customCommands.AddRange(ParseCommands(HostingEnvironment.MapPath("~/App_Data/Install/SqlServer.Indexes.sql"), false));
+            customCommands.AddRange(ParseCommands(
+                HostingEnvironment.MapPath("~/App_Data/Install/SqlServer.Indexes.sql"), false));
             //use webHelper.MapPath instead of HostingEnvironment.MapPath which is not available in unit tests
-            customCommands.AddRange(ParseCommands(HostingEnvironment.MapPath("~/App_Data/Install/SqlServer.StoredProcedures.sql"), false));
+            customCommands.AddRange(
+                ParseCommands(HostingEnvironment.MapPath("~/App_Data/Install/SqlServer.StoredProcedures.sql"), false));
 
             var initializer = new CreateTablesIfNotExist<NopObjectContext>(tablesToValidate, customCommands.ToArray());
             Database.SetInitializer(initializer);
         }
 
         /// <summary>
-        /// A value indicating whether this data provider supports stored procedures
+        ///     A value indicating whether this data provider supports stored procedures
         /// </summary>
         public virtual bool StoredProceduredSupported
         {
@@ -118,7 +120,7 @@ namespace TinyCms.Data
         }
 
         /// <summary>
-        /// Gets a support database parameter object (used by stored procedures)
+        ///     Gets a support database parameter object (used by stored procedures)
         /// </summary>
         /// <returns>Parameter</returns>
         public virtual DbParameter GetParameter()

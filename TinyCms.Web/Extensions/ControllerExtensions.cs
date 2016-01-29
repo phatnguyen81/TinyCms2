@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
@@ -23,8 +21,6 @@ namespace TinyCms.Web.Extensions
     //here we have some methods shared between controllers
     public static class ControllerExtensions
     {
-      
-
         public static IEnumerable<PostOverviewModel> PreparePostOverviewModels(this Controller controller,
             IWorkContext workContext,
             ICategoryService categoryService,
@@ -62,7 +58,7 @@ namespace TinyCms.Web.Extensions
                     CreatedOn = _dateTimeHelper.ConvertToUserTime(post.CreatedOnUtc),
                     Publish = post.Published
                 };
-               
+
 
                 //picture
                 if (preparePictureModel)
@@ -70,9 +66,13 @@ namespace TinyCms.Web.Extensions
                     #region Prepare post picture
 
                     //If a size has been set in the view, we use it in priority
-                    int pictureSize = postThumbPictureSize.HasValue ? postThumbPictureSize.Value : mediaSettings.PostThumbPictureSize;
+                    var pictureSize = postThumbPictureSize.HasValue
+                        ? postThumbPictureSize.Value
+                        : mediaSettings.PostThumbPictureSize;
                     //prepare picture model
-                    var defaultPostPictureCacheKey = string.Format(ModelCacheEventConsumer.PRODUCT_DEFAULTPICTURE_MODEL_KEY, post.Id, pictureSize, true, workContext.WorkingLanguage.Id, webHelper.IsCurrentConnectionSecured());
+                    var defaultPostPictureCacheKey =
+                        string.Format(ModelCacheEventConsumer.PRODUCT_DEFAULTPICTURE_MODEL_KEY, post.Id, pictureSize,
+                            true, workContext.WorkingLanguage.Id, webHelper.IsCurrentConnectionSecured());
                     model.DefaultPictureModel = cacheManager.Get(defaultPostPictureCacheKey, () =>
                     {
                         var picture = pictureService.GetPicturesByPostId(post.Id, 1).FirstOrDefault();
@@ -82,21 +82,21 @@ namespace TinyCms.Web.Extensions
                             FullSizeImageUrl = pictureService.GetPictureUrl(picture)
                         };
                         //"title" attribute
-                        pictureModel.Title = (picture != null && !string.IsNullOrEmpty(picture.TitleAttribute)) ?
-                            picture.TitleAttribute :
-                            string.Format(localizationService.GetResource("Media.Post.ImageLinkTitleFormat"), model.Name);
+                        pictureModel.Title = (picture != null && !string.IsNullOrEmpty(picture.TitleAttribute))
+                            ? picture.TitleAttribute
+                            : string.Format(localizationService.GetResource("Media.Post.ImageLinkTitleFormat"), model.Name);
                         //"alt" attribute
-                        pictureModel.AlternateText = (picture != null && !string.IsNullOrEmpty(picture.AltAttribute)) ?
-                            picture.AltAttribute :
-                            string.Format(localizationService.GetResource("Media.Post.ImageAlternateTextFormat"), model.Name);
-                        
+                        pictureModel.AlternateText = (picture != null && !string.IsNullOrEmpty(picture.AltAttribute))
+                            ? picture.AltAttribute
+                            : string.Format(localizationService.GetResource("Media.Post.ImageAlternateTextFormat"),
+                                model.Name);
+
                         return pictureModel;
                     });
 
                     #endregion
                 }
 
-            
 
                 models.Add(model);
             }

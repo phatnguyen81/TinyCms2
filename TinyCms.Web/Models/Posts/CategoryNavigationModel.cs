@@ -3,7 +3,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Web.Models.Posts
 {
-    public partial class CategoryNavigationModel : BaseNopModel
+    public class CategoryNavigationModel : BaseNopModel
     {
         public CategoryNavigationModel()
         {

@@ -11,28 +11,64 @@ using TinyCms.Core.Domain.Localization;
 namespace TinyCms.Services.Localization
 {
     /// <summary>
-    /// Provides information about localizable entities
+    ///     Provides information about localizable entities
     /// </summary>
-    public partial class LocalizedEntityService : ILocalizedEntityService
+    public class LocalizedEntityService : ILocalizedEntityService
     {
+        #region Ctor
+
+        /// <summary>
+        ///     Ctor
+        /// </summary>
+        /// <param name="cacheManager">Cache manager</param>
+        /// <param name="localizedPropertyRepository">Localized property repository</param>
+        /// <param name="localizationSettings">Localization settings</param>
+        public LocalizedEntityService(ICacheManager cacheManager,
+            IRepository<LocalizedProperty> localizedPropertyRepository,
+            LocalizationSettings localizationSettings)
+        {
+            _cacheManager = cacheManager;
+            _localizedPropertyRepository = localizedPropertyRepository;
+            _localizationSettings = localizationSettings;
+        }
+
+        #endregion
+
+        #region Nested classes
+
+        [Serializable]
+        public class LocalizedPropertyForCaching
+        {
+            public int Id { get; set; }
+            public int EntityId { get; set; }
+            public int LanguageId { get; set; }
+            public string LocaleKeyGroup { get; set; }
+            public string LocaleKey { get; set; }
+            public string LocaleValue { get; set; }
+        }
+
+        #endregion
+
         #region Constants
 
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         /// <remarks>
-        /// {0} : language ID
-        /// {1} : entity ID
-        /// {2} : locale key group
-        /// {3} : locale key
+        ///     {0} : language ID
+        ///     {1} : entity ID
+        ///     {2} : locale key group
+        ///     {3} : locale key
         /// </remarks>
         private const string LOCALIZEDPROPERTY_KEY = "Nop.localizedproperty.value-{0}-{1}-{2}-{3}";
+
         /// <summary>
-        /// Key for caching
+        ///     Key for caching
         /// </summary>
         private const string LOCALIZEDPROPERTY_ALL_KEY = "Nop.localizedproperty.all";
+
         /// <summary>
-        /// Key pattern to clear cache
+        ///     Key pattern to clear cache
         /// </summary>
         private const string LOCALIZEDPROPERTY_PATTERN_KEY = "Nop.localizedproperty.";
 
@@ -46,29 +82,10 @@ namespace TinyCms.Services.Localization
 
         #endregion
 
-        #region Ctor
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="cacheManager">Cache manager</param>
-        /// <param name="localizedPropertyRepository">Localized property repository</param>
-        /// <param name="localizationSettings">Localization settings</param>
-        public LocalizedEntityService(ICacheManager cacheManager,
-            IRepository<LocalizedProperty> localizedPropertyRepository,
-            LocalizationSettings localizationSettings)
-        {
-            this._cacheManager = cacheManager;
-            this._localizedPropertyRepository = localizedPropertyRepository;
-            this._localizationSettings = localizationSettings;
-        }
-
-        #endregion
-
         #region Utilities
 
         /// <summary>
-        /// Gets localized properties
+        ///     Gets localized properties
         /// </summary>
         /// <param name="entityId">Entity identifier</param>
         /// <param name="localeKeyGroup">Locale key group</param>
@@ -79,26 +96,26 @@ namespace TinyCms.Services.Localization
                 return new List<LocalizedProperty>();
 
             var query = from lp in _localizedPropertyRepository.Table
-                        orderby lp.Id
-                        where lp.EntityId == entityId &&
-                              lp.LocaleKeyGroup == localeKeyGroup
-                        select lp;
+                orderby lp.Id
+                where lp.EntityId == entityId &&
+                      lp.LocaleKeyGroup == localeKeyGroup
+                select lp;
             var props = query.ToList();
             return props;
         }
 
         /// <summary>
-        /// Gets all cached localized properties
+        ///     Gets all cached localized properties
         /// </summary>
         /// <returns>Cached localized properties</returns>
         protected virtual IList<LocalizedPropertyForCaching> GetAllLocalizedPropertiesCached()
         {
             //cache
-            string key = string.Format(LOCALIZEDPROPERTY_ALL_KEY);
+            var key = string.Format(LOCALIZEDPROPERTY_ALL_KEY);
             return _cacheManager.Get(key, () =>
             {
                 var query = from lp in _localizedPropertyRepository.Table
-                            select lp;
+                    select lp;
                 var localizedProperties = query.ToList();
                 var list = new List<LocalizedPropertyForCaching>();
                 foreach (var lp in localizedProperties)
@@ -120,25 +137,10 @@ namespace TinyCms.Services.Localization
 
         #endregion
 
-        #region Nested classes
-
-        [Serializable]
-        public class LocalizedPropertyForCaching
-        {
-            public int Id { get; set; }
-            public int EntityId { get; set; }
-            public int LanguageId { get; set; }
-            public string LocaleKeyGroup { get; set; }
-            public string LocaleKey { get; set; }
-            public string LocaleValue { get; set; }
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Deletes a localized property
+        ///     Deletes a localized property
         /// </summary>
         /// <param name="localizedProperty">Localized property</param>
         public virtual void DeleteLocalizedProperty(LocalizedProperty localizedProperty)
@@ -153,7 +155,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Gets a localized property
+        ///     Gets a localized property
         /// </summary>
         /// <param name="localizedPropertyId">Localized property identifier</param>
         /// <returns>Localized property</returns>
@@ -166,7 +168,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Find localized value
+        ///     Find localized value
         /// </summary>
         /// <param name="languageId">Language identifier</param>
         /// <param name="entityId">Entity identifier</param>
@@ -177,38 +179,37 @@ namespace TinyCms.Services.Localization
         {
             if (_localizationSettings.LoadAllLocalizedPropertiesOnStartup)
             {
-                string key = string.Format(LOCALIZEDPROPERTY_KEY, languageId, entityId, localeKeyGroup, localeKey);
+                var key = string.Format(LOCALIZEDPROPERTY_KEY, languageId, entityId, localeKeyGroup, localeKey);
                 return _cacheManager.Get(key, () =>
                 {
                     //load all records (we know they are cached)
                     var source = GetAllLocalizedPropertiesCached();
                     var query = from lp in source
-                                where lp.LanguageId == languageId &&
-                                lp.EntityId == entityId &&
-                                lp.LocaleKeyGroup == localeKeyGroup &&
-                                lp.LocaleKey == localeKey
-                                select lp.LocaleValue;
+                        where lp.LanguageId == languageId &&
+                              lp.EntityId == entityId &&
+                              lp.LocaleKeyGroup == localeKeyGroup &&
+                              lp.LocaleKey == localeKey
+                        select lp.LocaleValue;
                     var localeValue = query.FirstOrDefault();
                     //little hack here. nulls aren't cacheable so set it to ""
                     if (localeValue == null)
                         localeValue = "";
                     return localeValue;
                 });
-
             }
             else
             {
                 //gradual loading
-                string key = string.Format(LOCALIZEDPROPERTY_KEY, languageId, entityId, localeKeyGroup, localeKey);
+                var key = string.Format(LOCALIZEDPROPERTY_KEY, languageId, entityId, localeKeyGroup, localeKey);
                 return _cacheManager.Get(key, () =>
                 {
                     var source = _localizedPropertyRepository.Table;
                     var query = from lp in source
-                                where lp.LanguageId == languageId &&
-                                lp.EntityId == entityId &&
-                                lp.LocaleKeyGroup == localeKeyGroup &&
-                                lp.LocaleKey == localeKey
-                                select lp.LocaleValue;
+                        where lp.LanguageId == languageId &&
+                              lp.EntityId == entityId &&
+                              lp.LocaleKeyGroup == localeKeyGroup &&
+                              lp.LocaleKey == localeKey
+                        select lp.LocaleValue;
                     var localeValue = query.FirstOrDefault();
                     //little hack here. nulls aren't cacheable so set it to ""
                     if (localeValue == null)
@@ -219,7 +220,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Inserts a localized property
+        ///     Inserts a localized property
         /// </summary>
         /// <param name="localizedProperty">Localized property</param>
         public virtual void InsertLocalizedProperty(LocalizedProperty localizedProperty)
@@ -234,7 +235,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Updates the localized property
+        ///     Updates the localized property
         /// </summary>
         /// <param name="localizedProperty">Localized property</param>
         public virtual void UpdateLocalizedProperty(LocalizedProperty localizedProperty)
@@ -249,7 +250,7 @@ namespace TinyCms.Services.Localization
         }
 
         /// <summary>
-        /// Save localized value
+        ///     Save localized value
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="entity">Entity</param>
@@ -287,19 +288,21 @@ namespace TinyCms.Services.Localization
             if (propInfo == null)
             {
                 throw new ArgumentException(string.Format(
-                       "Expression '{0}' refers to a field, not a property.",
-                       keySelector));
+                    "Expression '{0}' refers to a field, not a property.",
+                    keySelector));
             }
 
-            string localeKeyGroup = typeof(T).Name;
-            string localeKey = propInfo.Name;
+            var localeKeyGroup = typeof (T).Name;
+            var localeKey = propInfo.Name;
 
             var props = GetLocalizedProperties(entity.Id, localeKeyGroup);
             var prop = props.FirstOrDefault(lp => lp.LanguageId == languageId &&
-                lp.LocaleKey.Equals(localeKey, StringComparison.InvariantCultureIgnoreCase)); //should be culture invariant
+                                                  lp.LocaleKey.Equals(localeKey,
+                                                      StringComparison.InvariantCultureIgnoreCase));
+                //should be culture invariant
 
             var localeValueStr = CommonHelper.To<string>(localeValue);
-            
+
             if (prop != null)
             {
                 if (string.IsNullOrWhiteSpace(localeValueStr))

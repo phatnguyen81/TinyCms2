@@ -5,12 +5,12 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Common
 {
-    public partial class SystemInfoModel : BaseNopModel
+    public class SystemInfoModel : BaseNopModel
     {
         public SystemInfoModel()
         {
-            this.ServerVariables = new List<ServerVariableModel>();
-            this.LoadedAssemblies = new List<LoadedAssembly>();
+            ServerVariables = new List<ServerVariableModel>();
+            LoadedAssemblies = new List<LoadedAssembly>();
         }
 
         [NopResourceDisplayName("Admin.System.SystemInfo.ASPNETInfo")]
@@ -43,13 +43,13 @@ namespace TinyCms.Admin.Models.Common
         [NopResourceDisplayName("Admin.System.SystemInfo.LoadedAssemblies")]
         public IList<LoadedAssembly> LoadedAssemblies { get; set; }
 
-        public partial class ServerVariableModel : BaseNopModel
+        public class ServerVariableModel : BaseNopModel
         {
             public string Name { get; set; }
             public string Value { get; set; }
         }
 
-        public partial class LoadedAssembly : BaseNopModel
+        public class LoadedAssembly : BaseNopModel
         {
             public string FullName { get; set; }
             public string Location { get; set; }

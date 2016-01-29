@@ -1,5 +1,4 @@
 ﻿@model ContactUsModel
-@using Nop.Web.Models.Common;
 @{
     Layout = "~/Views/Shared/_ColumnsOne.cshtml";
 
@@ -11,7 +10,7 @@
         <h1>@T("PageTitle.ContactUs")</h1>
     </div>
     <div class="page-body">
-        @Html.Action("TopicBlock", "Topic", new { systemName = "ContactUs" })
+        @Html.Action("TopicBlock", "Topic", new {systemName = "ContactUs"})
         @Html.Widget("contactus_top")
         @if (Model.SuccessfullySent)
         {
@@ -27,19 +26,19 @@
                 var validationSummary = Html.ValidationSummary(true);
                 if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
                 {
-                    <div class="message-error">@validationSummary</div> 
+                    <div class="message-error">@validationSummary</div>
                 }
                 <div class="fieldset">
                     <div class="form-fields">
                         <div class="inputs">
                             @Html.LabelFor(model => model.FullName)
-                            @Html.TextBoxFor(model => model.FullName, new { @class = "fullname", placeholder = T("ContactUs.FullName.Hint") })
+                            @Html.TextBoxFor(model => model.FullName, new {@class = "fullname", placeholder = T("ContactUs.FullName.Hint")})
                             @Html.RequiredHint()
                             @Html.ValidationMessageFor(model => model.FullName)
                         </div>
                         <div class="inputs">
                             @Html.LabelFor(model => model.Email)
-                            @Html.TextBoxFor(model => model.Email, new { @class = "email", placeholder = T("ContactUs.Email.Hint") })
+                            @Html.TextBoxFor(model => model.Email, new {@class = "email", placeholder = T("ContactUs.Email.Hint")})
                             @Html.RequiredHint()
                             @Html.ValidationMessageFor(model => model.Email)
                         </div>
@@ -47,14 +46,14 @@
                         {
                             <div class="inputs">
                                 @Html.LabelFor(model => model.Subject)
-                                @Html.TextBoxFor(model => model.Subject, new { @class = "subject", placeholder = T("ContactUs.Subject.Hint") })
+                                @Html.TextBoxFor(model => model.Subject, new {@class = "subject", placeholder = T("ContactUs.Subject.Hint")})
                                 @Html.RequiredHint()
                                 @Html.ValidationMessageFor(model => model.Subject)
                             </div>
                         }
                         <div class="inputs">
                             @Html.LabelFor(model => model.Enquiry)
-                            @Html.TextAreaFor(model => model.Enquiry, new { @class = "enquiry", placeholder = T("ContactUs.Enquiry.Hint") })
+                            @Html.TextAreaFor(model => model.Enquiry, new {@class = "enquiry", placeholder = T("ContactUs.Enquiry.Hint")})
                             @Html.RequiredHint()
                             @Html.ValidationMessageFor(model => model.Enquiry)
                         </div>
@@ -67,7 +66,7 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <input type="submit" name="send-email" class="button-1 contact-us-button" value="@T("ContactUs.Button")" />
+                    <input type="submit" name="send-email" class="button-1 contact-us-button" value="@T("ContactUs.Button")"/>
                 </div>
             }
         }

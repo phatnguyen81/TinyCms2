@@ -1,9 +1,5 @@
 using System;
-using System.IO;
-using System.Linq;
 using System.Web;
-using OfficeOpenXml;
-using TinyCms.Core;
 using TinyCms.Services.Media;
 using TinyCms.Services.Messages;
 using TinyCms.Services.Seo;
@@ -11,18 +7,10 @@ using TinyCms.Services.Seo;
 namespace TinyCms.Services.ExportImport
 {
     /// <summary>
-    /// Import manager
+    ///     Import manager
     /// </summary>
-    public partial class ImportManager : IImportManager
+    public class ImportManager : IImportManager
     {
-        #region Fields
-
-        private readonly IPictureService _pictureService;
-        private readonly IUrlRecordService _urlRecordService;
-        private readonly INewsLetterSubscriptionService _newsLetterSubscriptionService;
-
-        #endregion
-
         #region Ctor
 
         public ImportManager(
@@ -30,10 +18,18 @@ namespace TinyCms.Services.ExportImport
             IUrlRecordService urlRecordService,
             INewsLetterSubscriptionService newsLetterSubscriptionService)
         {
-            this._pictureService = pictureService;
-            this._urlRecordService = urlRecordService;
-            this._newsLetterSubscriptionService = newsLetterSubscriptionService;
+            _pictureService = pictureService;
+            _urlRecordService = urlRecordService;
+            _newsLetterSubscriptionService = newsLetterSubscriptionService;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly IPictureService _pictureService;
+        private readonly IUrlRecordService _urlRecordService;
+        private readonly INewsLetterSubscriptionService _newsLetterSubscriptionService;
 
         #endregion
 
@@ -47,7 +43,7 @@ namespace TinyCms.Services.ExportImport
             if (columnName == null)
                 throw new ArgumentNullException("columnName");
 
-            for (int i = 0; i < properties.Length; i++)
+            for (var i = 0; i < properties.Length; i++)
                 if (properties[i].Equals(columnName, StringComparison.InvariantCultureIgnoreCase))
                     return i + 1; //excel indexes start from 1
             return 0;
@@ -76,7 +72,6 @@ namespace TinyCms.Services.ExportImport
 
         #region Methods
 
-      
         #endregion
     }
 }

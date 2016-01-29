@@ -10,7 +10,6 @@ namespace Nop.Plugin.Widgets.AdsBanner.Data
 {
     public class AdsBannerObjectContext : DbContext, IDbContext
     {
-
         public AdsBannerObjectContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
             Database.SetInitializer<AdsBannerObjectContext>(null);
@@ -64,12 +63,14 @@ namespace Nop.Plugin.Widgets.AdsBanner.Data
         }
 
         #region IDbContext Implementations
+
         public IDbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
         {
             return base.Set<TEntity>();
         }
 
-        public IList<TEntity> ExecuteStoredProcedureList<TEntity>(string commandText, params object[] parameters) where TEntity : BaseEntity, new()
+        public IList<TEntity> ExecuteStoredProcedureList<TEntity>(string commandText, params object[] parameters)
+            where TEntity : BaseEntity, new()
         {
             throw new NotImplementedException();
         }
@@ -79,7 +80,8 @@ namespace Nop.Plugin.Widgets.AdsBanner.Data
             throw new NotImplementedException();
         }
 
-        public int ExecuteSqlCommand(string sql, bool doNotEnsureTransaction = false, int? timeout = null, params object[] parameters)
+        public int ExecuteSqlCommand(string sql, bool doNotEnsureTransaction = false, int? timeout = null,
+            params object[] parameters)
         {
             throw new NotImplementedException();
         }
@@ -91,6 +93,7 @@ namespace Nop.Plugin.Widgets.AdsBanner.Data
 
         public bool ProxyCreationEnabled { get; set; }
         public bool AutoDetectChangesEnabled { get; set; }
+
         #endregion
     }
 }

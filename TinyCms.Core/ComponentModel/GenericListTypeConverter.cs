@@ -7,7 +7,7 @@ using System.Linq;
 namespace TinyCms.Core.ComponentModel
 {
     /// <summary>
-    /// Generic List type converted
+    ///     Generic List type converted
     /// </summary>
     /// <typeparam name="T">Type</typeparam>
     public class GenericListTypeConverter<T> : TypeConverter
@@ -15,17 +15,17 @@ namespace TinyCms.Core.ComponentModel
         protected readonly TypeConverter typeConverter;
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         public GenericListTypeConverter()
         {
-            typeConverter = TypeDescriptor.GetConverter(typeof(T));
+            typeConverter = TypeDescriptor.GetConverter(typeof (T));
             if (typeConverter == null)
-                throw new InvalidOperationException("No type converter exists for type " + typeof(T).FullName);
+                throw new InvalidOperationException("No type converter exists for type " + typeof (T).FullName);
         }
 
         /// <summary>
-        /// Get string array from a comma-separate string
+        ///     Get string array from a comma-separate string
         /// </summary>
         /// <param name="input">Input</param>
         /// <returns>Array</returns>
@@ -44,19 +44,18 @@ namespace TinyCms.Core.ComponentModel
         }
 
         /// <summary>
-        /// Gets a value indicating whether this converter can        
-        /// convert an object in the given source type to the native type of the converter
-        /// using the context.
+        ///     Gets a value indicating whether this converter can
+        ///     convert an object in the given source type to the native type of the converter
+        ///     using the context.
         /// </summary>
         /// <param name="context">Context</param>
         /// <param name="sourceType">Source type</param>
         /// <returns>Result</returns>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-
-            if (sourceType == typeof(string))
+            if (sourceType == typeof (string))
             {
-                string[] items = GetStringArray(sourceType.ToString());
+                var items = GetStringArray(sourceType.ToString());
                 return items.Any();
             }
 
@@ -64,7 +63,7 @@ namespace TinyCms.Core.ComponentModel
         }
 
         /// <summary>
-        /// Converts the given object to the converter's native type.
+        ///     Converts the given object to the converter's native type.
         /// </summary>
         /// <param name="context">Context</param>
         /// <param name="culture">Culture</param>
@@ -74,14 +73,14 @@ namespace TinyCms.Core.ComponentModel
         {
             if (value is string)
             {
-                string[] items = GetStringArray((string)value);
+                var items = GetStringArray((string) value);
                 var result = new List<T>();
                 Array.ForEach(items, s =>
                 {
-                    object item = typeConverter.ConvertFromInvariantString(s);
+                    var item = typeConverter.ConvertFromInvariantString(s);
                     if (item != null)
                     {
-                        result.Add((T)item);
+                        result.Add((T) item);
                     }
                 });
 
@@ -91,27 +90,28 @@ namespace TinyCms.Core.ComponentModel
         }
 
         /// <summary>
-        /// Converts the given value object to the specified destination type using the specified context and arguments
+        ///     Converts the given value object to the specified destination type using the specified context and arguments
         /// </summary>
         /// <param name="context">Context</param>
         /// <param name="culture">Culture</param>
         /// <param name="value">Value</param>
         /// <param name="destinationType">Destination type</param>
         /// <returns>Result</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value,
+            Type destinationType)
         {
-            if (destinationType == typeof(string))
+            if (destinationType == typeof (string))
             {
-                string result = string.Empty;
+                var result = string.Empty;
                 if (value != null)
                 {
                     //we don't use string.Join() because it doesn't support invariant culture
-                    for (int i = 0; i < ((IList<T>)value).Count; i++)
+                    for (var i = 0; i < ((IList<T>) value).Count; i++)
                     {
-                        var str1 = Convert.ToString(((IList<T>)value)[i], CultureInfo.InvariantCulture);
+                        var str1 = Convert.ToString(((IList<T>) value)[i], CultureInfo.InvariantCulture);
                         result += str1;
                         //don't add comma after the last element
-                        if (i != ((IList<T>)value).Count - 1)
+                        if (i != ((IList<T>) value).Count - 1)
                             result += ",";
                     }
                 }

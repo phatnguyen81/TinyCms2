@@ -25,8 +25,85 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class CustomerController : BaseAdminController
+    public class CustomerController : BaseAdminController
     {
+        #region Constructors
+
+        public CustomerController(ICustomerService customerService,
+            INewsLetterSubscriptionService newsLetterSubscriptionService,
+            IGenericAttributeService genericAttributeService,
+            ICustomerRegistrationService customerRegistrationService,
+            IDateTimeHelper dateTimeHelper,
+            ILocalizationService localizationService,
+            DateTimeSettings dateTimeSettings,
+            CustomerSettings customerSettings,
+            IWorkContext workContext,
+            IExportManager exportManager,
+            ICustomerActivityService customerActivityService,
+            IPermissionService permissionService,
+            IQueuedEmailService queuedEmailService,
+            EmailAccountSettings emailAccountSettings,
+            IEmailAccountService emailAccountService,
+            IOpenAuthenticationService openAuthenticationService,
+            ICustomerAttributeParser customerAttributeParser,
+            ICustomerAttributeService customerAttributeService,
+            IWorkflowMessageService workflowMessageService, ICustomerReportService customerReportService)
+        {
+            _customerService = customerService;
+            _newsLetterSubscriptionService = newsLetterSubscriptionService;
+            _genericAttributeService = genericAttributeService;
+            _customerRegistrationService = customerRegistrationService;
+            _dateTimeHelper = dateTimeHelper;
+            _localizationService = localizationService;
+            _dateTimeSettings = dateTimeSettings;
+            _customerSettings = customerSettings;
+            _workContext = workContext;
+            _exportManager = exportManager;
+            _customerActivityService = customerActivityService;
+            _permissionService = permissionService;
+            _queuedEmailService = queuedEmailService;
+            _emailAccountSettings = emailAccountSettings;
+            _emailAccountService = emailAccountService;
+            _openAuthenticationService = openAuthenticationService;
+            _customerAttributeParser = customerAttributeParser;
+            _customerAttributeService = customerAttributeService;
+            _workflowMessageService = workflowMessageService;
+            _customerReportService = customerReportService;
+        }
+
+        #endregion
+
+        #region Activity log
+
+        [HttpPost]
+        public ActionResult ListActivityLog(DataSourceRequest command, int customerId)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
+                return Content("");
+
+            var activityLog = _customerActivityService.GetAllActivities(null, null, customerId, 0, command.Page - 1,
+                command.PageSize);
+            var gridModel = new DataSourceResult
+            {
+                Data = activityLog.Select(x =>
+                {
+                    var m = new CustomerModel.ActivityLogModel
+                    {
+                        Id = x.Id,
+                        ActivityLogTypeName = x.ActivityLogType.Name,
+                        Comment = x.Comment,
+                        CreatedOn = _dateTimeHelper.ConvertToUserTime(x.CreatedOnUtc, DateTimeKind.Utc)
+                    };
+                    return m;
+                }),
+                Total = activityLog.TotalCount
+            };
+
+            return Json(gridModel);
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly ICustomerService _customerService;
@@ -52,59 +129,13 @@ namespace TinyCms.Admin.Controllers
 
         #endregion
 
-        #region Constructors
-
-        public CustomerController(ICustomerService customerService,
-            INewsLetterSubscriptionService newsLetterSubscriptionService,
-            IGenericAttributeService genericAttributeService,
-            ICustomerRegistrationService customerRegistrationService,
-            IDateTimeHelper dateTimeHelper,
-            ILocalizationService localizationService, 
-            DateTimeSettings dateTimeSettings,
-            CustomerSettings customerSettings,
-            IWorkContext workContext,
-            IExportManager exportManager,
-            ICustomerActivityService customerActivityService,
-            IPermissionService permissionService, 
-            IQueuedEmailService queuedEmailService,
-            EmailAccountSettings emailAccountSettings,
-            IEmailAccountService emailAccountService, 
-            IOpenAuthenticationService openAuthenticationService,
-            ICustomerAttributeParser customerAttributeParser,
-            ICustomerAttributeService customerAttributeService,
-            IWorkflowMessageService workflowMessageService, ICustomerReportService customerReportService)
-        {
-            this._customerService = customerService;
-            this._newsLetterSubscriptionService = newsLetterSubscriptionService;
-            this._genericAttributeService = genericAttributeService;
-            this._customerRegistrationService = customerRegistrationService;
-            this._dateTimeHelper = dateTimeHelper;
-            this._localizationService = localizationService;
-            this._dateTimeSettings = dateTimeSettings;
-            this._customerSettings = customerSettings;
-            this._workContext = workContext;
-            this._exportManager = exportManager;
-            this._customerActivityService = customerActivityService;
-            this._permissionService = permissionService;
-            this._queuedEmailService = queuedEmailService;
-            this._emailAccountSettings = emailAccountSettings;
-            this._emailAccountService = emailAccountService;
-            this._openAuthenticationService = openAuthenticationService;
-            this._customerAttributeParser = customerAttributeParser;
-            this._customerAttributeService = customerAttributeService;
-            this._workflowMessageService = workflowMessageService;
-            _customerReportService = customerReportService;
-        }
-
-        #endregion
-
         #region Utilities
 
         [NonAction]
         protected virtual string GetCustomerRolesNames(IList<CustomerRole> customerRoles, string separator = ",")
         {
             var sb = new StringBuilder();
-            for (int i = 0; i < customerRoles.Count; i++)
+            for (var i = 0; i < customerRoles.Count; i++)
             {
                 sb.Append(customerRoles[i].Name);
                 if (i != customerRoles.Count - 1)
@@ -123,23 +154,27 @@ namespace TinyCms.Admin.Controllers
             var report = new List<RegisteredCustomerReportLineModel>();
             report.Add(new RegisteredCustomerReportLineModel
             {
-                Period = _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.7days"),
+                Period =
+                    _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.7days"),
                 Customers = _customerReportService.GetRegisteredCustomersReport(7)
             });
 
             report.Add(new RegisteredCustomerReportLineModel
             {
-                Period = _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.14days"),
+                Period =
+                    _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.14days"),
                 Customers = _customerReportService.GetRegisteredCustomersReport(14)
             });
             report.Add(new RegisteredCustomerReportLineModel
             {
-                Period = _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.month"),
+                Period =
+                    _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.month"),
                 Customers = _customerReportService.GetRegisteredCustomersReport(30)
             });
             report.Add(new RegisteredCustomerReportLineModel
             {
-                Period = _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.year"),
+                Period =
+                    _localizationService.GetResource("Admin.Customers.Reports.RegisteredCustomers.Fields.Period.year"),
                 Customers = _customerReportService.GetRegisteredCustomersReport(365)
             });
 
@@ -148,7 +183,8 @@ namespace TinyCms.Admin.Controllers
 
 
         [NonAction]
-        protected virtual IList<CustomerModel.AssociatedExternalAuthModel> GetAssociatedExternalAuthRecords(Customer customer)
+        protected virtual IList<CustomerModel.AssociatedExternalAuthModel> GetAssociatedExternalAuthRecords(
+            Customer customer)
         {
             if (customer == null)
                 throw new ArgumentNullException("customer");
@@ -156,7 +192,8 @@ namespace TinyCms.Admin.Controllers
             var result = new List<CustomerModel.AssociatedExternalAuthModel>();
             foreach (var record in _openAuthenticationService.GetExternalIdentifiersFor(customer))
             {
-                var method = _openAuthenticationService.LoadExternalAuthenticationMethodBySystemName(record.ProviderSystemName);
+                var method =
+                    _openAuthenticationService.LoadExternalAuthenticationMethodBySystemName(record.ProviderSystemName);
                 if (method == null)
                     continue;
 
@@ -164,7 +201,7 @@ namespace TinyCms.Admin.Controllers
                 {
                     Id = record.Id,
                     Email = record.Email,
-                    ExternalIdentifier = record.ExternalIdentifier,
+                    ExternalIdentifier = record.ExternalIdentifier
                     //AuthMethodName = method.PluginDescriptor.FriendlyName
                 });
             }
@@ -178,7 +215,8 @@ namespace TinyCms.Admin.Controllers
             return new CustomerModel
             {
                 Id = customer.Id,
-                Email = customer.IsRegistered() ? customer.Email : _localizationService.GetResource("Admin.Customers.Guest"),
+                Email =
+                    customer.IsRegistered() ? customer.Email : _localizationService.GetResource("Admin.Customers.Guest"),
                 Username = customer.Username,
                 FullName = customer.GetFullName(),
                 Company = customer.GetAttribute<string>(SystemCustomerAttributeNames.Company),
@@ -187,7 +225,7 @@ namespace TinyCms.Admin.Controllers
                 CustomerRoleNames = GetCustomerRolesNames(customer.CustomerRoles.ToList()),
                 Active = customer.Active,
                 CreatedOn = _dateTimeHelper.ConvertToUserTime(customer.CreatedOnUtc, DateTimeKind.Utc),
-                LastActivityDate = _dateTimeHelper.ConvertToUserTime(customer.LastActivityDateUtc, DateTimeKind.Utc),
+                LastActivityDate = _dateTimeHelper.ConvertToUserTime(customer.LastActivityDateUtc, DateTimeKind.Utc)
             };
         }
 
@@ -199,8 +237,10 @@ namespace TinyCms.Admin.Controllers
 
             //ensure a customer is not added to both 'Guests' and 'Registered' customer roles
             //ensure that a customer is in at least one required role ('Guests' and 'Registered')
-            bool isInGuestsRole = customerRoles.FirstOrDefault(cr => cr.SystemName == SystemCustomerRoleNames.Guests) != null;
-            bool isInRegisteredRole = customerRoles.FirstOrDefault(cr => cr.SystemName == SystemCustomerRoleNames.Registered) != null;
+            var isInGuestsRole = customerRoles.FirstOrDefault(cr => cr.SystemName == SystemCustomerRoleNames.Guests) !=
+                                 null;
+            var isInRegisteredRole =
+                customerRoles.FirstOrDefault(cr => cr.SystemName == SystemCustomerRoleNames.Registered) != null;
             if (isInGuestsRole && isInRegisteredRole)
                 return "The customer cannot be in both 'Guests' and 'Registered' customer roles";
             if (!isInGuestsRole && !isInRegisteredRole)
@@ -210,7 +250,7 @@ namespace TinyCms.Admin.Controllers
             return "";
         }
 
-       
+
         [NonAction]
         protected virtual void PrepareCustomerAttributeModel(CustomerModel model, Customer customer)
         {
@@ -222,7 +262,7 @@ namespace TinyCms.Admin.Controllers
                     Id = attribute.Id,
                     Name = attribute.Name,
                     IsRequired = attribute.IsRequired,
-                    AttributeControlType = attribute.AttributeControlType,
+                    AttributeControlType = attribute.AttributeControlType
                 };
 
                 if (attribute.ShouldHaveValues())
@@ -245,7 +285,9 @@ namespace TinyCms.Admin.Controllers
                 //set already selected attributes
                 if (customer != null)
                 {
-                    var selectedCustomerAttributes = customer.GetAttribute<string>(SystemCustomerAttributeNames.CustomCustomerAttributes, _genericAttributeService);
+                    var selectedCustomerAttributes =
+                        customer.GetAttribute<string>(SystemCustomerAttributeNames.CustomCustomerAttributes,
+                            _genericAttributeService);
                     switch (attribute.AttributeControlType)
                     {
                         case AttributeControlType.DropdownList:
@@ -259,7 +301,8 @@ namespace TinyCms.Admin.Controllers
                                     item.IsPreSelected = false;
 
                                 //select new values
-                                var selectedValues = _customerAttributeParser.ParseCustomerAttributeValues(selectedCustomerAttributes);
+                                var selectedValues =
+                                    _customerAttributeParser.ParseCustomerAttributeValues(selectedCustomerAttributes);
                                 foreach (var attributeValue in selectedValues)
                                     foreach (var item in attributeModel.Values)
                                         if (attributeValue.Id == item.Id)
@@ -278,7 +321,8 @@ namespace TinyCms.Admin.Controllers
                         {
                             if (!String.IsNullOrEmpty(selectedCustomerAttributes))
                             {
-                                var enteredText = _customerAttributeParser.ParseValues(selectedCustomerAttributes, attribute.Id);
+                                var enteredText = _customerAttributeParser.ParseValues(selectedCustomerAttributes,
+                                    attribute.Id);
                                 if (enteredText.Count > 0)
                                     attributeModel.DefaultValue = enteredText[0];
                             }
@@ -306,66 +350,67 @@ namespace TinyCms.Admin.Controllers
             if (form == null)
                 throw new ArgumentNullException("form");
 
-            string attributesXml = "";
+            var attributesXml = "";
             var customerAttributes = _customerAttributeService.GetAllCustomerAttributes();
             foreach (var attribute in customerAttributes)
             {
-                string controlId = string.Format("customer_attribute_{0}", attribute.Id);
+                var controlId = string.Format("customer_attribute_{0}", attribute.Id);
                 switch (attribute.AttributeControlType)
                 {
                     case AttributeControlType.DropdownList:
                     case AttributeControlType.RadioList:
+                    {
+                        var ctrlAttributes = form[controlId];
+                        if (!String.IsNullOrEmpty(ctrlAttributes))
                         {
-                            var ctrlAttributes = form[controlId];
-                            if (!String.IsNullOrEmpty(ctrlAttributes))
+                            var selectedAttributeId = int.Parse(ctrlAttributes);
+                            if (selectedAttributeId > 0)
+                                attributesXml = _customerAttributeParser.AddCustomerAttribute(attributesXml,
+                                    attribute, selectedAttributeId.ToString());
+                        }
+                    }
+                        break;
+                    case AttributeControlType.Checkboxes:
+                    {
+                        var cblAttributes = form[controlId];
+                        if (!String.IsNullOrEmpty(cblAttributes))
+                        {
+                            foreach (var item in cblAttributes.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                                )
                             {
-                                int selectedAttributeId = int.Parse(ctrlAttributes);
+                                var selectedAttributeId = int.Parse(item);
                                 if (selectedAttributeId > 0)
                                     attributesXml = _customerAttributeParser.AddCustomerAttribute(attributesXml,
                                         attribute, selectedAttributeId.ToString());
                             }
                         }
-                        break;
-                    case AttributeControlType.Checkboxes:
-                        {
-                            var cblAttributes = form[controlId];
-                            if (!String.IsNullOrEmpty(cblAttributes))
-                            {
-                                foreach (var item in cblAttributes.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                                {
-                                    int selectedAttributeId = int.Parse(item);
-                                    if (selectedAttributeId > 0)
-                                        attributesXml = _customerAttributeParser.AddCustomerAttribute(attributesXml,
-                                            attribute, selectedAttributeId.ToString());
-                                }
-                            }
-                        }
+                    }
                         break;
                     case AttributeControlType.ReadonlyCheckboxes:
+                    {
+                        //load read-only (already server-side selected) values
+                        var attributeValues = _customerAttributeService.GetCustomerAttributeValues(attribute.Id);
+                        foreach (var selectedAttributeId in attributeValues
+                            .Where(v => v.IsPreSelected)
+                            .Select(v => v.Id)
+                            .ToList())
                         {
-                            //load read-only (already server-side selected) values
-                            var attributeValues = _customerAttributeService.GetCustomerAttributeValues(attribute.Id);
-                            foreach (var selectedAttributeId in attributeValues
-                                .Where(v => v.IsPreSelected)
-                                .Select(v => v.Id)
-                                .ToList())
-                            {
-                                attributesXml = _customerAttributeParser.AddCustomerAttribute(attributesXml,
-                                            attribute, selectedAttributeId.ToString());
-                            }
+                            attributesXml = _customerAttributeParser.AddCustomerAttribute(attributesXml,
+                                attribute, selectedAttributeId.ToString());
                         }
+                    }
                         break;
                     case AttributeControlType.TextBox:
                     case AttributeControlType.MultilineTextbox:
+                    {
+                        var ctrlAttributes = form[controlId];
+                        if (!String.IsNullOrEmpty(ctrlAttributes))
                         {
-                            var ctrlAttributes = form[controlId];
-                            if (!String.IsNullOrEmpty(ctrlAttributes))
-                            {
-                                string enteredText = ctrlAttributes.Trim();
-                                attributesXml = _customerAttributeParser.AddCustomerAttribute(attributesXml,
-                                    attribute, enteredText);
-                            }
+                            var enteredText = ctrlAttributes.Trim();
+                            attributesXml = _customerAttributeParser.AddCustomerAttribute(attributesXml,
+                                attribute, enteredText);
                         }
+                    }
                         break;
                     case AttributeControlType.Datepicker:
                     case AttributeControlType.ColorSquares:
@@ -394,7 +439,8 @@ namespace TinyCms.Admin.Controllers
 
                     model.TimeZoneId = customer.GetAttribute<string>(SystemCustomerAttributeNames.TimeZoneId);
                     model.CreatedOn = _dateTimeHelper.ConvertToUserTime(customer.CreatedOnUtc, DateTimeKind.Utc);
-                    model.LastActivityDate = _dateTimeHelper.ConvertToUserTime(customer.LastActivityDateUtc, DateTimeKind.Utc);
+                    model.LastActivityDate = _dateTimeHelper.ConvertToUserTime(customer.LastActivityDateUtc,
+                        DateTimeKind.Utc);
                     model.LastIpAddress = customer.LastIpAddress;
                     model.LastVisitedPage = customer.GetAttribute<string>(SystemCustomerAttributeNames.LastVisitedPage);
 
@@ -405,7 +451,7 @@ namespace TinyCms.Admin.Controllers
                     {
                         var newsletterSubscriptionStoreIds = new List<int>();
                         var newsletterSubscription = _newsLetterSubscriptionService
-                               .GetNewsLetterSubscriptionByEmailAndStoreId(customer.Email);
+                            .GetNewsLetterSubscriptionByEmailAndStoreId(customer.Email);
                         model.SelectedNewsletterSubscriptionStoreIds = newsletterSubscriptionStoreIds.ToArray();
                     }
 
@@ -430,8 +476,13 @@ namespace TinyCms.Admin.Controllers
             model.AllowUsersToChangeUsernames = _customerSettings.AllowUsersToChangeUsernames;
             model.AllowCustomersToSetTimeZone = _dateTimeSettings.AllowCustomersToSetTimeZone;
             foreach (var tzi in _dateTimeHelper.GetSystemTimeZones())
-                model.AvailableTimeZones.Add(new SelectListItem { Text = tzi.DisplayName, Value = tzi.Id, Selected = (tzi.Id == model.TimeZoneId) });
-          
+                model.AvailableTimeZones.Add(new SelectListItem
+                {
+                    Text = tzi.DisplayName,
+                    Value = tzi.Id,
+                    Selected = (tzi.Id == model.TimeZoneId)
+                });
+
             //customer attributes
             PrepareCustomerAttributeModel(model, customer);
 
@@ -447,13 +498,13 @@ namespace TinyCms.Admin.Controllers
             model.PhoneEnabled = _customerSettings.PhoneEnabled;
             model.FaxEnabled = _customerSettings.FaxEnabled;
 
-          
+
             //customer roles
             model.AvailableCustomerRoles = _customerService
                 .GetAllCustomerRoles(true)
                 .Select(cr => cr.ToModel())
                 .ToList();
-      
+
             //external authentication records
             if (customer != null)
             {
@@ -463,21 +514,22 @@ namespace TinyCms.Admin.Controllers
             //1. "admin approval" registration method
             //2. already created customer
             //3. registered
-            model.AllowSendingOfWelcomeMessage = _customerSettings.UserRegistrationType == UserRegistrationType.AdminApproval &&
-                customer != null &&
-                customer.IsRegistered();
+            model.AllowSendingOfWelcomeMessage = _customerSettings.UserRegistrationType ==
+                                                 UserRegistrationType.AdminApproval &&
+                                                 customer != null &&
+                                                 customer.IsRegistered();
             //sending of the activation message
             //1. "email validation" registration method
             //2. already created customer
             //3. registered
             //4. not active
-            model.AllowReSendingOfActivationMessage = _customerSettings.UserRegistrationType == UserRegistrationType.EmailValidation &&
-                customer != null &&
-                customer.IsRegistered() &&
-                !customer.Active;
+            model.AllowReSendingOfActivationMessage = _customerSettings.UserRegistrationType ==
+                                                      UserRegistrationType.EmailValidation &&
+                                                      customer != null &&
+                                                      customer.IsRegistered() &&
+                                                      !customer.Active;
         }
 
-      
         #endregion
 
         #region Customers
@@ -493,7 +545,8 @@ namespace TinyCms.Admin.Controllers
                 return AccessDeniedView();
 
             //load registered customers by default
-            var defaultRoleIds = new[] {_customerService.GetCustomerRoleBySystemName(SystemCustomerRoleNames.Registered).Id};
+            var defaultRoleIds = new[]
+            {_customerService.GetCustomerRoleBySystemName(SystemCustomerRoleNames.Registered).Id};
             var model = new CustomerListModel
             {
                 UsernamesEnabled = _customerSettings.UsernamesEnabled,
@@ -502,26 +555,26 @@ namespace TinyCms.Admin.Controllers
                 PhoneEnabled = _customerSettings.PhoneEnabled,
                 ZipPostalCodeEnabled = _customerSettings.ZipPostalCodeEnabled,
                 AvailableCustomerRoles = _customerService.GetAllCustomerRoles(true).Select(cr => cr.ToModel()).ToList(),
-                SearchCustomerRoleIds = defaultRoleIds,
+                SearchCustomerRoleIds = defaultRoleIds
             };
             return View(model);
         }
 
         [HttpPost]
         public ActionResult CustomerList(DataSourceRequest command, CustomerListModel model,
-            [ModelBinder(typeof(CommaSeparatedModelBinder))] int[] searchCustomerRoleIds)
+            [ModelBinder(typeof (CommaSeparatedModelBinder))] int[] searchCustomerRoleIds)
         {
             //we use own own binder for searchCustomerRoleIds property 
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
                 return AccessDeniedView();
 
             var searchDayOfBirth = 0;
-            int searchMonthOfBirth = 0;
+            var searchMonthOfBirth = 0;
             if (!String.IsNullOrWhiteSpace(model.SearchDayOfBirth))
                 searchDayOfBirth = Convert.ToInt32(model.SearchDayOfBirth);
             if (!String.IsNullOrWhiteSpace(model.SearchMonthOfBirth))
                 searchMonthOfBirth = Convert.ToInt32(model.SearchMonthOfBirth);
-            
+
             var customers = _customerService.GetAllCustomers(
                 customerRoleIds: searchCustomerRoleIds,
                 email: model.SearchEmail,
@@ -601,33 +654,40 @@ namespace TinyCms.Admin.Controllers
                     AdminComment = model.AdminComment,
                     Active = model.Active,
                     CreatedOnUtc = DateTime.UtcNow,
-                    LastActivityDateUtc = DateTime.UtcNow,
+                    LastActivityDateUtc = DateTime.UtcNow
                 };
                 _customerService.InsertCustomer(customer);
 
                 //form fields
                 if (_dateTimeSettings.AllowCustomersToSetTimeZone)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId, model.TimeZoneId);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId,
+                        model.TimeZoneId);
                 if (_customerSettings.GenderEnabled)
                     _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender, model.Gender);
                 _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName, model.FirstName);
                 _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName, model.LastName);
                 if (_customerSettings.DateOfBirthEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth, model.DateOfBirth);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth,
+                        model.DateOfBirth);
                 if (_customerSettings.CompanyEnabled)
                     _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company, model.Company);
                 if (_customerSettings.StreetAddressEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress, model.StreetAddress);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress,
+                        model.StreetAddress);
                 if (_customerSettings.StreetAddress2Enabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2, model.StreetAddress2);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2,
+                        model.StreetAddress2);
                 if (_customerSettings.ZipPostalCodeEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode, model.ZipPostalCode);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode,
+                        model.ZipPostalCode);
                 if (_customerSettings.CityEnabled)
                     _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.City, model.City);
                 if (_customerSettings.CountryEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId, model.CountryId);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId,
+                        model.CountryId);
                 if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId, model.StateProvinceId);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId,
+                        model.StateProvinceId);
                 if (_customerSettings.PhoneEnabled)
                     _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
                 if (_customerSettings.FaxEnabled)
@@ -635,13 +695,15 @@ namespace TinyCms.Admin.Controllers
 
                 //custom customer attributes
                 var customerAttributes = ParseCustomCustomerAttributes(customer, form);
-                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CustomCustomerAttributes, customerAttributes);
+                _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CustomCustomerAttributes,
+                    customerAttributes);
 
 
                 //password
                 if (!String.IsNullOrWhiteSpace(model.Password))
                 {
-                    var changePassRequest = new ChangePasswordRequest(model.Email, false, _customerSettings.DefaultPasswordFormat, model.Password);
+                    var changePassRequest = new ChangePasswordRequest(model.Email, false,
+                        _customerSettings.DefaultPasswordFormat, model.Password);
                     var changePassResult = _customerRegistrationService.ChangePassword(changePassRequest);
                     if (!changePassResult.Success)
                     {
@@ -663,12 +725,12 @@ namespace TinyCms.Admin.Controllers
                 _customerService.UpdateCustomer(customer);
 
 
-
                 //activity log
-                _customerActivityService.InsertActivity("AddNewCustomer", _localizationService.GetResource("ActivityLog.AddNewCustomer"), customer.Id);
+                _customerActivityService.InsertActivity("AddNewCustomer",
+                    _localizationService.GetResource("ActivityLog.AddNewCustomer"), customer.Id);
 
                 SuccessNotification(_localizationService.GetResource("Admin.Customers.Customers.Added"));
-                return continueEditing ? RedirectToAction("Edit", new { id = customer.Id }) : RedirectToAction("List");
+                return continueEditing ? RedirectToAction("Edit", new {id = customer.Id}) : RedirectToAction("List");
             }
 
             //If we got this far, something failed, redisplay form
@@ -746,30 +808,41 @@ namespace TinyCms.Admin.Controllers
                         }
                     }
 
-               
+
                     //form fields
                     if (_dateTimeSettings.AllowCustomersToSetTimeZone)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId, model.TimeZoneId);
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId,
+                            model.TimeZoneId);
                     if (_customerSettings.GenderEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender, model.Gender);
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName, model.FirstName);
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName, model.LastName);
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Gender,
+                            model.Gender);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.FirstName,
+                        model.FirstName);
+                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.LastName,
+                        model.LastName);
                     if (_customerSettings.DateOfBirthEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth, model.DateOfBirth);
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.DateOfBirth,
+                            model.DateOfBirth);
                     if (_customerSettings.CompanyEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company, model.Company);
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Company,
+                            model.Company);
                     if (_customerSettings.StreetAddressEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress, model.StreetAddress);
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress,
+                            model.StreetAddress);
                     if (_customerSettings.StreetAddress2Enabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2, model.StreetAddress2);
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StreetAddress2,
+                            model.StreetAddress2);
                     if (_customerSettings.ZipPostalCodeEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode, model.ZipPostalCode);
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.ZipPostalCode,
+                            model.ZipPostalCode);
                     if (_customerSettings.CityEnabled)
                         _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.City, model.City);
                     if (_customerSettings.CountryEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId, model.CountryId);
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CountryId,
+                            model.CountryId);
                     if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
-                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId, model.StateProvinceId);
+                        _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.StateProvinceId,
+                            model.StateProvinceId);
                     if (_customerSettings.PhoneEnabled)
                         _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.Phone, model.Phone);
                     if (_customerSettings.FaxEnabled)
@@ -777,9 +850,8 @@ namespace TinyCms.Admin.Controllers
 
                     //custom customer attributes
                     var customerAttributes = ParseCustomCustomerAttributes(customer, form);
-                    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.CustomCustomerAttributes, customerAttributes);
-
-              
+                    _genericAttributeService.SaveAttribute(customer,
+                        SystemCustomerAttributeNames.CustomCustomerAttributes, customerAttributes);
 
 
                     //customer roles
@@ -808,10 +880,9 @@ namespace TinyCms.Admin.Controllers
                     _customerService.UpdateCustomer(customer);
 
 
-                  
-
                     //activity log
-                    _customerActivityService.InsertActivity("EditCustomer", _localizationService.GetResource("ActivityLog.EditCustomer"), customer.Id);
+                    _customerActivityService.InsertActivity("EditCustomer",
+                        _localizationService.GetResource("ActivityLog.EditCustomer"), customer.Id);
 
                     SuccessNotification(_localizationService.GetResource("Admin.Customers.Customers.Updated"));
                     if (continueEditing)
@@ -819,7 +890,7 @@ namespace TinyCms.Admin.Controllers
                         //selected tab
                         SaveSelectedTabIndex();
 
-                        return RedirectToAction("Edit", new { id = customer.Id });
+                        return RedirectToAction("Edit", new {id = customer.Id});
                     }
                     return RedirectToAction("List");
                 }
@@ -859,11 +930,10 @@ namespace TinyCms.Admin.Controllers
                         ErrorNotification(error);
             }
 
-            return RedirectToAction("Edit", new { id = customer.Id });
+            return RedirectToAction("Edit", new {id = customer.Id});
         }
-        
-      
-      
+
+
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -888,7 +958,8 @@ namespace TinyCms.Admin.Controllers
                 //}
 
                 //activity log
-                _customerActivityService.InsertActivity("DeleteCustomer", _localizationService.GetResource("ActivityLog.DeleteCustomer"), customer.Id);
+                _customerActivityService.InsertActivity("DeleteCustomer",
+                    _localizationService.GetResource("ActivityLog.DeleteCustomer"), customer.Id);
 
                 SuccessNotification(_localizationService.GetResource("Admin.Customers.Customers.Deleted"));
                 return RedirectToAction("List");
@@ -896,7 +967,7 @@ namespace TinyCms.Admin.Controllers
             catch (Exception exc)
             {
                 ErrorNotification(exc.Message);
-                return RedirectToAction("Edit", new { id = customer.Id });
+                return RedirectToAction("Edit", new {id = customer.Id});
             }
         }
 
@@ -924,7 +995,7 @@ namespace TinyCms.Admin.Controllers
             _genericAttributeService.SaveAttribute<int?>(_workContext.CurrentCustomer,
                 SystemCustomerAttributeNames.ImpersonatedCustomerId, customer.Id);
 
-            return RedirectToAction("Index", "Home", new { area = "" });
+            return RedirectToAction("Index", "Home", new {area = ""});
         }
 
         [HttpPost, ActionName("Edit")]
@@ -943,7 +1014,7 @@ namespace TinyCms.Admin.Controllers
 
             SuccessNotification(_localizationService.GetResource("Admin.Customers.Customers.SendWelcomeMessage.Success"));
 
-            return RedirectToAction("Edit", new { id = customer.Id });
+            return RedirectToAction("Edit", new {id = customer.Id});
         }
 
         [HttpPost, ActionName("Edit")]
@@ -959,12 +1030,14 @@ namespace TinyCms.Admin.Controllers
                 return RedirectToAction("List");
 
             //email validation message
-            _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.AccountActivationToken, Guid.NewGuid().ToString());
+            _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.AccountActivationToken,
+                Guid.NewGuid().ToString());
             _workflowMessageService.SendCustomerEmailValidationMessage(customer, _workContext.WorkingLanguage.Id);
 
-            SuccessNotification(_localizationService.GetResource("Admin.Customers.Customers.ReSendActivationMessage.Success"));
+            SuccessNotification(
+                _localizationService.GetResource("Admin.Customers.Customers.ReSendActivationMessage.Success"));
 
-            return RedirectToAction("Edit", new { id = customer.Id });
+            return RedirectToAction("Edit", new {id = customer.Id});
         }
 
         public ActionResult SendEmail(CustomerModel model)
@@ -1004,7 +1077,7 @@ namespace TinyCms.Admin.Controllers
                     To = customer.Email,
                     Subject = model.SendEmail.Subject,
                     Body = model.SendEmail.Body,
-                    CreatedOnUtc = DateTime.UtcNow,
+                    CreatedOnUtc = DateTime.UtcNow
                 };
                 _queuedEmailService.InsertQueuedEmail(email);
                 SuccessNotification(_localizationService.GetResource("Admin.Customers.Customers.SendEmail.Queued"));
@@ -1014,7 +1087,7 @@ namespace TinyCms.Admin.Controllers
                 ErrorNotification(exc.Message);
             }
 
-            return RedirectToAction("Edit", new { id = customer.Id });
+            return RedirectToAction("Edit", new {id = customer.Id});
         }
 
         //public ActionResult SendPm(CustomerModel model)
@@ -1062,7 +1135,7 @@ namespace TinyCms.Admin.Controllers
 
         //    return RedirectToAction("Edit", new { id = customer.Id });
         //}
-        
+
         #endregion
 
         #region Reports
@@ -1075,6 +1148,7 @@ namespace TinyCms.Admin.Controllers
 
             return PartialView();
         }
+
         [HttpPost]
         public ActionResult ReportRegisteredCustomersList(DataSourceRequest command)
         {
@@ -1093,41 +1167,7 @@ namespace TinyCms.Admin.Controllers
 
         #endregion
 
-
-        #region Activity log
-
-        [HttpPost]
-        public ActionResult ListActivityLog(DataSourceRequest command, int customerId)
-        {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageCustomers))
-                return Content("");
-
-            var activityLog = _customerActivityService.GetAllActivities(null, null, customerId, 0, command.Page - 1, command.PageSize);
-            var gridModel = new DataSourceResult
-            {
-                Data = activityLog.Select(x =>
-                {
-                    var m = new CustomerModel.ActivityLogModel
-                    {
-                        Id = x.Id,
-                        ActivityLogTypeName = x.ActivityLogType.Name,
-                        Comment = x.Comment,
-                        CreatedOn = _dateTimeHelper.ConvertToUserTime(x.CreatedOnUtc, DateTimeKind.Utc)
-                    };
-                    return m;
-
-                }),
-                Total = activityLog.TotalCount
-            };
-
-            return Json(gridModel);
-        }
-
-        #endregion
-
         #region Back in stock subscriptions
-
-      
 
         #endregion
 
@@ -1141,7 +1181,7 @@ namespace TinyCms.Admin.Controllers
                 return AccessDeniedView();
 
             var searchDayOfBirth = 0;
-            int searchMonthOfBirth = 0;
+            var searchMonthOfBirth = 0;
             if (!String.IsNullOrWhiteSpace(model.SearchDayOfBirth))
                 searchDayOfBirth = Convert.ToInt32(model.SearchDayOfBirth);
             if (!String.IsNullOrWhiteSpace(model.SearchMonthOfBirth))
@@ -1187,7 +1227,7 @@ namespace TinyCms.Admin.Controllers
             if (selectedIds != null)
             {
                 var ids = selectedIds
-                    .Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => Convert.ToInt32(x))
                     .ToArray();
                 customers.AddRange(_customerService.GetCustomersByIds(ids));
@@ -1210,7 +1250,7 @@ namespace TinyCms.Admin.Controllers
                 return AccessDeniedView();
 
             var searchDayOfBirth = 0;
-            int searchMonthOfBirth = 0;
+            var searchMonthOfBirth = 0;
             if (!String.IsNullOrWhiteSpace(model.SearchDayOfBirth))
                 searchDayOfBirth = Convert.ToInt32(model.SearchDayOfBirth);
             if (!String.IsNullOrWhiteSpace(model.SearchMonthOfBirth))
@@ -1251,7 +1291,7 @@ namespace TinyCms.Admin.Controllers
             if (selectedIds != null)
             {
                 var ids = selectedIds
-                    .Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => Convert.ToInt32(x))
                     .ToArray();
                 customers.AddRange(_customerService.GetCustomersByIds(ids));

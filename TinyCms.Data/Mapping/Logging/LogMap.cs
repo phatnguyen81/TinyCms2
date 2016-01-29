@@ -2,22 +2,21 @@ using TinyCms.Core.Domain.Logging;
 
 namespace TinyCms.Data.Mapping.Logging
 {
-    public partial class LogMap : NopEntityTypeConfiguration<Log>
+    public class LogMap : NopEntityTypeConfiguration<Log>
     {
         public LogMap()
         {
-            this.ToTable("Log");
-            this.HasKey(l => l.Id);
-            this.Property(l => l.ShortMessage).IsRequired();
-            this.Property(l => l.IpAddress).HasMaxLength(200);
+            ToTable("Log");
+            HasKey(l => l.Id);
+            Property(l => l.ShortMessage).IsRequired();
+            Property(l => l.IpAddress).HasMaxLength(200);
 
-            this.Ignore(l => l.LogLevel);
+            Ignore(l => l.LogLevel);
 
-            this.HasOptional(l => l.Customer)
+            HasOptional(l => l.Customer)
                 .WithMany()
                 .HasForeignKey(l => l.CustomerId)
-            .WillCascadeOnDelete(true);
-
+                .WillCascadeOnDelete(true);
         }
     }
 }

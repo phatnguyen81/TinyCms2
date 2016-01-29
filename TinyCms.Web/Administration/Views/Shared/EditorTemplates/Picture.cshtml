@@ -1,6 +1,6 @@
-﻿@model int
-@using TinyCms.Core;
-@using TinyCms.Web.Framework.UI;
+﻿@using TinyCms.Core
+@using TinyCms.Services.Media
+@model int
 @{
     //register CSS and JS
     Html.AddCssFileParts("~/Scripts/fineuploader/fineuploader-4.2.2.min.css");
@@ -9,14 +9,14 @@
     //other variables
     var random = CommonHelper.GenerateRandomInteger();
     var clientId = "picture" + random;
-    var pictureService = EngineContext.Current.Resolve<TinyCms.Services.Media.IPictureService>();
+    var pictureService = EngineContext.Current.Resolve<IPictureService>();
     var picture = pictureService.GetPictureById(Model);
 }
 <div id="@(clientId + "value")">
     @Html.HiddenFor(x => x)
 </div>
 <div id="@(clientId + "image")">
-    <img src="@(pictureService.GetPictureUrl(Model, 100, true))" />
+    <img src="@(pictureService.GetPictureUrl(Model, 100, true))"/>
 </div>
 @if (picture != null)
 {
@@ -24,18 +24,19 @@
 }
 else
 {
-    <span id="@(clientId + "remove")" class="k-button" style="display:none;">@T("Admin.Picture.RemovePicture")</span>
+    <span id="@(clientId + "remove")" class="k-button" style="display: none;">@T("Admin.Picture.RemovePicture")</span>
 }
-<br />
-    @*fine uploader container*@
+<br/>
+@*fine uploader container*@
 <div id="@clientId">
     <noscript>
         <p>
-            Please enable JavaScript to use file uploader.</p>
+            Please enable JavaScript to use file uploader.
+        </p>
         <!-- or put a simple form for upload here -->
     </noscript>
 </div>
-    @*fine uploader template (keep it synchronized to \Content\fineuploader\templates\default.html)*@
+@*fine uploader template (keep it synchronized to \Content\fineuploader\templates\default.html)*@
 <script type="text/template" id="@(clientId)-qq-template">
     <div class="qq-uploader-selector qq-uploader">
         <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
@@ -72,22 +73,35 @@ else
 
         $("#@(clientId)").fineUploader({
             request: {
-                endpoint: '@(Url.Content("~/Admin/Picture/AsyncUpload"))'
-            },
-            template: "@(clientId)-qq-template",
-            multiple: false
-        }).on("complete", function(event, id, name, responseJSON, xhr) {
-            if (responseJSON.success) {
-                $("#@(clientId + "image")").html("<img src='" + responseJSON.imageUrl + "'/>");
-                $("#@(clientId + "value") input").val(responseJSON.pictureId);
-                $("#@(clientId + "remove")").show();
-            }
-        });
+                endpoint: "@(Url.Content(\
+                               "~/Admin/Picture/AsyncUpload\"))"
+}
 
-        $("#@(clientId + "remove")").click(function(e) {
-            $("#@(clientId + "image")").html("<img src='@pictureService.GetDefaultPictureUrl()'/>");
-            $("#@(clientId + "value") input").val(0);
-            $(this).hide();
-        });
+    ,
+        private template 
+    : "@(clientId)-qq-template",
+        private multiple 
+    : false
+    }
+    ).
+
+on("complete", function(event, id, name, responseJSON, xhr)
+{
+if (
+responseJSON.success)
+{
+$("#@(clientId + "
+image")").html("<img src='" + responseJSON.imageUrl + "'/>");
+    $("#@(clientId + "value") input").val(responseJSON.pictureId);
+    $("#@(clientId + "remove")").show();
+}
+
+});
+
+    $("#@(clientId + "remove")").click(function(e) {
+    $("#@(clientId + "image")").html("<img src='@pictureService.GetDefaultPictureUrl()'/>");
+    $("#@(clientId + "value") input").val(0);
+    $(this).hide();
     });
-</script>
+    });
+                </script>

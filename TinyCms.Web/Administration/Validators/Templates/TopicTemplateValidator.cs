@@ -9,8 +9,12 @@ namespace TinyCms.Admin.Validators.Templates
     {
         public TopicTemplateValidator(ILocalizationService localizationService)
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage(localizationService.GetResource("Admin.System.Templates.Topic.Name.Required"));
-            RuleFor(x => x.ViewPath).NotEmpty().WithMessage(localizationService.GetResource("Admin.System.Templates.Topic.ViewPath.Required"));
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .WithMessage(localizationService.GetResource("Admin.System.Templates.Topic.Name.Required"));
+            RuleFor(x => x.ViewPath)
+                .NotEmpty()
+                .WithMessage(localizationService.GetResource("Admin.System.Templates.Topic.ViewPath.Required"));
         }
     }
 }

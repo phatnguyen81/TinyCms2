@@ -1,18 +1,15 @@
+using System.Data.Entity.Migrations;
+
 namespace TinyCms.Data.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<TinyCms.Data.NopObjectContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<NopObjectContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(TinyCms.Data.NopObjectContext context)
+        protected override void Seed(NopObjectContext context)
         {
             //  This method will be called after migrating to the latest version.
 

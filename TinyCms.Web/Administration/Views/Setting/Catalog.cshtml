@@ -8,18 +8,18 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Settings.Catalog")
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
         </div>
     </div>
-    
+
     @Html.ValidationSummary(false)
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#catalogsettings-edit").kendoTabStrip({
                 animation: {
                     open: {
@@ -55,7 +55,7 @@
 
     {
         //custom tabs
-        var eventMessage = new AdminTabStripCreated(this.Html, "catalogsettings-edit");
+        var eventMessage = new AdminTabStripCreated(Html, "catalogsettings-edit");
         EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
         foreach (var eventBlock in eventMessage.BlocksToRender)
         {
@@ -69,7 +69,7 @@
 @helper TabGeneralSettings()
 {
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $("#@Html.FieldIdFor(model => model.ShowCategoryPostNumber)").click(toggleShowCategoryPostNumberIncludingSubcategories);
             $("#@Html.FieldIdFor(model => model.ShowBestsellersOnHomepage)").click(toggleBestsellersOnHomepage);
@@ -84,22 +84,19 @@
         });
 
         function toggleShowCategoryPostNumberIncludingSubcategories() {
-            if ($('#@Html.FieldIdFor(model => model.ShowCategoryPostNumber)').is(':checked')) {
-                $('#pnlShowCategoryPostNumberIncludingSubcategories').show();
-            }
-            else {
-                $('#pnlShowCategoryPostNumberIncludingSubcategories').hide();
+            if ($("#@Html.FieldIdFor(model => model.ShowCategoryPostNumber)").is(":checked")) {
+                $("#pnlShowCategoryPostNumberIncludingSubcategories").show();
+            } else {
+                $("#pnlShowCategoryPostNumberIncludingSubcategories").hide();
             }
         }
-        
-      
+
 
         function toggleBestsellersOnHomepage() {
-            if ($('#@Html.FieldIdFor(model => model.ShowBestsellersOnHomepage)').is(':checked')) {
-                $('#pnlNumberOfBestsellersOnHomepage').show();
-            }
-            else {
-                $('#pnlNumberOfBestsellersOnHomepage').hide();
+            if ($("#@Html.FieldIdFor(model => model.ShowBestsellersOnHomepage)").is(":checked")) {
+                $("#pnlNumberOfBestsellersOnHomepage").show();
+            } else {
+                $("#pnlNumberOfBestsellersOnHomepage").hide();
             }
         }
 
@@ -314,7 +311,7 @@
 @helper TabSearchSettings()
 {
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $("#@Html.FieldIdFor(model => model.SearchPageAllowCustomersToSelectPageSize)").click(toggleSearchPagePageSize);
             $("#@Html.FieldIdFor(model => model.PostSearchAutoCompleteEnabled)").click(togglePostSearchAutoComplete);
@@ -324,26 +321,25 @@
         });
 
         function toggleSearchPagePageSize() {
-            if ($('#@Html.FieldIdFor(model => model.SearchPageAllowCustomersToSelectPageSize)').is(':checked')) {
-                $('#pnlSearchPagePostsPerPage').hide();
-                $('#pnlSearchPagePageSizeOptions').show();
+            if ($("#@Html.FieldIdFor(model => model.SearchPageAllowCustomersToSelectPageSize)").is(":checked")) {
+                $("#pnlSearchPagePostsPerPage").hide();
+                $("#pnlSearchPagePageSizeOptions").show();
             } else {
-                $('#pnlSearchPagePostsPerPage').show();
-                $('#pnlSearchPagePageSizeOptions').hide();
+                $("#pnlSearchPagePostsPerPage").show();
+                $("#pnlSearchPagePageSizeOptions").hide();
             }
         }
-        
+
         function togglePostSearchAutoComplete() {
-            if ($('#@Html.FieldIdFor(model => model.PostSearchAutoCompleteEnabled)').is(':checked')) {
-                $('#pnlPostSearchAutoCompleteNumberOfPosts').show();
-                $('#pnlShowPostImagesInSearchAutoComplete').show();                
-            }
-            else {
-                $('#pnlPostSearchAutoCompleteNumberOfPosts').hide();
-                $('#pnlShowPostImagesInSearchAutoComplete').hide();
+            if ($("#@Html.FieldIdFor(model => model.PostSearchAutoCompleteEnabled)").is(":checked")) {
+                $("#pnlPostSearchAutoCompleteNumberOfPosts").show();
+                $("#pnlShowPostImagesInSearchAutoComplete").show();
+            } else {
+                $("#pnlPostSearchAutoCompleteNumberOfPosts").hide();
+                $("#pnlShowPostImagesInSearchAutoComplete").hide();
             }
         }
-        
+
     </script>
     <table class="adminContent">
         <tr>

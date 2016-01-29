@@ -1,9 +1,10 @@
-﻿@model LanguageModel
+﻿@using System.Globalization
+@model LanguageModel
 @Html.ValidationSummary(true)
 @Html.HiddenFor(model => model.Id)
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#language-edit").kendoTabStrip({
             animation: {
                 open: {
@@ -30,7 +31,7 @@
 
 @{
     //custom tabs
-    var eventMessage = new AdminTabStripCreated(this.Html, "language-edit");
+    var eventMessage = new AdminTabStripCreated(Html, "language-edit");
     EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
     foreach (var eventBlock in eventMessage.BlocksToRender)
     {
@@ -46,12 +47,13 @@
 {
     <script type="text/javascript">
         function toggleFlags() {
-            $('#pnlAllFlags').toggle();
-            if ($('#pnlAllFlags').css('display') == 'none') {
-                $('#displayAllFlags').html('@T("Admin.Common.Show")');
-            }
-            else {
-                $('#displayAllFlags').html('@T("Admin.Common.Hide")');
+            $("#pnlAllFlags").toggle();
+            if ($("#pnlAllFlags").css("display") == "none") {
+                $("#displayAllFlags").html("@T(\
+                                                "Admin.Common.Show\")");;
+            } else {
+                $("#displayAllFlags").html("@T(\
+                                                "Admin.Common.Hide\")");;
             }
         }
     </script>
@@ -70,14 +72,14 @@
                 @Html.NopLabelFor(model => model.LanguageCulture):
             </td>
             <td class="adminData">
-                 @{
-                    var cultures = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.SpecificCultures)
+                @{
+                    var cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
                         .OrderBy(x => x.EnglishName)
                         .Select(x => new SelectListItem
-                                         {
-                                             Value = x.IetfLanguageTag,
-                                             Text = string.Format("{0}. {1}", x.EnglishName, x.IetfLanguageTag)
-                                         });
+                        {
+                            Value = x.IetfLanguageTag,
+                            Text = string.Format("{0}. {1}", x.EnglishName, x.IetfLanguageTag)
+                        });
                 }
                 @Html.DropDownListFor(model => model.LanguageCulture, cultures)
                 @Html.ValidationMessageFor(model => model.LanguageCulture)

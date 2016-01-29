@@ -2,18 +2,18 @@ using TinyCms.Core.Domain.Localization;
 
 namespace TinyCms.Data.Mapping.Localization
 {
-    public partial class LocalizedPropertyMap : NopEntityTypeConfiguration<LocalizedProperty>
+    public class LocalizedPropertyMap : NopEntityTypeConfiguration<LocalizedProperty>
     {
         public LocalizedPropertyMap()
         {
-            this.ToTable("LocalizedProperty");
-            this.HasKey(lp => lp.Id);
+            ToTable("LocalizedProperty");
+            HasKey(lp => lp.Id);
 
-            this.Property(lp => lp.LocaleKeyGroup).IsRequired().HasMaxLength(400);
-            this.Property(lp => lp.LocaleKey).IsRequired().HasMaxLength(400);
-            this.Property(lp => lp.LocaleValue).IsRequired();
-            
-            this.HasRequired(lp => lp.Language)
+            Property(lp => lp.LocaleKeyGroup).IsRequired().HasMaxLength(400);
+            Property(lp => lp.LocaleKey).IsRequired().HasMaxLength(400);
+            Property(lp => lp.LocaleValue).IsRequired();
+
+            HasRequired(lp => lp.Language)
                 .WithMany()
                 .HasForeignKey(lp => lp.LanguageId);
         }

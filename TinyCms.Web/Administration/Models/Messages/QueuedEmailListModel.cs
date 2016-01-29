@@ -6,7 +6,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Messages
 {
-    public partial class QueuedEmailListModel : BaseNopModel
+    public class QueuedEmailListModel : BaseNopModel
     {
         [NopResourceDisplayName("Admin.System.QueuedEmails.List.StartDate")]
         [UIHint("DateNullable")]

@@ -1,7 +1,8 @@
-﻿@model CategoryListModel
+﻿@using TinyCms.Core.Domain.Common
+@model CategoryListModel
 @{
-    var defaultGridPageSize = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
-    var gridPageSizes = EngineContext.Current.Resolve<TinyCms.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+    var defaultGridPageSize = EngineContext.Current.Resolve<AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<AdminAreaSettings>().GridPageSizes;
 
     //page title
     ViewBag.Title = T("Admin.Catalog.Categories.Manage").Text;
@@ -9,7 +10,7 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt=""/>
         @T("Admin.Catalog.Categories.Manage") @Html.ActionLink("(" + T("Admin.Catalog.Categories.SwitchToTreeView") + ")", "Tree")
     </div>
     <div class="options">
@@ -27,7 +28,7 @@
     </tr>
     <tr>
         <td colspan="2">
-            <input type="button" id="search-categories" class="k-button" value="@T("Admin.Common.Search")" />
+            <input type="button" id="search-categories" class="k-button" value="@T("Admin.Common.Search")"/>
         </td>
     </tr>
 </table>
@@ -37,7 +38,7 @@
             <div id="categories-grid"></div>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#categories-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -73,7 +74,8 @@
                             mode: "inline"
                         },
                         scrollable: false,
-                        columns: [{
+                        columns: [
+                        {
                             field: "Breadcrumb",
                             title: "@T("Admin.Catalog.Categories.Fields.Name")"
                         }, {
@@ -82,48 +84,65 @@
                             width: 100,
                             headerAttributes: { style: "text-align:center" },
                             attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=Published#.gif" />'
-                        }, {
-                            field: "DisplayOrder",
-                            title: "@T("Admin.Catalog.Categories.Fields.DisplayOrder")",
-                            width: 100
-                        }, {
-                            field: "Id",
-                            title: "@T("Admin.Common.Edit")",
-                            width: 100,
-                            template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
-                        }]
+                            template: "<img src=\"@Url.Content(\
+                                                      "~/Administration/Content/images/\")active-#=Published#.gif\" />"
+}
+
+    ,
+        {
+            "DisplayOrder",
+            "@T("
+            Admin.Catalog.Categories.Fields.DisplayOrder
+            ")",
+            100
+        }
+    ,
+
+{
+    private field 
+: "Id",
+    private title 
+: "@T("
+    private Admin.Common.Edit 
+")",
+    private width 
+: 100,
+    private template 
+: "<a href=\"Edit/#=Id#\">@T(\"Admin.Common.Edit\")</a>"
+}
+]
+}
+);
                     });
-                });
-            </script>
+                    </script>
 
             <script type="text/javascript">
-                $(document).ready(function () {
-                    //search button
-                    $('#search-categories').click(function () {
-                        //search
-                        var grid = $('#categories-grid').data('kendoGrid');
-                        grid.dataSource.page(1); //new search. Set page size to 1
-                        //grid.dataSource.read(); we already loaded the grid above using "page" function
-                        return false;
-                    });
-
-                    $("#@Html.FieldIdFor(model => model.SearchCategoryName)").keydown(function (event) {
-                        if (event.keyCode == 13) {
-                            $("#search-categories").click();
+                    $(document).ready(function() {
+                        //search button
+                        $("#search-categories").click(function() {
+                            //search
+                            var grid = $("#categories-grid").data("kendoGrid");
+                            grid.dataSource.page(1); //new search. Set page size to 1
+                            //grid.dataSource.read(); we already loaded the grid above using "page" function
                             return false;
-                        }
-                    });
-                });
+                        });
 
-                function additionalData() {
-                    var data = {
-                        SearchCategoryName: $('#@Html.FieldIdFor(model => model.SearchCategoryName)').val()
-                    };
-                    addAntiForgeryToken(data);
-                    return data;
-                }
-            </script>
+                        $("#@Html.FieldIdFor(model => model.SearchCategoryName)").keydown(function(event) {
+                            if (event.keyCode == 13) {
+                                $("#search-categories").click();
+                                return false;
+                            }
+                        });
+                    });
+
+                    function additionalData() {
+                        var data = {
+                            SearchCategoryName: $("#@Html.FieldIdFor(model => model.SearchCategoryName)").val()
+                        };
+                        addAntiForgeryToken(data);
+                        return data;
+                    }
+                    </script>
         </td>
     </tr>
 </table>

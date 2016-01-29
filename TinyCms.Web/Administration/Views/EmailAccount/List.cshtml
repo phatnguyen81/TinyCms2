@@ -5,7 +5,7 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
         @T("Admin.Configuration.EmailAccounts")
     </div>
     <div class="options">
@@ -19,7 +19,7 @@
             <div id="email-accounts-grid"></div>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     $("#email-accounts-grid").kendoGrid({
                         dataSource: {
                             type: "json",
@@ -56,7 +56,8 @@
                             mode: "inline"
                         },
                         scrollable: false,
-                        columns: [{
+                        columns: [
+                        {
                             field: "Email",
                             title: "@T("Admin.Configuration.EmailAccounts.Fields.Email")"
                         }, {
@@ -68,20 +69,37 @@
                             width: 100,
                             headerAttributes: { style: "text-align:center" },
                             attributes: { style: "text-align:center" },
-                            template: '<img src="@Url.Content("~/Administration/Content/images/")active-#=IsDefaultEmailAccount#.gif" />'
-                        }, {
-                            field: "Id",
-                            title: "@T("Admin.Configuration.EmailAccounts.Fields.MarkAsDefaultEmail")",
-                            template: '<a href="@Url.Content("~/Admin/EmailAccount/MarkAsDefaultEmail/")#=Id#" class="k-button">@T("Admin.Configuration.EmailAccounts.Fields.MarkAsDefaultEmail")</a>'
-                        }, {
-                            field: "Id",
-                            title: "@T("Admin.Common.Edit")",
-                            width: 100,
-                            template: '<a href="Edit/#=Id#">@T("Admin.Common.Edit")</a>'
-                        }]
+                            template: "<img src=\"@Url.Content(\
+                                                      "~/Administration/Content/images/\")active-#=IsDefaultEmailAccount#.gif\" />"
+}
+
+    ,
+        {
+            "Id",
+            "@T("
+            Admin.Configuration.EmailAccounts.Fields.MarkAsDefaultEmail
+            ")",
+            "<a href=\"@Url.Content(\"~/Admin/EmailAccount/MarkAsDefaultEmail/\")#=Id#\" class=\"k-button\">@T(\"Admin.Configuration.EmailAccounts.Fields.MarkAsDefaultEmail\")</a>"
+        }
+    ,
+
+{
+    private field 
+: "Id",
+    private title 
+: "@T("
+    private Admin.Common.Edit 
+")",
+    private width 
+: 100,
+    private template 
+: "<a href=\"Edit/#=Id#\">@T(\"Admin.Common.Edit\")</a>"
+}
+]
+}
+);
                     });
-                });
-            </script>
+                    </script>
         </td>
     </tr>
 </table>

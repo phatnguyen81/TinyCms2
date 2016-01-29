@@ -1,6 +1,4 @@
-﻿
-
-namespace TinyCms.Core
+﻿namespace TinyCms.Core
 {
     public static class Extensions
     {

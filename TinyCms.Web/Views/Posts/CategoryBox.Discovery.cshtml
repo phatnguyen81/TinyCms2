@@ -3,8 +3,9 @@
 {
     var firstPost = Model.Posts.First();
     <div class="boxctn">
-        <h2><span class="headrib"></span></h2>
-        <a href="@Url.RouteUrl("Post", new { SeName = firstPost.SeName })">
+        <h2>
+            <span class="headrib"></span></h2>
+        <a href="@Url.RouteUrl("Post", new {firstPost.SeName})">
             <span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="267" height="164" alt="@firstPost.DefaultPictureModel.AlternateText" class="bigimg" /></span>
             <span class="txlink">@firstPost.Name</span>
         </a>
@@ -15,11 +16,10 @@
                 {
                     <li>
                         <span class="rightarr icn"></span>
-                        <a href="@Url.RouteUrl("Post", new { SeName = post.SeName })">@post.Name</a>
+                        <a href="@Url.RouteUrl("Post", new {post.SeName})">@post.Name</a>
                     </li>
                 }
             </ul>
         }
     </div>
 }
-

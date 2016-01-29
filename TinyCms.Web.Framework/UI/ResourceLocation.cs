@@ -1,15 +1,15 @@
-﻿
-namespace TinyCms.Web.Framework.UI
+﻿namespace TinyCms.Web.Framework.UI
 {
     public enum ResourceLocation
     {
         /// <summary>
-        /// Header
+        ///     Header
         /// </summary>
         Head,
+
         /// <summary>
-        /// Footer
+        ///     Footer
         /// </summary>
-        Foot,
+        Foot
     }
 }

@@ -1,19 +1,19 @@
 namespace TinyCms.Services.Directory
 {
     /// <summary>
-    /// GEO lookup service
+    ///     GEO lookup service
     /// </summary>
-    public partial interface IGeoLookupService
+    public interface IGeoLookupService
     {
         /// <summary>
-        /// Get country name
+        ///     Get country name
         /// </summary>
         /// <param name="ipAddress">IP address</param>
         /// <returns>Country name</returns>
         string LookupCountryIsoCode(string ipAddress);
 
         /// <summary>
-        /// Get country name
+        ///     Get country name
         /// </summary>
         /// <param name="ipAddress">IP address</param>
         /// <returns>Country name</returns>

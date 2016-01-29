@@ -11,13 +11,9 @@ namespace TinyCms.Web.Models.Posts
         }
 
         public string Name { get; set; }
-
         public string SeName { get; set; }
-
         public int? NumberOfProducts { get; set; }
-
         public bool IncludeInTopMenu { get; set; }
-
         public List<CategorySimpleModel> SubCategories { get; set; }
     }
 }

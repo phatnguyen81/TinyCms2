@@ -4,9 +4,9 @@ using System.Data.Entity;
 namespace TinyCms.Data.Initializers
 {
     /// <summary>
-    /// An implementation of IDatabaseInitializer that will always recreate and optionally re-seed the
-    /// database the first time that a context is used in the app domain.
-    /// To seed the database, create a derived class and override the Seed method.
+    ///     An implementation of IDatabaseInitializer that will always recreate and optionally re-seed the
+    ///     database the first time that a context is used in the app domain.
+    ///     To seed the database, create a derived class and override the Seed method.
     /// </summary>
     /// <typeparam name="TContext">The type of the context.</typeparam>
     public class DropCreateCeDatabaseAlways<TContext> : SqlCeInitializer<TContext> where TContext : DbContext
@@ -14,7 +14,7 @@ namespace TinyCms.Data.Initializers
         #region Strategy implementation
 
         /// <summary>
-        /// Executes the strategy to initialize the database for the given context.
+        ///     Executes the strategy to initialize the database for the given context.
         /// </summary>
         /// <param name="context">The context.</param>
         public override void InitializeDatabase(TContext context)
@@ -39,8 +39,8 @@ namespace TinyCms.Data.Initializers
         #region Seeding methods
 
         /// <summary>
-        /// A that should be overridden to actually add data to the context for seeding. 
-        /// The default implementation does nothing.
+        ///     A that should be overridden to actually add data to the context for seeding.
+        ///     The default implementation does nothing.
         /// </summary>
         /// <param name="context">The context to seed.</param>
         protected virtual void Seed(TContext context)

@@ -7,9 +7,9 @@ using TinyCms.Core.Domain.Tasks;
 namespace TinyCms.Services.Tasks
 {
     /// <summary>
-    /// Task service
+    ///     Task service
     /// </summary>
-    public partial class ScheduleTaskService : IScheduleTaskService
+    public class ScheduleTaskService : IScheduleTaskService
     {
         #region Fields
 
@@ -21,7 +21,7 @@ namespace TinyCms.Services.Tasks
 
         public ScheduleTaskService(IRepository<ScheduleTask> taskRepository)
         {
-            this._taskRepository = taskRepository;
+            _taskRepository = taskRepository;
         }
 
         #endregion
@@ -29,7 +29,7 @@ namespace TinyCms.Services.Tasks
         #region Methods
 
         /// <summary>
-        /// Deletes a task
+        ///     Deletes a task
         /// </summary>
         /// <param name="task">Task</param>
         public virtual void DeleteTask(ScheduleTask task)
@@ -41,7 +41,7 @@ namespace TinyCms.Services.Tasks
         }
 
         /// <summary>
-        /// Gets a task
+        ///     Gets a task
         /// </summary>
         /// <param name="taskId">Task identifier</param>
         /// <returns>Task</returns>
@@ -54,7 +54,7 @@ namespace TinyCms.Services.Tasks
         }
 
         /// <summary>
-        /// Gets a task by its type
+        ///     Gets a task by its type
         /// </summary>
         /// <param name="type">Task type</param>
         /// <returns>Task</returns>
@@ -72,7 +72,7 @@ namespace TinyCms.Services.Tasks
         }
 
         /// <summary>
-        /// Gets all tasks
+        ///     Gets all tasks
         /// </summary>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>Tasks</returns>
@@ -90,7 +90,7 @@ namespace TinyCms.Services.Tasks
         }
 
         /// <summary>
-        /// Inserts a task
+        ///     Inserts a task
         /// </summary>
         /// <param name="task">Task</param>
         public virtual void InsertTask(ScheduleTask task)
@@ -102,7 +102,7 @@ namespace TinyCms.Services.Tasks
         }
 
         /// <summary>
-        /// Updates the task
+        ///     Updates the task
         /// </summary>
         /// <param name="task">Task</param>
         public virtual void UpdateTask(ScheduleTask task)

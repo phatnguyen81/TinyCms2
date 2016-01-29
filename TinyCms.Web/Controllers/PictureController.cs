@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TinyCms.Services.Media;
 using TinyCms.Web.Framework.Security;
@@ -15,7 +12,7 @@ namespace TinyCms.Web.Controllers
 
         public PictureController(IPictureService pictureService)
         {
-            this._pictureService = pictureService;
+            _pictureService = pictureService;
         }
 
         [HttpPost]
@@ -34,7 +31,7 @@ namespace TinyCms.Web.Controllers
             if (String.IsNullOrEmpty(Request["qqfile"]))
             {
                 // IE
-                HttpPostedFileBase httpPostedFile = Request.Files[0];
+                var httpPostedFile = Request.Files[0];
                 if (httpPostedFile == null)
                     throw new ArgumentException("No file uploaded");
                 stream = httpPostedFile.InputStream;
@@ -113,7 +110,7 @@ namespace TinyCms.Web.Controllers
             _pictureService.DeletePicture(picture);
             return Json(new
             {
-                success = true,
+                success = true
             });
         }
     }

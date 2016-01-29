@@ -7,14 +7,14 @@ using TinyCms.Core.Infrastructure;
 namespace TinyCms.Web.Framework.Mvc.Routes
 {
     /// <summary>
-    /// Route publisher
+    ///     Route publisher
     /// </summary>
     public class RoutePublisher : IRoutePublisher
     {
         protected readonly ITypeFinder typeFinder;
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="typeFinder"></param>
         public RoutePublisher(ITypeFinder typeFinder)
@@ -22,9 +22,8 @@ namespace TinyCms.Web.Framework.Mvc.Routes
             this.typeFinder = typeFinder;
         }
 
-      
         /// <summary>
-        /// Register routes
+        ///     Register routes
         /// </summary>
         /// <param name="routes">Routes</param>
         public virtual void RegisterRoutes(RouteCollection routes)
@@ -33,7 +32,6 @@ namespace TinyCms.Web.Framework.Mvc.Routes
             var routeProviders = new List<IRouteProvider>();
             foreach (var providerType in routeProviderTypes)
             {
-               
                 var provider = Activator.CreateInstance(providerType) as IRouteProvider;
                 routeProviders.Add(provider);
             }

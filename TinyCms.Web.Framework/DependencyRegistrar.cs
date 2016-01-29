@@ -11,7 +11,6 @@ using TinyCms.Core;
 using TinyCms.Core.Caching;
 using TinyCms.Core.Configuration;
 using TinyCms.Core.Data;
-using TinyCms.Core.Domain.Posts;
 using TinyCms.Core.Fakes;
 using TinyCms.Core.Infrastructure;
 using TinyCms.Core.Infrastructure.DependencyManagement;
@@ -45,12 +44,12 @@ using TinyCms.Web.Framework.UI;
 namespace TinyCms.Web.Framework
 {
     /// <summary>
-    /// Dependency registrar
+    ///     Dependency registrar
     /// </summary>
     public class DependencyRegistrar : IDependencyRegistrar
     {
         /// <summary>
-        /// Register services and interfaces
+        ///     Register services and interfaces
         /// </summary>
         /// <param name="builder">Container builder</param>
         /// <param name="typeFinder">Type finder</param>
@@ -58,11 +57,11 @@ namespace TinyCms.Web.Framework
         public virtual void Register(ContainerBuilder builder, ITypeFinder typeFinder, NopConfig config)
         {
             //HTTP context and other related stuff
-            builder.Register(c => 
+            builder.Register(c =>
                 //register FakeHttpContext when HttpContext is not available
-                HttpContext.Current != null ?
-                (new HttpContextWrapper(HttpContext.Current) as HttpContextBase) :
-                (new FakeHttpContext("~/") as HttpContextBase))
+                HttpContext.Current != null
+                    ? (new HttpContextWrapper(HttpContext.Current) as HttpContextBase)
+                    : (new FakeHttpContext("~/") as HttpContextBase))
                 .As<HttpContextBase>()
                 .InstancePerLifetimeScope();
             builder.Register(c => c.Resolve<HttpContextBase>().Request)
@@ -83,7 +82,7 @@ namespace TinyCms.Web.Framework
             //user agent helper
             builder.RegisterType<UserAgentHelper>().As<IUserAgentHelper>().InstancePerLifetimeScope();
 
-            
+
             //controllers
             builder.RegisterControllers(typeFinder.GetAssemblies().ToArray());
 
@@ -91,10 +90,14 @@ namespace TinyCms.Web.Framework
             var dataSettingsManager = new DataSettingsManager();
             var dataProviderSettings = dataSettingsManager.LoadSettings();
             builder.Register(c => dataSettingsManager.LoadSettings()).As<DataSettings>();
-            builder.Register(x => new EfDataProviderManager(x.Resolve<DataSettings>())).As<BaseDataProviderManager>().InstancePerDependency();
+            builder.Register(x => new EfDataProviderManager(x.Resolve<DataSettings>()))
+                .As<BaseDataProviderManager>()
+                .InstancePerDependency();
 
 
-            builder.Register(x => x.Resolve<BaseDataProviderManager>().LoadDataProvider()).As<IDataProvider>().InstancePerDependency();
+            builder.Register(x => x.Resolve<BaseDataProviderManager>().LoadDataProvider())
+                .As<IDataProvider>()
+                .InstancePerDependency();
 
             if (dataProviderSettings != null && dataProviderSettings.IsValid())
             {
@@ -102,20 +105,23 @@ namespace TinyCms.Web.Framework
                 var dataProvider = efDataProviderManager.LoadDataProvider();
                 dataProvider.InitConnectionFactory();
 
-                builder.Register<IDbContext>(c => new NopObjectContext(dataProviderSettings.DataConnectionString)).InstancePerLifetimeScope();
+                builder.Register<IDbContext>(c => new NopObjectContext(dataProviderSettings.DataConnectionString))
+                    .InstancePerLifetimeScope();
             }
             else
             {
-                builder.Register<IDbContext>(c => new NopObjectContext(dataSettingsManager.LoadSettings().DataConnectionString)).InstancePerLifetimeScope();
+                builder.Register<IDbContext>(
+                    c => new NopObjectContext(dataSettingsManager.LoadSettings().DataConnectionString))
+                    .InstancePerLifetimeScope();
             }
 
 
-            builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof (EfRepository<>)).As(typeof (IRepository<>)).InstancePerLifetimeScope();
 
             //plugins
             builder.RegisterType<PluginFinder>().As<IPluginFinder>().InstancePerLifetimeScope();
             builder.RegisterType<OfficialFeedManager>().As<IOfficialFeedManager>().InstancePerLifetimeScope();
-            
+
             //cache managers
             if (config.RedisCachingEnabled)
             {
@@ -123,9 +129,15 @@ namespace TinyCms.Web.Framework
             }
             else
             {
-                builder.RegisterType<MemoryCacheManager>().As<ICacheManager>().Named<ICacheManager>("nop_cache_static").SingleInstance();
+                builder.RegisterType<MemoryCacheManager>()
+                    .As<ICacheManager>()
+                    .Named<ICacheManager>("nop_cache_static")
+                    .SingleInstance();
             }
-            builder.RegisterType<PerRequestCacheManager>().As<ICacheManager>().Named<ICacheManager>("nop_cache_per_request").InstancePerLifetimeScope();
+            builder.RegisterType<PerRequestCacheManager>()
+                .As<ICacheManager>()
+                .Named<ICacheManager>("nop_cache_per_request")
+                .InstancePerLifetimeScope();
 
             if (config.RunOnAzureWebsites)
             {
@@ -148,7 +160,7 @@ namespace TinyCms.Web.Framework
             builder.RegisterType<CategoryTypeService>().As<ICategoryTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<TopicService>().As<ITopicService>().InstancePerLifetimeScope();
             builder.RegisterType<TopicTemplateService>().As<ITopicTemplateService>().InstancePerLifetimeScope();
-            
+
             //use static cache (between HTTP requests)
             builder.RegisterType<SearchTermService>().As<ISearchTermService>().InstancePerLifetimeScope();
             builder.RegisterType<GenericAttributeService>().As<IGenericAttributeService>().InstancePerLifetimeScope();
@@ -159,7 +171,9 @@ namespace TinyCms.Web.Framework
             builder.RegisterType<CustomerAttributeParser>().As<ICustomerAttributeParser>().InstancePerLifetimeScope();
             builder.RegisterType<CustomerAttributeService>().As<ICustomerAttributeService>().InstancePerLifetimeScope();
             builder.RegisterType<CustomerService>().As<ICustomerService>().InstancePerLifetimeScope();
-            builder.RegisterType<CustomerRegistrationService>().As<ICustomerRegistrationService>().InstancePerLifetimeScope();
+            builder.RegisterType<CustomerRegistrationService>()
+                .As<ICustomerRegistrationService>()
+                .InstancePerLifetimeScope();
             builder.RegisterType<CustomerReportService>().As<ICustomerReportService>().InstancePerLifetimeScope();
 
             //use static cache (between HTTP requests)
@@ -200,7 +214,9 @@ namespace TinyCms.Web.Framework
             builder.RegisterType<Tokenizer>().As<ITokenizer>().InstancePerLifetimeScope();
             builder.RegisterType<EmailSender>().As<IEmailSender>().InstancePerLifetimeScope();
             builder.RegisterType<WorkflowMessageService>().As<IWorkflowMessageService>().InstancePerLifetimeScope();
-            builder.RegisterType<NewsLetterSubscriptionService>().As<INewsLetterSubscriptionService>().InstancePerLifetimeScope();
+            builder.RegisterType<NewsLetterSubscriptionService>()
+                .As<INewsLetterSubscriptionService>()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<EncryptionService>().As<IEncryptionService>().InstancePerLifetimeScope();
             builder.RegisterType<FormsAuthenticationService>().As<IAuthenticationService>().InstancePerLifetimeScope();
@@ -254,33 +270,37 @@ namespace TinyCms.Web.Framework
 
 
             builder.RegisterType<ExternalAuthorizer>().As<IExternalAuthorizer>().InstancePerLifetimeScope();
-            builder.RegisterType<OpenAuthenticationService>().As<IOpenAuthenticationService>().InstancePerLifetimeScope();
+            builder.RegisterType<OpenAuthenticationService>()
+                .As<IOpenAuthenticationService>()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<ExternalAuthorizer>().As<IExternalAuthorizer>().InstancePerLifetimeScope();
-            builder.RegisterType<OpenAuthenticationService>().As<IOpenAuthenticationService>().InstancePerLifetimeScope();
-           
-                
+            builder.RegisterType<OpenAuthenticationService>()
+                .As<IOpenAuthenticationService>()
+                .InstancePerLifetimeScope();
+
+
             builder.RegisterType<RoutePublisher>().As<IRoutePublisher>().SingleInstance();
 
             //Register event consumers
-            var consumers = typeFinder.FindClassesOfType(typeof(IConsumer<>)).ToList();
+            var consumers = typeFinder.FindClassesOfType(typeof (IConsumer<>)).ToList();
             foreach (var consumer in consumers)
             {
                 builder.RegisterType(consumer)
                     .As(consumer.FindInterfaces((type, criteria) =>
                     {
-                        var isMatch = type.IsGenericType && ((Type)criteria).IsAssignableFrom(type.GetGenericTypeDefinition());
+                        var isMatch = type.IsGenericType &&
+                                      ((Type) criteria).IsAssignableFrom(type.GetGenericTypeDefinition());
                         return isMatch;
-                    }, typeof(IConsumer<>)))
+                    }, typeof (IConsumer<>)))
                     .InstancePerLifetimeScope();
             }
             builder.RegisterType<EventPublisher>().As<IEventPublisher>().SingleInstance();
             builder.RegisterType<SubscriptionService>().As<ISubscriptionService>().SingleInstance();
-
         }
 
         /// <summary>
-        /// Order of this dependency registrar implementation
+        ///     Order of this dependency registrar implementation
         /// </summary>
         public int Order
         {
@@ -291,34 +311,33 @@ namespace TinyCms.Web.Framework
 
     public class SettingsSource : IRegistrationSource
     {
-        static readonly MethodInfo BuildMethod = typeof(SettingsSource).GetMethod(
+        private static readonly MethodInfo BuildMethod = typeof (SettingsSource).GetMethod(
             "BuildRegistration",
             BindingFlags.Static | BindingFlags.NonPublic);
 
         public IEnumerable<IComponentRegistration> RegistrationsFor(
-                Service service,
-                Func<Service, IEnumerable<IComponentRegistration>> registrations)
+            Service service,
+            Func<Service, IEnumerable<IComponentRegistration>> registrations)
         {
             var ts = service as TypedService;
-            if (ts != null && typeof(ISettings).IsAssignableFrom(ts.ServiceType))
+            if (ts != null && typeof (ISettings).IsAssignableFrom(ts.ServiceType))
             {
                 var buildMethod = BuildMethod.MakeGenericMethod(ts.ServiceType);
-                yield return (IComponentRegistration)buildMethod.Invoke(null, null);
+                yield return (IComponentRegistration) buildMethod.Invoke(null, null);
             }
         }
 
-        static IComponentRegistration BuildRegistration<TSettings>() where TSettings : ISettings, new()
+        public bool IsAdapterForIndividualComponents
+        {
+            get { return false; }
+        }
+
+        private static IComponentRegistration BuildRegistration<TSettings>() where TSettings : ISettings, new()
         {
             return RegistrationBuilder
-                .ForDelegate((c, p) =>
-                {
-                    return c.Resolve<ISettingService>().LoadSetting<TSettings>();
-                })
+                .ForDelegate((c, p) => { return c.Resolve<ISettingService>().LoadSetting<TSettings>(); })
                 .InstancePerLifetimeScope()
                 .CreateRegistration();
         }
-
-        public bool IsAdapterForIndividualComponents { get { return false; } }
     }
-
 }

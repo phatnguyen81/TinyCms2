@@ -6,8 +6,8 @@ using TinyCms.Web.Validators.Customer;
 
 namespace TinyCms.Web.Models.Customer
 {
-    [Validator(typeof(PasswordRecoveryValidator))]
-    public partial class PasswordRecoveryModel : BaseNopModel
+    [Validator(typeof (PasswordRecoveryValidator))]
+    public class PasswordRecoveryModel : BaseNopModel
     {
         [AllowHtml]
         [NopResourceDisplayName("Account.PasswordRecovery.Email")]

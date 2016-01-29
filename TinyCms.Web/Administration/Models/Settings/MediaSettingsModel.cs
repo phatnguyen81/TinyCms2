@@ -3,9 +3,8 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Settings
 {
-    public partial class MediaSettingsModel : BaseNopModel
+    public class MediaSettingsModel : BaseNopModel
     {
-
         [NopResourceDisplayName("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase")]
         public bool PicturesStoredIntoDatabase { get; set; }
 
@@ -47,6 +46,5 @@ namespace TinyCms.Admin.Models.Settings
 
         [NopResourceDisplayName("Admin.Configuration.Settings.Media.DefaultImageQuality")]
         public int DefaultImageQuality { get; set; }
-
     }
 }

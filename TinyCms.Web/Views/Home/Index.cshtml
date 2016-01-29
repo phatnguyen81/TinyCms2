@@ -20,22 +20,22 @@
 <div class="top_news">
     @*@Html.Action("HomePageHotNews", "Posts", new { postThumbPictureSize = 500 })*@
     @*@Html.Action("CategoryBox", "Posts", new { categoryId = hotNewsCategoryId, numberPost = hotNewsCategoryNumberPost, template = "CategoryBox.HotNews", postThumbPictureSize = 500 })*@
-    @Html.Action("HomePagePosts", "Posts", new { postThumbPictureSize = 600 })
+    @Html.Action("HomePagePosts", "Posts", new {postThumbPictureSize = 600})
     <div class="rightlist_banner">
         @Html.Widget("home_right_header")
     </div>
 </div>
 @Html.Partial("ToolBoxMobile")
 
-@Html.Action("CategoryBox", "Posts", new { categoryId = pictureAndVideoCategoryId, numberPost = pictureAndVideoPostNumber, template = "CategoryBox.PictureAndVideo", postThumbPictureSize = 185 })
+@Html.Action("CategoryBox", "Posts", new {categoryId = pictureAndVideoCategoryId, numberPost = pictureAndVideoPostNumber, template = "CategoryBox.PictureAndVideo", postThumbPictureSize = 185})
 <div class="large_banner">
     @Html.Widget("home_wide_banner")
 </div>
 <div class="mainpage">
     <div class="sidebar">
         @Html.Partial("ToolBox")
-        @Html.Action("CategoryBox", "Posts", new { categoryId = discoveryCategoryId, numberPost = discoveryPostNumber, template = "CategoryBox.Discovery", postThumbPictureSize = 270 })
-        @Html.Action("CategoryBox", "Posts", new { categoryId = travelViaPictureCategoryId, numberPost = travelViaPicturePostNumber, template = "CategoryBox.TravelViaPicture", postThumbPictureSize = 270 })
+        @Html.Action("CategoryBox", "Posts", new {categoryId = discoveryCategoryId, numberPost = discoveryPostNumber, template = "CategoryBox.Discovery", postThumbPictureSize = 270})
+        @Html.Action("CategoryBox", "Posts", new {categoryId = travelViaPictureCategoryId, numberPost = travelViaPicturePostNumber, template = "CategoryBox.TravelViaPicture", postThumbPictureSize = 270})
         <div class="sidebanner">
             @Html.Widget("home_sidebar_banner")
         </div>

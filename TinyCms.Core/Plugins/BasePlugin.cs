@@ -3,25 +3,24 @@
     public abstract class BasePlugin : IPlugin
     {
         /// <summary>
-        /// Gets or sets the plugin descriptor
+        ///     Gets or sets the plugin descriptor
         /// </summary>
         public virtual PluginDescriptor PluginDescriptor { get; set; }
 
         /// <summary>
-        /// Install plugin
+        ///     Install plugin
         /// </summary>
-        public virtual void Install() 
+        public virtual void Install()
         {
-            PluginManager.MarkPluginAsInstalled(this.PluginDescriptor.SystemName);
+            PluginManager.MarkPluginAsInstalled(PluginDescriptor.SystemName);
         }
 
         /// <summary>
-        /// Uninstall plugin
+        ///     Uninstall plugin
         /// </summary>
-        public virtual void Uninstall() 
+        public virtual void Uninstall()
         {
-            PluginManager.MarkPluginAsUninstalled(this.PluginDescriptor.SystemName);
+            PluginManager.MarkPluginAsUninstalled(PluginDescriptor.SystemName);
         }
-
     }
 }

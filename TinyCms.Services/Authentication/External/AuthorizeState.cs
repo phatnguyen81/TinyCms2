@@ -2,14 +2,13 @@
 
 using System.Collections.Generic;
 using System.Web.Mvc;
-using TinyCms.Services.Authentication.External;
 
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// Authorize state
+    ///     Authorize state
     /// </summary>
-    public partial class AuthorizeState
+    public class AuthorizeState
     {
         public AuthorizeState(string returnUrl, OpenAuthenticationStatus openAuthenticationStatus)
         {
@@ -30,30 +29,30 @@ namespace TinyCms.Services.Authentication.External
         public OpenAuthenticationStatus AuthenticationStatus { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether request has been completed successfully
+        ///     Gets a value indicating whether request has been completed successfully
         /// </summary>
         public bool Success
         {
-            get { return (this.Errors.Count == 0); }
+            get { return (Errors.Count == 0); }
         }
 
         /// <summary>
-        /// Add error
-        /// </summary>
-        /// <param name="error">Error</param>
-        public void AddError(string error)
-        {
-            this.Errors.Add(error);
-        }
-
-        /// <summary>
-        /// Errors
+        ///     Errors
         /// </summary>
         public IList<string> Errors { get; set; }
 
         /// <summary>
-        /// Result
+        ///     Result
         /// </summary>
         public ActionResult Result { get; set; }
+
+        /// <summary>
+        ///     Add error
+        /// </summary>
+        /// <param name="error">Error</param>
+        public void AddError(string error)
+        {
+            Errors.Add(error);
+        }
     }
 }

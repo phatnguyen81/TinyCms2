@@ -2,7 +2,7 @@
 @Html.ValidationSummary(false)
 @Html.HiddenFor(model => model.Id)
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#topic-edit").kendoTabStrip({
             animation: {
                 open: {
@@ -38,7 +38,7 @@
 
 @{
     //custom tabs
-    var eventMessage = new AdminTabStripCreated(this.Html, "topic-edit");
+    var eventMessage = new AdminTabStripCreated(Html, "topic-edit");
     EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
     foreach (var eventBlock in eventMessage.BlocksToRender)
     {
@@ -50,7 +50,7 @@
 <input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
 
 @helper TabInfo()
-    {
+{
     <script type="text/javascript">
         $(document).ready(function() {
             $("#@Html.FieldIdFor(model => model.IsPasswordProtected)").click(togglePassword);
@@ -58,60 +58,60 @@
         });
 
         function togglePassword() {
-            if ($('#@Html.FieldIdFor(model => model.IsPasswordProtected)').is(':checked')) {
-                $('#pnlPasswordEnabled').show();
+            if ($("#@Html.FieldIdFor(model => model.IsPasswordProtected)").is(":checked")) {
+                $("#pnlPasswordEnabled").show();
             } else {
-                $('#pnlPasswordEnabled').hide();
+                $("#pnlPasswordEnabled").hide();
             }
         }
     </script>
     @(Html.LocalizedEditor<TopicModel, TopicLocalizedModel>("topic-info-localized",
           @<table class="adminContent">
-               <tr>
-                   <td class="adminTitle">
-                       @Html.NopLabelFor(model => model.Locales[item].Title):
-                   </td>
-                   <td class="adminData">
-                       @Html.EditorFor(model => model.Locales[item].Title)
-                       @Html.ValidationMessageFor(model => model.Locales[item].Title)
-                   </td>
-               </tr>
-               <tr>
-                   <td class="adminTitle">
-                       @Html.NopLabelFor(model => model.Locales[item].Body):
-                   </td>
-                   <td class="adminData">
-                       @Html.EditorFor(model => model.Locales[item].Body, "RichEditor")
-                       @Html.ValidationMessageFor(model => model.Locales[item].Body)
-                   </td>
-               </tr>
-               <tr>
-                   <td colspan="2">
-                       @Html.HiddenFor(model => model.Locales[item].LanguageId)
-                   </td>
-               </tr>
-           </table>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].Title):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].Title)
+                      @Html.ValidationMessageFor(model => model.Locales[item].Title)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].Body):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].Body, "RichEditor")
+                      @Html.ValidationMessageFor(model => model.Locales[item].Body)
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      @Html.HiddenFor(model => model.Locales[item].LanguageId)
+                  </td>
+              </tr>
+          </table>
         ,
           @<table class="adminContent">
-               <tr>
-                   <td class="adminTitle">
-                       @Html.NopLabelFor(model => model.Title):
-                   </td>
-                   <td class="adminData">
-                       @Html.EditorFor(model => model.Title)
-                       @Html.ValidationMessageFor(model => model.Title)
-                   </td>
-               </tr>
-               <tr>
-                   <td class="adminTitle">
-                       @Html.NopLabelFor(model => model.Body):
-                   </td>
-                   <td class="adminData">
-                       @Html.EditorFor(x => x.Body, "RichEditor")
-                       @Html.ValidationMessageFor(model => model.Body)
-                   </td>
-               </tr>
-           </table>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Title):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Title)
+                      @Html.ValidationMessageFor(model => model.Title)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Body):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(x => x.Body, "RichEditor")
+                      @Html.ValidationMessageFor(model => model.Body)
+                  </td>
+              </tr>
+          </table>
           ))
     <table class="adminContent">
         <tr>
@@ -227,96 +227,96 @@
     </table>
 }
 @helper TabSeo()
-    {
+{
     @(Html.LocalizedEditor<TopicModel, TopicLocalizedModel>("topic-seo-localized",
-               @<table class="adminContent">
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.Locales[item].MetaKeywords):
-                       </td>
-                       <td class="adminData">
-                           @Html.EditorFor(model => model.Locales[item].MetaKeywords)
-                           @Html.ValidationMessageFor(model => model.Locales[item].MetaKeywords)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.Locales[item].MetaDescription):
-                       </td>
-                       <td class="adminData">
-                           @Html.TextAreaFor(model => model.Locales[item].MetaDescription)
-                           @Html.ValidationMessageFor(model => model.Locales[item].MetaDescription)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.Locales[item].MetaTitle):
-                       </td>
-                       <td class="adminData">
-                           @Html.EditorFor(model => model.Locales[item].MetaTitle)
-                           @Html.ValidationMessageFor(model => model.Locales[item].MetaTitle)
-                       </td>
-                   </tr>
-                <tr>
-                    <td class="adminTitle">
-                        @Html.NopLabelFor(model => model.Locales[item].SeName):
-                    </td>
-                    <td class="adminData">
-                        @Html.EditorFor(model => model.Locales[item].SeName)
-                        @Html.ValidationMessageFor(model => model.Locales[item].SeName)
-                    </td>
-                </tr>
-                   <tr>
-                       <td colspan="2">
-                           @Html.HiddenFor(model => model.Locales[item].LanguageId)
-                       </td>
-                   </tr>
-               </table>
-               ,
-               @<table class="adminContent">
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.MetaKeywords):
-                       </td>
-                       <td class="adminData">
-                           @Html.EditorFor(x => x.MetaKeywords)
-                           @Html.ValidationMessageFor(model => model.MetaKeywords)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.MetaDescription):
-                       </td>
-                       <td class="adminData">
-                           @Html.TextAreaFor(x => x.MetaDescription)
-                           @Html.ValidationMessageFor(model => model.MetaDescription)
-                       </td>
-                   </tr>
-                   <tr>
-                       <td class="adminTitle">
-                           @Html.NopLabelFor(model => model.MetaTitle):
-                       </td>
-                       <td class="adminData">
-                           @Html.EditorFor(x => x.MetaTitle)
-                           @Html.ValidationMessageFor(model => model.MetaTitle)
-                       </td>
-                   </tr>
-                    <tr>
-                        <td class="adminTitle">
-                            @Html.NopLabelFor(model => model.SeName):
-                        </td>
-                        <td class="adminData">
-                            @Html.EditorFor(x => x.SeName)
-                            @Html.ValidationMessageFor(model => model.SeName)
-                        </td>
-                    </tr>
-               </table>))
+          @<table class="adminContent">
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].MetaKeywords):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].MetaKeywords)
+                      @Html.ValidationMessageFor(model => model.Locales[item].MetaKeywords)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].MetaDescription):
+                  </td>
+                  <td class="adminData">
+                      @Html.TextAreaFor(model => model.Locales[item].MetaDescription)
+                      @Html.ValidationMessageFor(model => model.Locales[item].MetaDescription)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].MetaTitle):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].MetaTitle)
+                      @Html.ValidationMessageFor(model => model.Locales[item].MetaTitle)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.Locales[item].SeName):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(model => model.Locales[item].SeName)
+                      @Html.ValidationMessageFor(model => model.Locales[item].SeName)
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      @Html.HiddenFor(model => model.Locales[item].LanguageId)
+                  </td>
+              </tr>
+          </table>
+        ,
+          @<table class="adminContent">
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.MetaKeywords):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(x => x.MetaKeywords)
+                      @Html.ValidationMessageFor(model => model.MetaKeywords)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.MetaDescription):
+                  </td>
+                  <td class="adminData">
+                      @Html.TextAreaFor(x => x.MetaDescription)
+                      @Html.ValidationMessageFor(model => model.MetaDescription)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.MetaTitle):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(x => x.MetaTitle)
+                      @Html.ValidationMessageFor(model => model.MetaTitle)
+                  </td>
+              </tr>
+              <tr>
+                  <td class="adminTitle">
+                      @Html.NopLabelFor(model => model.SeName):
+                  </td>
+                  <td class="adminData">
+                      @Html.EditorFor(x => x.SeName)
+                      @Html.ValidationMessageFor(model => model.SeName)
+                  </td>
+              </tr>
+          </table>))
 }
 
 @helper TabAcl()
 {
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             $("#@Html.FieldIdFor(model => model.SubjectToAcl)").click(toggleAcl);
 
@@ -325,11 +325,10 @@
 
 
         function toggleAcl() {
-            if ($('#@Html.FieldIdFor(model => model.SubjectToAcl)').is(':checked')) {
-                $('#pnl-acl').show();
-            }
-            else {
-                $('#pnl-acl').hide();
+            if ($("#@Html.FieldIdFor(model => model.SubjectToAcl)").is(":checked")) {
+                $("#pnl-acl").show();
+            } else {
+                $("#pnl-acl").hide();
             }
         }
 
@@ -355,7 +354,7 @@
                     foreach (var customerRole in Model.AvailableCustomerRoles)
                     {
                         <div>
-                            <input type="checkbox" name="SelectedCustomerRoleIds" value="@customerRole.Id" checked="@(Model.SelectedCustomerRoleIds != null && Model.SelectedCustomerRoleIds.Contains(customerRole.Id))" />@customerRole.Name
+                            <input type="checkbox" name="SelectedCustomerRoleIds" value="@customerRole.Id" checked="@(Model.SelectedCustomerRoleIds != null && Model.SelectedCustomerRoleIds.Contains(customerRole.Id))"/>@customerRole.Name
                         </div>
                     }
                 }

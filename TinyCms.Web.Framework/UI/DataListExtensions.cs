@@ -10,7 +10,7 @@ namespace TinyCms.Web.Framework.UI
     public static class DataListExtensions
     {
         public static IHtmlString DataList<T>(this HtmlHelper helper, IEnumerable<T> items, int columns,
-            Func<T, HelperResult> template) 
+            Func<T, HelperResult> template)
             where T : class
         {
             if (items == null)
@@ -19,16 +19,16 @@ namespace TinyCms.Web.Framework.UI
             var sb = new StringBuilder();
             sb.Append("<table>");
 
-            int cellIndex = 0;
+            var cellIndex = 0;
 
-            foreach (T item in items)
+            foreach (var item in items)
             {
                 if (cellIndex == 0)
                     sb.Append("<tr>");
 
                 sb.Append("<td");
                 sb.Append(">");
-                
+
                 sb.Append(template(item).ToHtmlString());
                 sb.Append("</td>");
 

@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -17,7 +16,7 @@ namespace TinyCms.Web.Framework.Kendoui
             {
                 return error.ErrorMessage;
             }
-            var args = new object[] { modelState.Value.AttemptedValue };
+            var args = new object[] {modelState.Value.AttemptedValue};
             return string.Format("ValueNotValidForProperty=The value '{0}' is invalid", args);
         }
 

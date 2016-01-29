@@ -3,8 +3,10 @@
 {
     var firstPost = Model.First();
     <div class="hotnews">
-        <a href="@Url.RouteUrl("Post", new {SeName = firstPost.SeName})"><span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="470" height="260" alt="" class="newsimg" /></span></a>
-        <h1><a href="@Url.RouteUrl("Post", new {SeName = firstPost.SeName})">@firstPost.Name</a>
+        <a href="@Url.RouteUrl("Post", new {firstPost.SeName})">
+            <span class="loading"><img src="@firstPost.DefaultPictureModel.ImageUrl" width="470" height="260" alt="" class="newsimg" /></span></a>
+        <h1>
+            <a href="@Url.RouteUrl("Post", new {firstPost.SeName})">@firstPost.Name</a>
         </h1>
         <p class="content">@firstPost.ShortDescription</p>
 
@@ -15,20 +17,20 @@
                 foreach (var post in Model.Skip(1).Take(2))
                 {
                     <em></em>
-                    <a href="@Url.RouteUrl("Post", new {SeName = post.SeName})">@post.Name</a>
+                    <a href="@Url.RouteUrl("Post", new {post.SeName})">@post.Name</a>
                     <br/>
                 }
             }
         </p>
     </div>
-    
+
     if (Model.Count() > 3)
     {
         var fourthPost = Model.Skip(3).First();
         <p class="caption">Các tin khác</p>
         <div class="listnews">
             <div class="toplist">
-                <a href="@Url.RouteUrl("Post", new { SeName = fourthPost.SeName })">
+                <a href="@Url.RouteUrl("Post", new {fourthPost.SeName})">
                     <span class="loading"><img src="@fourthPost.DefaultPictureModel.ImageUrl" width="170" height="107" alt="@fourthPost.DefaultPictureModel.AlternateText" /></span>
                     <span> @fourthPost.Name</span>
                 </a>
@@ -39,7 +41,7 @@
                     @foreach (var post in Model.Skip(4))
                     {
                         <li>
-                            <a href="@Url.RouteUrl("Post", new {SeName = post.SeName})">
+                            <a href="@Url.RouteUrl("Post", new {post.SeName})">
                                 @post.Name
                             </a>
                         </li>
@@ -49,9 +51,10 @@
         </div>
         <script type="text/javascript">
             var niceScroll;
-            $(document).ready(function () {
+            $(document).ready(function() {
                 enableNiceScroll();
             });
+
             function enableNiceScroll() {
                 if (niceScroll && $(window).width() <= 400) {
                     niceScroll.remove();
@@ -61,7 +64,8 @@
                     niceScroll = $(".listnews").niceScroll({ cursorcolor: "#aaa" });
                 }
             }
-            $(window).resize(function () {
+
+            $(window).resize(function() {
                 enableNiceScroll();
             });
         </script>

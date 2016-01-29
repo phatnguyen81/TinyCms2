@@ -27,7 +27,8 @@ namespace TinyCms.Web.Framework
 
             // Add attributes
             var urlHelper = new UrlHelper(helper.ViewContext.RequestContext);
-            var url = MvcHtmlString.Create(urlHelper.Content("~/Administration/Content/images/ico-help.gif")).ToHtmlString();
+            var url =
+                MvcHtmlString.Create(urlHelper.Content("~/Administration/Content/images/ico-help.gif")).ToHtmlString();
 
             builder.MergeAttribute("src", url);
             builder.MergeAttribute("alt", value);
@@ -47,7 +48,7 @@ namespace TinyCms.Web.Framework
             return new HelperResult(writer =>
             {
                 var localizationSupported = helper.ViewData.Model.Locales.Count > 1;
-          
+
                 if (localizationSupported)
                 {
                     var tabStrip = new StringBuilder();
@@ -62,7 +63,8 @@ namespace TinyCms.Web.Framework
                     foreach (var locale in helper.ViewData.Model.Locales)
                     {
                         //languages
-                        var language = EngineContext.Current.Resolve<ILanguageService>().GetLanguageById(locale.LanguageId);
+                        var language =
+                            EngineContext.Current.Resolve<ILanguageService>().GetLanguageById(locale.LanguageId);
 
                         tabStrip.AppendLine("<li>");
                         var urlHelper = new UrlHelper(helper.ViewContext.RequestContext);
@@ -74,13 +76,12 @@ namespace TinyCms.Web.Framework
                     tabStrip.AppendLine("</ul>");
 
 
-
                     //default tab
                     tabStrip.AppendLine("<div>");
                     tabStrip.AppendLine(standardTemplate(helper.ViewData.Model).ToHtmlString());
                     tabStrip.AppendLine("</div>");
 
-                    for (int i = 0; i < helper.ViewData.Model.Locales.Count; i++)
+                    for (var i = 0; i < helper.ViewData.Model.Locales.Count; i++)
                     {
                         //languages
                         tabStrip.AppendLine("<div>");
@@ -109,7 +110,8 @@ namespace TinyCms.Web.Framework
             });
         }
 
-        public static MvcHtmlString DeleteConfirmation<T>(this HtmlHelper<T> helper, string buttonsSelector) where T : BaseNopEntityModel
+        public static MvcHtmlString DeleteConfirmation<T>(this HtmlHelper<T> helper, string buttonsSelector)
+            where T : BaseNopEntityModel
         {
             return DeleteConfirmation(helper, "", buttonsSelector);
         }
@@ -120,8 +122,9 @@ namespace TinyCms.Web.Framework
             if (String.IsNullOrEmpty(actionName))
                 actionName = "Delete";
 
-            var modalId =  MvcHtmlString.Create(helper.ViewData.ModelMetadata.ModelType.Name.ToLower() + "-delete-confirmation")
-                .ToHtmlString();
+            var modalId =
+                MvcHtmlString.Create(helper.ViewData.ModelMetadata.ModelType.Name.ToLower() + "-delete-confirmation")
+                    .ToHtmlString();
 
             var deleteConfirmationModel = new DeleteConfirmationModel
             {
@@ -144,7 +147,8 @@ namespace TinyCms.Web.Framework
             window.AppendLine("if (!window.data('kendoWindow')) {");
             window.AppendLine("window.kendoWindow({");
             window.AppendLine("modal: true,");
-            window.AppendLine(string.Format("title: '{0}',", EngineContext.Current.Resolve<ILocalizationService>().GetResource("Admin.Common.AreYouSure")));
+            window.AppendLine(string.Format("title: '{0}',",
+                EngineContext.Current.Resolve<ILocalizationService>().GetResource("Admin.Common.AreYouSure")));
             window.AppendLine("actions: ['Close']");
             window.AppendLine("});");
             window.AppendLine("}");
@@ -156,7 +160,8 @@ namespace TinyCms.Web.Framework
             return MvcHtmlString.Create(window.ToString());
         }
 
-        public static MvcHtmlString NopLabelFor<TModel, TValue>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TValue>> expression, bool displayHint = true)
+        public static MvcHtmlString NopLabelFor<TModel, TValue>(this HtmlHelper<TModel> helper,
+            Expression<Func<TModel, TValue>> expression, bool displayHint = true)
         {
             var result = new StringBuilder();
             var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
@@ -174,7 +179,7 @@ namespace TinyCms.Web.Framework
                     result.Append(helper.Hint(hintResource).ToHtmlString());
                 }
             }
-            result.Append(helper.LabelFor(expression, new { title = hintResource }));
+            result.Append(helper.LabelFor(expression, new {title = hintResource}));
             return MvcHtmlString.Create(result.ToString());
         }
 
@@ -185,8 +190,10 @@ namespace TinyCms.Web.Framework
         {
             var dataInputIds = new List<string>();
             dataInputIds.Add(helper.FieldIdFor(forInputExpression));
-            return OverrideStoreCheckboxFor(helper, expression, activeStoreScopeConfiguration, null, dataInputIds.ToArray());
+            return OverrideStoreCheckboxFor(helper, expression, activeStoreScopeConfiguration, null,
+                dataInputIds.ToArray());
         }
+
         public static MvcHtmlString OverrideStoreCheckboxFor<TModel, TValue1, TValue2>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, bool>> expression,
             Expression<Func<TModel, TValue1>> forInputExpression1,
@@ -196,9 +203,12 @@ namespace TinyCms.Web.Framework
             var dataInputIds = new List<string>();
             dataInputIds.Add(helper.FieldIdFor(forInputExpression1));
             dataInputIds.Add(helper.FieldIdFor(forInputExpression2));
-            return OverrideStoreCheckboxFor(helper, expression, activeStoreScopeConfiguration, null, dataInputIds.ToArray());
+            return OverrideStoreCheckboxFor(helper, expression, activeStoreScopeConfiguration, null,
+                dataInputIds.ToArray());
         }
-        public static MvcHtmlString OverrideStoreCheckboxFor<TModel, TValue1, TValue2, TValue3>(this HtmlHelper<TModel> helper,
+
+        public static MvcHtmlString OverrideStoreCheckboxFor<TModel, TValue1, TValue2, TValue3>(
+            this HtmlHelper<TModel> helper,
             Expression<Func<TModel, bool>> expression,
             Expression<Func<TModel, TValue1>> forInputExpression1,
             Expression<Func<TModel, TValue2>> forInputExpression2,
@@ -209,8 +219,10 @@ namespace TinyCms.Web.Framework
             dataInputIds.Add(helper.FieldIdFor(forInputExpression1));
             dataInputIds.Add(helper.FieldIdFor(forInputExpression2));
             dataInputIds.Add(helper.FieldIdFor(forInputExpression3));
-            return OverrideStoreCheckboxFor(helper, expression, activeStoreScopeConfiguration, null, dataInputIds.ToArray());
+            return OverrideStoreCheckboxFor(helper, expression, activeStoreScopeConfiguration, null,
+                dataInputIds.ToArray());
         }
+
         public static MvcHtmlString OverrideStoreCheckboxFor<TModel>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, bool>> expression,
             string parentContainer,
@@ -218,6 +230,7 @@ namespace TinyCms.Web.Framework
         {
             return OverrideStoreCheckboxFor(helper, expression, activeStoreScopeConfiguration, parentContainer);
         }
+
         private static MvcHtmlString OverrideStoreCheckboxFor<TModel>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, bool>> expression,
             int activeStoreScopeConfiguration,
@@ -232,10 +245,11 @@ namespace TinyCms.Web.Framework
             {
                 //render only when a certain store is chosen
                 const string cssClass = "multi-store-override-option";
-                string dataInputSelector = "";
+                var dataInputSelector = "";
                 if (!String.IsNullOrEmpty(parentContainer))
                 {
-                    dataInputSelector = "#" + parentContainer + " input, #" + parentContainer + " textarea, #" + parentContainer + " select";
+                    dataInputSelector = "#" + parentContainer + " input, #" + parentContainer + " textarea, #" +
+                                        parentContainer + " select";
                 }
                 if (datainputIds != null && datainputIds.Length > 0)
                 {
@@ -244,16 +258,16 @@ namespace TinyCms.Web.Framework
                 var onClick = string.Format("checkOverriddenStoreValue(this, '{0}')", dataInputSelector);
                 result.Append(helper.CheckBoxFor(expression, new Dictionary<string, object>
                 {
-                    { "class", cssClass },
-                    { "onclick", onClick },
-                    { "data-for-input-selector", dataInputSelector },
+                    {"class", cssClass},
+                    {"onclick", onClick},
+                    {"data-for-input-selector", dataInputSelector}
                 }));
             }
             return MvcHtmlString.Create(result.ToString());
         }
 
         /// <summary>
-        /// Render CSS styles of selected index 
+        ///     Render CSS styles of selected index
         /// </summary>
         /// <param name="helper">HTML helper</param>
         /// <param name="currentIndex">Current tab index (where appropriate CSS style should be rendred)</param>
@@ -267,11 +281,11 @@ namespace TinyCms.Web.Framework
             //ensure it's not negative
             if (indexToSelect < 0)
                 indexToSelect = 0;
-            
+
             //required validation
             if (indexToSelect == currentIndex)
             {
-            return new MvcHtmlString(" class='k-state-active'");
+                return new MvcHtmlString(" class='k-state-active'");
             }
 
             return new MvcHtmlString("");
@@ -299,6 +313,7 @@ namespace TinyCms.Web.Framework
         {
             return html.ViewData.TemplateInfo.GetFullHtmlFieldName(ExpressionHelper.GetExpressionText(expression));
         }
+
         public static string FieldIdFor<T, TResult>(this HtmlHelper<T> html, Expression<Func<T, TResult>> expression)
         {
             var id = html.ViewData.TemplateInfo.GetFullHtmlFieldId(ExpressionHelper.GetExpressionText(expression));
@@ -307,8 +322,8 @@ namespace TinyCms.Web.Framework
         }
 
         /// <summary>
-        /// Creates a days, months, years drop down list using an HTML select control. 
-        /// The parameters represent the value of the "name" attribute on the select control.
+        ///     Creates a days, months, years drop down list using an HTML select control.
+        ///     The parameters represent the value of the "name" attribute on the select control.
         /// </summary>
         /// <param name="html">HTML helper</param>
         /// <param name="dayName">"Name" attribute of the day drop down list.</param>
@@ -361,18 +376,18 @@ namespace TinyCms.Web.Framework
             }
 
             days.AppendFormat("<option value='{0}'>{1}</option>", "0", dayLocale);
-            for (int i = 1; i <= 31; i++)
+            for (var i = 1; i <= 31; i++)
                 days.AppendFormat("<option value='{0}'{1}>{0}</option>", i,
                     (selectedDay.HasValue && selectedDay.Value == i) ? " selected=\"selected\"" : null);
 
 
             months.AppendFormat("<option value='{0}'>{1}</option>", "0", monthLocale);
-            for (int i = 1; i <= 12; i++)
+            for (var i = 1; i <= 12; i++)
             {
                 months.AppendFormat("<option value='{0}'{1}>{2}</option>",
-                                    i, 
-                                    (selectedMonth.HasValue && selectedMonth.Value == i) ? " selected=\"selected\"" : null,
-                                    CultureInfo.CurrentUICulture.DateTimeFormat.GetMonthName(i));
+                    i,
+                    (selectedMonth.HasValue && selectedMonth.Value == i) ? " selected=\"selected\"" : null,
+                    CultureInfo.CurrentUICulture.DateTimeFormat.GetMonthName(i));
             }
 
 
@@ -385,13 +400,13 @@ namespace TinyCms.Web.Framework
 
             if (endYear > beginYear)
             {
-                for (int i = beginYear.Value; i <= endYear.Value; i++)
+                for (var i = beginYear.Value; i <= endYear.Value; i++)
                     years.AppendFormat("<option value='{0}'{1}>{0}</option>", i,
                         (selectedYear.HasValue && selectedYear.Value == i) ? " selected=\"selected\"" : null);
             }
             else
             {
-                for (int i = beginYear.Value; i >= endYear.Value; i--)
+                for (var i = beginYear.Value; i >= endYear.Value; i--)
                     years.AppendFormat("<option value='{0}'{1}>{0}</option>", i,
                         (selectedYear.HasValue && selectedYear.Value == i) ? " selected=\"selected\"" : null);
             }
@@ -403,13 +418,14 @@ namespace TinyCms.Web.Framework
             return MvcHtmlString.Create(string.Concat(daysList, monthsList, yearsList));
         }
 
-        public static MvcHtmlString Widget(this HtmlHelper helper, string widgetZone, object additionalData = null, string area = null)
+        public static MvcHtmlString Widget(this HtmlHelper helper, string widgetZone, object additionalData = null,
+            string area = null)
         {
-            return helper.Action("WidgetsByZone", "Widget", new { widgetZone = widgetZone, additionalData = additionalData, area = area });
+            return helper.Action("WidgetsByZone", "Widget", new {widgetZone, additionalData, area});
         }
 
         /// <summary>
-        /// Renders the standard label with a specified suffix added to label text
+        ///     Renders the standard label with a specified suffix added to label text
         /// </summary>
         /// <typeparam name="TModel">Model</typeparam>
         /// <typeparam name="TValue">Value</typeparam>
@@ -418,17 +434,19 @@ namespace TinyCms.Web.Framework
         /// <param name="htmlAttributes">HTML attributes</param>
         /// <param name="suffix">Suffix</param>
         /// <returns>Label</returns>
-        public static MvcHtmlString LabelFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object htmlAttributes, string suffix)
+        public static MvcHtmlString LabelFor<TModel, TValue>(this HtmlHelper<TModel> html,
+            Expression<Func<TModel, TValue>> expression, object htmlAttributes, string suffix)
         {
-            string htmlFieldName = ExpressionHelper.GetExpressionText(expression);
+            var htmlFieldName = ExpressionHelper.GetExpressionText(expression);
             var metadata = ModelMetadata.FromLambdaExpression(expression, html.ViewData);
-            string resolvedLabelText = metadata.DisplayName ?? (metadata.PropertyName ?? htmlFieldName.Split(new [] { '.' }).Last());
+            var resolvedLabelText = metadata.DisplayName ?? (metadata.PropertyName ?? htmlFieldName.Split('.').Last());
             if (string.IsNullOrEmpty(resolvedLabelText))
             {
                 return MvcHtmlString.Empty;
             }
             var tag = new TagBuilder("label");
-            tag.Attributes.Add("for", TagBuilder.CreateSanitizedId(html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldId(htmlFieldName)));
+            tag.Attributes.Add("for",
+                TagBuilder.CreateSanitizedId(html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldId(htmlFieldName)));
             if (!String.IsNullOrEmpty(suffix))
             {
                 resolvedLabelText = String.Concat(resolvedLabelText, suffix);
@@ -444,4 +462,3 @@ namespace TinyCms.Web.Framework
         #endregion
     }
 }
-

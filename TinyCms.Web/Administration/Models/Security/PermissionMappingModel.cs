@@ -4,7 +4,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Security
 {
-    public partial class PermissionMappingModel : BaseNopModel
+    public class PermissionMappingModel : BaseNopModel
     {
         public PermissionMappingModel()
         {
@@ -12,9 +12,9 @@ namespace TinyCms.Admin.Models.Security
             AvailableCustomerRoles = new List<CustomerRoleModel>();
             Allowed = new Dictionary<string, IDictionary<int, bool>>();
         }
+
         public IList<PermissionRecordModel> AvailablePermissions { get; set; }
         public IList<CustomerRoleModel> AvailableCustomerRoles { get; set; }
-
         //[permission system name] / [customer role id] / [allowed]
         public IDictionary<string, IDictionary<int, bool>> Allowed { get; set; }
     }

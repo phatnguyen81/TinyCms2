@@ -12,7 +12,7 @@ namespace TinyCms.Data.Initializers
         #region Helpers
 
         /// <summary>
-        /// Returns a new DbContext with the same SqlCe connection string, but with the |DataDirectory| expanded
+        ///     Returns a new DbContext with the same SqlCe connection string, but with the |DataDirectory| expanded
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
@@ -32,8 +32,9 @@ namespace TinyCms.Data.Initializers
 
         private static string ReplaceDataDirectory(string inputString)
         {
-            string str = inputString.Trim();
-            if (string.IsNullOrEmpty(inputString) || !inputString.StartsWith("|DataDirectory|", StringComparison.InvariantCultureIgnoreCase))
+            var str = inputString.Trim();
+            if (string.IsNullOrEmpty(inputString) ||
+                !inputString.StartsWith("|DataDirectory|", StringComparison.InvariantCultureIgnoreCase))
             {
                 return str;
             }
@@ -46,7 +47,7 @@ namespace TinyCms.Data.Initializers
             {
                 data = string.Empty;
             }
-            int length = "|DataDirectory|".Length;
+            var length = "|DataDirectory|".Length;
             if ((inputString.Length > "|DataDirectory|".Length) && ('\\' == inputString["|DataDirectory|".Length]))
             {
                 length++;
@@ -56,5 +57,4 @@ namespace TinyCms.Data.Initializers
 
         #endregion
     }
-
 }

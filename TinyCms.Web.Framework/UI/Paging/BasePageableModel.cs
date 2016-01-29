@@ -11,10 +11,10 @@ namespace TinyCms.Web.Framework.UI.Paging
 
         public virtual void LoadPagedList<T>(IPagedList<T> pagedList)
         {
-            FirstItem = (pagedList.PageIndex * pagedList.PageSize) + 1;
+            FirstItem = (pagedList.PageIndex*pagedList.PageSize) + 1;
             HasNextPage = pagedList.HasNextPage;
             HasPreviousPage = pagedList.HasPreviousPage;
-            LastItem = Math.Min(pagedList.TotalCount, ((pagedList.PageIndex * pagedList.PageSize) + pagedList.PageSize));
+            LastItem = Math.Min(pagedList.TotalCount, ((pagedList.PageIndex*pagedList.PageSize) + pagedList.PageSize));
             PageNumber = pagedList.PageIndex + 1;
             PageSize = pagedList.PageSize;
             TotalItems = pagedList.TotalCount;
@@ -39,7 +39,7 @@ namespace TinyCms.Web.Framework.UI.Paging
             {
                 if (PageNumber > 0)
                     return PageNumber - 1;
-                
+
                 return 0;
             }
         }

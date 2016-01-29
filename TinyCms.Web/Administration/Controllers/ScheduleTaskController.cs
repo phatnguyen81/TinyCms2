@@ -12,30 +12,21 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class ScheduleTaskController : BaseAdminController
-	{
-		#region Fields
+    public class ScheduleTaskController : BaseAdminController
+    {
+        #region Constructors
 
-        private readonly IScheduleTaskService _scheduleTaskService;
-        private readonly IPermissionService _permissionService;
-        private readonly IDateTimeHelper _dateTimeHelper;
-        private readonly ILocalizationService _localizationService;
-
-		#endregion
-
-		#region Constructors
-
-        public ScheduleTaskController(IScheduleTaskService scheduleTaskService, 
+        public ScheduleTaskController(IScheduleTaskService scheduleTaskService,
             IPermissionService permissionService,
             IDateTimeHelper dateTimeHelper, ILocalizationService localizationService)
-		{
-            this._scheduleTaskService = scheduleTaskService;
-            this._permissionService = permissionService;
-            this._dateTimeHelper = dateTimeHelper;
-            this._localizationService = localizationService;
-		}
+        {
+            _scheduleTaskService = scheduleTaskService;
+            _permissionService = permissionService;
+            _dateTimeHelper = dateTimeHelper;
+            _localizationService = localizationService;
+        }
 
-		#endregion 
+        #endregion
 
         #region Utility
 
@@ -43,18 +34,36 @@ namespace TinyCms.Admin.Controllers
         protected virtual ScheduleTaskModel PrepareScheduleTaskModel(ScheduleTask task)
         {
             var model = new ScheduleTaskModel
-                            {
-                                Id = task.Id,
-                                Name = task.Name,
-                                Seconds = task.Seconds,
-                                Enabled = task.Enabled,
-                                StopOnError = task.StopOnError,
-                                LastStartUtc = task.LastStartUtc.HasValue ? _dateTimeHelper.ConvertToUserTime(task.LastStartUtc.Value, DateTimeKind.Utc).ToString("G") : "",
-                                LastEndUtc = task.LastEndUtc.HasValue ? _dateTimeHelper.ConvertToUserTime(task.LastEndUtc.Value, DateTimeKind.Utc).ToString("G") : "",
-                                LastSuccessUtc = task.LastSuccessUtc.HasValue ? _dateTimeHelper.ConvertToUserTime(task.LastSuccessUtc.Value, DateTimeKind.Utc).ToString("G") : "",
-                            };
+            {
+                Id = task.Id,
+                Name = task.Name,
+                Seconds = task.Seconds,
+                Enabled = task.Enabled,
+                StopOnError = task.StopOnError,
+                LastStartUtc =
+                    task.LastStartUtc.HasValue
+                        ? _dateTimeHelper.ConvertToUserTime(task.LastStartUtc.Value, DateTimeKind.Utc).ToString("G")
+                        : "",
+                LastEndUtc =
+                    task.LastEndUtc.HasValue
+                        ? _dateTimeHelper.ConvertToUserTime(task.LastEndUtc.Value, DateTimeKind.Utc).ToString("G")
+                        : "",
+                LastSuccessUtc =
+                    task.LastSuccessUtc.HasValue
+                        ? _dateTimeHelper.ConvertToUserTime(task.LastSuccessUtc.Value, DateTimeKind.Utc).ToString("G")
+                        : ""
+            };
             return model;
         }
+
+        #endregion
+
+        #region Fields
+
+        private readonly IScheduleTaskService _scheduleTaskService;
+        private readonly IPermissionService _permissionService;
+        private readonly IDateTimeHelper _dateTimeHelper;
+        private readonly ILocalizationService _localizationService;
 
         #endregion
 
@@ -71,9 +80,9 @@ namespace TinyCms.Admin.Controllers
                 return AccessDeniedView();
 
             return View();
-		}
+        }
 
-		[HttpPost]
+        [HttpPost]
         public ActionResult List(DataSourceRequest command)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageScheduleTasks))
@@ -89,7 +98,7 @@ namespace TinyCms.Admin.Controllers
             };
 
             return Json(gridModel);
-		}
+        }
 
         [HttpPost]
         public ActionResult TaskUpdate(ScheduleTaskModel model)
@@ -99,7 +108,7 @@ namespace TinyCms.Admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Json(new DataSourceResult { Errors = ModelState.SerializeErrors() });
+                return Json(new DataSourceResult {Errors = ModelState.SerializeErrors()});
             }
 
             var scheduleTask = _scheduleTaskService.GetTaskById(model.Id);
@@ -140,6 +149,7 @@ namespace TinyCms.Admin.Controllers
 
             return RedirectToAction("List");
         }
+
         #endregion
     }
 }

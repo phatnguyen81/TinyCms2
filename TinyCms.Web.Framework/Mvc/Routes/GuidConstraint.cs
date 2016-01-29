@@ -10,20 +10,22 @@ namespace TinyCms.Web.Framework.Mvc.Routes
 
         public GuidConstraint(bool allowEmpty)
         {
-            this._allowEmpty = allowEmpty;
+            _allowEmpty = allowEmpty;
         }
-        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+
+        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values,
+            RouteDirection routeDirection)
         {
             if (values.ContainsKey(parameterName))
             {
-                string stringValue = values[parameterName] != null ? values[parameterName].ToString() : null;
+                var stringValue = values[parameterName] != null ? values[parameterName].ToString() : null;
 
                 if (!string.IsNullOrEmpty(stringValue))
                 {
                     Guid guidValue;
 
-                    return Guid.TryParse(stringValue, out guidValue) && 
-                        (_allowEmpty || guidValue != Guid.Empty);
+                    return Guid.TryParse(stringValue, out guidValue) &&
+                           (_allowEmpty || guidValue != Guid.Empty);
                 }
             }
 

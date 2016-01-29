@@ -2,28 +2,45 @@
 
 @if (Model.IsAuthenticated)
 {
-    <img src="@Model.AvatarUrl" alt="" class="avt"><span class="botarr icn"></span>
+    <img src="@Model.AvatarUrl" alt="" class="avt">
+    <span class="botarr icn"></span>
     <div class="sub_info">
         <span class="toparr icn"></span>
         <ul>
-            <li><a href="@Url.RouteUrl("CustomerSummary")">Trang cá nhân</a></li>
-            <li><a href="@Url.RouteUrl("CustomerChangePassword")">Đổi mật khẩu</a></li>
-            <li><a href="@Url.RouteUrl("Logout")">Thoát</a></li>
+            <li>
+                <a href="@Url.RouteUrl("CustomerSummary")">Trang cá nhân</a>
+            </li>
+            <li>
+                <a href="@Url.RouteUrl("CustomerChangePassword")">Đổi mật khẩu</a>
+            </li>
+            <li>
+                <a href="@Url.RouteUrl("Logout")">Thoát</a>
+            </li>
         </ul>
     </div>
 }
 else
 {
-    <a href="@Url.Action("Login", "Customer")"><img src="@Model.AvatarUrl" alt="" class="avt"></a>
+    <a href="@Url.Action("Login", "Customer")">
+        <img src="@Model.AvatarUrl" alt="" class="avt">
+    </a>
     <script type="text/javascript">
         $(".header .myinfo a").click(function(e) {
             e.preventDefault();
             if ($(window).width() > 400) {
-                var url = '@Html.Raw(Url.Action("Login", "Customer", new { popup = true, returnUrl = Request.RawUrl }))';
-                showPopup(url, 'Đăng nhập');
-            } else {
-                window.location = '@Url.RouteUrl("login")';
-            }
-        });
-</script>
+                var url = "@Html.Raw(Url.Action(\
+                               "Login\", \"Customer\", new { popup = true, returnUrl = Request.RawUrl }))";
+                               showPopup(url, "Đăng nhập");
 }
+                               else
+    {
+        window.location = "@Url.RouteUrl(\"login\")"
+            ;
+    }
+}
+
+    );
+        </
+        private script 
+    >
+    }; 

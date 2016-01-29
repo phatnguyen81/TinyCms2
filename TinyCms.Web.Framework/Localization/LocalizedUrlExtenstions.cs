@@ -3,13 +3,12 @@ using TinyCms.Core.Domain.Localization;
 
 namespace TinyCms.Web.Framework.Localization
 {
-
     public static class LocalizedUrlExtenstions
     {
-        private static int _seoCodeLength = 2;
-        
+        private static readonly int _seoCodeLength = 2;
+
         /// <summary>
-        /// Returns a value indicating whether nopCommerce is run in virtual directory
+        ///     Returns a value indicating whether nopCommerce is run in virtual directory
         /// </summary>
         /// <param name="applicationPath">Application path</param>
         /// <returns>Result</returns>
@@ -22,7 +21,7 @@ namespace TinyCms.Web.Framework.Localization
         }
 
         /// <summary>
-        /// Remove application path from raw URL
+        ///     Remove application path from raw URL
         /// </summary>
         /// <param name="rawUrl">Raw URL</param>
         /// <param name="applicationPath">Application path</param>
@@ -35,7 +34,7 @@ namespace TinyCms.Web.Framework.Localization
             if (rawUrl.Length == applicationPath.Length)
                 return "/";
 
-            
+
             var result = rawUrl.Substring(applicationPath.Length);
             //raw url always starts with '/'
             if (!result.StartsWith("/"))
@@ -44,7 +43,7 @@ namespace TinyCms.Web.Framework.Localization
         }
 
         /// <summary>
-        /// Get language SEO code from URL
+        ///     Get language SEO code from URL
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="applicationPath">Application path</param>
@@ -62,12 +61,12 @@ namespace TinyCms.Web.Framework.Localization
 
                 return url.Substring(1, _seoCodeLength);
             }
-            
+
             return url.Substring(2, _seoCodeLength);
         }
 
         /// <summary>
-        /// Get a value indicating whether URL is localized (contains SEO code)
+        ///     Get a value indicating whether URL is localized (contains SEO code)
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="applicationPath">Application path</param>
@@ -85,7 +84,7 @@ namespace TinyCms.Web.Framework.Localization
                     url = url.RemoveApplicationPathFromRawUrl(applicationPath);
                 }
 
-                int length = url.Length;
+                var length = url.Length;
                 //too short url
                 if (length < 1 + _seoCodeLength)
                     return false;
@@ -99,7 +98,7 @@ namespace TinyCms.Web.Framework.Localization
             }
             else
             {
-                int length = url.Length;
+                var length = url.Length;
                 //too short url
                 if (length < 2 + _seoCodeLength)
                     return false;
@@ -114,7 +113,7 @@ namespace TinyCms.Web.Framework.Localization
         }
 
         /// <summary>
-        /// Remove language SEO code from URL
+        ///     Remove language SEO code from URL
         /// </summary>
         /// <param name="url">Raw URL</param>
         /// <param name="applicationPath">Application path</param>
@@ -131,21 +130,21 @@ namespace TinyCms.Web.Framework.Localization
                 url = url.RemoveApplicationPathFromRawUrl(applicationPath);
             }
 
-            int length = url.Length;
-            if (length < _seoCodeLength + 1)    //too short url
+            var length = url.Length;
+            if (length < _seoCodeLength + 1) //too short url
                 result = url;
-            else if (length == 1 + _seoCodeLength)  //url like "/en"
+            else if (length == 1 + _seoCodeLength) //url like "/en"
                 result = url.Substring(0, 1);
             else
                 result = url.Substring(_seoCodeLength + 1); //urls like "/en/" or "/en/somethingelse"
 
             if (applicationPath.IsVirtualDirectory())
-                result = applicationPath + result;  //add back applciation path
+                result = applicationPath + result; //add back applciation path
             return result;
         }
 
         /// <summary>
-        /// Add language SEO code from URL
+        ///     Add language SEO code from URL
         /// </summary>
         /// <param name="url">Raw URL</param>
         /// <param name="applicationPath">Application path</param>
@@ -162,7 +161,7 @@ namespace TinyCms.Web.Framework.Localization
             //    return url;
 
 
-            int startIndex = 0;
+            var startIndex = 0;
             if (applicationPath.IsVirtualDirectory())
             {
                 //we're in virtual directory.

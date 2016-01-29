@@ -8,11 +8,11 @@
     @Html.AntiForgeryToken()
     <div class="section-header">
         <div class="title">
-            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt="" />
+            <img src="@Url.Content("~/Administration/Content/images/ico-configuration.png")" alt=""/>
             @T("Admin.Configuration.Settings.GeneralCommon")
         </div>
         <div class="options">
-            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")"/>
         </div>
     </div>
     @Html.ValidationSummary(false)
@@ -20,7 +20,7 @@
     <script>
         $(document).ready(function() {
             $("#generalsettings-edit").kendoTabStrip({
-                animation:  {
+                animation: {
                     open: {
                         effects: "fadeIn"
                     }
@@ -72,7 +72,7 @@
 
     {
         //custom tabs
-        var eventMessage = new AdminTabStripCreated(this.Html, "generalsettings-edit");
+        var eventMessage = new AdminTabStripCreated(Html, "generalsettings-edit");
         EngineContext.Current.Resolve<IEventPublisher>().Publish(eventMessage);
         foreach (var eventBlock in eventMessage.BlocksToRender)
         {
@@ -81,11 +81,8 @@
     }
 
 
-    
-    
-    @*save selected tab index*@
+@*save selected tab index*@
     <input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@(GetSelectedTabIndex())">
-    
 }
 @helper TabStoreInformationSettings()
 {
@@ -146,20 +143,25 @@
                         <li style="float: left; width: 210px;">
                             <p style="float: left; padding-top: 55px;">
                                 <input type="radio" name="@Html.FieldNameFor(x => x.StoreInformationSettings.DefaultStoreTheme)" value="@theme.ThemeName" id="id_image_@theme.ThemeName"
-                                       @if (theme.ThemeName == Model.StoreInformationSettings.DefaultStoreTheme) { <text> checked="checked" </text>   }>
+                                       @if (theme.ThemeName == Model.StoreInformationSettings.DefaultStoreTheme)
+                                       {
+                                           <text> checked="checked" </text>
+                                       }>
                             </p>
                             <p style="float: left;">
                                 <label for="id_image_@theme.ThemeName">
                                     <img src="@Url.Content(theme.PreviewImageUrl)" alt="@theme.PreviewText" title="@theme.PreviewText" width="175">
-                                    <br />
-                                    <label style="text-align:center;font-weight:bold;width:170px;">@theme.ThemeTitle</label>
+                                    <br/>
+                                    <label style="font-weight: bold; text-align: center; width: 170px;">@theme.ThemeTitle</label>
                                 </label>
                             </p>
                         </li>
                     }
                 </ul>
                 @Html.ValidationMessageFor(model => model.StoreInformationSettings.DefaultStoreTheme)
-                <em>@T("Admin.Configuration.Settings.GeneralCommon.DefaultStoreTheme.GetMore") <a href="http://www.nopcommerce.com/extensions-and-themes.aspx?category=4&utm_source=admin-panel&utm_medium=theme-settings&utm_campaign=admin-panel" target="_blank">http://www.nopcommerce.com/extensions-and-themes.aspx</a></em>
+                <em>
+                    @T("Admin.Configuration.Settings.GeneralCommon.DefaultStoreTheme.GetMore") <a href="http://www.nopcommerce.com/extensions-and-themes.aspx?category=4&utm_source=admin-panel&utm_medium=theme-settings&utm_campaign=admin-panel" target="_blank">http://www.nopcommerce.com/extensions-and-themes.aspx</a>
+                </em>
             </td>
         </tr>
         <tr>
@@ -361,41 +363,40 @@
 @helper TabSecuritySettings()
 {
     <script type="text/javascript">
-    $(document).ready(function () {
+        $(document).ready(function() {
 
-        $("#@Html.FieldIdFor(model => model.SecuritySettings.CaptchaEnabled)").click(toggleReCaptcha);
+            $("#@Html.FieldIdFor(model => model.SecuritySettings.CaptchaEnabled)").click(toggleReCaptcha);
 
-        toggleReCaptcha();
-    });
+            toggleReCaptcha();
+        });
 
-    function toggleReCaptcha() {
-        if ($('#@Html.FieldIdFor(model => model.SecuritySettings.CaptchaEnabled)').is(':checked')) {
-            $('#ssCaptchaShowOnLoginPagepnl').show();
-            $('#ssCaptchaShowOnRegistrationPagepnl').show();
-            $('#ssCaptchaShowOnContactUsPagepnl').show();
-            $('#ssCaptchaShowOnEmailWishlistToFriendPagepnl').show();
-            $('#ssCaptchaShowOnEmailPostToFriendPagepnl').show();
-            $('#ssCaptchaShowOnBlogCommentPagepnl').show();
-            $('#ssCaptchaShowOnNewsCommentPagepnl').show();
-            $('#ssCaptchaShowOnPostReviewPagepnl').show();
-            $('#ssCaptchaShowOnApplyVendorPagepnl').show();
-            $('#ssReCaptchaPublicKeypnl').show();
-            $('#ssReCaptchaPrivateKeypnl').show();
+        function toggleReCaptcha() {
+            if ($("#@Html.FieldIdFor(model => model.SecuritySettings.CaptchaEnabled)").is(":checked")) {
+                $("#ssCaptchaShowOnLoginPagepnl").show();
+                $("#ssCaptchaShowOnRegistrationPagepnl").show();
+                $("#ssCaptchaShowOnContactUsPagepnl").show();
+                $("#ssCaptchaShowOnEmailWishlistToFriendPagepnl").show();
+                $("#ssCaptchaShowOnEmailPostToFriendPagepnl").show();
+                $("#ssCaptchaShowOnBlogCommentPagepnl").show();
+                $("#ssCaptchaShowOnNewsCommentPagepnl").show();
+                $("#ssCaptchaShowOnPostReviewPagepnl").show();
+                $("#ssCaptchaShowOnApplyVendorPagepnl").show();
+                $("#ssReCaptchaPublicKeypnl").show();
+                $("#ssReCaptchaPrivateKeypnl").show();
+            } else {
+                $("#ssCaptchaShowOnLoginPagepnl").hide();
+                $("#ssCaptchaShowOnRegistrationPagepnl").hide();
+                $("#ssCaptchaShowOnContactUsPagepnl").hide();
+                $("#ssCaptchaShowOnEmailWishlistToFriendPagepnl").hide();
+                $("#ssCaptchaShowOnEmailPostToFriendPagepnl").hide();
+                $("#ssCaptchaShowOnBlogCommentPagepnl").hide();
+                $("#ssCaptchaShowOnNewsCommentPagepnl").hide();
+                $("#ssCaptchaShowOnPostReviewPagepnl").hide();
+                $("#ssCaptchaShowOnApplyVendorPagepnl").hide();
+                $("#ssReCaptchaPublicKeypnl").hide();
+                $("#ssReCaptchaPrivateKeypnl").hide();
+            }
         }
-        else {
-            $('#ssCaptchaShowOnLoginPagepnl').hide();
-            $('#ssCaptchaShowOnRegistrationPagepnl').hide();
-            $('#ssCaptchaShowOnContactUsPagepnl').hide();
-            $('#ssCaptchaShowOnEmailWishlistToFriendPagepnl').hide();
-            $('#ssCaptchaShowOnEmailPostToFriendPagepnl').hide();
-            $('#ssCaptchaShowOnBlogCommentPagepnl').hide();
-            $('#ssCaptchaShowOnNewsCommentPagepnl').hide();
-            $('#ssCaptchaShowOnPostReviewPagepnl').hide();
-            $('#ssCaptchaShowOnApplyVendorPagepnl').hide();
-            $('#ssReCaptchaPublicKeypnl').hide();
-            $('#ssReCaptchaPrivateKeypnl').hide();
-        }
-    }
     </script>
 
     <table class="adminContent">
@@ -406,7 +407,7 @@
             <td class="adminData">
                 @Html.EditorFor(model => model.SecuritySettings.EncryptionKey)
                 @Html.ValidationMessageFor(model => model.SecuritySettings.EncryptionKey)
-                <input type="submit" name="changeencryptionkey" value="@T("Admin.Common.Change")" id="changeencryptionkey" class="adminButton" onclick="return confirm('@T("Admin.Common.AreYouSure")');" />
+                <input type="submit" name="changeencryptionkey" value="@T("Admin.Common.Change")" id="changeencryptionkey" class="adminButton" onclick=" return confirm('@T("Admin.Common.AreYouSure")'); "/>
             </td>
         </tr>
         <tr>
@@ -456,8 +457,8 @@
         </tr>
         <tr>
             <td colspan="2">
-                <hr />
-                <br />
+                <hr/>
+                <br/>
                 A CAPTCHA is a program that can tell whether its user is a human or a computer.
                 You've probably seen them — colorful images with distorted text at the bottom of
                 Web registration forms. CAPTCHAs are used by many websites to prevent abuse from
@@ -663,7 +664,7 @@
                     {
                         @T("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.CurrenlyDisabled")
                     }
-                    <input type="submit" name="togglefulltext" value="@(Model.FullTextSettings.Enabled ? T("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Disable").Text : T("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Enable").Text)" class="adminButton" />
+                    <input type="submit" name="togglefulltext" value="@(Model.FullTextSettings.Enabled ? T("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Disable").Text : T("Admin.Configuration.Settings.GeneralCommon.FullTextSettings.Enable").Text)" class="adminButton"/>
                 </td>
             </tr>
             if (Model.FullTextSettings.Enabled)
@@ -673,17 +674,17 @@
                 </td>
             }
             if (Model.FullTextSettings.Enabled)
-                {
-            <tr>
-                <td class="adminTitle">
-                    @Html.NopLabelFor(model => model.FullTextSettings.SearchMode):
-                </td>
-                <td class="adminData">
-                    @Html.DropDownListFor(model => model.FullTextSettings.SearchMode, Model.FullTextSettings.SearchModeValues)
-                    @Html.ValidationMessageFor(model => model.FullTextSettings.SearchMode)
-                </td>
-            </tr>
-                }
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.NopLabelFor(model => model.FullTextSettings.SearchMode):
+                    </td>
+                    <td class="adminData">
+                        @Html.DropDownListFor(model => model.FullTextSettings.SearchMode, Model.FullTextSettings.SearchModeValues)
+                        @Html.ValidationMessageFor(model => model.FullTextSettings.SearchMode)
+                    </td>
+                </tr>
+            }
         }
     </table>
 }

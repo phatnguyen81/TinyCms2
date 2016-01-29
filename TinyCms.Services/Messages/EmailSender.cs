@@ -9,17 +9,12 @@ using TinyCms.Core.Domain.Messages;
 namespace TinyCms.Services.Messages
 {
     /// <summary>
-    /// Email sender
+    ///     Email sender
     /// </summary>
-    public partial class EmailSender : IEmailSender
+    public class EmailSender : IEmailSender
     {
-
-        public EmailSender()
-        {
-        }
-
         /// <summary>
-        /// Sends an email
+        ///     Sends an email
         /// </summary>
         /// <param name="emailAccount">Email account to use</param>
         /// <param name="subject">Subject</param>
@@ -33,11 +28,14 @@ namespace TinyCms.Services.Messages
         /// <param name="bcc">BCC addresses list</param>
         /// <param name="cc">CC addresses list</param>
         /// <param name="attachmentFilePath">Attachment file path</param>
-        /// <param name="attachmentFileName">Attachment file name. If specified, then this file name will be sent to a recipient. Otherwise, "AttachmentFilePath" name will be used.</param>
+        /// <param name="attachmentFileName">
+        ///     Attachment file name. If specified, then this file name will be sent to a recipient.
+        ///     Otherwise, "AttachmentFilePath" name will be used.
+        /// </param>
         /// <param name="attachedDownloadId">Attachment download ID (another attachedment)</param>
         public virtual void SendEmail(EmailAccount emailAccount, string subject, string body,
             string fromAddress, string fromName, string toAddress, string toName,
-             string replyTo = null, string replyToName = null,
+            string replyTo = null, string replyToName = null,
             IEnumerable<string> bcc = null, IEnumerable<string> cc = null,
             string attachmentFilePath = null, string attachmentFileName = null,
             int attachedDownloadId = 0)
@@ -88,7 +86,7 @@ namespace TinyCms.Services.Messages
                 }
                 message.Attachments.Add(attachment);
             }
-         
+
             //send email
             using (var smtpClient = new SmtpClient())
             {
@@ -96,12 +94,11 @@ namespace TinyCms.Services.Messages
                 smtpClient.Host = emailAccount.Host;
                 smtpClient.Port = emailAccount.Port;
                 smtpClient.EnableSsl = emailAccount.EnableSsl;
-                smtpClient.Credentials = emailAccount.UseDefaultCredentials ? 
-                    CredentialCache.DefaultNetworkCredentials :
-                    new NetworkCredential(emailAccount.Username, emailAccount.Password);
+                smtpClient.Credentials = emailAccount.UseDefaultCredentials
+                    ? CredentialCache.DefaultNetworkCredentials
+                    : new NetworkCredential(emailAccount.Username, emailAccount.Password);
                 smtpClient.Send(message);
             }
         }
-
     }
 }

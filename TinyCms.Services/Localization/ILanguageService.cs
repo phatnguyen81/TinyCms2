@@ -4,18 +4,18 @@ using TinyCms.Core.Domain.Localization;
 namespace TinyCms.Services.Localization
 {
     /// <summary>
-    /// Language service interface
+    ///     Language service interface
     /// </summary>
-    public partial interface ILanguageService
+    public interface ILanguageService
     {
         /// <summary>
-        /// Deletes a language
+        ///     Deletes a language
         /// </summary>
         /// <param name="language">Language</param>
         void DeleteLanguage(Language language);
 
         /// <summary>
-        /// Gets all languages
+        ///     Gets all languages
         /// </summary>
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
@@ -23,20 +23,20 @@ namespace TinyCms.Services.Localization
         IList<Language> GetAllLanguages(bool showHidden = false);
 
         /// <summary>
-        /// Gets a language
+        ///     Gets a language
         /// </summary>
         /// <param name="languageId">Language identifier</param>
         /// <returns>Language</returns>
         Language GetLanguageById(int languageId);
 
         /// <summary>
-        /// Inserts a language
+        ///     Inserts a language
         /// </summary>
         /// <param name="language">Language</param>
         void InsertLanguage(Language language);
 
         /// <summary>
-        /// Updates a language
+        ///     Updates a language
         /// </summary>
         /// <param name="language">Language</param>
         void UpdateLanguage(Language language);

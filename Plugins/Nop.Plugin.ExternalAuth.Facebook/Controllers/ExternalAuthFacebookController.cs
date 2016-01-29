@@ -15,14 +15,14 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Controllers
 {
     public class ExternalAuthFacebookController : BasePluginController
     {
-        private readonly ISettingService _settingService;
+        private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
+        private readonly ILocalizationService _localizationService;
         private readonly IOAuthProviderFacebookAuthorizer _oAuthProviderFacebookAuthorizer;
         private readonly IOpenAuthenticationService _openAuthenticationService;
-        private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
         private readonly IPermissionService _permissionService;
-        private readonly IWorkContext _workContext;
         private readonly IPluginFinder _pluginFinder;
-        private readonly ILocalizationService _localizationService;
+        private readonly ISettingService _settingService;
+        private readonly IWorkContext _workContext;
 
         public ExternalAuthFacebookController(ISettingService settingService,
             IOAuthProviderFacebookAuthorizer oAuthProviderFacebookAuthorizer,
@@ -33,14 +33,14 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Controllers
             IPluginFinder pluginFinder,
             ILocalizationService localizationService)
         {
-            this._settingService = settingService;
-            this._oAuthProviderFacebookAuthorizer = oAuthProviderFacebookAuthorizer;
-            this._openAuthenticationService = openAuthenticationService;
-            this._externalAuthenticationSettings = externalAuthenticationSettings;
-            this._permissionService = permissionService;
-            this._workContext = workContext;
-            this._pluginFinder = pluginFinder;
-            this._localizationService = localizationService;
+            _settingService = settingService;
+            _oAuthProviderFacebookAuthorizer = oAuthProviderFacebookAuthorizer;
+            _openAuthenticationService = openAuthenticationService;
+            _externalAuthenticationSettings = externalAuthenticationSettings;
+            _permissionService = permissionService;
+            _workContext = workContext;
+            _pluginFinder = pluginFinder;
+            _localizationService = localizationService;
         }
 
         [AdminAuthorize]
@@ -114,7 +114,8 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Controllers
         [NonAction]
         private ActionResult LoginInternal(string returnUrl, bool verifyResponse)
         {
-            var processor = _openAuthenticationService.LoadExternalAuthenticationMethodBySystemName("ExternalAuth.Facebook");
+            var processor =
+                _openAuthenticationService.LoadExternalAuthenticationMethodBySystemName("ExternalAuth.Facebook");
             if (processor == null ||
                 !processor.IsMethodActive(_externalAuthenticationSettings) ||
                 !processor.PluginDescriptor.Installed ||
@@ -128,42 +129,44 @@ namespace Nop.Plugin.ExternalAuth.Facebook.Controllers
             switch (result.AuthenticationStatus)
             {
                 case OpenAuthenticationStatus.Error:
-                    {
-                        if (!result.Success)
-                            foreach (var error in result.Errors)
-                                ExternalAuthorizerHelper.AddErrorsToDisplay(error);
+                {
+                    if (!result.Success)
+                        foreach (var error in result.Errors)
+                            ExternalAuthorizerHelper.AddErrorsToDisplay(error);
 
-                        return new RedirectResult(Url.LogOn(returnUrl));
-                    }
+                    return new RedirectResult(Url.LogOn(returnUrl));
+                }
                 case OpenAuthenticationStatus.AssociateOnLogon:
-                    {
-                        return new RedirectResult(Url.LogOn(returnUrl));
-                    }
+                {
+                    return new RedirectResult(Url.LogOn(returnUrl));
+                }
                 case OpenAuthenticationStatus.AutoRegisteredEmailValidation:
-                    {
-                        //result
-                        return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.EmailValidation });
-                    }
+                {
+                    //result
+                    return RedirectToRoute("RegisterResult", new {resultId = (int) UserRegistrationType.EmailValidation});
+                }
                 case OpenAuthenticationStatus.AutoRegisteredAdminApproval:
-                    {
-                        return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.AdminApproval });
-                    }
+                {
+                    return RedirectToRoute("RegisterResult", new {resultId = (int) UserRegistrationType.AdminApproval});
+                }
                 case OpenAuthenticationStatus.AutoRegisteredStandard:
-                    {
-                        return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.Standard });
-                    }
+                {
+                    return RedirectToRoute("RegisterResult", new {resultId = (int) UserRegistrationType.Standard});
+                }
                 case OpenAuthenticationStatus.Authenticated:
-                    {
-                        SuccessNotification("Đăng nhập facebook thành công");
-                        break;
-                    }
+                {
+                    SuccessNotification("Đăng nhập facebook thành công");
+                    break;
+                }
                 default:
                     break;
             }
 
             if (result.Result != null) return result.Result;
 
-            return HttpContext.Request.IsAuthenticated ? new RedirectResult(!string.IsNullOrEmpty(returnUrl) ? returnUrl : "~/") : new RedirectResult(Url.LogOn(returnUrl));
+            return HttpContext.Request.IsAuthenticated
+                ? new RedirectResult(!string.IsNullOrEmpty(returnUrl) ? returnUrl : "~/")
+                : new RedirectResult(Url.LogOn(returnUrl));
         }
 
         public ActionResult Login(string returnUrl)

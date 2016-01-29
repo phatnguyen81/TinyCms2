@@ -6,19 +6,19 @@
         <div id="postpictures-grid"></div>
 
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $("#postpictures-grid").kendoGrid({
                     dataSource: {
                         type: "json",
                         transport: {
                             read: {
-                                url: "@Html.Raw(Url.Action("PostPictureList", "Post", new { postId = Model.Id }))",
+                                url: "@Html.Raw(Url.Action("PostPictureList", "Post", new {postId = Model.Id}))",
                                 type: "POST",
                                 dataType: "json",
                                 data: addAntiForgeryToken
                             },
                             update: {
-                                url:"@Html.Raw(Url.Action("PostPictureUpdate", "Post"))",
+                                url: "@Html.Raw(Url.Action("PostPictureUpdate", "Post"))",
                                 type: "POST",
                                 dataType: "json",
                                 data: addAntiForgeryToken
@@ -37,15 +37,15 @@
                             model: {
                                 id: "Id",
                                 fields: {
-                                    PictureUrl: {editable: false, type: "string" },
-                                    DisplayOrder: {editable: true, type: "number" },
-                                    OverrideAltAttribute: {editable: true, type: "string" },
-                                    OverrideTitleAttribute: {editable: true, type: "string" }
+                                    PictureUrl: { editable: false, type: "string" },
+                                    DisplayOrder: { editable: true, type: "number" },
+                                    OverrideAltAttribute: { editable: true, type: "string" },
+                                    OverrideTitleAttribute: { editable: true, type: "string" }
                                 }
                             }
                         },
                         requestEnd: function(e) {
-                            if(e.type=="update") {
+                            if (e.type == "update") {
                                 this.read();
                             }
                         },
@@ -69,39 +69,43 @@
                         mode: "inline"
                     },
                     scrollable: false,
-                    columns: [{
-                        field: "PictureUrl",
-                        title: "@T("Admin.Catalog.Posts.Pictures.Fields.Picture")",
-                        template: '<a href="#=PictureUrl#" target="_blank"><img alt="#=PictureId#" src="#=PictureUrl#" width="150" /></a>',
-                        width: 200
-                    }, {
-                        field: "DisplayOrder",
-                        title: "@T("Admin.Catalog.Posts.Pictures.Fields.DisplayOrder")",
-                        //integer format
-                        format: "{0:0}",
-                        width: 150
-                    }, {
-                        field: "OverrideAltAttribute",
-                        title: "@T("Admin.Catalog.Posts.Pictures.Fields.OverrideAltAttribute")",
-                        width: 200
-                    }, {
-                        field: "OverrideTitleAttribute",
-                        title: "@T("Admin.Catalog.Posts.Pictures.Fields.OverrideTitleAttribute")",
-                        width: 200
-                    }, {
-                        command: [{
-                            name: "edit",
-                            text: {
-                                edit: "@T("Admin.Common.Edit")",
-                                update: "@T("Admin.Common.Update")",
-                                cancel: "@T("Admin.Common.Cancel")"
-                            }
+                    columns: [
+                        {
+                            field: "PictureUrl",
+                            title: "@T("Admin.Catalog.Posts.Pictures.Fields.Picture")",
+                            template: "<a href=\"#=PictureUrl#\" target=\"_blank\"><img alt=\"#=PictureId#\" src=\"#=PictureUrl#\" width=\"150\" /></a>",
+                            width: 200
                         }, {
-                            name: "destroy",
-                            text: "@T("Admin.Common.Delete")"
-                        }],
-                        width: 200
-                    }]
+                            field: "DisplayOrder",
+                            title: "@T("Admin.Catalog.Posts.Pictures.Fields.DisplayOrder")",
+                            //integer format
+                            format: "{0:0}",
+                            width: 150
+                        }, {
+                            field: "OverrideAltAttribute",
+                            title: "@T("Admin.Catalog.Posts.Pictures.Fields.OverrideAltAttribute")",
+                            width: 200
+                        }, {
+                            field: "OverrideTitleAttribute",
+                            title: "@T("Admin.Catalog.Posts.Pictures.Fields.OverrideTitleAttribute")",
+                            width: 200
+                        }, {
+                            command: [
+                                {
+                                    name: "edit",
+                                    text: {
+                                        edit: "@T("Admin.Common.Edit")",
+                                        update: "@T("Admin.Common.Update")",
+                                        cancel: "@T("Admin.Common.Cancel")"
+                                    }
+                                }, {
+                                    name: "destroy",
+                                    text: "@T("Admin.Common.Delete")"
+                                }
+                            ],
+                            width: 200
+                        }
+                    ]
                 });
             });
         </script>
@@ -111,19 +115,19 @@
     </p>
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $('#addPostPicture').click(function () {
+        $(document).ready(function() {
+            $("#addPostPicture").click(function() {
                 var pictureId = $("#@Html.FieldIdFor(model => model.AddPictureModel.PictureId)").val();
                 var overrideAltAttribute = $("#@Html.FieldIdFor(model => model.AddPictureModel.OverrideAltAttribute)").val();
                 var overrideTitleAttribute = $("#@Html.FieldIdFor(model => model.AddPictureModel.OverrideTitleAttribute)").val();
                 var displayOrder = $("#@Html.FieldIdFor(model => model.AddPictureModel.DisplayOrder)").val();
 
                 if (pictureId == 0) {
-                    alert('Upload picture first');
+                    alert("Upload picture first");
                     return;
                 }
 
-                $('#addPostPicture').attr('disabled', true);
+                $("#addPostPicture").attr("disabled", true);
 
                 var postData = {
                     pictureId: pictureId,
@@ -141,17 +145,17 @@
                     data: postData,
                     success: function(data) {
                         var grid = $("#postpictures-grid");
-                        grid.data('kendoGrid').dataSource.read();
-                        $('#addPostPicture').attr('disabled', false);
+                        grid.data("kendoGrid").dataSource.read();
+                        $("#addPostPicture").attr("disabled", false);
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
-                        alert('Failed to add post picture.');
-                        $('#addPostPicture').attr('disabled', false);
+                        alert("Failed to add post picture.");
+                        $("#addPostPicture").attr("disabled", false);
                     }
                 });
             });
         });
-    </script>     
+    </script>
     <table class="adminContent">
         <tr>
             <td class="adminTitle">
@@ -191,7 +195,7 @@
         </tr>
         <tr>
             <td colspan="2" align="left">
-                <input type="button" id="addPostPicture" class="k-button" value="@T("Admin.Catalog.Posts.Pictures.AddButton")" />
+                <input type="button" id="addPostPicture" class="k-button" value="@T("Admin.Catalog.Posts.Pictures.AddButton")"/>
             </td>
         </tr>
     </table>

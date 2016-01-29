@@ -7,7 +7,8 @@
 
 <div class="page404">
     <h2>@T("PageTitle.PageNotFound")</h2>
-    <p>@Html.Action("TopicBlock", "Topic", new { systemName = "PageNotFound" })</p>
-    <p>Quay về <a href="@Url.RouteUrl("homepage")">Trang chủ</a></p>
+    <p>@Html.Action("TopicBlock", "Topic", new {systemName = "PageNotFound"})</p>
+    <p>
+        Quay về <a href="@Url.RouteUrl("homepage")">Trang chủ</a>
+    </p>
 </div>
-

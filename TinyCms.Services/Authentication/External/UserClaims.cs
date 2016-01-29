@@ -5,10 +5,10 @@ using System;
 namespace TinyCms.Services.Authentication.External
 {
     /// <summary>
-    /// User claims
+    ///     User claims
     /// </summary>
     [Serializable]
-    public partial class UserClaims
+    public class UserClaims
     {
         public BirthDateClaims BirthDate { get; set; }
         public ContactClaims Contact { get; set; }
@@ -22,10 +22,10 @@ namespace TinyCms.Services.Authentication.External
     }
 
     /// <summary>
-    /// Image claims
+    ///     Image claims
     /// </summary>
     [Serializable]
-    public partial class ImageClaims
+    public class ImageClaims
     {
         public string Aspect11 { get; set; }
         public string Aspect34 { get; set; }
@@ -35,23 +35,22 @@ namespace TinyCms.Services.Authentication.External
     }
 
     /// <summary>
-    /// Media claims
+    ///     Media claims
     /// </summary>
     [Serializable]
-    public partial class MediaClaims
+    public class MediaClaims
     {
         public string AudioGreeting { get; set; }
         public string SpokenName { get; set; }
         public string VideoGreeting { get; set; }
-
         public ImageClaims Images { get; set; }
     }
 
     /// <summary>
-    /// Web claims
+    ///     Web claims
     /// </summary>
     [Serializable]
-    public partial class WebClaims
+    public class WebClaims
     {
         public string Amazon { get; set; }
         public string Blog { get; set; }
@@ -62,10 +61,10 @@ namespace TinyCms.Services.Authentication.External
     }
 
     /// <summary>
-    /// Telephone claims
+    ///     Telephone claims
     /// </summary>
     [Serializable]
-    public partial class TelephoneClaims
+    public class TelephoneClaims
     {
         public string Fax { get; set; }
         public string Home { get; set; }
@@ -75,10 +74,10 @@ namespace TinyCms.Services.Authentication.External
     }
 
     /// <summary>
-    /// Instant messaging claims
+    ///     Instant messaging claims
     /// </summary>
     [Serializable]
-    public partial class InstantMessagingClaims
+    public class InstantMessagingClaims
     {
         public string AOL { get; set; }
         public string ICQ { get; set; }
@@ -89,26 +88,25 @@ namespace TinyCms.Services.Authentication.External
     }
 
     /// <summary>
-    /// Company claims
+    ///     Company claims
     /// </summary>
     [Serializable]
-    public partial class CompanyClaims
+    public class CompanyClaims
     {
         public string CompanyName { get; set; }
         public string JobTitle { get; set; }
     }
 
     /// <summary>
-    /// Address claims
+    ///     Address claims
     /// </summary>
     [Serializable]
-    public partial class AddressClaims
+    public class AddressClaims
     {
         public string SingleLineAddress { get; set; }
         public string DisplayName { get; set; }
         public string Host { get; set; }
         public string User { get; set; }
-
         public string City { get; set; }
         public string Country { get; set; }
         public string PostalCode { get; set; }
@@ -118,20 +116,20 @@ namespace TinyCms.Services.Authentication.External
     }
 
     /// <summary>
-    /// Person claims
+    ///     Person claims
     /// </summary>
     [Serializable]
-    public partial class PersonClaims
+    public class PersonClaims
     {
         public string Gender { get; set; }
         public string Biography { get; set; }
     }
 
     /// <summary>
-    /// Name claims
+    ///     Name claims
     /// </summary>
     [Serializable]
-    public partial class NameClaims
+    public class NameClaims
     {
         public string FullName { get; set; }
         public string Nickname { get; set; }
@@ -144,10 +142,10 @@ namespace TinyCms.Services.Authentication.External
     }
 
     /// <summary>
-    /// Preference claims
+    ///     Preference claims
     /// </summary>
     [Serializable]
-    public partial class PreferenceClaims
+    public class PreferenceClaims
     {
         public string Language { get; set; }
         public string PrimaryLanguage { get; set; }
@@ -155,13 +153,12 @@ namespace TinyCms.Services.Authentication.External
     }
 
     /// <summary>
-    /// Contact claims
+    ///     Contact claims
     /// </summary>
     [Serializable]
-    public partial class ContactClaims
+    public class ContactClaims
     {
         public string Email { get; set; }
-
         public AddressClaims Address { get; set; }
         public InstantMessagingClaims IM { get; set; }
         public TelephoneClaims Phone { get; set; }
@@ -171,16 +168,20 @@ namespace TinyCms.Services.Authentication.External
     }
 
     /// <summary>
-    /// Birth date claims
+    ///     Birth date claims
     /// </summary>
     [Serializable]
-    public partial class BirthDateClaims
+    public class BirthDateClaims
     {
         public int DayOfMonth { get; set; }
         public int Month { get; set; }
         public DateTime? WholeBirthDate { get; set; }
         public int Year { get; set; }
         public string Raw { get; set; }
-        public DateTime GeneratedBirthDate { get { return new DateTime(Year, Month, DayOfMonth); } }
+
+        public DateTime GeneratedBirthDate
+        {
+            get { return new DateTime(Year, Month, DayOfMonth); }
+        }
     }
 }

@@ -5,23 +5,14 @@ using System.Text.RegularExpressions;
 namespace TinyCms.Core.Html
 {
     /// <summary>
-    /// Represents a ResolveLinks helper
+    ///     Represents a ResolveLinks helper
     /// </summary>
-    public partial class ResolveLinksHelper
+    public class ResolveLinksHelper
     {
-        #region Fields
-        /// <summary>
-        /// The regular expression used to parse links.
-        /// </summary>
-        private static readonly Regex regex = new Regex("((http://|https://|www\\.)([A-Z0-9.\\-]{1,})\\.[0-9A-Z?;~&\\(\\)#,=\\-_\\./\\+]{2,})", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private const string link = "<a href=\"{0}{1}\" rel=\"nofollow\">{2}</a>";
-        private const int MAX_LENGTH = 50;
-        #endregion
-
         #region Utilities
 
         /// <summary>
-        /// Shortens any absolute URL to a specified maximum length
+        ///     Shortens any absolute URL to a specified maximum length
         /// </summary>
         private static string ShortenUrl(string url, int max)
         {
@@ -29,7 +20,7 @@ namespace TinyCms.Core.Html
                 return url;
 
             // Remove the protocal
-            int startIndex = url.IndexOf("://");
+            var startIndex = url.IndexOf("://");
             if (startIndex > -1)
                 url = url.Substring(startIndex + 3);
 
@@ -37,8 +28,8 @@ namespace TinyCms.Core.Html
                 return url;
 
             // Compress folder structure
-            int firstIndex = url.IndexOf("/") + 1;
-            int lastIndex = url.LastIndexOf("/");
+            var firstIndex = url.IndexOf("/") + 1;
+            var lastIndex = url.LastIndexOf("/");
             if (firstIndex < lastIndex)
             {
                 url = url.Remove(firstIndex, lastIndex - firstIndex);
@@ -49,7 +40,7 @@ namespace TinyCms.Core.Html
                 return url;
 
             // Remove URL parameters
-            int queryIndex = url.IndexOf("?");
+            var queryIndex = url.IndexOf("?");
             if (queryIndex > -1)
                 url = url.Substring(0, queryIndex);
 
@@ -57,7 +48,7 @@ namespace TinyCms.Core.Html
                 return url;
 
             // Remove URL fragment
-            int fragmentIndex = url.IndexOf("#");
+            var fragmentIndex = url.IndexOf("#");
             if (fragmentIndex > -1)
                 url = url.Substring(0, fragmentIndex);
 
@@ -69,19 +60,21 @@ namespace TinyCms.Core.Html
             lastIndex = url.LastIndexOf(".");
             if (lastIndex - firstIndex > 10)
             {
-                string page = url.Substring(firstIndex, lastIndex - firstIndex);
-                int length = url.Length - max + 3;
+                var page = url.Substring(firstIndex, lastIndex - firstIndex);
+                var length = url.Length - max + 3;
                 if (page.Length > length)
                     url = url.Replace(page, "..." + page.Substring(length));
             }
 
             return url;
         }
+
         #endregion
 
         #region Methods
+
         /// <summary>
-        /// Formats the text
+        ///     Formats the text
         /// </summary>
         /// <param name="text">Text</param>
         /// <returns>Formatted text</returns>
@@ -95,16 +88,33 @@ namespace TinyCms.Core.Html
             {
                 if (!match.Value.Contains("://"))
                 {
-                    text = text.Replace(match.Value, string.Format(info, link, "http://", match.Value, ShortenUrl(match.Value, MAX_LENGTH)));
+                    text = text.Replace(match.Value,
+                        string.Format(info, link, "http://", match.Value, ShortenUrl(match.Value, MAX_LENGTH)));
                 }
                 else
                 {
-                    text = text.Replace(match.Value, string.Format(info, link, string.Empty, match.Value, ShortenUrl(match.Value, MAX_LENGTH)));
+                    text = text.Replace(match.Value,
+                        string.Format(info, link, string.Empty, match.Value, ShortenUrl(match.Value, MAX_LENGTH)));
                 }
             }
 
             return text;
         }
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        ///     The regular expression used to parse links.
+        /// </summary>
+        private static readonly Regex regex =
+            new Regex("((http://|https://|www\\.)([A-Z0-9.\\-]{1,})\\.[0-9A-Z?;~&\\(\\)#,=\\-_\\./\\+]{2,})",
+                RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+        private const string link = "<a href=\"{0}{1}\" rel=\"nofollow\">{2}</a>";
+        private const int MAX_LENGTH = 50;
+
         #endregion
     }
 }

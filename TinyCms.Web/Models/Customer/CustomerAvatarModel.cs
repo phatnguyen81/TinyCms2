@@ -2,7 +2,7 @@
 
 namespace TinyCms.Web.Models.Customer
 {
-    public partial class CustomerAvatarModel : BaseNopModel
+    public class CustomerAvatarModel : BaseNopModel
     {
         public string AvatarUrl { get; set; }
     }

@@ -5,7 +5,7 @@
 @Html.AntiForgeryToken()
 <div class="section-header">
     <div class="title">
-        <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt="" />
+        <img src="@Url.Content("~/Administration/Content/images/ico-catalog.png")" alt=""/>
         @T("Admin.Catalog.Categories.Manage") @Html.ActionLink("(" + T("Admin.Catalog.Categories.SwitchToListView") + ")", "List")
     </div>
     <div class="options">
@@ -39,7 +39,7 @@
                     $("#category-treeview").kendoTreeView({
                         dataSource: categories,
                         dataTextField: "Name",
-                        select: function (e) {
+                        select: function(e) {
                             var dataItem = this.dataItem(e.node);
                             var url = "@(Url.Action("Edit"))" + "/" + dataItem.id;
                             window.location = url;
@@ -47,7 +47,7 @@
                     });
                 });
 
-                
+
             </script>
         </td>
     </tr>

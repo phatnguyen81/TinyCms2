@@ -13,9 +13,24 @@ using TinyCms.Services.Security;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class SecurityController : BaseAdminController
-	{
-		#region Fields
+    public class SecurityController : BaseAdminController
+    {
+        #region Constructors
+
+        public SecurityController(ILogger logger, IWorkContext workContext,
+            IPermissionService permissionService,
+            ICustomerService customerService, ILocalizationService localizationService)
+        {
+            _logger = logger;
+            _workContext = workContext;
+            _permissionService = permissionService;
+            _customerService = customerService;
+            _localizationService = localizationService;
+        }
+
+        #endregion
+
+        #region Fields
 
         private readonly ILogger _logger;
         private readonly IWorkContext _workContext;
@@ -23,22 +38,7 @@ namespace TinyCms.Admin.Controllers
         private readonly ICustomerService _customerService;
         private readonly ILocalizationService _localizationService;
 
-		#endregion
-
-		#region Constructors
-
-        public SecurityController(ILogger logger, IWorkContext workContext,
-            IPermissionService permissionService,
-            ICustomerService customerService, ILocalizationService localizationService)
-		{
-            this._logger = logger;
-            this._workContext = workContext;
-            this._permissionService = permissionService;
-            this._customerService = customerService;
-            this._localizationService = localizationService;
-		}
-
-		#endregion 
+        #endregion
 
         #region Methods
 
@@ -51,7 +51,8 @@ namespace TinyCms.Admin.Controllers
                 return View();
             }
 
-            _logger.Information(string.Format("Access denied to user #{0} '{1}' on {2}", currentCustomer.Email, currentCustomer.Email, pageUrl));
+            _logger.Information(string.Format("Access denied to user #{0} '{1}' on {2}", currentCustomer.Email,
+                currentCustomer.Email, pageUrl));
 
 
             return View();
@@ -86,7 +87,7 @@ namespace TinyCms.Admin.Controllers
             foreach (var pr in permissionRecords)
                 foreach (var cr in customerRoles)
                 {
-                    bool allowed = pr.CustomerRoles.Count(x => x.Id == cr.Id) > 0;
+                    var allowed = pr.CustomerRoles.Count(x => x.Id == cr.Id) > 0;
                     if (!model.Allowed.ContainsKey(pr.SystemName))
                         model.Allowed[pr.SystemName] = new Dictionary<int, bool>();
                     model.Allowed[pr.SystemName][cr.Id] = allowed;
@@ -107,13 +108,14 @@ namespace TinyCms.Admin.Controllers
 
             foreach (var cr in customerRoles)
             {
-                string formKey = "allow_" + cr.Id;
-                var permissionRecordSystemNamesToRestrict = form[formKey] != null ? form[formKey].Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList() : new List<string>();
+                var formKey = "allow_" + cr.Id;
+                var permissionRecordSystemNamesToRestrict = form[formKey] != null
+                    ? form[formKey].Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList()
+                    : new List<string>();
 
                 foreach (var pr in permissionRecords)
                 {
-
-                    bool allow = permissionRecordSystemNamesToRestrict.Contains(pr.SystemName);
+                    var allow = permissionRecordSystemNamesToRestrict.Contains(pr.SystemName);
                     if (allow)
                     {
                         if (pr.CustomerRoles.FirstOrDefault(x => x.Id == cr.Id) == null)

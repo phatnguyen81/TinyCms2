@@ -10,7 +10,8 @@
     <div class="info_content">
         <div class="avtthumb">
             <img src="@Model.AvatarUrl" alt="avatar" id="avatar"/>
-            <a href="#" class="change_avt" title="Đổi avatar"><span class="camera icn"></span></a>
+            <a href="#" class="change_avt" title="Đổi avatar">
+                <span class="camera icn"></span></a>
         </div>
         <input type="file" style="display: none;" id="fileAvatar"/>
         <p class="username">@(string.IsNullOrWhiteSpace(Model.Fullname) ? Model.Username : Model.Fullname)</p>
@@ -19,13 +20,13 @@
         <a href="@Url.RouteUrl("CreateNewPost")" class="btn01">Viết bài mới</a>
 
     </div>
-   
-        @using (Html.BeginForm(null,null,FormMethod.Get))
-        {
-            <div style="float: right">
-                @Html.DropDownListFor(model => model.Status, Model.StatusList)
-            </div>
-        }
+
+    @using (Html.BeginForm(null, null, FormMethod.Get))
+    {
+        <div style="float: right">
+            @Html.DropDownListFor(model => model.Status, Model.StatusList)
+        </div>
+    }
     <div class="infoblog">
         @if (Model.Posts.Any())
         {
@@ -46,13 +47,13 @@
                             @if (post.Publish)
                             {
                                 <a href="@Url.RouteUrl("Post", new {post.SeName})">
-                                    <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText" class="blog_info" />
+                                    <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText" class="blog_info"/>
                                     <span>@post.Name</span>
                                 </a>
                             }
                             else
                             {
-                                <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText" class="blog_info" />
+                                <img src="@post.DefaultPictureModel.ImageUrl" alt="@post.DefaultPictureModel.AlternateText" class="blog_info"/>
                                 <span>@post.Name</span>
                             }
                         </td>
@@ -70,47 +71,59 @@
 
             </table>
             <div class="clr"></div>
-                var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
-                if (!pager.IsEmpty())
-                {
-                    <div class="pager">
-                        @pager
-                    </div>
-                }
+            var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
+            if (!pager.IsEmpty())
+            {
+                <div class="pager">
+                    @pager
+                </div>
+            }
         }
         else
         {
-            <p class="err">Hiện tại bạn chưa có bài viết nào, <a href="@Url.RouteUrl("CreateNewPost")">Viết ngay</a></p>
+            <p class="err">
+                Hiện tại bạn chưa có bài viết nào, <a href="@Url.RouteUrl("CreateNewPost")">Viết ngay</a>
+            </p>
         }
 
 
     </div>
 </div>
 <script type="text/javascript">
-    $('.change_avt').click(function () {
+    $(".change_avt").click(function() {
         $("#fileAvatar").trigger("click");
     });
-    $("#fileAvatar").change(function () {
-        var formData = new FormData();
-        formData.append("uploadedFile", $("#fileAvatar")[0].files[0]);
-        $.ajax({
-            url: '@Url.Action("ChangeAvatar","Customer")',
-            data: formData,
-            dataType: "json",
-            type: "POST",
-            contentType: false,
-            processData: false
-        }).done(function (result) {
-            if (result.success) {
+    $("#fileAvatar").change(function() {
+            var formData = new FormData();
+            formData.append("uploadedFile", $("#fileAvatar")[0].files[0]);
+            $.ajax({
+                url: "@Url.Action(\
+                          "ChangeAvatar\",\"Customer\")",
+                          formData,
+                          "json",
+                          "POST",
+                          false,
+                          false
+}
+
+    ).
+
+        private done(function (result);
+        {
+            if (result.success)
+            {
                 d = new Date();
-                $("#avatar, img.avt").attr("src", result.avatarUrl + "?" + d.getTime());
-            } else {
+                $
+                ("#avatar, img.avt").attr("src", result.avatarUrl + "?" + d.getTime());
+            }
+            else
+            {
                 alert(result.message);
             }
-        });
-
+        }
+    );
     });
     $("#Status").change(function() {
-        $(this).closest('form').submit();
+        $(this).closest("form").submit();
     });
 </script>

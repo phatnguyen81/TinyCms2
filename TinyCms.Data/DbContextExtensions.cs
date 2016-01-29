@@ -5,19 +5,20 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using TinyCms.Core;
 
-namespace TinyCms.Data 
+namespace TinyCms.Data
 {
     public static class DbContextExtensions
     {
         #region Utilities
 
-        private static T InnerGetCopy<T>(IDbContext context, T currentCopy, Func<DbEntityEntry<T>, DbPropertyValues> func) where T : BaseEntity
+        private static T InnerGetCopy<T>(IDbContext context, T currentCopy,
+            Func<DbEntityEntry<T>, DbPropertyValues> func) where T : BaseEntity
         {
             //Get the database context
-            DbContext dbContext = CastOrThrow(context);
+            var dbContext = CastOrThrow(context);
 
             //Get the entity tracking object
-            DbEntityEntry<T> entry = GetEntityOrReturnNull(currentCopy, dbContext);
+            var entry = GetEntityOrReturnNull(currentCopy, dbContext);
 
             //The output 
             T output = null;
@@ -25,7 +26,7 @@ namespace TinyCms.Data
             //Try and get the values
             if (entry != null)
             {
-                DbPropertyValues dbPropertyValues = func(entry);
+                var dbPropertyValues = func(entry);
                 if (dbPropertyValues != null)
                 {
                     output = dbPropertyValues.ToObject() as T;
@@ -36,13 +37,14 @@ namespace TinyCms.Data
         }
 
         /// <summary>
-        /// Gets the entity or return null.
+        ///     Gets the entity or return null.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="currentCopy">The current copy.</param>
         /// <param name="dbContext">The db context.</param>
         /// <returns></returns>
-        private static DbEntityEntry<T> GetEntityOrReturnNull<T>(T currentCopy, DbContext dbContext) where T : BaseEntity
+        private static DbEntityEntry<T> GetEntityOrReturnNull<T>(T currentCopy, DbContext dbContext)
+            where T : BaseEntity
         {
             return dbContext.ChangeTracker.Entries<T>().FirstOrDefault(e => e.Entity == currentCopy);
         }
@@ -64,7 +66,7 @@ namespace TinyCms.Data
         #region Methods
 
         /// <summary>
-        /// Loads the original copy.
+        ///     Loads the original copy.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="context">The context.</param>
@@ -76,7 +78,7 @@ namespace TinyCms.Data
         }
 
         /// <summary>
-        /// Loads the database copy.
+        ///     Loads the database copy.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="context">The context.</param>
@@ -88,7 +90,7 @@ namespace TinyCms.Data
         }
 
         /// <summary>
-        /// Drop a plugin table
+        ///     Drop a plugin table
         /// </summary>
         /// <param name="context">Context</param>
         /// <param name="tableName">Table name</param>
@@ -101,7 +103,9 @@ namespace TinyCms.Data
                 throw new ArgumentNullException("tableName");
 
             //drop the table
-            if (context.Database.SqlQuery<int>("SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = {0}", tableName).Any<int>())
+            if (
+                context.Database.SqlQuery<int>("SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = {0}",
+                    tableName).Any<int>())
             {
                 var dbScript = "DROP TABLE [" + tableName + "]";
                 context.Database.ExecuteSqlCommand(dbScript);
@@ -110,7 +114,7 @@ namespace TinyCms.Data
         }
 
         /// <summary>
-        /// Get table name of entity
+        ///     Get table name of entity
         /// </summary>
         /// <typeparam name="T">Entity type</typeparam>
         /// <param name="context">Context</param>
@@ -123,19 +127,20 @@ namespace TinyCms.Data
             //this code works only with Entity Framework.
             //If you want to support other database, then use the code above (commented)
 
-            var adapter = ((IObjectContextAdapter)context).ObjectContext;
-            var storageModel = (StoreItemCollection)adapter.MetadataWorkspace.GetItemCollection(DataSpace.SSpace);
+            var adapter = ((IObjectContextAdapter) context).ObjectContext;
+            var storageModel = (StoreItemCollection) adapter.MetadataWorkspace.GetItemCollection(DataSpace.SSpace);
             var containers = storageModel.GetItems<EntityContainer>();
-            var entitySetBase = containers.SelectMany(c => c.BaseEntitySets.Where(bes => bes.Name == typeof(T).Name)).First();
+            var entitySetBase =
+                containers.SelectMany(c => c.BaseEntitySets.Where(bes => bes.Name == typeof (T).Name)).First();
 
             // Here are variables that will hold table and schema name
-            string tableName = entitySetBase.MetadataProperties.First(p => p.Name == "Table").Value.ToString();
+            var tableName = entitySetBase.MetadataProperties.First(p => p.Name == "Table").Value.ToString();
             //string schemaName = productEntitySetBase.MetadataProperties.First(p => p.Name == "Schema").Value.ToString();
             return tableName;
         }
 
         /// <summary>
-        /// Get column maximum length
+        ///     Get column maximum length
         /// </summary>
         /// <param name="context">Context</param>
         /// <param name="entityTypeName">Entity type name</param>
@@ -146,16 +151,21 @@ namespace TinyCms.Data
             //original: http://stackoverflow.com/questions/5081109/entity-framework-4-0-automatically-truncate-trim-string-before-insert
             int? result = null;
 
-            Type entType = Type.GetType(entityTypeName);
-            var adapter = ((IObjectContextAdapter)context).ObjectContext;
+            var entType = Type.GetType(entityTypeName);
+            var adapter = ((IObjectContextAdapter) context).ObjectContext;
             var metadataWorkspace = adapter.MetadataWorkspace;
-            var q = from meta in metadataWorkspace.GetItems(DataSpace.CSpace).Where(m => m.BuiltInTypeKind == BuiltInTypeKind.EntityType)
-                    from p in (meta as EntityType).Properties.Where(p => p.Name == columnName && p.TypeUsage.EdmType.Name == "String")
-                    select p;
+            var q =
+                from meta in
+                    metadataWorkspace.GetItems(DataSpace.CSpace)
+                        .Where(m => m.BuiltInTypeKind == BuiltInTypeKind.EntityType)
+                from p in
+                    (meta as EntityType).Properties.Where(
+                        p => p.Name == columnName && p.TypeUsage.EdmType.Name == "String")
+                select p;
 
             var queryResult = q.Where(p =>
             {
-                bool match = p.DeclaringType.Name == entityTypeName;
+                var match = p.DeclaringType.Name == entityTypeName;
                 if (!match && entType != null)
                 {
                     //Is a fully qualified name....
@@ -163,7 +173,6 @@ namespace TinyCms.Data
                 }
 
                 return match;
-
             }).Select(sel => sel.TypeUsage.Facets["MaxLength"].Value);
 
             if (queryResult.Any())

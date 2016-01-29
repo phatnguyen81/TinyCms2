@@ -9,7 +9,7 @@ namespace TinyCms.Web.Framework.Mvc
             var model = base.BindModel(controllerContext, bindingContext);
             if (model is BaseNopModel)
             {
-                ((BaseNopModel)model).BindModel(controllerContext, bindingContext);
+                ((BaseNopModel) model).BindModel(controllerContext, bindingContext);
             }
             return model;
         }

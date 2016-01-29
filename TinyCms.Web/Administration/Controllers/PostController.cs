@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using TinyCms.Admin.Extensions;
-using TinyCms.Admin.Infrastructure.Cache;
 using TinyCms.Admin.Models.Posts;
 using TinyCms.Core;
 using TinyCms.Core.Caching;
@@ -27,8 +24,50 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class PostController : BaseAdminController
+    public class PostController : BaseAdminController
     {
+        #region Constructors
+
+        public PostController(IPostService postService,
+            ICategoryService categoryService,
+            ICustomerService customerService,
+            IUrlRecordService urlRecordService,
+            IWorkContext workContext,
+            ILanguageService languageService,
+            ILocalizationService localizationService,
+            ILocalizedEntityService localizedEntityService,
+            IPictureService pictureService,
+            IExportManager exportManager,
+            IImportManager importManager,
+            ICustomerActivityService customerActivityService,
+            IPermissionService permissionService,
+            IAclService aclService,
+            ICacheManager cacheManager,
+            IDateTimeHelper dateTimeHelper,
+            IPostTagService postTagService, IPostTemplateService postTemplateService)
+        {
+            _postService = postService;
+            _categoryService = categoryService;
+            _customerService = customerService;
+            _urlRecordService = urlRecordService;
+            _workContext = workContext;
+            _languageService = languageService;
+            _localizationService = localizationService;
+            _localizedEntityService = localizedEntityService;
+            _pictureService = pictureService;
+            _exportManager = exportManager;
+            _importManager = importManager;
+            _customerActivityService = customerActivityService;
+            _permissionService = permissionService;
+            _aclService = aclService;
+            _cacheManager = cacheManager;
+            _dateTimeHelper = dateTimeHelper;
+            _postTagService = postTagService;
+            _postTemplateService = postTemplateService;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly IPostService _postService;
@@ -49,51 +88,8 @@ namespace TinyCms.Admin.Controllers
         private readonly ICacheManager _cacheManager;
         private readonly IDateTimeHelper _dateTimeHelper;
         private readonly IPostTemplateService _postTemplateService;
-        
 
         #endregion
-
-		#region Constructors
-
-        public PostController(IPostService postService, 
-            ICategoryService categoryService, 
-            ICustomerService customerService,
-            IUrlRecordService urlRecordService, 
-            IWorkContext workContext, 
-            ILanguageService languageService, 
-            ILocalizationService localizationService, 
-            ILocalizedEntityService localizedEntityService,
-            IPictureService pictureService,
-            IExportManager exportManager, 
-            IImportManager importManager,
-            ICustomerActivityService customerActivityService,
-            IPermissionService permissionService, 
-            IAclService aclService,
-            ICacheManager cacheManager,
-            IDateTimeHelper dateTimeHelper, 
-            IPostTagService postTagService, IPostTemplateService postTemplateService)
-        {
-            this._postService = postService;
-            this._categoryService = categoryService;
-            this._customerService = customerService;
-            this._urlRecordService = urlRecordService;
-            this._workContext = workContext;
-            this._languageService = languageService;
-            this._localizationService = localizationService;
-            this._localizedEntityService = localizedEntityService;
-            this._pictureService = pictureService;
-            this._exportManager = exportManager;
-            this._importManager = importManager;
-            this._customerActivityService = customerActivityService;
-            this._permissionService = permissionService;
-            this._aclService = aclService;
-            this._cacheManager = cacheManager;
-            this._dateTimeHelper = dateTimeHelper;
-            this._postTagService = postTagService;
-            _postTemplateService = postTemplateService;
-        }
-
-        #endregion 
 
         #region Utilities
 
@@ -103,29 +99,29 @@ namespace TinyCms.Admin.Controllers
             foreach (var localized in model.Locales)
             {
                 _localizedEntityService.SaveLocalizedValue(post,
-                                                               x => x.Name,
-                                                               localized.Name,
-                                                               localized.LanguageId);
+                    x => x.Name,
+                    localized.Name,
+                    localized.LanguageId);
                 _localizedEntityService.SaveLocalizedValue(post,
-                                                               x => x.ShortDescription,
-                                                               localized.ShortDescription,
-                                                               localized.LanguageId);
+                    x => x.ShortDescription,
+                    localized.ShortDescription,
+                    localized.LanguageId);
                 _localizedEntityService.SaveLocalizedValue(post,
-                                                               x => x.FullDescription,
-                                                               localized.FullDescription,
-                                                               localized.LanguageId);
+                    x => x.FullDescription,
+                    localized.FullDescription,
+                    localized.LanguageId);
                 _localizedEntityService.SaveLocalizedValue(post,
-                                                               x => x.MetaKeywords,
-                                                               localized.MetaKeywords,
-                                                               localized.LanguageId);
+                    x => x.MetaKeywords,
+                    localized.MetaKeywords,
+                    localized.LanguageId);
                 _localizedEntityService.SaveLocalizedValue(post,
-                                                               x => x.MetaDescription,
-                                                               localized.MetaDescription,
-                                                               localized.LanguageId);
+                    x => x.MetaDescription,
+                    localized.MetaDescription,
+                    localized.LanguageId);
                 _localizedEntityService.SaveLocalizedValue(post,
-                                                               x => x.MetaTitle,
-                                                               localized.MetaTitle,
-                                                               localized.LanguageId);
+                    x => x.MetaTitle,
+                    localized.MetaTitle,
+                    localized.LanguageId);
 
                 //search engine name
                 var seName = post.ValidateSeName(localized.SeName, localized.Name, false);
@@ -139,12 +135,11 @@ namespace TinyCms.Admin.Controllers
             foreach (var localized in model.Locales)
             {
                 _localizedEntityService.SaveLocalizedValue(postTag,
-                                                               x => x.Name,
-                                                               localized.Name,
-                                                               localized.LanguageId);
+                    x => x.Name,
+                    localized.Name,
+                    localized.LanguageId);
             }
         }
-
 
 
         [NonAction]
@@ -153,7 +148,7 @@ namespace TinyCms.Admin.Controllers
             foreach (var pp in post.PostPictures)
                 _pictureService.SetSeoFilename(pp.PictureId, _pictureService.GetPictureSeName(post.Name));
         }
-        
+
         [NonAction]
         protected virtual void PrepareAclModel(PostModel model, Post post, bool excludeProperties)
         {
@@ -189,7 +184,8 @@ namespace TinyCms.Admin.Controllers
                 else
                 {
                     //remove role
-                    var aclRecordToDelete = existingAclRecords.FirstOrDefault(acl => acl.CustomerRoleId == customerRole.Id);
+                    var aclRecordToDelete =
+                        existingAclRecords.FirstOrDefault(acl => acl.CustomerRoleId == customerRole.Id);
                     if (aclRecordToDelete != null)
                         _aclService.DeleteAclRecord(aclRecordToDelete);
                 }
@@ -203,8 +199,8 @@ namespace TinyCms.Admin.Controllers
             var result = new List<string>();
             if (!String.IsNullOrWhiteSpace(postTags))
             {
-                string[] values = postTags.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string val1 in values)
+                var values = postTags.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var val1 in values)
                     if (!String.IsNullOrEmpty(val1.Trim()))
                         result.Add(val1.Trim());
             }
@@ -222,8 +218,8 @@ namespace TinyCms.Admin.Controllers
             var postTagsToRemove = new List<PostTag>();
             foreach (var existingPostTag in existingPostTags)
             {
-                bool found = false;
-                foreach (string newPostTag in postTags)
+                var found = false;
+                foreach (var newPostTag in postTags)
                 {
                     if (existingPostTag.Name.Equals(newPostTag, StringComparison.InvariantCultureIgnoreCase))
                     {
@@ -241,7 +237,7 @@ namespace TinyCms.Admin.Controllers
                 post.PostTags.Remove(postTag);
                 _postService.UpdatePost(post);
             }
-            foreach (string postTagName in postTags)
+            foreach (var postTagName in postTags)
             {
                 PostTag postTag;
                 var postTag2 = _postTagService.GetPostTagByName(postTagName);
@@ -277,17 +273,23 @@ namespace TinyCms.Admin.Controllers
             {
                 model.CreatedOn = _dateTimeHelper.ConvertToUserTime(post.CreatedOnUtc, DateTimeKind.Utc);
                 model.UpdatedOn = _dateTimeHelper.ConvertToUserTime(post.UpdatedOnUtc, DateTimeKind.Utc);
-                if(post.ApprovedOnUtc != null)
+                if (post.ApprovedOnUtc != null)
                     model.ApprovedOn = _dateTimeHelper.ConvertToUserTime(post.ApprovedOnUtc.Value, DateTimeKind.Utc);
                 if (model.CreatedBy > 0)
                 {
                     var userCreated = _customerService.GetCustomerById(model.CreatedBy);
-                    if (userCreated != null) {model.CreatedByName = userCreated.Username;}
+                    if (userCreated != null)
+                    {
+                        model.CreatedByName = userCreated.Username;
+                    }
                 }
                 if (model.ApprovedBy > 0)
                 {
-                    var userApproved= _customerService.GetCustomerById(model.ApprovedBy);
-                    if (userApproved != null) { model.ApprovedByName = userApproved.Username; }
+                    var userApproved = _customerService.GetCustomerById(model.ApprovedBy);
+                    if (userApproved != null)
+                    {
+                        model.ApprovedByName = userApproved.Username;
+                    }
                 }
             }
 
@@ -296,7 +298,6 @@ namespace TinyCms.Admin.Controllers
             //anyway they're not used (you need to save a post before you map add them)
             if (post != null)
             {
-            
                 //categories
                 var allCategories = _categoryService.GetAllCategories(showHidden: true);
                 foreach (var category in allCategories)
@@ -307,7 +308,6 @@ namespace TinyCms.Admin.Controllers
                         Value = category.Id.ToString()
                     });
                 }
-
             }
 
 
@@ -316,7 +316,7 @@ namespace TinyCms.Admin.Controllers
             {
                 model.CopyPostModel.Id = post.Id;
                 model.CopyPostModel.Name = "Copy of " + post.Name;
-               // model.CopyPostModel.Published = true;
+                // model.CopyPostModel.Published = true;
                 model.CopyPostModel.CopyImages = true;
             }
 
@@ -330,12 +330,12 @@ namespace TinyCms.Admin.Controllers
                     Value = template.Id.ToString()
                 });
             }
-       
+
             //post tags
             if (post != null)
             {
                 var result = new StringBuilder();
-                for (int i = 0; i < post.PostTags.Count; i++)
+                for (var i = 0; i < post.PostTags.Count; i++)
                 {
                     var pt = post.PostTags.ToList()[i];
                     result.Append(pt.Name);
@@ -345,7 +345,6 @@ namespace TinyCms.Admin.Controllers
                 model.PostTags = result.ToString();
             }
 
-          
 
             ////default values
             //if (setPredefinedValues)
@@ -367,7 +366,6 @@ namespace TinyCms.Admin.Controllers
             return categoriesIds;
         }
 
-
         #endregion
 
         #region Methods
@@ -388,18 +386,38 @@ namespace TinyCms.Admin.Controllers
             var model = new PostListModel();
 
             //categories
-            model.AvailableCategories.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
+            model.AvailableCategories.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Common.All"),
+                Value = "0"
+            });
             var categories = _categoryService.GetAllCategories(showHidden: true);
             foreach (var c in categories)
-                model.AvailableCategories.Add(new SelectListItem { Text = c.GetFormattedBreadCrumb(categories), Value = c.Id.ToString() });
+                model.AvailableCategories.Add(new SelectListItem
+                {
+                    Text = c.GetFormattedBreadCrumb(categories),
+                    Value = c.Id.ToString()
+                });
 
             //"published" property
             //0 - all (according to "ShowHidden" parameter)
             //1 - published only
             //2 - unpublished only
-            model.AvailablePublishedOptions.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Catalog.Posts.List.SearchPublished.All"), Value = "0" });
-            model.AvailablePublishedOptions.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Catalog.Posts.List.SearchPublished.PublishedOnly"), Value = "1" });
-            model.AvailablePublishedOptions.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Catalog.Posts.List.SearchPublished.UnpublishedOnly"), Value = "2" });
+            model.AvailablePublishedOptions.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Catalog.Posts.List.SearchPublished.All"),
+                Value = "0"
+            });
+            model.AvailablePublishedOptions.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Catalog.Posts.List.SearchPublished.PublishedOnly"),
+                Value = "1"
+            });
+            model.AvailablePublishedOptions.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Catalog.Posts.List.SearchPublished.UnpublishedOnly"),
+                Value = "2"
+            });
 
             return View(model);
         }
@@ -411,7 +429,7 @@ namespace TinyCms.Admin.Controllers
                 return AccessDeniedView();
 
 
-            var categoryIds = new List<int> { model.SearchCategoryId };
+            var categoryIds = new List<int> {model.SearchCategoryId};
             //include subcategories
             if (model.SearchIncludeSubCategories && model.SearchCategoryId > 0)
                 categoryIds.AddRange(GetChildCategoryIds(model.SearchCategoryId));
@@ -432,7 +450,7 @@ namespace TinyCms.Admin.Controllers
                 pageSize: command.PageSize,
                 showHidden: true,
                 overridePublished: overridePublished
-            );
+                );
             var gridModel = new DataSourceResult();
             gridModel.Data = posts.Select(x =>
             {
@@ -488,8 +506,6 @@ namespace TinyCms.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-             
-
                 //post
                 var post = model.ToEntity();
                 post.CreatedOnUtc = DateTime.UtcNow;
@@ -507,10 +523,11 @@ namespace TinyCms.Admin.Controllers
                 SavePostTags(post, ParsePostTags(model.PostTags));
 
                 //activity log
-                _customerActivityService.InsertActivity("AddNewPost", _localizationService.GetResource("ActivityLog.AddNewPost"), post.Name);
-                
+                _customerActivityService.InsertActivity("AddNewPost",
+                    _localizationService.GetResource("ActivityLog.AddNewPost"), post.Name);
+
                 SuccessNotification(_localizationService.GetResource("Admin.Catalog.Posts.Added"));
-                return continueEditing ? RedirectToAction("Edit", new { id = post.Id }) : RedirectToAction("List");
+                return continueEditing ? RedirectToAction("Edit", new {id = post.Id}) : RedirectToAction("List");
             }
 
             //If we got this far, something failed, redisplay form
@@ -533,15 +550,15 @@ namespace TinyCms.Admin.Controllers
             var model = post.ToModel();
             PreparePostModel(model, post, false, false);
             AddLocales(_languageService, model.Locales, (locale, languageId) =>
-                {
-                    locale.Name = post.GetLocalized(x => x.Name, languageId, false, false);
-                    locale.ShortDescription = post.GetLocalized(x => x.ShortDescription, languageId, false, false);
-                    locale.FullDescription = post.GetLocalized(x => x.FullDescription, languageId, false, false);
-                    locale.MetaKeywords = post.GetLocalized(x => x.MetaKeywords, languageId, false, false);
-                    locale.MetaDescription = post.GetLocalized(x => x.MetaDescription, languageId, false, false);
-                    locale.MetaTitle = post.GetLocalized(x => x.MetaTitle, languageId, false, false);
-                    locale.SeName = post.GetSeName(languageId, false, false);
-                });
+            {
+                locale.Name = post.GetLocalized(x => x.Name, languageId, false, false);
+                locale.ShortDescription = post.GetLocalized(x => x.ShortDescription, languageId, false, false);
+                locale.FullDescription = post.GetLocalized(x => x.FullDescription, languageId, false, false);
+                locale.MetaKeywords = post.GetLocalized(x => x.MetaKeywords, languageId, false, false);
+                locale.MetaDescription = post.GetLocalized(x => x.MetaDescription, languageId, false, false);
+                locale.MetaTitle = post.GetLocalized(x => x.MetaTitle, languageId, false, false);
+                locale.SeName = post.GetSeName(languageId, false, false);
+            });
 
             PrepareAclModel(model, post, false);
             return View(model);
@@ -558,7 +575,7 @@ namespace TinyCms.Admin.Controllers
                 //No post found with the specified id
                 return RedirectToAction("List");
 
-        
+
             if (ModelState.IsValid)
             {
                 //post
@@ -576,10 +593,11 @@ namespace TinyCms.Admin.Controllers
                 SavePostAcl(post, model);
                 //picture seo names
                 UpdatePictureSeoNames(post);
-                
+
                 //activity log
-                _customerActivityService.InsertActivity("EditPost", _localizationService.GetResource("ActivityLog.EditPost"), post.Name);
-                
+                _customerActivityService.InsertActivity("EditPost",
+                    _localizationService.GetResource("ActivityLog.EditPost"), post.Name);
+
                 SuccessNotification(_localizationService.GetResource("Admin.Catalog.Posts.Updated"));
 
                 if (continueEditing)
@@ -614,7 +632,7 @@ namespace TinyCms.Admin.Controllers
 
             _postService.UpdatePost(post);
 
-            return continueEditing ? RedirectToAction("Edit", new { id = post.Id }) : RedirectToAction("List");
+            return continueEditing ? RedirectToAction("Edit", new {id = post.Id}) : RedirectToAction("List");
         }
 
         //delete post
@@ -632,8 +650,9 @@ namespace TinyCms.Admin.Controllers
             _postService.DeletePost(post);
 
             //activity log
-            _customerActivityService.InsertActivity("DeletePost", _localizationService.GetResource("ActivityLog.DeletePost"), post.Name);
-                
+            _customerActivityService.InsertActivity("DeletePost",
+                _localizationService.GetResource("ActivityLog.DeletePost"), post.Name);
+
             SuccessNotification(_localizationService.GetResource("Admin.Catalog.Posts.Deleted"));
             return RedirectToAction("List");
         }
@@ -649,17 +668,16 @@ namespace TinyCms.Admin.Controllers
             {
                 posts.AddRange(_postService.GetPostsByIds(selectedIds.ToArray()));
 
-                for (int i = 0; i < posts.Count; i++)
+                for (var i = 0; i < posts.Count; i++)
                 {
                     var post = posts[i];
 
-                 
 
                     _postService.DeletePost(post);
                 }
             }
 
-            return Json(new { Result = true });
+            return Json(new {Result = true});
         }
 
         #endregion
@@ -673,17 +691,17 @@ namespace TinyCms.Admin.Controllers
             var result = "";
 
             if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
-                return Json(new { Text = result });
+                return Json(new {Text = result});
 
             if (!String.IsNullOrWhiteSpace(postIds))
             {
                 var ids = new List<int>();
                 var rangeArray = postIds
-                    .Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => x.Trim())
                     .ToList();
 
-                foreach (string str1 in rangeArray)
+                foreach (var str1 in rangeArray)
                 {
                     int tmp1;
                     if (int.TryParse(str1, out tmp1))
@@ -691,7 +709,7 @@ namespace TinyCms.Admin.Controllers
                 }
 
                 var posts = _postService.GetPostsByIds(ids.ToArray());
-                for (int i = 0; i <= posts.Count - 1; i++)
+                for (var i = 0; i <= posts.Count - 1; i++)
                 {
                     result += posts[i].Name;
                     if (i != posts.Count - 1)
@@ -699,11 +717,11 @@ namespace TinyCms.Admin.Controllers
                 }
             }
 
-            return Json(new { Text = result });
+            return Json(new {Text = result});
         }
 
         #endregion
-        
+
         #region Post categories
 
         [HttpPost]
@@ -712,7 +730,7 @@ namespace TinyCms.Admin.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManagePosts))
                 return AccessDeniedView();
 
-        
+
             var postCategories = _categoryService.GetPostCategoriesByPostId(postId, true);
             var postCategoriesModel = postCategories
                 .Select(x => new PostModel.PostCategoryModel
@@ -722,7 +740,7 @@ namespace TinyCms.Admin.Controllers
                     PostId = x.PostId,
                     CategoryId = x.CategoryId,
                     IsFeaturedPost = x.IsFeaturedPost,
-                    DisplayOrder  = x.DisplayOrder
+                    DisplayOrder = x.DisplayOrder
                 })
                 .ToList();
 
@@ -744,7 +762,6 @@ namespace TinyCms.Admin.Controllers
             var postId = model.PostId;
             var categoryId = model.CategoryId;
 
-        
 
             var existingPostCategories = _categoryService.GetPostCategoriesByCategoryId(categoryId, showHidden: true);
             if (existingPostCategories.FindPostCategory(postId, categoryId) == null)
@@ -755,7 +772,7 @@ namespace TinyCms.Admin.Controllers
                     CategoryId = categoryId,
                     DisplayOrder = model.DisplayOrder
                 };
-              
+
                 _categoryService.InsertPostCategory(postCategory);
             }
 
@@ -772,10 +789,10 @@ namespace TinyCms.Admin.Controllers
             if (postCategory == null)
                 throw new ArgumentException("No post category mapping found with the specified id");
 
-          
+
             postCategory.CategoryId = model.CategoryId;
             postCategory.DisplayOrder = model.DisplayOrder;
-           
+
             _categoryService.UpdatePostCategory(postCategory);
 
             return new NullJsonResult();
@@ -800,11 +817,10 @@ namespace TinyCms.Admin.Controllers
 
         #endregion
 
-
         #region Post pictures
 
         [ValidateInput(false)]
-        public ActionResult PostPictureAdd(int pictureId, int displayOrder, 
+        public ActionResult PostPictureAdd(int pictureId, int displayOrder,
             string overrideAltAttribute, string overrideTitleAttribute,
             int postId)
         {
@@ -817,7 +833,7 @@ namespace TinyCms.Admin.Controllers
             var post = _postService.GetPostById(postId);
             if (post == null)
                 throw new ArgumentException("No post found with the specified id");
-            
+
             var picture = _pictureService.GetPictureById(pictureId);
             if (picture == null)
                 throw new ArgumentException("No picture found with the specified id");
@@ -826,19 +842,19 @@ namespace TinyCms.Admin.Controllers
             {
                 PictureId = pictureId,
                 PostId = postId,
-                DisplayOrder = displayOrder,
+                DisplayOrder = displayOrder
             });
 
             _pictureService.UpdatePicture(picture.Id,
                 _pictureService.LoadPictureBinary(picture),
                 picture.MimeType,
-                picture.SeoFilename, 
-                overrideAltAttribute, 
+                picture.SeoFilename,
+                overrideAltAttribute,
                 overrideTitleAttribute);
 
             _pictureService.SetSeoFilename(pictureId, _pictureService.GetPictureSeName(post.Name));
 
-            return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {Result = true}, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -850,22 +866,22 @@ namespace TinyCms.Admin.Controllers
             var postPictures = _postService.GetPostPicturesByPostId(postId);
             var postPicturesModel = postPictures
                 .Select(x =>
-                        {
-                            var picture = _pictureService.GetPictureById(x.PictureId);
-                            if (picture == null)
-                                throw new Exception("Picture cannot be loaded");
-                            var m = new PostModel.PostPictureModel
-                                    {
-                                        Id = x.Id,
-                                        PostId = x.PostId,
-                                        PictureId = x.PictureId,
-                                        PictureUrl = _pictureService.GetPictureUrl(picture),
-                                        OverrideAltAttribute = picture.AltAttribute,
-                                        OverrideTitleAttribute = picture.TitleAttribute,
-                                        DisplayOrder = x.DisplayOrder
-                                    };
-                            return m;
-                        })
+                {
+                    var picture = _pictureService.GetPictureById(x.PictureId);
+                    if (picture == null)
+                        throw new Exception("Picture cannot be loaded");
+                    var m = new PostModel.PostPictureModel
+                    {
+                        Id = x.Id,
+                        PostId = x.PostId,
+                        PictureId = x.PictureId,
+                        PictureUrl = _pictureService.GetPictureUrl(picture),
+                        OverrideAltAttribute = picture.AltAttribute,
+                        OverrideTitleAttribute = picture.TitleAttribute,
+                        DisplayOrder = x.DisplayOrder
+                    };
+                    return m;
+                })
                 .ToList();
 
             var gridModel = new DataSourceResult
@@ -887,7 +903,6 @@ namespace TinyCms.Admin.Controllers
             if (postPicture == null)
                 throw new ArgumentException("No post picture found with the specified id");
 
-      
 
             postPicture.DisplayOrder = model.DisplayOrder;
             _postService.UpdatePostPicture(postPicture);
@@ -900,7 +915,7 @@ namespace TinyCms.Admin.Controllers
                 _pictureService.LoadPictureBinary(picture),
                 picture.MimeType,
                 picture.SeoFilename,
-                model.OverrideAltAttribute, 
+                model.OverrideAltAttribute,
                 model.OverrideTitleAttribute);
 
             return new NullJsonResult();
@@ -931,7 +946,6 @@ namespace TinyCms.Admin.Controllers
 
         #endregion
 
-   
         #region Post tags
 
         public ActionResult PostTags()
@@ -1000,10 +1014,8 @@ namespace TinyCms.Admin.Controllers
                 PostCount = _postTagService.GetPostCount(postTag.Id)
             };
             //locales
-            AddLocales(_languageService, model.Locales, (locale, languageId) =>
-            {
-                locale.Name = postTag.GetLocalized(x => x.Name, languageId, false, false);
-            });
+            AddLocales(_languageService, model.Locales,
+                (locale, languageId) => { locale.Name = postTag.GetLocalized(x => x.Name, languageId, false, false); });
 
             return View(model);
         }
@@ -1110,10 +1122,18 @@ namespace TinyCms.Admin.Controllers
             var model = new PostModel.AddRelatedPostModel();
 
             //categories
-            model.AvailableCategories.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
+            model.AvailableCategories.Add(new SelectListItem
+            {
+                Text = _localizationService.GetResource("Admin.Common.All"),
+                Value = "0"
+            });
             var categories = _categoryService.GetAllCategories(showHidden: true);
             foreach (var c in categories)
-                model.AvailableCategories.Add(new SelectListItem { Text = c.GetFormattedBreadCrumb(categories), Value = c.Id.ToString() });
+                model.AvailableCategories.Add(new SelectListItem
+                {
+                    Text = c.GetFormattedBreadCrumb(categories),
+                    Value = c.Id.ToString()
+                });
 
             return View(model);
         }
@@ -1126,7 +1146,7 @@ namespace TinyCms.Admin.Controllers
 
 
             var posts = _postService.SearchPosts(
-                categoryIds: new List<int> { model.SearchCategoryId },
+                categoryIds: new List<int> {model.SearchCategoryId},
                 keywords: model.SearchPostName,
                 pageIndex: command.Page - 1,
                 pageSize: command.PageSize,
@@ -1148,12 +1168,11 @@ namespace TinyCms.Admin.Controllers
 
             if (model.SelectedPostIds != null)
             {
-                foreach (int id in model.SelectedPostIds)
+                foreach (var id in model.SelectedPostIds)
                 {
                     var post = _postService.GetPostById(id);
                     if (post != null)
                     {
-
                         var existingRelatedPosts = _postService.GetRelatedPostsByPostId1(model.PostId);
                         if (existingRelatedPosts.FindRelatedPost(model.PostId, id) == null)
                         {

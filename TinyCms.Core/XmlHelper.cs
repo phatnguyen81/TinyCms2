@@ -8,14 +8,14 @@ using System.Xml.Serialization;
 namespace TinyCms.Core
 {
     /// <summary>
-    /// Xml helper class
+    ///     Xml helper class
     /// </summary>
-    public partial class XmlHelper
+    public class XmlHelper
     {
         #region Methods
 
         /// <summary>
-        /// XML Encode
+        ///     XML Encode
         /// </summary>
         /// <param name="str">String</param>
         /// <returns>Encoded string</returns>
@@ -28,7 +28,7 @@ namespace TinyCms.Core
         }
 
         /// <summary>
-        /// XML Encode as is
+        ///     XML Encode as is
         /// </summary>
         /// <param name="str">String</param>
         /// <returns>Encoded string</returns>
@@ -45,7 +45,7 @@ namespace TinyCms.Core
         }
 
         /// <summary>
-        /// Encodes an attribute
+        ///     Encodes an attribute
         /// </summary>
         /// <param name="str">Attribute</param>
         /// <returns>Encoded attribute</returns>
@@ -58,7 +58,7 @@ namespace TinyCms.Core
         }
 
         /// <summary>
-        /// Encodes an attribute as is
+        ///     Encodes an attribute as is
         /// </summary>
         /// <param name="str">Attribute</param>
         /// <returns>Encoded attribute</returns>
@@ -68,24 +68,30 @@ namespace TinyCms.Core
         }
 
         /// <summary>
-        /// Decodes an attribute
+        ///     Decodes an attribute
         /// </summary>
         /// <param name="str">Attribute</param>
         /// <returns>Decoded attribute</returns>
         public static string XmlDecode(string str)
         {
             var sb = new StringBuilder(str);
-            return sb.Replace("&quot;", "\"").Replace("&apos;", "'").Replace("&lt;", "<").Replace("&gt;", ">").Replace("&amp;", "&").ToString();
+            return
+                sb.Replace("&quot;", "\"")
+                    .Replace("&apos;", "'")
+                    .Replace("&lt;", "<")
+                    .Replace("&gt;", ">")
+                    .Replace("&amp;", "&")
+                    .ToString();
         }
 
         /// <summary>
-        /// Serializes a datetime
+        ///     Serializes a datetime
         /// </summary>
         /// <param name="dateTime">Datetime</param>
         /// <returns>Serialized datetime</returns>
         public static string SerializeDateTime(DateTime dateTime)
         {
-            var xmlS = new XmlSerializer(typeof(DateTime));
+            var xmlS = new XmlSerializer(typeof (DateTime));
             var sb = new StringBuilder();
             using (var sw = new StringWriter(sb))
             {
@@ -95,17 +101,17 @@ namespace TinyCms.Core
         }
 
         /// <summary>
-        /// Deserializes a datetime
+        ///     Deserializes a datetime
         /// </summary>
         /// <param name="dateTime">Datetime</param>
         /// <returns>Deserialized datetime</returns>
         public static DateTime DeserializeDateTime(string dateTime)
         {
-            var xmlS = new XmlSerializer(typeof(DateTime));
+            var xmlS = new XmlSerializer(typeof (DateTime));
             using (var sr = new StringReader(dateTime))
             {
-                object test = xmlS.Deserialize(sr);
-                return (DateTime)test;
+                var test = xmlS.Deserialize(sr);
+                return (DateTime) test;
             }
         }
 

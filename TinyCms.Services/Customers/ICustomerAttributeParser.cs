@@ -4,26 +4,26 @@ using TinyCms.Core.Domain.Customers;
 namespace TinyCms.Services.Customers
 {
     /// <summary>
-    /// Customer attribute parser interface
+    ///     Customer attribute parser interface
     /// </summary>
-    public partial interface ICustomerAttributeParser
+    public interface ICustomerAttributeParser
     {
         /// <summary>
-        /// Gets selected customer attributes
+        ///     Gets selected customer attributes
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <returns>Selected customer attributes</returns>
         IList<CustomerAttribute> ParseCustomerAttributes(string attributesXml);
 
         /// <summary>
-        /// Get customer attribute values
+        ///     Get customer attribute values
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <returns>Customer attribute values</returns>
         IList<CustomerAttributeValue> ParseCustomerAttributeValues(string attributesXml);
 
         /// <summary>
-        /// Gets selected customer attribute value
+        ///     Gets selected customer attribute value
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <param name="customerAttributeId">Customer attribute identifier</param>
@@ -31,7 +31,7 @@ namespace TinyCms.Services.Customers
         IList<string> ParseValues(string attributesXml, int customerAttributeId);
 
         /// <summary>
-        /// Adds an attribute
+        ///     Adds an attribute
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <param name="ca">Customer attribute</param>
@@ -40,7 +40,7 @@ namespace TinyCms.Services.Customers
         string AddCustomerAttribute(string attributesXml, CustomerAttribute ca, string value);
 
         /// <summary>
-        /// Validates customer attributes
+        ///     Validates customer attributes
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <returns>Warnings</returns>

@@ -1,24 +1,23 @@
 ﻿using System;
 using System.IO;
-using System.Web;
 using System.Web.Mvc;
 using TinyCms.Services.Media;
 using TinyCms.Web.Framework.Security;
 
 namespace TinyCms.Admin.Controllers
 {
-    public partial class PictureController : BaseAdminController
+    public class PictureController : BaseAdminController
     {
         private readonly IPictureService _pictureService;
 
         public PictureController(IPictureService pictureService)
         {
-            this._pictureService = pictureService;
+            _pictureService = pictureService;
         }
 
         [HttpPost]
         //do not validate request token (XSRF)
-        [AdminAntiForgery(true)] 
+        [AdminAntiForgery(true)]
         public ActionResult AsyncUpload()
         {
             //if (!_permissionService.Authorize(StandardPermissionProvider.UploadPictures))
@@ -32,7 +31,7 @@ namespace TinyCms.Admin.Controllers
             if (String.IsNullOrEmpty(Request["qqfile"]))
             {
                 // IE
-                HttpPostedFileBase httpPostedFile = Request.Files[0];
+                var httpPostedFile = Request.Files[0];
                 if (httpPostedFile == null)
                     throw new ArgumentException("No file uploaded");
                 stream = httpPostedFile.InputStream;
@@ -88,8 +87,12 @@ namespace TinyCms.Admin.Controllers
             var picture = _pictureService.InsertPicture(fileBinary, contentType, null);
             //when returning JSON the mime-type must be set to text/plain
             //otherwise some browsers will pop-up a "Save As" dialog.
-            return Json(new { success = true, pictureId = picture.Id,
-                imageUrl = _pictureService.GetPictureUrl(picture, 100) },
+            return Json(new
+            {
+                success = true,
+                pictureId = picture.Id,
+                imageUrl = _pictureService.GetPictureUrl(picture, 100)
+            },
                 "text/plain");
         }
     }

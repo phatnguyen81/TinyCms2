@@ -5,69 +5,69 @@ using TinyCms.Core.Domain.Security;
 namespace TinyCms.Services.Security
 {
     /// <summary>
-    /// Permission service interface
+    ///     Permission service interface
     /// </summary>
-    public partial interface IPermissionService
+    public interface IPermissionService
     {
         /// <summary>
-        /// Delete a permission
+        ///     Delete a permission
         /// </summary>
         /// <param name="permission">Permission</param>
         void DeletePermissionRecord(PermissionRecord permission);
 
         /// <summary>
-        /// Gets a permission
+        ///     Gets a permission
         /// </summary>
         /// <param name="permissionId">Permission identifier</param>
         /// <returns>Permission</returns>
         PermissionRecord GetPermissionRecordById(int permissionId);
 
         /// <summary>
-        /// Gets a permission
+        ///     Gets a permission
         /// </summary>
         /// <param name="systemName">Permission system name</param>
         /// <returns>Permission</returns>
         PermissionRecord GetPermissionRecordBySystemName(string systemName);
 
         /// <summary>
-        /// Gets all permissions
+        ///     Gets all permissions
         /// </summary>
         /// <returns>Permissions</returns>
         IList<PermissionRecord> GetAllPermissionRecords();
 
         /// <summary>
-        /// Inserts a permission
+        ///     Inserts a permission
         /// </summary>
         /// <param name="permission">Permission</param>
         void InsertPermissionRecord(PermissionRecord permission);
 
         /// <summary>
-        /// Updates the permission
+        ///     Updates the permission
         /// </summary>
         /// <param name="permission">Permission</param>
         void UpdatePermissionRecord(PermissionRecord permission);
 
         /// <summary>
-        /// Install permissions
+        ///     Install permissions
         /// </summary>
         /// <param name="permissionProvider">Permission provider</param>
         void InstallPermissions(IPermissionProvider permissionProvider);
 
         /// <summary>
-        /// Uninstall permissions
+        ///     Uninstall permissions
         /// </summary>
         /// <param name="permissionProvider">Permission provider</param>
         void UninstallPermissions(IPermissionProvider permissionProvider);
 
         /// <summary>
-        /// Authorize permission
+        ///     Authorize permission
         /// </summary>
         /// <param name="permission">Permission record</param>
         /// <returns>true - authorized; otherwise, false</returns>
         bool Authorize(PermissionRecord permission);
 
         /// <summary>
-        /// Authorize permission
+        ///     Authorize permission
         /// </summary>
         /// <param name="permission">Permission record</param>
         /// <param name="customer">Customer</param>
@@ -75,14 +75,14 @@ namespace TinyCms.Services.Security
         bool Authorize(PermissionRecord permission, Customer customer);
 
         /// <summary>
-        /// Authorize permission
+        ///     Authorize permission
         /// </summary>
         /// <param name="permissionRecordSystemName">Permission record system name</param>
         /// <returns>true - authorized; otherwise, false</returns>
         bool Authorize(string permissionRecordSystemName);
 
         /// <summary>
-        /// Authorize permission
+        ///     Authorize permission
         /// </summary>
         /// <param name="permissionRecordSystemName">Permission record system name</param>
         /// <param name="customer">Customer</param>

@@ -1,36 +1,46 @@
-﻿
-namespace TinyCms.Services.Messages
+﻿namespace TinyCms.Services.Messages
 {
     public sealed class Token
     {
         private readonly string _key;
-        private readonly string _value;
         private readonly bool _neverHtmlEncoded;
+        private readonly string _value;
 
-        public Token(string key, string value):
+        public Token(string key, string value) :
             this(key, value, false)
         {
-            
         }
+
         public Token(string key, string value, bool neverHtmlEncoded)
         {
-            this._key = key;
-            this._value = value;
-            this._neverHtmlEncoded = neverHtmlEncoded;
+            _key = key;
+            _value = value;
+            _neverHtmlEncoded = neverHtmlEncoded;
         }
 
         /// <summary>
-        /// Token key
+        ///     Token key
         /// </summary>
-        public string Key { get { return _key; } }
+        public string Key
+        {
+            get { return _key; }
+        }
+
         /// <summary>
-        /// Token value
+        ///     Token value
         /// </summary>
-        public string Value { get { return _value; } }
+        public string Value
+        {
+            get { return _value; }
+        }
+
         /// <summary>
-        /// Indicates whether this token should not be HTML encoded
+        ///     Indicates whether this token should not be HTML encoded
         /// </summary>
-        public bool NeverHtmlEncoded { get { return _neverHtmlEncoded; } }
+        public bool NeverHtmlEncoded
+        {
+            get { return _neverHtmlEncoded; }
+        }
 
         public override string ToString()
         {

@@ -3,12 +3,12 @@
 namespace TinyCms.Web.Framework.Mvc.Routes
 {
     /// <summary>
-    /// Route publisher
+    ///     Route publisher
     /// </summary>
     public interface IRoutePublisher
     {
         /// <summary>
-        /// Register routes
+        ///     Register routes
         /// </summary>
         /// <param name="routes">Routes</param>
         void RegisterRoutes(RouteCollection routes);

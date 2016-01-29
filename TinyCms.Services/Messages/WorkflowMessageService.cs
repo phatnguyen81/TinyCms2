@@ -11,8 +11,31 @@ using TinyCms.Services.Localization;
 
 namespace TinyCms.Services.Messages
 {
-    public partial class WorkflowMessageService : IWorkflowMessageService
+    public class WorkflowMessageService : IWorkflowMessageService
     {
+        #region Ctor
+
+        public WorkflowMessageService(IMessageTemplateService messageTemplateService,
+            IQueuedEmailService queuedEmailService,
+            ILanguageService languageService,
+            ITokenizer tokenizer,
+            IEmailAccountService emailAccountService,
+            IMessageTokenProvider messageTokenProvider,
+            EmailAccountSettings emailAccountSettings,
+            IEventPublisher eventPublisher)
+        {
+            _messageTemplateService = messageTemplateService;
+            _queuedEmailService = queuedEmailService;
+            _languageService = languageService;
+            _tokenizer = tokenizer;
+            _emailAccountService = emailAccountService;
+            _messageTokenProvider = messageTokenProvider;
+            _emailAccountSettings = emailAccountSettings;
+            _eventPublisher = eventPublisher;
+        }
+
+        #endregion
+
         #region Fields
 
         private readonly IMessageTemplateService _messageTemplateService;
@@ -26,32 +49,9 @@ namespace TinyCms.Services.Messages
 
         #endregion
 
-        #region Ctor
-
-        public WorkflowMessageService(IMessageTemplateService messageTemplateService,
-            IQueuedEmailService queuedEmailService,
-            ILanguageService languageService,
-            ITokenizer tokenizer, 
-            IEmailAccountService emailAccountService,
-            IMessageTokenProvider messageTokenProvider,
-            EmailAccountSettings emailAccountSettings,
-            IEventPublisher eventPublisher)
-        {
-            this._messageTemplateService = messageTemplateService;
-            this._queuedEmailService = queuedEmailService;
-            this._languageService = languageService;
-            this._tokenizer = tokenizer;
-            this._emailAccountService = emailAccountService;
-            this._messageTokenProvider = messageTokenProvider;
-            this._emailAccountSettings = emailAccountSettings;
-            this._eventPublisher = eventPublisher;
-        }
-
-        #endregion
-
         #region Utilities
-        
-        protected virtual int SendNotification(MessageTemplate messageTemplate, 
+
+        protected virtual int SendNotification(MessageTemplate messageTemplate,
             EmailAccount emailAccount, int languageId, IEnumerable<Token> tokens,
             string toEmailAddress, string toName,
             string attachmentFilePath = null, string attachmentFileName = null,
@@ -65,7 +65,7 @@ namespace TinyCms.Services.Messages
             //Replace subject and body tokens 
             var subjectReplaced = _tokenizer.Replace(subject, tokens, false);
             var bodyReplaced = _tokenizer.Replace(body, tokens, true);
-            
+
             var email = new QueuedEmail
             {
                 Priority = QueuedEmailPriority.High,
@@ -115,7 +115,6 @@ namespace TinyCms.Services.Messages
             if (emailAccount == null)
                 emailAccount = _emailAccountService.GetAllEmailAccounts().FirstOrDefault();
             return emailAccount;
-
         }
 
         protected virtual int EnsureLanguageIsActive(int languageId)
@@ -146,7 +145,7 @@ namespace TinyCms.Services.Messages
         #region Customer workflow
 
         /// <summary>
-        /// Sends 'New customer' notification message to a store owner
+        ///     Sends 'New customer' notification message to a store owner
         /// </summary>
         /// <param name="customer">Customer instance</param>
         /// <param name="languageId">Message language identifier</param>
@@ -167,7 +166,8 @@ namespace TinyCms.Services.Messages
 
             //tokens
             var tokens = new List<Token>();
-            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(), emailAccount);
+            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(),
+                emailAccount);
             _messageTokenProvider.AddCustomerTokens(tokens, customer);
 
             //event notification
@@ -181,7 +181,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Sends a welcome message to a customer
+        ///     Sends a welcome message to a customer
         /// </summary>
         /// <param name="customer">Customer instance</param>
         /// <param name="languageId">Message language identifier</param>
@@ -202,7 +202,8 @@ namespace TinyCms.Services.Messages
 
             //tokens
             var tokens = new List<Token>();
-            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(), emailAccount);
+            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(),
+                emailAccount);
             _messageTokenProvider.AddCustomerTokens(tokens, customer);
 
             //event notification
@@ -211,12 +212,12 @@ namespace TinyCms.Services.Messages
             var toEmail = customer.Email;
             var toName = customer.GetFullName();
             return SendNotification(messageTemplate, emailAccount,
-                languageId, tokens, 
+                languageId, tokens,
                 toEmail, toName);
         }
 
         /// <summary>
-        /// Sends an email validation message to a customer
+        ///     Sends an email validation message to a customer
         /// </summary>
         /// <param name="customer">Customer instance</param>
         /// <param name="languageId">Message language identifier</param>
@@ -237,7 +238,8 @@ namespace TinyCms.Services.Messages
 
             //tokens
             var tokens = new List<Token>();
-            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(), emailAccount);
+            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(),
+                emailAccount);
             _messageTokenProvider.AddCustomerTokens(tokens, customer);
 
 
@@ -252,7 +254,7 @@ namespace TinyCms.Services.Messages
         }
 
         /// <summary>
-        /// Sends password recovery message to a customer
+        ///     Sends password recovery message to a customer
         /// </summary>
         /// <param name="customer">Customer instance</param>
         /// <param name="languageId">Message language identifier</param>
@@ -273,7 +275,8 @@ namespace TinyCms.Services.Messages
 
             //tokens
             var tokens = new List<Token>();
-            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(), emailAccount);
+            _messageTokenProvider.AddStoreTokens(tokens, EngineContext.Current.Resolve<StoreInformationSettings>(),
+                emailAccount);
             _messageTokenProvider.AddCustomerTokens(tokens, customer);
 
 
@@ -292,7 +295,7 @@ namespace TinyCms.Services.Messages
         #region Misc
 
         /// <summary>
-        /// Sends a test email
+        ///     Sends a test email
         /// </summary>
         /// <param name="messageTemplateId">Message template identifier</param>
         /// <param name="sendToEmail">Send to email</param>

@@ -4,12 +4,12 @@ using TinyCms.Core.Configuration;
 namespace TinyCms.Core.Domain.Customers
 {
     /// <summary>
-    /// External authentication settings
+    ///     External authentication settings
     /// </summary>
     public class ExternalAuthenticationSettings : ISettings
     {
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         public ExternalAuthenticationSettings()
         {
@@ -17,18 +17,19 @@ namespace TinyCms.Core.Domain.Customers
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether auto registration is enabled
+        ///     Gets or sets a value indicating whether auto registration is enabled
         /// </summary>
         public bool AutoRegisterEnabled { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether email validation is required with "AutoRegisterEnabled".
-        /// In most cases we can skip email validation for Facebook or any other third-party external authentication plugins. I guess we can trust  Facebook for the validation.
+        ///     Gets or sets a value indicating whether email validation is required with "AutoRegisterEnabled".
+        ///     In most cases we can skip email validation for Facebook or any other third-party external authentication plugins. I
+        ///     guess we can trust  Facebook for the validation.
         /// </summary>
         public bool RequireEmailValidation { get; set; }
 
         /// <summary>
-        /// Gets or sets system names of active payment methods
+        ///     Gets or sets system names of active payment methods
         /// </summary>
         public List<string> ActiveAuthenticationMethodSystemNames { get; set; }
     }

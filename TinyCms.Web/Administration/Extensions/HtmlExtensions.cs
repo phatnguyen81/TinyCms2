@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -8,15 +9,15 @@ namespace TinyCms.Admin.Extensions
 {
     public static class HtmlExtensions
     {
-        public static MvcHtmlString NopField<TModel>(this HtmlHelper<TModel> helper, 
-            System.Linq.Expressions.Expression<Func<TModel, string>> expression)
+        public static MvcHtmlString NopField<TModel>(this HtmlHelper<TModel> helper,
+            Expression<Func<TModel, string>> expression)
         {
             return helper.NopCommonField(expression, helper.TextBoxFor);
         }
 
-        private static MvcHtmlString NopCommonField<TModel, TValue>(this HtmlHelper<TModel> helper, 
-            System.Linq.Expressions.Expression<Func<TModel, TValue>> expression,
-            Func<System.Linq.Expressions.Expression<Func<TModel, TValue>>,MvcHtmlString> editor)
+        private static MvcHtmlString NopCommonField<TModel, TValue>(this HtmlHelper<TModel> helper,
+            Expression<Func<TModel, TValue>> expression,
+            Func<Expression<Func<TModel, TValue>>, MvcHtmlString> editor)
         {
             var sb = new StringBuilder();
             var tr = new TagBuilder("tr");

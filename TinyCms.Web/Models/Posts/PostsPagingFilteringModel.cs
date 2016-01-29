@@ -1,41 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using TinyCms.Web.Framework.Mvc;
 using TinyCms.Web.Framework.UI.Paging;
 
 namespace TinyCms.Web.Models.Posts
 {
     /// <summary>
-    /// Filtering and paging model for catalog
+    ///     Filtering and paging model for catalog
     /// </summary>
-    public partial class PostsPagingFilteringModel : BasePageableModel
+    public class PostsPagingFilteringModel : BasePageableModel
     {
         #region Ctor
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         public PostsPagingFilteringModel()
         {
-            this.PageSizeOptions = new List<SelectListItem>();
+            PageSizeOptions = new List<SelectListItem>();
         }
 
         #endregion
 
         #region Properties
 
-     
         /// <summary>
-        /// Available page size options
+        ///     Available page size options
         /// </summary>
         public IList<SelectListItem> PageSizeOptions { get; set; }
 
-
-        
         #endregion
-
     }
 }

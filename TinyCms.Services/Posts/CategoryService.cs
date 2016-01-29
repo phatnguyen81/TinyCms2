@@ -13,83 +13,14 @@ using TinyCms.Services.Security;
 namespace TinyCms.Services.Posts
 {
     /// <summary>
-    /// Category service
+    ///     Category service
     /// </summary>
-    public partial class CategoryService : ICategoryService
+    public class CategoryService : ICategoryService
     {
-        #region Constants
-        /// <summary>
-        /// Key for caching
-        /// </summary>
-        /// <remarks>
-        /// {0} : category ID
-        /// </remarks>
-        private const string CATEGORIES_BY_ID_KEY = "Nop.category.id-{0}";
-        /// <summary>
-        /// Key for caching
-        /// </summary>
-        /// <remarks>
-        /// {0} : parent category ID
-        /// {1} : show hidden records?
-        /// {2} : current customer ID
-        /// {3} : store ID
-        /// {3} : include all levels (child)
-        /// </remarks>
-        private const string CATEGORIES_BY_PARENT_CATEGORY_ID_KEY = "Nop.category.byparent-{0}-{1}-{2}-{3}";
-        /// <summary>
-        /// Key for caching
-        /// </summary>
-        /// <remarks>
-        /// {0} : show hidden records?
-        /// {1} : category ID
-        /// {2} : page index
-        /// {3} : page size
-        /// {4} : current customer ID
-        /// {5} : store ID
-        /// </remarks>
-        private const string PRODUCTCATEGORIES_ALLBYCATEGORYID_KEY = "Nop.productcategory.allbycategoryid-{0}-{1}-{2}-{3}-{4}";
-        /// <summary>
-        /// Key for caching
-        /// </summary>
-        /// <remarks>
-        /// {0} : show hidden records?
-        /// {1} : product ID
-        /// {2} : current customer ID
-        /// {3} : store ID
-        /// </remarks>
-        private const string PRODUCTCATEGORIES_ALLBYPRODUCTID_KEY = "Nop.productcategory.allbyproductid-{0}-{1}-{2}";
-        /// <summary>
-        /// Key pattern to clear cache
-        /// </summary>
-        private const string CATEGORIES_PATTERN_KEY = "Nop.category.";
-        /// <summary>
-        /// Key pattern to clear cache
-        /// </summary>
-        private const string PRODUCTCATEGORIES_PATTERN_KEY = "Nop.productcategory.";
-
-        private const string CATEGORIES_BY_CATEGORY_TYPE_SYSTEM_NAME_ID_KEY = "Nop.category.bycategorytypesystemname-{0}-{1}";
-
-        #endregion
-
-        #region Fields
-
-        private readonly IRepository<Category> _categoryRepository;
-        private readonly IRepository<PostCategory> _productCategoryRepository;
-        private readonly IRepository<Post> _productRepository;
-        private readonly IRepository<AclRecord> _aclRepository;
-        private readonly IWorkContext _workContext;
-        private readonly IEventPublisher _eventPublisher;
-        private readonly ICacheManager _cacheManager;
-        private readonly IAclService _aclService;
-        private readonly ICategoryTypeService _categoryTypeService;
-        private readonly CatalogSettings _catalogSettings;
-
-        #endregion
-        
         #region Ctor
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="cacheManager">Cache manager</param>
         /// <param name="categoryRepository">Category repository</param>
@@ -113,24 +44,101 @@ namespace TinyCms.Services.Posts
             IAclService aclService,
             CatalogSettings catalogSettings, ICategoryTypeService categoryTypeService)
         {
-            this._cacheManager = cacheManager;
-            this._categoryRepository = categoryRepository;
-            this._productCategoryRepository = productCategoryRepository;
-            this._productRepository = productRepository;
-            this._aclRepository = aclRepository;
-            this._workContext = workContext;
-            this._eventPublisher = eventPublisher;
-            this._aclService = aclService;
-            this._catalogSettings = catalogSettings;
+            _cacheManager = cacheManager;
+            _categoryRepository = categoryRepository;
+            _productCategoryRepository = productCategoryRepository;
+            _productRepository = productRepository;
+            _aclRepository = aclRepository;
+            _workContext = workContext;
+            _eventPublisher = eventPublisher;
+            _aclService = aclService;
+            _catalogSettings = catalogSettings;
             _categoryTypeService = categoryTypeService;
         }
+
+        #endregion
+
+        #region Constants
+
+        /// <summary>
+        ///     Key for caching
+        /// </summary>
+        /// <remarks>
+        ///     {0} : category ID
+        /// </remarks>
+        private const string CATEGORIES_BY_ID_KEY = "Nop.category.id-{0}";
+
+        /// <summary>
+        ///     Key for caching
+        /// </summary>
+        /// <remarks>
+        ///     {0} : parent category ID
+        ///     {1} : show hidden records?
+        ///     {2} : current customer ID
+        ///     {3} : store ID
+        ///     {3} : include all levels (child)
+        /// </remarks>
+        private const string CATEGORIES_BY_PARENT_CATEGORY_ID_KEY = "Nop.category.byparent-{0}-{1}-{2}-{3}";
+
+        /// <summary>
+        ///     Key for caching
+        /// </summary>
+        /// <remarks>
+        ///     {0} : show hidden records?
+        ///     {1} : category ID
+        ///     {2} : page index
+        ///     {3} : page size
+        ///     {4} : current customer ID
+        ///     {5} : store ID
+        /// </remarks>
+        private const string PRODUCTCATEGORIES_ALLBYCATEGORYID_KEY =
+            "Nop.productcategory.allbycategoryid-{0}-{1}-{2}-{3}-{4}";
+
+        /// <summary>
+        ///     Key for caching
+        /// </summary>
+        /// <remarks>
+        ///     {0} : show hidden records?
+        ///     {1} : product ID
+        ///     {2} : current customer ID
+        ///     {3} : store ID
+        /// </remarks>
+        private const string PRODUCTCATEGORIES_ALLBYPRODUCTID_KEY = "Nop.productcategory.allbyproductid-{0}-{1}-{2}";
+
+        /// <summary>
+        ///     Key pattern to clear cache
+        /// </summary>
+        private const string CATEGORIES_PATTERN_KEY = "Nop.category.";
+
+        /// <summary>
+        ///     Key pattern to clear cache
+        /// </summary>
+        private const string PRODUCTCATEGORIES_PATTERN_KEY = "Nop.productcategory.";
+
+        private const string CATEGORIES_BY_CATEGORY_TYPE_SYSTEM_NAME_ID_KEY =
+            "Nop.category.bycategorytypesystemname-{0}-{1}";
+
+        #endregion
+
+        #region Fields
+
+        private readonly IRepository<Category> _categoryRepository;
+        private readonly IRepository<PostCategory> _productCategoryRepository;
+        private readonly IRepository<Post> _productRepository;
+        private readonly IRepository<AclRecord> _aclRepository;
+        private readonly IWorkContext _workContext;
+        private readonly IEventPublisher _eventPublisher;
+        private readonly ICacheManager _cacheManager;
+        private readonly IAclService _aclService;
+        private readonly ICategoryTypeService _categoryTypeService;
+        private readonly CatalogSettings _catalogSettings;
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Delete category
+        ///     Delete category
         /// </summary>
         /// <param name="category">Category</param>
         public virtual void DeleteCategory(Category category)
@@ -149,16 +157,16 @@ namespace TinyCms.Services.Posts
                 UpdateCategory(subcategory);
             }
         }
-        
+
         /// <summary>
-        /// Gets all categories
+        ///     Gets all categories
         /// </summary>
         /// <param name="categoryName">Category name</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>Categories</returns>
-        public virtual IPagedList<Category> GetAllCategories(string categoryName = "", int[] categoryTypes = null, 
+        public virtual IPagedList<Category> GetAllCategories(string categoryName = "", int[] categoryTypes = null,
             int pageIndex = 0, int pageSize = int.MaxValue, bool showHidden = false)
         {
             var query = _categoryRepository.Table;
@@ -171,7 +179,7 @@ namespace TinyCms.Services.Posts
 
             query = query.Where(c => !c.Deleted);
             query = query.OrderBy(c => c.ParentCategoryId).ThenBy(c => c.DisplayOrder);
-            
+
             if (!showHidden && (!_catalogSettings.IgnoreAcl || !_catalogSettings.IgnoreStoreLimitations))
             {
                 if (!_catalogSettings.IgnoreAcl)
@@ -179,23 +187,24 @@ namespace TinyCms.Services.Posts
                     //ACL (access control list)
                     var allowedCustomerRolesIds = _workContext.CurrentCustomer.GetCustomerRoleIds();
                     query = from c in query
-                            join acl in _aclRepository.Table
-                            on new { c1 = c.Id, c2 = "Category" } equals new { c1 = acl.EntityId, c2 = acl.EntityName } into c_acl
-                            from acl in c_acl.DefaultIfEmpty()
-                            where !c.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
-                            select c;
+                        join acl in _aclRepository.Table
+                            on new {c1 = c.Id, c2 = "Category"} equals new {c1 = acl.EntityId, c2 = acl.EntityName} into
+                            c_acl
+                        from acl in c_acl.DefaultIfEmpty()
+                        where !c.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
+                        select c;
                 }
-            
+
 
                 //only distinct categories (group by ID)
                 query = from c in query
-                        group c by c.Id
-                        into cGroup
-                        orderby cGroup.Key
-                        select cGroup.FirstOrDefault();
+                    group c by c.Id
+                    into cGroup
+                    orderby cGroup.Key
+                    select cGroup.FirstOrDefault();
                 query = query.OrderBy(c => c.ParentCategoryId).ThenBy(c => c.DisplayOrder);
             }
-            
+
             var unsortedCategories = query.ToList();
 
             //sort categories
@@ -206,7 +215,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Gets all categories filtered by parent category identifier
+        ///     Gets all categories filtered by parent category identifier
         /// </summary>
         /// <param name="parentCategoryId">Parent category identifier</param>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
@@ -215,7 +224,8 @@ namespace TinyCms.Services.Posts
         public virtual IList<Category> GetAllCategoriesByParentCategoryId(int parentCategoryId,
             bool showHidden = false, bool includeAllLevels = false)
         {
-            string key = string.Format(CATEGORIES_BY_PARENT_CATEGORY_ID_KEY, parentCategoryId, showHidden, _workContext.CurrentCustomer.Id, includeAllLevels);
+            var key = string.Format(CATEGORIES_BY_PARENT_CATEGORY_ID_KEY, parentCategoryId, showHidden,
+                _workContext.CurrentCustomer.Id, includeAllLevels);
             return _cacheManager.Get(key, () =>
             {
                 var query = _categoryRepository.Table;
@@ -232,19 +242,20 @@ namespace TinyCms.Services.Posts
                         //ACL (access control list)
                         var allowedCustomerRolesIds = _workContext.CurrentCustomer.GetCustomerRoleIds();
                         query = from c in query
-                                join acl in _aclRepository.Table
-                                on new { c1 = c.Id, c2 = "Category" } equals new { c1 = acl.EntityId, c2 = acl.EntityName } into c_acl
-                                from acl in c_acl.DefaultIfEmpty()
-                                where !c.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
-                                select c;
+                            join acl in _aclRepository.Table
+                                on new {c1 = c.Id, c2 = "Category"} equals new {c1 = acl.EntityId, c2 = acl.EntityName}
+                                into c_acl
+                            from acl in c_acl.DefaultIfEmpty()
+                            where !c.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
+                            select c;
                     }
-                   
+
                     //only distinct categories (group by ID)
                     query = from c in query
-                            group c by c.Id
-                            into cGroup
-                            orderby cGroup.Key
-                            select cGroup.FirstOrDefault();
+                        group c by c.Id
+                        into cGroup
+                        orderby cGroup.Key
+                        select cGroup.FirstOrDefault();
                     query = query.OrderBy(c => c.DisplayOrder);
                 }
 
@@ -255,27 +266,28 @@ namespace TinyCms.Services.Posts
                     //add child levels
                     foreach (var category in categories)
                     {
-                        childCategories.AddRange(GetAllCategoriesByParentCategoryId(category.Id, showHidden, includeAllLevels));
+                        childCategories.AddRange(GetAllCategoriesByParentCategoryId(category.Id, showHidden,
+                            includeAllLevels));
                     }
                     categories.AddRange(childCategories);
                 }
                 return categories;
             });
         }
-        
+
         /// <summary>
-        /// Gets all categories displayed on the home page
+        ///     Gets all categories displayed on the home page
         /// </summary>
         /// <param name="showHidden">A value indicating whether to show hidden records</param>
         /// <returns>Categories</returns>
         public virtual IList<Category> GetAllCategoriesDisplayedOnHomePage(bool showHidden = false)
         {
             var query = from c in _categoryRepository.Table
-                        orderby c.DisplayOrder
-                        where c.Published &&
-                        !c.Deleted && 
-                        c.ShowOnHomePage
-                        select c;
+                orderby c.DisplayOrder
+                where c.Published &&
+                      !c.Deleted &&
+                      c.ShowOnHomePage
+                select c;
 
             var categories = query.ToList();
             if (!showHidden)
@@ -290,7 +302,7 @@ namespace TinyCms.Services.Posts
 
         public IList<Category> GetCategoryByCategoryTypeSystemName(string systemName, bool showHidden)
         {
-            string key = string.Format(CATEGORIES_BY_CATEGORY_TYPE_SYSTEM_NAME_ID_KEY, systemName, showHidden);
+            var key = string.Format(CATEGORIES_BY_CATEGORY_TYPE_SYSTEM_NAME_ID_KEY, systemName, showHidden);
             return _cacheManager.Get(key, () =>
             {
                 var categoryType = _categoryTypeService.GetCategoryTypeBySystemName(systemName);
@@ -304,11 +316,10 @@ namespace TinyCms.Services.Posts
                 var categories = query.ToList();
                 return categories;
             });
-            
         }
 
         /// <summary>
-        /// Gets a category
+        ///     Gets a category
         /// </summary>
         /// <param name="categoryId">Category identifier</param>
         /// <returns>Category</returns>
@@ -316,13 +327,13 @@ namespace TinyCms.Services.Posts
         {
             if (categoryId == 0)
                 return null;
-            
-            string key = string.Format(CATEGORIES_BY_ID_KEY, categoryId);
+
+            var key = string.Format(CATEGORIES_BY_ID_KEY, categoryId);
             return _cacheManager.Get(key, () => _categoryRepository.GetById(categoryId));
         }
 
         /// <summary>
-        /// Inserts category
+        ///     Inserts category
         /// </summary>
         /// <param name="category">Category</param>
         public virtual void InsertCategory(Category category)
@@ -341,7 +352,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Updates the category
+        ///     Updates the category
         /// </summary>
         /// <param name="category">Category</param>
         public virtual void UpdateCategory(Category category)
@@ -370,10 +381,10 @@ namespace TinyCms.Services.Posts
             //event notification
             _eventPublisher.EntityUpdated(category);
         }
-        
-        
+
+
         /// <summary>
-        /// Deletes a product category mapping
+        ///     Deletes a product category mapping
         /// </summary>
         /// <param name="productCategory">Post category</param>
         public virtual void DeletePostCategory(PostCategory productCategory)
@@ -392,7 +403,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Gets product category mapping collection
+        ///     Gets product category mapping collection
         /// </summary>
         /// <param name="categoryId">Category identifier</param>
         /// <param name="pageIndex">Page index</param>
@@ -405,16 +416,17 @@ namespace TinyCms.Services.Posts
             if (categoryId == 0)
                 return new PagedList<PostCategory>(new List<PostCategory>(), pageIndex, pageSize);
 
-            string key = string.Format(PRODUCTCATEGORIES_ALLBYCATEGORYID_KEY, showHidden, categoryId, pageIndex, pageSize, _workContext.CurrentCustomer.Id);
+            var key = string.Format(PRODUCTCATEGORIES_ALLBYCATEGORYID_KEY, showHidden, categoryId, pageIndex, pageSize,
+                _workContext.CurrentCustomer.Id);
             return _cacheManager.Get(key, () =>
             {
                 var query = from pc in _productCategoryRepository.Table
-                            join p in _productRepository.Table on pc.PostId equals p.Id
-                            where pc.CategoryId == categoryId &&
-                                  !p.Deleted &&
-                                  (showHidden || p.Published)
-                            orderby pc.DisplayOrder
-                            select pc;
+                    join p in _productRepository.Table on pc.PostId equals p.Id
+                    where pc.CategoryId == categoryId &&
+                          !p.Deleted &&
+                          (showHidden || p.Published)
+                    orderby pc.DisplayOrder
+                    select pc;
 
                 if (!showHidden && (!_catalogSettings.IgnoreAcl || !_catalogSettings.IgnoreStoreLimitations))
                 {
@@ -423,19 +435,20 @@ namespace TinyCms.Services.Posts
                         //ACL (access control list)
                         var allowedCustomerRolesIds = _workContext.CurrentCustomer.GetCustomerRoleIds();
                         query = from pc in query
-                                join c in _categoryRepository.Table on pc.CategoryId equals c.Id
-                                join acl in _aclRepository.Table
-                                on new { c1 = c.Id, c2 = "Category" } equals new { c1 = acl.EntityId, c2 = acl.EntityName } into c_acl
-                                from acl in c_acl.DefaultIfEmpty()
-                                where !c.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
-                                select pc;
+                            join c in _categoryRepository.Table on pc.CategoryId equals c.Id
+                            join acl in _aclRepository.Table
+                                on new {c1 = c.Id, c2 = "Category"} equals new {c1 = acl.EntityId, c2 = acl.EntityName}
+                                into c_acl
+                            from acl in c_acl.DefaultIfEmpty()
+                            where !c.SubjectToAcl || allowedCustomerRolesIds.Contains(acl.CustomerRoleId)
+                            select pc;
                     }
                     //only distinct categories (group by ID)
                     query = from c in query
-                            group c by c.Id
-                            into cGroup
-                            orderby cGroup.Key
-                            select cGroup.FirstOrDefault();
+                        group c by c.Id
+                        into cGroup
+                        orderby cGroup.Key
+                        select cGroup.FirstOrDefault();
                     query = query.OrderBy(pc => pc.DisplayOrder);
                 }
 
@@ -444,9 +457,9 @@ namespace TinyCms.Services.Posts
             });
         }
 
-      
+
         /// <summary>
-        /// Gets a product category mapping collection
+        ///     Gets a product category mapping collection
         /// </summary>
         /// <param name="productId">Post identifier</param>
         /// <param name="storeId">Store identifier (used in multi-store environment). "showHidden" parameter should also be "true"</param>
@@ -457,16 +470,17 @@ namespace TinyCms.Services.Posts
             if (productId == 0)
                 return new List<PostCategory>();
 
-            string key = string.Format(PRODUCTCATEGORIES_ALLBYPRODUCTID_KEY, showHidden, productId, _workContext.CurrentCustomer.Id);
+            var key = string.Format(PRODUCTCATEGORIES_ALLBYPRODUCTID_KEY, showHidden, productId,
+                _workContext.CurrentCustomer.Id);
             return _cacheManager.Get(key, () =>
             {
                 var query = from pc in _productCategoryRepository.Table
-                            join c in _categoryRepository.Table on pc.CategoryId equals c.Id
-                            where pc.PostId == productId &&
-                                  !c.Deleted &&
-                                  (showHidden || c.Published)
-                            orderby pc.DisplayOrder
-                            select pc;
+                    join c in _categoryRepository.Table on pc.CategoryId equals c.Id
+                    where pc.PostId == productId &&
+                          !c.Deleted &&
+                          (showHidden || c.Published)
+                    orderby pc.DisplayOrder
+                    select pc;
 
                 var allPostCategories = query.ToList();
                 var result = new List<PostCategory>();
@@ -476,7 +490,7 @@ namespace TinyCms.Services.Posts
                     {
                         //ACL (access control list) and store mapping
                         var category = pc.Category;
-                        if (_aclService.Authorize(category) )
+                        if (_aclService.Authorize(category))
                             result.Add(pc);
                     }
                 }
@@ -490,7 +504,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Gets a product category mapping 
+        ///     Gets a product category mapping
         /// </summary>
         /// <param name="productCategoryId">Post category mapping identifier</param>
         /// <returns>Post category mapping</returns>
@@ -503,14 +517,14 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Inserts a product category mapping
+        ///     Inserts a product category mapping
         /// </summary>
         /// <param name="productCategory">>Post category mapping</param>
         public virtual void InsertPostCategory(PostCategory productCategory)
         {
             if (productCategory == null)
                 throw new ArgumentNullException("productCategory");
-            
+
             _productCategoryRepository.Insert(productCategory);
 
             //cache
@@ -522,7 +536,7 @@ namespace TinyCms.Services.Posts
         }
 
         /// <summary>
-        /// Updates the product category mapping 
+        ///     Updates the product category mapping
         /// </summary>
         /// <param name="productCategory">>Post category mapping</param>
         public virtual void UpdatePostCategory(PostCategory productCategory)

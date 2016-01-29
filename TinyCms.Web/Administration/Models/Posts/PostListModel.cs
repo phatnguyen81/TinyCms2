@@ -5,7 +5,7 @@ using TinyCms.Web.Framework.Mvc;
 
 namespace TinyCms.Admin.Models.Posts
 {
-    public partial class PostListModel : BaseNopModel
+    public class PostListModel : BaseNopModel
     {
         public PostListModel()
         {
@@ -16,10 +16,13 @@ namespace TinyCms.Admin.Models.Posts
         [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchPostName")]
         [AllowHtml]
         public string SearchPostName { get; set; }
+
         [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchCategory")]
         public int SearchCategoryId { get; set; }
+
         [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchIncludeSubCategories")]
         public bool SearchIncludeSubCategories { get; set; }
+
         [NopResourceDisplayName("Admin.Catalog.Posts.List.SearchPublished")]
         public int SearchPublishedId { get; set; }
 
