@@ -66,9 +66,12 @@
 </div>
 <div class="leftcol">
     <div class="news_detail">
-        <h1>
-            <a href="@Url.RouteUrl("Category", new {Model.Breadcrumb.CategoryBreadcrumb.Last().SeName})">@Model.Breadcrumb.CategoryBreadcrumb.Last().Name</a>
-        </h1>
+       @if (Model.Breadcrumb != null && Model.Breadcrumb.CategoryBreadcrumb != null && Model.Breadcrumb.CategoryBreadcrumb.Any())
+       {
+            <h1>
+                <a href="@Url.RouteUrl("Category", new {Model.Breadcrumb.CategoryBreadcrumb.Last().SeName})">@Model.Breadcrumb.CategoryBreadcrumb.Last().Name</a>
+            </h1>
+        }
         <p class="title">@Model.Name</p>
         <p class="time_post">@Model.CreatedOn.ToString("HH:mm dd/MM/yyyy")</p>
         <p class="desc">@Html.Raw(Model.ShortDescription)</p>
